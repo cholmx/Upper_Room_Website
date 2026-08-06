@@ -1,2 +1,3 @@
-# Church-Website-CMS-Development-8376
-Repository created by Greta
+# Church Website & CMS Project
+
+*Waiting for initial code and instructions from the user...*

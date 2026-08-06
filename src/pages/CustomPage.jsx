@@ -1,0 +1,76 @@
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { publicDataFetch } from '../api';
+
+export default function CustomPage() {
+  const { slug } = useParams();
+  const [page, setPage] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchPage() {
+      setLoading(true);
+      const res = await publicDataFetch(`read/custom_pages_church?slug_key=${slug}`);
+      if (res.status === 'success' && res.data?.length > 0) {
+        setPage(res.data[0]);
+      }
+      setLoading(false);
+    }
+    fetchPage();
+  }, [slug]);
+
+  const fadeUp = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-[#F9F9F7] pt-32 flex flex-col items-center justify-center opacity-60">
+        <div className="w-12 h-12 border-4 border-[#A6790F] border-t-transparent rounded-full animate-spin mb-4"></div>
+        <p className="font-bold uppercase tracking-widest text-sm">Loading Page...</p>
+      </div>
+    );
+  }
+
+  if (!page) {
+    return (
+      <div className="min-h-screen bg-[#F9F9F7] pt-40 px-6 text-center">
+        <div className="max-w-xl mx-auto bg-white p-12 rounded-3xl border border-black/5 shadow-sm">
+          <div className="text-6xl mb-6">📄</div>
+          <h2 className="text-3xl font-bold mb-4">Page Not Found</h2>
+          <p className="opacity-60 text-lg">The page you are looking for does not exist or has been moved.</p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="bg-[#F9F9F7] min-h-screen text-black pt-20 pb-32">
+      {/* Hero Banner */}
+      <div className="bg-[#0B1613] text-[#F9F9F7] py-24 px-6 text-center shadow-lg relative overflow-hidden">
+         {/* Subtle abstract background */}
+         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&q=80&w=2000')] bg-cover bg-center opacity-[0.08] mix-blend-overlay"></div>
+         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#FFC44F] rounded-full blur-[150px] opacity-10 pointer-events-none"></div>
+         
+         <motion.div initial="hidden" animate="visible" variants={fadeUp} className="max-w-[800px] mx-auto relative z-10">
+           <span className="kicker text-[#FFC44F] mb-4 inline-block">Information</span>
+           <h1 className="text-4xl md:text-6xl mb-8 leading-tight">{page.title_text}</h1>
+           <div className="w-16 h-1 bg-[#FFC44F] mx-auto rounded-full opacity-50"></div>
+         </motion.div>
+      </div>
+
+      {/* Content Body */}
+      <div className="py-24 px-6">
+        <motion.div initial="hidden" animate="visible" variants={fadeUp} className="max-w-[800px] mx-auto bg-white p-8 md:p-16 rounded-3xl border border-black/5 shadow-sm">
+          <div className="space-y-8 text-lg md:text-xl opacity-80 leading-relaxed font-serif text-gray-800">
+            {(page.body_content_text || '').split('\n').filter(Boolean).map((para, i) => (
+              <p key={i}>{para}</p>
+            ))}
+          </div>
+        </motion.div>
+      </div>
+    </div>
+  );
+}
