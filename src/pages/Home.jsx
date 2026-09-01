@@ -45,6 +45,16 @@ export default function Home() {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const slideInLeft = {
+    hidden: { opacity: 0, x: -60 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+  };
+
+  const slideInRight = {
+    hidden: { opacity: 0, x: 60 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+  };
+
   const fadeUp = {
     hidden: { opacity: 0, y: 40 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
@@ -54,8 +64,8 @@ export default function Home() {
     campaign: (
       <div key="campaign" className="text-center py-24 px-6 bg-gradient-to-b from-[#F9F9F7] to-white text-black border-b border-black/5 overflow-hidden">
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp}>
-          <span className="kicker text-[#A6790F]">Transforming Together</span>
-          <h2 className="text-4xl md:text-6xl max-w-[20ch] mx-auto mb-6">Growth Campaign</h2>
+          <motion.span variants={slideInLeft} className="kicker text-[#A6790F]">Transforming Together</motion.span>
+          <motion.h2 variants={slideInRight} className="text-4xl md:text-6xl max-w-[20ch] mx-auto mb-6">Growth Campaign</motion.h2>
           <div className="flex flex-wrap justify-center gap-4 mt-8">
             <a className="btn btn-solid group" href="https://www.urfellowship.com/transforming-together" target="_blank" rel="noopener noreferrer">
               Learn More <SafeIcon icon={FiArrowRight} className="group-hover:translate-x-1 transition-transform" />
@@ -70,14 +80,18 @@ export default function Home() {
         <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#CCA866] rounded-full blur-[150px] opacity-10 translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
         
         <div className="max-w-[1145px] mx-auto grid md:grid-cols-2 gap-16 items-center relative z-10">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-            <span className="kicker text-[#FFC44F]">Welcome</span>
-            <h2 className="text-4xl md:text-5xl mb-6 leading-tight">Welcome to the Upper Room Fellowship</h2>
-            <p className="text-lg mb-6 opacity-80 leading-relaxed">For over 50 years, our congregation has been gathering in Columbiana to worship, grow, and serve together.</p>
-            <p className="text-lg mb-10 opacity-80 leading-relaxed">Together, we're learning to live with more love, joy, and purpose. We support each other and reach out to make our community better.</p>
-            <Link to="/about" className="btn btn-outline border-white/30 hover:border-white group">
-              Read Our Story <SafeIcon icon={FiArrowRight} className="group-hover:translate-x-1 transition-transform" />
-            </Link>
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{
+            visible: { transition: { staggerChildren: 0.1 } }
+          }}>
+            <motion.span variants={slideInLeft} className="kicker text-[#FFC44F]">Welcome</motion.span>
+            <motion.h2 variants={slideInLeft} className="text-4xl md:text-5xl mb-6 leading-tight">Welcome to the Upper Room Fellowship</motion.h2>
+            <motion.p variants={slideInLeft} className="text-lg mb-6 opacity-80 leading-relaxed">For over 50 years, our congregation has been gathering in Columbiana to worship, grow, and serve together.</motion.p>
+            <motion.p variants={slideInLeft} className="text-lg mb-10 opacity-80 leading-relaxed">Together, we're learning to live with more love, joy, and purpose. We support each other and reach out to make our community better.</motion.p>
+            <motion.div variants={slideInLeft}>
+              <Link to="/about" className="btn btn-outline border-white/30 hover:border-white group">
+                Read Our Story <SafeIcon icon={FiArrowRight} className="group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </motion.div>
           </motion.div>
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }} 
@@ -97,16 +111,18 @@ export default function Home() {
     statement: (
       <div key="statement" className="text-center py-32 px-6 bg-[#CCA866] text-black relative overflow-hidden">
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-          <h2 className="text-4xl md:text-6xl lg:text-7xl max-w-[20ch] mx-auto leading-none">Know God.<br/>Share Life.<br/>Serve Others.</h2>
+          <motion.h2 variants={slideInLeft} className="text-4xl md:text-6xl lg:text-7xl max-w-[20ch] mx-auto leading-none">Know God.<br/>Share Life.<br/>Serve Others.</motion.h2>
         </motion.div>
       </div>
     ),
     quicklinks: (
       <div key="quicklinks" className="py-24 px-6 bg-[#F9F9F7] text-black">
         <div className="max-w-[1145px] mx-auto">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-16">
-            <span className="kicker">Quick Links</span>
-            <h2 className="text-4xl md:text-5xl">Get Started</h2>
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{
+            visible: { transition: { staggerChildren: 0.1 } }
+          }} className="text-center mb-16">
+            <motion.span variants={slideInLeft} className="kicker">Quick Links</motion.span>
+            <motion.h2 variants={slideInRight} className="text-4xl md:text-5xl">Get Started</motion.h2>
           </motion.div>
           <div className="grid md:grid-cols-3 gap-8">
             {[
@@ -143,20 +159,18 @@ export default function Home() {
     ),
     wherewhen: (
       <div key="wherewhen" className="py-24 px-6 bg-[#0B1613] text-white relative overflow-hidden">
-        {/* Modern CSS Grid Background Overlay */}
         <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.2) 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
         <div className="absolute inset-0 bg-gradient-to-b from-[#0B1613] via-transparent to-[#0B1613] pointer-events-none"></div>
 
         <div className="max-w-[1300px] mx-auto relative z-10">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center md:text-left mb-12">
-            <span className="kicker text-[#FFC44F]">Location Hub</span>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl">Where & When</h2>
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{
+            visible: { transition: { staggerChildren: 0.1 } }
+          }} className="text-center md:text-left mb-12">
+            <motion.span variants={slideInLeft} className="kicker text-[#FFC44F]">Location Hub</motion.span>
+            <motion.h2 variants={slideInLeft} className="text-4xl md:text-5xl lg:text-6xl">Where & When</motion.h2>
           </motion.div>
 
-          {/* Modern Bento Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6">
-            
-            {/* Main Address Card */}
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="lg:col-span-8 bg-white/5 backdrop-blur-md border border-white/10 rounded-[2rem] p-8 md:p-12 flex flex-col justify-between group hover:bg-white/10 transition-colors duration-500">
               <div>
                 <h3 className="text-3xl md:text-5xl mb-4 font-bold leading-tight">500 Sponseller Road<br/><span className="text-white/50">Columbiana, OH</span></h3>
@@ -171,10 +185,7 @@ export default function Home() {
               </div>
             </motion.div>
 
-            {/* Explore Area Map Card */}
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="lg:col-span-4 bg-[#FFC44F] rounded-[2rem] p-8 text-black flex flex-col justify-end relative overflow-hidden min-h-[300px] group">
-              
-              {/* Actual Map Background */}
               <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
                 <iframe 
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3008.3188981156844!2d-80.684117!3d40.871142!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88340156d9a9f243%3A0x6b149b552d433eb!2s500%20Sponseller%20Rd%2C%20Columbiana%2C%20OH%2044408!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus" 
@@ -184,12 +195,10 @@ export default function Home() {
                   referrerPolicy="no-referrer-when-downgrade"
                   title="Church Location Map"
                 ></iframe>
-                {/* Yellow Overlays */}
                 <div className="absolute inset-0 bg-[#FFC44F] mix-blend-color z-10 pointer-events-none"></div>
                 <div className="absolute inset-0 bg-[#FFC44F] opacity-40 mix-blend-multiply z-10 pointer-events-none"></div>
               </div>
 
-              {/* Center Pin */}
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
                 <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center text-[#FFC44F] shadow-2xl scale-100 group-hover:scale-110 transition-transform duration-500">
                   <SafeIcon icon={FiMapPin} className="text-3xl" />
@@ -203,7 +212,6 @@ export default function Home() {
               </div>
             </motion.div>
 
-            {/* Directions Links */}
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="lg:col-span-6 bg-white/5 backdrop-blur-md border border-white/10 rounded-[2rem] p-8 flex flex-col justify-center">
               <h4 className="text-xl font-bold mb-6 flex items-center gap-2"><SafeIcon icon={FiNavigation} className="text-[#FFC44F]" /> Get Directions</h4>
               <div className="grid sm:grid-cols-2 gap-4">
@@ -218,12 +226,10 @@ export default function Home() {
               </div>
             </motion.div>
 
-            {/* Extra Info */}
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.4 }} className="lg:col-span-6 bg-gradient-to-br from-[#CCA866] to-[#A6790F] rounded-[2rem] p-8 text-black flex flex-col justify-center">
               <h4 className="text-xl font-bold mb-3">Plenty of Parking</h4>
               <p className="opacity-90 leading-relaxed font-medium">When you arrive on campus, feel free to park anywhere in the main lot. Our welcome team will be at the front doors ready to greet you and help you find your way.</p>
             </motion.div>
-
           </div>
         </div>
       </div>
@@ -231,9 +237,11 @@ export default function Home() {
     features: (
       <div key="features" className="py-24 px-6 bg-[#F9F9F7] text-black">
         <div className="max-w-[1145px] mx-auto">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-16">
-            <span className="kicker text-[#A6790F]">This Week</span>
-            <h2 className="text-4xl md:text-5xl">What's Happening</h2>
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{
+            visible: { transition: { staggerChildren: 0.1 } }
+          }} className="text-center mb-16">
+            <motion.span variants={slideInLeft} className="kicker text-[#A6790F]">This Week</motion.span>
+            <motion.h2 variants={slideInRight} className="text-4xl md:text-5xl">What's Happening</motion.h2>
           </motion.div>
           <div className="grid md:grid-cols-3 gap-6">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}>
@@ -270,10 +278,12 @@ export default function Home() {
     latestposts: (
       <div key="latestposts" className="py-24 px-6 bg-white text-black border-t border-black/5">
         <div className="max-w-[1145px] mx-auto">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{
+            visible: { transition: { staggerChildren: 0.1 } }
+          }} className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
             <div>
-              <span className="kicker text-[#A6790F]">Insights & Updates</span>
-              <h2 className="text-4xl md:text-5xl">Latest Articles</h2>
+              <motion.span variants={slideInLeft} className="kicker text-[#A6790F]">Insights & Updates</motion.span>
+              <motion.h2 variants={slideInLeft} className="text-4xl md:text-5xl">Latest Articles</motion.h2>
             </div>
             <Link to="/blog" className="btn btn-outline border-black/20 hover:border-black text-black hidden md:inline-flex group">
               View All <SafeIcon icon={FiArrowRight} className="group-hover:translate-x-1 transition-transform" />
@@ -326,9 +336,11 @@ export default function Home() {
     gallery: (
       <div key="gallery" className="py-24 px-6 bg-[#F9F9F7] text-black">
         <div className="max-w-[1145px] mx-auto">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-16">
-            <span className="kicker">Life at Upper Room</span>
-            <h2 className="text-4xl md:text-5xl">Community in Pictures</h2>
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{
+            visible: { transition: { staggerChildren: 0.1 } }
+          }} className="text-center mb-16">
+            <motion.span variants={slideInLeft} className="kicker">Life at Upper Room</motion.span>
+            <motion.h2 variants={slideInRight} className="text-4xl md:text-5xl">Community in Pictures</motion.h2>
           </motion.div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[1, 2, 3, 4, 5, 6, 7, 8].map((i, idx) => (
@@ -352,24 +364,32 @@ export default function Home() {
         {photoSections.map(s => (
           <div key={s.id} className="photo-section py-40 px-6 text-center" style={{ backgroundImage: s.image_url ? `url('${s.image_url}')` : 'none' }}>
             <div className="scrim"></div>
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="relative z-10 text-[#F9F9F7] max-w-[800px] mx-auto">
-              <h2 className="text-4xl md:text-6xl lg:text-7xl mb-6">{s.heading}</h2>
-              {s.subtext && <p className="font-serif italic text-2xl mb-10 opacity-90 leading-relaxed">{s.subtext}</p>}
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{
+              visible: { transition: { staggerChildren: 0.1 } }
+            }} className="relative z-10 text-[#F9F9F7] max-w-[800px] mx-auto">
+              <motion.h2 variants={slideInLeft} className="text-4xl md:text-6xl lg:text-7xl mb-6">{s.heading}</motion.h2>
+              {s.subtext && <motion.p variants={slideInRight} className="font-serif italic text-2xl mb-10 opacity-90 leading-relaxed">{s.subtext}</motion.p>}
               {s.button_text && (
-                <Link to={s.button_page_slug ? `/p/${s.button_page_slug}` : '/visit'} className="btn btn-solid group">
-                  {s.button_text} <SafeIcon icon={FiArrowRight} className="group-hover:translate-x-1 transition-transform" />
-                </Link>
+                <motion.div variants={fadeUp}>
+                  <Link to={s.button_page_slug ? `/p/${s.button_page_slug}` : '/visit'} className="btn btn-solid group">
+                    {s.button_text} <SafeIcon icon={FiArrowRight} className="group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </motion.div>
               )}
             </motion.div>
           </div>
         ))}
         {photoSections.length === 0 && (
           <div className="py-32 px-6 text-center bg-[#FFC44F] text-black">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="relative z-10">
-              <h2 className="text-4xl md:text-6xl mb-8">Join Us Sundays at 10:30 AM</h2>
-              <Link to="/visit" className="btn btn-outline border-black text-black hover:bg-black hover:text-[#FFC44F] group">
-                Plan Your Visit <SafeIcon icon={FiArrowRight} className="group-hover:translate-x-1 transition-transform" />
-              </Link>
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{
+              visible: { transition: { staggerChildren: 0.1 } }
+            }} className="relative z-10">
+              <motion.h2 variants={slideInLeft} className="text-4xl md:text-6xl mb-8">Join Us Sundays at 10:30 AM</motion.h2>
+              <motion.div variants={slideInRight}>
+                <Link to="/visit" className="btn btn-outline border-black text-black hover:bg-black hover:text-[#FFC44F] group">
+                  Plan Your Visit <SafeIcon icon={FiArrowRight} className="group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </motion.div>
             </motion.div>
           </div>
         )}
@@ -382,7 +402,6 @@ export default function Home() {
 
   return (
     <div className="pt-20">
-      {/* Hero */}
       <div className="photo-section bg-[#0B1613] py-32 md:py-56 px-6 relative" style={{ backgroundImage: hero?.image_url ? `url('${hero.image_url}')` : 'none' }}>
         <div className="scrim"></div>
         <div className="max-w-[1145px] mx-auto relative z-10 text-white">
@@ -405,8 +424,6 @@ export default function Home() {
           </motion.div>
         </div>
       </div>
-
-      {/* Render sections in order */}
       {order.map(key => sections[key])}
     </div>
   );

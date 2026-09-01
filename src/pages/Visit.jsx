@@ -15,6 +15,16 @@ export default function Visit() {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const slideInLeft = {
+    hidden: { opacity: 0, x: -60 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+  };
+
+  const slideInRight = {
+    hidden: { opacity: 0, x: 60 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+  };
+
   const fadeUp = {
     hidden: { opacity: 0, y: 30 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
@@ -27,7 +37,6 @@ export default function Visit() {
 
   return (
     <div className="bg-[#F9F9F7] min-h-screen text-black pt-20">
-      {/* Hero */}
       <div className="photo-section text-[#F9F9F7] py-32 px-6 text-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1544427928-c49cdfebf194?auto=format&fit=crop&q=80&w=2000')" }}>
         <div className="scrim"></div>
         <motion.div initial="hidden" animate="visible" variants={fadeUp} className="max-w-[800px] mx-auto relative z-10">
@@ -40,25 +49,22 @@ export default function Visit() {
       </div>
 
       <div className="py-24 px-6 max-w-[1300px] mx-auto">
-        
-        {/* Modern Location Hub (Replaces Iframe) */}
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="mb-24 relative rounded-[3rem] overflow-hidden shadow-2xl border border-black/10 min-h-[600px] flex items-center bg-[#0B1613]">
-          
-          {/* Stylized Map Background (Aerial view heavily overlayed) */}
           <div className="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-luminosity" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1478810237466-4e5c543f46f3?auto=format&fit=crop&q=80&w=2000')" }}></div>
           <div className="absolute inset-0 bg-gradient-to-r from-[#0B1613] via-[#0B1613]/80 to-transparent"></div>
           
-          {/* Glassmorphism Dashboard */}
           <div className="relative z-10 p-8 md:p-16 max-w-[600px] w-full">
-            <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-[2rem] p-8 md:p-10 text-white shadow-2xl">
-              <span className="kicker text-[#FFC44F] flex items-center gap-2"><SafeIcon icon={FiMapPin} /> Location Hub</span>
-              <h2 className="text-4xl md:text-5xl mb-2 font-bold leading-tight">500 Sponseller Road</h2>
-              <p className="text-xl opacity-70 mb-8 font-serif italic">Columbiana, OH 44408</p>
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{
+              visible: { transition: { staggerChildren: 0.1 } }
+            }} className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-[2rem] p-8 md:p-10 text-white shadow-2xl">
+              <motion.span variants={slideInLeft} className="kicker text-[#FFC44F] flex items-center gap-2"><SafeIcon icon={FiMapPin} /> Location Hub</motion.span>
+              <motion.h2 variants={slideInLeft} className="text-4xl md:text-5xl mb-2 font-bold leading-tight">500 Sponseller Road</motion.h2>
+              <motion.p variants={slideInLeft} className="text-xl opacity-70 mb-8 font-serif italic">Columbiana, OH 44408</motion.p>
               
-              <div className="flex items-center gap-4 text-lg font-bold bg-black/30 p-4 rounded-2xl mb-8 border border-white/5 w-fit">
+              <motion.div variants={fadeUp} className="flex items-center gap-4 text-lg font-bold bg-black/30 p-4 rounded-2xl mb-8 border border-white/5 w-fit">
                  <SafeIcon icon={FiClock} className="text-[#FFC44F] text-2xl" />
                  Sundays at 10:30 AM
-              </div>
+              </motion.div>
 
               <div className="space-y-4">
                 <button onClick={handleCopy} className="w-full flex items-center justify-between p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition-colors group">
@@ -79,10 +85,9 @@ export default function Visit() {
                   </a>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
           
-          {/* Animated Pin on the "Map" side */}
           <div className="absolute right-[15%] top-[40%] hidden lg:flex items-center justify-center">
              <div className="w-48 h-48 border border-[#FFC44F]/30 rounded-full absolute animate-ping opacity-50 duration-3000"></div>
              <div className="w-24 h-24 border border-[#FFC44F]/50 rounded-full absolute"></div>
@@ -92,30 +97,29 @@ export default function Visit() {
           </div>
         </motion.div>
 
-        {/* Remaining Content */}
         <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-start max-w-[1145px] mx-auto">
-          
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="space-y-8">
             <motion.div variants={fadeUp} className="fcard bg-[#FFC44F] text-black">
-              <span className="kicker text-[#A6790F]">Kids Ministry</span>
+              <motion.span variants={slideInLeft} className="kicker text-[#A6790F]">Kids Ministry</motion.span>
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-14 h-14 bg-white/40 rounded-full flex items-center justify-center text-[#A6790F] text-3xl shadow-sm">
                   <SafeIcon icon={FiSmile} />
                 </div>
-                <h2 className="text-3xl m-0">Bring the Family</h2>
+                <motion.h2 variants={slideInRight} className="text-3xl m-0">Bring the Family</motion.h2>
               </div>
-              <p className="opacity-90 text-lg leading-relaxed font-medium">
+              <motion.p variants={fadeUp} className="opacity-90 text-lg leading-relaxed font-medium">
                 We have a dedicated, safe, and fun environment for your kids during the Sunday service. Our trained volunteers are passionate about teaching children about Jesus in a way they can understand.
-              </p>
+              </motion.p>
             </motion.div>
           </motion.div>
 
-          {/* FAQ / What to expect */}
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="fcard sticky top-32">
-            <div className="flex items-center gap-3 mb-10 border-b border-black/10 pb-6">
+            <motion.div variants={{
+              visible: { transition: { staggerChildren: 0.1 } }
+            }} className="flex items-center gap-3 mb-10 border-b border-black/10 pb-6">
               <SafeIcon icon={FiHelpCircle} className="text-3xl text-[#A6790F]" />
-              <h2 className="text-3xl m-0">What to Expect</h2>
-            </div>
+              <motion.h2 variants={slideInLeft} className="text-3xl m-0">What to Expect</motion.h2>
+            </motion.div>
             
             <div className="space-y-10">
               <div className="group">
@@ -149,7 +153,6 @@ export default function Visit() {
               </div>
             </div>
           </motion.div>
-
         </div>
       </div>
     </div>

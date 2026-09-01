@@ -7,6 +7,16 @@ import * as FiIcons from 'react-icons/fi';
 const { FiArrowRight, FiHeart, FiUsers, FiStar, FiZap, FiSun, FiGlobe } = FiIcons;
 
 export default function About() {
+  const slideInLeft = {
+    hidden: { opacity: 0, x: -60 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+  };
+
+  const slideInRight = {
+    hidden: { opacity: 0, x: 60 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+  };
+
   const fadeUp = {
     hidden: { opacity: 0, y: 30 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
@@ -33,33 +43,36 @@ export default function About() {
 
       {/* Mission & Vision */}
       <div className="py-24 px-6 overflow-hidden">
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="max-w-[900px] mx-auto text-center">
-          <span className="kicker text-[#A6790F]">Our Mission</span>
-          <h2 className="text-4xl md:text-6xl mb-10 leading-tight">Know God.<br/>Share Life.<br/>Serve Others.</h2>
-          <div className="text-xl opacity-80 leading-relaxed space-y-6">
+        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{
+          visible: { transition: { staggerChildren: 0.1 } }
+        }} className="max-w-[900px] mx-auto text-center">
+          <motion.span variants={slideInLeft} className="kicker text-[#A6790F]">Our Mission</motion.span>
+          <motion.h2 variants={slideInRight} className="text-4xl md:text-6xl mb-10 leading-tight">Know God.<br/>Share Life.<br/>Serve Others.</motion.h2>
+          <motion.div variants={fadeUp} className="text-xl opacity-80 leading-relaxed space-y-6">
             <p>
               For over 50 years, the Upper Room Fellowship has been a community of believers in Columbiana, Ohio, dedicated to following Jesus. We believe that church isn't just a building you go to, but a family you belong to. 
             </p>
             <p>
               Whether you've grown up in church or are just starting to ask questions about faith, there is a place for you here. We are passionate about seeing lives transformed by the gospel and equipping people to make a difference in their homes, workplaces, and city.
             </p>
-          </div>
+          </motion.div>
         </motion.div>
       </div>
 
       {/* Core Values Intro */}
       <div className="py-24 px-6 bg-white border-t border-black/5 relative overflow-hidden">
-        {/* Abstract background element */}
         <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-[#CCA866] rounded-full blur-[120px] opacity-[0.03] -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
 
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="max-w-[900px] mx-auto text-center mb-20 relative z-10">
-          <span className="kicker text-[#A6790F]">What Drives Us</span>
-          <h2 className="text-4xl md:text-6xl mb-8">Core Values</h2>
-          <p className="text-xl opacity-80 leading-relaxed mb-12 max-w-4xl mx-auto">
+        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{
+          visible: { transition: { staggerChildren: 0.1 } }
+        }} className="max-w-[900px] mx-auto text-center mb-20 relative z-10">
+          <motion.span variants={slideInLeft} className="kicker text-[#A6790F]">What Drives Us</motion.span>
+          <motion.h2 variants={slideInRight} className="text-4xl md:text-6xl mb-8">Core Values</motion.h2>
+          <motion.p variants={fadeUp} className="text-xl opacity-80 leading-relaxed mb-12 max-w-4xl mx-auto">
             When what's important to God becomes precious to us, transformation happens naturally. These values aren't just aspirational statements but practical pathways to living the abundant life Jesus promised.
-          </p>
+          </motion.p>
           
-          <div className="bg-[#F9F9F7] p-8 md:p-12 rounded-3xl border border-black/5 text-left mb-16 shadow-sm">
+          <motion.div variants={fadeUp} className="bg-[#F9F9F7] p-8 md:p-12 rounded-3xl border border-black/5 text-left mb-16 shadow-sm">
             <h3 className="text-3xl font-bold mb-6">Living from the Inside Out</h3>
             <p className="text-lg opacity-80 leading-relaxed mb-6">
               Values shape who we are at our core—they guide our decisions, relationships, and daily choices. At Upper Room Fellowship, we believe transformation happens when our hearts align with God's heart. 
@@ -70,13 +83,11 @@ export default function About() {
             <p className="text-lg opacity-80 leading-relaxed font-bold text-[#A6790F]">
               The beautiful result? We become carriers of His love and light wherever we go.
             </p>
-          </div>
+          </motion.div>
         </motion.div>
 
-        {/* Core Values Grid */}
         <div className="max-w-[1145px] mx-auto relative z-10">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={staggerContainer} className="grid md:grid-cols-2 gap-8 lg:gap-12">
-
             {[
               {
                 icon: FiHeart,
@@ -139,23 +150,22 @@ export default function About() {
                 </div>
               </motion.div>
             ))}
-
           </motion.div>
         </div>
 
-        {/* Growing in Our Values Outro */}
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="max-w-[900px] mx-auto text-center mt-32 relative z-10">
-          <h3 className="text-3xl md:text-5xl font-bold mb-8">Growing in Our Values</h3>
-          <p className="text-xl opacity-80 leading-relaxed mb-6">
+        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{
+          visible: { transition: { staggerChildren: 0.1 } }
+        }} className="max-w-[900px] mx-auto text-center mt-32 relative z-10">
+          <motion.h3 variants={slideInLeft} className="text-3xl md:text-5xl font-bold mb-8">Growing in Our Values</motion.h3>
+          <motion.p variants={fadeUp} className="text-xl opacity-80 leading-relaxed mb-6">
             These values aren't just words for us. They're the heart of what we believe and how we try to live. Jesus showed us what these values look like in action, and we're doing our best to follow His example.
-          </p>
-          <p className="text-xl opacity-80 leading-relaxed mb-6">
+          </motion.p>
+          <motion.p variants={fadeUp} className="text-xl opacity-80 leading-relaxed mb-6">
             Living by these values isn't always easy, but we've found it's incredibly rewarding. There's a real sense of purpose and joy that comes from aligning our lives with what God values.
-          </p>
+          </motion.p>
         </motion.div>
       </div>
 
-      {/* CTA */}
       <div className="py-32 px-6 text-center bg-[#FFC44F] text-black">
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
           <h2 className="text-4xl md:text-6xl mb-8">Come see for yourself.</h2>

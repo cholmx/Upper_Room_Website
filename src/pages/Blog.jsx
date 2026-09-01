@@ -49,6 +49,16 @@ export default function Blog() {
   const featuredPost = filteredPosts.length > 0 ? filteredPosts[0] : null;
   const standardPosts = filteredPosts.length > 1 ? filteredPosts.slice(1) : [];
 
+  const slideInLeft = {
+    hidden: { opacity: 0, x: -60 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+  };
+
+  const slideInRight = {
+    hidden: { opacity: 0, x: 60 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+  };
+
   const fadeUp = {
     hidden: { opacity: 0, y: 30 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
@@ -56,7 +66,6 @@ export default function Blog() {
 
   return (
     <div className="bg-[#F9F9F7] min-h-screen text-black pb-24 pt-20">
-      {/* Hero Header */}
       <div className="photo-section text-[#F9F9F7] py-32 px-6 text-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1455309014304-9fea74c3d598?auto=format&fit=crop&q=80&w=2000')" }}>
         <div className="scrim"></div>
         <motion.div initial="hidden" animate="visible" variants={fadeUp} className="max-w-[800px] mx-auto relative z-10">
@@ -81,7 +90,6 @@ export default function Blog() {
           </div>
         ) : (
           <>
-            {/* Search and Category Filter */}
             <motion.div initial="hidden" animate="visible" variants={fadeUp} className="mb-16 max-w-3xl mx-auto">
               <div className="relative mb-8 group">
                 <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none group-focus-within:text-[#A6790F] transition-colors">
@@ -126,10 +134,11 @@ export default function Blog() {
               </motion.div>
             ) : (
               <>
-                {/* Featured Post */}
                 {featuredPost && (
-                  <motion.div initial="hidden" animate="visible" variants={fadeUp} className="mb-20">
-                    <span className="kicker text-[#A6790F] mb-4 inline-block">{searchQuery || selectedCategory !== 'All' ? 'Top Result' : 'Latest Article'}</span>
+                  <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{
+                    visible: { transition: { staggerChildren: 0.1 } }
+                  }} className="mb-20">
+                    <motion.span variants={slideInLeft} className="kicker text-[#A6790F] mb-4 inline-block">{searchQuery || selectedCategory !== 'All' ? 'Top Result' : 'Latest Article'}</motion.span>
                     <Link to={`/p/${featuredPost.slug || featuredPost.id}`} className="block bg-white border border-black/5 hover:shadow-2xl transition-all duration-500 rounded-3xl overflow-hidden flex flex-col md:flex-row group translate-y-0 hover:-translate-y-2">
                       <div className="md:w-1/2 aspect-square md:aspect-auto bg-[#0B1613] relative overflow-hidden flex-shrink-0">
                         {featuredPost.image_url ? (
@@ -147,19 +156,19 @@ export default function Blog() {
                       </div>
                       
                       <div className="p-8 md:p-14 flex flex-col justify-center md:w-1/2 relative">
-                        <div className="flex flex-wrap items-center gap-4 text-xs font-bold text-[#A6790F] uppercase tracking-wider mb-6">
+                        <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-4 text-xs font-bold text-[#A6790F] uppercase tracking-wider mb-6">
                           {featuredPost.category && (
                             <span className="bg-[#A6790F]/10 text-[#A6790F] px-4 py-1.5 rounded-full">{featuredPost.category}</span>
                           )}
                           <span className="flex items-center gap-1.5 text-gray-500"><SafeIcon icon={FiCalendar} /> {featuredPost.date ? formatDate(featuredPost.date) : formatDate(featuredPost.created_at)}</span>
                           <span className="flex items-center gap-1.5 text-gray-500"><SafeIcon icon={FiClock} /> {getReadTime(featuredPost.body)}</span>
-                        </div>
+                        </motion.div>
                         
-                        <h2 className="text-4xl lg:text-5xl font-bold mb-6 group-hover:text-[#A6790F] transition-colors leading-tight">{featuredPost.title}</h2>
+                        <motion.h2 variants={slideInRight} className="text-4xl lg:text-5xl font-bold mb-6 group-hover:text-[#A6790F] transition-colors leading-tight">{featuredPost.title}</motion.h2>
                         
-                        <p className="opacity-70 mb-10 line-clamp-4 text-lg leading-relaxed">
+                        <motion.p variants={fadeUp} className="opacity-70 mb-10 line-clamp-4 text-lg leading-relaxed">
                           {featuredPost.body?.replace(/<[^>]*>?/gm, '') || 'Read this article to learn more...'}
-                        </p>
+                        </motion.p>
                         
                         <div className="mt-auto flex items-center justify-between border-t border-black/5 pt-8">
                           {featuredPost.author ? (
@@ -179,15 +188,14 @@ export default function Blog() {
                   </motion.div>
                 )}
 
-                {/* Grid of Older Posts */}
                 {standardPosts.length > 0 && (
                   <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={{
                     hidden: { opacity: 0 },
                     visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
                   }}>
-                    <h3 className="text-3xl font-bold mb-10 border-b border-black/10 pb-4">
+                    <motion.h3 variants={slideInLeft} className="text-3xl font-bold mb-10 border-b border-black/10 pb-4">
                       {searchQuery || selectedCategory !== 'All' ? 'More Results' : 'More Articles'}
-                    </h3>
+                    </motion.h3>
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                       {standardPosts.map(post => (
                         <motion.div key={post.id} variants={fadeUp}>

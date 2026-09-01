@@ -40,6 +40,16 @@ export default function Sermons() {
   const featuredSermon = filteredSermons.length > 0 ? filteredSermons[0] : null;
   const pastSermons = filteredSermons.length > 1 ? filteredSermons.slice(1) : [];
 
+  const slideInLeft = {
+    hidden: { opacity: 0, x: -60 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+  };
+
+  const slideInRight = {
+    hidden: { opacity: 0, x: 60 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+  };
+
   const fadeUp = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
@@ -68,10 +78,7 @@ export default function Sermons() {
           </div>
         ) : (
           <>
-            {/* Search and Filter Panel */}
             <motion.div initial="hidden" animate="visible" variants={fadeUp} className="mb-12 bg-white p-3 rounded-[2rem] shadow-sm border border-black/5 flex flex-col md:flex-row gap-3">
-              
-              {/* Search Bar */}
               <div className="relative flex-grow group">
                 <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none group-focus-within:text-[#A6790F] transition-colors">
                   <SafeIcon icon={FiSearch} className="text-gray-400 text-xl" />
@@ -85,7 +92,6 @@ export default function Sermons() {
                 />
               </div>
 
-              {/* Series Filter Dropdown */}
               {allSeries.length > 1 && (
                 <div className="relative w-full md:w-72 flex-shrink-0 group">
                   <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none text-gray-400 group-focus-within:text-[#A6790F] transition-colors">
@@ -123,14 +129,15 @@ export default function Sermons() {
               </motion.div>
             ) : (
               <>
-                {/* Featured Sermon */}
                 {featuredSermon && (
-                  <motion.div initial="hidden" animate="visible" variants={fadeUp} className="mb-20 bg-white p-8 md:p-12 border border-black/5 shadow-xl rounded-3xl overflow-hidden">
-                    <span className="kicker text-[#A6790F] mb-4 inline-block">
+                  <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{
+                    visible: { transition: { staggerChildren: 0.1 } }
+                  }} className="mb-20 bg-white p-8 md:p-12 border border-black/5 shadow-xl rounded-3xl overflow-hidden">
+                    <motion.span variants={slideInLeft} className="kicker text-[#A6790F] mb-4 inline-block">
                       {searchQuery ? 'Top Result' : (selectedSeries === 'All' ? 'Latest Message' : `Latest in ${selectedSeries}`)}
-                    </span>
-                    <h2 className="text-4xl md:text-5xl mb-4">{featuredSermon?.title}</h2>
-                    <div className="flex flex-wrap items-center gap-3 opacity-60 text-sm mb-8 uppercase tracking-wider font-bold">
+                    </motion.span>
+                    <motion.h2 variants={slideInRight} className="text-4xl md:text-5xl mb-4">{featuredSermon?.title}</motion.h2>
+                    <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-3 opacity-60 text-sm mb-8 uppercase tracking-wider font-bold">
                       <span className="bg-gray-100 px-3 py-1 rounded-full text-black">{featuredSermon?.date ? formatDate(featuredSermon.date) : ''}</span>
                       <span>•</span>
                       <span className="text-black">{featuredSermon?.speaker || 'Speaker'}</span>
@@ -140,41 +147,40 @@ export default function Sermons() {
                           <span className="text-[#A6790F]">Series: {featuredSermon.series}</span>
                         </>
                       )}
-                    </div>
+                    </motion.div>
                     
                     {featuredSermon?.video_url ? (
-                      <div className="aspect-video bg-black mb-8 rounded-2xl overflow-hidden shadow-2xl relative group">
+                      <motion.div variants={fadeUp} className="aspect-video bg-black mb-8 rounded-2xl overflow-hidden shadow-2xl relative group">
                         <iframe 
                           src={featuredSermon.video_url.replace('watch?v=', 'embed/')} 
                           className="w-full h-full relative z-10" 
                           title={featuredSermon.title}
                           allowFullScreen
                         ></iframe>
-                      </div>
+                      </motion.div>
                     ) : (
-                      <div className="aspect-video bg-gray-100 mb-8 flex items-center justify-center text-gray-400 rounded-2xl border border-black/5">
+                      <motion.div variants={fadeUp} className="aspect-video bg-gray-100 mb-8 flex items-center justify-center text-gray-400 rounded-2xl border border-black/5">
                         <SafeIcon icon={FiHeadphones} className="text-6xl opacity-20" />
-                      </div>
+                      </motion.div>
                     )}
                     
-                    <p className="opacity-80 max-w-[800px] text-lg leading-relaxed">{featuredSermon?.description}</p>
+                    <motion.p variants={fadeUp} className="opacity-80 max-w-[800px] text-lg leading-relaxed">{featuredSermon?.description}</motion.p>
                     {featuredSermon?.audio_url && (
-                      <a href={featuredSermon.audio_url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center px-6 py-3 rounded-full border-2 border-black/20 hover:border-black transition-colors font-bold uppercase tracking-wider text-sm mt-8">
+                      <motion.a variants={fadeUp} href={featuredSermon.audio_url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center px-6 py-3 rounded-full border-2 border-black/20 hover:border-black transition-colors font-bold uppercase tracking-wider text-sm mt-8">
                         <SafeIcon icon={FiHeadphones} className="mr-2" /> Listen to Audio
-                      </a>
+                      </motion.a>
                     )}
                   </motion.div>
                 )}
 
-                {/* Past Sermons Grid */}
                 {pastSermons.length > 0 && (
                   <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={{
                     hidden: { opacity: 0 },
                     visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
                   }}>
-                    <h3 className="text-3xl font-bold mb-10 border-b border-black/10 pb-4">
+                    <motion.h3 variants={slideInLeft} className="text-3xl font-bold mb-10 border-b border-black/10 pb-4">
                       {searchQuery ? 'More Results' : 'Past Messages'}
-                    </h3>
+                    </motion.h3>
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                       {pastSermons.map(s => (
                         <motion.div key={s.id} variants={fadeUp} className="bg-white border border-black/5 p-6 rounded-2xl hover:shadow-2xl transition-all duration-300 flex flex-col group translate-y-0 hover:-translate-y-2">
