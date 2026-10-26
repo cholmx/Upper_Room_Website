@@ -16,6 +16,7 @@ export const SITE = {
   serviceTime: 'Sundays at 10:30 AM',
   address,
   addressLine: `${address.street}, ${address.city}, ${address.region} ${address.postalCode}`,
+  mapEmbedUrl: `https://www.google.com/maps?q=${mapQuery}&output=embed`,
   googleMapsUrl: `https://maps.google.com/?q=${mapQuery}`,
   appleMapsUrl: `https://maps.apple.com/?q=${mapQuery}`,
   giveUrl: 'https://onrealm.org/urfellowship',

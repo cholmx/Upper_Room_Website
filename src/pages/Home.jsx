@@ -196,9 +196,8 @@ export default function Home() {
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="lg:col-span-4 bg-[#FFC44F] rounded-[2rem] p-8 text-black flex flex-col justify-end relative overflow-hidden min-h-[300px] group">
               <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
                 <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3008.3188981156844!2d-80.684117!3d40.871142!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88340156d9a9f243%3A0x6b149b552d433eb!2s500%20Sponseller%20Rd%2C%20Columbiana%2C%20OH%2044408!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus" 
+                  src={SITE.mapEmbedUrl}
                   className="w-full h-[150%] -translate-y-1/4 border-0 grayscale" 
-                  allowFullScreen="" 
                   loading="lazy" 
                   referrerPolicy="no-referrer-when-downgrade"
                   title="Church Location Map"

@@ -11,6 +11,7 @@ describe('mergeSettings', () => {
     expect(s.addressLine).toBe('1 Main St, Salem, OH 44460');
     expect(s.googleMapsUrl).toContain('1%20Main%20St');
     expect(s.phoneHref).toBe('tel:3305551212');
+    expect(s.mapEmbedUrl).toBe('https://www.google.com/maps?q=1%20Main%20St%20Salem%20OH%2044460&output=embed');
     expect(s.serviceTime).toBe('Sundays at 9 AM');
   });
   it('keeps defaults for blank fields', () => {
