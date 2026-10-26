@@ -1,9 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { imgUrl } from '../utils';
 
 export default function PageHero({ kicker, title, subtitle, image }) {
   return (
-    <div className="photo-section text-[#F9F9F7] py-32 px-6 text-center" style={{ backgroundImage: `url('${image}')` }}>
+    <div className="photo-section text-[#F9F9F7] py-32 px-6 text-center" style={{ backgroundImage: `url('${imgUrl(image, 1600)}')` }}>
       <div className="scrim"></div>
       <motion.div
         initial={{ opacity: 0, y: 30 }}

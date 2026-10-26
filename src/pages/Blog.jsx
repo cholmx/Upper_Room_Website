@@ -79,7 +79,7 @@ export default function Blog() {
           <>
             <motion.div initial="hidden" animate="visible" variants={fadeUp} className="mb-16 max-w-3xl mx-auto">
               <div className="relative mb-8 group">
-                <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none group-focus-within:text-[#A6790F] transition-colors">
+                <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none group-focus-within:text-[#8A6309] transition-colors">
                   <SafeIcon icon={FiSearch} className="text-gray-400 text-xl" />
                 </div>
                 <input
@@ -99,7 +99,7 @@ export default function Blog() {
                       onClick={() => setSelectedCategory(cat)}
                       className={`px-6 py-2.5 rounded-full text-sm font-bold uppercase tracking-wider transition-all duration-300 flex items-center gap-2 ${selectedCategory === cat ? 'bg-[#0B1613] text-white shadow-md scale-105' : 'bg-white hover:border-black/30 hover:bg-gray-50 text-gray-600 border border-black/10'}`}
                     >
-                      {cat !== 'All' && <SafeIcon icon={FiTag} className={selectedCategory === cat ? 'text-white' : 'text-[#A6790F]'} />}
+                      {cat !== 'All' && <SafeIcon icon={FiTag} className={selectedCategory === cat ? 'text-white' : 'text-[#8A6309]'} />}
                       {cat}
                     </button>
                   ))}
@@ -125,7 +125,7 @@ export default function Blog() {
                   <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{
                     visible: { transition: { staggerChildren: 0.1 } }
                   }} className="mb-20">
-                    <motion.span variants={slideInLeft} className="kicker text-[#A6790F] mb-4 inline-block">{searchQuery || selectedCategory !== 'All' ? 'Top Result' : 'Latest Article'}</motion.span>
+                    <motion.span variants={slideInLeft} className="kicker text-[#8A6309] mb-4 inline-block">{searchQuery || selectedCategory !== 'All' ? 'Top Result' : 'Latest Article'}</motion.span>
                     <Link to={`/blog/${featuredPost.id}`} className="block bg-white border border-black/5 hover:shadow-2xl transition-all duration-500 rounded-3xl overflow-hidden flex flex-col md:flex-row group translate-y-0 hover:-translate-y-2">
                       <div className="md:w-1/2 aspect-square md:aspect-auto bg-[#0B1613] relative overflow-hidden flex-shrink-0">
                         {featuredPost.image_url ? (
@@ -144,15 +144,15 @@ export default function Blog() {
                       </div>
                       
                       <div className="p-8 md:p-14 flex flex-col justify-center md:w-1/2 relative">
-                        <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-4 text-xs font-bold text-[#A6790F] uppercase tracking-wider mb-6">
+                        <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-4 text-xs font-bold text-[#8A6309] uppercase tracking-wider mb-6">
                           {featuredPost.category && (
-                            <span className="bg-[#A6790F]/10 text-[#A6790F] px-4 py-1.5 rounded-full">{featuredPost.category}</span>
+                            <span className="bg-[#A6790F]/10 text-[#8A6309] px-4 py-1.5 rounded-full">{featuredPost.category}</span>
                           )}
                           <span className="flex items-center gap-1.5 text-gray-500"><SafeIcon icon={FiCalendar} /> {featuredPost.date ? formatDate(featuredPost.date) : formatDate(featuredPost.created_at)}</span>
                           <span className="flex items-center gap-1.5 text-gray-500"><SafeIcon icon={FiClock} /> {getReadTime(featuredPost.body)}</span>
                         </motion.div>
                         
-                        <motion.h2 variants={slideInRight} className="text-4xl lg:text-5xl font-bold mb-6 group-hover:text-[#A6790F] transition-colors leading-tight">{featuredPost.title}</motion.h2>
+                        <motion.h2 variants={slideInRight} className="text-4xl lg:text-5xl font-bold mb-6 group-hover:text-[#8A6309] transition-colors leading-tight">{featuredPost.title}</motion.h2>
                         
                         <motion.p variants={fadeUp} className="opacity-70 mb-10 line-clamp-4 text-lg leading-relaxed">
                           {plainText(featuredPost.body) || 'Read this article to learn more...'}
@@ -167,7 +167,7 @@ export default function Blog() {
                               {featuredPost.author}
                             </div>
                           ) : <div />}
-                          <div className="flex items-center text-sm font-bold uppercase tracking-wider text-[#A6790F] group-hover:text-black transition-colors">
+                          <div className="flex items-center text-sm font-bold uppercase tracking-wider text-[#8A6309] group-hover:text-black transition-colors">
                             Read Article <SafeIcon icon={FiArrowRight} className="ml-2 transform group-hover:translate-x-1 transition-transform" />
                           </div>
                         </div>
@@ -212,12 +212,12 @@ export default function Blog() {
                             </div>
                             
                             <div className="p-8 flex flex-col flex-grow">
-                              <div className="flex flex-wrap gap-3 text-[10px] font-bold text-[#A6790F] uppercase tracking-wider mb-4">
+                              <div className="flex flex-wrap gap-3 text-[10px] font-bold text-[#8A6309] uppercase tracking-wider mb-4">
                                 <span className="flex items-center gap-1 bg-[#A6790F]/10 px-2.5 py-1 rounded text-black/70"><SafeIcon icon={FiClock} /> {getReadTime(post.body)}</span>
                                 <span className="flex items-center gap-1"><SafeIcon icon={FiCalendar} /> {post.date ? formatDate(post.date) : formatDate(post.created_at)}</span>
                               </div>
                               
-                              <h3 className="text-2xl font-bold mb-4 group-hover:text-[#A6790F] transition-colors leading-tight">
+                              <h3 className="text-2xl font-bold mb-4 group-hover:text-[#8A6309] transition-colors leading-tight">
                                 {post.title}
                               </h3>
                               
@@ -231,7 +231,7 @@ export default function Blog() {
                                     <SafeIcon icon={FiUser} /> {post.author}
                                   </div>
                                 ) : <div />}
-                                <div className="flex items-center text-xs font-bold uppercase tracking-wider text-[#A6790F] group-hover:text-black transition-colors">
+                                <div className="flex items-center text-xs font-bold uppercase tracking-wider text-[#8A6309] group-hover:text-black transition-colors">
                                   Read <SafeIcon icon={FiArrowRight} className="ml-1.5 transform group-hover:translate-x-1 transition-transform" />
                                 </div>
                               </div>

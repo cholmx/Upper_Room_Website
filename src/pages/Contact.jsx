@@ -53,9 +53,9 @@ export default function Contact() {
       <div className="max-w-[1000px] mx-auto px-6 mt-16 grid md:grid-cols-5 gap-12">
         <div className="md:col-span-2 space-y-4 text-lg">
           <h2 className="text-3xl mb-4">Reach us</h2>
-          <p><a className="font-bold hover:text-[#A6790F]" href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
-          <p><a className="font-bold hover:text-[#A6790F]" href={SITE.phoneHref}>{SITE.phone}</a></p>
-          <p><a className="hover:text-[#A6790F]" href={SITE.googleMapsUrl} target="_blank" rel="noopener noreferrer">{SITE.addressLine}</a></p>
+          <p><a className="font-bold hover:text-[#8A6309]" href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
+          <p><a className="font-bold hover:text-[#8A6309]" href={SITE.phoneHref}>{SITE.phone}</a></p>
+          <p><a className="hover:text-[#8A6309]" href={SITE.googleMapsUrl} target="_blank" rel="noopener noreferrer">{SITE.addressLine}</a></p>
           <p className="opacity-70">{SITE.serviceTime}</p>
         </div>
 

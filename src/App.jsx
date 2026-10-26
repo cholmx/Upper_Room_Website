@@ -48,8 +48,9 @@ function ProtectedRoute({ children }) {
 function PublicLayout({ children }) {
   return (
     <div className="min-h-screen flex flex-col pt-0">
+      <a href="#main" className="skip-link">Skip to content</a>
       <Navbar />
-      <main className="flex-grow">{children}</main>
+      <main id="main" tabIndex={-1} className="flex-grow outline-none">{children}</main>
       <Footer />
     </div>
   );

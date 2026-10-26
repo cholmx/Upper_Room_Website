@@ -96,9 +96,9 @@ export default function Visit() {
         <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-start max-w-[1145px] mx-auto">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="space-y-8">
             <motion.div variants={fadeUp} className="fcard bg-[#FFC44F] text-black">
-              <motion.span variants={slideInLeft} className="kicker text-[#A6790F]">Kids Ministry</motion.span>
+              <motion.span variants={slideInLeft} className="kicker text-[#8A6309]">Kids Ministry</motion.span>
               <div className="flex items-center gap-4 mb-6">
-                <div className="w-14 h-14 bg-white/40 rounded-full flex items-center justify-center text-[#A6790F] text-3xl shadow-sm">
+                <div className="w-14 h-14 bg-white/40 rounded-full flex items-center justify-center text-[#8A6309] text-3xl shadow-sm">
                   <SafeIcon icon={FiSmile} />
                 </div>
                 <motion.h2 variants={slideInRight} className="text-3xl m-0">Bring the Family</motion.h2>
@@ -113,14 +113,14 @@ export default function Visit() {
             <motion.div variants={{
               visible: { transition: { staggerChildren: 0.1 } }
             }} className="flex items-center gap-3 mb-10 border-b border-black/10 pb-6">
-              <SafeIcon icon={FiHelpCircle} className="text-3xl text-[#A6790F]" />
+              <SafeIcon icon={FiHelpCircle} className="text-3xl text-[#8A6309]" />
               <motion.h2 variants={slideInLeft} className="text-3xl m-0">What to Expect</motion.h2>
             </motion.div>
             
             <div className="space-y-10">
               <div className="group">
                 <div className="flex items-start gap-4">
-                  <SafeIcon icon={FiClock} className="text-2xl text-gray-400 group-hover:text-[#A6790F] transition-colors mt-1" />
+                  <SafeIcon icon={FiClock} className="text-2xl text-gray-400 group-hover:text-[#8A6309] transition-colors mt-1" />
                   <div>
                     <h4 className="font-bold text-xl mb-2">How long is the service?</h4>
                     <p className="opacity-70 text-lg leading-relaxed">Our services typically last about 75 to 90 minutes. We start with a time of musical worship, followed by announcements, and a biblical, engaging message.</p>
@@ -130,7 +130,7 @@ export default function Visit() {
               
               <div className="group">
                 <div className="flex items-start gap-4">
-                  <SafeIcon icon={FiCoffee} className="text-2xl text-gray-400 group-hover:text-[#A6790F] transition-colors mt-1" />
+                  <SafeIcon icon={FiCoffee} className="text-2xl text-gray-400 group-hover:text-[#8A6309] transition-colors mt-1" />
                   <div>
                     <h4 className="font-bold text-xl mb-2">What should I wear?</h4>
                     <p className="opacity-70 text-lg leading-relaxed">Come as you are! You'll see people in everything from jeans and t-shirts to business casual. We care more about you being here than what you wear.</p>
@@ -140,7 +140,7 @@ export default function Visit() {
               
               <div className="group">
                 <div className="flex items-start gap-4">
-                  <SafeIcon icon={FiCar} className="text-2xl text-gray-400 group-hover:text-[#A6790F] transition-colors mt-1" />
+                  <SafeIcon icon={FiCar} className="text-2xl text-gray-400 group-hover:text-[#8A6309] transition-colors mt-1" />
                   <div>
                     <h4 className="font-bold text-xl mb-2">Where do I park?</h4>
                     <p className="opacity-70 text-lg leading-relaxed">We have ample parking right on our campus. When you pull in off Sponseller Road, feel free to park anywhere in the main lot. Our welcome team will be at the doors to greet you!</p>

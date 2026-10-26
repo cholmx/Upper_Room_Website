@@ -36,11 +36,11 @@ export default function Ministries() {
                </div>
                <div className="text-[#CCA866] font-bold text-5xl opacity-40 font-serif">01</div>
              </div>
-             <h3 className="text-3xl font-bold mb-4 relative z-10 group-hover:text-[#A6790F] transition-colors">Kids Ministry</h3>
+             <h3 className="text-3xl font-bold mb-4 relative z-10 group-hover:text-[#8A6309] transition-colors">Kids Ministry</h3>
              <p className="text-lg opacity-70 leading-relaxed mb-8 flex-grow relative z-10">
                We provide a fun, safe, and engaging environment for children to learn about Jesus. From infants to elementary school, our dedicated team is passionate about raising the next generation.
              </p>
-             <div className="mt-auto flex items-center text-sm font-bold uppercase tracking-wider text-[#A6790F] group-hover:text-black transition-colors relative z-10 border-t border-black/5 pt-6">
+             <div className="mt-auto flex items-center text-sm font-bold uppercase tracking-wider text-[#8A6309] group-hover:text-black transition-colors relative z-10 border-t border-black/5 pt-6">
                 Learn More <SafeIcon icon={FiArrowRight} className="ml-2 group-hover:translate-x-1 transition-transform" />
              </div>
           </motion.div>
@@ -53,11 +53,11 @@ export default function Ministries() {
                </div>
                <div className="text-[#CCA866] font-bold text-5xl opacity-40 font-serif">02</div>
              </div>
-             <h3 className="text-3xl font-bold mb-4 relative z-10 group-hover:text-[#A6790F] transition-colors">Youth Ministry</h3>
+             <h3 className="text-3xl font-bold mb-4 relative z-10 group-hover:text-[#8A6309] transition-colors">Youth Ministry</h3>
              <p className="text-lg opacity-70 leading-relaxed mb-8 flex-grow relative z-10">
                Our youth ministry is designed to help teenagers navigate life with faith. We gather weekly for passionate worship, relevant teaching, and small group discussions to build a solid foundation.
              </p>
-             <div className="mt-auto flex items-center text-sm font-bold uppercase tracking-wider text-[#A6790F] group-hover:text-black transition-colors relative z-10 border-t border-black/5 pt-6">
+             <div className="mt-auto flex items-center text-sm font-bold uppercase tracking-wider text-[#8A6309] group-hover:text-black transition-colors relative z-10 border-t border-black/5 pt-6">
                 Learn More <SafeIcon icon={FiArrowRight} className="ml-2 group-hover:translate-x-1 transition-transform" />
              </div>
           </motion.div>
@@ -70,11 +70,11 @@ export default function Ministries() {
                </div>
                <div className="text-[#CCA866] font-bold text-5xl opacity-40 font-serif">03</div>
              </div>
-             <h3 className="text-3xl font-bold mb-4 relative z-10 group-hover:text-[#A6790F] transition-colors">Life Groups</h3>
+             <h3 className="text-3xl font-bold mb-4 relative z-10 group-hover:text-[#8A6309] transition-colors">Life Groups</h3>
              <p className="text-lg opacity-70 leading-relaxed mb-8 flex-grow relative z-10">
                We believe growth happens in circles, not rows. Life groups meet throughout the week in homes and at the church to study the Bible, pray together, and build genuine, lasting community.
              </p>
-             <div className="mt-auto flex items-center text-sm font-bold uppercase tracking-wider text-[#A6790F] group-hover:text-black transition-colors relative z-10 border-t border-black/5 pt-6">
+             <div className="mt-auto flex items-center text-sm font-bold uppercase tracking-wider text-[#8A6309] group-hover:text-black transition-colors relative z-10 border-t border-black/5 pt-6">
                 Learn More <SafeIcon icon={FiArrowRight} className="ml-2 group-hover:translate-x-1 transition-transform" />
              </div>
           </motion.div>
@@ -87,11 +87,11 @@ export default function Ministries() {
                </div>
                <div className="text-[#CCA866] font-bold text-5xl opacity-40 font-serif">04</div>
              </div>
-             <h3 className="text-3xl font-bold mb-4 relative z-10 group-hover:text-[#A6790F] transition-colors">Worship & Tech</h3>
+             <h3 className="text-3xl font-bold mb-4 relative z-10 group-hover:text-[#8A6309] transition-colors">Worship & Tech</h3>
              <p className="text-lg opacity-70 leading-relaxed mb-8 flex-grow relative z-10">
                If you have a passion for music, sound, cameras, or production, there's a place for you on our team. Help us create an atmosphere where people can seamlessly engage with God.
              </p>
-             <div className="mt-auto flex items-center text-sm font-bold uppercase tracking-wider text-[#A6790F] group-hover:text-black transition-colors relative z-10 border-t border-black/5 pt-6">
+             <div className="mt-auto flex items-center text-sm font-bold uppercase tracking-wider text-[#8A6309] group-hover:text-black transition-colors relative z-10 border-t border-black/5 pt-6">
                 Learn More <SafeIcon icon={FiArrowRight} className="ml-2 group-hover:translate-x-1 transition-transform" />
              </div>
           </motion.div>

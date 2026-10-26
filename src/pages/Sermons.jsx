@@ -4,6 +4,8 @@ import { motion } from 'framer-motion';
 import usePageMeta from '../hooks/usePageMeta';
 import useFetch from '../hooks/useFetch';
 import { ErrorState } from '../components/StateViews';
+import RichText from '../components/RichText';
+import { plainText } from '../lib/markdown';
 import { formatDate, ytId, ytEmbed, ytThumb, isLive } from '../utils';
 import PageHero from '../components/PageHero';
 import SafeIcon from '../common/SafeIcon';
@@ -28,7 +30,7 @@ export default function Sermons() {
     const matchesSearch = !searchQuery || 
       (s?.title?.toLowerCase().includes(query)) ||
       (s?.speaker?.toLowerCase().includes(query)) ||
-      (s?.description?.toLowerCase().includes(query));
+      (plainText(s?.description).toLowerCase().includes(query));
 
     return matchesSeries && matchesSearch;
   });
@@ -72,7 +74,7 @@ export default function Sermons() {
           <>
             <motion.div initial="hidden" animate="visible" variants={fadeUp} className="mb-12 bg-white p-3 rounded-[2rem] shadow-sm border border-black/5 flex flex-col md:flex-row gap-3">
               <div className="relative flex-grow group">
-                <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none group-focus-within:text-[#A6790F] transition-colors">
+                <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none group-focus-within:text-[#8A6309] transition-colors">
                   <SafeIcon icon={FiSearch} className="text-gray-400 text-xl" />
                 </div>
                 <input
@@ -86,7 +88,7 @@ export default function Sermons() {
 
               {allSeries.length > 1 && (
                 <div className="relative w-full md:w-72 flex-shrink-0 group">
-                  <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none text-gray-400 group-focus-within:text-[#A6790F] transition-colors">
+                  <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none text-gray-400 group-focus-within:text-[#8A6309] transition-colors">
                     <SafeIcon icon={FiFilter} className="text-lg" />
                   </div>
                   <select
@@ -125,10 +127,10 @@ export default function Sermons() {
                   <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{
                     visible: { transition: { staggerChildren: 0.1 } }
                   }} className="mb-20 bg-white p-8 md:p-12 border border-black/5 shadow-xl rounded-3xl overflow-hidden">
-                    <motion.span variants={slideInLeft} className="kicker text-[#A6790F] mb-4 inline-block">
+                    <motion.span variants={slideInLeft} className="kicker text-[#8A6309] mb-4 inline-block">
                       {searchQuery ? 'Top Result' : (selectedSeries === 'All' ? 'Latest Message' : `Latest in ${selectedSeries}`)}
                     </motion.span>
-                    <motion.h2 variants={slideInRight} className="text-4xl md:text-5xl mb-4"><Link to={`/sermons/${featuredSermon.id}`} className="hover:text-[#A6790F] transition-colors">{featuredSermon?.title}</Link></motion.h2>
+                    <motion.h2 variants={slideInRight} className="text-4xl md:text-5xl mb-4"><Link to={`/sermons/${featuredSermon.id}`} className="hover:text-[#8A6309] transition-colors">{featuredSermon?.title}</Link></motion.h2>
                     <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-3 opacity-60 text-sm mb-8 uppercase tracking-wider font-bold">
                       <span className="bg-gray-100 px-3 py-1 rounded-full text-black">{featuredSermon?.date ? formatDate(featuredSermon.date) : ''}</span>
                       <span>•</span>
@@ -136,7 +138,7 @@ export default function Sermons() {
                       {featuredSermon?.series && (
                         <>
                           <span>•</span>
-                          <span className="text-[#A6790F]">Series: {featuredSermon.series}</span>
+                          <span className="text-[#8A6309]">Series: {featuredSermon.series}</span>
                         </>
                       )}
                     </motion.div>
@@ -156,7 +158,7 @@ export default function Sermons() {
                       </motion.div>
                     )}
                     
-                    <motion.p variants={fadeUp} className="opacity-80 max-w-[800px] text-lg leading-relaxed">{featuredSermon?.description}</motion.p>
+                    <motion.div variants={fadeUp} className="opacity-80 max-w-[800px] text-lg leading-relaxed"><RichText value={featuredSermon?.description} /></motion.div>
                     {featuredSermon?.audio_url && (
                       <motion.a variants={fadeUp} href={featuredSermon.audio_url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center px-6 py-3 rounded-full border-2 border-black/20 hover:border-black transition-colors font-bold uppercase tracking-wider text-sm mt-8">
                         <SafeIcon icon={FiHeadphones} className="mr-2" /> Listen to Audio
@@ -208,11 +210,11 @@ export default function Sermons() {
                             <span>•</span>
                             <span>{s?.speaker}</span>
                           </div>
-                          <h4 className="text-2xl font-bold mb-3 group-hover:text-[#A6790F] transition-colors leading-tight"><Link to={`/sermons/${s.id}`} className="after:absolute after:inset-0 focus-visible:outline-none">{s?.title}</Link></h4>
-                          <p className="opacity-70 line-clamp-3 mb-6 flex-grow text-sm leading-relaxed">{s?.description}</p>
+                          <h4 className="text-2xl font-bold mb-3 group-hover:text-[#8A6309] transition-colors leading-tight"><Link to={`/sermons/${s.id}`} className="after:absolute after:inset-0 focus-visible:outline-none">{s?.title}</Link></h4>
+                          <p className="opacity-70 line-clamp-3 mb-6 flex-grow text-sm leading-relaxed">{plainText(s?.description)}</p>
                           
                           {s?.audio_url ? (
-                            <a href={s.audio_url} target="_blank" rel="noopener noreferrer" className="relative z-10 mt-auto inline-flex items-center text-sm font-bold text-[#A6790F] hover:text-black uppercase tracking-wider group/link">
+                            <a href={s.audio_url} target="_blank" rel="noopener noreferrer" className="relative z-10 mt-auto inline-flex items-center text-sm font-bold text-[#8A6309] hover:text-black uppercase tracking-wider group/link">
                               <SafeIcon icon={FiHeadphones} className="mr-2" /> Listen Audio <SafeIcon icon={FiArrowRight} className="ml-2 opacity-0 -translate-x-2 group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all" />
                             </a>
                           ) : (

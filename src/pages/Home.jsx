@@ -72,7 +72,7 @@ export default function Home() {
     campaign: (
       <div key="campaign" className="text-center py-24 px-6 bg-gradient-to-b from-[#F9F9F7] to-white text-black border-b border-black/5 overflow-hidden">
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp}>
-          <motion.span variants={slideInLeft} className="kicker text-[#A6790F]">Transforming Together</motion.span>
+          <motion.span variants={slideInLeft} className="kicker text-[#8A6309]">Transforming Together</motion.span>
           <motion.h2 variants={slideInRight} className="text-4xl md:text-6xl max-w-[20ch] mx-auto mb-6">Growth Campaign</motion.h2>
           <div className="flex flex-wrap justify-center gap-4 mt-8">
             <a className="btn btn-solid group" href="https://www.urfellowship.com/transforming-together" target="_blank" rel="noopener noreferrer">
@@ -150,11 +150,11 @@ export default function Home() {
                 <p className="mb-8 opacity-70 leading-relaxed flex-grow">{card.text}</p>
                 <div className="mt-auto">
                   {card.link.startsWith('http') ? (
-                    <a href={card.link} className="inline-flex items-center font-bold uppercase tracking-widest text-[#A6790F] group-hover:text-[#FFC44F] transition-colors">
+                    <a href={card.link} className="inline-flex items-center font-bold uppercase tracking-widest text-[#8A6309] group-hover:text-[#FFC44F] transition-colors">
                       {card.label} <SafeIcon icon={FiArrowRight} className="ml-2 group-hover:translate-x-2 transition-transform" />
                     </a>
                   ) : (
-                    <Link to={card.link} className="inline-flex items-center font-bold uppercase tracking-widest text-[#A6790F] group-hover:text-[#FFC44F] transition-colors">
+                    <Link to={card.link} className="inline-flex items-center font-bold uppercase tracking-widest text-[#8A6309] group-hover:text-[#FFC44F] transition-colors">
                       {card.label} <SafeIcon icon={FiArrowRight} className="ml-2 group-hover:translate-x-2 transition-transform" />
                     </Link>
                   )}
@@ -248,14 +248,14 @@ export default function Home() {
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{
             visible: { transition: { staggerChildren: 0.1 } }
           }} className="text-center mb-16">
-            <motion.span variants={slideInLeft} className="kicker text-[#A6790F]">This Week</motion.span>
+            <motion.span variants={slideInLeft} className="kicker text-[#8A6309]">This Week</motion.span>
             <motion.h2 variants={slideInRight} className="text-4xl md:text-5xl">What's Happening</motion.h2>
           </motion.div>
           <div className="grid md:grid-cols-3 gap-6">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}>
               <Link to="/sermons" className="block p-8 bg-white border border-black/5 shadow-sm rounded-3xl hover:border-[#A6790F] hover:shadow-xl transition-all duration-300 group h-full">
-                <span className="kicker text-[#A6790F]">Latest Message</span>
-                <h4 className="text-2xl mb-4 group-hover:text-[#A6790F] transition-colors">{latestSermon?.title || 'Watch Latest Message'}</h4>
+                <span className="kicker text-[#8A6309]">Latest Message</span>
+                <h4 className="text-2xl mb-4 group-hover:text-[#8A6309] transition-colors">{latestSermon?.title || 'Watch Latest Message'}</h4>
                 <div className="flex items-center gap-2 font-serif italic text-sm opacity-60 uppercase tracking-wider">
                   <SafeIcon icon={FiPlay} /> {latestSermon?.date ? formatDate(latestSermon.date) : 'Watch Now'}
                 </div>
@@ -263,8 +263,8 @@ export default function Home() {
             </motion.div>
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}>
               <Link to="/events" className="block p-8 bg-white border border-black/5 shadow-sm rounded-3xl hover:border-[#A6790F] hover:shadow-xl transition-all duration-300 group h-full">
-                <span className="kicker text-[#A6790F]">Next Event</span>
-                <h4 className="text-2xl mb-4 group-hover:text-[#A6790F] transition-colors">{nextEvent?.title || 'Check Upcoming Events'}</h4>
+                <span className="kicker text-[#8A6309]">Next Event</span>
+                <h4 className="text-2xl mb-4 group-hover:text-[#8A6309] transition-colors">{nextEvent?.title || 'Check Upcoming Events'}</h4>
                 <div className="flex items-center gap-2 font-serif italic text-sm opacity-60 uppercase tracking-wider">
                   <SafeIcon icon={FiCalendar} /> {nextEvent ? formatDate(nextEvent.occurrence_date) : 'View Calendar'}
                 </div>
@@ -272,8 +272,8 @@ export default function Home() {
             </motion.div>
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }}>
               <Link to="/blog" className="block p-8 bg-white border border-black/5 shadow-sm rounded-3xl hover:border-[#A6790F] hover:shadow-xl transition-all duration-300 group h-full">
-                <span className="kicker text-[#A6790F]">From the Blog</span>
-                <h4 className="text-2xl mb-4 group-hover:text-[#A6790F] transition-colors">{latestPosts[0]?.title || 'Read Our Latest Post'}</h4>
+                <span className="kicker text-[#8A6309]">From the Blog</span>
+                <h4 className="text-2xl mb-4 group-hover:text-[#8A6309] transition-colors">{latestPosts[0]?.title || 'Read Our Latest Post'}</h4>
                 <div className="font-serif italic text-sm opacity-60 uppercase tracking-wider">
                   {latestPosts[0]?.date ? formatDate(latestPosts[0].date) : 'Read Journal'}
                 </div>
@@ -290,7 +290,7 @@ export default function Home() {
             visible: { transition: { staggerChildren: 0.1 } }
           }} className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
             <div>
-              <motion.span variants={slideInLeft} className="kicker text-[#A6790F]">Insights & Updates</motion.span>
+              <motion.span variants={slideInLeft} className="kicker text-[#8A6309]">Insights & Updates</motion.span>
               <motion.h2 variants={slideInLeft} className="text-4xl md:text-5xl">Latest Articles</motion.h2>
             </div>
             <Link to="/blog" className="btn btn-outline border-black/20 hover:border-black text-black hidden md:inline-flex group">
@@ -318,12 +318,12 @@ export default function Home() {
                       )}
                     </div>
                     <div className="p-8 flex flex-col flex-grow">
-                      <div className="text-[10px] font-bold text-[#A6790F] uppercase tracking-wider mb-3">
+                      <div className="text-[10px] font-bold text-[#8A6309] uppercase tracking-wider mb-3">
                         {post.date ? formatDate(post.date) : formatDate(post.created_at)}
                       </div>
-                      <h3 className="text-2xl font-bold mb-3 group-hover:text-[#A6790F] transition-colors leading-tight">{post.title}</h3>
+                      <h3 className="text-2xl font-bold mb-3 group-hover:text-[#8A6309] transition-colors leading-tight">{post.title}</h3>
                       <p className="opacity-70 text-sm line-clamp-3 mb-6 flex-grow leading-relaxed">{plainText(post.body)}</p>
-                      <div className="text-xs font-bold uppercase tracking-wider text-[#A6790F] group-hover:text-black transition-colors mt-auto pt-4 border-t border-black/5 flex items-center">
+                      <div className="text-xs font-bold uppercase tracking-wider text-[#8A6309] group-hover:text-black transition-colors mt-auto pt-4 border-t border-black/5 flex items-center">
                         Read Article <SafeIcon icon={FiArrowRight} className="ml-2 transform group-hover:translate-x-1 transition-transform" />
                       </div>
                     </div>

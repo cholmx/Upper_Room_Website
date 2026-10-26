@@ -5,9 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && node scripts/generate-seo.mjs",
     "preview": "vite preview",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "test": "vitest run",
+    "prerender": "node scripts/prerender.mjs"
   },
   "dependencies": {
     "@sentry/react": "^8.55.2",
@@ -32,6 +34,7 @@
     "eslint-plugin-react-refresh": "^0.4.7",
     "globals": "^15.0.0",
     "jsdom": "^25.0.1",
+    "playwright": "^1.64.1",
     "postcss": "^8.4.38",
     "tailwindcss": "^3.4.3",
     "vite": "^6.4.5",
