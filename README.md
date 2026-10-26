@@ -59,9 +59,12 @@ Every table has RLS enabled:
 - `contact_messages_church`: anonymous users can insert only. Reads, updates, and deletes need a signed-in user.
 - `activity_log_church`: signed-in users only.
 
-Drafts and scheduled items are hidden by the app, not by the database. They are still readable through the
-public API by anyone who asks for them directly. If a draft must stay secret, add a policy that limits public
-reads to `published = 1`.
+Drafts and scheduled items are protected in the database too. Migration
+`20261026160000_protect_unpublished_content.sql` replaces the public read policy on `sermons`,
+`events_church`, and `posts` with two: anonymous visitors see only rows where `published` is not 0 and
+`publish_date` is empty or today or earlier, and signed-in users see everything so the admin can edit
+drafts. Scheduled items appear by themselves when their date arrives. Without this migration, anyone
+who asks the public API directly can read drafts. The app also hides them in the browser either way.
 
 ### Tables
 
