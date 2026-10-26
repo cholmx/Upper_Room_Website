@@ -3,11 +3,12 @@ import { Link, useLocation } from 'react-router-dom';
 import * as FiIcons from 'react-icons/fi';
 import SafeIcon from '../common/SafeIcon';
 import { publicDataFetch } from '../api';
-import { SITE } from '../config';
+import { useSite } from '../settings';
 
 const { FiMenu, FiX } = FiIcons;
 
 export default function Navbar() {
+  const SITE = useSite();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [customPages, setCustomPages] = useState([]);

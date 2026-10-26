@@ -1,8 +1,11 @@
 import React, { useEffect, Suspense, lazy } from 'react';
+import { MotionConfig } from 'framer-motion';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import { AuthProvider, useAuth } from './auth';
+import { SettingsProvider } from './settings';
+import ErrorBoundary from './components/ErrorBoundary';
 
 const Home = lazy(() => import('./pages/Home'));
 const About = lazy(() => import('./pages/About'));
@@ -11,6 +14,10 @@ const Podcasts = lazy(() => import('./pages/Podcasts'));
 const Blog = lazy(() => import('./pages/Blog'));
 const Events = lazy(() => import('./pages/Events'));
 const Visit = lazy(() => import('./pages/Visit'));
+const SermonDetail = lazy(() => import('./pages/SermonDetail'));
+const BlogPost = lazy(() => import('./pages/BlogPost'));
+const EventDetail = lazy(() => import('./pages/EventDetail'));
+const Contact = lazy(() => import('./pages/Contact'));
 const Ministries = lazy(() => import('./pages/Ministries'));
 const CustomPage = lazy(() => import('./pages/CustomPage'));
 const Login = lazy(() => import('./pages/admin/Login'));
@@ -50,7 +57,10 @@ function PublicLayout({ children }) {
 
 export default function App() {
   return (
+    <ErrorBoundary>
+    <MotionConfig reducedMotion="user">
     <Router>
+      <SettingsProvider>
       <AuthProvider>
       <ScrollToTop />
       <Suspense fallback={<Loading />}>
@@ -63,9 +73,13 @@ export default function App() {
         <Route path="/" element={<PublicLayout><Home /></PublicLayout>} />
         <Route path="/about" element={<PublicLayout><About /></PublicLayout>} />
         <Route path="/sermons" element={<PublicLayout><Sermons /></PublicLayout>} />
+        <Route path="/sermons/:id" element={<PublicLayout><SermonDetail /></PublicLayout>} />
         <Route path="/podcasts" element={<PublicLayout><Podcasts /></PublicLayout>} />
         <Route path="/blog" element={<PublicLayout><Blog /></PublicLayout>} />
+        <Route path="/blog/:id" element={<PublicLayout><BlogPost /></PublicLayout>} />
         <Route path="/events" element={<PublicLayout><Events /></PublicLayout>} />
+        <Route path="/events/:id" element={<PublicLayout><EventDetail /></PublicLayout>} />
+        <Route path="/contact" element={<PublicLayout><Contact /></PublicLayout>} />
         <Route path="/visit" element={<PublicLayout><Visit /></PublicLayout>} />
         <Route path="/ministries" element={<PublicLayout><Ministries /></PublicLayout>} />
         <Route path="/p/:slug" element={<PublicLayout><CustomPage /></PublicLayout>} />
@@ -75,6 +89,9 @@ export default function App() {
       </Routes>
       </Suspense>
       </AuthProvider>
+      </SettingsProvider>
     </Router>
+    </MotionConfig>
+    </ErrorBoundary>
   );
 }

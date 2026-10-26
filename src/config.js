@@ -13,6 +13,7 @@ export const SITE = {
   email: 'info@urfellowship.com',
   phone: '330.482.9058',
   phoneHref: 'tel:3304829058',
+  serviceTime: 'Sundays at 10:30 AM',
   address,
   addressLine: `${address.street}, ${address.city}, ${address.region} ${address.postalCode}`,
   googleMapsUrl: `https://maps.google.com/?q=${mapQuery}`,

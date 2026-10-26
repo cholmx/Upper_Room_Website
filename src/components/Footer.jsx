@@ -1,4 +1,4 @@
-import { SITE } from '../config';
+import { useSite } from '../settings';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -8,6 +8,7 @@ import * as FiIcons from 'react-icons/fi';
 const { FiArrowRight } = FiIcons;
 
 export default function Footer() {
+  const SITE = useSite();
   const container = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
@@ -72,6 +73,7 @@ export default function Footer() {
           <FooterLink to="/sermons">Messages</FooterLink>
           <FooterLink to="/events">Events</FooterLink>
           <FooterLink to="/blog">Blog</FooterLink>
+          <FooterLink to="/contact">Contact Us</FooterLink>
         </motion.div>
 
         <motion.div variants={item}>

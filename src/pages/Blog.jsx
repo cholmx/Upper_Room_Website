@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import usePageMeta from '../hooks/usePageMeta';
-import { publicDataFetch } from '../api';
-import { formatDate, stripHtml } from '../utils';
+import { formatDate, isLive } from '../utils';
+import { plainText } from '../lib/markdown';
+import useFetch from '../hooks/useFetch';
+import { ErrorState } from '../components/StateViews';
 import PageHero from '../components/PageHero';
 import SafeIcon from '../common/SafeIcon';
 import * as FiIcons from 'react-icons/fi';
@@ -12,25 +14,14 @@ const { FiSearch, FiArrowRight, FiUser, FiCalendar, FiClock, FiTag } = FiIcons;
 
 export default function Blog() {
   usePageMeta('Blog', 'Articles, devotions and updates from the Upper Room Fellowship family.');
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { data, loading, error, reload } = useFetch('read/posts?sort=created_at:desc');
+  const posts = useMemo(() => (data ?? []).filter(isLive), [data]);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
 
-  useEffect(() => {
-    async function loadPosts() {
-      const res = await publicDataFetch('read/posts?sort=created_at:desc');
-      if (res.status === 'success') {
-        setPosts(res.data ?? []);
-      }
-      setLoading(false);
-    }
-    loadPosts();
-  }, []);
-
   const getReadTime = (text) => {
     if (!text) return '1 min read';
-    const words = stripHtml(text).split(/\s+/).length;
+    const words = plainText(text).split(/\s+/).length;
     const mins = Math.max(1, Math.ceil(words / 200));
     return `${mins} min read`;
   };
@@ -72,7 +63,9 @@ export default function Blog() {
       <PageHero kicker={'Articles & Updates'} title={'Church Blog'} subtitle={'Insights, devotions, and updates from the Upper Room Family.'} image="https://images.unsplash.com/photo-1455309014304-9fea74c3d598?auto=format&fit=crop&q=80&w=2000" />
 
       <div className="max-w-[1145px] mx-auto px-6 mt-16">
-        {loading ? (
+        {error ? (
+          <ErrorState message={error} onRetry={reload} />
+        ) : loading ? (
           <div className="text-center py-32 opacity-50 flex flex-col items-center">
             <div className="w-10 h-10 border-4 border-[#A6790F] border-t-transparent rounded-full animate-spin mb-4"></div>
             Loading articles...
@@ -133,10 +126,11 @@ export default function Blog() {
                     visible: { transition: { staggerChildren: 0.1 } }
                   }} className="mb-20">
                     <motion.span variants={slideInLeft} className="kicker text-[#A6790F] mb-4 inline-block">{searchQuery || selectedCategory !== 'All' ? 'Top Result' : 'Latest Article'}</motion.span>
-                    <Link to={`/p/${featuredPost.slug || featuredPost.id}`} className="block bg-white border border-black/5 hover:shadow-2xl transition-all duration-500 rounded-3xl overflow-hidden flex flex-col md:flex-row group translate-y-0 hover:-translate-y-2">
+                    <Link to={`/blog/${featuredPost.id}`} className="block bg-white border border-black/5 hover:shadow-2xl transition-all duration-500 rounded-3xl overflow-hidden flex flex-col md:flex-row group translate-y-0 hover:-translate-y-2">
                       <div className="md:w-1/2 aspect-square md:aspect-auto bg-[#0B1613] relative overflow-hidden flex-shrink-0">
                         {featuredPost.image_url ? (
                           <img 
+                            loading="lazy"
                             src={featuredPost.image_url} 
                             alt={featuredPost.title} 
                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" 
@@ -161,7 +155,7 @@ export default function Blog() {
                         <motion.h2 variants={slideInRight} className="text-4xl lg:text-5xl font-bold mb-6 group-hover:text-[#A6790F] transition-colors leading-tight">{featuredPost.title}</motion.h2>
                         
                         <motion.p variants={fadeUp} className="opacity-70 mb-10 line-clamp-4 text-lg leading-relaxed">
-                          {stripHtml(featuredPost.body) || 'Read this article to learn more...'}
+                          {plainText(featuredPost.body) || 'Read this article to learn more...'}
                         </motion.p>
                         
                         <div className="mt-auto flex items-center justify-between border-t border-black/5 pt-8">
@@ -194,12 +188,13 @@ export default function Blog() {
                       {standardPosts.map(post => (
                         <motion.div key={post.id} variants={fadeUp}>
                           <Link 
-                            to={`/p/${post.slug || post.id}`}
+                            to={`/blog/${post.id}`}
                             className="bg-white border border-black/5 flex flex-col h-full rounded-2xl overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-400 group"
                           >
                             <div className="aspect-[16/10] bg-[#0B1613] relative overflow-hidden">
                               {post.image_url ? (
                                 <img 
+                                  loading="lazy"
                                   src={post.image_url} 
                                   alt={post.title} 
                                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
@@ -227,7 +222,7 @@ export default function Blog() {
                               </h3>
                               
                               <p className="opacity-70 mb-8 line-clamp-3 text-sm leading-relaxed flex-grow">
-                                {stripHtml(post.body) || 'Read this article to learn more...'}
+                                {plainText(post.body) || 'Read this article to learn more...'}
                               </p>
                               
                               <div className="mt-auto pt-5 border-t border-black/5 flex items-center justify-between">

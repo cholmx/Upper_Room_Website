@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { SITE } from '../config';
+import { useSite } from '../settings';
 import usePageMeta from '../hooks/usePageMeta';
 import PageHero from '../components/PageHero';
 import SafeIcon from '../common/SafeIcon';
@@ -9,6 +9,7 @@ import * as FiIcons from 'react-icons/fi';
 const { FiClock, FiMapPin, FiSmile, FiHelpCircle, FiCoffee, FiCar, FiCopy, FiCheck, FiNavigation, FiSmartphone } = FiIcons;
 
 export default function Visit() {
+  const SITE = useSite();
   usePageMeta('Plan Your Visit', 'Service times, directions and what to expect when you visit Upper Room Fellowship.');
   const [copied, setCopied] = useState(false);
 
@@ -53,12 +54,12 @@ export default function Visit() {
               visible: { transition: { staggerChildren: 0.1 } }
             }} className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-[2rem] p-8 md:p-10 text-white shadow-2xl">
               <motion.span variants={slideInLeft} className="kicker text-[#FFC44F] flex items-center gap-2"><SafeIcon icon={FiMapPin} /> Location Hub</motion.span>
-              <motion.h2 variants={slideInLeft} className="text-4xl md:text-5xl mb-2 font-bold leading-tight">500 Sponseller Road</motion.h2>
-              <motion.p variants={slideInLeft} className="text-xl opacity-70 mb-8 font-serif italic">Columbiana, OH 44408</motion.p>
+              <motion.h2 variants={slideInLeft} className="text-4xl md:text-5xl mb-2 font-bold leading-tight">{SITE.address.street}</motion.h2>
+              <motion.p variants={slideInLeft} className="text-xl opacity-70 mb-8 font-serif italic">{SITE.address.city}, {SITE.address.region} {SITE.address.postalCode}</motion.p>
               
               <motion.div variants={fadeUp} className="flex items-center gap-4 text-lg font-bold bg-black/30 p-4 rounded-2xl mb-8 border border-white/5 w-fit">
                  <SafeIcon icon={FiClock} className="text-[#FFC44F] text-2xl" />
-                 Sundays at 10:30 AM
+                 {SITE.serviceTime}
               </motion.div>
 
               <div className="space-y-4">

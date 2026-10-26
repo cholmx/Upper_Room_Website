@@ -3,15 +3,17 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import usePageMeta from '../hooks/usePageMeta';
 import { publicDataFetch } from '../api';
-import { formatDate } from '../utils';
-import { SITE } from '../config';
+import { formatDate, isLive, expandEvents } from '../utils';
+import { plainText } from '../lib/markdown';
+import { useSite } from '../settings';
 import SafeIcon from '../common/SafeIcon';
 import * as FiIcons from 'react-icons/fi';
 
 const { FiArrowRight, FiPlay, FiCalendar, FiClock, FiMapPin, FiCopy, FiCheck, FiNavigation, FiSmartphone, FiCompass } = FiIcons;
 
 export default function Home() {
-  usePageMeta('Home', 'Upper Room Fellowship in Columbiana, Ohio. Transforming lives that transform communities. Join us Sundays at 10:30 AM.');
+  const SITE = useSite();
+  usePageMeta('Home', `Upper Room Fellowship in ${SITE.address.city}, Ohio. Transforming lives that transform communities. Join us ${SITE.serviceTime}.`);
   const [hero, setHero] = useState(null);
   const [photoSections, setPhotoSections] = useState([]);
   const [sectionOrder, setSectionOrder] = useState([]);
@@ -27,18 +29,18 @@ export default function Home() {
         publicDataFetch('read/hero_config'),
         publicDataFetch('read/photo_sections_church?sort=sort_order_num'),
         publicDataFetch('read/home_section_order_church?sort=sort_order_num_val'),
-        publicDataFetch('read/sermons?limit=1&sort=created_at:desc'),
-        publicDataFetch('read/events_church?limit=1&sort=date:asc'),
-        publicDataFetch('read/posts?limit=3&sort=created_at:desc'),
+        publicDataFetch('read/sermons?limit=10&sort=created_at:desc'),
+        publicDataFetch('read/events_church?sort=date:asc'),
+        publicDataFetch('read/posts?limit=10&sort=created_at:desc'),
         publicDataFetch('read/gallery_church?sort=sort_order_num')
       ]);
 
       if (h.status === 'success') setHero(h.data?.[0]);
       if (ps.status === 'success') setPhotoSections(ps.data ?? []);
       if (so.status === 'success') setSectionOrder(so.data ?? []);
-      if (s.status === 'success') setLatestSermon(s.data?.[0]);
-      if (e.status === 'success') setNextEvent(e.data?.[0]);
-      if (b.status === 'success') setLatestPosts(b.data ?? []);
+      if (s.status === 'success') setLatestSermon((s.data ?? []).filter(isLive)[0]);
+      if (e.status === 'success') setNextEvent(expandEvents((e.data ?? []).filter(isLive), undefined, 60)[0]);
+      if (b.status === 'success') setLatestPosts((b.data ?? []).filter(isLive).slice(0, 3));
       if (g.status === 'success') setGallery(g.data ?? []);
     }
     fetchData();
@@ -179,10 +181,10 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="lg:col-span-8 bg-white/5 backdrop-blur-md border border-white/10 rounded-[2rem] p-8 md:p-12 flex flex-col justify-between group hover:bg-white/10 transition-colors duration-500">
               <div>
-                <h3 className="text-3xl md:text-5xl mb-4 font-bold leading-tight">500 Sponseller Road<br/><span className="text-white/50">Columbiana, OH</span></h3>
+                <h3 className="text-3xl md:text-5xl mb-4 font-bold leading-tight">{SITE.address.street}<br/><span className="text-white/50">{SITE.address.city}, {SITE.address.region}</span></h3>
                 <div className="flex flex-wrap items-center gap-4 mt-8">
                   <div className="flex items-center gap-3 bg-[#FFC44F] text-black px-6 py-3 rounded-full font-bold">
-                    <SafeIcon icon={FiClock} className="text-xl" /> Sundays at 10:30 AM
+                    <SafeIcon icon={FiClock} className="text-xl" /> {SITE.serviceTime}
                   </div>
                   <button onClick={handleCopy} className="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-full font-bold transition-colors">
                     {copied ? <><SafeIcon icon={FiCheck} className="text-[#FFC44F]" /> Copied!</> : <><SafeIcon icon={FiCopy} /> Copy Address</>}
@@ -255,7 +257,7 @@ export default function Home() {
                 <span className="kicker text-[#A6790F]">Latest Message</span>
                 <h4 className="text-2xl mb-4 group-hover:text-[#A6790F] transition-colors">{latestSermon?.title || 'Watch Latest Message'}</h4>
                 <div className="flex items-center gap-2 font-serif italic text-sm opacity-60 uppercase tracking-wider">
-                  <SafeIcon icon={FiPlay} /> {latestSermon?.date || 'Watch Now'}
+                  <SafeIcon icon={FiPlay} /> {latestSermon?.date ? formatDate(latestSermon.date) : 'Watch Now'}
                 </div>
               </Link>
             </motion.div>
@@ -264,7 +266,7 @@ export default function Home() {
                 <span className="kicker text-[#A6790F]">Next Event</span>
                 <h4 className="text-2xl mb-4 group-hover:text-[#A6790F] transition-colors">{nextEvent?.title || 'Check Upcoming Events'}</h4>
                 <div className="flex items-center gap-2 font-serif italic text-sm opacity-60 uppercase tracking-wider">
-                  <SafeIcon icon={FiCalendar} /> {nextEvent?.date ? formatDate(nextEvent.date) : 'View Calendar'}
+                  <SafeIcon icon={FiCalendar} /> {nextEvent ? formatDate(nextEvent.occurrence_date) : 'View Calendar'}
                 </div>
               </Link>
             </motion.div>
@@ -300,10 +302,10 @@ export default function Home() {
             <div className="grid md:grid-cols-3 gap-8">
               {latestPosts.map((post, i) => (
                 <motion.div key={post.id} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
-                  <Link to={`/p/${post.slug || post.id}`} className="bg-[#F9F9F7] border border-black/5 rounded-3xl overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group flex flex-col h-full">
+                  <Link to={`/blog/${post.id}`} className="bg-[#F9F9F7] border border-black/5 rounded-3xl overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group flex flex-col h-full">
                     <div className="aspect-video bg-[#0B1613] relative overflow-hidden">
                       {post.image_url ? (
-                        <img src={post.image_url} alt={post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                        <img src={post.image_url} alt={post.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                       ) : (
                         <div className="absolute inset-0 flex items-center justify-center text-white/50 bg-gradient-to-br from-[#0B1613] to-[#1A2E28]">
                           <span className="font-serif text-2xl">Upper Room</span>
@@ -320,7 +322,7 @@ export default function Home() {
                         {post.date ? formatDate(post.date) : formatDate(post.created_at)}
                       </div>
                       <h3 className="text-2xl font-bold mb-3 group-hover:text-[#A6790F] transition-colors leading-tight">{post.title}</h3>
-                      <p className="opacity-70 text-sm line-clamp-3 mb-6 flex-grow leading-relaxed">{post.body?.replace(/<[^>]*>?/gm, '')}</p>
+                      <p className="opacity-70 text-sm line-clamp-3 mb-6 flex-grow leading-relaxed">{plainText(post.body)}</p>
                       <div className="text-xs font-bold uppercase tracking-wider text-[#A6790F] group-hover:text-black transition-colors mt-auto pt-4 border-t border-black/5 flex items-center">
                         Read Article <SafeIcon icon={FiArrowRight} className="ml-2 transform group-hover:translate-x-1 transition-transform" />
                       </div>
@@ -390,7 +392,7 @@ export default function Home() {
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{
               visible: { transition: { staggerChildren: 0.1 } }
             }} className="relative z-10">
-              <motion.h2 variants={slideInLeft} className="text-4xl md:text-6xl mb-8">Join Us Sundays at 10:30 AM</motion.h2>
+              <motion.h2 variants={slideInLeft} className="text-4xl md:text-6xl mb-8">Join Us {SITE.serviceTime}</motion.h2>
               <motion.div variants={slideInRight}>
                 <Link to="/visit" className="btn btn-outline border-black text-black hover:bg-black hover:text-[#FFC44F] group">
                   Plan Your Visit <SafeIcon icon={FiArrowRight} className="group-hover:translate-x-1 transition-transform" />
@@ -417,7 +419,7 @@ export default function Home() {
               {hero?.heading || 'Transforming lives that transform communities'}
             </h1>
             <p className="font-serif italic text-2xl md:text-3xl max-w-[40ch] opacity-90 mb-10 drop-shadow-md">
-              {hero?.subtext || 'Join us Sundays at 10:30am in Columbiana, Ohio'}
+              {hero?.subtext || `Join us ${SITE.serviceTime} in ${SITE.address.city}, Ohio`}
             </p>
             <div className="flex flex-wrap gap-4">
               <Link to="/visit" className="btn btn-solid group">

@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import usePageMeta from '../hooks/usePageMeta';
-import { publicDataFetch } from '../api';
-import { formatDate, ytId, ytEmbed, ytThumb } from '../utils';
+import useFetch from '../hooks/useFetch';
+import { ErrorState } from '../components/StateViews';
+import { formatDate, ytId, ytEmbed, ytThumb, isLive } from '../utils';
 import PageHero from '../components/PageHero';
 import SafeIcon from '../common/SafeIcon';
 import * as FiIcons from 'react-icons/fi';
@@ -11,21 +13,12 @@ const { FiSearch, FiPlay, FiHeadphones, FiArrowRight, FiFilter, FiChevronDown } 
 
 export default function Sermons() {
   usePageMeta('Messages', 'Watch and listen to recent messages and series from Upper Room Fellowship.');
-  const [sermons, setSermons] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [selectedSeries, setSelectedSeries] = useState('All');
+  const { data, loading, error, reload } = useFetch('read/sermons?sort=created_at:desc');
+  const sermons = useMemo(() => (data ?? []).filter(isLive), [data]);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const selectedSeries = searchParams.get('series') || 'All';
+  const setSelectedSeries = (series) => setSearchParams(series === 'All' ? {} : { series });
   const [searchQuery, setSearchQuery] = useState('');
-
-  useEffect(() => {
-    async function loadSermons() {
-      const res = await publicDataFetch('read/sermons?sort=created_at:desc');
-      if (res.status === 'success') {
-        setSermons(res.data ?? []);
-      }
-      setLoading(false);
-    }
-    loadSermons();
-  }, []);
 
   const allSeries = ['All', ...new Set(sermons.map(s => s?.series).filter(Boolean))];
 
@@ -64,7 +57,9 @@ export default function Sermons() {
       <PageHero kicker={'Watch & Listen'} title={'Messages'} subtitle={'Catch up on recent teachings and series.'} image="https://images.unsplash.com/photo-1519781542704-957ff19eff00?auto=format&fit=crop&q=80&w=2000" />
 
       <div className="max-w-[1145px] mx-auto px-6 mt-16">
-        {loading ? (
+        {error ? (
+          <ErrorState message={error} onRetry={reload} />
+        ) : loading ? (
           <div className="flex justify-center items-center py-32">
             <div className="w-10 h-10 border-4 border-[#A6790F] border-t-transparent rounded-full animate-spin"></div>
           </div>
@@ -133,7 +128,7 @@ export default function Sermons() {
                     <motion.span variants={slideInLeft} className="kicker text-[#A6790F] mb-4 inline-block">
                       {searchQuery ? 'Top Result' : (selectedSeries === 'All' ? 'Latest Message' : `Latest in ${selectedSeries}`)}
                     </motion.span>
-                    <motion.h2 variants={slideInRight} className="text-4xl md:text-5xl mb-4">{featuredSermon?.title}</motion.h2>
+                    <motion.h2 variants={slideInRight} className="text-4xl md:text-5xl mb-4"><Link to={`/sermons/${featuredSermon.id}`} className="hover:text-[#A6790F] transition-colors">{featuredSermon?.title}</Link></motion.h2>
                     <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-3 opacity-60 text-sm mb-8 uppercase tracking-wider font-bold">
                       <span className="bg-gray-100 px-3 py-1 rounded-full text-black">{featuredSermon?.date ? formatDate(featuredSermon.date) : ''}</span>
                       <span>•</span>
@@ -180,7 +175,7 @@ export default function Sermons() {
                     </motion.h3>
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                       {pastSermons.map(s => (
-                        <motion.div key={s.id} variants={fadeUp} className="bg-white border border-black/5 p-6 rounded-2xl hover:shadow-2xl transition-all duration-300 flex flex-col group translate-y-0 hover:-translate-y-2">
+                        <motion.div key={s.id} variants={fadeUp} className="relative bg-white border border-black/5 p-6 rounded-2xl hover:shadow-2xl transition-all duration-300 flex flex-col group translate-y-0 hover:-translate-y-2">
                           <div className="aspect-video bg-[#0B1613] mb-6 overflow-hidden relative rounded-xl shadow-inner">
                              {ytId(videoOf(s)) ? (
                                 <>
@@ -213,11 +208,11 @@ export default function Sermons() {
                             <span>•</span>
                             <span>{s?.speaker}</span>
                           </div>
-                          <h4 className="text-2xl font-bold mb-3 group-hover:text-[#A6790F] transition-colors leading-tight">{s?.title}</h4>
+                          <h4 className="text-2xl font-bold mb-3 group-hover:text-[#A6790F] transition-colors leading-tight"><Link to={`/sermons/${s.id}`} className="after:absolute after:inset-0 focus-visible:outline-none">{s?.title}</Link></h4>
                           <p className="opacity-70 line-clamp-3 mb-6 flex-grow text-sm leading-relaxed">{s?.description}</p>
                           
                           {s?.audio_url ? (
-                            <a href={s.audio_url} target="_blank" rel="noopener noreferrer" className="mt-auto inline-flex items-center text-sm font-bold text-[#A6790F] hover:text-black uppercase tracking-wider group/link">
+                            <a href={s.audio_url} target="_blank" rel="noopener noreferrer" className="relative z-10 mt-auto inline-flex items-center text-sm font-bold text-[#A6790F] hover:text-black uppercase tracking-wider group/link">
                               <SafeIcon icon={FiHeadphones} className="mr-2" /> Listen Audio <SafeIcon icon={FiArrowRight} className="ml-2 opacity-0 -translate-x-2 group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all" />
                             </a>
                           ) : (
