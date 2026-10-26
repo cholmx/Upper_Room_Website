@@ -1,46 +1,54 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import usePageMeta from '../hooks/usePageMeta';
 import { publicDataFetch } from '../api';
-import { formatDate } from '../utils';
+import { formatDate, isLive, expandEvents } from '../utils';
+import { plainText } from '../lib/markdown';
+import { useSite } from '../settings';
 import SafeIcon from '../common/SafeIcon';
 import * as FiIcons from 'react-icons/fi';
 
 const { FiArrowRight, FiPlay, FiCalendar, FiClock, FiMapPin, FiCopy, FiCheck, FiNavigation, FiSmartphone, FiCompass } = FiIcons;
 
 export default function Home() {
+  const SITE = useSite();
+  usePageMeta('Home', `Upper Room Fellowship in ${SITE.address.city}, Ohio. Transforming lives that transform communities. Join us ${SITE.serviceTime}.`);
   const [hero, setHero] = useState(null);
   const [photoSections, setPhotoSections] = useState([]);
   const [sectionOrder, setSectionOrder] = useState([]);
   const [latestSermon, setLatestSermon] = useState(null);
   const [nextEvent, setNextEvent] = useState(null);
   const [latestPosts, setLatestPosts] = useState([]);
+  const [gallery, setGallery] = useState([]);
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
-      const [h, ps, so, s, e, b] = await Promise.all([
+      const [h, ps, so, s, e, b, g] = await Promise.all([
         publicDataFetch('read/hero_config'),
         publicDataFetch('read/photo_sections_church?sort=sort_order_num'),
         publicDataFetch('read/home_section_order_church?sort=sort_order_num_val'),
-        publicDataFetch('read/sermons?limit=1&sort=created_at:desc'),
-        publicDataFetch('read/events_church?limit=1&sort=date:asc'),
-        publicDataFetch('read/posts?limit=3&sort=created_at:desc')
+        publicDataFetch('read/sermons?limit=10&sort=created_at:desc'),
+        publicDataFetch('read/events_church?sort=date:asc'),
+        publicDataFetch('read/posts?limit=10&sort=created_at:desc'),
+        publicDataFetch('read/gallery_church?sort=sort_order_num')
       ]);
 
       if (h.status === 'success') setHero(h.data?.[0]);
       if (ps.status === 'success') setPhotoSections(ps.data ?? []);
       if (so.status === 'success') setSectionOrder(so.data ?? []);
-      if (s.status === 'success') setLatestSermon(s.data?.[0]);
-      if (e.status === 'success') setNextEvent(e.data?.[0]);
-      if (b.status === 'success') setLatestPosts(b.data ?? []);
+      if (s.status === 'success') setLatestSermon((s.data ?? []).filter(isLive)[0]);
+      if (e.status === 'success') setNextEvent(expandEvents((e.data ?? []).filter(isLive), undefined, 60)[0]);
+      if (b.status === 'success') setLatestPosts((b.data ?? []).filter(isLive).slice(0, 3));
+      if (g.status === 'success') setGallery(g.data ?? []);
     }
     fetchData();
   }, []);
 
   const handleCopy = (e) => {
     e.preventDefault();
-    navigator.clipboard.writeText("500 Sponseller Road, Columbiana, Ohio 44408");
+    navigator.clipboard.writeText(SITE.addressLine);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -64,7 +72,7 @@ export default function Home() {
     campaign: (
       <div key="campaign" className="text-center py-24 px-6 bg-gradient-to-b from-[#F9F9F7] to-white text-black border-b border-black/5 overflow-hidden">
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp}>
-          <motion.span variants={slideInLeft} className="kicker text-[#A6790F]">Transforming Together</motion.span>
+          <motion.span variants={slideInLeft} className="kicker text-[#8A6309]">Transforming Together</motion.span>
           <motion.h2 variants={slideInRight} className="text-4xl md:text-6xl max-w-[20ch] mx-auto mb-6">Growth Campaign</motion.h2>
           <div className="flex flex-wrap justify-center gap-4 mt-8">
             <a className="btn btn-solid group" href="https://www.urfellowship.com/transforming-together" target="_blank" rel="noopener noreferrer">
@@ -101,7 +109,7 @@ export default function Home() {
             className="relative"
           >
             <div className="aspect-[4/5] md:aspect-square rounded-3xl overflow-hidden border border-white/10 shadow-2xl relative z-10">
-              <img src="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&q=80&w=1000" alt="Church" className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000" />
+              <img src="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&q=80&w=1000" alt="Upper Room Fellowship congregation" loading="lazy" className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000" />
             </div>
             <div className="absolute -bottom-6 -left-6 w-full h-full border-2 border-[#CCA866]/30 rounded-3xl z-0"></div>
           </motion.div>
@@ -128,7 +136,7 @@ export default function Home() {
             {[
               { title: 'Plan Your Visit', text: 'Find service times, directions, and helpful info for your first visit.', link: '/visit', label: 'New Here?' },
               { title: 'Latest Message', text: 'Catch up on recent teachings and series from our Sunday services.', link: '/sermons', label: 'Messages' },
-              { title: 'Give Online', text: 'Partner with us in our mission to transform our community.', link: 'https://onrealm.org/urfellowship', label: 'Give' }
+              { title: 'Give Online', text: 'Partner with us in our mission to transform our community.', link: SITE.giveUrl, label: 'Give' }
             ].map((card, i) => (
               <motion.div 
                 key={i} 
@@ -142,11 +150,11 @@ export default function Home() {
                 <p className="mb-8 opacity-70 leading-relaxed flex-grow">{card.text}</p>
                 <div className="mt-auto">
                   {card.link.startsWith('http') ? (
-                    <a href={card.link} className="inline-flex items-center font-bold uppercase tracking-widest text-[#A6790F] group-hover:text-[#FFC44F] transition-colors">
+                    <a href={card.link} className="inline-flex items-center font-bold uppercase tracking-widest text-[#8A6309] group-hover:text-[#FFC44F] transition-colors">
                       {card.label} <SafeIcon icon={FiArrowRight} className="ml-2 group-hover:translate-x-2 transition-transform" />
                     </a>
                   ) : (
-                    <Link to={card.link} className="inline-flex items-center font-bold uppercase tracking-widest text-[#A6790F] group-hover:text-[#FFC44F] transition-colors">
+                    <Link to={card.link} className="inline-flex items-center font-bold uppercase tracking-widest text-[#8A6309] group-hover:text-[#FFC44F] transition-colors">
                       {card.label} <SafeIcon icon={FiArrowRight} className="ml-2 group-hover:translate-x-2 transition-transform" />
                     </Link>
                   )}
@@ -173,10 +181,10 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="lg:col-span-8 bg-white/5 backdrop-blur-md border border-white/10 rounded-[2rem] p-8 md:p-12 flex flex-col justify-between group hover:bg-white/10 transition-colors duration-500">
               <div>
-                <h3 className="text-3xl md:text-5xl mb-4 font-bold leading-tight">500 Sponseller Road<br/><span className="text-white/50">Columbiana, OH</span></h3>
+                <h3 className="text-3xl md:text-5xl mb-4 font-bold leading-tight">{SITE.address.street}<br/><span className="text-white/50">{SITE.address.city}, {SITE.address.region}</span></h3>
                 <div className="flex flex-wrap items-center gap-4 mt-8">
                   <div className="flex items-center gap-3 bg-[#FFC44F] text-black px-6 py-3 rounded-full font-bold">
-                    <SafeIcon icon={FiClock} className="text-xl" /> Sundays at 10:30 AM
+                    <SafeIcon icon={FiClock} className="text-xl" /> {SITE.serviceTime}
                   </div>
                   <button onClick={handleCopy} className="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-full font-bold transition-colors">
                     {copied ? <><SafeIcon icon={FiCheck} className="text-[#FFC44F]" /> Copied!</> : <><SafeIcon icon={FiCopy} /> Copy Address</>}
@@ -188,9 +196,8 @@ export default function Home() {
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="lg:col-span-4 bg-[#FFC44F] rounded-[2rem] p-8 text-black flex flex-col justify-end relative overflow-hidden min-h-[300px] group">
               <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
                 <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3008.3188981156844!2d-80.684117!3d40.871142!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88340156d9a9f243%3A0x6b149b552d433eb!2s500%20Sponseller%20Rd%2C%20Columbiana%2C%20OH%2044408!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus" 
+                  src={SITE.mapEmbedUrl}
                   className="w-full h-[150%] -translate-y-1/4 border-0 grayscale" 
-                  allowFullScreen="" 
                   loading="lazy" 
                   referrerPolicy="no-referrer-when-downgrade"
                   title="Church Location Map"
@@ -206,7 +213,7 @@ export default function Home() {
               </div>
               
               <div className="relative z-20 mt-auto w-full pt-32">
-                <a href="https://maps.google.com/?q=500+Sponseller+Road+Columbiana+OH+44408" target="_blank" rel="noopener noreferrer" className="bg-black text-[#FFC44F] w-full py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-black/90 transition-colors shadow-xl">
+                <a href={SITE.googleMapsUrl} target="_blank" rel="noopener noreferrer" className="bg-black text-[#FFC44F] w-full py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-black/90 transition-colors shadow-xl">
                   <SafeIcon icon={FiCompass} className="text-xl" /> Explore Area
                 </a>
               </div>
@@ -215,11 +222,11 @@ export default function Home() {
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="lg:col-span-6 bg-white/5 backdrop-blur-md border border-white/10 rounded-[2rem] p-8 flex flex-col justify-center">
               <h4 className="text-xl font-bold mb-6 flex items-center gap-2"><SafeIcon icon={FiNavigation} className="text-[#FFC44F]" /> Get Directions</h4>
               <div className="grid sm:grid-cols-2 gap-4">
-                <a href="https://maps.google.com/?q=500+Sponseller+Road+Columbiana+OH+44408" target="_blank" rel="noopener noreferrer" className="flex items-center justify-between p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 transition-colors group">
+                <a href={SITE.googleMapsUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-between p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 transition-colors group">
                   <span className="font-bold">Google Maps</span>
                   <SafeIcon icon={FiArrowRight} className="text-white/50 group-hover:text-white group-hover:translate-x-1 transition-all" />
                 </a>
-                <a href="http://maps.apple.com/?q=500+Sponseller+Road+Columbiana+OH+44408" target="_blank" rel="noopener noreferrer" className="flex items-center justify-between p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 transition-colors group">
+                <a href={SITE.appleMapsUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-between p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 transition-colors group">
                   <span className="font-bold">Apple Maps</span>
                   <SafeIcon icon={FiSmartphone} className="text-white/50 group-hover:text-white group-hover:translate-x-1 transition-all" />
                 </a>
@@ -240,32 +247,32 @@ export default function Home() {
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{
             visible: { transition: { staggerChildren: 0.1 } }
           }} className="text-center mb-16">
-            <motion.span variants={slideInLeft} className="kicker text-[#A6790F]">This Week</motion.span>
+            <motion.span variants={slideInLeft} className="kicker text-[#8A6309]">This Week</motion.span>
             <motion.h2 variants={slideInRight} className="text-4xl md:text-5xl">What's Happening</motion.h2>
           </motion.div>
           <div className="grid md:grid-cols-3 gap-6">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}>
               <Link to="/sermons" className="block p-8 bg-white border border-black/5 shadow-sm rounded-3xl hover:border-[#A6790F] hover:shadow-xl transition-all duration-300 group h-full">
-                <span className="kicker text-[#A6790F]">Latest Message</span>
-                <h4 className="text-2xl mb-4 group-hover:text-[#A6790F] transition-colors">{latestSermon?.title || 'Watch Latest Message'}</h4>
+                <span className="kicker text-[#8A6309]">Latest Message</span>
+                <h4 className="text-2xl mb-4 group-hover:text-[#8A6309] transition-colors">{latestSermon?.title || 'Watch Latest Message'}</h4>
                 <div className="flex items-center gap-2 font-serif italic text-sm opacity-60 uppercase tracking-wider">
-                  <SafeIcon icon={FiPlay} /> {latestSermon?.date || 'Watch Now'}
+                  <SafeIcon icon={FiPlay} /> {latestSermon?.date ? formatDate(latestSermon.date) : 'Watch Now'}
                 </div>
               </Link>
             </motion.div>
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}>
               <Link to="/events" className="block p-8 bg-white border border-black/5 shadow-sm rounded-3xl hover:border-[#A6790F] hover:shadow-xl transition-all duration-300 group h-full">
-                <span className="kicker text-[#A6790F]">Next Event</span>
-                <h4 className="text-2xl mb-4 group-hover:text-[#A6790F] transition-colors">{nextEvent?.title || 'Check Upcoming Events'}</h4>
+                <span className="kicker text-[#8A6309]">Next Event</span>
+                <h4 className="text-2xl mb-4 group-hover:text-[#8A6309] transition-colors">{nextEvent?.title || 'Check Upcoming Events'}</h4>
                 <div className="flex items-center gap-2 font-serif italic text-sm opacity-60 uppercase tracking-wider">
-                  <SafeIcon icon={FiCalendar} /> {nextEvent?.date ? formatDate(nextEvent.date) : 'View Calendar'}
+                  <SafeIcon icon={FiCalendar} /> {nextEvent ? formatDate(nextEvent.occurrence_date) : 'View Calendar'}
                 </div>
               </Link>
             </motion.div>
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }}>
               <Link to="/blog" className="block p-8 bg-white border border-black/5 shadow-sm rounded-3xl hover:border-[#A6790F] hover:shadow-xl transition-all duration-300 group h-full">
-                <span className="kicker text-[#A6790F]">From the Blog</span>
-                <h4 className="text-2xl mb-4 group-hover:text-[#A6790F] transition-colors">{latestPosts[0]?.title || 'Read Our Latest Post'}</h4>
+                <span className="kicker text-[#8A6309]">From the Blog</span>
+                <h4 className="text-2xl mb-4 group-hover:text-[#8A6309] transition-colors">{latestPosts[0]?.title || 'Read Our Latest Post'}</h4>
                 <div className="font-serif italic text-sm opacity-60 uppercase tracking-wider">
                   {latestPosts[0]?.date ? formatDate(latestPosts[0].date) : 'Read Journal'}
                 </div>
@@ -282,7 +289,7 @@ export default function Home() {
             visible: { transition: { staggerChildren: 0.1 } }
           }} className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
             <div>
-              <motion.span variants={slideInLeft} className="kicker text-[#A6790F]">Insights & Updates</motion.span>
+              <motion.span variants={slideInLeft} className="kicker text-[#8A6309]">Insights & Updates</motion.span>
               <motion.h2 variants={slideInLeft} className="text-4xl md:text-5xl">Latest Articles</motion.h2>
             </div>
             <Link to="/blog" className="btn btn-outline border-black/20 hover:border-black text-black hidden md:inline-flex group">
@@ -294,10 +301,10 @@ export default function Home() {
             <div className="grid md:grid-cols-3 gap-8">
               {latestPosts.map((post, i) => (
                 <motion.div key={post.id} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
-                  <Link to={`/p/${post.slug || post.id}`} className="bg-[#F9F9F7] border border-black/5 rounded-3xl overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group flex flex-col h-full">
+                  <Link to={`/blog/${post.id}`} className="bg-[#F9F9F7] border border-black/5 rounded-3xl overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group flex flex-col h-full">
                     <div className="aspect-video bg-[#0B1613] relative overflow-hidden">
                       {post.image_url ? (
-                        <img src={post.image_url} alt={post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                        <img src={post.image_url} alt={post.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                       ) : (
                         <div className="absolute inset-0 flex items-center justify-center text-white/50 bg-gradient-to-br from-[#0B1613] to-[#1A2E28]">
                           <span className="font-serif text-2xl">Upper Room</span>
@@ -310,12 +317,12 @@ export default function Home() {
                       )}
                     </div>
                     <div className="p-8 flex flex-col flex-grow">
-                      <div className="text-[10px] font-bold text-[#A6790F] uppercase tracking-wider mb-3">
+                      <div className="text-[10px] font-bold text-[#8A6309] uppercase tracking-wider mb-3">
                         {post.date ? formatDate(post.date) : formatDate(post.created_at)}
                       </div>
-                      <h3 className="text-2xl font-bold mb-3 group-hover:text-[#A6790F] transition-colors leading-tight">{post.title}</h3>
-                      <p className="opacity-70 text-sm line-clamp-3 mb-6 flex-grow leading-relaxed">{post.body?.replace(/<[^>]*>?/gm, '')}</p>
-                      <div className="text-xs font-bold uppercase tracking-wider text-[#A6790F] group-hover:text-black transition-colors mt-auto pt-4 border-t border-black/5 flex items-center">
+                      <h3 className="text-2xl font-bold mb-3 group-hover:text-[#8A6309] transition-colors leading-tight">{post.title}</h3>
+                      <p className="opacity-70 text-sm line-clamp-3 mb-6 flex-grow leading-relaxed">{plainText(post.body)}</p>
+                      <div className="text-xs font-bold uppercase tracking-wider text-[#8A6309] group-hover:text-black transition-colors mt-auto pt-4 border-t border-black/5 flex items-center">
                         Read Article <SafeIcon icon={FiArrowRight} className="ml-2 transform group-hover:translate-x-1 transition-transform" />
                       </div>
                     </div>
@@ -333,7 +340,7 @@ export default function Home() {
         </div>
       </div>
     ),
-    gallery: (
+    gallery: gallery.length === 0 ? null : (
       <div key="gallery" className="py-24 px-6 bg-[#F9F9F7] text-black">
         <div className="max-w-[1145px] mx-auto">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{
@@ -343,16 +350,16 @@ export default function Home() {
             <motion.h2 variants={slideInRight} className="text-4xl md:text-5xl">Community in Pictures</motion.h2>
           </motion.div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[1, 2, 3, 4, 5, 6, 7, 8].map((i, idx) => (
+            {gallery.map((photo, idx) => (
               <motion.div 
-                key={i} 
+                key={photo.id ?? idx} 
                 initial={{ opacity: 0, scale: 0.9 }} 
                 whileInView={{ opacity: 1, scale: 1 }} 
                 viewport={{ once: true }} 
                 transition={{ duration: 0.4, delay: idx * 0.05 }}
-                className="aspect-square bg-[#0B1613] overflow-hidden rounded-2xl border border-black/5 group cursor-pointer"
+                className="aspect-square bg-[#0B1613] overflow-hidden rounded-2xl border border-black/5 group"
               >
-                <img src={`https://images.unsplash.com/photo-${1500000000000 + i * 10000}?auto=format&fit=crop&q=80&w=400`} alt="Gallery" className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" />
+                <img src={photo.image_url} alt={photo.caption || 'Upper Room Fellowship community photo'} loading="lazy" className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" />
               </motion.div>
             ))}
           </div>
@@ -384,7 +391,7 @@ export default function Home() {
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{
               visible: { transition: { staggerChildren: 0.1 } }
             }} className="relative z-10">
-              <motion.h2 variants={slideInLeft} className="text-4xl md:text-6xl mb-8">Join Us Sundays at 10:30 AM</motion.h2>
+              <motion.h2 variants={slideInLeft} className="text-4xl md:text-6xl mb-8">Join Us {SITE.serviceTime}</motion.h2>
               <motion.div variants={slideInRight}>
                 <Link to="/visit" className="btn btn-outline border-black text-black hover:bg-black hover:text-[#FFC44F] group">
                   Plan Your Visit <SafeIcon icon={FiArrowRight} className="group-hover:translate-x-1 transition-transform" />
@@ -411,7 +418,7 @@ export default function Home() {
               {hero?.heading || 'Transforming lives that transform communities'}
             </h1>
             <p className="font-serif italic text-2xl md:text-3xl max-w-[40ch] opacity-90 mb-10 drop-shadow-md">
-              {hero?.subtext || 'Join us Sundays at 10:30am in Columbiana, Ohio'}
+              {hero?.subtext || `Join us ${SITE.serviceTime} in ${SITE.address.city}, Ohio`}
             </p>
             <div className="flex flex-wrap gap-4">
               <Link to="/visit" className="btn btn-solid group">

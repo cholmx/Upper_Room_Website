@@ -1,33 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { publicDataFetch } from '../api';
-import { formatDate } from '../utils';
+import usePageMeta from '../hooks/usePageMeta';
+import { formatDate, isLive } from '../utils';
+import { plainText } from '../lib/markdown';
+import useFetch from '../hooks/useFetch';
+import { ErrorState } from '../components/StateViews';
+import PageHero from '../components/PageHero';
 import SafeIcon from '../common/SafeIcon';
 import * as FiIcons from 'react-icons/fi';
 
 const { FiSearch, FiArrowRight, FiUser, FiCalendar, FiClock, FiTag } = FiIcons;
 
 export default function Blog() {
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  usePageMeta('Blog', 'Articles, devotions and updates from the Upper Room Fellowship family.');
+  const { data, loading, error, reload } = useFetch('read/posts?sort=created_at:desc');
+  const posts = useMemo(() => (data ?? []).filter(isLive), [data]);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
 
-  useEffect(() => {
-    async function loadPosts() {
-      const res = await publicDataFetch('read/posts?sort=created_at:desc');
-      if (res.status === 'success') {
-        setPosts(res.data ?? []);
-      }
-      setLoading(false);
-    }
-    loadPosts();
-  }, []);
-
   const getReadTime = (text) => {
     if (!text) return '1 min read';
-    const words = text.replace(/<[^>]*>?/gm, '').split(/\s+/).length;
+    const words = plainText(text).split(/\s+/).length;
     const mins = Math.max(1, Math.ceil(words / 200));
     return `${mins} min read`;
   };
@@ -66,19 +60,12 @@ export default function Blog() {
 
   return (
     <div className="bg-[#F9F9F7] min-h-screen text-black pb-24 pt-20">
-      <div className="photo-section text-[#F9F9F7] py-32 px-6 text-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1455309014304-9fea74c3d598?auto=format&fit=crop&q=80&w=2000')" }}>
-        <div className="scrim"></div>
-        <motion.div initial="hidden" animate="visible" variants={fadeUp} className="max-w-[800px] mx-auto relative z-10">
-          <span className="kicker text-[#FFC44F]">Articles & Updates</span>
-          <h1 className="text-5xl md:text-7xl mb-6 drop-shadow-lg">Church Blog</h1>
-          <p className="font-serif italic text-2xl opacity-90 max-w-2xl mx-auto drop-shadow-md">
-            Insights, devotions, and updates from the Upper Room Family.
-          </p>
-        </motion.div>
-      </div>
+      <PageHero kicker={'Articles & Updates'} title={'Church Blog'} subtitle={'Insights, devotions, and updates from the Upper Room Family.'} image="https://images.unsplash.com/photo-1455309014304-9fea74c3d598?auto=format&fit=crop&q=80&w=2000" />
 
       <div className="max-w-[1145px] mx-auto px-6 mt-16">
-        {loading ? (
+        {error ? (
+          <ErrorState message={error} onRetry={reload} />
+        ) : loading ? (
           <div className="text-center py-32 opacity-50 flex flex-col items-center">
             <div className="w-10 h-10 border-4 border-[#A6790F] border-t-transparent rounded-full animate-spin mb-4"></div>
             Loading articles...
@@ -92,7 +79,7 @@ export default function Blog() {
           <>
             <motion.div initial="hidden" animate="visible" variants={fadeUp} className="mb-16 max-w-3xl mx-auto">
               <div className="relative mb-8 group">
-                <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none group-focus-within:text-[#A6790F] transition-colors">
+                <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none group-focus-within:text-[#8A6309] transition-colors">
                   <SafeIcon icon={FiSearch} className="text-gray-400 text-xl" />
                 </div>
                 <input
@@ -112,7 +99,7 @@ export default function Blog() {
                       onClick={() => setSelectedCategory(cat)}
                       className={`px-6 py-2.5 rounded-full text-sm font-bold uppercase tracking-wider transition-all duration-300 flex items-center gap-2 ${selectedCategory === cat ? 'bg-[#0B1613] text-white shadow-md scale-105' : 'bg-white hover:border-black/30 hover:bg-gray-50 text-gray-600 border border-black/10'}`}
                     >
-                      {cat !== 'All' && <SafeIcon icon={FiTag} className={selectedCategory === cat ? 'text-white' : 'text-[#A6790F]'} />}
+                      {cat !== 'All' && <SafeIcon icon={FiTag} className={selectedCategory === cat ? 'text-white' : 'text-[#8A6309]'} />}
                       {cat}
                     </button>
                   ))}
@@ -138,11 +125,12 @@ export default function Blog() {
                   <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{
                     visible: { transition: { staggerChildren: 0.1 } }
                   }} className="mb-20">
-                    <motion.span variants={slideInLeft} className="kicker text-[#A6790F] mb-4 inline-block">{searchQuery || selectedCategory !== 'All' ? 'Top Result' : 'Latest Article'}</motion.span>
-                    <Link to={`/p/${featuredPost.slug || featuredPost.id}`} className="block bg-white border border-black/5 hover:shadow-2xl transition-all duration-500 rounded-3xl overflow-hidden flex flex-col md:flex-row group translate-y-0 hover:-translate-y-2">
+                    <motion.span variants={slideInLeft} className="kicker text-[#8A6309] mb-4 inline-block">{searchQuery || selectedCategory !== 'All' ? 'Top Result' : 'Latest Article'}</motion.span>
+                    <Link to={`/blog/${featuredPost.id}`} className="block bg-white border border-black/5 hover:shadow-2xl transition-all duration-500 rounded-3xl overflow-hidden flex flex-col md:flex-row group translate-y-0 hover:-translate-y-2">
                       <div className="md:w-1/2 aspect-square md:aspect-auto bg-[#0B1613] relative overflow-hidden flex-shrink-0">
                         {featuredPost.image_url ? (
                           <img 
+                            loading="lazy"
                             src={featuredPost.image_url} 
                             alt={featuredPost.title} 
                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" 
@@ -156,18 +144,18 @@ export default function Blog() {
                       </div>
                       
                       <div className="p-8 md:p-14 flex flex-col justify-center md:w-1/2 relative">
-                        <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-4 text-xs font-bold text-[#A6790F] uppercase tracking-wider mb-6">
+                        <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-4 text-xs font-bold text-[#8A6309] uppercase tracking-wider mb-6">
                           {featuredPost.category && (
-                            <span className="bg-[#A6790F]/10 text-[#A6790F] px-4 py-1.5 rounded-full">{featuredPost.category}</span>
+                            <span className="bg-[#A6790F]/10 text-[#8A6309] px-4 py-1.5 rounded-full">{featuredPost.category}</span>
                           )}
                           <span className="flex items-center gap-1.5 text-gray-500"><SafeIcon icon={FiCalendar} /> {featuredPost.date ? formatDate(featuredPost.date) : formatDate(featuredPost.created_at)}</span>
                           <span className="flex items-center gap-1.5 text-gray-500"><SafeIcon icon={FiClock} /> {getReadTime(featuredPost.body)}</span>
                         </motion.div>
                         
-                        <motion.h2 variants={slideInRight} className="text-4xl lg:text-5xl font-bold mb-6 group-hover:text-[#A6790F] transition-colors leading-tight">{featuredPost.title}</motion.h2>
+                        <motion.h2 variants={slideInRight} className="text-4xl lg:text-5xl font-bold mb-6 group-hover:text-[#8A6309] transition-colors leading-tight">{featuredPost.title}</motion.h2>
                         
                         <motion.p variants={fadeUp} className="opacity-70 mb-10 line-clamp-4 text-lg leading-relaxed">
-                          {featuredPost.body?.replace(/<[^>]*>?/gm, '') || 'Read this article to learn more...'}
+                          {plainText(featuredPost.body) || 'Read this article to learn more...'}
                         </motion.p>
                         
                         <div className="mt-auto flex items-center justify-between border-t border-black/5 pt-8">
@@ -179,7 +167,7 @@ export default function Blog() {
                               {featuredPost.author}
                             </div>
                           ) : <div />}
-                          <div className="flex items-center text-sm font-bold uppercase tracking-wider text-[#A6790F] group-hover:text-black transition-colors">
+                          <div className="flex items-center text-sm font-bold uppercase tracking-wider text-[#8A6309] group-hover:text-black transition-colors">
                             Read Article <SafeIcon icon={FiArrowRight} className="ml-2 transform group-hover:translate-x-1 transition-transform" />
                           </div>
                         </div>
@@ -200,12 +188,13 @@ export default function Blog() {
                       {standardPosts.map(post => (
                         <motion.div key={post.id} variants={fadeUp}>
                           <Link 
-                            to={`/p/${post.slug || post.id}`}
+                            to={`/blog/${post.id}`}
                             className="bg-white border border-black/5 flex flex-col h-full rounded-2xl overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-400 group"
                           >
                             <div className="aspect-[16/10] bg-[#0B1613] relative overflow-hidden">
                               {post.image_url ? (
                                 <img 
+                                  loading="lazy"
                                   src={post.image_url} 
                                   alt={post.title} 
                                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
@@ -223,17 +212,17 @@ export default function Blog() {
                             </div>
                             
                             <div className="p-8 flex flex-col flex-grow">
-                              <div className="flex flex-wrap gap-3 text-[10px] font-bold text-[#A6790F] uppercase tracking-wider mb-4">
+                              <div className="flex flex-wrap gap-3 text-[10px] font-bold text-[#8A6309] uppercase tracking-wider mb-4">
                                 <span className="flex items-center gap-1 bg-[#A6790F]/10 px-2.5 py-1 rounded text-black/70"><SafeIcon icon={FiClock} /> {getReadTime(post.body)}</span>
                                 <span className="flex items-center gap-1"><SafeIcon icon={FiCalendar} /> {post.date ? formatDate(post.date) : formatDate(post.created_at)}</span>
                               </div>
                               
-                              <h3 className="text-2xl font-bold mb-4 group-hover:text-[#A6790F] transition-colors leading-tight">
+                              <h3 className="text-2xl font-bold mb-4 group-hover:text-[#8A6309] transition-colors leading-tight">
                                 {post.title}
                               </h3>
                               
                               <p className="opacity-70 mb-8 line-clamp-3 text-sm leading-relaxed flex-grow">
-                                {post.body?.replace(/<[^>]*>?/gm, '') || 'Read this article to learn more...'}
+                                {plainText(post.body) || 'Read this article to learn more...'}
                               </p>
                               
                               <div className="mt-auto pt-5 border-t border-black/5 flex items-center justify-between">
@@ -242,7 +231,7 @@ export default function Blog() {
                                     <SafeIcon icon={FiUser} /> {post.author}
                                   </div>
                                 ) : <div />}
-                                <div className="flex items-center text-xs font-bold uppercase tracking-wider text-[#A6790F] group-hover:text-black transition-colors">
+                                <div className="flex items-center text-xs font-bold uppercase tracking-wider text-[#8A6309] group-hover:text-black transition-colors">
                                   Read <SafeIcon icon={FiArrowRight} className="ml-1.5 transform group-hover:translate-x-1 transition-transform" />
                                 </div>
                               </div>

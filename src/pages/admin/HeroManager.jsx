@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { dataFetch } from '../../api';
+import FieldInput from './FieldInput';
 import SafeIcon from '../../common/SafeIcon';
 import * as FiIcons from 'react-icons/fi';
 
@@ -11,12 +12,13 @@ const HeroManager = () => {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [heroId, setHeroId] = useState(null);
+  const [message, setMessage] = useState(null); // { type: 'success' | 'error', text }
 
   useEffect(() => {
     const fetchHero = async () => {
       setLoading(true);
       const res = await dataFetch('read/hero_config?limit=1');
-      if (res.status === 'success' && res.data.length > 0) {
+      if (res.status === 'success' && res.data?.length > 0) {
         setHero(res.data[0]);
         setHeroId(res.data[0].id);
       }
@@ -33,7 +35,8 @@ const HeroManager = () => {
   const handleSave = async (e) => {
     e.preventDefault();
     setSaving(true);
-    
+    setMessage(null);
+
     const payload = {
       heading: hero.heading,
       subtext: hero.subtext,
@@ -57,6 +60,9 @@ const HeroManager = () => {
     }
 
     setSaving(false);
+    setMessage(res.status === 'success'
+      ? { type: 'success', text: 'Hero saved.' }
+      : { type: 'error', text: `Save failed: ${res.error}` });
   };
 
   if (loading) {
@@ -100,21 +106,14 @@ const HeroManager = () => {
           />
         </div>
 
-        <div>
-          <label htmlFor="image_url" className="block text-sm font-bold text-gray-800 mb-2">
-            Background Image URL
-          </label>
-          <input
-            type="text"
-            name="image_url"
-            id="image_url"
-            value={hero.image_url}
-            onChange={handleInputChange}
-            className="w-full px-4 py-3 bg-gray-50 rounded-lg border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#CCA866] transition"
-            placeholder="https://images.unsplash.com/..."
-          />
-        </div>
+        <FieldInput field={{ name: 'image_url', label: 'Background Image', type: 'image' }} value={hero.image_url} onChange={(n, v) => setHero(prev => ({ ...prev, [n]: v }))} />
         
+        {message && (
+          <div role={message.type === 'error' ? 'alert' : 'status'} className={`p-4 rounded-lg text-sm font-medium ${message.type === 'error' ? 'bg-red-50 border border-red-200 text-red-700' : 'bg-green-50 border border-green-200 text-green-700'}`}>
+            {message.text}
+          </div>
+        )}
+
         <div className="flex justify-end">
           <button
             type="submit"

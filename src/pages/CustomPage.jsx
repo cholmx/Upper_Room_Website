@@ -2,16 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { publicDataFetch } from '../api';
+import usePageMeta from '../hooks/usePageMeta';
+import { stripHtml } from '../utils';
 
 export default function CustomPage() {
   const { slug } = useParams();
   const [page, setPage] = useState(null);
   const [loading, setLoading] = useState(true);
+  usePageMeta(page?.title_text || 'Page', stripHtml(page?.body_content_text).slice(0, 155));
 
   useEffect(() => {
     async function fetchPage() {
       setLoading(true);
-      const res = await publicDataFetch(`read/custom_pages_church?slug_key=${slug}`);
+      const res = await publicDataFetch(`read/custom_pages_church?slug_key=${encodeURIComponent(slug)}`);
       if (res.status === 'success' && res.data?.length > 0) {
         setPage(res.data[0]);
       }
@@ -65,7 +68,7 @@ export default function CustomPage() {
       <div className="py-24 px-6">
         <motion.div initial="hidden" animate="visible" variants={fadeUp} className="max-w-[800px] mx-auto bg-white p-8 md:p-16 rounded-3xl border border-black/5 shadow-sm">
           <div className="space-y-8 text-lg md:text-xl opacity-80 leading-relaxed font-serif text-gray-800">
-            {(page.body_content_text || '').split('\n').filter(Boolean).map((para, i) => (
+            {stripHtml(page.body_content_text).split('\n').filter(Boolean).map((para, i) => (
               <p key={i}>{para}</p>
             ))}
           </div>

@@ -1,12 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import usePageMeta from '../hooks/usePageMeta';
+import PageHero from '../components/PageHero';
 import SafeIcon from '../common/SafeIcon';
 import * as FiIcons from 'react-icons/fi';
 
 const { FiArrowRight, FiHeart, FiUsers, FiStar, FiZap, FiSun, FiGlobe } = FiIcons;
 
 export default function About() {
+  usePageMeta('Our Story', 'Learn the story, mission and values of Upper Room Fellowship in Columbiana, Ohio.');
   const slideInLeft = {
     hidden: { opacity: 0, x: -60 },
     visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
@@ -30,23 +33,14 @@ export default function About() {
   return (
     <div className="bg-[#F9F9F7] min-h-screen text-black pt-20">
       {/* Hero */}
-      <div className="photo-section text-[#F9F9F7] py-32 px-6 text-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&q=80&w=2000')" }}>
-        <div className="scrim"></div>
-        <motion.div initial="hidden" animate="visible" variants={fadeUp} className="max-w-[800px] mx-auto relative z-10">
-          <span className="kicker text-[#FFC44F]">Who We Are</span>
-          <h1 className="text-5xl md:text-7xl mb-6 drop-shadow-lg">Our Story</h1>
-          <p className="font-serif italic text-2xl opacity-90 max-w-[50ch] mx-auto drop-shadow-md">
-            Transforming lives that transform communities.
-          </p>
-        </motion.div>
-      </div>
+      <PageHero kicker={'Who We Are'} title={'Our Story'} subtitle={'Transforming lives that transform communities.'} image="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&q=80&w=2000" />
 
       {/* Mission & Vision */}
       <div className="py-24 px-6 overflow-hidden">
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{
           visible: { transition: { staggerChildren: 0.1 } }
         }} className="max-w-[900px] mx-auto text-center">
-          <motion.span variants={slideInLeft} className="kicker text-[#A6790F]">Our Mission</motion.span>
+          <motion.span variants={slideInLeft} className="kicker text-[#8A6309]">Our Mission</motion.span>
           <motion.h2 variants={slideInRight} className="text-4xl md:text-6xl mb-10 leading-tight">Know God.<br/>Share Life.<br/>Serve Others.</motion.h2>
           <motion.div variants={fadeUp} className="text-xl opacity-80 leading-relaxed space-y-6">
             <p>
@@ -66,7 +60,7 @@ export default function About() {
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{
           visible: { transition: { staggerChildren: 0.1 } }
         }} className="max-w-[900px] mx-auto text-center mb-20 relative z-10">
-          <motion.span variants={slideInLeft} className="kicker text-[#A6790F]">What Drives Us</motion.span>
+          <motion.span variants={slideInLeft} className="kicker text-[#8A6309]">What Drives Us</motion.span>
           <motion.h2 variants={slideInRight} className="text-4xl md:text-6xl mb-8">Core Values</motion.h2>
           <motion.p variants={fadeUp} className="text-xl opacity-80 leading-relaxed mb-12 max-w-4xl mx-auto">
             When what's important to God becomes precious to us, transformation happens naturally. These values aren't just aspirational statements but practical pathways to living the abundant life Jesus promised.
@@ -80,7 +74,7 @@ export default function About() {
             <p className="text-lg opacity-80 leading-relaxed mb-6">
               As we embrace what matters to God, we begin experiencing the freedom and fullness He designed for us. We don't focus on achieving perfection but welcome God's work changing us from within.
             </p>
-            <p className="text-lg opacity-80 leading-relaxed font-bold text-[#A6790F]">
+            <p className="text-lg opacity-80 leading-relaxed font-bold text-[#8A6309]">
               The beautiful result? We become carriers of His love and light wherever we go.
             </p>
           </motion.div>
@@ -143,7 +137,7 @@ export default function About() {
                   <ul className="space-y-2">
                     {value.points.map((point, i) => (
                       <li key={i} className="flex items-start gap-3 opacity-80">
-                        <span className="text-[#A6790F] mt-1 text-xs">◆</span> {point}
+                        <span className="text-[#8A6309] mt-1 text-xs">◆</span> {point}
                       </li>
                     ))}
                   </ul>

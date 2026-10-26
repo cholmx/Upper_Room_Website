@@ -1,7 +1,9 @@
+import { PROXY_BASE } from './ncbConfig';
+
 // NCB calls flow through the backend proxy — secret key never ships to the browser.
 const NCB_CONFIG = {
   conversationId: 'chat-ceaea0e1-2e45-4d96-9b72-f25956d431ce',
-  proxyBase: 'https://rmvzorxcl35mttidiexhtp5g2m0hpsqo.lambda-url.us-east-2.on.aws',
+  proxyBase: PROXY_BASE,
   instance: import.meta.env.VITE_NCB_INSTANCE,
 };
 

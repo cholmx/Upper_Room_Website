@@ -1,15 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
+import useFetch from '../hooks/useFetch';
+import { ErrorState } from '../components/StateViews';
 import { motion } from 'framer-motion';
-import { publicDataFetch } from '../api';
+import usePageMeta from '../hooks/usePageMeta';
 import * as FiIcons from 'react-icons/fi';
+import PageHero from '../components/PageHero';
 import SafeIcon from '../common/SafeIcon';
 
 const { FiHeadphones, FiPlayCircle, FiPauseCircle, FiCalendar, FiX } = FiIcons;
 
 export default function Podcasts() {
-  const [episodes, setEpisodes] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  usePageMeta('Podcasts', 'Listen to messages and discussions from Upper Room Fellowship anywhere.');
+  const { data, loading, error, reload } = useFetch('read/episodes?sort=date&order=desc');
+  const episodes = data ?? [];
 
   const [activeEpisode, setActiveEpisode] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -17,24 +20,6 @@ export default function Podcasts() {
   const [duration, setDuration] = useState(0);
   const [speed, setSpeed] = useState(1);
   const audioRef = useRef(null);
-
-  useEffect(() => {
-    async function loadEpisodes() {
-      try {
-        const res = await publicDataFetch('read/episodes?sort=date&order=desc');
-        if (res.status === 'success') {
-          setEpisodes(res.data ?? []);
-        } else {
-          setError(res.error || 'Failed to load podcasts.');
-        }
-      } catch (err) {
-        setError('An unexpected error occurred.');
-      } finally {
-        setLoading(false);
-      }
-    }
-    loadEpisodes();
-  }, []);
 
   useEffect(() => {
     if (audioRef.current) {
@@ -111,28 +96,17 @@ export default function Podcasts() {
   return (
     <div className="bg-[#F9F9F7] min-h-screen text-black pb-32 pt-20">
       {/* Hero */}
-      <div className="photo-section text-[#F9F9F7] py-32 px-6 text-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&q=80&w=2000')" }}>
-        <div className="scrim"></div>
-        <motion.div initial="hidden" animate="visible" variants={fadeUp} className="max-w-[800px] mx-auto relative z-10">
-          <span className="kicker text-[#FFC44F]">Listen Anywhere</span>
-          <h1 className="text-5xl md:text-7xl mb-6 drop-shadow-lg">Podcasts</h1>
-          <p className="font-serif italic text-2xl opacity-90 max-w-[50ch] mx-auto drop-shadow-md">
-            Catch up on the latest messages, discussions, and spiritual insights.
-          </p>
-        </motion.div>
-      </div>
+      <PageHero kicker={'Listen Anywhere'} title={'Podcasts'} subtitle={'Catch up on the latest messages, discussions, and spiritual insights.'} image="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&q=80&w=2000" />
 
       {/* Content */}
       <div className="py-24 px-6 max-w-[900px] mx-auto">
         {loading ? (
-          <div className="text-center py-32 opacity-60 flex flex-col items-center justify-center space-y-6">
-            <SafeIcon icon={FiHeadphones} className="text-5xl animate-pulse text-[#A6790F]" />
+          <div role="status" className="text-center py-32 opacity-60 flex flex-col items-center justify-center space-y-6">
+            <SafeIcon icon={FiHeadphones} className="text-5xl animate-pulse text-[#8A6309]" />
             <p className="text-lg">Loading episodes...</p>
           </div>
         ) : error ? (
-          <div className="text-center py-32 text-red-600 bg-white rounded-3xl border border-black/5 shadow-sm">
-            <p className="text-lg">{error}</p>
-          </div>
+          <ErrorState message={error} onRetry={reload} />
         ) : episodes.length === 0 ? (
           <div className="text-center py-32 bg-white rounded-3xl border border-black/5 shadow-sm">
             <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -176,18 +150,18 @@ export default function Podcasts() {
                       {ep.date ? new Date(ep.date).toLocaleDateString() : 'Unknown Date'}
                     </span>
                     {ep.feed && (
-                      <span className="text-[#A6790F]">
+                      <span className="text-[#8A6309]">
                         {ep.feed}
                       </span>
                     )}
                   </div>
                   
-                  <h3 className="text-2xl md:text-3xl font-bold mb-4 group-hover:text-[#A6790F] transition-colors leading-tight">{ep.title || 'Untitled Episode'}</h3>
+                  <h3 className="text-2xl md:text-3xl font-bold mb-4 group-hover:text-[#8A6309] transition-colors leading-tight">{ep.title || 'Untitled Episode'}</h3>
                   
                   {ep.audio ? (
                     <button 
                       onClick={() => togglePlay(ep)}
-                      className="mt-2 text-sm font-bold text-[#A6790F] hover:text-black uppercase tracking-wider flex items-center gap-2 transition-colors"
+                      className="mt-2 text-sm font-bold text-[#8A6309] hover:text-black uppercase tracking-wider flex items-center gap-2 transition-colors"
                     >
                       <SafeIcon icon={(activeEpisode?.id === ep.id && isPlaying) ? FiPauseCircle : FiPlayCircle} className="text-lg" />
                       {(activeEpisode?.id === ep.id && isPlaying) ? 'Pause Episode' : 'Listen Now'}
