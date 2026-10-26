@@ -32,7 +32,7 @@ request. Dependabot opens weekly update PRs.
 | `VITE_FACEBOOK_URL`, `VITE_INSTAGRAM_URL`, `VITE_YOUTUBE_URL` | Default footer social links (the admin Settings tab overrides them) |
 | `VITE_CLOUDINARY_CLOUD_NAME`, `VITE_CLOUDINARY_UPLOAD_PRESET` | Enables the Upload button on image fields. Use an **unsigned** upload preset |
 | `VITE_PLAUSIBLE_DOMAIN` | Turns on Plausible analytics |
-| `VITE_SENTRY_DSN` | Turns on Sentry error reporting |
+| `VITE_SENTRY_DSN` | Turns on Sentry error reporting through its CDN loader script (enable "Loader Script" on the Sentry project key) |
 
 ## Backend setup (NCB)
 

@@ -12,7 +12,6 @@
     "prerender": "node scripts/prerender.mjs"
   },
   "dependencies": {
-    "@sentry/react": "^8.55.2",
     "clsx": "^2.1.0",
     "dompurify": "^3.4.17",
     "framer-motion": "^11.0.24",
