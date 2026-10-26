@@ -20,6 +20,19 @@ export function slugify(s) {
   return (s || '').toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') || 'page';
 }
 
+// Only http(s) addresses may reach an href or a src. Anything else (javascript:,
+// data:, vbscript:) is dropped, so stored content can never run as code.
+export function safeUrl(url) {
+  const v = String(url || '').trim();
+  if (!v) return '';
+  try {
+    const u = new URL(v, 'https://example.invalid');
+    return u.protocol === 'http:' || u.protocol === 'https:' ? v : '';
+  } catch {
+    return '';
+  }
+}
+
 export function stripHtml(s) {
   return (s || '').replace(/<[^>]*>?/gm, '');
 }
@@ -126,8 +139,10 @@ export function downloadIcs(ev) {
 
 // Resizes / converts Unsplash URLs; other hosts pass through unchanged.
 export function imgUrl(url, width = 1600) {
-  if (!url || !url.includes('images.unsplash.com')) return url;
-  const u = new URL(url);
+  const safe = safeUrl(url);
+  if (!safe) return '';
+  if (!safe.includes('images.unsplash.com')) return safe;
+  const u = new URL(safe);
   u.searchParams.set('w', String(width));
   u.searchParams.set('fm', 'webp');
   u.searchParams.set('q', '75');
@@ -135,7 +150,7 @@ export function imgUrl(url, width = 1600) {
 }
 
 export function imgSrcSet(url, widths = [480, 800, 1200]) {
-  if (!url || !url.includes('images.unsplash.com')) return undefined;
+  if (!safeUrl(url) || !url.includes('images.unsplash.com')) return undefined;
   return widths.map(w => `${imgUrl(url, w)} ${w}w`).join(', ');
 }
 

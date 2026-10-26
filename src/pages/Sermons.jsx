@@ -6,7 +6,7 @@ import useFetch from '../hooks/useFetch';
 import { ErrorState } from '../components/StateViews';
 import RichText from '../components/RichText';
 import { plainText } from '../lib/markdown';
-import { formatDate, ytId, ytEmbed, ytThumb, isLive } from '../utils';
+import { formatDate, ytId, ytEmbed, ytThumb, isLive, safeUrl } from '../utils';
 import PageHero from '../components/PageHero';
 import SafeIcon from '../common/SafeIcon';
 import * as FiIcons from 'react-icons/fi';
@@ -159,8 +159,8 @@ export default function Sermons() {
                     )}
                     
                     <motion.div variants={fadeUp} className="opacity-80 max-w-[800px] text-lg leading-relaxed"><RichText value={featuredSermon?.description} /></motion.div>
-                    {featuredSermon?.audio_url && (
-                      <motion.a variants={fadeUp} href={featuredSermon.audio_url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center px-6 py-3 rounded-full border-2 border-black/20 hover:border-black transition-colors font-bold uppercase tracking-wider text-sm mt-8">
+                    {safeUrl(featuredSermon?.audio_url) && (
+                      <motion.a variants={fadeUp} href={safeUrl(featuredSermon.audio_url)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center px-6 py-3 rounded-full border-2 border-black/20 hover:border-black transition-colors font-bold uppercase tracking-wider text-sm mt-8">
                         <SafeIcon icon={FiHeadphones} className="mr-2" /> Listen to Audio
                       </motion.a>
                     )}
@@ -213,8 +213,8 @@ export default function Sermons() {
                           <h4 className="text-2xl font-bold mb-3 group-hover:text-[#8A6309] transition-colors leading-tight"><Link to={`/sermons/${s.id}`} className="after:absolute after:inset-0 focus-visible:outline-none">{s?.title}</Link></h4>
                           <p className="opacity-70 line-clamp-3 mb-6 flex-grow text-sm leading-relaxed">{plainText(s?.description)}</p>
                           
-                          {s?.audio_url ? (
-                            <a href={s.audio_url} target="_blank" rel="noopener noreferrer" className="relative z-10 mt-auto inline-flex items-center text-sm font-bold text-[#8A6309] hover:text-black uppercase tracking-wider group/link">
+                          {safeUrl(s?.audio_url) ? (
+                            <a href={safeUrl(s.audio_url)} target="_blank" rel="noopener noreferrer" className="relative z-10 mt-auto inline-flex items-center text-sm font-bold text-[#8A6309] hover:text-black uppercase tracking-wider group/link">
                               <SafeIcon icon={FiHeadphones} className="mr-2" /> Listen Audio <SafeIcon icon={FiArrowRight} className="ml-2 opacity-0 -translate-x-2 group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all" />
                             </a>
                           ) : (

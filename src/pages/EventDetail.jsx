@@ -5,7 +5,7 @@ import useFetch from '../hooks/useFetch';
 import usePageMeta from '../hooks/usePageMeta';
 import useJsonLd from '../hooks/useJsonLd';
 import { useSite } from '../settings';
-import { formatDate, isLive, downloadIcs } from '../utils';
+import { formatDate, isLive, downloadIcs, safeUrl } from '../utils';
 import { plainText } from '../lib/markdown';
 import RichText from '../components/RichText';
 import { Spinner, ErrorState, NotFound } from '../components/StateViews';
@@ -67,8 +67,8 @@ export default function EventDetail() {
         </div>
         {description && <RichText value={description} className="text-lg md:text-xl mb-12" />}
         <div className="flex flex-wrap gap-3">
-          {ev.registration_url && (
-            <a href={ev.registration_url} target="_blank" rel="noopener noreferrer" className="btn btn-solid group">
+          {safeUrl(ev.registration_url) && (
+            <a href={safeUrl(ev.registration_url)} target="_blank" rel="noopener noreferrer" className="btn btn-solid group">
               Register Now <SafeIcon icon={FiArrowRight} className="group-hover:translate-x-1 transition-transform" />
             </a>
           )}

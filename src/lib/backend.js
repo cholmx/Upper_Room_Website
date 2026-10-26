@@ -87,6 +87,16 @@ export function createBackend({
   const errorText = (body, status) =>
     body?.error_description || body?.msg || body?.message || body?.error || `HTTP ${status}`;
 
+  // Database errors carry schema, constraint and policy detail, so the interface gets a
+   // generic message for the status instead of the backend's own text.
+  const dataErrorText = (status) => {
+    if (status === 401 || status === 403) return 'You are not signed in, or you do not have permission to do that.';
+    if (status === 404) return 'That item no longer exists.';
+    if (status === 409) return 'That conflicts with something that already exists.';
+    if (status === 400 || status === 422) return 'Some of the details sent were not valid. Please check the form and try again.';
+    return 'Something went wrong. Please try again.';
+  };
+
   const tokenToSession = (t) => ({
     access_token: t.access_token,
     refresh_token: t.refresh_token,
@@ -167,10 +177,12 @@ export function createBackend({
       if (token === anonKey) return null;
       const { res, json } = await authCall('user', { method: 'GET', token });
       if (res.status === 401 || res.status === 403) { writeSession(null); return null; }
-      if (!res.ok) return readSession()?.user ?? null; // server hiccup: trust the stored user
+      // The stored session is never trusted on its own: if the server did not confirm
+      // it, the user is treated as signed out.
+      if (!res.ok) return null;
       return json;
     } catch {
-      return readSession()?.user ?? null;
+      return null;
     }
   }
 
@@ -192,7 +204,7 @@ export function createBackend({
         body: req.body ? JSON.stringify(req.body) : undefined,
       });
       const json = await res.json().catch(() => null);
-      if (!res.ok) return fail(errorText(json, res.status), res.status);
+      if (!res.ok) return fail(dataErrorText(res.status), res.status);
 
       if (req.method === 'GET') return ok(Array.isArray(json) ? json : []);
       if (req.method === 'POST') return ok(Array.isArray(json) ? json[0] ?? {} : {});

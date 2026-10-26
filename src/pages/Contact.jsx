@@ -30,11 +30,11 @@ export default function Contact() {
     const res = await publicDataFetch('create/contact_messages_church', {
       method: 'POST',
       body: JSON.stringify({
-        name: form.name.trim(),
-        email: form.email.trim(),
+        // `handled` and `created_at` are set by the database, not by the visitor.
+        name: form.name.trim().slice(0, 120),
+        email: form.email.trim().slice(0, 200),
         kind: form.kind,
-        message: form.message.trim(),
-        handled: 0,
+        message: form.message.trim().slice(0, 5000),
       }),
     });
     if (res.status === 'success') {

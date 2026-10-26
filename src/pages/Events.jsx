@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import useFetch from '../hooks/useFetch';
 import usePageMeta from '../hooks/usePageMeta';
-import { expandEvents, isLive, downloadIcs } from '../utils';
+import { expandEvents, isLive, downloadIcs, safeUrl } from '../utils';
 import { plainText } from '../lib/markdown';
 import PageHero from '../components/PageHero';
 import { Spinner, ErrorState } from '../components/StateViews';
@@ -83,8 +83,8 @@ export default function Events() {
                     <p className="opacity-80 text-lg leading-relaxed mb-8 line-clamp-3">{plainText(e.description || e.desc_text)}</p>
 
                     <div className="relative z-10 flex flex-wrap gap-3 justify-center md:justify-start">
-                      {e.registration_url && (
-                        <a href={e.registration_url} target="_blank" rel="noopener noreferrer" className="btn btn-solid group/btn">
+                      {safeUrl(e.registration_url) && (
+                        <a href={safeUrl(e.registration_url)} target="_blank" rel="noopener noreferrer" className="btn btn-solid group/btn">
                           Register Now <SafeIcon icon={FiArrowRight} className="group-hover/btn:translate-x-1 transition-transform" />
                         </a>
                       )}

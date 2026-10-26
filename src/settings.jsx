@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { publicDataFetch } from './api';
 import { SITE } from './config';
+import { safeUrl } from './utils';
 
 const SettingsContext = createContext(SITE);
 
@@ -19,9 +20,9 @@ export function mergeSettings(row) {
   const q = encodeURIComponent(`${address.street} ${address.city} ${address.region} ${address.postalCode}`);
   const phone = row.phone || SITE.phone;
   const social = [
-    { label: 'Facebook', url: row.facebook_url || SITE.social.find(s => s.label === 'Facebook')?.url },
-    { label: 'Instagram', url: row.instagram_url || SITE.social.find(s => s.label === 'Instagram')?.url },
-    { label: 'YouTube', url: row.youtube_url || SITE.social.find(s => s.label === 'YouTube')?.url },
+    { label: 'Facebook', url: safeUrl(row.facebook_url) || SITE.social.find(s => s.label === 'Facebook')?.url },
+    { label: 'Instagram', url: safeUrl(row.instagram_url) || SITE.social.find(s => s.label === 'Instagram')?.url },
+    { label: 'YouTube', url: safeUrl(row.youtube_url) || SITE.social.find(s => s.label === 'YouTube')?.url },
   ].filter(s => s.url);
   return {
     ...SITE,
@@ -34,7 +35,7 @@ export function mergeSettings(row) {
     mapEmbedUrl: `https://www.google.com/maps?q=${q}&output=embed`,
     googleMapsUrl: `https://maps.google.com/?q=${q}`,
     appleMapsUrl: `https://maps.apple.com/?q=${q}`,
-    giveUrl: row.give_url || SITE.giveUrl,
+    giveUrl: safeUrl(row.give_url) || SITE.giveUrl,
     social,
   };
 }

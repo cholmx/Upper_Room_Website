@@ -5,7 +5,7 @@ import useFetch from '../hooks/useFetch';
 import usePageMeta from '../hooks/usePageMeta';
 import useJsonLd from '../hooks/useJsonLd';
 import { useSite } from '../settings';
-import { formatDate, isLive, ytId, ytEmbed, ytThumb } from '../utils';
+import { formatDate, isLive, ytId, ytEmbed, ytThumb, safeUrl } from '../utils';
 import { plainText } from '../lib/markdown';
 import RichText from '../components/RichText';
 import { Spinner, ErrorState, NotFound } from '../components/StateViews';
@@ -60,11 +60,11 @@ export default function SermonDetail() {
             <iframe src={embed} className="w-full h-full" title={live.title} loading="lazy" allowFullScreen></iframe>
           </div>
         )}
-        {live.audio_url && (
-          <audio controls preload="none" src={live.audio_url} className="w-full mb-10" aria-label={`Audio for ${live.title}`} />
+        {safeUrl(live.audio_url) && (
+          <audio controls preload="none" src={safeUrl(live.audio_url)} className="w-full mb-10" aria-label={`Audio for ${live.title}`} />
         )}
-        {live.audio_url && !embed && (
-          <a href={live.audio_url} className="inline-flex items-center gap-2 font-bold text-[#8A6309] mb-10"><SafeIcon icon={FiHeadphones} /> Download audio</a>
+        {safeUrl(live.audio_url) && !embed && (
+          <a href={safeUrl(live.audio_url)} className="inline-flex items-center gap-2 font-bold text-[#8A6309] mb-10"><SafeIcon icon={FiHeadphones} /> Download audio</a>
         )}
 
         {live.description && <RichText value={live.description} className="text-lg opacity-80 mb-12" />}

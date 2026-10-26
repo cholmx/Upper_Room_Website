@@ -81,10 +81,11 @@ describe('data', () => {
     expect((await backend.data('delete/posts/1', { method: 'DELETE' })).status).toBe('error');
   });
 
-  it('surfaces database error messages', async () => {
+  it('replaces database error messages with a generic one', async () => {
     const { backend } = setup(() => reply({ message: 'permission denied for table posts' }, 401));
     const res = await backend.data('read/posts');
-    expect(res.error).toBe('permission denied for table posts');
+    expect(res.error).not.toContain('permission denied');
+    expect(res.error).toMatch(/permission to do that/);
     expect(res.httpStatus).toBe(401);
   });
 
