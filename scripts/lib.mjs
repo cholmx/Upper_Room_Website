@@ -1,5 +1,4 @@
 import { loadEnv } from 'vite';
-import { PROXY_BASE } from '../src/ncbConfig.js';
 
 export const env = loadEnv('production', process.cwd(), 'VITE_');
 export const SITE_URL = (env.VITE_SITE_URL || 'https://www.urfellowship.com').replace(/\/$/, '');
@@ -7,14 +6,14 @@ export const SITE_URL = (env.VITE_SITE_URL || 'https://www.urfellowship.com').re
 export const STATIC_ROUTES = ['/', '/about', '/sermons', '/podcasts', '/blog', '/events', '/visit', '/ministries', '/contact'];
 
 async function readTable(table) {
-  if (!env.VITE_NCB_INSTANCE) return [];
-  const url = new URL(`/public-data/read/${table}`, PROXY_BASE);
-  url.searchParams.set('Instance', env.VITE_NCB_INSTANCE);
+  const base = (env.VITE_SUPABASE_URL || '').replace(/\/$/, '');
+  const key = env.VITE_SUPABASE_ANON_KEY;
+  if (!base || !key) return [];
   try {
-    const res = await fetch(url);
+    const res = await fetch(`${base}/rest/v1/${table}?select=*`, { headers: { apikey: key, Authorization: `Bearer ${key}` } });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const body = await res.json();
-    return Array.isArray(body) ? body : body.data ?? [];
+    const rows = await res.json();
+    return Array.isArray(rows) ? rows : [];
   } catch (err) {
     console.warn(`[seo] could not read ${table}: ${err.message}`);
     return [];

@@ -186,7 +186,7 @@ export default function Sermons() {
                                     loading="lazy" 
                                     alt={s.title}
                                     className="w-full h-full object-cover group-hover:scale-105 group-hover:opacity-60 transition-all duration-500"
-                                    onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1438232992991-995b7058bbb3?w=800&q=80'; }}
+                                    onError={(e) => { if (e.currentTarget.dataset.fallback) return; e.currentTarget.dataset.fallback = '1'; e.currentTarget.src = 'https://images.unsplash.com/photo-1438232992991-995b7058bbb3?w=800&q=80'; }}
                                   />
                                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                     <div className="w-16 h-16 bg-[#FFC44F] rounded-full flex items-center justify-center text-black pl-1 shadow-lg">

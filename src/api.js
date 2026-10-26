@@ -1,46 +1,11 @@
-import { PROXY_BASE } from './ncbConfig';
+import { backend } from './lib/backend';
 
-// NCB calls flow through the backend proxy — secret key never ships to the browser.
-const NCB_CONFIG = {
-  conversationId: 'chat-ceaea0e1-2e45-4d96-9b72-f25956d431ce',
-  proxyBase: PROXY_BASE,
-  instance: import.meta.env.VITE_NCB_INSTANCE,
-};
-
-function buildProxyUrl(path) {
-  const url = new URL(path, NCB_CONFIG.proxyBase);
-  url.searchParams.set('Instance', NCB_CONFIG.instance);
-  return url.toString();
+// Both helpers use the signed-in user's session when there is one and the anonymous key
+// otherwise. What each caller may actually do is decided by row level security in the database.
+export function dataFetch(path, options = {}) {
+  return backend.data(path, options);
 }
 
-async function ncbRequest(url, options = {}) {
-  try {
-    const res = await fetch(url, {
-      credentials: 'include',
-      headers: { 'Content-Type': 'application/json', ...options.headers },
-      ...options,
-    });
-    const body = await res.json().catch(() => ({}));
-    if (!res.ok) {
-      return { status: 'error', data: null, error: body?.message || body?.error || `HTTP ${res.status}`, httpStatus: res.status };
-    }
-    if (body && typeof body === 'object' && !Array.isArray(body) && typeof body.status === 'string' && 'data' in body) {
-      return body;
-    }
-    return { status: 'success', data: body };
-  } catch (err) {
-    return { status: 'error', data: null, error: err?.message || 'Network error' };
-  }
-}
-
-export async function authFetch(path, options = {}) {
-  return ncbRequest(buildProxyUrl(`/auth/${path}`), options);
-}
-
-export async function dataFetch(path, options = {}) {
-  return ncbRequest(buildProxyUrl(`/data/${path}`), options);
-}
-
-export async function publicDataFetch(path, options = {}) {
-  return ncbRequest(buildProxyUrl(`/public-data/${path}`), options);
+export function publicDataFetch(path, options = {}) {
+  return backend.data(path, options, { minimal: true });
 }

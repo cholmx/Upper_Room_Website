@@ -117,7 +117,12 @@ export default function GenericManager({ config }) {
 
     setSaving(true);
     setError('');
+    // Empty inputs become NULL (dates) or 0 (numbers) so typed database columns accept them.
     const payload = { ...prepared };
+    for (const f of config.fields) {
+      if (payload[f.name] === '' && f.type === 'date') payload[f.name] = null;
+      if (payload[f.name] === '' && f.type === 'number') payload[f.name] = 0;
+    }
     let res;
     if (payload.id) {
       res = await dataFetch(`update/${config.table}/${payload.id}`, { method: 'PUT', body: JSON.stringify(payload) });

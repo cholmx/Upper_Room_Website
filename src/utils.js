@@ -10,7 +10,8 @@ export function ytThumb(id) {
 
 export function formatDate(d) {
   if (!d) return '';
-  const dt = new Date(d + 'T00:00:00');
+  const day = String(d).slice(0, 10);
+  const dt = new Date(day + 'T00:00:00');
   if (isNaN(dt)) return d;
   return dt.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }).toUpperCase();
 }

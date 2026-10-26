@@ -19,5 +19,6 @@ jobs:
       - run: npm test
       - run: npm run build
         env:
-          VITE_NCB_INSTANCE: ci
+          VITE_SUPABASE_URL: https://example.supabase.co
+          VITE_SUPABASE_ANON_KEY: ci
       - run: npm audit --omit=dev --audit-level=high
