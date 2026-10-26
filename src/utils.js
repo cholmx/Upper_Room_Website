@@ -18,3 +18,13 @@ export function formatDate(d) {
 export function slugify(s) {
   return (s || '').toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') || 'page';
 }
+
+export function stripHtml(s) {
+  return (s || '').replace(/<[^>]*>?/gm, '');
+}
+
+// Returns a YouTube embed URL for watch/short/embed links, or null.
+export function ytEmbed(url) {
+  const id = ytId(url);
+  return id ? `https://www.youtube.com/embed/${id}` : null;
+}

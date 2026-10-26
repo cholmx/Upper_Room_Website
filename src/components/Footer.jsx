@@ -1,3 +1,4 @@
+import { SITE } from '../config';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -58,9 +59,9 @@ export default function Footer() {
           <h5 className="font-serif italic uppercase text-[0.85rem] font-bold tracking-widest text-white/50 mb-6">
             Contact
           </h5>
-          <FooterLink external to="mailto:info@urfellowship.com">info@urfellowship.com</FooterLink>
-          <FooterLink external to="tel:3304829058">330.482.9058</FooterLink>
-          <FooterLink external to="https://maps.google.com/?q=500+Sponseller+Road+Columbiana+OH+44408">500 Sponseller Rd, Columbiana OH</FooterLink>
+          <FooterLink external to={`mailto:${SITE.email}`}>{SITE.email}</FooterLink>
+          <FooterLink external to={SITE.phoneHref}>{SITE.phone}</FooterLink>
+          <FooterLink external to={SITE.googleMapsUrl}>{SITE.address.street}, {SITE.address.city} {SITE.address.region}</FooterLink>
         </motion.div>
 
         <motion.div variants={item}>
@@ -83,14 +84,16 @@ export default function Footer() {
           <FooterLink to="/p/leadership">Leadership</FooterLink>
         </motion.div>
 
-        <motion.div variants={item}>
-          <h5 className="font-serif italic uppercase text-[0.85rem] font-bold tracking-widest text-white/50 mb-6">
-            Follow
-          </h5>
-          <FooterLink external to="https://facebook.com">Facebook</FooterLink>
-          <FooterLink external to="https://instagram.com">Instagram</FooterLink>
-          <FooterLink external to="https://youtube.com">YouTube</FooterLink>
-        </motion.div>
+        {SITE.social.length > 0 && (
+          <motion.div variants={item}>
+            <h5 className="font-serif italic uppercase text-[0.85rem] font-bold tracking-widest text-white/50 mb-6">
+              Follow
+            </h5>
+            {SITE.social.map(link => (
+              <FooterLink key={link.label} external to={link.url}>{link.label}</FooterLink>
+            ))}
+          </motion.div>
+        )}
       </motion.div>
       
       <div className="text-center text-[0.75rem] opacity-40 py-6 border-t border-white/10 flex flex-col items-center gap-2 relative z-10 bg-black/20">

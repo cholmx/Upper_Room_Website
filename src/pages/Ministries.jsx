@@ -1,11 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import usePageMeta from '../hooks/usePageMeta';
+import PageHero from '../components/PageHero';
 import SafeIcon from '../common/SafeIcon';
 import * as FiIcons from 'react-icons/fi';
 
 const { FiUsers, FiHeart, FiMusic, FiVideo, FiArrowRight } = FiIcons;
 
 export default function Ministries() {
+  usePageMeta('Ministries', 'Find where you belong and how you can serve at Upper Room Fellowship.');
   const fadeUp = {
     hidden: { opacity: 0, y: 30 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
@@ -19,16 +22,7 @@ export default function Ministries() {
   return (
     <div className="bg-[#F9F9F7] min-h-screen text-black pt-20">
       {/* Hero */}
-      <div className="photo-section text-[#F9F9F7] py-32 px-6 text-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&q=80&w=2000')" }}>
-        <div className="scrim"></div>
-        <motion.div initial="hidden" animate="visible" variants={fadeUp} className="max-w-[800px] mx-auto relative z-10">
-          <span className="kicker text-[#FFC44F]">Get Involved</span>
-          <h1 className="text-5xl md:text-7xl mb-6 drop-shadow-lg">Our Ministries</h1>
-          <p className="font-serif italic text-2xl opacity-90 max-w-[50ch] mx-auto drop-shadow-md">
-            Discover where you belong and how you can serve.
-          </p>
-        </motion.div>
-      </div>
+      <PageHero kicker={'Get Involved'} title={'Our Ministries'} subtitle={'Discover where you belong and how you can serve.'} image="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&q=80&w=2000" />
 
       {/* Content */}
       <div className="py-24 px-6 max-w-[1145px] mx-auto">

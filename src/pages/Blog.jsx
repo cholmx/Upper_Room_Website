@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import usePageMeta from '../hooks/usePageMeta';
 import { publicDataFetch } from '../api';
-import { formatDate } from '../utils';
+import { formatDate, stripHtml } from '../utils';
+import PageHero from '../components/PageHero';
 import SafeIcon from '../common/SafeIcon';
 import * as FiIcons from 'react-icons/fi';
 
 const { FiSearch, FiArrowRight, FiUser, FiCalendar, FiClock, FiTag } = FiIcons;
 
 export default function Blog() {
+  usePageMeta('Blog', 'Articles, devotions and updates from the Upper Room Fellowship family.');
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
@@ -27,7 +30,7 @@ export default function Blog() {
 
   const getReadTime = (text) => {
     if (!text) return '1 min read';
-    const words = text.replace(/<[^>]*>?/gm, '').split(/\s+/).length;
+    const words = stripHtml(text).split(/\s+/).length;
     const mins = Math.max(1, Math.ceil(words / 200));
     return `${mins} min read`;
   };
@@ -66,16 +69,7 @@ export default function Blog() {
 
   return (
     <div className="bg-[#F9F9F7] min-h-screen text-black pb-24 pt-20">
-      <div className="photo-section text-[#F9F9F7] py-32 px-6 text-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1455309014304-9fea74c3d598?auto=format&fit=crop&q=80&w=2000')" }}>
-        <div className="scrim"></div>
-        <motion.div initial="hidden" animate="visible" variants={fadeUp} className="max-w-[800px] mx-auto relative z-10">
-          <span className="kicker text-[#FFC44F]">Articles & Updates</span>
-          <h1 className="text-5xl md:text-7xl mb-6 drop-shadow-lg">Church Blog</h1>
-          <p className="font-serif italic text-2xl opacity-90 max-w-2xl mx-auto drop-shadow-md">
-            Insights, devotions, and updates from the Upper Room Family.
-          </p>
-        </motion.div>
-      </div>
+      <PageHero kicker={'Articles & Updates'} title={'Church Blog'} subtitle={'Insights, devotions, and updates from the Upper Room Family.'} image="https://images.unsplash.com/photo-1455309014304-9fea74c3d598?auto=format&fit=crop&q=80&w=2000" />
 
       <div className="max-w-[1145px] mx-auto px-6 mt-16">
         {loading ? (
@@ -167,7 +161,7 @@ export default function Blog() {
                         <motion.h2 variants={slideInRight} className="text-4xl lg:text-5xl font-bold mb-6 group-hover:text-[#A6790F] transition-colors leading-tight">{featuredPost.title}</motion.h2>
                         
                         <motion.p variants={fadeUp} className="opacity-70 mb-10 line-clamp-4 text-lg leading-relaxed">
-                          {featuredPost.body?.replace(/<[^>]*>?/gm, '') || 'Read this article to learn more...'}
+                          {stripHtml(featuredPost.body) || 'Read this article to learn more...'}
                         </motion.p>
                         
                         <div className="mt-auto flex items-center justify-between border-t border-black/5 pt-8">
@@ -233,7 +227,7 @@ export default function Blog() {
                               </h3>
                               
                               <p className="opacity-70 mb-8 line-clamp-3 text-sm leading-relaxed flex-grow">
-                                {post.body?.replace(/<[^>]*>?/gm, '') || 'Read this article to learn more...'}
+                                {stripHtml(post.body) || 'Read this article to learn more...'}
                               </p>
                               
                               <div className="mt-auto pt-5 border-t border-black/5 flex items-center justify-between">

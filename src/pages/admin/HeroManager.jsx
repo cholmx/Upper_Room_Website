@@ -11,12 +11,13 @@ const HeroManager = () => {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [heroId, setHeroId] = useState(null);
+  const [message, setMessage] = useState(null); // { type: 'success' | 'error', text }
 
   useEffect(() => {
     const fetchHero = async () => {
       setLoading(true);
       const res = await dataFetch('read/hero_config?limit=1');
-      if (res.status === 'success' && res.data.length > 0) {
+      if (res.status === 'success' && res.data?.length > 0) {
         setHero(res.data[0]);
         setHeroId(res.data[0].id);
       }
@@ -33,7 +34,8 @@ const HeroManager = () => {
   const handleSave = async (e) => {
     e.preventDefault();
     setSaving(true);
-    
+    setMessage(null);
+
     const payload = {
       heading: hero.heading,
       subtext: hero.subtext,
@@ -57,6 +59,9 @@ const HeroManager = () => {
     }
 
     setSaving(false);
+    setMessage(res.status === 'success'
+      ? { type: 'success', text: 'Hero saved.' }
+      : { type: 'error', text: `Save failed: ${res.error}` });
   };
 
   if (loading) {
@@ -115,6 +120,12 @@ const HeroManager = () => {
           />
         </div>
         
+        {message && (
+          <div role={message.type === 'error' ? 'alert' : 'status'} className={`p-4 rounded-lg text-sm font-medium ${message.type === 'error' ? 'bg-red-50 border border-red-200 text-red-700' : 'bg-green-50 border border-green-200 text-green-700'}`}>
+            {message.text}
+          </div>
+        )}
+
         <div className="flex justify-end">
           <button
             type="submit"

@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import usePageMeta from '../hooks/usePageMeta';
 import { publicDataFetch } from '../api';
-import { formatDate } from '../utils';
+import { formatDate, ytId, ytEmbed, ytThumb } from '../utils';
+import PageHero from '../components/PageHero';
 import SafeIcon from '../common/SafeIcon';
 import * as FiIcons from 'react-icons/fi';
 
 const { FiSearch, FiPlay, FiHeadphones, FiArrowRight, FiFilter, FiChevronDown } = FiIcons;
 
 export default function Sermons() {
+  usePageMeta('Messages', 'Watch and listen to recent messages and series from Upper Room Fellowship.');
   const [sermons, setSermons] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedSeries, setSelectedSeries] = useState('All');
@@ -37,6 +40,7 @@ export default function Sermons() {
     return matchesSeries && matchesSearch;
   });
 
+  const videoOf = (s) => s?.video_url || s?.yt;
   const featuredSermon = filteredSermons.length > 0 ? filteredSermons[0] : null;
   const pastSermons = filteredSermons.length > 1 ? filteredSermons.slice(1) : [];
 
@@ -57,14 +61,7 @@ export default function Sermons() {
 
   return (
     <div className="bg-[#F9F9F7] min-h-screen text-black pb-24 pt-20">
-      <div className="photo-section text-[#F9F9F7] py-32 px-6 text-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1519781542704-957ff19eff00?auto=format&fit=crop&q=80&w=2000')" }}>
-        <div className="scrim"></div>
-        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="max-w-[800px] mx-auto relative z-10">
-          <span className="kicker text-[#FFC44F]">Watch & Listen</span>
-          <h1 className="text-5xl md:text-7xl mb-4">Messages</h1>
-          <p className="font-serif italic text-xl md:text-2xl opacity-90">Catch up on recent teachings and series.</p>
-        </motion.div>
-      </div>
+      <PageHero kicker={'Watch & Listen'} title={'Messages'} subtitle={'Catch up on recent teachings and series.'} image="https://images.unsplash.com/photo-1519781542704-957ff19eff00?auto=format&fit=crop&q=80&w=2000" />
 
       <div className="max-w-[1145px] mx-auto px-6 mt-16">
         {loading ? (
@@ -149,10 +146,10 @@ export default function Sermons() {
                       )}
                     </motion.div>
                     
-                    {featuredSermon?.video_url ? (
+                    {ytEmbed(videoOf(featuredSermon)) ? (
                       <motion.div variants={fadeUp} className="aspect-video bg-black mb-8 rounded-2xl overflow-hidden shadow-2xl relative group">
                         <iframe 
-                          src={featuredSermon.video_url.replace('watch?v=', 'embed/')} 
+                          src={ytEmbed(videoOf(featuredSermon))} 
                           className="w-full h-full relative z-10" 
                           title={featuredSermon.title}
                           allowFullScreen
@@ -185,10 +182,11 @@ export default function Sermons() {
                       {pastSermons.map(s => (
                         <motion.div key={s.id} variants={fadeUp} className="bg-white border border-black/5 p-6 rounded-2xl hover:shadow-2xl transition-all duration-300 flex flex-col group translate-y-0 hover:-translate-y-2">
                           <div className="aspect-video bg-[#0B1613] mb-6 overflow-hidden relative rounded-xl shadow-inner">
-                             {s?.video_url ? (
+                             {ytId(videoOf(s)) ? (
                                 <>
                                   <img 
-                                    src={`https://img.youtube.com/vi/${s.video_url.split('v=')[1]?.split('&')[0]}/maxresdefault.jpg`} 
+                                    src={ytThumb(ytId(videoOf(s)))}
+                                    loading="lazy" 
                                     alt={s.title}
                                     className="w-full h-full object-cover group-hover:scale-105 group-hover:opacity-60 transition-all duration-500"
                                     onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1438232992991-995b7058bbb3?w=800&q=80'; }}

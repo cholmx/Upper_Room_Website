@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import * as FiIcons from 'react-icons/fi';
 import SafeIcon from '../common/SafeIcon';
 import { publicDataFetch } from '../api';
+import { SITE } from '../config';
 
 const { FiMenu, FiX } = FiIcons;
 
@@ -71,7 +72,7 @@ export default function Navbar() {
           ))}
           <li>
             <a
-              href="https://onrealm.org/urfellowship"
+              href={SITE.giveUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="px-5 py-2 rounded-full bg-[#0B1613] text-white font-serif italic uppercase text-[0.85rem] tracking-widest hover:bg-[#FFC44F] hover:text-black transition-colors"
@@ -82,7 +83,7 @@ export default function Navbar() {
         </ul>
 
         {/* Mobile Toggle */}
-        <button className="lg:hidden p-2 hover:bg-black/5 rounded-full transition-colors" onClick={() => setIsOpen(!isOpen)}>
+        <button aria-label="Open menu" aria-expanded={isOpen} className="lg:hidden p-2 hover:bg-black/5 rounded-full transition-colors" onClick={() => setIsOpen(!isOpen)}>
           <SafeIcon icon={FiMenu} size={24} />
         </button>
       </div>
@@ -93,7 +94,7 @@ export default function Navbar() {
           isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
       >
-        <button className="absolute top-6 right-6 p-3 bg-white rounded-full shadow-md hover:scale-105 transition-transform" onClick={() => setIsOpen(false)}>
+        <button aria-label="Close menu" className="absolute top-6 right-6 p-3 bg-white rounded-full shadow-md hover:scale-105 transition-transform" onClick={() => setIsOpen(false)}>
           <SafeIcon icon={FiX} size={24} />
         </button>
         <ul className="space-y-6 text-center">
@@ -111,7 +112,7 @@ export default function Navbar() {
           ))}
           <li className="pt-6 mt-6 border-t border-black/10">
             <a
-              href="https://onrealm.org/urfellowship"
+              href={SITE.giveUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block uppercase text-3xl text-[#CCA866] hover:text-black transition-colors"

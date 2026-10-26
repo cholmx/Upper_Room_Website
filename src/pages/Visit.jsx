@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { SITE } from '../config';
+import usePageMeta from '../hooks/usePageMeta';
+import PageHero from '../components/PageHero';
 import SafeIcon from '../common/SafeIcon';
 import * as FiIcons from 'react-icons/fi';
 
 const { FiClock, FiMapPin, FiSmile, FiHelpCircle, FiCoffee, FiCar, FiCopy, FiCheck, FiNavigation, FiSmartphone } = FiIcons;
 
 export default function Visit() {
+  usePageMeta('Plan Your Visit', 'Service times, directions and what to expect when you visit Upper Room Fellowship.');
   const [copied, setCopied] = useState(false);
 
   const handleCopy = (e) => {
     e.preventDefault();
-    navigator.clipboard.writeText("500 Sponseller Road, Columbiana, Ohio 44408");
+    navigator.clipboard.writeText(SITE.addressLine);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -37,16 +41,7 @@ export default function Visit() {
 
   return (
     <div className="bg-[#F9F9F7] min-h-screen text-black pt-20">
-      <div className="photo-section text-[#F9F9F7] py-32 px-6 text-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1544427928-c49cdfebf194?auto=format&fit=crop&q=80&w=2000')" }}>
-        <div className="scrim"></div>
-        <motion.div initial="hidden" animate="visible" variants={fadeUp} className="max-w-[800px] mx-auto relative z-10">
-          <span className="kicker text-[#FFC44F]">Welcome Home</span>
-          <h1 className="text-5xl md:text-7xl mb-6 drop-shadow-lg">Plan Your Visit</h1>
-          <p className="font-serif italic text-2xl opacity-90 max-w-[50ch] mx-auto drop-shadow-md">
-            We can't wait to meet you this Sunday.
-          </p>
-        </motion.div>
-      </div>
+      <PageHero kicker={'Welcome Home'} title={'Plan Your Visit'} subtitle={"We can't wait to meet you this Sunday."} image="https://images.unsplash.com/photo-1544427928-c49cdfebf194?auto=format&fit=crop&q=80&w=2000" />
 
       <div className="py-24 px-6 max-w-[1300px] mx-auto">
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="mb-24 relative rounded-[3rem] overflow-hidden shadow-2xl border border-black/10 min-h-[600px] flex items-center bg-[#0B1613]">
@@ -75,11 +70,11 @@ export default function Visit() {
                 </button>
 
                 <div className="grid grid-cols-2 gap-4">
-                  <a href="https://maps.google.com/?q=500+Sponseller+Road+Columbiana+OH+44408" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center justify-center p-4 rounded-xl bg-[#FFC44F] text-black hover:bg-white transition-colors group text-center gap-2 font-bold">
+                  <a href={SITE.googleMapsUrl} target="_blank" rel="noopener noreferrer" className="flex flex-col items-center justify-center p-4 rounded-xl bg-[#FFC44F] text-black hover:bg-white transition-colors group text-center gap-2 font-bold">
                     <SafeIcon icon={FiNavigation} className="text-2xl" />
                     Google Maps
                   </a>
-                  <a href="http://maps.apple.com/?q=500+Sponseller+Road+Columbiana+OH+44408" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center justify-center p-4 rounded-xl bg-white/10 text-white hover:bg-white/20 border border-white/10 transition-colors group text-center gap-2 font-bold">
+                  <a href={SITE.appleMapsUrl} target="_blank" rel="noopener noreferrer" className="flex flex-col items-center justify-center p-4 rounded-xl bg-white/10 text-white hover:bg-white/20 border border-white/10 transition-colors group text-center gap-2 font-bold">
                     <SafeIcon icon={FiSmartphone} className="text-2xl" />
                     Apple Maps
                   </a>

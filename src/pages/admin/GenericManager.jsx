@@ -12,6 +12,7 @@ export default function GenericManager({ config }) {
   const [view, setView] = useState('list'); // 'list' | 'form'
   const [formData, setFormData] = useState({});
   const [saving, setSaving] = useState(false);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     fetchItems();
@@ -23,6 +24,9 @@ export default function GenericManager({ config }) {
     const res = await dataFetch(`read/${config.table}?sort=id:desc`);
     if (res.status === 'success') {
       setItems(res.data ?? []);
+      setError('');
+    } else {
+      setError(`Could not load ${config.title}: ${res.error}`);
     }
     setLoading(false);
   };
@@ -43,7 +47,11 @@ export default function GenericManager({ config }) {
 
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this item?')) {
-      await dataFetch(`delete/${config.table}/${id}`, { method: 'DELETE' });
+      const res = await dataFetch(`delete/${config.table}/${id}`, { method: 'DELETE' });
+      if (res.status !== 'success') {
+        setError(`Delete failed: ${res.error}`);
+        return;
+      }
       fetchItems();
     }
   };
@@ -59,22 +67,28 @@ export default function GenericManager({ config }) {
   const handleSave = async (e) => {
     e.preventDefault();
     setSaving(true);
+    setError('');
 
-    const payload = { ...formData, user_id: 'admin' };
+    const payload = { ...formData };
 
+    let res;
     if (payload.id) {
-      await dataFetch(`update/${config.table}/${payload.id}`, {
+      res = await dataFetch(`update/${config.table}/${payload.id}`, {
         method: 'PUT',
         body: JSON.stringify(payload)
       });
     } else {
-      await dataFetch(`create/${config.table}`, {
+      res = await dataFetch(`create/${config.table}`, {
         method: 'POST',
         body: JSON.stringify(payload)
       });
     }
 
     setSaving(false);
+    if (res.status !== 'success') {
+      setError(`Save failed: ${res.error}`);
+      return;
+    }
     setView('list');
     fetchItems();
   };
@@ -91,18 +105,23 @@ export default function GenericManager({ config }) {
     return (
       <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2 }}>
         <div className="flex items-center gap-4 mb-6">
-          <button onClick={() => setView('list')} className="p-2 hover:bg-gray-200 rounded-full transition text-gray-500 hover:text-black">
+          <button type="button" aria-label="Back to list" onClick={() => setView('list')} className="p-2 hover:bg-gray-200 rounded-full transition text-gray-500 hover:text-black">
             <SafeIcon icon={FiArrowLeft} className="text-xl" />
           </button>
           <h2 className="text-2xl font-bold">{formData.id ? 'Edit' : 'Add'} {config.title}</h2>
         </div>
 
+        {error && (
+          <div role="alert" className="mb-6 p-4 rounded-lg bg-red-50 border border-red-200 text-red-700 text-sm font-medium">{error}</div>
+        )}
+
         <form onSubmit={handleSave} className="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-gray-100 space-y-6">
           {config.fields.map(field => (
             <div key={field.name}>
-              <label className="block text-sm font-bold text-gray-800 mb-2">{field.label}</label>
+              <label htmlFor={`f-${field.name}`} className="block text-sm font-bold text-gray-800 mb-2">{field.label}</label>
               {field.type === 'textarea' ? (
                 <textarea
+                  id={`f-${field.name}`}
                   name={field.name}
                   value={formData[field.name] || ''}
                   onChange={handleInputChange}
@@ -112,6 +131,7 @@ export default function GenericManager({ config }) {
               ) : (
                 <input
                   type={field.type}
+                  id={`f-${field.name}`}
                   name={field.name}
                   value={formData[field.name] || ''}
                   onChange={handleInputChange}
@@ -145,6 +165,9 @@ export default function GenericManager({ config }) {
 
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.2 }}>
+      {error && (
+          <div role="alert" className="mb-6 p-4 rounded-lg bg-red-50 border border-red-200 text-red-700 text-sm font-medium">{error}</div>
+        )}
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold text-gray-800">Manage {config.title}</h2>
         <button onClick={handleAddNew} className="bg-[#CCA866] hover:bg-[#b59253] text-black font-bold py-2.5 px-5 rounded-lg flex items-center gap-2 transition shadow-sm">

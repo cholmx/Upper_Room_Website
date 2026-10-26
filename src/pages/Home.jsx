@@ -1,31 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import usePageMeta from '../hooks/usePageMeta';
 import { publicDataFetch } from '../api';
 import { formatDate } from '../utils';
+import { SITE } from '../config';
 import SafeIcon from '../common/SafeIcon';
 import * as FiIcons from 'react-icons/fi';
 
 const { FiArrowRight, FiPlay, FiCalendar, FiClock, FiMapPin, FiCopy, FiCheck, FiNavigation, FiSmartphone, FiCompass } = FiIcons;
 
 export default function Home() {
+  usePageMeta('Home', 'Upper Room Fellowship in Columbiana, Ohio. Transforming lives that transform communities. Join us Sundays at 10:30 AM.');
   const [hero, setHero] = useState(null);
   const [photoSections, setPhotoSections] = useState([]);
   const [sectionOrder, setSectionOrder] = useState([]);
   const [latestSermon, setLatestSermon] = useState(null);
   const [nextEvent, setNextEvent] = useState(null);
   const [latestPosts, setLatestPosts] = useState([]);
+  const [gallery, setGallery] = useState([]);
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
-      const [h, ps, so, s, e, b] = await Promise.all([
+      const [h, ps, so, s, e, b, g] = await Promise.all([
         publicDataFetch('read/hero_config'),
         publicDataFetch('read/photo_sections_church?sort=sort_order_num'),
         publicDataFetch('read/home_section_order_church?sort=sort_order_num_val'),
         publicDataFetch('read/sermons?limit=1&sort=created_at:desc'),
         publicDataFetch('read/events_church?limit=1&sort=date:asc'),
-        publicDataFetch('read/posts?limit=3&sort=created_at:desc')
+        publicDataFetch('read/posts?limit=3&sort=created_at:desc'),
+        publicDataFetch('read/gallery_church?sort=sort_order_num')
       ]);
 
       if (h.status === 'success') setHero(h.data?.[0]);
@@ -34,13 +39,14 @@ export default function Home() {
       if (s.status === 'success') setLatestSermon(s.data?.[0]);
       if (e.status === 'success') setNextEvent(e.data?.[0]);
       if (b.status === 'success') setLatestPosts(b.data ?? []);
+      if (g.status === 'success') setGallery(g.data ?? []);
     }
     fetchData();
   }, []);
 
   const handleCopy = (e) => {
     e.preventDefault();
-    navigator.clipboard.writeText("500 Sponseller Road, Columbiana, Ohio 44408");
+    navigator.clipboard.writeText(SITE.addressLine);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -101,7 +107,7 @@ export default function Home() {
             className="relative"
           >
             <div className="aspect-[4/5] md:aspect-square rounded-3xl overflow-hidden border border-white/10 shadow-2xl relative z-10">
-              <img src="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&q=80&w=1000" alt="Church" className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000" />
+              <img src="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&q=80&w=1000" alt="Upper Room Fellowship congregation" loading="lazy" className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000" />
             </div>
             <div className="absolute -bottom-6 -left-6 w-full h-full border-2 border-[#CCA866]/30 rounded-3xl z-0"></div>
           </motion.div>
@@ -128,7 +134,7 @@ export default function Home() {
             {[
               { title: 'Plan Your Visit', text: 'Find service times, directions, and helpful info for your first visit.', link: '/visit', label: 'New Here?' },
               { title: 'Latest Message', text: 'Catch up on recent teachings and series from our Sunday services.', link: '/sermons', label: 'Messages' },
-              { title: 'Give Online', text: 'Partner with us in our mission to transform our community.', link: 'https://onrealm.org/urfellowship', label: 'Give' }
+              { title: 'Give Online', text: 'Partner with us in our mission to transform our community.', link: SITE.giveUrl, label: 'Give' }
             ].map((card, i) => (
               <motion.div 
                 key={i} 
@@ -206,7 +212,7 @@ export default function Home() {
               </div>
               
               <div className="relative z-20 mt-auto w-full pt-32">
-                <a href="https://maps.google.com/?q=500+Sponseller+Road+Columbiana+OH+44408" target="_blank" rel="noopener noreferrer" className="bg-black text-[#FFC44F] w-full py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-black/90 transition-colors shadow-xl">
+                <a href={SITE.googleMapsUrl} target="_blank" rel="noopener noreferrer" className="bg-black text-[#FFC44F] w-full py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-black/90 transition-colors shadow-xl">
                   <SafeIcon icon={FiCompass} className="text-xl" /> Explore Area
                 </a>
               </div>
@@ -215,11 +221,11 @@ export default function Home() {
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="lg:col-span-6 bg-white/5 backdrop-blur-md border border-white/10 rounded-[2rem] p-8 flex flex-col justify-center">
               <h4 className="text-xl font-bold mb-6 flex items-center gap-2"><SafeIcon icon={FiNavigation} className="text-[#FFC44F]" /> Get Directions</h4>
               <div className="grid sm:grid-cols-2 gap-4">
-                <a href="https://maps.google.com/?q=500+Sponseller+Road+Columbiana+OH+44408" target="_blank" rel="noopener noreferrer" className="flex items-center justify-between p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 transition-colors group">
+                <a href={SITE.googleMapsUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-between p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 transition-colors group">
                   <span className="font-bold">Google Maps</span>
                   <SafeIcon icon={FiArrowRight} className="text-white/50 group-hover:text-white group-hover:translate-x-1 transition-all" />
                 </a>
-                <a href="http://maps.apple.com/?q=500+Sponseller+Road+Columbiana+OH+44408" target="_blank" rel="noopener noreferrer" className="flex items-center justify-between p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 transition-colors group">
+                <a href={SITE.appleMapsUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-between p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 transition-colors group">
                   <span className="font-bold">Apple Maps</span>
                   <SafeIcon icon={FiSmartphone} className="text-white/50 group-hover:text-white group-hover:translate-x-1 transition-all" />
                 </a>
@@ -333,7 +339,7 @@ export default function Home() {
         </div>
       </div>
     ),
-    gallery: (
+    gallery: gallery.length === 0 ? null : (
       <div key="gallery" className="py-24 px-6 bg-[#F9F9F7] text-black">
         <div className="max-w-[1145px] mx-auto">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{
@@ -343,16 +349,16 @@ export default function Home() {
             <motion.h2 variants={slideInRight} className="text-4xl md:text-5xl">Community in Pictures</motion.h2>
           </motion.div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[1, 2, 3, 4, 5, 6, 7, 8].map((i, idx) => (
+            {gallery.map((photo, idx) => (
               <motion.div 
-                key={i} 
+                key={photo.id ?? idx} 
                 initial={{ opacity: 0, scale: 0.9 }} 
                 whileInView={{ opacity: 1, scale: 1 }} 
                 viewport={{ once: true }} 
                 transition={{ duration: 0.4, delay: idx * 0.05 }}
-                className="aspect-square bg-[#0B1613] overflow-hidden rounded-2xl border border-black/5 group cursor-pointer"
+                className="aspect-square bg-[#0B1613] overflow-hidden rounded-2xl border border-black/5 group"
               >
-                <img src={`https://images.unsplash.com/photo-${1500000000000 + i * 10000}?auto=format&fit=crop&q=80&w=400`} alt="Gallery" className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" />
+                <img src={photo.image_url} alt={photo.caption || 'Upper Room Fellowship community photo'} loading="lazy" className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" />
               </motion.div>
             ))}
           </div>

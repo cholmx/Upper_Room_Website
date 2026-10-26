@@ -1,12 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import usePageMeta from '../hooks/usePageMeta';
 import { publicDataFetch } from '../api';
 import * as FiIcons from 'react-icons/fi';
+import PageHero from '../components/PageHero';
 import SafeIcon from '../common/SafeIcon';
 
 const { FiHeadphones, FiPlayCircle, FiPauseCircle, FiCalendar, FiX } = FiIcons;
 
 export default function Podcasts() {
+  usePageMeta('Podcasts', 'Listen to messages and discussions from Upper Room Fellowship anywhere.');
   const [episodes, setEpisodes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -111,16 +114,7 @@ export default function Podcasts() {
   return (
     <div className="bg-[#F9F9F7] min-h-screen text-black pb-32 pt-20">
       {/* Hero */}
-      <div className="photo-section text-[#F9F9F7] py-32 px-6 text-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&q=80&w=2000')" }}>
-        <div className="scrim"></div>
-        <motion.div initial="hidden" animate="visible" variants={fadeUp} className="max-w-[800px] mx-auto relative z-10">
-          <span className="kicker text-[#FFC44F]">Listen Anywhere</span>
-          <h1 className="text-5xl md:text-7xl mb-6 drop-shadow-lg">Podcasts</h1>
-          <p className="font-serif italic text-2xl opacity-90 max-w-[50ch] mx-auto drop-shadow-md">
-            Catch up on the latest messages, discussions, and spiritual insights.
-          </p>
-        </motion.div>
-      </div>
+      <PageHero kicker={'Listen Anywhere'} title={'Podcasts'} subtitle={'Catch up on the latest messages, discussions, and spiritual insights.'} image="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&q=80&w=2000" />
 
       {/* Content */}
       <div className="py-24 px-6 max-w-[900px] mx-auto">

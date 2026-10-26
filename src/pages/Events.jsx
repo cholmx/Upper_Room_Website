@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import usePageMeta from '../hooks/usePageMeta';
 import { publicDataFetch } from '../api';
 import { formatDate } from '../utils';
+import PageHero from '../components/PageHero';
 import SafeIcon from '../common/SafeIcon';
 import * as FiIcons from 'react-icons/fi';
 
 const { FiMapPin, FiClock, FiArrowRight } = FiIcons;
 
 export default function Events() {
+  usePageMeta('Events', 'Upcoming events and gatherings at Upper Room Fellowship in Columbiana, Ohio.');
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -39,14 +42,7 @@ export default function Events() {
 
   return (
     <div className="bg-[#F9F9F7] min-h-screen text-black pb-24 pt-20">
-      <div className="photo-section text-[#F9F9F7] py-32 px-6 text-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&q=80&w=2000')" }}>
-        <div className="scrim"></div>
-        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="max-w-[800px] mx-auto relative z-10">
-          <span className="kicker text-[#FFC44F]">Get Involved</span>
-          <h1 className="text-5xl md:text-7xl mb-4">Upcoming Events</h1>
-          <p className="font-serif italic text-xl md:text-2xl opacity-90">Find where you belong and connect with community.</p>
-        </motion.div>
-      </div>
+      <PageHero kicker={'Get Involved'} title={'Upcoming Events'} subtitle={'Find where you belong and connect with community.'} image="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&q=80&w=2000" />
 
       <div className="max-w-[900px] mx-auto px-6 mt-20">
         {loading ? (

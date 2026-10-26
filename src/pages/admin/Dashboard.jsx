@@ -4,8 +4,9 @@ import SafeIcon from '../../common/SafeIcon';
 import * as FiIcons from 'react-icons/fi';
 import HeroManager from './HeroManager';
 import GenericManager from './GenericManager';
+import { useAuth } from '../../auth';
 
-const { FiTv, FiLayout, FiMic, FiCalendar, FiFileText, FiCamera, FiSettings, FiLogOut, FiMenu, FiX } = FiIcons;
+const { FiTv, FiLayout, FiMic, FiCalendar, FiFileText, FiCamera, FiImage, FiLogOut, FiMenu, FiX } = FiIcons;
 
 const NavItem = ({ icon, children, ...rest }) => (
   <button {...rest} className="w-full flex items-center gap-4 px-4 py-3 text-left text-gray-300 hover:bg-[#CCA866] hover:text-black rounded-lg transition-colors duration-200">
@@ -27,6 +28,15 @@ const TAB_CONFIGS = {
       { name: 'sort_order_num', label: 'Sort Order', type: 'number' }
     ]
   },
+  gallery: {
+    table: 'gallery_church',
+    title: 'Gallery Photos',
+    fields: [
+      { name: 'image_url', label: 'Image URL', type: 'text' },
+      { name: 'caption', label: 'Caption / Alt Text', type: 'text' },
+      { name: 'sort_order_num', label: 'Sort Order', type: 'number' }
+    ]
+  },
   pages: {
     table: 'custom_pages_church',
     title: 'Custom Pages',
@@ -34,7 +44,7 @@ const TAB_CONFIGS = {
       { name: 'title_text', label: 'Title', type: 'text' },
       { name: 'slug_key', label: 'URL Slug', type: 'text' },
       { name: 'nav_label_text', label: 'Nav Label', type: 'text' },
-      { name: 'body_content_text', label: 'Body Content (HTML)', type: 'textarea' }
+      { name: 'body_content_text', label: 'Body Content (plain text, blank line between paragraphs)', type: 'textarea' }
     ]
   },
   sermons: {
@@ -45,8 +55,9 @@ const TAB_CONFIGS = {
       { name: 'speaker', label: 'Speaker', type: 'text' },
       { name: 'series', label: 'Series', type: 'text' },
       { name: 'date', label: 'Date', type: 'date' },
-      { name: 'yt', label: 'YouTube URL', type: 'text' },
-      { name: 'yt_id', label: 'YouTube ID', type: 'text' }
+      { name: 'description', label: 'Description', type: 'textarea' },
+      { name: 'video_url', label: 'YouTube URL', type: 'text' },
+      { name: 'audio_url', label: 'Audio URL (optional)', type: 'text' }
     ]
   },
   events: {
@@ -69,12 +80,13 @@ const TAB_CONFIGS = {
       { name: 'date', label: 'Date', type: 'date' },
       { name: 'category', label: 'Category', type: 'text' },
       { name: 'image_url', label: 'Image URL', type: 'text' },
-      { name: 'body', label: 'Body Content (HTML)', type: 'textarea' }
+      { name: 'body', label: 'Body Content (plain text, blank line between paragraphs)', type: 'textarea' }
     ]
   }
 };
 
 const ContentStudio = () => {
+  const { logout } = useAuth();
   const [activeTab, setActiveTab] = useState('hero');
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
@@ -83,13 +95,14 @@ const ContentStudio = () => {
       case 'hero':
         return <HeroManager />;
       case 'photosections':
+      case 'gallery':
       case 'pages':
       case 'sermons':
       case 'events':
       case 'posts':
         return <GenericManager key={activeTab} config={TAB_CONFIGS[activeTab]} />;
       default:
-        return <div className="p-8 bg-white rounded-2xl shadow-sm border border-gray-100 flex items-center justify-center h-64 text-gray-500">Settings module coming soon.</div>;
+        return null;
     }
   };
 
@@ -98,15 +111,13 @@ const ContentStudio = () => {
       { key: 'hero', label: 'Hero Section', icon: FiTv },
       { key: 'photosections', label: 'Photo Sections', icon: FiCamera },
       { key: 'pages', label: 'Custom Pages', icon: FiLayout },
+      { key: 'gallery', label: 'Gallery', icon: FiImage },
     ],
     'Content': [
       { key: 'sermons', label: 'Sermons', icon: FiMic },
       { key: 'events', label: 'Events', icon: FiCalendar },
       { key: 'posts', label: 'Blog Posts', icon: FiFileText },
     ],
-    'Admin': [
-      { key: 'settings', label: 'Settings', icon: FiSettings },
-    ]
   };
 
   const getTabLabel = () => {
@@ -133,17 +144,17 @@ const ContentStudio = () => {
       >
         <div className="flex items-center justify-between mb-10">
             <h1 className="text-2xl font-bold text-white tracking-wider">Content <span className="text-[#CCA866]">Studio</span></h1>
-            <button onClick={() => setIsSidebarOpen(false)} className="lg:hidden text-2xl text-gray-400 hover:text-white">
+            <button aria-label="Close menu" onClick={() => setIsSidebarOpen(false)} className="lg:hidden text-2xl text-gray-400 hover:text-white">
                 <SafeIcon icon={FiX} />
             </button>
         </div>
 
-        <nav className="flex-grow space-y-4">
+        <nav aria-label="Content Studio" className="flex-grow space-y-4">
           {Object.entries(TABS).map(([category, items]) => (
             <div key={category}>
               <h2 className="px-4 text-sm font-bold text-gray-500 uppercase tracking-widest mb-2">{category}</h2>
               {items.map(tab => (
-                 <NavItem key={tab.key} icon={tab.icon} onClick={() => { setActiveTab(tab.key); if (window.innerWidth < 1024) setIsSidebarOpen(false); }}>
+                 <NavItem key={tab.key} icon={tab.icon} aria-current={activeTab === tab.key ? 'page' : undefined} onClick={() => { setActiveTab(tab.key); if (window.innerWidth < 1024) setIsSidebarOpen(false); }}>
                     {tab.label}
                 </NavItem>
               ))}
@@ -152,7 +163,7 @@ const ContentStudio = () => {
         </nav>
         
         <div className="mt-auto pt-6 border-t border-white/10">
-             <NavItem icon={FiLogOut} onClick={() => { localStorage.removeItem('urf_admin_auth'); window.location.reload(); }}>
+             <NavItem icon={FiLogOut} onClick={logout}>
                 Log Out
             </NavItem>
         </div>
@@ -161,7 +172,7 @@ const ContentStudio = () => {
       {/* Main Content */}
       <main className="flex-1 p-4 sm:p-6 lg:p-10 flex flex-col">
         <header className="flex items-center justify-between mb-8 w-full">
-           <button onClick={() => setIsSidebarOpen(true)} className="lg:hidden text-2xl p-2 -ml-2">
+           <button aria-label="Open menu" aria-expanded={isSidebarOpen} onClick={() => setIsSidebarOpen(true)} className="lg:hidden text-2xl p-2 -ml-2">
                 <SafeIcon icon={FiMenu} />
             </button>
           <h1 className="text-3xl font-bold">{getTabLabel()}</h1>
