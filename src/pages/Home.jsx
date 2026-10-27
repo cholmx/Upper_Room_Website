@@ -6,6 +6,7 @@ import { publicDataFetch } from '../api';
 import { formatDate, isLive, expandEvents, mergeSectionOrder } from '../utils';
 import ThisWeek from '../components/home/ThisWeek';
 import NextSteps from '../components/home/NextSteps';
+import { Spinner } from '../components/StateViews';
 import { plainText } from '../lib/markdown';
 import { useSite } from '../settings';
 import SafeIcon from '../common/SafeIcon';
@@ -24,29 +25,48 @@ export default function Home() {
   const [latestPosts, setLatestPosts] = useState([]);
   const [gallery, setGallery] = useState([]);
   const [copied, setCopied] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const [reloadKey, setReloadKey] = useState(0);
 
   useEffect(() => {
+    let cancelled = false;
     async function fetchData() {
-      const [h, ps, so, s, e, b, g] = await Promise.all([
-        publicDataFetch('read/hero_config'),
-        publicDataFetch('read/photo_sections_church?sort=sort_order_num'),
-        publicDataFetch('read/home_section_order_church?sort=sort_order_num_val'),
-        publicDataFetch('read/sermons?limit=10&sort=created_at:desc'),
-        publicDataFetch('read/events_church?sort=date:asc'),
-        publicDataFetch('read/posts?limit=10&sort=created_at:desc'),
-        publicDataFetch('read/gallery_church?sort=sort_order_num')
-      ]);
+      setLoading(true);
+      setError(false);
+      try {
+        const [h, ps, so, s, e, b, g] = await Promise.all([
+          publicDataFetch('read/hero_config'),
+          publicDataFetch('read/photo_sections_church?sort=sort_order_num'),
+          publicDataFetch('read/home_section_order_church?sort=sort_order_num_val'),
+          publicDataFetch('read/sermons?limit=10&sort=created_at:desc'),
+          publicDataFetch('read/events_church?sort=date:asc'),
+          publicDataFetch('read/posts?limit=10&sort=created_at:desc'),
+          publicDataFetch('read/gallery_church?sort=sort_order_num')
+        ]);
 
-      if (h.status === 'success') setHero(h.data?.[0]);
-      if (ps.status === 'success') setPhotoSections(ps.data ?? []);
-      if (so.status === 'success') setSectionOrder(so.data ?? []);
-      if (s.status === 'success') setLatestSermon((s.data ?? []).filter(isLive)[0]);
-      if (e.status === 'success') setNextEvent(expandEvents((e.data ?? []).filter(isLive), undefined, 60)[0]);
-      if (b.status === 'success') setLatestPosts((b.data ?? []).filter(isLive).slice(0, 3));
-      if (g.status === 'success') setGallery(g.data ?? []);
+        if (cancelled) return;
+        if (h.status === 'success') setHero(h.data?.[0]);
+        if (ps.status === 'success') setPhotoSections(ps.data ?? []);
+        if (so.status === 'success') setSectionOrder(so.data ?? []);
+        if (s.status === 'success') setLatestSermon((s.data ?? []).filter(isLive)[0]);
+        if (e.status === 'success') setNextEvent(expandEvents((e.data ?? []).filter(isLive), undefined, 60)[0]);
+        if (b.status === 'success') setLatestPosts((b.data ?? []).filter(isLive).slice(0, 3));
+        if (g.status === 'success') setGallery(g.data ?? []);
+
+        const failed = [h, ps, so, s, e, b, g].some(r => r.status === 'error');
+        if (failed) setError(true);
+      } catch {
+        if (!cancelled) setError(true);
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
     }
     fetchData();
-  }, []);
+    return () => { cancelled = true; };
+  }, [reloadKey]);
+
+  const retry = () => setReloadKey(k => k + 1);
 
   const handleCopy = (e) => {
     e.preventDefault();
@@ -80,7 +100,7 @@ export default function Home() {
             <a className="btn btn-solid group" href="https://www.urfellowship.com/transforming-together" target="_blank" rel="noopener noreferrer">
               Learn More <SafeIcon icon={FiArrowRight} className="group-hover:translate-x-1 transition-transform" />
             </a>
-            <a className="btn btn-outline border-black/20 hover:border-black" href="#" target="_blank" rel="noopener noreferrer">Give to Campaign</a>
+            <a className="btn btn-outline border-black/20 hover:border-black" href={SITE.giveUrl} target="_blank" rel="noopener noreferrer">Give to Campaign</a>
           </div>
         </motion.div>
       </div>
@@ -111,7 +131,7 @@ export default function Home() {
             className="relative"
           >
             <div className="aspect-[4/5] md:aspect-square rounded-3xl overflow-hidden border border-white/10 shadow-2xl relative z-10">
-              <img src="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&q=80&w=1000" alt="Upper Room Fellowship congregation" loading="lazy" className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000" />
+              <img src="https://images.pexels.com/photos/38274945/pexels-photo-38274945.jpeg?auto=compress&cs=tinysrgb&h=1200" alt="Upper Room Fellowship congregation gathering for worship" loading="lazy" className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000" />
             </div>
             <div className="absolute -bottom-6 -left-6 w-full h-full border-2 border-[#CCA866]/30 rounded-3xl z-0"></div>
           </motion.div>
@@ -351,7 +371,14 @@ export default function Home() {
           </motion.div>
         </div>
       </div>
-      {order.map(key => sections[key])}
+      {loading && <Spinner label="Loading the home page" />}
+      {error && !loading && (
+        <div className="bg-[#FFC44F]/20 border-y border-black/10 px-6 py-4 text-center">
+          <p className="text-sm font-medium text-black/70 mb-2">Some sections didn't load.</p>
+          <button onClick={retry} className="btn btn-solid text-sm py-2">Try Again</button>
+        </div>
+      )}
+      {!loading && order.map(key => sections[key])}
     </div>
   );
 }
