@@ -6,6 +6,7 @@ import usePageMeta from '../hooks/usePageMeta';
 import * as FiIcons from 'react-icons/fi';
 import PageHero from '../components/PageHero';
 import SafeIcon from '../common/SafeIcon';
+import { fadeUpShort as fadeUp } from '../lib/motion';
 
 const { FiHeadphones, FiPlayCircle, FiPauseCircle, FiCalendar, FiX } = FiIcons;
 
@@ -88,15 +89,10 @@ export default function Podcasts() {
     setSpeed(speeds[nextIndex]);
   };
 
-  const fadeUp = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
-  };
-
   return (
     <div className="bg-[#F9F9F7] min-h-screen text-black pb-32 pt-20">
       {/* Hero */}
-      <PageHero kicker={'Listen Anywhere'} title={'Podcasts'} subtitle={'Catch up on the latest messages, discussions, and spiritual insights.'} image="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&q=80&w=2000" />
+      <PageHero kicker={'Listen Anywhere'} title={'Podcasts'} subtitle={'Catch up on the latest messages, discussions, and spiritual insights.'} image="https://images.pexels.com/photos/7383469/pexels-photo-7383469.jpeg?auto=compress&cs=tinysrgb&h=1200" />
 
       {/* Content */}
       <div className="py-24 px-6 max-w-[900px] mx-auto">

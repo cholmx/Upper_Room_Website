@@ -8,6 +8,7 @@ import useFetch from '../hooks/useFetch';
 import { ErrorState } from '../components/StateViews';
 import PageHero from '../components/PageHero';
 import SafeIcon from '../common/SafeIcon';
+import { slideInLeft, slideInRight, fadeUp } from '../lib/motion';
 import * as FiIcons from 'react-icons/fi';
 
 const { FiSearch, FiArrowRight, FiUser, FiCalendar, FiClock, FiTag } = FiIcons;
@@ -43,24 +44,9 @@ export default function Blog() {
   const featuredPost = filteredPosts.length > 0 ? filteredPosts[0] : null;
   const standardPosts = filteredPosts.length > 1 ? filteredPosts.slice(1) : [];
 
-  const slideInLeft = {
-    hidden: { opacity: 0, x: -60 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
-  };
-
-  const slideInRight = {
-    hidden: { opacity: 0, x: 60 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
-  };
-
-  const fadeUp = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
-  };
-
   return (
     <div className="bg-[#F9F9F7] min-h-screen text-black pb-24 pt-20">
-      <PageHero kicker={'Articles & Updates'} title={'Church Blog'} subtitle={'Insights, devotions, and updates from the Upper Room Family.'} image="https://images.unsplash.com/photo-1455309014304-9fea74c3d598?auto=format&fit=crop&q=80&w=2000" />
+      <PageHero kicker={'Articles & Updates'} title={'Church Blog'} subtitle={'Insights, devotions, and updates from the Upper Room Family.'} image="https://images.pexels.com/photos/6779632/pexels-photo-6779632.jpeg?auto=compress&cs=tinysrgb&h=1200" />
 
       <div className="max-w-[1145px] mx-auto px-6 mt-16">
         {error ? (

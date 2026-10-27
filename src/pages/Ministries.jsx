@@ -3,26 +3,18 @@ import { motion } from 'framer-motion';
 import usePageMeta from '../hooks/usePageMeta';
 import PageHero from '../components/PageHero';
 import SafeIcon from '../common/SafeIcon';
+import { fadeUp, staggerContainer } from '../lib/motion';
 import * as FiIcons from 'react-icons/fi';
 
 const { FiUsers, FiHeart, FiMusic, FiVideo, FiArrowRight } = FiIcons;
 
 export default function Ministries() {
   usePageMeta('Ministries', 'Find where you belong and how you can serve at Upper Room Fellowship.');
-  const fadeUp = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
-  };
-
-  const staggerContainer = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
-  };
 
   return (
     <div className="bg-[#F9F9F7] min-h-screen text-black pt-20">
       {/* Hero */}
-      <PageHero kicker={'Get Involved'} title={'Our Ministries'} subtitle={'Discover where you belong and how you can serve.'} image="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&q=80&w=2000" />
+      <PageHero kicker={'Get Involved'} title={'Our Ministries'} subtitle={'Discover where you belong and how you can serve.'} image="https://images.pexels.com/photos/3700250/pexels-photo-3700250.jpeg?auto=compress&cs=tinysrgb&h=1200" />
 
       {/* Content */}
       <div className="py-24 px-6 max-w-[1145px] mx-auto">

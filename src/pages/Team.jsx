@@ -20,7 +20,7 @@ export default function Team() {
 
   return (
     <div className="bg-[#F9F9F7] min-h-screen text-black pb-24 pt-20">
-      <PageHero kicker="Meet The Team" title="Staff & Leaders" subtitle="The people who love and serve this church." image="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=2000" />
+      <PageHero kicker="Meet The Team" title="Staff & Leaders" subtitle="The people who love and serve this church." image="https://images.pexels.com/photos/3184393/pexels-photo-3184393.jpeg?auto=compress&cs=tinysrgb&h=1200" />
 
       <div className="max-w-[1145px] mx-auto px-6 mt-16">
         {error ? (

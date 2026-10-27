@@ -4,36 +4,18 @@ import { motion } from 'framer-motion';
 import usePageMeta from '../hooks/usePageMeta';
 import PageHero from '../components/PageHero';
 import SafeIcon from '../common/SafeIcon';
+import { slideInLeft, slideInRight, fadeUp, staggerContainer } from '../lib/motion';
 import * as FiIcons from 'react-icons/fi';
 
 const { FiArrowRight, FiHeart, FiUsers, FiStar, FiZap, FiSun, FiGlobe } = FiIcons;
 
 export default function About() {
   usePageMeta('Our Story', 'Learn the story, mission and values of Upper Room Fellowship in Columbiana, Ohio.');
-  const slideInLeft = {
-    hidden: { opacity: 0, x: -60 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
-  };
-
-  const slideInRight = {
-    hidden: { opacity: 0, x: 60 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
-  };
-
-  const fadeUp = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
-  };
-
-  const staggerContainer = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
-  };
 
   return (
     <div className="bg-[#F9F9F7] min-h-screen text-black pt-20">
       {/* Hero */}
-      <PageHero kicker={'Who We Are'} title={'Our Story'} subtitle={'Transforming lives that transform communities.'} image="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&q=80&w=2000" />
+      <PageHero kicker={'Who We Are'} title={'Our Story'} subtitle={'Transforming lives that transform communities.'} image="https://images.pexels.com/photos/40383990/pexels-photo-40383990.jpeg?auto=compress&cs=tinysrgb&h=1200" />
 
       {/* Mission & Vision */}
       <div className="py-24 px-6 overflow-hidden">
@@ -163,7 +145,7 @@ export default function About() {
       <div className="py-32 px-6 text-center bg-[#FFC44F] text-black">
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
           <h2 className="text-4xl md:text-6xl mb-8">Come see for yourself.</h2>
-          <Link to="/visit" className="btn btn-outline border-black hover:bg-black group">
+          <Link to="/visit" className="btn btn-outline-gold border-black hover:bg-black group">
             Plan Your Visit <SafeIcon icon={FiArrowRight} className="group-hover:translate-x-1 transition-transform" />
           </Link>
         </motion.div>

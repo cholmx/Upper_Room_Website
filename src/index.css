@@ -110,24 +110,24 @@ h1, h2, h3, h4 {
 }
 
 .photo-section .btn-outline,
-.bg-\[\#0B1613\] .btn-outline {
+.btn-outline-dark {
   color: var(--light);
   border-color: rgba(255, 255, 255, 0.5);
 }
 
 .photo-section .btn-outline:hover,
-.bg-\[\#0B1613\] .btn-outline:hover {
+.btn-outline-dark:hover {
   background: var(--light);
-  color: var(--black); /* High contrast black on white */
+  color: var(--black);
   border-color: var(--light);
 }
 
-.bg-\[\#FFC44F\] .btn-outline {
+.btn-outline-gold {
   color: var(--black);
   border-color: rgba(0,0,0, 0.5);
 }
 
-.bg-\[\#FFC44F\] .btn-outline:hover {
+.btn-outline-gold:hover {
   background: var(--black);
   color: var(--yellow);
   border-color: var(--black);
@@ -234,8 +234,13 @@ h1, h2, h3, h4 {
   outline-offset: 2px;
 }
 
-.bg-\[\#0B1613\] :focus-visible,
+.focus-gold :focus-visible,
 .photo-section :focus-visible {
+  outline-color: var(--yellow);
+}
+
+/* Legacy support: dark backgrounds that use the raw hex class */
+.bg-\[\#0B1613\] :focus-visible {
   outline-color: var(--yellow);
 }
 

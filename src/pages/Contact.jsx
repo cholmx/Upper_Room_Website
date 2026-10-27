@@ -49,7 +49,7 @@ export default function Contact() {
 
   return (
     <div className="bg-[#F9F9F7] min-h-screen text-black pb-24 pt-20">
-      <PageHero kicker="Get In Touch" title="Contact Us" subtitle="We would love to hear from you." image="https://images.unsplash.com/photo-1507692049790-de58290a4334?auto=format&fit=crop&q=80&w=2000" />
+      <PageHero kicker="Get In Touch" title="Contact Us" subtitle="We would love to hear from you." image="https://images.pexels.com/photos/8250816/pexels-photo-8250816.jpeg?auto=compress&cs=tinysrgb&h=1200" />
       <div className="max-w-[1000px] mx-auto px-6 mt-16 grid md:grid-cols-5 gap-12">
         <div className="md:col-span-2 space-y-4 text-lg">
           <h2 className="text-3xl mb-4">Reach us</h2>

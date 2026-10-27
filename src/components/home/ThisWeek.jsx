@@ -84,7 +84,7 @@ export default function ThisWeek({ site, sermon, event }) {
                 <Link to="/visit" className="btn btn-solid group">
                   Plan Your Visit <SafeIcon icon={FiArrowRight} className="group-hover:translate-x-1 transition-transform" />
                 </Link>
-                <a href={site.googleMapsUrl} target="_blank" rel="noopener noreferrer" className="btn btn-outline">Directions</a>
+                <a href={site.googleMapsUrl} target="_blank" rel="noopener noreferrer" className="btn btn-outline-dark">Directions</a>
               </div>
             </motion.section>
 

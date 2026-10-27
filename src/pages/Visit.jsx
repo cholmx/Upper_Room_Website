@@ -4,6 +4,7 @@ import { useSite } from '../settings';
 import usePageMeta from '../hooks/usePageMeta';
 import PageHero from '../components/PageHero';
 import SafeIcon from '../common/SafeIcon';
+import { slideInLeft, slideInRight, fadeUp, staggerSlow } from '../lib/motion';
 import * as FiIcons from 'react-icons/fi';
 
 const { FiClock, FiMapPin, FiSmile, FiHelpCircle, FiCoffee, FiCar, FiCopy, FiCheck, FiNavigation, FiSmartphone } = FiIcons;
@@ -20,33 +21,13 @@ export default function Visit() {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const slideInLeft = {
-    hidden: { opacity: 0, x: -60 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
-  };
-
-  const slideInRight = {
-    hidden: { opacity: 0, x: 60 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
-  };
-
-  const fadeUp = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
-  };
-
-  const staggerContainer = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
-  };
-
   return (
     <div className="bg-[#F9F9F7] min-h-screen text-black pt-20">
-      <PageHero kicker={'Welcome Home'} title={'Plan Your Visit'} subtitle={"We can't wait to meet you this Sunday."} image="https://images.unsplash.com/photo-1544427928-c49cdfebf194?auto=format&fit=crop&q=80&w=2000" />
+      <PageHero kicker={'Welcome Home'} title={'Plan Your Visit'} subtitle={"We can't wait to meet you this Sunday."} image="https://images.pexels.com/photos/8250816/pexels-photo-8250816.jpeg?auto=compress&cs=tinysrgb&h=1200" />
 
       <div className="py-24 px-6 max-w-[1300px] mx-auto">
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="mb-24 relative rounded-[3rem] overflow-hidden shadow-2xl border border-black/10 min-h-[600px] flex items-center bg-[#0B1613]">
-          <div className="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-luminosity" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1478810237466-4e5c543f46f3?auto=format&fit=crop&q=80&w=2000')" }}></div>
+          <div className="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-luminosity" style={{ backgroundImage: "url('https://images.pexels.com/photos/17508755/pexels-photo-17508755.jpeg?auto=compress&cs=tinysrgb&h=1200')" }}></div>
           <div className="absolute inset-0 bg-gradient-to-r from-[#0B1613] via-[#0B1613]/80 to-transparent"></div>
           
           <div className="relative z-10 p-8 md:p-16 max-w-[600px] w-full">
@@ -94,7 +75,7 @@ export default function Visit() {
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-start max-w-[1145px] mx-auto">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="space-y-8">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerSlow} className="space-y-8">
             <motion.div variants={fadeUp} className="fcard bg-[#FFC44F] text-black">
               <motion.span variants={slideInLeft} className="kicker text-[#8A6309]">Kids Ministry</motion.span>
               <div className="flex items-center gap-4 mb-6">

@@ -54,7 +54,7 @@ export default function CustomPage() {
       {/* Hero Banner */}
       <div className="bg-[#0B1613] text-[#F9F9F7] py-24 px-6 text-center shadow-lg relative overflow-hidden">
          {/* Subtle abstract background */}
-         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&q=80&w=2000')] bg-cover bg-center opacity-[0.08] mix-blend-overlay"></div>
+         <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/9562304/pexels-photo-9562304.jpeg?auto=compress&cs=tinysrgb&h=1200')] bg-cover bg-center opacity-[0.08] mix-blend-overlay"></div>
          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#FFC44F] rounded-full blur-[150px] opacity-10 pointer-events-none"></div>
          
          <motion.div initial="hidden" animate="visible" variants={fadeUp} className="max-w-[800px] mx-auto relative z-10">

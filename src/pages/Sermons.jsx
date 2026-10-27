@@ -9,6 +9,7 @@ import { plainText } from '../lib/markdown';
 import { formatDate, ytId, ytEmbed, ytThumb, isLive, safeUrl } from '../utils';
 import PageHero from '../components/PageHero';
 import SafeIcon from '../common/SafeIcon';
+import { slideInLeft, slideInRight, fadeUpShort as fadeUp } from '../lib/motion';
 import * as FiIcons from 'react-icons/fi';
 
 const { FiSearch, FiPlay, FiHeadphones, FiArrowRight, FiFilter, FiChevronDown } = FiIcons;
@@ -39,24 +40,9 @@ export default function Sermons() {
   const featuredSermon = filteredSermons.length > 0 ? filteredSermons[0] : null;
   const pastSermons = filteredSermons.length > 1 ? filteredSermons.slice(1) : [];
 
-  const slideInLeft = {
-    hidden: { opacity: 0, x: -60 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
-  };
-
-  const slideInRight = {
-    hidden: { opacity: 0, x: 60 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
-  };
-
-  const fadeUp = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
-  };
-
   return (
     <div className="bg-[#F9F9F7] min-h-screen text-black pb-24 pt-20">
-      <PageHero kicker={'Watch & Listen'} title={'Messages'} subtitle={'Catch up on recent teachings and series.'} image="https://images.unsplash.com/photo-1519781542704-957ff19eff00?auto=format&fit=crop&q=80&w=2000" />
+      <PageHero kicker={'Watch & Listen'} title={'Messages'} subtitle={'Catch up on recent teachings and series.'} image="https://images.pexels.com/photos/34328505/pexels-photo-34328505.jpeg?auto=compress&cs=tinysrgb&h=1200" />
 
       <div className="max-w-[1145px] mx-auto px-6 mt-16">
         {error ? (
@@ -186,7 +172,7 @@ export default function Sermons() {
                                     loading="lazy" 
                                     alt={s.title}
                                     className="w-full h-full object-cover group-hover:scale-105 group-hover:opacity-60 transition-all duration-500"
-                                    onError={(e) => { if (e.currentTarget.dataset.fallback) return; e.currentTarget.dataset.fallback = '1'; e.currentTarget.src = 'https://images.unsplash.com/photo-1438232992991-995b7058bbb3?w=800&q=80'; }}
+                                    onError={(e) => { if (e.currentTarget.dataset.fallback) return; e.currentTarget.dataset.fallback = '1'; e.currentTarget.src = 'https://images.pexels.com/photos/34328505/pexels-photo-34328505.jpeg?auto=compress&cs=tinysrgb&h=800'; }}
                                   />
                                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                     <div className="w-16 h-16 bg-[#FFC44F] rounded-full flex items-center justify-center text-black pl-1 shadow-lg">

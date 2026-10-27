@@ -8,6 +8,7 @@ import ThisWeek from '../components/home/ThisWeek';
 import NextSteps from '../components/home/NextSteps';
 import { Spinner } from '../components/StateViews';
 import { plainText } from '../lib/markdown';
+import { slideInLeft, slideInRight, fadeUp, staggerContainer } from '../lib/motion';
 import { useSite } from '../settings';
 import SafeIcon from '../common/SafeIcon';
 import * as FiIcons from 'react-icons/fi';
@@ -75,21 +76,6 @@ export default function Home() {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const slideInLeft = {
-    hidden: { opacity: 0, x: -60 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
-  };
-
-  const slideInRight = {
-    hidden: { opacity: 0, x: 60 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
-  };
-
-  const fadeUp = {
-    hidden: { opacity: 0, y: 40 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
-  };
-
   const sections = {
     campaign: (
       <div key="campaign" className="text-center py-24 px-6 bg-gradient-to-b from-[#F9F9F7] to-white text-black border-b border-black/5 overflow-hidden">
@@ -118,7 +104,7 @@ export default function Home() {
             <motion.p variants={slideInLeft} className="text-lg mb-6 opacity-80 leading-relaxed">For over 50 years, our congregation has been gathering in Columbiana to worship, grow, and serve together.</motion.p>
             <motion.p variants={slideInLeft} className="text-lg mb-10 opacity-80 leading-relaxed">Together, we're learning to live with more love, joy, and purpose. We support each other and reach out to make our community better.</motion.p>
             <motion.div variants={slideInLeft}>
-              <Link to="/about" className="btn btn-outline border-white/30 hover:border-white group">
+              <Link to="/about" className="btn btn-outline-dark border-white/30 hover:border-white group">
                 Read Our Story <SafeIcon icon={FiArrowRight} className="group-hover:translate-x-1 transition-transform" />
               </Link>
             </motion.div>

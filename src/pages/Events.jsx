@@ -8,6 +8,7 @@ import { plainText } from '../lib/markdown';
 import PageHero from '../components/PageHero';
 import { Spinner, ErrorState } from '../components/StateViews';
 import SafeIcon from '../common/SafeIcon';
+import { fadeUpShort as fadeUp } from '../lib/motion';
 import * as FiIcons from 'react-icons/fi';
 
 const { FiMapPin, FiClock, FiArrowRight, FiCalendar, FiRepeat } = FiIcons;
@@ -19,14 +20,9 @@ export default function Events() {
   const { data, loading, error, reload } = useFetch('read/events_church?sort=date:asc');
   const events = useMemo(() => expandEvents((data ?? []).filter(isLive)), [data]);
 
-  const fadeUp = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
-  };
-
   return (
     <div className="bg-[#F9F9F7] min-h-screen text-black pb-24 pt-20">
-      <PageHero kicker="Get Involved" title="Upcoming Events" subtitle="Find where you belong and connect with community." image="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&q=80&w=2000" />
+      <PageHero kicker="Get Involved" title="Upcoming Events" subtitle="Find where you belong and connect with community." image="https://images.pexels.com/photos/39007872/pexels-photo-39007872.jpeg?auto=compress&cs=tinysrgb&h=1200" />
 
       <div className="max-w-[900px] mx-auto px-6 mt-20">
         {error ? (
