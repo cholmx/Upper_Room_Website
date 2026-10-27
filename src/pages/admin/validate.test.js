@@ -33,3 +33,15 @@ describe('autoSlug', () => {
     expect(autoSlug(fields, { title: 'Our Beliefs', slug: 'custom' }).slug).toBe('custom');
   });
 });
+
+describe('email fields', () => {
+  const f = [{ name: 'email', label: 'Email', type: 'email' }];
+  it('accepts a valid address and blank values', () => {
+    expect(validate(f, { email: 'pastor@church.org' })).toEqual({});
+    expect(validate(f, { email: '' })).toEqual({});
+  });
+  it('rejects malformed addresses', () => {
+    expect(validate(f, { email: 'not-an-email' }).email).toBeTruthy();
+    expect(validate(f, { email: 'a@b' }).email).toBeTruthy();
+  });
+});

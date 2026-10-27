@@ -25,6 +25,8 @@ export function validate(fields, data, others = []) {
     if (empty) continue;
     if (f.type === 'url' || f.type === 'image') {
       if (!isHttpUrl(v)) errors[f.name] = 'Enter a full link starting with http:// or https://';
+    } else if (f.type === 'email') {
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(v).trim())) errors[f.name] = 'Enter a valid email address';
     } else if (f.type === 'youtube') {
       if (!ytId(v)) errors[f.name] = 'Enter a YouTube watch, youtu.be, or embed link';
     } else if (f.type === 'date') {

@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { dataFetch } from '../../api';
 import { useAuth } from '../../auth';
 import { logActivity } from '../../lib/activity';
+import { mergeSectionOrder } from '../../utils';
 import SafeIcon from '../../common/SafeIcon';
 import * as FiIcons from 'react-icons/fi';
 
@@ -13,9 +14,9 @@ export const HOME_SECTIONS = [
   { key: 'campaign', label: 'Campaign banner' },
   { key: 'story', label: 'Our story' },
   { key: 'statement', label: 'Mission statement' },
-  { key: 'quicklinks', label: 'Quick links' },
   { key: 'wherewhen', label: 'Where and when' },
-  { key: 'features', label: "What's happening" },
+  { key: 'features', label: 'This week (sermon, Sunday, next event)' },
+  { key: 'nextsteps', label: 'Next steps (visit, connect, serve, give)' },
   { key: 'latestposts', label: 'Latest blog posts' },
   { key: 'gallery', label: 'Photo gallery' },
   { key: 'photosections', label: 'Photo sections' },
@@ -35,9 +36,7 @@ export default function SectionOrderManager() {
       if (res.status === 'success') {
         const data = res.data ?? [];
         setRows(Object.fromEntries(data.map(r => [r.section_key_name, r])));
-        const known = data.map(r => r.section_key_name).filter(k => HOME_SECTIONS.some(s => s.key === k));
-        const missing = HOME_SECTIONS.map(s => s.key).filter(k => !known.includes(k));
-        setOrder([...known, ...missing]);
+        setOrder(mergeSectionOrder(data.map(r => r.section_key_name), HOME_SECTIONS.map(s => s.key)));
       } else {
         setMessage({ type: 'error', text: `Could not load layout: ${res.error}` });
       }

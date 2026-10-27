@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import usePageMeta from '../hooks/usePageMeta';
 import { publicDataFetch } from '../api';
-import { formatDate, isLive, expandEvents } from '../utils';
+import { formatDate, isLive, expandEvents, mergeSectionOrder } from '../utils';
+import ThisWeek from '../components/home/ThisWeek';
+import NextSteps from '../components/home/NextSteps';
 import { plainText } from '../lib/markdown';
 import { useSite } from '../settings';
 import SafeIcon from '../common/SafeIcon';
@@ -123,48 +125,6 @@ export default function Home() {
         </motion.div>
       </div>
     ),
-    quicklinks: (
-      <div key="quicklinks" className="py-24 px-6 bg-[#F9F9F7] text-black">
-        <div className="max-w-[1145px] mx-auto">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{
-            visible: { transition: { staggerChildren: 0.1 } }
-          }} className="text-center mb-16">
-            <motion.span variants={slideInLeft} className="kicker">Quick Links</motion.span>
-            <motion.h2 variants={slideInRight} className="text-4xl md:text-5xl">Get Started</motion.h2>
-          </motion.div>
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              { title: 'Plan Your Visit', text: 'Find service times, directions, and helpful info for your first visit.', link: '/visit', label: 'New Here?' },
-              { title: 'Latest Message', text: 'Catch up on recent teachings and series from our Sunday services.', link: '/sermons', label: 'Messages' },
-              { title: 'Give Online', text: 'Partner with us in our mission to transform our community.', link: SITE.giveUrl, label: 'Give' }
-            ].map((card, i) => (
-              <motion.div 
-                key={i} 
-                initial={{ opacity: 0, y: 30 }} 
-                whileInView={{ opacity: 1, y: 0 }} 
-                viewport={{ once: true }} 
-                transition={{ duration: 0.6, delay: i * 0.15 }}
-                className="fcard group hover:bg-[#0B1613] hover:text-white flex flex-col h-full"
-              >
-                <h4 className="text-2xl mb-3">{card.title}</h4>
-                <p className="mb-8 opacity-70 leading-relaxed flex-grow">{card.text}</p>
-                <div className="mt-auto">
-                  {card.link.startsWith('http') ? (
-                    <a href={card.link} className="inline-flex items-center font-bold uppercase tracking-widest text-[#8A6309] group-hover:text-[#FFC44F] transition-colors">
-                      {card.label} <SafeIcon icon={FiArrowRight} className="ml-2 group-hover:translate-x-2 transition-transform" />
-                    </a>
-                  ) : (
-                    <Link to={card.link} className="inline-flex items-center font-bold uppercase tracking-widest text-[#8A6309] group-hover:text-[#FFC44F] transition-colors">
-                      {card.label} <SafeIcon icon={FiArrowRight} className="ml-2 group-hover:translate-x-2 transition-transform" />
-                    </Link>
-                  )}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </div>
-    ),
     wherewhen: (
       <div key="wherewhen" className="py-24 px-6 bg-[#0B1613] text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.2) 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
@@ -241,47 +201,8 @@ export default function Home() {
         </div>
       </div>
     ),
-    features: (
-      <div key="features" className="py-24 px-6 bg-[#F9F9F7] text-black">
-        <div className="max-w-[1145px] mx-auto">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{
-            visible: { transition: { staggerChildren: 0.1 } }
-          }} className="text-center mb-16">
-            <motion.span variants={slideInLeft} className="kicker text-[#8A6309]">This Week</motion.span>
-            <motion.h2 variants={slideInRight} className="text-4xl md:text-5xl">What's Happening</motion.h2>
-          </motion.div>
-          <div className="grid md:grid-cols-3 gap-6">
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}>
-              <Link to="/sermons" className="block p-8 bg-white border border-black/5 shadow-sm rounded-3xl hover:border-[#A6790F] hover:shadow-xl transition-all duration-300 group h-full">
-                <span className="kicker text-[#8A6309]">Latest Message</span>
-                <h4 className="text-2xl mb-4 group-hover:text-[#8A6309] transition-colors">{latestSermon?.title || 'Watch Latest Message'}</h4>
-                <div className="flex items-center gap-2 font-serif italic text-sm opacity-60 uppercase tracking-wider">
-                  <SafeIcon icon={FiPlay} /> {latestSermon?.date ? formatDate(latestSermon.date) : 'Watch Now'}
-                </div>
-              </Link>
-            </motion.div>
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}>
-              <Link to="/events" className="block p-8 bg-white border border-black/5 shadow-sm rounded-3xl hover:border-[#A6790F] hover:shadow-xl transition-all duration-300 group h-full">
-                <span className="kicker text-[#8A6309]">Next Event</span>
-                <h4 className="text-2xl mb-4 group-hover:text-[#8A6309] transition-colors">{nextEvent?.title || 'Check Upcoming Events'}</h4>
-                <div className="flex items-center gap-2 font-serif italic text-sm opacity-60 uppercase tracking-wider">
-                  <SafeIcon icon={FiCalendar} /> {nextEvent ? formatDate(nextEvent.occurrence_date) : 'View Calendar'}
-                </div>
-              </Link>
-            </motion.div>
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }}>
-              <Link to="/blog" className="block p-8 bg-white border border-black/5 shadow-sm rounded-3xl hover:border-[#A6790F] hover:shadow-xl transition-all duration-300 group h-full">
-                <span className="kicker text-[#8A6309]">From the Blog</span>
-                <h4 className="text-2xl mb-4 group-hover:text-[#8A6309] transition-colors">{latestPosts[0]?.title || 'Read Our Latest Post'}</h4>
-                <div className="font-serif italic text-sm opacity-60 uppercase tracking-wider">
-                  {latestPosts[0]?.date ? formatDate(latestPosts[0].date) : 'Read Journal'}
-                </div>
-              </Link>
-            </motion.div>
-          </div>
-        </div>
-      </div>
-    ),
+    features: <ThisWeek key="features" site={SITE} sermon={latestSermon} event={nextEvent} />,
+    nextsteps: <NextSteps key="nextsteps" site={SITE} />,
     latestposts: (
       <div key="latestposts" className="py-24 px-6 bg-white text-black border-t border-black/5">
         <div className="max-w-[1145px] mx-auto">
@@ -404,8 +325,7 @@ export default function Home() {
     )
   };
 
-  const defaultOrder = ['campaign', 'story', 'statement', 'quicklinks', 'wherewhen', 'features', 'latestposts', 'gallery', 'photosections'];
-  const order = sectionOrder.length > 0 ? sectionOrder.map(s => s.section_key_name) : defaultOrder;
+  const order = mergeSectionOrder(sectionOrder.map(s => s.section_key_name));
 
   return (
     <div className="pt-20">

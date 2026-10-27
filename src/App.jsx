@@ -17,6 +17,7 @@ const Visit = lazy(() => import('./pages/Visit'));
 const SermonDetail = lazy(() => import('./pages/SermonDetail'));
 const BlogPost = lazy(() => import('./pages/BlogPost'));
 const EventDetail = lazy(() => import('./pages/EventDetail'));
+const Team = lazy(() => import('./pages/Team'));
 const Contact = lazy(() => import('./pages/Contact'));
 const Ministries = lazy(() => import('./pages/Ministries'));
 const CustomPage = lazy(() => import('./pages/CustomPage'));
@@ -80,6 +81,7 @@ export default function App() {
         <Route path="/blog/:id" element={<PublicLayout><BlogPost /></PublicLayout>} />
         <Route path="/events" element={<PublicLayout><Events /></PublicLayout>} />
         <Route path="/events/:id" element={<PublicLayout><EventDetail /></PublicLayout>} />
+        <Route path="/team" element={<PublicLayout><Team /></PublicLayout>} />
         <Route path="/contact" element={<PublicLayout><Contact /></PublicLayout>} />
         <Route path="/visit" element={<PublicLayout><Visit /></PublicLayout>} />
         <Route path="/ministries" element={<PublicLayout><Ministries /></PublicLayout>} />

@@ -9,7 +9,7 @@ import SectionOrderManager from './SectionOrderManager';
 import ActivityLog from './ActivityLog';
 import { useAuth } from '../../auth';
 
-const { FiTv, FiLayout, FiMic, FiCalendar, FiFileText, FiCamera, FiImage, FiLogOut, FiMenu, FiX, FiHeadphones, FiMail, FiSettings, FiList, FiActivity } = FiIcons;
+const { FiTv, FiLayout, FiMic, FiCalendar, FiFileText, FiCamera, FiImage, FiLogOut, FiMenu, FiX, FiHeadphones, FiMail, FiSettings, FiList, FiActivity, FiUsers } = FiIcons;
 
 const NavItem = ({ icon, children, ...rest }) => (
   <button {...rest} className="w-full flex items-center gap-4 px-4 py-3 text-left text-gray-300 hover:bg-[#CCA866] hover:text-black rounded-lg transition-colors duration-200">
@@ -51,6 +51,23 @@ const TAB_CONFIGS = {
       { name: 'image_url', label: 'Image', type: 'image', required: true },
       { name: 'caption', label: 'Caption / Alt Text', type: 'text', required: true },
       { name: 'sort_order_num', label: 'Sort Order', type: 'number' }
+    ]
+  },
+  staff: {
+    table: 'staff_church',
+    title: 'Staff and Leaders',
+    titleField: 'name',
+    thumbField: 'photo_url',
+    sortField: 'sort_order_num',
+    columns: ['name', 'role'],
+    fields: [
+      { name: 'name', label: 'Name', type: 'text', required: true },
+      { name: 'role', label: 'Role / Title', type: 'text' },
+      { name: 'photo_url', label: 'Photo', type: 'image' },
+      { name: 'bio', label: 'Short Bio', type: 'markdown' },
+      { name: 'email', label: 'Email (optional)', type: 'email' },
+      { name: 'sort_order_num', label: 'Sort Order', type: 'number' },
+      { name: 'published', label: 'Published', type: 'checkbox', defaultChecked: true, help: 'Visible on the website' }
     ]
   },
   pages: {
@@ -167,6 +184,7 @@ const ContentStudio = () => {
         return <ActivityLog />;
       case 'photosections':
       case 'gallery':
+      case 'staff':
       case 'pages':
       case 'sermons':
       case 'events':
@@ -189,6 +207,7 @@ const ContentStudio = () => {
       { key: 'pages', label: 'Custom Pages', icon: FiLayout },
     ],
     'Content': [
+      { key: 'staff', label: 'Staff & Leaders', icon: FiUsers },
       { key: 'sermons', label: 'Sermons', icon: FiMic },
       { key: 'episodes', label: 'Podcasts', icon: FiHeadphones },
       { key: 'events', label: 'Events', icon: FiCalendar },

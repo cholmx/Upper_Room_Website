@@ -149,7 +149,7 @@ export default function FieldInput({ field, value, onChange, error }) {
       control = <input id={id} type="number" value={value ?? ''} onChange={(e) => set(e.target.value === '' ? '' : Number(e.target.value))} className={`${base} ${invalid ? bad : ok}`} aria-invalid={invalid} />;
       break;
     default:
-      control = <input id={id} type={field.type === 'date' || field.type === 'url' ? field.type : 'text'} value={value || ''} onChange={(e) => set(e.target.value)} className={`${base} ${invalid ? bad : ok}`} aria-invalid={invalid} />;
+      control = <input id={id} type={['date', 'url', 'email'].includes(field.type) ? field.type : 'text'} value={value || ''} onChange={(e) => set(e.target.value)} className={`${base} ${invalid ? bad : ok}`} aria-invalid={invalid} />;
   }
 
   return (

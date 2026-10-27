@@ -83,7 +83,7 @@ export default function Footer() {
           <FooterLink to="/p/beliefs">Our Beliefs</FooterLink>
           <FooterLink to="/about">Core Values</FooterLink>
           <FooterLink to="/ministries">Ministries</FooterLink>
-          <FooterLink to="/p/leadership">Leadership</FooterLink>
+          <FooterLink to="/team">Staff &amp; Leaders</FooterLink>
         </motion.div>
 
         {SITE.social.length > 0 && (

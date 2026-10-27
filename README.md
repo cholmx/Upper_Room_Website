@@ -54,6 +54,7 @@ blocked at the database level, add a row level security rule that checks `auth.j
 
 Every table has RLS enabled:
 - Create, update, and delete require a signed-in user on every table.
+- `staff_church`: anonymous visitors see only published rows; signed-in users see and manage all of them.
 - Public read: `hero_config`, `home_section_order_church`, `photo_sections_church`, `gallery_church`,
   `custom_pages_church`, `sermons`, `events_church`, `posts`, `episodes`, `site_settings_church`.
 - `contact_messages_church`: anonymous users can insert only. Reads, updates, and deletes need a signed-in user.
@@ -79,6 +80,7 @@ who asks the public API directly can read drafts. The app also hides them in the
 | `events_church` | `title`, `date`, `recurrence` (`none`/`weekly`/`biweekly`/`monthly`), `time`, `location`, `desc_text`, `registration_url`, `published`, `publish_date` |
 | `posts` | `title`, `author`, `date`, `category`, `image_url`, `body`, `published`, `publish_date` |
 | `episodes` | `title`, `date`, `audio`, `feed` |
+| `staff_church` | `name`, `role`, `bio`, `photo_url`, `email`, `sort_order_num`, `published` |
 | `site_settings_church` | `service_time`, `phone`, `email`, `street`, `city`, `region`, `postal_code`, `give_url`, `facebook_url`, `instagram_url`, `youtube_url` |
 | `contact_messages_church` | `name`, `email`, `kind`, `message`, `handled` |
 | `activity_log_church` | `actor`, `action`, `area`, `item_label` |
@@ -93,10 +95,11 @@ The database starts empty. Log in at `/admin` and fill in, in this order:
 
 1. **Settings:** service time, phone, email, address, giving link, social links.
 2. **Hero Section:** the heading, subtext, and background image on the Home page.
-3. **Custom Pages:** `beliefs` and `leadership` (the footer links to `/p/beliefs` and `/p/leadership`).
-4. **Sermons, Events, Blog Posts:** at least one of each so those pages are not empty.
-5. **Photo Sections and Gallery:** optional. The Gallery section stays hidden until it has photos.
-6. **Home Layout:** reorder the Home page sections if you want a different order.
+3. **Staff & Leaders:** add each person with a photo, title, and short bio. They appear on `/team`, in the order you set.
+4. **Custom Pages:** `beliefs` (the footer links to `/p/beliefs`).
+5. **Sermons, Events, Blog Posts:** at least one of each so those pages are not empty.
+6. **Photo Sections and Gallery:** optional. The Gallery section stays hidden until it has photos.
+7. **Home Layout:** reorder the Home page sections if you want a different order.
 
 Uncheck Published, or set Publish On to a future date, to prepare an item without showing it yet.
 
@@ -106,6 +109,8 @@ Uncheck Published, or set Publish On to a future date, to prepare an item withou
 - **Recurring events:** choose weekly, every 2 weeks, or monthly. The Events page shows the next 120 days of occurrences, and every event has an Add to Calendar (.ics) button.
 - **Detail pages:** `/sermons/:id`, `/blog/:id`, `/events/:id`, with `VideoObject`, `BlogPosting`, and `Event` structured data.
 - **Series pages:** `/sermons?series=Name` filters the sermon list.
+- **Home page:** the This Week block shows the latest sermon (click to play, nothing autoplays), the Sunday service time and address, and the next event with Add to Calendar. The Next Steps path links to Visit, Contact, Ministries, and giving.
+- **Staff & Leaders:** `/team`, managed in the admin.
 - **Reordering:** photo sections, gallery photos, and the Home page layout can be dragged or moved with arrow buttons.
 
 ## Deployment

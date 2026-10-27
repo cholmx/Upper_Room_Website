@@ -102,3 +102,30 @@ describe('imgUrl', () => {
     expect(imgUrl('https://example.com/a.jpg', 800)).toBe('https://example.com/a.jpg');
   });
 });
+
+import { mergeSectionOrder, HOME_SECTION_DEFAULTS } from './utils';
+
+describe('mergeSectionOrder', () => {
+  it('uses the default order when nothing is saved', () => {
+    expect(mergeSectionOrder([])).toEqual(HOME_SECTION_DEFAULTS);
+  });
+  it('keeps a saved order exactly when it is complete', () => {
+    const saved = [...HOME_SECTION_DEFAULTS].reverse();
+    expect(mergeSectionOrder(saved)).toEqual(saved);
+  });
+  it('slots a section added later at its default position', () => {
+    const saved = HOME_SECTION_DEFAULTS.filter(k => k !== 'nextsteps');
+    const out = mergeSectionOrder(saved);
+    expect(out.indexOf('nextsteps')).toBe(out.indexOf('latestposts') - 1);
+    expect(out).toHaveLength(HOME_SECTION_DEFAULTS.length);
+  });
+  it('ignores retired or unknown keys and never duplicates', () => {
+    const out = mergeSectionOrder(['quicklinks', 'story', 'story', 'campaign']);
+    expect(out).not.toContain('quicklinks');
+    expect(new Set(out).size).toBe(out.length);
+    expect(out.indexOf('story')).toBeLessThan(out.indexOf('campaign'));
+  });
+  it('puts a new section last when every later default is missing too', () => {
+    expect(mergeSectionOrder(['story']).at(0)).toBe('campaign');
+  });
+});

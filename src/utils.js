@@ -155,3 +155,21 @@ export function imgSrcSet(url, widths = [480, 800, 1200]) {
 }
 
 export { DAY };
+
+
+export const HOME_SECTION_DEFAULTS = ['campaign', 'story', 'statement', 'wherewhen', 'features', 'nextsteps', 'latestposts', 'gallery', 'photosections'];
+
+// Keeps the order staff saved, but slots in sections added later (so a new section shows up)
+// at their default position, just before the next default section that is already placed.
+export function mergeSectionOrder(saved, defaults = HOME_SECTION_DEFAULTS) {
+  const known = [...new Set((saved || []).filter(k => defaults.includes(k)))];
+  if (known.length === 0) return [...defaults];
+  const out = [...known];
+  defaults.forEach((key, i) => {
+    if (out.includes(key)) return;
+    const next = defaults.slice(i + 1).find(k => out.includes(k));
+    if (next) out.splice(out.indexOf(next), 0, key);
+    else out.push(key);
+  });
+  return out;
+}
