@@ -87,24 +87,18 @@ Every table also has an `id` and a `created_at` column. The app never writes tho
 `handled` are stored as 1 or 0. Rows saved before `published` existed count as published.
 Bodies for pages, posts, sermons, and events are Markdown and are sanitized before display.
 
-### Copying content from the old NCB backend
+## First-time content setup
 
-`scripts/migrate-from-ncb.mjs` copies the existing sermons, posts, events, pages, hero, and so on into the
-new tables. It signs in as your admin user so the same security rules apply, keeps original creation times,
-renames old fields (`yt` to `video_url`, event `description` to `desc_text`), and skips any table that
-already has rows so it cannot duplicate content.
+The database starts empty. Log in at `/admin` and fill in, in this order:
 
-```
-# 1. Preview. Writes nothing.
-NCB_INSTANCE=<old instance id> node scripts/migrate-from-ncb.mjs --dry-run
+1. **Settings:** service time, phone, email, address, giving link, social links.
+2. **Hero Section:** the heading, subtext, and background image on the Home page.
+3. **Custom Pages:** `beliefs` and `leadership` (the footer links to `/p/beliefs` and `/p/leadership`).
+4. **Sermons, Events, Blog Posts:** at least one of each so those pages are not empty.
+5. **Photo Sections and Gallery:** optional. The Gallery section stays hidden until it has photos.
+6. **Home Layout:** reorder the Home page sections if you want a different order.
 
-# 2. Copy for real
-NCB_INSTANCE=<old instance id> MIGRATE_EMAIL=you@example.com MIGRATE_PASSWORD='your password' \
-  node scripts/migrate-from-ncb.mjs
-```
-
-The old instance id is the value `VITE_NCB_INSTANCE` had before. Image links are copied as they are, so
-images hosted elsewhere keep working.
+Uncheck Published, or set Publish On to a future date, to prepare an item without showing it yet.
 
 ## Content features
 

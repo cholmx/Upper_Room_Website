@@ -23,7 +23,7 @@ export default defineConfig(({ mode }) => {
     },
     test: {
       environment: 'jsdom',
-      include: ['src/**/*.test.{js,jsx}', 'scripts/**/*.test.mjs'],
+      include: ['src/**/*.test.{js,jsx}'],
     },
     build: {
       outDir: 'dist',
