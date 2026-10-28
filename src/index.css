@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 :root {
-  --dark: #0B1613;
-  --light: #F9F9F7;
-  --yellow: #FFC44F;
-  --muted: #CCA866;
-  --black: #080c0b;
+  --dark: theme('colors.ink.DEFAULT');
+  --light: theme('colors.cream.DEFAULT');
+  --yellow: theme('colors.gold.DEFAULT');
+  --muted: theme('colors.gold.bronze');
+  --black: theme('colors.ink.deep');
 }
 
 html {
@@ -230,7 +230,7 @@ h1, h2, h3, h4 {
 }
 /* Keyboard focus is always visible */
 :focus-visible {
-  outline: 3px solid #8A6309;
+  outline: 3px solid theme('colors.gold.600');
   outline-offset: 2px;
 }
 
@@ -239,8 +239,8 @@ h1, h2, h3, h4 {
   outline-color: var(--yellow);
 }
 
-/* Legacy support: dark backgrounds that use the raw hex class */
-.bg-\[\#0B1613\] :focus-visible {
+/* Dark backgrounds use the ink token */
+.bg-ink :focus-visible {
   outline-color: var(--yellow);
 }
 
@@ -289,7 +289,7 @@ h1, h2, h3, h4 {
 .rich-text h1 { font-size: 1.9em; }
 .rich-text h2 { font-size: 1.5em; }
 .rich-text h3 { font-size: 1.25em; }
-.rich-text a { color: #8A6309; text-decoration: underline; }
+.rich-text a { color: theme('colors.gold.600'); text-decoration: underline; }
 .rich-text ul { list-style: disc; padding-left: 1.5em; }
 .rich-text ol { list-style: decimal; padding-left: 1.5em; }
 .rich-text blockquote { border-left: 4px solid var(--muted); padding-left: 1em; font-style: italic; }

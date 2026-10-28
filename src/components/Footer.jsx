@@ -20,10 +20,10 @@ export default function Footer() {
   };
 
   const FooterLink = ({ to, external, children }) => {
-    const className = "group flex items-center gap-2 opacity-70 hover:opacity-100 hover:text-[#FFC44F] transition-all duration-300 mb-3 text-[0.9rem]";
+    const className = "group flex items-center gap-2 opacity-70 hover:opacity-100 hover:text-gold transition-all duration-300 mb-3 text-[0.9rem]";
     const content = (
       <>
-        <SafeIcon icon={FiArrowRight} className="text-[#FFC44F] opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
+        <SafeIcon icon={FiArrowRight} className="text-gold opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
         {children}
       </>
     );
@@ -36,9 +36,9 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[#0B1613] text-[#F9F9F7] relative overflow-hidden">
+    <footer className="bg-ink text-cream relative overflow-hidden">
       {/* Decorative background element */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#FFC44F] rounded-full blur-[150px] opacity-5 pointer-events-none translate-x-1/3 -translate-y-1/3"></div>
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gold rounded-full blur-[150px] opacity-5 pointer-events-none translate-x-1/3 -translate-y-1/3"></div>
 
       <motion.div 
         initial="hidden" 
@@ -48,7 +48,7 @@ export default function Footer() {
         className="max-w-[1145px] mx-auto px-6 py-24 flex flex-wrap gap-12 justify-between items-start relative z-10"
       >
         <motion.div variants={item} className="max-w-[24ch]">
-          <h5 className="font-serif italic uppercase text-[1rem] tracking-widest text-[#FFC44F] mb-4">
+          <h5 className="font-serif italic uppercase text-[1rem] tracking-widest text-gold mb-4">
             Upper Room Fellowship
           </h5>
           <p className="opacity-70 text-[0.95rem] leading-relaxed mb-8">
@@ -100,7 +100,7 @@ export default function Footer() {
       
       <div className="text-center text-[0.75rem] opacity-40 py-6 border-t border-white/10 flex flex-col items-center gap-2 relative z-10 bg-black/20">
         <div>&copy; {new Date().getFullYear()} Upper Room Fellowship. All rights reserved.</div>
-        <Link to="/admin" className="hover:text-[#FFC44F] transition-colors uppercase tracking-widest font-bold mt-2">Content Studio Login</Link>
+        <Link to="/admin" className="hover:text-gold transition-colors uppercase tracking-widest font-bold mt-2">Content Studio Login</Link>
       </div>
     </footer>
   );

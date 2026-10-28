@@ -39,9 +39,9 @@ export default function SermonDetail() {
   if (!live) return <NotFound what="message" />;
 
   return (
-    <div className="bg-[#F9F9F7] min-h-screen pt-32 pb-24 px-6">
+    <div className="bg-cream min-h-screen pt-32 pb-24 px-6">
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-[900px] mx-auto">
-        <Link to="/sermons" className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-[#8A6309] hover:text-black mb-8">
+        <Link to="/sermons" className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-gold-600 hover:text-black mb-8">
           <SafeIcon icon={FiArrowLeft} /> All Messages
         </Link>
         <div className="flex flex-wrap items-center gap-3 opacity-70 text-sm mb-6 uppercase tracking-wider font-bold">
@@ -49,7 +49,7 @@ export default function SermonDetail() {
           {live.speaker && <><span>•</span><span>{live.speaker}</span></>}
           {live.series && (
             <><span>•</span>
-              <Link className="text-[#8A6309] hover:underline" to={`/sermons?series=${encodeURIComponent(live.series)}`}>Series: {live.series}</Link>
+              <Link className="text-gold-600 hover:underline" to={`/sermons?series=${encodeURIComponent(live.series)}`}>Series: {live.series}</Link>
             </>
           )}
         </div>
@@ -64,7 +64,7 @@ export default function SermonDetail() {
           <audio controls preload="none" src={safeUrl(live.audio_url)} className="w-full mb-10" aria-label={`Audio for ${live.title}`} />
         )}
         {safeUrl(live.audio_url) && !embed && (
-          <a href={safeUrl(live.audio_url)} className="inline-flex items-center gap-2 font-bold text-[#8A6309] mb-10"><SafeIcon icon={FiHeadphones} /> Download audio</a>
+          <a href={safeUrl(live.audio_url)} className="inline-flex items-center gap-2 font-bold text-gold-600 mb-10"><SafeIcon icon={FiHeadphones} /> Download audio</a>
         )}
 
         {live.description && <RichText value={live.description} className="text-lg opacity-80 mb-12" />}

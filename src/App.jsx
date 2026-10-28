@@ -35,7 +35,7 @@ function ScrollToTop() {
 function Loading() {
   return (
     <div className="min-h-screen flex items-center justify-center" role="status" aria-label="Loading">
-      <div className="w-10 h-10 border-4 border-[#A6790F] border-t-transparent rounded-full animate-spin"></div>
+      <div className="w-10 h-10 border-4 border-gold-dark border-t-transparent rounded-full animate-spin"></div>
     </div>
   );
 }

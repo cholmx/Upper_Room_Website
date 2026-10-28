@@ -17,6 +17,7 @@ export default {
           deep: '#080c0b',
           900: '#0B1613',
           800: '#1A2E28',
+          700: '#11201B',
         },
         cream: {
           DEFAULT: '#F9F9F7',
@@ -29,6 +30,7 @@ export default {
           light: '#FFD27A',
           dark: '#A6790F',
           bronze: '#CCA866',
+          'bronze-dark': '#B59253',
           300: '#FFD27A',
           400: '#FFC44F',
           500: '#CCA866',

@@ -30,8 +30,8 @@ export default function CustomPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#F9F9F7] pt-32 flex flex-col items-center justify-center opacity-60">
-        <div className="w-12 h-12 border-4 border-[#A6790F] border-t-transparent rounded-full animate-spin mb-4"></div>
+      <div className="min-h-screen bg-cream pt-32 flex flex-col items-center justify-center opacity-60">
+        <div className="w-12 h-12 border-4 border-gold-dark border-t-transparent rounded-full animate-spin mb-4"></div>
         <p className="font-bold uppercase tracking-widest text-sm">Loading Page...</p>
       </div>
     );
@@ -39,7 +39,7 @@ export default function CustomPage() {
 
   if (!page) {
     return (
-      <div className="min-h-screen bg-[#F9F9F7] pt-40 px-6 text-center">
+      <div className="min-h-screen bg-cream pt-40 px-6 text-center">
         <div className="max-w-xl mx-auto bg-white p-12 rounded-3xl border border-black/5 shadow-sm">
           <div className="text-6xl mb-6">📄</div>
           <h2 className="text-3xl font-bold mb-4">Page Not Found</h2>
@@ -50,17 +50,17 @@ export default function CustomPage() {
   }
 
   return (
-    <div className="bg-[#F9F9F7] min-h-screen text-black pt-20 pb-32">
+    <div className="bg-cream min-h-screen text-black pt-20 pb-32">
       {/* Hero Banner */}
-      <div className="bg-[#0B1613] text-[#F9F9F7] py-24 px-6 text-center shadow-lg relative overflow-hidden">
+      <div className="bg-ink text-cream py-24 px-6 text-center shadow-lg relative overflow-hidden">
          {/* Subtle abstract background */}
          <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/9562304/pexels-photo-9562304.jpeg?auto=compress&cs=tinysrgb&h=1200')] bg-cover bg-center opacity-[0.08] mix-blend-overlay"></div>
-         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#FFC44F] rounded-full blur-[150px] opacity-10 pointer-events-none"></div>
+         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gold rounded-full blur-[150px] opacity-10 pointer-events-none"></div>
          
          <motion.div initial="hidden" animate="visible" variants={fadeUp} className="max-w-[800px] mx-auto relative z-10">
-           <span className="kicker text-[#FFC44F] mb-4 inline-block">Information</span>
+           <span className="kicker text-gold mb-4 inline-block">Information</span>
            <h1 className="text-4xl md:text-6xl mb-8 leading-tight">{page.title_text}</h1>
-           <div className="w-16 h-1 bg-[#FFC44F] mx-auto rounded-full opacity-50"></div>
+           <div className="w-16 h-1 bg-gold mx-auto rounded-full opacity-50"></div>
          </motion.div>
       </div>
 

@@ -78,9 +78,9 @@ export default function Home() {
 
   const sections = {
     campaign: (
-      <div key="campaign" className="text-center py-24 px-6 bg-gradient-to-b from-[#F9F9F7] to-white text-black border-b border-black/5 overflow-hidden">
+      <div key="campaign" className="text-center py-24 px-6 bg-gradient-to-b from-cream to-white text-black border-b border-black/5 overflow-hidden">
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp}>
-          <motion.span variants={slideInLeft} className="kicker text-[#8A6309]">Transforming Together</motion.span>
+          <motion.span variants={slideInLeft} className="kicker text-gold-600">Transforming Together</motion.span>
           <motion.h2 variants={slideInRight} className="text-4xl md:text-6xl max-w-[20ch] mx-auto mb-6">Growth Campaign</motion.h2>
           <div className="flex flex-wrap justify-center gap-4 mt-8">
             <a className="btn btn-solid group" href="https://www.urfellowship.com/transforming-together" target="_blank" rel="noopener noreferrer">
@@ -92,14 +92,14 @@ export default function Home() {
       </div>
     ),
     story: (
-      <div key="story" className="py-24 px-6 bg-[#0B1613] text-[#F9F9F7] relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#CCA866] rounded-full blur-[150px] opacity-10 translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
+      <div key="story" className="py-24 px-6 bg-ink text-cream relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gold-bronze rounded-full blur-[150px] opacity-10 translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
         
         <div className="max-w-[1145px] mx-auto grid md:grid-cols-2 gap-16 items-center relative z-10">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{
             visible: { transition: { staggerChildren: 0.1 } }
           }}>
-            <motion.span variants={slideInLeft} className="kicker text-[#FFC44F]">Welcome</motion.span>
+            <motion.span variants={slideInLeft} className="kicker text-gold">Welcome</motion.span>
             <motion.h2 variants={slideInLeft} className="text-4xl md:text-5xl mb-6 leading-tight">Welcome to the Upper Room Fellowship</motion.h2>
             <motion.p variants={slideInLeft} className="text-lg mb-6 opacity-80 leading-relaxed">For over 50 years, our congregation has been gathering in Columbiana to worship, grow, and serve together.</motion.p>
             <motion.p variants={slideInLeft} className="text-lg mb-10 opacity-80 leading-relaxed">Together, we're learning to live with more love, joy, and purpose. We support each other and reach out to make our community better.</motion.p>
@@ -119,28 +119,28 @@ export default function Home() {
             <div className="aspect-[4/5] md:aspect-square rounded-3xl overflow-hidden border border-white/10 shadow-2xl relative z-10">
               <img src="https://images.pexels.com/photos/38274945/pexels-photo-38274945.jpeg?auto=compress&cs=tinysrgb&h=1200" alt="Upper Room Fellowship congregation gathering for worship" loading="lazy" className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000" />
             </div>
-            <div className="absolute -bottom-6 -left-6 w-full h-full border-2 border-[#CCA866]/30 rounded-3xl z-0"></div>
+            <div className="absolute -bottom-6 -left-6 w-full h-full border-2 border-gold-bronze/30 rounded-3xl z-0"></div>
           </motion.div>
         </div>
       </div>
     ),
     statement: (
-      <div key="statement" className="text-center py-32 px-6 bg-[#CCA866] text-black relative overflow-hidden">
+      <div key="statement" className="text-center py-32 px-6 bg-gold-bronze text-black relative overflow-hidden">
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
           <motion.h2 variants={slideInLeft} className="text-4xl md:text-6xl lg:text-7xl max-w-[20ch] mx-auto leading-none">Know God.<br/>Share Life.<br/>Serve Others.</motion.h2>
         </motion.div>
       </div>
     ),
     wherewhen: (
-      <div key="wherewhen" className="py-24 px-6 bg-[#0B1613] text-white relative overflow-hidden">
+      <div key="wherewhen" className="py-24 px-6 bg-ink text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.2) 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0B1613] via-transparent to-[#0B1613] pointer-events-none"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-ink via-transparent to-ink pointer-events-none"></div>
 
         <div className="max-w-[1300px] mx-auto relative z-10">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{
             visible: { transition: { staggerChildren: 0.1 } }
           }} className="text-center md:text-left mb-12">
-            <motion.span variants={slideInLeft} className="kicker text-[#FFC44F]">Location Hub</motion.span>
+            <motion.span variants={slideInLeft} className="kicker text-gold">Location Hub</motion.span>
             <motion.h2 variants={slideInLeft} className="text-4xl md:text-5xl lg:text-6xl">Where & When</motion.h2>
           </motion.div>
 
@@ -149,17 +149,17 @@ export default function Home() {
               <div>
                 <h3 className="text-3xl md:text-5xl mb-4 font-bold leading-tight">{SITE.address.street}<br/><span className="text-white/50">{SITE.address.city}, {SITE.address.region}</span></h3>
                 <div className="flex flex-wrap items-center gap-4 mt-8">
-                  <div className="flex items-center gap-3 bg-[#FFC44F] text-black px-6 py-3 rounded-full font-bold">
+                  <div className="flex items-center gap-3 bg-gold text-black px-6 py-3 rounded-full font-bold">
                     <SafeIcon icon={FiClock} className="text-xl" /> {SITE.serviceTime}
                   </div>
                   <button onClick={handleCopy} className="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-full font-bold transition-colors">
-                    {copied ? <><SafeIcon icon={FiCheck} className="text-[#FFC44F]" /> Copied!</> : <><SafeIcon icon={FiCopy} /> Copy Address</>}
+                    {copied ? <><SafeIcon icon={FiCheck} className="text-gold" /> Copied!</> : <><SafeIcon icon={FiCopy} /> Copy Address</>}
                   </button>
                 </div>
               </div>
             </motion.div>
 
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="lg:col-span-4 bg-[#FFC44F] rounded-[2rem] p-8 text-black flex flex-col justify-end relative overflow-hidden min-h-[300px] group">
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="lg:col-span-4 bg-gold rounded-[2rem] p-8 text-black flex flex-col justify-end relative overflow-hidden min-h-[300px] group">
               <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
                 <iframe 
                   src={SITE.mapEmbedUrl}
@@ -168,25 +168,25 @@ export default function Home() {
                   referrerPolicy="no-referrer-when-downgrade"
                   title="Church Location Map"
                 ></iframe>
-                <div className="absolute inset-0 bg-[#FFC44F] mix-blend-color z-10 pointer-events-none"></div>
-                <div className="absolute inset-0 bg-[#FFC44F] opacity-40 mix-blend-multiply z-10 pointer-events-none"></div>
+                <div className="absolute inset-0 bg-gold mix-blend-color z-10 pointer-events-none"></div>
+                <div className="absolute inset-0 bg-gold opacity-40 mix-blend-multiply z-10 pointer-events-none"></div>
               </div>
 
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
-                <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center text-[#FFC44F] shadow-2xl scale-100 group-hover:scale-110 transition-transform duration-500">
+                <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center text-gold shadow-2xl scale-100 group-hover:scale-110 transition-transform duration-500">
                   <SafeIcon icon={FiMapPin} className="text-3xl" />
                 </div>
               </div>
               
               <div className="relative z-20 mt-auto w-full pt-32">
-                <a href={SITE.googleMapsUrl} target="_blank" rel="noopener noreferrer" className="bg-black text-[#FFC44F] w-full py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-black/90 transition-colors shadow-xl">
+                <a href={SITE.googleMapsUrl} target="_blank" rel="noopener noreferrer" className="bg-black text-gold w-full py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-black/90 transition-colors shadow-xl">
                   <SafeIcon icon={FiCompass} className="text-xl" /> Explore Area
                 </a>
               </div>
             </motion.div>
 
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="lg:col-span-6 bg-white/5 backdrop-blur-md border border-white/10 rounded-[2rem] p-8 flex flex-col justify-center">
-              <h4 className="text-xl font-bold mb-6 flex items-center gap-2"><SafeIcon icon={FiNavigation} className="text-[#FFC44F]" /> Get Directions</h4>
+              <h4 className="text-xl font-bold mb-6 flex items-center gap-2"><SafeIcon icon={FiNavigation} className="text-gold" /> Get Directions</h4>
               <div className="grid sm:grid-cols-2 gap-4">
                 <a href={SITE.googleMapsUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-between p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 transition-colors group">
                   <span className="font-bold">Google Maps</span>
@@ -199,7 +199,7 @@ export default function Home() {
               </div>
             </motion.div>
 
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.4 }} className="lg:col-span-6 bg-gradient-to-br from-[#CCA866] to-[#A6790F] rounded-[2rem] p-8 text-black flex flex-col justify-center">
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.4 }} className="lg:col-span-6 bg-gradient-to-br from-gold-bronze to-gold-dark rounded-[2rem] p-8 text-black flex flex-col justify-center">
               <h4 className="text-xl font-bold mb-3">Plenty of Parking</h4>
               <p className="opacity-90 leading-relaxed font-medium">When you arrive on campus, feel free to park anywhere in the main lot. Our welcome team will be at the front doors ready to greet you and help you find your way.</p>
             </motion.div>
@@ -216,7 +216,7 @@ export default function Home() {
             visible: { transition: { staggerChildren: 0.1 } }
           }} className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
             <div>
-              <motion.span variants={slideInLeft} className="kicker text-[#8A6309]">Insights & Updates</motion.span>
+              <motion.span variants={slideInLeft} className="kicker text-gold-600">Insights & Updates</motion.span>
               <motion.h2 variants={slideInLeft} className="text-4xl md:text-5xl">Latest Articles</motion.h2>
             </div>
             <Link to="/blog" className="btn btn-outline border-black/20 hover:border-black text-black hidden md:inline-flex group">
@@ -228,12 +228,12 @@ export default function Home() {
             <div className="grid md:grid-cols-3 gap-8">
               {latestPosts.map((post, i) => (
                 <motion.div key={post.id} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
-                  <Link to={`/blog/${post.id}`} className="bg-[#F9F9F7] border border-black/5 rounded-3xl overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group flex flex-col h-full">
-                    <div className="aspect-video bg-[#0B1613] relative overflow-hidden">
+                  <Link to={`/blog/${post.id}`} className="bg-cream border border-black/5 rounded-3xl overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group flex flex-col h-full">
+                    <div className="aspect-video bg-ink relative overflow-hidden">
                       {post.image_url ? (
                         <img src={post.image_url} alt={post.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                       ) : (
-                        <div className="absolute inset-0 flex items-center justify-center text-white/50 bg-gradient-to-br from-[#0B1613] to-[#1A2E28]">
+                        <div className="absolute inset-0 flex items-center justify-center text-white/50 bg-gradient-to-br from-ink to-ink-800">
                           <span className="font-serif text-2xl">Upper Room</span>
                         </div>
                       )}
@@ -244,12 +244,12 @@ export default function Home() {
                       )}
                     </div>
                     <div className="p-8 flex flex-col flex-grow">
-                      <div className="text-[10px] font-bold text-[#8A6309] uppercase tracking-wider mb-3">
+                      <div className="text-[10px] font-bold text-gold-600 uppercase tracking-wider mb-3">
                         {post.date ? formatDate(post.date) : formatDate(post.created_at)}
                       </div>
-                      <h3 className="text-2xl font-bold mb-3 group-hover:text-[#8A6309] transition-colors leading-tight">{post.title}</h3>
+                      <h3 className="text-2xl font-bold mb-3 group-hover:text-gold-600 transition-colors leading-tight">{post.title}</h3>
                       <p className="opacity-70 text-sm line-clamp-3 mb-6 flex-grow leading-relaxed">{plainText(post.body)}</p>
-                      <div className="text-xs font-bold uppercase tracking-wider text-[#8A6309] group-hover:text-black transition-colors mt-auto pt-4 border-t border-black/5 flex items-center">
+                      <div className="text-xs font-bold uppercase tracking-wider text-gold-600 group-hover:text-black transition-colors mt-auto pt-4 border-t border-black/5 flex items-center">
                         Read Article <SafeIcon icon={FiArrowRight} className="ml-2 transform group-hover:translate-x-1 transition-transform" />
                       </div>
                     </div>
@@ -258,7 +258,7 @@ export default function Home() {
               ))}
             </div>
           ) : (
-            <div className="text-center py-16 bg-[#F9F9F7] rounded-3xl border border-black/5 opacity-60">More articles coming soon.</div>
+            <div className="text-center py-16 bg-cream rounded-3xl border border-black/5 opacity-60">More articles coming soon.</div>
           )}
           
           <div className="mt-10 text-center md:hidden">
@@ -268,7 +268,7 @@ export default function Home() {
       </div>
     ),
     gallery: gallery.length === 0 ? null : (
-      <div key="gallery" className="py-24 px-6 bg-[#F9F9F7] text-black">
+      <div key="gallery" className="py-24 px-6 bg-cream text-black">
         <div className="max-w-[1145px] mx-auto">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{
             visible: { transition: { staggerChildren: 0.1 } }
@@ -284,7 +284,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, scale: 1 }} 
                 viewport={{ once: true }} 
                 transition={{ duration: 0.4, delay: idx * 0.05 }}
-                className="aspect-square bg-[#0B1613] overflow-hidden rounded-2xl border border-black/5 group"
+                className="aspect-square bg-ink overflow-hidden rounded-2xl border border-black/5 group"
               >
                 <img src={photo.image_url} alt={photo.caption || 'Upper Room Fellowship community photo'} loading="lazy" className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" />
               </motion.div>
@@ -300,7 +300,7 @@ export default function Home() {
             <div className="scrim"></div>
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{
               visible: { transition: { staggerChildren: 0.1 } }
-            }} className="relative z-10 text-[#F9F9F7] max-w-[800px] mx-auto">
+            }} className="relative z-10 text-cream max-w-[800px] mx-auto">
               <motion.h2 variants={slideInLeft} className="text-4xl md:text-6xl lg:text-7xl mb-6">{s.heading}</motion.h2>
               {s.subtext && <motion.p variants={slideInRight} className="font-serif italic text-2xl mb-10 opacity-90 leading-relaxed">{s.subtext}</motion.p>}
               {s.button_text && (
@@ -314,13 +314,13 @@ export default function Home() {
           </div>
         ))}
         {photoSections.length === 0 && (
-          <div className="py-32 px-6 text-center bg-[#FFC44F] text-black">
+          <div className="py-32 px-6 text-center bg-gold text-black">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{
               visible: { transition: { staggerChildren: 0.1 } }
             }} className="relative z-10">
               <motion.h2 variants={slideInLeft} className="text-4xl md:text-6xl mb-8">Join Us {SITE.serviceTime}</motion.h2>
               <motion.div variants={slideInRight}>
-                <Link to="/visit" className="btn btn-outline border-black text-black hover:bg-black hover:text-[#FFC44F] group">
+                <Link to="/visit" className="btn btn-outline border-black text-black hover:bg-black hover:text-gold group">
                   Plan Your Visit <SafeIcon icon={FiArrowRight} className="group-hover:translate-x-1 transition-transform" />
                 </Link>
               </motion.div>
@@ -335,11 +335,11 @@ export default function Home() {
 
   return (
     <div className="pt-20">
-      <div className="photo-section bg-[#0B1613] py-32 md:py-56 px-6 relative" style={{ backgroundImage: hero?.image_url ? `url('${hero.image_url}')` : 'none' }}>
+      <div className="photo-section bg-ink py-32 md:py-56 px-6 relative" style={{ backgroundImage: hero?.image_url ? `url('${hero.image_url}')` : 'none' }}>
         <div className="scrim"></div>
         <div className="max-w-[1145px] mx-auto relative z-10 text-white">
           <motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: "easeOut" }}>
-            <span className="kicker text-[#FFC44F] tracking-widest drop-shadow-md">Upper Room Fellowship</span>
+            <span className="kicker text-gold tracking-widest drop-shadow-md">Upper Room Fellowship</span>
             <h1 className="text-5xl md:text-7xl lg:text-8xl max-w-[18ch] mb-6 leading-[1.05] drop-shadow-lg">
               {hero?.heading || 'Transforming lives that transform communities'}
             </h1>
@@ -359,7 +359,7 @@ export default function Home() {
       </div>
       {loading && <Spinner label="Loading the home page" />}
       {error && !loading && (
-        <div className="bg-[#FFC44F]/20 border-y border-black/10 px-6 py-4 text-center">
+        <div className="bg-gold/20 border-y border-black/10 px-6 py-4 text-center">
           <p className="text-sm font-medium text-black/70 mb-2">Some sections didn't load.</p>
           <button onClick={retry} className="btn btn-solid text-sm py-2">Try Again</button>
         </div>

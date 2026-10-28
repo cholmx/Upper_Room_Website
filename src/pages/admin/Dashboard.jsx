@@ -12,7 +12,7 @@ import { useAuth } from '../../auth';
 const { FiTv, FiLayout, FiMic, FiCalendar, FiFileText, FiCamera, FiImage, FiLogOut, FiMenu, FiX, FiHeadphones, FiMail, FiSettings, FiList, FiActivity, FiUsers } = FiIcons;
 
 const NavItem = ({ icon, children, ...rest }) => (
-  <button {...rest} className="w-full flex items-center gap-4 px-4 py-3 text-left text-gray-300 hover:bg-[#CCA866] hover:text-black rounded-lg transition-colors duration-200">
+  <button {...rest} className="w-full flex items-center gap-4 px-4 py-3 text-left text-gray-300 hover:bg-gold-bronze hover:text-black rounded-lg transition-colors duration-200">
     <SafeIcon icon={icon} className="text-xl" />
     <span className="font-semibold">{children}</span>
   </button>
@@ -242,10 +242,10 @@ const ContentStudio = () => {
         variants={sidebarVariants}
         initial="open"
         animate={isSidebarOpen ? "open" : "closed"}
-        className={`w-72 bg-[#0B1613] text-white p-6 flex-col fixed lg:relative h-full z-50 lg:z-auto ${isSidebarOpen ? 'flex' : 'hidden'}`}
+        className={`w-72 bg-ink text-white p-6 flex-col fixed lg:relative h-full z-50 lg:z-auto ${isSidebarOpen ? 'flex' : 'hidden'}`}
       >
         <div className="flex items-center justify-between mb-10">
-            <h1 className="text-2xl font-bold text-white tracking-wider">Content <span className="text-[#CCA866]">Studio</span></h1>
+            <h1 className="text-2xl font-bold text-white tracking-wider">Content <span className="text-gold-bronze">Studio</span></h1>
             <button aria-label="Close menu" onClick={() => setIsSidebarOpen(false)} className="lg:hidden text-2xl text-gray-400 hover:text-white">
                 <SafeIcon icon={FiX} />
             </button>
