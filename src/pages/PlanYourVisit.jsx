@@ -17,7 +17,7 @@ export default function PlanYourVisit() {
         intro="We are glad you are here. Walking into a new church can feel intimidating, so this page covers a Sunday from the front door to the coffee line."
       >
         <Btn href={SITE.googleMapsUrl} variant="primary">Get Directions</Btn>
-        <Btn to="/connect" variant="light">Fill Out the Connect Card</Btn>
+        <Btn to="#connect-card" variant="light">Fill Out the Connect Card</Btn>
       </PageHeader>
 
       <Section tone="cream" className="!pb-0 md:!pb-0">
@@ -38,10 +38,10 @@ export default function PlanYourVisit() {
           <Steps
             items={[
               { title: 'When you arrive', body: <p>Friendly greeters will meet you at the doors, say hello, and help you find your way. If you have kids, they will point you to our secure check-in area.</p> },
-              { title: 'We worship together', body: <p>The morning starts with everyone in the same room, adults and children together. We sing contemporary worship songs with the lyrics on screen. Scripture readings are on screen too, so you do not need to bring a Bible. Stand, sit, or raise your hands, whichever feels natural.</p> },
+              { title: 'We worship together', body: <p>Everyone starts in the same room, adults and children together. We sing contemporary songs with the lyrics on screen, and Scripture is on screen too, so you do not need a Bible. Stand, sit, or raise your hands.</p> },
               { title: 'Coffee and connection', body: <p>After worship we take a short break for coffee and conversation. We never single out visitors or ask anyone to stand up and introduce themselves.</p> },
-              { title: 'The message', body: <p>Adults and teens stay in the sanctuary for the message. It is practical, rooted in the Bible, and meant to help with real life on Monday. Kids from birth through 5th grade are dismissed to their own programs right before the message begins.</p> },
-              { title: 'After the service', body: <p>The service usually ends {SITE.serviceEnds}. Our team is happy to talk, answer questions, or pray with you. Stop by the <Gloss k="connectionCenter" /> to meet some of us and pick up a small gift for first-time guests.</p> },
+              { title: 'The message', body: <p>Adults and teens stay for a practical, Bible-based message. Kids from birth through 5th grade go to their own programs right before it starts.</p> },
+              { title: 'After the service', body: <p>The service usually ends {SITE.serviceEnds}. Our team is happy to talk, answer questions, or pray with you. Stop by the <Gloss k="connectionCenter" /> to meet some of us.</p> },
             ]}
           />
         </div>
@@ -68,15 +68,15 @@ export default function PlanYourVisit() {
           <div>
             <SectionHeader kicker="Bringing kids" title="Your kids" className="!mb-5" />
             <div className="space-y-4 text-lg leading-relaxed text-black/80">
-              <p>Upper Room Kids welcomes children from birth through 5th grade. Kids worship with you at the start, then head to age-appropriate classes during the message. The nursery is open for the whole service for infants and toddlers, and a parent viewing room lets you follow the service while you keep an eye on a little one.</p>
-              <p>Every volunteer is background-checked and trained. Our check-in system makes sure only authorized adults can pick up your child.</p>
+              <p>Upper Room Kids welcomes children from birth through 5th grade. The nursery is open for the whole service.</p>
+              <p>Every volunteer is background-checked, and check-in makes sure only authorized adults can pick up your child.</p>
             </div>
             <div className="mt-6"><Btn to="/kids" variant="ghost">More about Upper Room Kids</Btn></div>
           </div>
           <div>
             <SectionHeader kicker="Accessibility" title="Everyone can take part" className="!mb-5" />
             <div className="space-y-4 text-lg leading-relaxed text-black/80">
-              <p>Our building is fully wheelchair accessible, with designated seating areas. If you have trouble hearing, our free Listen Everywhere app streams the service audio to your phone or tablet. Bring your own headphones. It works on iPhone and Android. If you have other needs, tell us ahead of time and we will do our best to help.</p>
+              <p>Our building is fully wheelchair accessible. If you have trouble hearing, the free Listen Everywhere app streams the service audio to your phone. Tell us ahead of time about any other needs.</p>
             </div>
             <div className="mt-6 flex flex-wrap gap-3">
               <Btn href={SITE.listenApps.apple} variant="ghost">Download on the App Store</Btn>
@@ -87,7 +87,9 @@ export default function PlanYourVisit() {
       </Section>
 
       <Section tone="cream">
-        <SectionHeader kicker="Come as you are" title="What to wear" intro="Come as you are. You will see everything from jeans to business casual." />
+        <SectionHeader kicker="Quick answers" title="Quick answers" />
+        <Accordion items={FAQ_PREVIEW} />
+        <div className="mt-8"><Btn to="/faq" variant="ghost">See all questions</Btn></div>
       </Section>
 
       <Section tone="sand" id="connect-card">
@@ -100,19 +102,6 @@ export default function PlanYourVisit() {
         </div>
       </Section>
 
-      <Section tone="cream">
-        <SectionHeader kicker="Quick answers" title="Quick answers" />
-        <Accordion items={FAQ_PREVIEW} />
-        <div className="mt-8"><Btn to="/faq" variant="ghost">See all questions</Btn></div>
-      </Section>
-
-      <Section tone="ink" narrow>
-        <div className="text-center">
-          <h2 className="text-3xl md:text-4xl">After your visit</h2>
-          <p className="mt-4 text-lg md:text-xl text-white/90 leading-relaxed">When you are ready, we would love to help you find a <Gloss k="tableGroups" />.</p>
-          <div className="mt-8"><Btn to="/table-groups" variant="primary">Explore Table Groups</Btn></div>
-        </div>
-      </Section>
     </>
   );
 }

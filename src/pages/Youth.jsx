@@ -1,6 +1,6 @@
 import React from 'react';
 import usePageMeta from '../hooks/usePageMeta';
-import { Btn, Section, SectionHeader, PageHeader, QuickFacts, Todo, EndCta } from '../components/ui';
+import { Btn, Section, SectionHeader, PageHeader, QuickFacts, Todo, AdminOnly, EndCta } from '../components/ui';
 
 export default function Youth() {
   usePageMeta('youth');
@@ -38,21 +38,14 @@ export default function Youth() {
       </Section>
 
       <Section tone="sand">
-        <div className="grid md:grid-cols-3 gap-8">
-          <div>
-            <h2 className="text-2xl mb-3">Contact</h2>
-            <p><Todo id="youth-leader">[YOUTH LEADER NAME, EMAIL, PHONE]</Todo></p>
-          </div>
-          <div>
-            <h2 className="text-2xl mb-3">For parents</h2>
-            <p><Todo id="youth-parents">[PERMISSION FORMS, SAFETY POLICY]</Todo></p>
-          </div>
-          <div>
-            <h2 className="text-2xl mb-3">Upcoming events</h2>
-            <p><Todo id="youth-events">[LIST]</Todo></p>
-            <p className="mt-3"><Btn to="/events" variant="ghost">See the calendar</Btn></p>
-          </div>
-        </div>
+        <AdminOnly>
+          <p className="mb-3 text-lg"><Todo id="youth-leader">[YOUTH LEADER NAME, EMAIL, PHONE]</Todo></p>
+          <p className="mb-3 text-lg"><Todo id="youth-parents">[PERMISSION FORMS, SAFETY POLICY]</Todo></p>
+          <p className="mb-3 text-lg"><Todo id="youth-events">[LIST]</Todo></p>
+        </AdminOnly>
+        <h2 className="text-2xl mb-3">Upcoming events</h2>
+        <p className="text-lg text-black/80 mb-5">Retreats and special nights are on the calendar.</p>
+        <Btn to="/events" variant="ghost">See the calendar</Btn>
       </Section>
 
       <EndCta title="Parents, your questions are welcome" text="Send us a message and we will help however we can." to="/contact" label="Send a message" />

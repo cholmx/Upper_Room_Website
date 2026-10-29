@@ -324,3 +324,5 @@ details.u-acc > summary .u-acc-icon { transition: transform 0.2s ease; }
 }
 
 html, body { overflow-x: clip; }
+
+p:empty { display: none; }

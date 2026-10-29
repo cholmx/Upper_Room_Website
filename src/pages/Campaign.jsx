@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import usePageMeta from '../hooks/usePageMeta';
 import { useSite } from '../settings';
 import { CAMPAIGN_FAQ } from '../content/campaign';
-import { Btn, Section, SectionHeader, PageHeader, Accordion, Photo, Todo } from '../components/ui';
+import { Btn, Section, SectionHeader, PageHeader, Accordion, Photo, Todo, AdminOnly } from '../components/ui';
 
 export default function Campaign() {
   usePageMeta('growth');
@@ -53,6 +53,7 @@ export default function Campaign() {
         <p className="mt-6"><Todo id="campaign-links">[CONFIRM WHICH GIVING LINK IS CORRECT FOR EACH BUTTON]</Todo></p>
       </Section>
 
+      <AdminOnly>
       <Section tone="cream">
         <div className="grid md:grid-cols-2 gap-10">
           <div>
@@ -65,6 +66,7 @@ export default function Campaign() {
           </div>
         </div>
       </Section>
+      </AdminOnly>
 
       <Section tone="sand" narrow>
         <SectionHeader title="Questions and answers" />

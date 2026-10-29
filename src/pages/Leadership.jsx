@@ -3,7 +3,7 @@ import usePageMeta from '../hooks/usePageMeta';
 import useFetch from '../hooks/useFetch';
 import { isLive } from '../utils';
 import { DEFAULT_LEADERS, HOW_WE_LEAD, LEADERS_AIM } from '../content/leaders';
-import { Section, SectionHeader, PageHeader, PhotoBox, Todo, EndCta } from '../components/ui';
+import { Section, SectionHeader, PageHeader, PhotoBox, Todo, AdminOnly, EndCta } from '../components/ui';
 import RichText from '../components/RichText';
 
 function Person({ p }) {
@@ -44,17 +44,21 @@ export default function Leadership() {
         <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {people.map(p => <Person key={p.id || p.name} p={p} />)}
           {fromAdmin.length === 0 && (
-            <li className="rounded-2xl border-2 border-dashed border-[#8A6309]/60 bg-white p-6 flex items-center justify-center text-center">
-              <Todo id="fifth-leader">[FIFTH PERSON: NAME AND TITLE, PHOTO SUPPLIED]</Todo>
-            </li>
+            <AdminOnly>
+              <li className="rounded-2xl border-2 border-dashed border-[#8A6309]/60 bg-white p-6 flex items-center justify-center text-center">
+                <Todo id="fifth-leader">[FIFTH PERSON: NAME AND TITLE, PHOTO SUPPLIED]</Todo>
+              </li>
+            </AdminOnly>
           )}
         </ul>
       </Section>
 
-      <Section tone="sand">
-        <SectionHeader kicker="Elders" title="Our elders" />
-        <p className="text-lg"><Todo id="elders">[LIST ELDER NAMES AND PHOTOS]</Todo></p>
-      </Section>
+      <AdminOnly>
+        <Section tone="sand">
+          <SectionHeader kicker="Elders" title="Our elders" />
+          <p className="text-lg"><Todo id="elders">[LIST ELDER NAMES AND PHOTOS]</Todo></p>
+        </Section>
+      </AdminOnly>
 
       <Section tone="cream">
         <SectionHeader kicker="How we lead" title="How we lead" />

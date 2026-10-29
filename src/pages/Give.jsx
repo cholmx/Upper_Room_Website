@@ -1,8 +1,7 @@
 import React from 'react';
 import usePageMeta from '../hooks/usePageMeta';
 import { useSite } from '../settings';
-import { Btn, Section, SectionHeader, PageHeader, Cards, Card, PhotoGrid, Todo } from '../components/ui';
-import FormBlock from '../components/FormBlock';
+import { Btn, Section, SectionHeader, PageHeader, Cards, Card, PhotoGrid, Todo, AdminOnly } from '../components/ui';
 
 export default function Give() {
   usePageMeta('give');
@@ -65,22 +64,14 @@ export default function Give() {
 
       <Section tone="sand">
         <SectionHeader kicker="Impact" title="Where your gift goes" intro="Your gifts mostly fund our local ministries, our building, our staff, and our outreach, with a portion going to missions." />
-        <ul className="space-y-3 text-lg">
-          <li><Todo id="impact-stories">[SHORT IMPACT STORY]</Todo></li>
-          <li><Todo id="impact-stories">[SHORT IMPACT STORY]</Todo></li>
-          <li><Todo id="impact-stories">[SHORT IMPACT STORY]</Todo></li>
-        </ul>
+        <AdminOnly>
+          <ul className="space-y-3 text-lg">
+            <li><Todo id="impact-stories">[SHORT IMPACT STORY]</Todo></li>
+            <li><Todo id="impact-stories">[SHORT IMPACT STORY]</Todo></li>
+            <li><Todo id="impact-stories">[SHORT IMPACT STORY]</Todo></li>
+          </ul>
+        </AdminOnly>
         <PhotoGrid slots={['give-impact-1', 'give-impact-2', 'give-impact-3']} className="mt-8 md:!grid-cols-3" />
-      </Section>
-
-      <Section tone="cream">
-        <div className="grid md:grid-cols-5 gap-10 items-start">
-          <div className="md:col-span-2">
-            <SectionHeader title="Generosity stories" className="!mb-4" />
-            <p className="text-lg leading-relaxed text-black/80">Has giving changed something for you? Share your story and it might encourage someone else.</p>
-          </div>
-          <div className="md:col-span-3"><FormBlock formKey="generosity" /></div>
-        </div>
       </Section>
 
       <Section tone="ink" narrow>

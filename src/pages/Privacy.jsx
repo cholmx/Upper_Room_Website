@@ -1,7 +1,7 @@
 import React from 'react';
 import usePageMeta from '../hooks/usePageMeta';
 import { useSite } from '../settings';
-import { Section, PageHeader, EndCta, Todo } from '../components/ui';
+import { Section, PageHeader, EndCta, Todo, AdminOnly } from '../components/ui';
 
 export default function Privacy() {
   usePageMeta('privacy');
@@ -25,7 +25,7 @@ export default function Privacy() {
           <p>We do not sell or rent your information, and we do not use it for advertising.</p>
           <h2 className={h}>Your choices</h2>
           <p>To see, correct, or delete information you sent us, email <a className="underline underline-offset-4 font-semibold text-[#8A6309]" href={`mailto:${SITE.email}`}>{SITE.email}</a> or call {SITE.phone}.</p>
-          <p className="text-base">Last updated: <Todo id="legal-review">[DATE]</Todo></p>
+          <AdminOnly><p className="text-base">Last updated: <Todo id="legal-review">[DATE]</Todo></p></AdminOnly>
         </div>
       </Section>
       <EndCta title="Questions about your information?" text="Ask us. We will answer plainly." to="/contact" label="Contact us" />

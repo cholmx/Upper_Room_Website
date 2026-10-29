@@ -24,20 +24,15 @@ const Ministries = lazy(() => import('./pages/Ministries'));
 const Kids = lazy(() => import('./pages/Kids'));
 const Youth = lazy(() => import('./pages/Youth'));
 const TableGroups = lazy(() => import('./pages/TableGroups'));
-const WorshipTeam = lazy(() => import('./pages/WorshipTeam'));
 const Serve = lazy(() => import('./pages/Serve'));
-const Outreach = lazy(() => import('./pages/Outreach'));
 const Sozo = lazy(() => import('./pages/Sozo'));
 const CarePortal = lazy(() => import('./pages/CarePortal'));
 const Events = lazy(() => import('./pages/Events'));
 const EventDetail = lazy(() => import('./pages/EventDetail'));
-const Prayer = lazy(() => import('./pages/Prayer'));
-const Stories = lazy(() => import('./pages/Stories'));
 const FAQPage = lazy(() => import('./pages/FAQ'));
 const Give = lazy(() => import('./pages/Give'));
 const Campaign = lazy(() => import('./pages/Campaign'));
 const Contact = lazy(() => import('./pages/Contact'));
-const Connect = lazy(() => import('./pages/Connect'));
 const Accessibility = lazy(() => import('./pages/Accessibility'));
 const Privacy = lazy(() => import('./pages/Privacy'));
 const Blog = lazy(() => import('./pages/Blog'));
@@ -112,9 +107,9 @@ export default function App() {
           ['/', Home], ['/plan-your-visit', PlanYourVisit], ['/about', About], ['/beliefs', Beliefs], ['/core-values', CoreValues],
           ['/leadership', Leadership], ['/messages', Messages], ['/messages/series/:series', MessageSeries], ['/messages/:slug', MessageDetail],
           ['/next-steps', NextSteps], ['/ministries', Ministries], ['/kids', Kids], ['/youth', Youth], ['/table-groups', TableGroups],
-          ['/worship-team', WorshipTeam], ['/serve', Serve], ['/outreach', Outreach], ['/sozo', Sozo], ['/careportal', CarePortal],
-          ['/events', Events], ['/events/:id', EventDetail], ['/prayer', Prayer], ['/stories', Stories], ['/faq', FAQPage],
-          ['/give', Give], ['/transforming-together', Campaign], ['/contact', Contact], ['/connect', Connect],
+          ['/serve', Serve], ['/sozo', Sozo], ['/careportal', CarePortal],
+          ['/events', Events], ['/events/:id', EventDetail], ['/faq', FAQPage],
+          ['/give', Give], ['/transforming-together', Campaign], ['/contact', Contact],
           ['/accessibility', Accessibility], ['/privacy', Privacy], ['/blog', Blog], ['/blog/:id', BlogPost], ['/p/:slug', CustomPage],
         ].map(([path, Page]) => (
           <Route key={path} path={path} element={<PublicLayout><Page /></PublicLayout>} />
@@ -126,6 +121,11 @@ export default function App() {
         <Route path="/sermons/:id" element={<SermonRedirect />} />
         <Route path="/team" element={<Navigate to="/leadership" replace />} />
         <Route path="/podcasts" element={<Navigate to="/messages" replace />} />
+        <Route path="/worship-team" element={<Navigate to="/serve#worship" replace />} />
+        <Route path="/outreach" element={<Navigate to="/ministries#outreach" replace />} />
+        <Route path="/prayer" element={<Navigate to="/contact#prayer" replace />} />
+        <Route path="/stories" element={<Navigate to="/about#stories" replace />} />
+        <Route path="/connect" element={<Navigate to="/plan-your-visit#connect-card" replace />} />
 
         <Route path="*" element={<PublicLayout><NotFoundPage /></PublicLayout>} />
       </Routes>

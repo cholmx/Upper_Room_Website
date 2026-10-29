@@ -1,7 +1,43 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+import useFetch from '../hooks/useFetch';
+import { isLive } from '../utils';
+import RichText from '../components/RichText';
 import usePageMeta from '../hooks/usePageMeta';
-import { Btn, Section, SectionHeader, PageHeader, Split, Todo, EndCta } from '../components/ui';
+import { Btn, Section, SectionHeader, PageHeader, PhotoBox, Split, Todo, AdminOnly, EndCta } from '../components/ui';
 import { SITE } from '../config';
+
+function Stories() {
+  const { data } = useFetch('read/stories_church?sort=created_at:desc');
+  const stories = useMemo(() => (data ?? []).filter(isLive), [data]);
+  return (
+    <>
+      {stories.length > 0 && (
+        <Section tone="sand" id="stories">
+          <SectionHeader kicker="Stories" title="Stories from our church family" intro="These are real stories from people who call this place home. Each one is shared with permission." />
+          <ul className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {stories.map(s => (
+              <li key={s.id} className="bg-white rounded-2xl border border-black/10 overflow-hidden flex flex-col">
+                <PhotoBox src={s.photo_url} alt={s.name ? `Photo of ${s.name}` : ''} label={`${s.name || 'story'} photo`} ratio="aspect-[4/3]" rounded={false} />
+                <div className="p-6 flex flex-col flex-grow">
+                  <blockquote className="text-xl leading-snug">“{s.quote}”</blockquote>
+                  {s.name && <p className="mt-3 font-semibold text-[#8A6309]">{s.name}</p>}
+                  {s.body && (
+                    <details className="mt-4 u-acc">
+                      <summary className="cursor-pointer list-none min-h-[44px] flex items-center font-semibold underline underline-offset-4 text-[#8A6309]">Read more</summary>
+                      <RichText value={s.body} className="mt-3" />
+                    </details>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-8"><Btn to="/contact#story" variant="ghost">Share your story</Btn></p>
+        </Section>
+      )}
+      {stories.length === 0 && <AdminOnly><Section tone="sand"><Todo id="stories">[ADD 3 TO 5 SHORT STORIES WITH WRITTEN PERMISSION. They appear here once published in the admin.]</Todo></Section></AdminOnly>}
+    </>
+  );
+}
 
 export default function About() {
   usePageMeta('about');
@@ -28,9 +64,11 @@ export default function About() {
             <p className="text-2xl font-bold">1971</p>
             <p className="text-lg text-black/80">A small group meets above a veterinarian’s office in Columbiana.</p>
           </li>
-          <li>
-            <p className="text-2xl font-bold"><Todo id="milestones">[ADD KEY MILESTONES AND DATES FOR EACH BUILDING EXPANSION]</Todo></p>
-          </li>
+          <AdminOnly>
+            <li>
+              <p className="text-2xl font-bold"><Todo id="milestones">[ADD KEY MILESTONES AND DATES FOR EACH BUILDING EXPANSION]</Todo></p>
+            </li>
+          </AdminOnly>
           <li>
             <p className="text-2xl font-bold">Today</p>
             <p className="text-lg text-black/80">A growing church family at {SITE.address.street}, planning for what comes next.</p>
@@ -68,6 +106,8 @@ export default function About() {
           </blockquote>
         </div>
       </Section>
+
+      <Stories />
 
       <Section tone="cream">
         <SectionHeader kicker="Leadership" title="Meet our leaders" intro="A team of elders and pastors shares the work of teaching, spiritual oversight, and caring for people here." />

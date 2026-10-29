@@ -16,17 +16,11 @@ export const NAV = [
       { label: 'Kids', to: '/kids' },
       { label: 'Youth', to: '/youth' },
       { label: 'Table Groups', to: '/table-groups' },
-      { label: 'Worship and Creative', to: '/worship-team' },
       { label: 'Serve', to: '/serve' },
-      { label: 'Outreach and Missions', to: '/outreach' },
-      { label: 'Sozo', to: '/sozo' },
-      { label: 'CarePortal', to: '/careportal' },
     ],
   },
   { label: 'Messages', to: '/messages' },
-  { label: 'Next Steps', to: '/next-steps' },
   { label: 'Events', to: '/events' },
-  { label: 'Contact', to: '/contact' },
 ];
 
 // Short site map for the footer.
@@ -37,8 +31,7 @@ export const FOOTER_LINKS = [
   { label: 'Messages', to: '/messages' },
   { label: 'Next Steps', to: '/next-steps' },
   { label: 'Events', to: '/events' },
-  { label: 'Prayer', to: '/prayer' },
-  { label: 'Stories', to: '/stories' },
+  { label: 'Prayer', to: '/contact#prayer' },
   { label: 'Questions', to: '/faq' },
   { label: 'Contact', to: '/contact' },
 ];

@@ -22,7 +22,7 @@ export default function Beliefs() {
       <PageHeader
         kicker="What we believe"
         title="What we believe"
-        intro="We hold a short list of beliefs tightly and give each other room to grow on the rest. Love holds us together. Each section below begins with a plain-English line, followed by our full statement."
+        intro="We hold a short list of beliefs tightly and give each other room to grow on the rest. Love holds us together. Each topic below starts with a plain-English line."
       />
       <Section tone="cream" narrow>
         <nav aria-label="Topics on this page" className="bg-white rounded-2xl border border-black/10 p-6 mb-10">

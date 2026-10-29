@@ -3,12 +3,14 @@ import usePageMeta from '../hooks/usePageMeta';
 import { Btn, Section, SectionHeader, PageHeader, Accordion, Todo, Steps, QuickFacts } from '../components/ui';
 import FormBlock from '../components/FormBlock';
 import { useSite } from '../settings';
+import { useAuth } from '../auth';
 
 const PASTE = (id, what) => <p><Todo id={id}>[PASTE THE EXISTING SOZO TEXT: {what}]</Todo></p>;
 
 export default function Sozo() {
   usePageMeta('sozo');
   const SITE = useSite();
+  const staff = Boolean(useAuth()?.user);
   return (
     <>
       <PageHeader
@@ -30,9 +32,9 @@ export default function Sozo() {
 
       <Section tone="cream">
         <div className="grid md:grid-cols-2 gap-10">
-          <div><SectionHeader title="What is Sozo" className="!mb-4" />{PASTE('sozo-text', 'What is Sozo, with the Matthew 9:22 passage')}</div>
-          <div><SectionHeader title="Biblical foundation" className="!mb-4" />{PASTE('sozo-text', 'Biblical foundation')}</div>
-          <div><SectionHeader title="Our approach" className="!mb-4" />{PASTE('sozo-text', 'Our approach')}</div>
+          {staff && <div><SectionHeader title="What is Sozo" className="!mb-4" />{PASTE('sozo-text', 'What is Sozo, with the Matthew 9:22 passage')}</div>}
+          {staff && <div><SectionHeader title="Biblical foundation" className="!mb-4" />{PASTE('sozo-text', 'Biblical foundation')}</div>}
+          {staff && <div><SectionHeader title="Our approach" className="!mb-4" />{PASTE('sozo-text', 'Our approach')}</div>}
           <div>
             <SectionHeader title="Our Sozo tools" className="!mb-4" />
             <ul className="list-disc pl-6 space-y-1 text-lg">
@@ -49,10 +51,9 @@ export default function Sozo() {
         <SectionHeader title="How to begin" />
         <div className="max-w-3xl">
           <Steps items={[
-            { title: 'Step 1', body: PASTE('sozo-text', 'step 1') },
+            ...(staff ? [{ title: 'Step 1', body: PASTE('sozo-text', 'step 1') }] : []),
             { title: 'Reach out', body: <p>Fill out the form below and our Sozo coordinator will contact you within 3 to 5 business days. You can also email <a className="underline underline-offset-4 font-semibold" href={`mailto:${SITE.email}`}>{SITE.email}</a> with your name, phone number, and best times to reach you. Your inquiry is confidential and handled with care.</p> },
-            { title: 'Step 3', body: PASTE('sozo-text', 'step 3') },
-            { title: 'Step 4', body: PASTE('sozo-text', 'step 4') },
+            ...(staff ? [{ title: 'Step 3', body: PASTE('sozo-text', 'step 3') }, { title: 'Step 4', body: PASTE('sozo-text', 'step 4') }] : []),
           ]} />
         </div>
       </Section>
@@ -66,7 +67,7 @@ export default function Sozo() {
           { id: 'q-who', title: 'Who can receive Sozo?', content: <p>Sozo is open to members and non-members.</p> },
           { id: 'q-private', title: 'Is it confidential?', content: <p>Yes. What you share is kept confidential, except where we are legally required to report.</p> },
           { id: 'q-counsel', title: 'Is Sozo counseling?', content: <p>No. Sozo does not replace professional counseling or medical care.</p> },
-          { id: 'q-more', title: 'Other questions', content: PASTE('sozo-text', 'the rest of the FAQ') },
+          ...(staff ? [{ id: 'q-more', title: 'Other questions', content: PASTE('sozo-text', 'the rest of the FAQ') }] : []),
         ]} />
       </Section>
 

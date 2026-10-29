@@ -7,14 +7,14 @@ const GENERAL = PX(9562304);
 
 export const HERO_IMAGES = {
   home: PX(38274945),
-  plan: VISIT, connect: VISIT, contact: VISIT, faq: VISIT,
+  plan: VISIT, contact: VISIT, faq: VISIT,
   about: ABOUT, beliefs: ABOUT, values: ABOUT, growth: ABOUT,
   leadership: PX(3184393),
   messages: PX(34328505),
   events: PX(39007872),
-  ministries: MINISTRY, kids: MINISTRY, youth: MINISTRY, tableGroups: MINISTRY, worship: MINISTRY, serve: MINISTRY,
-  outreach: MINISTRY, careportal: MINISTRY, nextSteps: MINISTRY,
-  sozo: GENERAL, prayer: GENERAL, stories: GENERAL, give: GENERAL, accessibility: GENERAL, privacy: GENERAL,
+  ministries: MINISTRY, kids: MINISTRY, youth: MINISTRY, tableGroups: MINISTRY, serve: MINISTRY,
+  careportal: MINISTRY, nextSteps: MINISTRY,
+  sozo: GENERAL, give: GENERAL, accessibility: GENERAL, privacy: GENERAL,
   blog: PX(6779632),
 };
 

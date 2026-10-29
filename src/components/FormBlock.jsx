@@ -8,8 +8,8 @@ export const SUBMISSIONS_TABLE = 'form_submissions_church';
 
 const input = 'w-full min-h-[48px] px-4 py-3 bg-white rounded-xl border border-black/25 focus:outline-none focus:ring-2 focus:ring-[#8A6309] focus:border-[#8A6309] text-base';
 
-function Field({ field, value, onChange, error }) {
-  const id = `ff-${field.name}`;
+function Field({ formKey, field, value, onChange, error }) {
+  const id = `ff-${formKey}-${field.name}`;
   const describedBy = error ? `${id}-err` : undefined;
   const common = { id, name: field.name, 'aria-invalid': Boolean(error), 'aria-describedby': describedBy, required: field.required };
 
@@ -118,7 +118,7 @@ export default function FormBlock({ formKey, heading, intro, defaults = {}, clas
     const found = validateForm(formKey, values);
     if (Object.keys(found).length) {
       setErrors(found);
-      formRef.current?.querySelector(`#ff-${Object.keys(found)[0]}, [name="${Object.keys(found)[0]}"]`)?.focus();
+      formRef.current?.querySelector(`#ff-${formKey}-${Object.keys(found)[0]}, [name="${Object.keys(found)[0]}"]`)?.focus();
       return;
     }
     setState({ phase: 'sending', error: '' });
@@ -145,7 +145,7 @@ export default function FormBlock({ formKey, heading, intro, defaults = {}, clas
       {heading && <h2 id={headingId} className="text-2xl md:text-3xl">{heading}</h2>}
       {intro && <p className="text-black/80 leading-relaxed">{intro}</p>}
       {def.fields.filter(f => isVisible(f, values)).map(f => (
-        <Field key={f.name} field={f} value={values[f.name]} onChange={change} error={errors[f.name]} />
+        <Field key={f.name} formKey={formKey} field={f} value={values[f.name]} onChange={change} error={errors[f.name]} />
       ))}
       {/* Honeypot: hidden from people and screen readers */}
       <div aria-hidden="true" className="absolute -left-[9999px] h-0 overflow-hidden">

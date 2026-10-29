@@ -30,11 +30,11 @@ npm run dev
 | `/about`, `/beliefs`, `/core-values`, `/leadership` | Story, accordion of beliefs, six core values, leaders |
 | `/messages`, `/messages/series/:series`, `/messages/:id-title` | Sermon library, series, and message pages |
 | `/next-steps` | Eight next steps, with forms that open in place |
-| `/ministries`, `/kids`, `/youth`, `/table-groups`, `/worship-team`, `/serve`, `/outreach`, `/sozo`, `/careportal` | Ministries |
+| `/ministries` (includes outreach and missions), `/kids`, `/youth`, `/table-groups`, `/serve` (includes worship and creative teams), `/sozo`, `/careportal` | Ministries |
 | `/events`, `/events/:id` | List and month calendar, ministry filter, Add to Calendar |
-| `/prayer`, `/stories`, `/faq` | Prayer form, member stories, questions |
+| `/faq` | Questions. Prayer requests and story sharing live on `/contact`; published stories show on `/about` |
 | `/give`, `/transforming-together` | Giving and the Growth Campaign |
-| `/contact`, `/connect`, `/accessibility`, `/privacy` | Contact, Connect Card, policies |
+| `/contact`, `/accessibility`, `/privacy` | Contact, policies. The Connect Card is on `/plan-your-visit#connect-card` |
 
 Old addresses (`/visit`, `/sermons`, `/team`, `/podcasts`) redirect to the new ones. The blog and custom pages
 (`/blog`, `/p/your-slug`) still work but are not in the menu.
@@ -98,7 +98,7 @@ fields). Public pages still load.
 | `form_submissions_church` | Every public form: `form_type`, `name`, `email`, `phone`, `data`, `handled` |
 | `site_photos_church` | Photo slots: `slot_key`, `image_url`, `alt_text` |
 | `table_groups_church` | Group finder: `name`, `day`, `time_of_day`, `area`, `life_stage`, `status`, `description`, `published` |
-| `stories_church` | `/stories`: `name`, `quote`, `body`, `photo_url`, `published` |
+| `stories_church` | shown on `/about`: `name`, `quote`, `body`, `photo_url`, `published` |
 | `launch_checklist_church` | Which Content to Confirm items are done |
 | `staff_church` | Leadership page |
 | `sermons` | Messages. New columns: `scripture`, `topic`, `notes_url`, `series_image_url` |
@@ -144,3 +144,6 @@ an error are skipped.
 
 The app uses client-side routing, so the host must serve `index.html` for unknown paths. `public/_redirects` covers
 Netlify and Cloudflare Pages. Other hosts need an equivalent rewrite.
+
+
+Old addresses `/worship-team`, `/outreach`, `/prayer`, `/stories` and `/connect` redirect to the pages that now hold that content. Unfinished placeholders show only to signed-in staff.

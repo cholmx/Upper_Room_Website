@@ -1,11 +1,13 @@
 import React from 'react';
 import usePageMeta from '../hooks/usePageMeta';
 import { useSite } from '../settings';
+import { useAuth } from '../auth';
 import { Btn, Section, SectionHeader, PageHeader, Steps, Cards, Card, Todo, EndCta } from '../components/ui';
 
 export default function CarePortal() {
   usePageMeta('careportal');
   const SITE = useSite();
+  const staff = Boolean(useAuth()?.user);
   return (
     <>
       <PageHeader
@@ -21,8 +23,10 @@ export default function CarePortal() {
         <div className="max-w-3xl">
           <Steps items={[
             { title: 'Uncovering real needs', body: <><p>Teachers, social workers, and other community workers see which children and families are in crisis.</p><p><Todo id="careportal-text">[PASTE THE CAREPORTAL TEXT FOR THIS STEP]</Todo></p></> },
-            { title: 'Sharing verified requests', body: <p><Todo id="careportal-text">[PASTE THE CAREPORTAL TEXT FOR THIS STEP]</Todo></p> },
-            { title: 'Connecting needs with our church', body: <p><Todo id="careportal-text">[PASTE THE CAREPORTAL TEXT FOR THIS STEP]</Todo></p> },
+            ...(staff ? [
+              { title: 'Sharing verified requests', body: <p><Todo id="careportal-text">[PASTE THE CAREPORTAL TEXT FOR THIS STEP]</Todo></p> },
+              { title: 'Connecting needs with our church', body: <p><Todo id="careportal-text">[PASTE THE CAREPORTAL TEXT FOR THIS STEP]</Todo></p> },
+            ] : []),
             { title: 'Our church family responds', body: <p>Our church family responds with beds, appliances, rides, mentoring, and more. Over half of CarePortal requests get a response within 48 hours.</p> },
           ]} />
         </div>

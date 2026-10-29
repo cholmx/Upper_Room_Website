@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import usePageMeta from '../hooks/usePageMeta';
 import { useSite } from '../settings';
 import { Btn, Section, PageHeader, Gloss, Todo, EndCta } from '../components/ui';
@@ -71,16 +72,10 @@ export default function NextSteps() {
           <StepCard n={5} title="Serve on a team" action={<Btn to="/serve" variant="ghost">Find a team</Btn>}>
             <p>Everyone has a gift to give. Find a team that fits yours.</p>
           </StepCard>
-          <StepCard n={6} title="Experience Sozo" action={<Btn to="/sozo" variant="ghost">Learn about Sozo</Btn>}>
-            <p><Gloss k="sozo" /> It is a gentle time to ask God about the places where you feel stuck.</p>
-          </StepCard>
-          <StepCard n={7} title="Talk with a pastor" action={<Btn to="/contact" variant="ghost">Send a message</Btn>}>
-            <p>Have questions, need prayer, or want to talk? Send a message and a pastor will reply.</p>
-          </StepCard>
-          <StepCard n={8} title="Give" action={<Btn href={SITE.giveUrl} variant="ghost">Give online</Btn>}>
-            <p>Your generosity helps us change lives in Columbiana and beyond.</p>
-          </StepCard>
         </ol>
+        <p className="mt-10 text-lg leading-relaxed text-black/80 max-w-3xl">
+          There are other ways in, too. You can <Link className="underline underline-offset-4 font-semibold text-[#8A6309]" to="/sozo">ask about Sozo</Link>, <Link className="underline underline-offset-4 font-semibold text-[#8A6309]" to="/contact">talk with a pastor</Link>, or <a className="underline underline-offset-4 font-semibold text-[#8A6309]" href={SITE.giveUrl}>give online</a>.
+        </p>
       </Section>
       <EndCta title="Not sure where to start?" text="Start with a Sunday. Everything else gets easier once you know a few faces." to="/plan-your-visit" label="Plan Your Visit" />
     </>

@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect } from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { usePhoto, usePhotoUrls } from '../../photos';
@@ -6,6 +6,7 @@ import { imgUrl, safeUrl } from '../../utils';
 import { GLOSSARY } from '../../content/glossary';
 import { HERO_IMAGES } from '../../content/photos';
 import { SEO_ROUTES } from '../../content/seo';
+import { useAuth } from '../../auth';
 
 const isExternal = (to) => /^(https?:|mailto:|tel:|sms:)/i.test(to);
 
@@ -74,10 +75,11 @@ export function SectionHeader({ kicker, title, intro, center = false, as: Tag = 
 // A real photo when one is set. Nothing shows until then, so there are no empty boxes.
 export function Photo({ slot, className = '', ratio = 'aspect-[4/3]', priority = false, rounded = true }) {
   const { url, alt } = usePhoto(slot);
-  if (!url) return null;
+  const [failed, setFailed] = useState(null);
+  if (!url || failed === url) return null;
   return (
     <div className={`${ratio} ${rounded ? 'rounded-3xl' : ''} overflow-hidden border border-black/5 shadow-xl bg-[#0B1613] ${className}`}>
-      <img src={url} alt={alt} loading={priority ? 'eager' : 'lazy'} decoding="async" className="w-full h-full object-cover" />
+      <img src={url} alt={alt} loading={priority ? 'eager' : 'lazy'} decoding="async" onError={() => setFailed(url)} className="w-full h-full object-cover" />
     </div>
   );
 }
@@ -251,8 +253,15 @@ export function EndCta({ title, text, to, href, label }) {
   );
 }
 
-// A visible reminder that something still needs a real answer from the church.
+// Staff see these reminders while signed in. Visitors never see an unfinished placeholder.
+export function AdminOnly({ children }) {
+  const user = useAuth()?.user;
+  return user ? <>{children}</> : null;
+}
+
 export function Todo({ id, children }) {
+  const user = useAuth()?.user;
+  if (!user) return null;
   return (
     <span data-todo={id} className="inline bg-[#FFF3C4] text-[#5c4306] border border-dashed border-[#8A6309] rounded px-1.5 py-0.5 text-[0.95em] font-semibold normal-case tracking-normal not-italic">
       {children}
@@ -263,10 +272,14 @@ export function Todo({ id, children }) {
 // Names a church term and explains it in plain words the first time it appears on a page.
 export function Gloss({ k, children }) {
   const g = GLOSSARY[k];
+  const user = useAuth()?.user;
+  const note = g.todo && user;
   return (
     <>
-      <strong>{children || g.term}</strong>{' '}
-      <span>({g.plain}{g.plain && g.todo ? ' ' : ''}{g.todo && <Todo id={g.todo}>{g.todoText}</Todo>})</span>
+      <strong>{children || g.term}</strong>
+      {(g.plain || note) && (
+        <span>{' '}({g.plain}{g.plain && note ? ' ' : ''}{note && <Todo id={g.todo}>{g.todoText}</Todo>})</span>
+      )}
     </>
   );
 }

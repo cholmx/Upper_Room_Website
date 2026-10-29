@@ -5,7 +5,7 @@ import useFetch from '../hooks/useFetch';
 import { downloadIcs, expandEvents, formatDate, isLive, safeUrl } from '../utils';
 import { plainText } from '../lib/markdown';
 import { MINISTRY_FILTERS, RECURRING_EVENTS } from '../content/events';
-import { Btn, Section, PageHeader, EndCta, Todo, PhotoBox } from '../components/ui';
+import { Btn, Section, PageHeader, EndCta, Todo, AdminOnly, PhotoBox } from '../components/ui';
 import { Spinner } from '../components/StateViews';
 
 const todayIso = () => new Date().toISOString().slice(0, 10);
@@ -111,6 +111,7 @@ export default function Events() {
   usePageMeta('events');
   const { data, loading } = useFetch('read/events_church?sort=date:asc');
   const [view, setView] = useState('list');
+  const [showAll, setShowAll] = useState(false);
   const [ministry, setMinistry] = useState('');
   const [cursor, setCursor] = useState(() => { const n = new Date(); return new Date(n.getFullYear(), n.getMonth(), 1); });
 
@@ -161,12 +162,15 @@ export default function Events() {
             )}
             {rest.length === 0 ? <p className="text-lg">Nothing else is on the calendar yet. Check back soon or follow us on Facebook and Instagram.</p> : (
               <ul className="space-y-5">
-                {rest.map(e => <li key={`${e.id}-${e.occurrence_date}`}><EventCard e={e} /></li>)}
+                {rest.slice(0, showAll ? rest.length : 6).map(e => <li key={`${e.id}-${e.occurrence_date}`}><EventCard e={e} /></li>)}
               </ul>
             )}
           </>
         )}
-        <p className="mt-8"><Todo id="events-other">[ADD OTHER EVENTS]</Todo></p>
+        {view !== 'month' && rest.length > 6 && !showAll && (
+          <div className="mt-8"><button type="button" className="btn btn-outline" onClick={() => setShowAll(true)}>Show all {rest.length} events</button></div>
+        )}
+        <AdminOnly><p className="mt-8"><Todo id="events-other">[ADD OTHER EVENTS]</Todo></p></AdminOnly>
       </Section>
       <EndCta title="Come to Sunday" text="Our weekly gathering is the easiest place to start." to="/plan-your-visit" label="Plan Your Visit" />
     </>
