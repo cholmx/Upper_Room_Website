@@ -4,7 +4,7 @@ import { uploadImage, uploadsEnabled } from '../../lib/upload';
 import RichText from '../../components/RichText';
 
 const base = 'w-full px-4 py-3 bg-gray-50 rounded-lg border focus:outline-none focus:ring-1 transition';
-const ok = 'border-gray-200 focus:border-gold-bronze focus:ring-gold-bronze';
+const ok = 'border-gray-200 focus:border-[#CCA866] focus:ring-[#CCA866]';
 const bad = 'border-red-400 focus:border-red-500 focus:ring-red-500';
 
 export const isChecked = (v, fallback = false) => {
@@ -38,7 +38,7 @@ function ImageField({ id, value, onChange, invalid }) {
         {uploadsEnabled && (
           <>
             <input ref={fileRef} type="file" accept="image/*" className="sr-only" onChange={pick} aria-label="Upload image file" tabIndex={-1} />
-            <button type="button" onClick={() => fileRef.current?.click()} disabled={busy} className="px-5 rounded-lg bg-ink text-white font-bold whitespace-nowrap disabled:opacity-60">
+            <button type="button" onClick={() => fileRef.current?.click()} disabled={busy} className="px-5 rounded-lg bg-[#0B1613] text-white font-bold whitespace-nowrap disabled:opacity-60">
               {busy ? 'Uploading...' : 'Upload'}
             </button>
           </>
@@ -121,7 +121,7 @@ export default function FieldInput({ field, value, onChange, error }) {
     case 'checkbox':
       control = (
         <label className="inline-flex items-center gap-3 cursor-pointer">
-          <input id={id} type="checkbox" checked={isChecked(value, field.defaultChecked)} onChange={(e) => set(e.target.checked ? 1 : 0)} className="w-5 h-5 accent-gold-bronze" />
+          <input id={id} type="checkbox" checked={isChecked(value, field.defaultChecked)} onChange={(e) => set(e.target.checked ? 1 : 0)} className="w-5 h-5 accent-[#CCA866]" />
           <span className="text-gray-700">{field.help}</span>
         </label>
       );

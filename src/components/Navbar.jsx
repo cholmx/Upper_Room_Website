@@ -43,8 +43,8 @@ export default function Navbar() {
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 flex items-center transition-all duration-300 ${
       isScrolled 
-        ? 'bg-cream/85 backdrop-blur-md border-b border-black/5 shadow-sm h-16' 
-        : 'bg-cream border-b border-transparent h-24'
+        ? 'bg-[#F9F9F7]/85 backdrop-blur-md border-b border-black/5 shadow-sm h-16' 
+        : 'bg-[#F9F9F7] border-b border-transparent h-24'
     } text-black`}>
       <div className="max-w-[1145px] w-full mx-auto px-6 flex items-center justify-between">
         <Link 
@@ -63,7 +63,7 @@ export default function Navbar() {
                 to={link.path}
                 className={`font-serif italic uppercase text-[0.9rem] tracking-widest py-1 border-b-2 transition-all duration-300 ${
                   location.pathname === link.path 
-                    ? 'border-gold text-black' 
+                    ? 'border-[#FFC44F] text-black' 
                     : 'border-transparent text-black/70 hover:text-black hover:border-black/20'
                 }`}
               >
@@ -76,7 +76,7 @@ export default function Navbar() {
               href={SITE.giveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-5 py-2 rounded-full bg-ink text-white font-serif italic uppercase text-[0.85rem] tracking-widest hover:bg-gold hover:text-black transition-colors"
+              className="px-5 py-2 rounded-full bg-[#0B1613] text-white font-serif italic uppercase text-[0.85rem] tracking-widest hover:bg-[#FFC44F] hover:text-black transition-colors"
             >
               Give
             </a>
@@ -91,7 +91,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       <div
-        className={`fixed inset-0 bg-cream/95 backdrop-blur-xl z-[60] flex flex-col justify-center px-8 transition-all duration-300 ${
+        className={`fixed inset-0 bg-[#F9F9F7]/95 backdrop-blur-xl z-[60] flex flex-col justify-center px-8 transition-all duration-300 ${
           isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
       >
@@ -103,7 +103,7 @@ export default function Navbar() {
             <li key={link.path}>
               <Link
                 to={link.path}
-                className="inline-block uppercase text-3xl hover:text-gold-bronze transition-colors"
+                className="inline-block uppercase text-3xl hover:text-[#CCA866] transition-colors"
                 style={{ fontFamily: "'Google Sans Flex', sans-serif", fontWeight: 900 }}
                 onClick={() => setIsOpen(false)}
               >
@@ -116,7 +116,7 @@ export default function Navbar() {
               href={SITE.giveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block uppercase text-3xl text-gold-bronze hover:text-black transition-colors"
+              className="inline-block uppercase text-3xl text-[#CCA866] hover:text-black transition-colors"
               style={{ fontFamily: "'Google Sans Flex', sans-serif", fontWeight: 900 }}
             >
               Give Online

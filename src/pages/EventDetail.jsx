@@ -54,16 +54,16 @@ export default function EventDetail() {
   if (!ev) return <NotFound what="event" />;
 
   return (
-    <div className="bg-cream min-h-screen pt-32 pb-24 px-6">
+    <div className="bg-[#F9F9F7] min-h-screen pt-32 pb-24 px-6">
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-[800px] mx-auto">
-        <Link to="/events" className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-gold-600 hover:text-black mb-8">
+        <Link to="/events" className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-[#8A6309] hover:text-black mb-8">
           <SafeIcon icon={FiArrowLeft} /> All Events
         </Link>
         <h1 className="text-4xl md:text-6xl mb-8">{ev.title}</h1>
         <div className="flex flex-wrap gap-3 mb-10">
-          <span className="flex items-center gap-2 text-sm font-bold bg-white border border-black/5 px-4 py-2 rounded-full"><SafeIcon icon={FiCalendar} className="text-gold-600" /> {formatDate(ev.occurrence_date)}</span>
-          <span className="flex items-center gap-2 text-sm font-bold bg-white border border-black/5 px-4 py-2 rounded-full"><SafeIcon icon={FiClock} className="text-gold-600" /> {ev.time || 'Time TBD'}</span>
-          {ev.location && <span className="flex items-center gap-2 text-sm font-bold bg-white border border-black/5 px-4 py-2 rounded-full"><SafeIcon icon={FiMapPin} className="text-gold-600" /> {ev.location}</span>}
+          <span className="flex items-center gap-2 text-sm font-bold bg-white border border-black/5 px-4 py-2 rounded-full"><SafeIcon icon={FiCalendar} className="text-[#8A6309]" /> {formatDate(ev.occurrence_date)}</span>
+          <span className="flex items-center gap-2 text-sm font-bold bg-white border border-black/5 px-4 py-2 rounded-full"><SafeIcon icon={FiClock} className="text-[#8A6309]" /> {ev.time || 'Time TBD'}</span>
+          {ev.location && <span className="flex items-center gap-2 text-sm font-bold bg-white border border-black/5 px-4 py-2 rounded-full"><SafeIcon icon={FiMapPin} className="text-[#8A6309]" /> {ev.location}</span>}
         </div>
         {description && <RichText value={description} className="text-lg md:text-xl mb-12" />}
         <div className="flex flex-wrap gap-3">

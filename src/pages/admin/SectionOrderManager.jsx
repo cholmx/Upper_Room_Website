@@ -84,7 +84,7 @@ export default function SectionOrderManager() {
   };
 
   if (loading) {
-    return <div className="flex justify-center p-12" role="status" aria-label="Loading"><SafeIcon icon={FiLoader} className="animate-spin text-3xl text-gold-bronze" /></div>;
+    return <div className="flex justify-center p-12" role="status" aria-label="Loading"><SafeIcon icon={FiLoader} className="animate-spin text-3xl text-[#CCA866]" /></div>;
   }
 
   return (
@@ -115,7 +115,7 @@ export default function SectionOrderManager() {
         <div role={message.type === 'error' ? 'alert' : 'status'} className={`mb-6 p-4 rounded-lg text-sm font-medium ${message.type === 'error' ? 'bg-red-50 border border-red-200 text-red-700' : 'bg-green-50 border border-green-200 text-green-700'}`}>{message.text}</div>
       )}
       <div className="flex justify-end">
-        <button onClick={save} disabled={saving} className="bg-ink text-white font-bold py-3 px-8 rounded-lg hover:bg-black transition disabled:bg-gray-400 flex items-center gap-2">
+        <button onClick={save} disabled={saving} className="bg-[#0B1613] text-white font-bold py-3 px-8 rounded-lg hover:bg-black transition disabled:bg-gray-400 flex items-center gap-2">
           {saving ? <SafeIcon icon={FiLoader} className="animate-spin" /> : <SafeIcon icon={FiSave} />}
           {saving ? 'Saving...' : 'Save Layout'}
         </button>

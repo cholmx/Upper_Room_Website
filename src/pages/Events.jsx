@@ -21,7 +21,7 @@ export default function Events() {
   const events = useMemo(() => expandEvents((data ?? []).filter(isLive)), [data]);
 
   return (
-    <div className="bg-cream min-h-screen text-black pb-24 pt-20">
+    <div className="bg-[#F9F9F7] min-h-screen text-black pb-24 pt-20">
       <PageHero kicker="Get Involved" title="Upcoming Events" subtitle="Find where you belong and connect with community." image="https://images.pexels.com/photos/39007872/pexels-photo-39007872.jpeg?auto=compress&cs=tinysrgb&h=1200" />
 
       <div className="max-w-[900px] mx-auto px-6 mt-20">
@@ -47,8 +47,8 @@ export default function Events() {
               const detail = `/events/${e.id}?date=${e.occurrence_date}`;
               return (
                 <motion.li key={`${e.id}-${e.occurrence_date}`} variants={fadeUp} className="relative bg-white border border-black/5 p-8 md:p-10 rounded-3xl flex flex-col md:flex-row gap-10 items-start hover:shadow-2xl transition-all duration-300 group hover:-translate-y-1">
-                  <div className="md:w-1/4 flex-shrink-0 text-center md:text-left bg-cream md:bg-transparent w-full md:w-auto py-6 md:py-0 rounded-2xl md:rounded-none">
-                    <div className="text-gold-600 font-bold text-2xl uppercase tracking-widest leading-tight">
+                  <div className="md:w-1/4 flex-shrink-0 text-center md:text-left bg-[#F9F9F7] md:bg-transparent w-full md:w-auto py-6 md:py-0 rounded-2xl md:rounded-none">
+                    <div className="text-[#8A6309] font-bold text-2xl uppercase tracking-widest leading-tight">
                       {d.toLocaleDateString('en-US', { month: 'short' })}
                       <br className="hidden md:block" />
                       <span className="text-4xl md:text-6xl text-black">{d.getDate()}</span>
@@ -56,22 +56,22 @@ export default function Events() {
                   </div>
 
                   <div className="md:w-3/4 flex flex-col items-center md:items-start text-center md:text-left">
-                    <h3 className="text-3xl font-bold mb-4 group-hover:text-gold-600 transition-colors">
+                    <h3 className="text-3xl font-bold mb-4 group-hover:text-[#8A6309] transition-colors">
                       <Link to={detail} className="after:absolute after:inset-0 after:rounded-3xl">{e.title}</Link>
                     </h3>
 
                     <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 mb-6">
                       <div className="flex items-center gap-2 text-sm font-bold opacity-70 bg-gray-100 px-4 py-2 rounded-full">
-                        <SafeIcon icon={FiClock} className="text-gold-600" /> {e.time || 'Time TBD'}
+                        <SafeIcon icon={FiClock} className="text-[#8A6309]" /> {e.time || 'Time TBD'}
                       </div>
                       {e.location && (
                         <div className="flex items-center gap-2 text-sm font-bold opacity-70 bg-gray-100 px-4 py-2 rounded-full">
-                          <SafeIcon icon={FiMapPin} className="text-gold-600" /> {e.location}
+                          <SafeIcon icon={FiMapPin} className="text-[#8A6309]" /> {e.location}
                         </div>
                       )}
                       {RECURRENCE_LABEL[e.recurrence] && (
                         <div className="flex items-center gap-2 text-sm font-bold opacity-70 bg-gray-100 px-4 py-2 rounded-full">
-                          <SafeIcon icon={FiRepeat} className="text-gold-600" /> {RECURRENCE_LABEL[e.recurrence]}
+                          <SafeIcon icon={FiRepeat} className="text-[#8A6309]" /> {RECURRENCE_LABEL[e.recurrence]}
                         </div>
                       )}
                     </div>

@@ -194,7 +194,7 @@ export default function GenericManager({ config }) {
   if (loading && view === 'list') {
     return (
       <div className="flex justify-center items-center p-12 h-64" role="status" aria-label="Loading">
-        <SafeIcon icon={FiLoader} className="animate-spin text-3xl text-gold-bronze" />
+        <SafeIcon icon={FiLoader} className="animate-spin text-3xl text-[#CCA866]" />
       </div>
     );
   }
@@ -220,7 +220,7 @@ export default function GenericManager({ config }) {
           ))}
           <div className="flex justify-end gap-4 pt-6 border-t border-gray-100">
             <button type="button" onClick={requestLeaveForm} className="px-6 py-3 font-bold text-gray-600 hover:text-black transition">Cancel</button>
-            <button type="submit" disabled={saving} className="bg-ink text-white font-bold py-3 px-8 rounded-lg hover:bg-black transition disabled:bg-gray-400 flex items-center gap-2">
+            <button type="submit" disabled={saving} className="bg-[#0B1613] text-white font-bold py-3 px-8 rounded-lg hover:bg-black transition disabled:bg-gray-400 flex items-center gap-2">
               {saving ? <SafeIcon icon={FiLoader} className="animate-spin" /> : <SafeIcon icon={FiSave} />}
               {saving ? 'Saving...' : 'Save'}
             </button>
@@ -245,7 +245,7 @@ export default function GenericManager({ config }) {
       <div className="flex flex-wrap justify-between items-center gap-4 mb-6">
         <h2 className="text-2xl font-bold text-gray-800">Manage {config.title}</h2>
         {canCreate && (
-          <button onClick={handleAddNew} className="bg-gold-bronze hover:bg-gold-bronze-dark text-black font-bold py-2.5 px-5 rounded-lg flex items-center gap-2 transition shadow-sm">
+          <button onClick={handleAddNew} className="bg-[#CCA866] hover:bg-[#b59253] text-black font-bold py-2.5 px-5 rounded-lg flex items-center gap-2 transition shadow-sm">
             <SafeIcon icon={FiPlus} /> Add New
           </button>
         )}
@@ -260,7 +260,7 @@ export default function GenericManager({ config }) {
             placeholder={`Search ${config.title.toLowerCase()}...`}
             value={query}
             onChange={(e) => { setQuery(e.target.value); setPage(0); }}
-            className="w-full pl-11 pr-4 py-2.5 rounded-lg border border-gray-200 bg-white focus:outline-none focus:border-gold-bronze focus:ring-1 focus:ring-gold-bronze"
+            className="w-full pl-11 pr-4 py-2.5 rounded-lg border border-gray-200 bg-white focus:outline-none focus:border-[#CCA866] focus:ring-1 focus:ring-[#CCA866]"
           />
         </div>
       )}
@@ -273,7 +273,7 @@ export default function GenericManager({ config }) {
         {items.length === 0 ? (
           <div className="p-12 text-center text-gray-500">
             <p className="mb-4">No {config.title.toLowerCase()} yet.</p>
-            {canCreate && <button onClick={handleAddNew} className="text-gold-bronze font-bold hover:underline">Create your first one</button>}
+            {canCreate && <button onClick={handleAddNew} className="text-[#CCA866] font-bold hover:underline">Create your first one</button>}
           </div>
         ) : filtered.length === 0 ? (
           <div className="p-12 text-center text-gray-500">No {config.title.toLowerCase()} match "{query}".</div>
@@ -331,7 +331,7 @@ export default function GenericManager({ config }) {
                       })}
                       <td className="px-6 py-4 text-right">
                         <div className="flex items-center justify-end gap-2">
-                          <button onClick={() => openForm({ ...item })} aria-label={`Edit ${item[titleField] || 'item'}`} className="p-2 text-gray-400 hover:text-gold-bronze bg-white hover:bg-gold-bronze/10 border border-gray-100 rounded-lg transition" title="Edit">
+                          <button onClick={() => openForm({ ...item })} aria-label={`Edit ${item[titleField] || 'item'}`} className="p-2 text-gray-400 hover:text-[#CCA866] bg-white hover:bg-[#CCA866]/10 border border-gray-100 rounded-lg transition" title="Edit">
                             <SafeIcon icon={FiEdit2} />
                           </button>
                           <button onClick={() => setPendingDelete(item)} aria-label={`Delete ${item[titleField] || 'item'}`} className="p-2 text-gray-400 hover:text-red-500 bg-white hover:bg-red-50 border border-gray-100 rounded-lg transition" title="Delete">

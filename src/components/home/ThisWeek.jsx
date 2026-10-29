@@ -16,10 +16,10 @@ export default function ThisWeek({ site, sermon, event }) {
   const eventDate = event ? new Date(event.occurrence_date + 'T00:00:00') : null;
 
   return (
-    <div key="features" className="py-24 px-6 bg-cream text-black">
+    <div key="features" className="py-24 px-6 bg-[#F9F9F7] text-black">
       <div className="max-w-[1145px] mx-auto">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
-          <span className="kicker text-gold-600">This Week</span>
+          <span className="kicker text-[#8A6309]">This Week</span>
           <h2 className="text-4xl md:text-5xl">What's Happening</h2>
         </motion.div>
 
@@ -30,7 +30,7 @@ export default function ThisWeek({ site, sermon, event }) {
             className="lg:col-span-7 bg-white border border-black/5 rounded-[2rem] overflow-hidden shadow-sm flex flex-col"
             aria-label="Watch this past sermon"
           >
-            <div className="aspect-video bg-ink">
+            <div className="aspect-video bg-[#0B1613]">
               {id ? (
                 <LiteYouTube id={id} title={sermon.title} />
               ) : (
@@ -40,11 +40,11 @@ export default function ThisWeek({ site, sermon, event }) {
               )}
             </div>
             <div className="p-8 md:p-10 flex flex-col flex-grow">
-              <span className="kicker text-gold-600">Watch This Past Sermon</span>
+              <span className="kicker text-[#8A6309]">Watch This Past Sermon</span>
               {sermon ? (
                 <>
                   <h3 className="text-3xl md:text-4xl mb-3">
-                    <Link to={`/sermons/${sermon.id}`} className="hover:text-gold-600 transition-colors">{sermon.title}</Link>
+                    <Link to={`/sermons/${sermon.id}`} className="hover:text-[#8A6309] transition-colors">{sermon.title}</Link>
                   </h3>
                   <p className="text-sm font-bold uppercase tracking-wider opacity-60 mb-4">
                     {[sermon.speaker, sermon.date && formatDate(sermon.date), sermon.series && `Series: ${sermon.series}`].filter(Boolean).join('  •  ')}
@@ -54,7 +54,7 @@ export default function ThisWeek({ site, sermon, event }) {
                     <Link to={`/sermons/${sermon.id}`} className="btn btn-solid group">
                       {sermon.notes ? 'Notes & Details' : 'Details'} <SafeIcon icon={FiArrowRight} className="group-hover:translate-x-1 transition-transform" />
                     </Link>
-                    <Link to="/sermons" className="font-bold uppercase tracking-wider text-sm text-gold-600 hover:text-black">All messages</Link>
+                    <Link to="/sermons" className="font-bold uppercase tracking-wider text-sm text-[#8A6309] hover:text-black">All messages</Link>
                   </div>
                 </>
               ) : (
@@ -71,14 +71,14 @@ export default function ThisWeek({ site, sermon, event }) {
             {/* This Sunday */}
             <motion.section
               initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
-              className="bg-ink text-white rounded-[2rem] p-8 md:p-10"
+              className="bg-[#0B1613] text-white rounded-[2rem] p-8 md:p-10"
               aria-label="This Sunday"
             >
-              <span className="kicker text-gold">Join Us</span>
+              <span className="kicker text-[#FFC44F]">Join Us</span>
               <h3 className="text-3xl mb-5">This Sunday</h3>
               <ul className="space-y-3 mb-8 text-lg">
-                <li className="flex items-center gap-3"><SafeIcon icon={FiClock} className="text-gold flex-shrink-0" /> {site.serviceTime}</li>
-                <li className="flex items-center gap-3"><SafeIcon icon={FiMapPin} className="text-gold flex-shrink-0" /> {site.addressLine}</li>
+                <li className="flex items-center gap-3"><SafeIcon icon={FiClock} className="text-[#FFC44F] flex-shrink-0" /> {site.serviceTime}</li>
+                <li className="flex items-center gap-3"><SafeIcon icon={FiMapPin} className="text-[#FFC44F] flex-shrink-0" /> {site.addressLine}</li>
               </ul>
               <div className="flex flex-wrap gap-3">
                 <Link to="/visit" className="btn btn-solid group">
@@ -94,21 +94,21 @@ export default function ThisWeek({ site, sermon, event }) {
               className="bg-white border border-black/5 rounded-[2rem] p-8 md:p-10 shadow-sm flex-grow"
               aria-label="Next event"
             >
-              <span className="kicker text-gold-600">Next Event</span>
+              <span className="kicker text-[#8A6309]">Next Event</span>
               {event ? (
                 <div className="flex gap-6 items-start">
-                  <div className="text-center flex-shrink-0 bg-cream rounded-2xl px-5 py-4 border border-black/5">
-                    <div className="text-gold-600 font-bold uppercase tracking-widest text-sm">{eventDate.toLocaleDateString('en-US', { month: 'short' })}</div>
+                  <div className="text-center flex-shrink-0 bg-[#F9F9F7] rounded-2xl px-5 py-4 border border-black/5">
+                    <div className="text-[#8A6309] font-bold uppercase tracking-widest text-sm">{eventDate.toLocaleDateString('en-US', { month: 'short' })}</div>
                     <div className="text-4xl font-black leading-none">{eventDate.getDate()}</div>
                   </div>
                   <div className="min-w-0">
                     <h3 className="text-2xl mb-2 leading-tight">
-                      <Link to={eventDetail} className="hover:text-gold-600 transition-colors">{event.title}</Link>
+                      <Link to={eventDetail} className="hover:text-[#8A6309] transition-colors">{event.title}</Link>
                     </h3>
                     <p className="text-sm opacity-70 mb-4">{[event.time, event.location].filter(Boolean).join('  •  ') || 'Details to come'}</p>
                     <div className="flex flex-wrap gap-4 items-center">
-                      <Link to={eventDetail} className="font-bold uppercase tracking-wider text-sm text-gold-600 hover:text-black">Details</Link>
-                      <button type="button" onClick={() => downloadIcs(event)} className="inline-flex items-center gap-2 font-bold uppercase tracking-wider text-sm text-gold-600 hover:text-black">
+                      <Link to={eventDetail} className="font-bold uppercase tracking-wider text-sm text-[#8A6309] hover:text-black">Details</Link>
+                      <button type="button" onClick={() => downloadIcs(event)} className="inline-flex items-center gap-2 font-bold uppercase tracking-wider text-sm text-[#8A6309] hover:text-black">
                         <SafeIcon icon={FiCalendar} /> Add to calendar
                       </button>
                     </div>
@@ -117,7 +117,7 @@ export default function ThisWeek({ site, sermon, event }) {
               ) : (
                 <>
                   <h3 className="text-2xl mb-2">Nothing scheduled yet</h3>
-                  <Link to="/events" className="font-bold uppercase tracking-wider text-sm text-gold-600 hover:text-black">See the calendar</Link>
+                  <Link to="/events" className="font-bold uppercase tracking-wider text-sm text-[#8A6309] hover:text-black">See the calendar</Link>
                 </>
               )}
             </motion.section>

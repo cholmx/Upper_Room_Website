@@ -45,17 +45,17 @@ export default function Contact() {
     }
   };
 
-  const input = 'w-full px-4 py-3 bg-white rounded-xl border border-black/10 focus:outline-none focus:ring-2 focus:ring-gold-dark';
+  const input = 'w-full px-4 py-3 bg-white rounded-xl border border-black/10 focus:outline-none focus:ring-2 focus:ring-[#A6790F]';
 
   return (
-    <div className="bg-cream min-h-screen text-black pb-24 pt-20">
+    <div className="bg-[#F9F9F7] min-h-screen text-black pb-24 pt-20">
       <PageHero kicker="Get In Touch" title="Contact Us" subtitle="We would love to hear from you." image="https://images.pexels.com/photos/8250816/pexels-photo-8250816.jpeg?auto=compress&cs=tinysrgb&h=1200" />
       <div className="max-w-[1000px] mx-auto px-6 mt-16 grid md:grid-cols-5 gap-12">
         <div className="md:col-span-2 space-y-4 text-lg">
           <h2 className="text-3xl mb-4">Reach us</h2>
-          <p><a className="font-bold hover:text-gold-600" href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
-          <p><a className="font-bold hover:text-gold-600" href={SITE.phoneHref}>{SITE.phone}</a></p>
-          <p><a className="hover:text-gold-600" href={SITE.googleMapsUrl} target="_blank" rel="noopener noreferrer">{SITE.addressLine}</a></p>
+          <p><a className="font-bold hover:text-[#8A6309]" href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
+          <p><a className="font-bold hover:text-[#8A6309]" href={SITE.phoneHref}>{SITE.phone}</a></p>
+          <p><a className="hover:text-[#8A6309]" href={SITE.googleMapsUrl} target="_blank" rel="noopener noreferrer">{SITE.addressLine}</a></p>
           <p className="opacity-70">{SITE.serviceTime}</p>
         </div>
 

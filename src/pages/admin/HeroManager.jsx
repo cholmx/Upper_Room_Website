@@ -86,7 +86,7 @@ const HeroManager = () => {
             id="heading"
             value={hero.heading}
             onChange={handleInputChange}
-            className="w-full px-4 py-3 bg-gray-50 rounded-lg border-gray-200 focus:outline-none focus:ring-2 focus:ring-gold-bronze transition"
+            className="w-full px-4 py-3 bg-gray-50 rounded-lg border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#CCA866] transition"
             placeholder="e.g., Transforming lives..."
           />
         </div>
@@ -101,7 +101,7 @@ const HeroManager = () => {
             id="subtext"
             value={hero.subtext}
             onChange={handleInputChange}
-            className="w-full px-4 py-3 bg-gray-50 rounded-lg border-gray-200 focus:outline-none focus:ring-2 focus:ring-gold-bronze transition"
+            className="w-full px-4 py-3 bg-gray-50 rounded-lg border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#CCA866] transition"
             placeholder="e.g., Join us Sundays..."
           />
         </div>
@@ -118,7 +118,7 @@ const HeroManager = () => {
           <button
             type="submit"
             disabled={saving}
-            className="bg-ink text-white font-bold py-3 px-6 rounded-lg hover:bg-black transition-colors disabled:bg-gray-400 flex items-center gap-2"
+            className="bg-[#0B1613] text-white font-bold py-3 px-6 rounded-lg hover:bg-black transition-colors disabled:bg-gray-400 flex items-center gap-2"
           >
             {saving ? (
               <>

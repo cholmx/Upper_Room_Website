@@ -13,7 +13,7 @@ export default function About() {
   usePageMeta('Our Story', 'Learn the story, mission and values of Upper Room Fellowship in Columbiana, Ohio.');
 
   return (
-    <div className="bg-cream min-h-screen text-black pt-20">
+    <div className="bg-[#F9F9F7] min-h-screen text-black pt-20">
       {/* Hero */}
       <PageHero kicker={'Who We Are'} title={'Our Story'} subtitle={'Transforming lives that transform communities.'} image="https://images.pexels.com/photos/40383990/pexels-photo-40383990.jpeg?auto=compress&cs=tinysrgb&h=1200" />
 
@@ -22,7 +22,7 @@ export default function About() {
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{
           visible: { transition: { staggerChildren: 0.1 } }
         }} className="max-w-[900px] mx-auto text-center">
-          <motion.span variants={slideInLeft} className="kicker text-gold-600">Our Mission</motion.span>
+          <motion.span variants={slideInLeft} className="kicker text-[#8A6309]">Our Mission</motion.span>
           <motion.h2 variants={slideInRight} className="text-4xl md:text-6xl mb-10 leading-tight">Know God.<br/>Share Life.<br/>Serve Others.</motion.h2>
           <motion.div variants={fadeUp} className="text-xl opacity-80 leading-relaxed space-y-6">
             <p>
@@ -37,18 +37,18 @@ export default function About() {
 
       {/* Core Values Intro */}
       <div className="py-24 px-6 bg-white border-t border-black/5 relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-gold-bronze rounded-full blur-[120px] opacity-[0.03] -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
+        <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-[#CCA866] rounded-full blur-[120px] opacity-[0.03] -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
 
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{
           visible: { transition: { staggerChildren: 0.1 } }
         }} className="max-w-[900px] mx-auto text-center mb-20 relative z-10">
-          <motion.span variants={slideInLeft} className="kicker text-gold-600">What Drives Us</motion.span>
+          <motion.span variants={slideInLeft} className="kicker text-[#8A6309]">What Drives Us</motion.span>
           <motion.h2 variants={slideInRight} className="text-4xl md:text-6xl mb-8">Core Values</motion.h2>
           <motion.p variants={fadeUp} className="text-xl opacity-80 leading-relaxed mb-12 max-w-4xl mx-auto">
             When what's important to God becomes precious to us, transformation happens naturally. These values aren't just aspirational statements but practical pathways to living the abundant life Jesus promised.
           </motion.p>
           
-          <motion.div variants={fadeUp} className="bg-cream p-8 md:p-12 rounded-3xl border border-black/5 text-left mb-16 shadow-sm">
+          <motion.div variants={fadeUp} className="bg-[#F9F9F7] p-8 md:p-12 rounded-3xl border border-black/5 text-left mb-16 shadow-sm">
             <h3 className="text-3xl font-bold mb-6">Living from the Inside Out</h3>
             <p className="text-lg opacity-80 leading-relaxed mb-6">
               Values shape who we are at our core—they guide our decisions, relationships, and daily choices. At Upper Room Fellowship, we believe transformation happens when our hearts align with God's heart. 
@@ -56,7 +56,7 @@ export default function About() {
             <p className="text-lg opacity-80 leading-relaxed mb-6">
               As we embrace what matters to God, we begin experiencing the freedom and fullness He designed for us. We don't focus on achieving perfection but welcome God's work changing us from within.
             </p>
-            <p className="text-lg opacity-80 leading-relaxed font-bold text-gold-600">
+            <p className="text-lg opacity-80 leading-relaxed font-bold text-[#8A6309]">
               The beautiful result? We become carriers of His love and light wherever we go.
             </p>
           </motion.div>
@@ -103,14 +103,14 @@ export default function About() {
               }
             ].map((value, idx) => (
               <motion.div key={idx} variants={fadeUp} className="fcard group relative overflow-hidden">
-                <div className="absolute -right-6 -top-6 text-gold-bronze opacity-10 group-hover:scale-150 group-hover:opacity-20 transition-all duration-700 pointer-events-none">
+                <div className="absolute -right-6 -top-6 text-[#CCA866] opacity-10 group-hover:scale-150 group-hover:opacity-20 transition-all duration-700 pointer-events-none">
                   <SafeIcon icon={value.icon} size={150} />
                 </div>
                 <div className="flex items-center gap-4 mb-6 relative z-10">
-                  <div className="w-14 h-14 bg-gold rounded-full flex items-center justify-center text-black text-2xl shadow-md">
+                  <div className="w-14 h-14 bg-[#FFC44F] rounded-full flex items-center justify-center text-black text-2xl shadow-md">
                     <SafeIcon icon={value.icon} />
                   </div>
-                  <div className="text-gold-bronze font-bold text-4xl opacity-50 font-serif">0{idx + 1}</div>
+                  <div className="text-[#CCA866] font-bold text-4xl opacity-50 font-serif">0{idx + 1}</div>
                 </div>
                 <h3 className="text-3xl font-bold mb-4 relative z-10">{value.title}</h3>
                 <p className="opacity-80 mb-8 text-lg relative z-10">{value.desc}</p>
@@ -119,7 +119,7 @@ export default function About() {
                   <ul className="space-y-2">
                     {value.points.map((point, i) => (
                       <li key={i} className="flex items-start gap-3 opacity-80">
-                        <span className="text-gold-600 mt-1 text-xs">◆</span> {point}
+                        <span className="text-[#8A6309] mt-1 text-xs">◆</span> {point}
                       </li>
                     ))}
                   </ul>
@@ -142,7 +142,7 @@ export default function About() {
         </motion.div>
       </div>
 
-      <div className="py-32 px-6 text-center bg-gold text-black">
+      <div className="py-32 px-6 text-center bg-[#FFC44F] text-black">
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
           <h2 className="text-4xl md:text-6xl mb-8">Come see for yourself.</h2>
           <Link to="/visit" className="btn btn-outline-gold border-black hover:bg-black group">

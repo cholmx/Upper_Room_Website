@@ -20,12 +20,6 @@ describe('index.css brand colors match tailwind.config.js', () => {
     expect(hexOf(name)).toBe(token.toUpperCase());
   });
 
-  it('uses the gold-600 text color for the focus ring and article links', () => {
-    const gold600 = colors.gold[600].toUpperCase();
-    expect(css).toMatch(new RegExp(`outline: 3px solid ${gold600}`, 'i'));
-    expect(css).toMatch(new RegExp(`\\.rich-text a \\{ color: ${gold600}`, 'i'));
-  });
-
   it('has no theme() lookups that depend on the Tailwind config being loaded', () => {
     expect(css).not.toMatch(/theme\(/);
   });

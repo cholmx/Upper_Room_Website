@@ -15,7 +15,7 @@ export default class ErrorBoundary extends React.Component {
   render() {
     if (!this.state.failed) return this.props.children;
     return (
-      <div className="min-h-screen flex items-center justify-center bg-cream px-6 text-center">
+      <div className="min-h-screen flex items-center justify-center bg-[#F9F9F7] px-6 text-center">
         <div className="max-w-md">
           <h1 className="text-4xl mb-4">Something went wrong</h1>
           <p className="opacity-70 mb-8">The page hit an unexpected problem. Reloading usually fixes it.</p>

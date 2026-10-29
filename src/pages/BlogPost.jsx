@@ -37,13 +37,13 @@ export default function BlogPost() {
   if (!live) return <NotFound what="article" />;
 
   return (
-    <article className="bg-cream min-h-screen pt-32 pb-24 px-6">
+    <article className="bg-[#F9F9F7] min-h-screen pt-32 pb-24 px-6">
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-[800px] mx-auto">
-        <Link to="/blog" className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-gold-600 hover:text-black mb-8">
+        <Link to="/blog" className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-[#8A6309] hover:text-black mb-8">
           <SafeIcon icon={FiArrowLeft} /> All Articles
         </Link>
         <div className="flex flex-wrap items-center gap-3 text-xs font-bold uppercase tracking-wider text-gray-500 mb-6">
-          {live.category && <span className="bg-gold-dark/10 text-gold-600 px-4 py-1.5 rounded-full">{live.category}</span>}
+          {live.category && <span className="bg-[#A6790F]/10 text-[#8A6309] px-4 py-1.5 rounded-full">{live.category}</span>}
           <span>{formatDate(live.date || live.created_at?.slice(0, 10))}</span>
           {live.author && <><span>•</span><span>{live.author}</span></>}
         </div>
