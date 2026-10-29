@@ -129,3 +129,44 @@ describe('mergeSectionOrder', () => {
     expect(mergeSectionOrder(['story']).at(0)).toBe('campaign');
   });
 });
+
+import { messagePath, parseMessageId, seriesPath, scriptureBook, groupSeries, dateRangeLabel } from './utils';
+
+describe('message urls', () => {
+  it('builds and parses readable message paths', () => {
+    expect(messagePath({ id: 12, title: 'The Upper Room!' })).toBe('/messages/12-the-upper-room');
+    expect(parseMessageId('12-the-upper-room')).toBe('12');
+    expect(parseMessageId('abc')).toBeNull();
+    expect(seriesPath('Hope & Home')).toBe('/messages/series/hope-home');
+  });
+});
+
+describe('scriptureBook', () => {
+  it('finds the book name', () => {
+    expect(scriptureBook('John 3:16-21')).toBe('John');
+    expect(scriptureBook('1 John 2:1-6')).toBe('1 John');
+    expect(scriptureBook('Song of Solomon 2:1')).toBe('Song of Solomon');
+    expect(scriptureBook('Psalm 23')).toBe('Psalm');
+    expect(scriptureBook('')).toBe('');
+  });
+});
+
+describe('groupSeries', () => {
+  const rows = [
+    { series: 'Hope', date: '2025-02-02', title: 'a' },
+    { series: 'Hope', date: '2025-03-02', title: 'b', series_image_url: 'https://img.example.org/h.jpg' },
+    { series: 'Home', date: '2025-05-04', title: 'c' },
+    { title: 'no series' },
+  ];
+  it('counts messages, keeps the date range, and finds a cover', () => {
+    const out = groupSeries(rows);
+    expect(out.map(s => s.name)).toEqual(['Home', 'Hope']);
+    const hope = out.find(s => s.name === 'Hope');
+    expect(hope).toMatchObject({ count: 2, first: '2025-02-02', last: '2025-03-02', image: 'https://img.example.org/h.jpg', slug: 'hope' });
+  });
+  it('formats ranges', () => {
+    expect(dateRangeLabel('2025-02-02', '2025-03-02')).toBe('Feb 2025 to Mar 2025');
+    expect(dateRangeLabel('2025-02-02', '2025-02-20')).toBe('Feb 2025');
+    expect(dateRangeLabel(null)).toBe('');
+  });
+});

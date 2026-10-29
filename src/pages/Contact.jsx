@@ -1,105 +1,52 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import usePageMeta from '../hooks/usePageMeta';
-import { publicDataFetch } from '../api';
 import { useSite } from '../settings';
-import PageHero from '../components/PageHero';
-
-const KINDS = [
-  { value: 'question', label: 'General question' },
-  { value: 'prayer', label: 'Prayer request' },
-  { value: 'visit', label: 'Planning a visit' },
-];
+import { Section, PageHeader, EndCta, Todo } from '../components/ui';
+import FormBlock from '../components/FormBlock';
 
 export default function Contact() {
+  usePageMeta('contact');
   const SITE = useSite();
-  usePageMeta('Contact', 'Send a message or prayer request to Upper Room Fellowship.');
-  const opened = useRef(Date.now());
-  const [form, setForm] = useState({ name: '', email: '', kind: 'question', message: '', website: '' });
-  const [status, setStatus] = useState({ state: 'idle', error: '' });
-
-  const change = (e) => setForm(f => ({ ...f, [e.target.name]: e.target.value }));
-
-  const submit = async (e) => {
-    e.preventDefault();
-    // Bots fill the hidden field or submit instantly; pretend success and drop it.
-    if (form.website || Date.now() - opened.current < 3000) {
-      setStatus({ state: 'sent', error: '' });
-      return;
-    }
-    setStatus({ state: 'sending', error: '' });
-    const res = await publicDataFetch('create/contact_messages_church', {
-      method: 'POST',
-      body: JSON.stringify({
-        // `handled` and `created_at` are set by the database, not by the visitor.
-        name: form.name.trim().slice(0, 120),
-        email: form.email.trim().slice(0, 200),
-        kind: form.kind,
-        message: form.message.trim().slice(0, 5000),
-      }),
-    });
-    if (res.status === 'success') {
-      setStatus({ state: 'sent', error: '' });
-      setForm({ name: '', email: '', kind: 'question', message: '', website: '' });
-    } else {
-      setStatus({ state: 'error', error: `We couldn't send that right now. You can also email ${SITE.email} or call ${SITE.phone}.` });
-    }
-  };
-
-  const input = 'w-full px-4 py-3 bg-white rounded-xl border border-black/10 focus:outline-none focus:ring-2 focus:ring-[#A6790F]';
-
   return (
-    <div className="bg-[#F9F9F7] min-h-screen text-black pb-24 pt-20">
-      <PageHero kicker="Get In Touch" title="Contact Us" subtitle="We would love to hear from you." image="https://images.pexels.com/photos/8250816/pexels-photo-8250816.jpeg?auto=compress&cs=tinysrgb&h=1200" />
-      <div className="max-w-[1000px] mx-auto px-6 mt-16 grid md:grid-cols-5 gap-12">
-        <div className="md:col-span-2 space-y-4 text-lg">
-          <h2 className="text-3xl mb-4">Reach us</h2>
-          <p><a className="font-bold hover:text-[#8A6309]" href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
-          <p><a className="font-bold hover:text-[#8A6309]" href={SITE.phoneHref}>{SITE.phone}</a></p>
-          <p><a className="hover:text-[#8A6309]" href={SITE.googleMapsUrl} target="_blank" rel="noopener noreferrer">{SITE.addressLine}</a></p>
-          <p className="opacity-70">{SITE.serviceTime}</p>
-        </div>
-
-        <div className="md:col-span-3">
-          {status.state === 'sent' ? (
-            <div role="status" className="bg-white border border-black/5 rounded-3xl p-10 text-center">
-              <h2 className="text-3xl mb-3">Thank you</h2>
-              <p className="opacity-70 text-lg mb-6">Your message was sent. Someone from our team will follow up soon.</p>
-              <button className="btn btn-outline border-black/30 text-black" onClick={() => setStatus({ state: 'idle', error: '' })}>Send another</button>
+    <>
+      <PageHeader
+        kicker="Contact"
+        title="Contact us"
+        intro="Have a question, need prayer, or want to know how to get involved? Send us a message and someone will reply within 48 hours. You can also call or stop by."
+      />
+      <Section tone="cream">
+        <div className="grid md:grid-cols-5 gap-10">
+          <div className="md:col-span-2 space-y-6">
+            <div>
+              <h2 className="text-2xl mb-3">Find us</h2>
+              <address className="not-italic text-lg leading-relaxed space-y-1">
+                <p>{SITE.address.street}<br />{SITE.address.city}, {SITE.address.region} {SITE.address.postalCode}</p>
+                <p><a className="underline underline-offset-4 font-semibold" href={SITE.phoneHref}>{SITE.phone}</a></p>
+                <p><a className="underline underline-offset-4 font-semibold" href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
+                <p>{SITE.serviceTime}</p>
+                <p><Todo id="office-hours">[OFFICE HOURS]</Todo></p>
+              </address>
+              <p className="mt-3">
+                <a href={SITE.googleMapsUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center min-h-[44px] font-semibold text-[#8A6309] underline underline-offset-4">Get directions<span className="sr-only"> (opens in a new tab)</span></a>
+              </p>
             </div>
-          ) : (
-            <form onSubmit={submit} className="bg-white border border-black/5 rounded-3xl p-8 md:p-10 space-y-6">
-              <div>
-                <label htmlFor="c-kind" className="block text-sm font-bold mb-2">What is this about?</label>
-                <select id="c-kind" name="kind" value={form.kind} onChange={change} className={input}>
-                  {KINDS.map(k => <option key={k.value} value={k.value}>{k.label}</option>)}
-                </select>
-              </div>
-              <div className="grid sm:grid-cols-2 gap-6">
-                <div>
-                  <label htmlFor="c-name" className="block text-sm font-bold mb-2">Name</label>
-                  <input id="c-name" name="name" required maxLength={100} autoComplete="name" value={form.name} onChange={change} className={input} />
-                </div>
-                <div>
-                  <label htmlFor="c-email" className="block text-sm font-bold mb-2">Email</label>
-                  <input id="c-email" name="email" type="email" required maxLength={200} autoComplete="email" value={form.email} onChange={change} className={input} />
-                </div>
-              </div>
-              <div>
-                <label htmlFor="c-message" className="block text-sm font-bold mb-2">Message</label>
-                <textarea id="c-message" name="message" required rows={6} maxLength={4000} value={form.message} onChange={change} className={input} />
-              </div>
-              {/* Honeypot: hidden from people and assistive tech */}
-              <div aria-hidden="true" className="absolute -left-[9999px]">
-                <label>Website<input tabIndex={-1} autoComplete="off" name="website" value={form.website} onChange={change} /></label>
-              </div>
-              {status.state === 'error' && <p role="alert" className="text-red-700 font-medium">{status.error}</p>}
-              <button type="submit" disabled={status.state === 'sending'} className="btn btn-solid disabled:opacity-60">
-                {status.state === 'sending' ? 'Sending...' : 'Send Message'}
-              </button>
-            </form>
-          )}
+            <div>
+              <h2 className="text-2xl mb-3">Follow along</h2>
+              <ul className="flex flex-wrap gap-x-5">
+                {SITE.social.map(s => (
+                  <li key={s.label}><a href={s.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center min-h-[44px] font-semibold underline underline-offset-4">{s.label}<span className="sr-only"> (opens in a new tab)</span></a></li>
+                ))}
+              </ul>
+            </div>
+            <p className="text-[#2b2f2d]">We believe in healthy relationships, and that starts with getting to know you.</p>
+          </div>
+          <div className="md:col-span-3"><FormBlock formKey="contact" /></div>
         </div>
-      </div>
-    </div>
+        <div className="mt-12 rounded-2xl overflow-hidden border border-black/10 bg-white aspect-[16/9] md:aspect-[21/9]">
+          <iframe title={`Map of ${SITE.addressLine}`} src={SITE.mapEmbedUrl} loading="lazy" referrerPolicy="no-referrer-when-downgrade" className="w-full h-full border-0"></iframe>
+        </div>
+      </Section>
+      <EndCta title="Planning a visit?" text="Let us know you are coming and our welcome team will be watching for you." to="/connect" label="Fill Out the Connect Card" />
+    </>
   );
 }

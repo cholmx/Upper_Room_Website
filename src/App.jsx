@@ -1,35 +1,68 @@
 import React, { useEffect, Suspense, lazy } from 'react';
 import { MotionConfig } from 'framer-motion';
-import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import Navbar from './components/Navbar';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation, useParams } from 'react-router-dom';
+import Header from './components/Header';
 import Footer from './components/Footer';
+import AnnouncementBar from './components/AnnouncementBar';
+import StickyMobileBar from './components/StickyMobileBar';
 import { AuthProvider, useAuth } from './auth';
 import { SettingsProvider } from './settings';
+import { PhotosProvider } from './photos';
 import ErrorBoundary from './components/ErrorBoundary';
 
 const Home = lazy(() => import('./pages/Home'));
+const PlanYourVisit = lazy(() => import('./pages/PlanYourVisit'));
 const About = lazy(() => import('./pages/About'));
-const Sermons = lazy(() => import('./pages/Sermons'));
-const Podcasts = lazy(() => import('./pages/Podcasts'));
-const Blog = lazy(() => import('./pages/Blog'));
-const Events = lazy(() => import('./pages/Events'));
-const Visit = lazy(() => import('./pages/Visit'));
-const SermonDetail = lazy(() => import('./pages/SermonDetail'));
-const BlogPost = lazy(() => import('./pages/BlogPost'));
-const EventDetail = lazy(() => import('./pages/EventDetail'));
-const Team = lazy(() => import('./pages/Team'));
-const Contact = lazy(() => import('./pages/Contact'));
+const Beliefs = lazy(() => import('./pages/Beliefs'));
+const CoreValues = lazy(() => import('./pages/CoreValues'));
+const Leadership = lazy(() => import('./pages/Leadership'));
+const Messages = lazy(() => import('./pages/Messages'));
+const MessageSeries = lazy(() => import('./pages/MessageSeries'));
+const MessageDetail = lazy(() => import('./pages/MessageDetail'));
+const NextSteps = lazy(() => import('./pages/NextSteps'));
 const Ministries = lazy(() => import('./pages/Ministries'));
+const Kids = lazy(() => import('./pages/Kids'));
+const Youth = lazy(() => import('./pages/Youth'));
+const TableGroups = lazy(() => import('./pages/TableGroups'));
+const WorshipTeam = lazy(() => import('./pages/WorshipTeam'));
+const Serve = lazy(() => import('./pages/Serve'));
+const Outreach = lazy(() => import('./pages/Outreach'));
+const Sozo = lazy(() => import('./pages/Sozo'));
+const CarePortal = lazy(() => import('./pages/CarePortal'));
+const Events = lazy(() => import('./pages/Events'));
+const EventDetail = lazy(() => import('./pages/EventDetail'));
+const Prayer = lazy(() => import('./pages/Prayer'));
+const Stories = lazy(() => import('./pages/Stories'));
+const FAQPage = lazy(() => import('./pages/FAQ'));
+const Give = lazy(() => import('./pages/Give'));
+const Campaign = lazy(() => import('./pages/Campaign'));
+const Contact = lazy(() => import('./pages/Contact'));
+const Connect = lazy(() => import('./pages/Connect'));
+const Accessibility = lazy(() => import('./pages/Accessibility'));
+const Privacy = lazy(() => import('./pages/Privacy'));
+const Blog = lazy(() => import('./pages/Blog'));
+const BlogPost = lazy(() => import('./pages/BlogPost'));
 const CustomPage = lazy(() => import('./pages/CustomPage'));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 const Login = lazy(() => import('./pages/admin/Login'));
 const Dashboard = lazy(() => import('./pages/admin/Dashboard'));
 
+// New pages open at the top, unless the link points at a section (for example /next-steps#baptism).
 function ScrollToTop() {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
   useEffect(() => {
+    if (hash) {
+      const el = document.getElementById(hash.slice(1));
+      if (el) { el.scrollIntoView(); return; }
+    }
     window.scrollTo(0, 0);
-  }, [pathname]);
+  }, [pathname, hash]);
   return null;
+}
+
+function SermonRedirect() {
+  const { id } = useParams();
+  return <Navigate to={`/messages/${id}`} replace />;
 }
 
 function Loading() {
@@ -48,11 +81,13 @@ function ProtectedRoute({ children }) {
 
 function PublicLayout({ children }) {
   return (
-    <div className="min-h-screen flex flex-col pt-0">
+    <div className="min-h-screen flex flex-col">
       <a href="#main" className="skip-link">Skip to content</a>
-      <Navbar />
+      <AnnouncementBar />
+      <Header />
       <main id="main" tabIndex={-1} className="flex-grow outline-none">{children}</main>
       <Footer />
+      <StickyMobileBar />
     </div>
   );
 }
@@ -63,6 +98,7 @@ export default function App() {
     <MotionConfig reducedMotion="user">
     <Router>
       <SettingsProvider>
+      <PhotosProvider>
       <AuthProvider>
       <ScrollToTop />
       <Suspense fallback={<Loading />}>
@@ -72,26 +108,30 @@ export default function App() {
         <Route path="/admin" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
 
         {/* Public Routes */}
-        <Route path="/" element={<PublicLayout><Home /></PublicLayout>} />
-        <Route path="/about" element={<PublicLayout><About /></PublicLayout>} />
-        <Route path="/sermons" element={<PublicLayout><Sermons /></PublicLayout>} />
-        <Route path="/sermons/:id" element={<PublicLayout><SermonDetail /></PublicLayout>} />
-        <Route path="/podcasts" element={<PublicLayout><Podcasts /></PublicLayout>} />
-        <Route path="/blog" element={<PublicLayout><Blog /></PublicLayout>} />
-        <Route path="/blog/:id" element={<PublicLayout><BlogPost /></PublicLayout>} />
-        <Route path="/events" element={<PublicLayout><Events /></PublicLayout>} />
-        <Route path="/events/:id" element={<PublicLayout><EventDetail /></PublicLayout>} />
-        <Route path="/team" element={<PublicLayout><Team /></PublicLayout>} />
-        <Route path="/contact" element={<PublicLayout><Contact /></PublicLayout>} />
-        <Route path="/visit" element={<PublicLayout><Visit /></PublicLayout>} />
-        <Route path="/ministries" element={<PublicLayout><Ministries /></PublicLayout>} />
-        <Route path="/p/:slug" element={<PublicLayout><CustomPage /></PublicLayout>} />
-        
-        {/* Fallback */}
-        <Route path="*" element={<Navigate to="/" />} />
+        {[
+          ['/', Home], ['/plan-your-visit', PlanYourVisit], ['/about', About], ['/beliefs', Beliefs], ['/core-values', CoreValues],
+          ['/leadership', Leadership], ['/messages', Messages], ['/messages/series/:series', MessageSeries], ['/messages/:slug', MessageDetail],
+          ['/next-steps', NextSteps], ['/ministries', Ministries], ['/kids', Kids], ['/youth', Youth], ['/table-groups', TableGroups],
+          ['/worship-team', WorshipTeam], ['/serve', Serve], ['/outreach', Outreach], ['/sozo', Sozo], ['/careportal', CarePortal],
+          ['/events', Events], ['/events/:id', EventDetail], ['/prayer', Prayer], ['/stories', Stories], ['/faq', FAQPage],
+          ['/give', Give], ['/transforming-together', Campaign], ['/contact', Contact], ['/connect', Connect],
+          ['/accessibility', Accessibility], ['/privacy', Privacy], ['/blog', Blog], ['/blog/:id', BlogPost], ['/p/:slug', CustomPage],
+        ].map(([path, Page]) => (
+          <Route key={path} path={path} element={<PublicLayout><Page /></PublicLayout>} />
+        ))}
+
+        {/* Old addresses still work */}
+        <Route path="/visit" element={<Navigate to="/plan-your-visit" replace />} />
+        <Route path="/sermons" element={<Navigate to="/messages" replace />} />
+        <Route path="/sermons/:id" element={<SermonRedirect />} />
+        <Route path="/team" element={<Navigate to="/leadership" replace />} />
+        <Route path="/podcasts" element={<Navigate to="/messages" replace />} />
+
+        <Route path="*" element={<PublicLayout><NotFoundPage /></PublicLayout>} />
       </Routes>
       </Suspense>
       </AuthProvider>
+      </PhotosProvider>
       </SettingsProvider>
     </Router>
     </MotionConfig>

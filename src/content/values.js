@@ -1,0 +1,75 @@
+export const CORE_VALUES = [
+  {
+    id: 'relationships', n: 1,
+    title: 'Pursuing Healthy Relationships',
+    summary: 'We show up honestly, with kindness and honor.',
+    body: 'We show up honestly, with kindness and honor. When conflict comes, and it does, we work toward making things right and keep the relationship. Everyone gets a seat at the table before they believe anything in particular.',
+    practice: [
+      'Calling out the gold in each other',
+      'Listening before we try to fix',
+      'Setting clear boundaries that protect our hearts without building walls',
+      'Extending grace the way God has extended it to us',
+    ],
+  },
+  {
+    id: 'wholeness', n: 2,
+    title: 'Accessing Abundant Wholeness',
+    summary: 'Jesus paid for our complete salvation, healing, and deliverance.',
+    body: 'Jesus paid for everything we need, which opens the door to complete salvation, healing, and freedom. We believe wholeness is meant for every part of life, spiritual, emotional, physical, and relational, and for every person who follows Him.',
+    practice: [
+      'Living from what we have in Christ',
+      'Receiving God’s healing for old wounds and current struggles',
+      'Caring wisely for our bodies and minds',
+      'Passing wholeness on to the people around us',
+    ],
+  },
+  {
+    id: 'greatness', n: 3,
+    title: 'Knowing Our Greatness',
+    summary: 'Everyone has value and a part to play. No spectators.',
+    body: 'Every person has value and a destiny. Nobody here is a spectator. We help people find their spiritual gifts and natural talents, then give them places to use them.',
+    practice: [
+      'Developing the gifts God gave each of us',
+      'Serving from identity, with no need to earn approval',
+      'Pursuing excellence without perfectionism',
+      'Celebrating the many ways God’s image shows up in people',
+    ],
+  },
+  {
+    id: 'supernatural', n: 4,
+    title: 'Owning a Supernatural Lifestyle',
+    summary: 'We partner with the Holy Spirit and expect God to move.',
+    body: 'The same power that raised Jesus from the dead is available today. We make room for God to move through prayer for healing, prophetic ministry, and Spirit-led worship, and we expect the supernatural to feel normal for Christians.',
+    practice: [
+      'Expecting God to work in ways we cannot explain',
+      'Learning to hear His voice and follow His lead',
+      'Praying boldly for healing and breakthrough',
+      'Taking faith-filled risks, grounded in Scripture and good character',
+    ],
+  },
+  {
+    id: 'presence', n: 5,
+    title: 'Treasuring His Presence',
+    summary: 'We grow through daily worship, prayer, and the Bible.',
+    body: 'We grow through daily time with God in worship, prayer, and the Bible. His presence changes us from the inside out, and we want church to be a place where anyone can encounter Him.',
+    practice: [
+      'Building daily rhythms that make space for God',
+      'Treating worship as a relationship',
+      'Putting God’s presence ahead of programs and performance',
+      'Creating settings where anyone can meet Him',
+    ],
+  },
+  {
+    id: 'gospel', n: 6,
+    title: 'Living the Gospel',
+    summary: 'We share Christ’s love through service and generosity.',
+    body: 'The good news is for Monday through Saturday too. We share the love of Jesus through service, generosity, and everyday conversation.',
+    practice: [
+      'Serving with no strings attached',
+      'Giving our time, talent, and money freely',
+      'Sharing our faith through words and actions',
+      'Standing up for justice and with the marginalized',
+      'Being good news in our neighborhoods, workplaces, and city',
+    ],
+  },
+];

@@ -173,3 +173,49 @@ export function mergeSectionOrder(saved, defaults = HOME_SECTION_DEFAULTS) {
   });
   return out;
 }
+
+// Message (sermon) URLs: /messages/12-the-upper-room. The id keeps lookups exact and the
+// words make the address readable.
+export function messagePath(sermon) {
+  return `/messages/${sermon.id}-${slugify(sermon.title)}`;
+}
+
+export function parseMessageId(param) {
+  const m = String(param || '').match(/^(\d+)/);
+  return m ? m[1] : null;
+}
+
+export function seriesPath(name) {
+  return `/messages/series/${slugify(name)}`;
+}
+
+// "1 John 2:1-6" -> "1 John", "Psalm 23" -> "Psalm"
+export function scriptureBook(ref) {
+  const m = String(ref || '').trim().match(/^((?:[1-3]\s)?[A-Za-z]+(?:\s[A-Za-z]+)*?)\s+\d/);
+  return m ? m[1] : '';
+}
+
+// Groups messages into series with a count, a date range, and the first cover image found.
+export function groupSeries(messages) {
+  const map = new Map();
+  for (const m of messages) {
+    const name = (m.series || '').trim();
+    if (!name) continue;
+    const entry = map.get(name) || { name, slug: slugify(name), count: 0, first: null, last: null, image: '' };
+    entry.count += 1;
+    const d = String(m.date || m.created_at || '').slice(0, 10);
+    if (d) {
+      if (!entry.first || d < entry.first) entry.first = d;
+      if (!entry.last || d > entry.last) entry.last = d;
+    }
+    if (!entry.image && safeUrl(m.series_image_url)) entry.image = safeUrl(m.series_image_url);
+    map.set(name, entry);
+  }
+  return [...map.values()].sort((a, b) => String(b.last || '').localeCompare(String(a.last || '')));
+}
+
+export function dateRangeLabel(first, last) {
+  if (!first) return '';
+  const fmt = (d) => new Date(d + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+  return first.slice(0, 7) === (last || first).slice(0, 7) ? fmt(first) : `${fmt(first)} to ${fmt(last)}`;
+}

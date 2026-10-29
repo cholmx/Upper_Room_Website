@@ -6,7 +6,7 @@ import { formatDate, isLive } from '../utils';
 import { plainText } from '../lib/markdown';
 import useFetch from '../hooks/useFetch';
 import { ErrorState } from '../components/StateViews';
-import PageHero from '../components/PageHero';
+import { PageHeader } from '../components/ui';
 import SafeIcon from '../common/SafeIcon';
 import { slideInLeft, slideInRight, fadeUp } from '../lib/motion';
 import * as FiIcons from 'react-icons/fi';
@@ -46,7 +46,7 @@ export default function Blog() {
 
   return (
     <div className="bg-[#F9F9F7] min-h-screen text-black pb-24 pt-20">
-      <PageHero kicker={'Articles & Updates'} title={'Church Blog'} subtitle={'Insights, devotions, and updates from the Upper Room Family.'} image="https://images.pexels.com/photos/6779632/pexels-photo-6779632.jpeg?auto=compress&cs=tinysrgb&h=1200" />
+      <PageHeader kicker="Articles and updates" title="Church blog" intro="Insights, devotions, and updates from the Upper Room family." />
 
       <div className="max-w-[1145px] mx-auto px-6 mt-16">
         {error ? (

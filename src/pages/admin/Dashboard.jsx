@@ -2,14 +2,15 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import SafeIcon from '../../common/SafeIcon';
 import * as FiIcons from 'react-icons/fi';
-import HeroManager from './HeroManager';
 import GenericManager from './GenericManager';
 import SettingsManager from './SettingsManager';
-import SectionOrderManager from './SectionOrderManager';
 import ActivityLog from './ActivityLog';
+import SitePhotosManager from './SitePhotosManager';
+import ChecklistManager from './ChecklistManager';
+import FormSubmissionsManager from './FormSubmissionsManager';
 import { useAuth } from '../../auth';
 
-const { FiTv, FiLayout, FiMic, FiCalendar, FiFileText, FiCamera, FiImage, FiLogOut, FiMenu, FiX, FiHeadphones, FiMail, FiSettings, FiList, FiActivity, FiUsers } = FiIcons;
+const { FiLayout, FiMic, FiCalendar, FiFileText, FiCamera, FiLogOut, FiMenu, FiX, FiMail, FiSettings, FiActivity, FiUsers, FiCheckSquare, FiHeart, FiMessageSquare } = FiIcons;
 
 const NavItem = ({ icon, children, ...rest }) => (
   <button {...rest} className="w-full flex items-center gap-4 px-4 py-3 text-left text-gray-300 hover:bg-[#CCA866] hover:text-black rounded-lg transition-colors duration-200">
@@ -23,34 +24,56 @@ const PUBLISH_FIELDS = [
   { name: 'publish_date', label: 'Publish On (optional)', type: 'date' },
 ];
 
+const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+const opts = (list) => list.map(v => ({ value: v, label: v }));
+
 const TAB_CONFIGS = {
-  photosections: {
-    table: 'photo_sections_church',
-    title: 'Photo Sections',
-    titleField: 'heading',
-    thumbField: 'image_url',
-    sortField: 'sort_order_num',
-    columns: ['heading', 'subtext'],
+  sermons: {
+    table: 'sermons',
+    title: 'Messages',
+    titleField: 'title',
+    columns: ['title', 'speaker', 'series', 'date'],
     fields: [
-      { name: 'heading', label: 'Heading', type: 'text', required: true },
-      { name: 'subtext', label: 'Subtext', type: 'text' },
-      { name: 'image_url', label: 'Image', type: 'image', required: true },
-      { name: 'button_text', label: 'Button Text', type: 'text' },
-      { name: 'button_page_slug', label: 'Button Link Slug', type: 'text' },
-      { name: 'sort_order_num', label: 'Sort Order', type: 'number' }
+      { name: 'title', label: 'Title', type: 'text', required: true },
+      { name: 'speaker', label: 'Speaker', type: 'text' },
+      { name: 'series', label: 'Series', type: 'text' },
+      { name: 'series_image_url', label: 'Series cover art (any message in the series)', type: 'image' },
+      { name: 'date', label: 'Date', type: 'date', required: true },
+      { name: 'scripture', label: 'Main Scripture passage (for example John 3:16-21)', type: 'text' },
+      { name: 'topic', label: 'Topic', type: 'text' },
+      { name: 'description', label: 'Short summary', type: 'markdown' },
+      { name: 'notes', label: 'Notes, transcript, or written summary', type: 'markdown' },
+      { name: 'notes_url', label: 'Downloadable notes link (optional)', type: 'url' },
+      { name: 'video_url', label: 'YouTube URL', type: 'youtube' },
+      { name: 'audio_url', label: 'Audio URL (optional)', type: 'url' },
+      ...PUBLISH_FIELDS
     ]
   },
-  gallery: {
-    table: 'gallery_church',
-    title: 'Gallery Photos',
-    titleField: 'caption',
-    thumbField: 'image_url',
-    sortField: 'sort_order_num',
-    columns: ['caption'],
+  events: {
+    table: 'events_church',
+    title: 'Events',
+    titleField: 'title',
+    columns: ['title', 'date', 'ministry'],
     fields: [
-      { name: 'image_url', label: 'Image', type: 'image', required: true },
-      { name: 'caption', label: 'Caption / Alt Text', type: 'text', required: true },
-      { name: 'sort_order_num', label: 'Sort Order', type: 'number' }
+      { name: 'title', label: 'Title', type: 'text', required: true },
+      { name: 'date', label: 'Date (first occurrence)', type: 'date', required: true },
+      {
+        name: 'recurrence', label: 'Repeats', type: 'select',
+        options: [
+          { value: 'none', label: 'Does not repeat' },
+          { value: 'weekly', label: 'Every week' },
+          { value: 'biweekly', label: 'Every 2 weeks' },
+          { value: 'monthly', label: 'Every month' },
+        ]
+      },
+      { name: 'ministry', label: 'Ministry (for the calendar filter)', type: 'select', options: [{ value: '', label: 'None' }, ...opts(['Sunday', 'Kids', 'Youth', 'Table Groups', 'Outreach', 'Campaign'])] },
+      { name: 'time', label: 'Time', type: 'text' },
+      { name: 'location', label: 'Location', type: 'text' },
+      { name: 'desc_text', label: 'Description', type: 'markdown' },
+      { name: 'image_url', label: 'Image (optional)', type: 'image' },
+      { name: 'registration_url', label: 'Sign-up link (optional)', type: 'url' },
+      { name: 'featured', label: 'Featured', type: 'checkbox', help: 'Show at the top of the Events page' },
+      ...PUBLISH_FIELDS
     ]
   },
   staff: {
@@ -70,6 +93,36 @@ const TAB_CONFIGS = {
       { name: 'published', label: 'Published', type: 'checkbox', defaultChecked: true, help: 'Visible on the website' }
     ]
   },
+  groups: {
+    table: 'table_groups_church',
+    title: 'Table Groups',
+    titleField: 'name',
+    columns: ['name', 'day', 'status'],
+    fields: [
+      { name: 'name', label: 'Group name', type: 'text', required: true },
+      { name: 'day', label: 'Day', type: 'select', options: [{ value: '', label: 'Not set' }, ...opts(DAYS)] },
+      { name: 'time_of_day', label: 'Time of day', type: 'select', options: [{ value: '', label: 'Not set' }, ...opts(['Morning', 'Afternoon', 'Evening'])] },
+      { name: 'area', label: 'Area (for example Columbiana, Salem)', type: 'text' },
+      { name: 'life_stage', label: 'Life stage (for example Young adults, Families)', type: 'text' },
+      { name: 'status', label: 'Open or full', type: 'select', options: [{ value: 'open', label: 'Open' }, { value: 'full', label: 'Full' }] },
+      { name: 'description', label: 'Short description', type: 'textarea' },
+      { name: 'published', label: 'Published', type: 'checkbox', defaultChecked: true, help: 'Visible on the website' }
+    ]
+  },
+  stories: {
+    table: 'stories_church',
+    title: 'Stories',
+    titleField: 'name',
+    thumbField: 'photo_url',
+    columns: ['name', 'quote'],
+    fields: [
+      { name: 'name', label: 'First name and last initial', type: 'text', required: true },
+      { name: 'quote', label: 'Short quote', type: 'textarea', required: true },
+      { name: 'body', label: 'Full story (optional)', type: 'markdown' },
+      { name: 'photo_url', label: 'Photo (written permission required)', type: 'image' },
+      { name: 'published', label: 'Published', type: 'checkbox', defaultChecked: true, help: 'Visible on the website' }
+    ]
+  },
   pages: {
     table: 'custom_pages_church',
     title: 'Custom Pages',
@@ -77,50 +130,9 @@ const TAB_CONFIGS = {
     columns: ['title_text', 'slug_key', 'nav_label_text'],
     fields: [
       { name: 'title_text', label: 'Title', type: 'text', required: true },
-      { name: 'slug_key', label: 'URL Slug', type: 'slug', slugFrom: 'title_text', required: true },
+      { name: 'slug_key', label: 'URL Slug (the page appears at /p/your-slug)', type: 'slug', slugFrom: 'title_text', required: true },
       { name: 'nav_label_text', label: 'Nav Label', type: 'text' },
       { name: 'body_content_text', label: 'Body Content', type: 'markdown' }
-    ]
-  },
-  sermons: {
-    table: 'sermons',
-    title: 'Sermons',
-    titleField: 'title',
-    columns: ['title', 'speaker', 'date'],
-    fields: [
-      { name: 'title', label: 'Title', type: 'text', required: true },
-      { name: 'speaker', label: 'Speaker', type: 'text' },
-      { name: 'series', label: 'Series', type: 'text' },
-      { name: 'date', label: 'Date', type: 'date', required: true },
-      { name: 'description', label: 'Description', type: 'markdown' },
-      { name: 'notes', label: 'Sermon Notes / Transcript', type: 'markdown' },
-      { name: 'video_url', label: 'YouTube URL', type: 'youtube' },
-      { name: 'audio_url', label: 'Audio URL (optional)', type: 'url' },
-      ...PUBLISH_FIELDS
-    ]
-  },
-  events: {
-    table: 'events_church',
-    title: 'Events',
-    titleField: 'title',
-    columns: ['title', 'date', 'recurrence'],
-    fields: [
-      { name: 'title', label: 'Title', type: 'text', required: true },
-      { name: 'date', label: 'Date (first occurrence)', type: 'date', required: true },
-      {
-        name: 'recurrence', label: 'Repeats', type: 'select',
-        options: [
-          { value: 'none', label: 'Does not repeat' },
-          { value: 'weekly', label: 'Every week' },
-          { value: 'biweekly', label: 'Every 2 weeks' },
-          { value: 'monthly', label: 'Every month' },
-        ]
-      },
-      { name: 'time', label: 'Time', type: 'text' },
-      { name: 'location', label: 'Location', type: 'text' },
-      { name: 'desc_text', label: 'Description', type: 'markdown' },
-      { name: 'registration_url', label: 'Registration Link (optional)', type: 'url' },
-      ...PUBLISH_FIELDS
     ]
   },
   posts: {
@@ -139,80 +151,47 @@ const TAB_CONFIGS = {
       ...PUBLISH_FIELDS
     ]
   },
-  episodes: {
-    table: 'episodes',
-    title: 'Podcast Episodes',
-    titleField: 'title',
-    columns: ['title', 'date'],
-    fields: [
-      { name: 'title', label: 'Title', type: 'text', required: true },
-      { name: 'date', label: 'Date', type: 'date', required: true },
-      { name: 'audio', label: 'Audio URL', type: 'url', required: true },
-      { name: 'feed', label: 'Feed / Show Link (optional)', type: 'url' }
-    ]
-  },
-  messages: {
-    table: 'contact_messages_church',
-    title: 'Messages',
-    titleField: 'name',
-    canCreate: false,
-    columns: ['name', 'kind', 'email'],
-    fields: [
-      { name: 'name', label: 'Name', type: 'text' },
-      { name: 'email', label: 'Email', type: 'text' },
-      { name: 'kind', label: 'Type', type: 'text' },
-      { name: 'message', label: 'Message', type: 'textarea' },
-      { name: 'handled', label: 'Handled', type: 'checkbox', help: 'Someone has followed up' }
-    ]
-  }
 };
 
 const ContentStudio = () => {
   const { user, logout } = useAuth();
-  const [activeTab, setActiveTab] = useState('hero');
+  const [activeTab, setActiveTab] = useState('forms');
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   const renderContent = () => {
     switch (activeTab) {
-      case 'hero':
-        return <HeroManager />;
-      case 'layout':
-        return <SectionOrderManager />;
+      case 'forms':
+        return <FormSubmissionsManager />;
+      case 'checklist':
+        return <ChecklistManager />;
+      case 'photos':
+        return <SitePhotosManager />;
       case 'settings':
         return <SettingsManager />;
       case 'activity':
         return <ActivityLog />;
-      case 'photosections':
-      case 'gallery':
-      case 'staff':
-      case 'pages':
-      case 'sermons':
-      case 'events':
-      case 'posts':
-      case 'episodes':
-      case 'messages':
-        return <GenericManager key={activeTab} config={TAB_CONFIGS[activeTab]} />;
       default:
-        return null;
+        return TAB_CONFIGS[activeTab] ? <GenericManager key={activeTab} config={TAB_CONFIGS[activeTab]} /> : null;
     }
   };
 
   const isAdmin = user?.role !== 'editor';
   const TABS = {
+    'Inbox': [
+      { key: 'forms', label: 'Form Submissions', icon: FiMail },
+    ],
     'Site': [
-      { key: 'hero', label: 'Hero Section', icon: FiTv },
-      { key: 'layout', label: 'Home Layout', icon: FiList },
-      { key: 'photosections', label: 'Photo Sections', icon: FiCamera },
-      { key: 'gallery', label: 'Gallery', icon: FiImage },
+      { key: 'checklist', label: 'Content to Confirm', icon: FiCheckSquare },
+      { key: 'photos', label: 'Site Photos', icon: FiCamera },
       { key: 'pages', label: 'Custom Pages', icon: FiLayout },
     ],
     'Content': [
-      { key: 'staff', label: 'Staff & Leaders', icon: FiUsers },
-      { key: 'sermons', label: 'Sermons', icon: FiMic },
-      { key: 'episodes', label: 'Podcasts', icon: FiHeadphones },
+      { key: 'sermons', label: 'Messages', icon: FiMic },
       { key: 'events', label: 'Events', icon: FiCalendar },
+      { key: 'staff', label: 'Staff & Leaders', icon: FiUsers },
+      { key: 'groups', label: 'Table Groups', icon: FiHeart },
+      { key: 'stories', label: 'Stories', icon: FiMessageSquare },
       { key: 'posts', label: 'Blog Posts', icon: FiFileText },
-      { key: 'messages', label: 'Messages', icon: FiMail },
     ],
     ...(isAdmin ? {
       'Admin': [

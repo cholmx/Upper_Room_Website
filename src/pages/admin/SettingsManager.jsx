@@ -11,7 +11,9 @@ import * as FiIcons from 'react-icons/fi';
 const { FiSave, FiLoader } = FiIcons;
 
 const FIELDS = [
-  { name: 'service_time', label: 'Service Time (shown on Home and Visit)', type: 'text', required: true },
+  { name: 'announcement_text', label: 'Announcement bar text (leave blank for none)', type: 'text' },
+  { name: 'announcement_url', label: 'Announcement link (optional)', type: 'url' },
+  { name: 'service_time', label: 'Service Time (for example Sundays at 10:30am)', type: 'text', required: true },
   { name: 'phone', label: 'Phone', type: 'text' },
   { name: 'email', label: 'Public Email', type: 'text' },
   { name: 'street', label: 'Street Address', type: 'text' },

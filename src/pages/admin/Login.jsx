@@ -37,7 +37,7 @@ export default function Login() {
         className="bg-[#11201B]/80 backdrop-blur-2xl p-10 rounded-3xl shadow-2xl max-w-md w-full border border-white/10 relative z-10"
       >
         <div className="text-center mb-10">
-          <h1 className="text-3xl font-black uppercase text-white mb-2 tracking-tight" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>
+          <h1 className="text-3xl font-black uppercase text-white mb-2 tracking-tight">
             Content Studio
           </h1>
           <p className="font-serif italic text-[#FFC44F] text-sm">Upper Room Fellowship</p>

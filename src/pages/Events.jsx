@@ -1,100 +1,174 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import useFetch from '../hooks/useFetch';
 import usePageMeta from '../hooks/usePageMeta';
-import { expandEvents, isLive, downloadIcs, safeUrl } from '../utils';
+import useFetch from '../hooks/useFetch';
+import { downloadIcs, expandEvents, formatDate, isLive, safeUrl } from '../utils';
 import { plainText } from '../lib/markdown';
-import PageHero from '../components/PageHero';
-import { Spinner, ErrorState } from '../components/StateViews';
-import SafeIcon from '../common/SafeIcon';
-import { fadeUpShort as fadeUp } from '../lib/motion';
-import * as FiIcons from 'react-icons/fi';
+import { MINISTRY_FILTERS, RECURRING_EVENTS } from '../content/events';
+import { Btn, Section, PageHeader, EndCta, Todo, PhotoBox } from '../components/ui';
+import { Spinner } from '../components/StateViews';
 
-const { FiMapPin, FiClock, FiArrowRight, FiCalendar, FiRepeat } = FiIcons;
+const todayIso = () => new Date().toISOString().slice(0, 10);
+const pad = (n) => String(n).padStart(2, '0');
 
-const RECURRENCE_LABEL = { weekly: 'Every week', biweekly: 'Every 2 weeks', monthly: 'Every month' };
+function detailPath(e) {
+  if (e.to) return e.to;
+  return `/events/${e.id}?date=${e.occurrence_date}`;
+}
 
-export default function Events() {
-  usePageMeta('Events', 'Upcoming events and gatherings at Upper Room Fellowship in Columbiana, Ohio.');
-  const { data, loading, error, reload } = useFetch('read/events_church?sort=date:asc');
-  const events = useMemo(() => expandEvents((data ?? []).filter(isLive)), [data]);
+function EventCard({ e, featured = false }) {
+  const d = new Date(e.occurrence_date + 'T00:00:00');
+  const text = plainText(e.description || e.desc_text);
+  const reg = safeUrl(e.registration_url);
+  return (
+    <article className={`bg-white rounded-2xl border border-black/10 overflow-hidden ${featured ? 'md:grid md:grid-cols-2' : 'flex flex-col md:flex-row'}`}>
+      {safeUrl(e.image_url) && <PhotoBox src={e.image_url} alt="" label={e.title} ratio={featured ? 'aspect-[16/10]' : 'aspect-[16/10] md:aspect-auto md:w-56'} rounded={false} />}
+      <div className="p-6 flex gap-5 flex-grow">
+        <div className="text-center flex-shrink-0 w-16" aria-hidden="true">
+          <div className="text-sm font-bold uppercase tracking-wider text-[#8A6309]">{d.toLocaleDateString('en-US', { month: 'short' })}</div>
+          <div className="text-3xl font-display font-semibold leading-none">{d.getDate()}</div>
+        </div>
+        <div className="min-w-0 flex-grow">
+          {e.ministry && <p className="u-kicker text-[#8A6309] !mb-1">{e.ministry}</p>}
+          <h2 className="text-xl md:text-2xl"><Link to={detailPath(e)} className="hover:text-[#8A6309]">{e.title}</Link></h2>
+          <p className="mt-1 text-[#2b2f2d]"><span className="sr-only">Date: </span>{formatDate(e.occurrence_date)}{e.time ? `, ${e.time}` : ''}{e.location ? `, ${e.location}` : ''}</p>
+          {text && <p className="mt-3 text-[#2b2f2d] leading-relaxed line-clamp-3">{text}</p>}
+          <div className="mt-4 flex flex-wrap gap-3 items-center">
+            {reg && <Btn href={reg} variant="primary">Sign up</Btn>}
+            <button type="button" onClick={() => downloadIcs(e)} className="inline-flex items-center min-h-[44px] font-semibold underline underline-offset-4 text-[#8A6309]">Add to Calendar</button>
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function MonthView({ events, cursor, setCursor }) {
+  const year = cursor.getFullYear();
+  const month = cursor.getMonth();
+  const first = new Date(year, month, 1);
+  const days = new Date(year, month + 1, 0).getDate();
+  const byDay = {};
+  for (const e of events) {
+    const [y, m, d] = e.occurrence_date.split('-').map(Number);
+    if (y === year && m === month + 1) (byDay[d] ||= []).push(e);
+  }
+  const cells = [...Array(first.getDay()).fill(null), ...Array.from({ length: days }, (_, i) => i + 1)];
+  while (cells.length % 7) cells.push(null);
+  const label = first.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+  const move = (delta) => setCursor(new Date(year, month + delta, 1));
 
   return (
-    <div className="bg-[#F9F9F7] min-h-screen text-black pb-24 pt-20">
-      <PageHero kicker="Get Involved" title="Upcoming Events" subtitle="Find where you belong and connect with community." image="https://images.pexels.com/photos/39007872/pexels-photo-39007872.jpeg?auto=compress&cs=tinysrgb&h=1200" />
-
-      <div className="max-w-[900px] mx-auto px-6 mt-20">
-        {error ? (
-          <ErrorState message={error} onRetry={reload} />
-        ) : loading ? (
-          <Spinner />
-        ) : events.length === 0 ? (
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center py-32 bg-white rounded-3xl border border-black/5">
-            <div className="text-5xl mb-6" aria-hidden="true">🗓️</div>
-            <h2 className="text-3xl font-bold mb-3">No upcoming events</h2>
-            <p className="opacity-60 text-lg">Check back soon for new gatherings and opportunities.</p>
-          </motion.div>
-        ) : (
-          <motion.ul
-            className="space-y-8"
-            initial="hidden"
-            animate="visible"
-            variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.1 } } }}
-          >
-            {events.map((e) => {
-              const d = new Date(e.occurrence_date + 'T00:00:00');
-              const detail = `/events/${e.id}?date=${e.occurrence_date}`;
-              return (
-                <motion.li key={`${e.id}-${e.occurrence_date}`} variants={fadeUp} className="relative bg-white border border-black/5 p-8 md:p-10 rounded-3xl flex flex-col md:flex-row gap-10 items-start hover:shadow-2xl transition-all duration-300 group hover:-translate-y-1">
-                  <div className="md:w-1/4 flex-shrink-0 text-center md:text-left bg-[#F9F9F7] md:bg-transparent w-full md:w-auto py-6 md:py-0 rounded-2xl md:rounded-none">
-                    <div className="text-[#8A6309] font-bold text-2xl uppercase tracking-widest leading-tight">
-                      {d.toLocaleDateString('en-US', { month: 'short' })}
-                      <br className="hidden md:block" />
-                      <span className="text-4xl md:text-6xl text-black">{d.getDate()}</span>
-                    </div>
-                  </div>
-
-                  <div className="md:w-3/4 flex flex-col items-center md:items-start text-center md:text-left">
-                    <h3 className="text-3xl font-bold mb-4 group-hover:text-[#8A6309] transition-colors">
-                      <Link to={detail} className="after:absolute after:inset-0 after:rounded-3xl">{e.title}</Link>
-                    </h3>
-
-                    <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 mb-6">
-                      <div className="flex items-center gap-2 text-sm font-bold opacity-70 bg-gray-100 px-4 py-2 rounded-full">
-                        <SafeIcon icon={FiClock} className="text-[#8A6309]" /> {e.time || 'Time TBD'}
-                      </div>
-                      {e.location && (
-                        <div className="flex items-center gap-2 text-sm font-bold opacity-70 bg-gray-100 px-4 py-2 rounded-full">
-                          <SafeIcon icon={FiMapPin} className="text-[#8A6309]" /> {e.location}
-                        </div>
-                      )}
-                      {RECURRENCE_LABEL[e.recurrence] && (
-                        <div className="flex items-center gap-2 text-sm font-bold opacity-70 bg-gray-100 px-4 py-2 rounded-full">
-                          <SafeIcon icon={FiRepeat} className="text-[#8A6309]" /> {RECURRENCE_LABEL[e.recurrence]}
-                        </div>
-                      )}
-                    </div>
-
-                    <p className="opacity-80 text-lg leading-relaxed mb-8 line-clamp-3">{plainText(e.description || e.desc_text)}</p>
-
-                    <div className="relative z-10 flex flex-wrap gap-3 justify-center md:justify-start">
-                      {safeUrl(e.registration_url) && (
-                        <a href={safeUrl(e.registration_url)} target="_blank" rel="noopener noreferrer" className="btn btn-solid group/btn">
-                          Register Now <SafeIcon icon={FiArrowRight} className="group-hover/btn:translate-x-1 transition-transform" />
-                        </a>
-                      )}
-                      <button type="button" onClick={() => downloadIcs(e)} className="btn btn-outline border-black/30 text-black">
-                        <SafeIcon icon={FiCalendar} className="mr-2" /> Add to Calendar
-                      </button>
-                    </div>
-                  </div>
-                </motion.li>
-              );
-            })}
-          </motion.ul>
-        )}
+    <div>
+      <div className="flex items-center justify-between mb-4">
+        <button type="button" onClick={() => move(-1)} className="u-btn bg-transparent text-[#080c0b] border-[#080c0b]/70 hover:bg-[#080c0b] hover:text-[#FFC44F]">Previous<span className="sr-only"> month</span></button>
+        <h2 className="text-xl md:text-2xl" aria-live="polite">{label}</h2>
+        <button type="button" onClick={() => move(1)} className="u-btn bg-transparent text-[#080c0b] border-[#080c0b]/70 hover:bg-[#080c0b] hover:text-[#FFC44F]">Next<span className="sr-only"> month</span></button>
       </div>
+
+      {/* Phones: a plain agenda for the month */}
+      <ul className="md:hidden space-y-3">
+        {Object.keys(byDay).length === 0 && <li className="text-lg">Nothing scheduled this month.</li>}
+        {Object.keys(byDay).map(Number).sort((a, b) => a - b).map(day => (
+          <li key={day} className="bg-white rounded-xl border border-black/10 p-4">
+            <p className="font-semibold">{new Date(year, month, day).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}</p>
+            <ul className="mt-1">{byDay[day].map(e => <li key={e.id + e.occurrence_date}><Link to={detailPath(e)} className="underline underline-offset-4 text-[#8A6309]">{e.title}</Link>{e.time ? `, ${e.time}` : ''}</li>)}</ul>
+          </li>
+        ))}
+      </ul>
+
+      <table className="hidden md:table w-full table-fixed border-collapse bg-white rounded-xl overflow-hidden border border-black/10">
+        <caption className="sr-only">{label}</caption>
+        <thead>
+          <tr>{['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(d => <th key={d} scope="col" className="p-2 text-sm font-bold text-[#2b2f2d] border-b border-black/10">{d}</th>)}</tr>
+        </thead>
+        <tbody>
+          {Array.from({ length: cells.length / 7 }, (_, r) => (
+            <tr key={r}>
+              {cells.slice(r * 7, r * 7 + 7).map((day, i) => (
+                <td key={i} className="align-top h-28 p-2 border border-black/10">
+                  {day && (
+                    <>
+                      <span className="text-sm font-semibold">{day}</span>
+                      <ul className="mt-1 space-y-1">
+                        {(byDay[day] || []).map(e => (
+                          <li key={e.id + e.occurrence_date}><Link to={detailPath(e)} className="block text-xs leading-snug underline underline-offset-2 text-[#8A6309]">{e.title}</Link></li>
+                        ))}
+                      </ul>
+                    </>
+                  )}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
+  );
+}
+
+export default function Events() {
+  usePageMeta('events');
+  const { data, loading } = useFetch('read/events_church?sort=date:asc');
+  const [view, setView] = useState('list');
+  const [ministry, setMinistry] = useState('');
+  const [cursor, setCursor] = useState(() => { const n = new Date(); return new Date(n.getFullYear(), n.getMonth(), 1); });
+
+  const all = useMemo(() => [...(data ?? []).filter(isLive), ...RECURRING_EVENTS].filter(e => !ministry || e.ministry === ministry), [data, ministry]);
+  const upcoming = useMemo(() => expandEvents(all, todayIso(), 120), [all]);
+  const monthEvents = useMemo(() => {
+    const start = `${cursor.getFullYear()}-${pad(cursor.getMonth() + 1)}-01`;
+    const days = new Date(cursor.getFullYear(), cursor.getMonth() + 1, 0).getDate();
+    return expandEvents(all, start, days - 1);
+  }, [all, cursor]);
+
+  const featured = useMemo(() => {
+    const dbOnly = upcoming.filter(e => typeof e.id === 'number' || /^\d+$/.test(String(e.id)));
+    return dbOnly.find(e => e.featured === 1 || e.featured === true) || null;
+  }, [upcoming]);
+  const rest = upcoming.filter(e => e !== featured);
+
+  return (
+    <>
+      <PageHeader kicker="Events" title="What is happening" intro="This is what is coming up at the church." />
+      <Section tone="cream">
+        <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
+          <div role="group" aria-label="Calendar view" className="inline-flex rounded-full border border-black/30 overflow-hidden">
+            {['list', 'month'].map(v => (
+              <button key={v} type="button" aria-pressed={view === v} onClick={() => setView(v)} className={`min-h-[48px] px-6 font-semibold ${view === v ? 'bg-[#0B1613] text-white' : 'bg-white text-[#080c0b] hover:bg-[#F2F1ED]'}`}>
+                {v === 'list' ? 'List' : 'Month'}
+              </button>
+            ))}
+          </div>
+          <div>
+            <label htmlFor="ev-ministry" className="block text-sm font-semibold mb-1">Show events for</label>
+            <select id="ev-ministry" value={ministry} onChange={(e) => setMinistry(e.target.value)} className="min-h-[48px] px-3 bg-white rounded-xl border border-black/25 focus:outline-none focus:ring-2 focus:ring-[#8A6309]">
+              <option value="">Everything</option>
+              {MINISTRY_FILTERS.map(m => <option key={m} value={m}>{m}</option>)}
+            </select>
+          </div>
+        </div>
+
+        {loading ? <Spinner /> : view === 'month' ? (
+          <MonthView events={monthEvents} cursor={cursor} setCursor={setCursor} />
+        ) : (
+          <>
+            {featured && (
+              <div className="mb-8">
+                <p className="u-kicker text-[#8A6309]">Featured</p>
+                <EventCard e={featured} featured />
+              </div>
+            )}
+            {rest.length === 0 ? <p className="text-lg">Nothing else is on the calendar yet. Check back soon or follow us on Facebook and Instagram.</p> : (
+              <ul className="space-y-5">
+                {rest.map(e => <li key={`${e.id}-${e.occurrence_date}`}><EventCard e={e} /></li>)}
+              </ul>
+            )}
+          </>
+        )}
+        <p className="mt-8"><Todo id="events-other">[ADD OTHER EVENTS]</Todo></p>
+      </Section>
+      <EndCta title="Come to Sunday" text="Our weekly gathering is the easiest place to start." to="/plan-your-visit" label="Plan Your Visit" />
+    </>
   );
 }

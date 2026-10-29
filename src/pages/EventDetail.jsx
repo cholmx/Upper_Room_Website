@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import useFetch from '../hooks/useFetch';
 import usePageMeta from '../hooks/usePageMeta';
 import useJsonLd from '../hooks/useJsonLd';
@@ -8,11 +7,8 @@ import { useSite } from '../settings';
 import { formatDate, isLive, downloadIcs, safeUrl } from '../utils';
 import { plainText } from '../lib/markdown';
 import RichText from '../components/RichText';
+import { Btn, Section, EndCta, PhotoBox } from '../components/ui';
 import { Spinner, ErrorState, NotFound } from '../components/StateViews';
-import SafeIcon from '../common/SafeIcon';
-import * as FiIcons from 'react-icons/fi';
-
-const { FiArrowLeft, FiClock, FiMapPin, FiCalendar, FiArrowRight } = FiIcons;
 
 export default function EventDetail() {
   const { id } = useParams();
@@ -24,14 +20,16 @@ export default function EventDetail() {
     ? { ...found, occurrence_date: params.get('date') || String(found.date).slice(0, 10) }
     : null;
   const description = ev?.description || ev?.desc_text;
+  const reg = safeUrl(ev?.registration_url);
 
-  usePageMeta(ev?.title || 'Event', plainText(description).slice(0, 155) || `An event at ${SITE.name}.`);
+  usePageMeta(ev ? `${ev.title} | Events` : 'Event', plainText(description).slice(0, 155) || `An event at ${SITE.shortName} in Columbiana, Ohio.`);
   useJsonLd(ev ? {
     '@context': 'https://schema.org',
     '@type': 'Event',
     name: ev.title,
     startDate: ev.occurrence_date,
     description: plainText(description) || undefined,
+    image: safeUrl(ev.image_url) || undefined,
     eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
     eventStatus: 'https://schema.org/EventScheduled',
     location: {
@@ -49,34 +47,35 @@ export default function EventDetail() {
     organizer: { '@type': 'Organization', name: SITE.name, url: SITE.url },
   } : null);
 
-  if (loading) return <div className="pt-32"><Spinner /></div>;
-  if (error) return <div className="pt-32 px-6 max-w-3xl mx-auto"><ErrorState message={error} onRetry={reload} /></div>;
+  if (loading) return <Section><Spinner /></Section>;
+  if (error) return <Section><ErrorState message={error} onRetry={reload} /></Section>;
   if (!ev) return <NotFound what="event" />;
 
   return (
-    <div className="bg-[#F9F9F7] min-h-screen pt-32 pb-24 px-6">
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-[800px] mx-auto">
-        <Link to="/events" className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-[#8A6309] hover:text-black mb-8">
-          <SafeIcon icon={FiArrowLeft} /> All Events
-        </Link>
-        <h1 className="text-4xl md:text-6xl mb-8">{ev.title}</h1>
-        <div className="flex flex-wrap gap-3 mb-10">
-          <span className="flex items-center gap-2 text-sm font-bold bg-white border border-black/5 px-4 py-2 rounded-full"><SafeIcon icon={FiCalendar} className="text-[#8A6309]" /> {formatDate(ev.occurrence_date)}</span>
-          <span className="flex items-center gap-2 text-sm font-bold bg-white border border-black/5 px-4 py-2 rounded-full"><SafeIcon icon={FiClock} className="text-[#8A6309]" /> {ev.time || 'Time TBD'}</span>
-          {ev.location && <span className="flex items-center gap-2 text-sm font-bold bg-white border border-black/5 px-4 py-2 rounded-full"><SafeIcon icon={FiMapPin} className="text-[#8A6309]" /> {ev.location}</span>}
-        </div>
-        {description && <RichText value={description} className="text-lg md:text-xl mb-12" />}
-        <div className="flex flex-wrap gap-3">
-          {safeUrl(ev.registration_url) && (
-            <a href={safeUrl(ev.registration_url)} target="_blank" rel="noopener noreferrer" className="btn btn-solid group">
-              Register Now <SafeIcon icon={FiArrowRight} className="group-hover:translate-x-1 transition-transform" />
-            </a>
-          )}
-          <button type="button" onClick={() => downloadIcs(ev)} className="btn btn-outline border-black/30 text-black">
-            <SafeIcon icon={FiCalendar} className="mr-2" /> Add to Calendar
-          </button>
-        </div>
-      </motion.div>
-    </div>
+    <>
+      <article>
+        <header className="bg-[#F2F1ED]">
+          <div className="max-w-4xl mx-auto px-5 sm:px-8 py-10 md:py-14">
+            <Link to="/events" className="inline-flex items-center min-h-[44px] font-semibold text-[#8A6309] underline underline-offset-4">All events</Link>
+            {ev.ministry && <p className="u-kicker text-[#8A6309] mt-2">{ev.ministry}</p>}
+            <h1 className="text-3xl md:text-5xl">{ev.title}</h1>
+            <dl className="mt-5 grid sm:grid-cols-2 gap-x-8 gap-y-2 text-[#2b2f2d]">
+              <div><dt className="inline font-semibold">Date: </dt><dd className="inline">{formatDate(ev.occurrence_date)}</dd></div>
+              <div><dt className="inline font-semibold">Time: </dt><dd className="inline">{ev.time || 'To be announced'}</dd></div>
+              {ev.location && <div><dt className="inline font-semibold">Where: </dt><dd className="inline">{ev.location}</dd></div>}
+            </dl>
+          </div>
+        </header>
+        <Section tone="cream" narrow>
+          {safeUrl(ev.image_url) && <PhotoBox src={ev.image_url} alt="" label={ev.title} ratio="aspect-[16/9]" className="mb-8" />}
+          {description && <RichText value={description} className="text-lg mb-8" />}
+          <div className="flex flex-wrap gap-3 items-center">
+            {reg && <Btn href={reg} variant="primary">Sign up</Btn>}
+            <button type="button" onClick={() => downloadIcs(ev)} className="u-btn bg-transparent text-[#080c0b] border-[#080c0b]/70 hover:bg-[#080c0b] hover:text-[#FFC44F]">Add to Calendar</button>
+          </div>
+        </Section>
+      </article>
+      <EndCta title="Come to Sunday" text="Our weekly gathering is the easiest place to start." to="/plan-your-visit" label="Plan Your Visit" />
+    </>
   );
 }
