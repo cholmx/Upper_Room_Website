@@ -14,7 +14,7 @@ export default function Prayer() {
       />
       <Section tone="cream" narrow>
         <FormBlock formKey="prayer" />
-        <p className="mt-5 text-sm text-[#2b2f2d]"><Todo id="prayer-who">[CONFIRM WHO RECEIVES REQUESTS AND WHETHER FOLLOW-UP HAPPENS]</Todo></p>
+        <p className="mt-5 text-sm text-black/80"><Todo id="prayer-who">[CONFIRM WHO RECEIVES REQUESTS AND WHETHER FOLLOW-UP HAPPENS]</Todo></p>
       </Section>
     </>
   );

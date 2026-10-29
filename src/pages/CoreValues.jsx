@@ -11,7 +11,7 @@ function ValueIcon({ n }) {
   const [failed, setFailed] = useState(false);
   const src = url || `/images/core-values/core-value-${n}.png`;
   if (failed && !url) {
-    return <span aria-hidden="true" className="w-16 h-16 rounded-full bg-[#FFC44F] text-[#080c0b] font-display text-2xl font-semibold flex items-center justify-center">{n}</span>;
+    return <span aria-hidden="true" className="w-16 h-16 rounded-full bg-[#FFC44F] text-[#080c0b] text-2xl font-semibold flex items-center justify-center">{n}</span>;
   }
   return <img src={src} alt="" width="72" height="72" loading="lazy" className="w-[72px] h-[72px] object-contain" onError={() => setFailed(true)} />;
 }
@@ -33,12 +33,12 @@ export default function CoreValues() {
                 <summary className="cursor-pointer list-none p-6 flex items-start gap-5 min-h-[56px]">
                   <ValueIcon n={v.n} />
                   <span className="flex-grow">
-                    <h2 className="block text-xl md:text-2xl font-display font-semibold">{v.title}</h2>
-                    <span className="block mt-1 text-[#2b2f2d]">{v.summary}</span>
+                    <h2 className="block text-xl md:text-2xl font-bold">{v.title}</h2>
+                    <span className="block mt-1 text-black/80">{v.summary}</span>
                     <span className="block mt-3 text-sm font-semibold text-[#8A6309]"><span className="group-open:hidden">Read more</span><span className="hidden group-open:inline">Show less</span></span>
                   </span>
                 </summary>
-                <div className="px-6 pb-6 -mt-1 text-[#2b2f2d] leading-relaxed">
+                <div className="px-6 pb-6 -mt-1 text-black/80 leading-relaxed">
                   <p>{v.body}</p>
                   <h3 className="text-lg mt-5 mb-2">In practice, this means</h3>
                   <ul className="list-disc pl-6 space-y-1">
@@ -49,7 +49,7 @@ export default function CoreValues() {
             </li>
           ))}
         </ol>
-        <p className="mt-10 max-w-3xl text-lg leading-relaxed text-[#2b2f2d]">
+        <p className="mt-10 max-w-3xl text-lg leading-relaxed text-black/80">
           Living by these values is hard some days, and we get it wrong sometimes. We keep going because it is worth it. As Psalm 58:11 says in the New Living Translation, “There truly is a reward for those who live for God.”
         </p>
       </Section>

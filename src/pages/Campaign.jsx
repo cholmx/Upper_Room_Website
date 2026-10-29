@@ -16,13 +16,13 @@ export default function Campaign() {
 
   return (
     <>
-      <PageHeader kicker="Growth Campaign" title="Transforming Together" photo="campaign-hero" photoRatio="aspect-[16/10]">
+      <PageHeader kicker="Growth Campaign" title="Transforming Together" photo="campaign-hero">
         <Btn href={SITE.growthGiveUrl} variant="primary">Give to the Growth Campaign</Btn>
-        <Btn href={SITE.pledgeUrl} variant="ghost">Submit Your Commitment Card</Btn>
+        <Btn href={SITE.pledgeUrl} variant="light">Submit Your Commitment Card</Btn>
       </PageHeader>
 
       <Section tone="cream" narrow>
-        <div className="space-y-6 text-lg leading-relaxed text-[#2b2f2d]">
+        <div className="space-y-6 text-lg leading-relaxed text-black/80">
           <p>In 1971, a handful of believers met in an upper room above a vet’s office in Columbiana. They had no building fund and no plan, only a willingness to obey. They prayed, worshiped, and invited friends who needed Jesus. God showed up.</p>
           <p>Fifty years later, that simple yes has changed lives, healed marriages, broken addictions, and brought generations back to God.</p>
           <p>Every so often since then, we have faced the same choice. We could stay comfortable, or we could make room. Each time we chose faith, and each time God provided. The generations before us gave sacrificially and put up with construction mess because they believed more people needed Jesus. Now it is our turn.</p>
@@ -36,17 +36,17 @@ export default function Campaign() {
         <div className="grid md:grid-cols-3 gap-6">
           <div className="bg-white rounded-2xl border border-black/10 p-6 flex flex-col">
             <h3 className="text-xl mb-2">Give to the Building Fund</h3>
-            <p className="text-[#2b2f2d] flex-grow">Choose “Building Donation” from the dropdown on the giving form.</p>
+            <p className="text-black/80 flex-grow">Choose “Building Donation” from the dropdown on the giving form.</p>
             <div className="mt-4"><Btn href={SITE.giveUrl} variant="ghost">Give to the Building Fund</Btn></div>
           </div>
           <div className="bg-white rounded-2xl border border-black/10 p-6 flex flex-col">
             <h3 className="text-xl mb-2">Give to the Growth Campaign</h3>
-            <p className="text-[#2b2f2d] flex-grow">Give toward the campaign directly.</p>
+            <p className="text-black/80 flex-grow">Give toward the campaign directly.</p>
             <div className="mt-4"><Btn href={SITE.growthGiveUrl} variant="ghost">Give to the Growth Campaign</Btn></div>
           </div>
           <div className="bg-white rounded-2xl border border-black/10 p-6 flex flex-col">
             <h3 className="text-xl mb-2">Submit your commitment</h3>
-            <p className="text-[#2b2f2d] flex-grow">Tell us what you plan to give over the three years.</p>
+            <p className="text-black/80 flex-grow">Tell us what you plan to give over the three years.</p>
             <div className="mt-4"><Btn href={SITE.pledgeUrl} variant="ghost">Submit Your Commitment Card</Btn></div>
           </div>
         </div>

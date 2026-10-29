@@ -33,7 +33,7 @@ export default function LiteYouTube({ id, title }) {
         src={ytThumb(id)}
         alt=""
         loading="lazy"
-        className="w-full h-full object-cover opacity-80 group-hover:opacity-60 group-hover:scale-105 transition-all duration-500"
+        className="w-full h-full object-cover text-black/80 group-hover:opacity-60 group-hover:scale-105 transition-all duration-500"
         onError={(e) => { e.currentTarget.style.display = 'none'; }}
       />
       <span className="absolute inset-0 flex items-center justify-center">

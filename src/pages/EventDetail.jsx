@@ -54,12 +54,12 @@ export default function EventDetail() {
   return (
     <>
       <article>
-        <header className="bg-[#F2F1ED]">
+        <header className="bg-white">
           <div className="max-w-4xl mx-auto px-5 sm:px-8 py-10 md:py-14">
             <Link to="/events" className="inline-flex items-center min-h-[44px] font-semibold text-[#8A6309] underline underline-offset-4">All events</Link>
-            {ev.ministry && <p className="u-kicker text-[#8A6309] mt-2">{ev.ministry}</p>}
+            {ev.ministry && <p className="kicker text-[#8A6309] mt-2">{ev.ministry}</p>}
             <h1 className="text-3xl md:text-5xl">{ev.title}</h1>
-            <dl className="mt-5 grid sm:grid-cols-2 gap-x-8 gap-y-2 text-[#2b2f2d]">
+            <dl className="mt-5 grid sm:grid-cols-2 gap-x-8 gap-y-2 text-black/80">
               <div><dt className="inline font-semibold">Date: </dt><dd className="inline">{formatDate(ev.occurrence_date)}</dd></div>
               <div><dt className="inline font-semibold">Time: </dt><dd className="inline">{ev.time || 'To be announced'}</dd></div>
               {ev.location && <div><dt className="inline font-semibold">Where: </dt><dd className="inline">{ev.location}</dd></div>}
@@ -71,7 +71,7 @@ export default function EventDetail() {
           {description && <RichText value={description} className="text-lg mb-8" />}
           <div className="flex flex-wrap gap-3 items-center">
             {reg && <Btn href={reg} variant="primary">Sign up</Btn>}
-            <button type="button" onClick={() => downloadIcs(ev)} className="u-btn bg-transparent text-[#080c0b] border-[#080c0b]/70 hover:bg-[#080c0b] hover:text-[#FFC44F]">Add to Calendar</button>
+            <button type="button" onClick={() => downloadIcs(ev)} className="btn btn-outline">Add to Calendar</button>
           </div>
         </Section>
       </article>

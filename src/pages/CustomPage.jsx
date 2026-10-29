@@ -67,7 +67,7 @@ export default function CustomPage() {
       {/* Content Body */}
       <div className="py-24 px-6">
         <motion.div initial="hidden" animate="visible" variants={fadeUp} className="max-w-[800px] mx-auto bg-white p-8 md:p-16 rounded-3xl border border-black/5 shadow-sm">
-          <div className="space-y-8 text-lg md:text-xl opacity-80 leading-relaxed font-serif text-gray-800">
+          <div className="space-y-8 text-lg md:text-xl text-black/80 leading-relaxed font-serif text-gray-800">
             {stripHtml(page.body_content_text).split('\n').filter(Boolean).map((para, i) => (
               <p key={i}>{para}</p>
             ))}

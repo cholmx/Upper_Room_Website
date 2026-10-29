@@ -26,7 +26,7 @@ export default function Stories() {
               <li key={s.id} className="bg-white rounded-2xl border border-black/10 overflow-hidden flex flex-col">
                 <PhotoBox src={s.photo_url} alt={s.name ? `Photo of ${s.name}` : ''} label={`${s.name || 'story'} photo`} ratio="aspect-[4/3]" rounded={false} />
                 <div className="p-6 flex flex-col flex-grow">
-                  <blockquote className="text-xl font-display leading-snug">“{s.quote}”</blockquote>
+                  <blockquote className="text-xl leading-snug">“{s.quote}”</blockquote>
                   {s.name && <p className="mt-3 font-semibold text-[#8A6309]">{s.name}</p>}
                   {s.body && (
                     <details className="mt-4 u-acc">
@@ -44,7 +44,7 @@ export default function Stories() {
         <div className="grid md:grid-cols-5 gap-10 items-start">
           <div className="md:col-span-2">
             <SectionHeader title="Share your story" className="!mb-4" />
-            <p className="text-lg leading-relaxed text-[#2b2f2d]">If God has done something in your life, we would love to hear it. It might encourage someone else.</p>
+            <p className="text-lg leading-relaxed text-black/80">If God has done something in your life, we would love to hear it. It might encourage someone else.</p>
           </div>
           <div className="md:col-span-3"><FormBlock formKey="story" /></div>
         </div>

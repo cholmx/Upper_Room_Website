@@ -1,3 +1,23 @@
+// The page banners from the original design. A photo set in Site Photos replaces one.
+const PX = (id) => `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&h=1200`;
+const ABOUT = PX(40383990);
+const VISIT = PX(8250816);
+const MINISTRY = PX(3700250);
+const GENERAL = PX(9562304);
+
+export const HERO_IMAGES = {
+  home: PX(38274945),
+  plan: VISIT, connect: VISIT, contact: VISIT, faq: VISIT,
+  about: ABOUT, beliefs: ABOUT, values: ABOUT, growth: ABOUT,
+  leadership: PX(3184393),
+  messages: PX(34328505),
+  events: PX(39007872),
+  ministries: MINISTRY, kids: MINISTRY, youth: MINISTRY, tableGroups: MINISTRY, worship: MINISTRY, serve: MINISTRY,
+  outreach: MINISTRY, careportal: MINISTRY, nextSteps: MINISTRY,
+  sozo: GENERAL, prayer: GENERAL, stories: GENERAL, give: GENERAL, accessibility: GENERAL, privacy: GENERAL,
+  blog: PX(6779632),
+};
+
 // Every image the site shows. Until a real photo is added in the admin (Site Photos),
 // the slot shows its label so it is clear what belongs there.
 export const PHOTO_SLOTS = [
@@ -28,4 +48,8 @@ export const PHOTO_SLOTS = [
   { key: 'core-value-6', label: 'icon for Living the Gospel', alt: '', kind: 'icon' },
 ];
 
+export const BANNER_SLOTS = Object.keys(HERO_IMAGES).map(k => ({ key: `banner-${k}`, label: `${k.replace(/([A-Z])/g, ' $1').toLowerCase()} page banner (replaces the default photo)`, alt: '', kind: 'banner' }));
+PHOTO_SLOTS.push(...BANNER_SLOTS);
+
 export const SLOT_BY_KEY = Object.fromEntries(PHOTO_SLOTS.map(s => [s.key, s]));
+

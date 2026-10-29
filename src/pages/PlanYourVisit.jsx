@@ -1,7 +1,7 @@
 import React from 'react';
 import usePageMeta from '../hooks/usePageMeta';
 import { useSite } from '../settings';
-import { Btn, Section, SectionHeader, PageHeader, QuickFacts, Steps, Photo, Gloss, Todo, Accordion } from '../components/ui';
+import { Btn, Section, SectionHeader, PageHeader, QuickFacts, Steps, Photo, PhotoGrid, Gloss, Todo, Accordion } from '../components/ui';
 import FormBlock from '../components/FormBlock';
 import { FAQ_PREVIEW } from '../content/faq';
 
@@ -17,7 +17,7 @@ export default function PlanYourVisit() {
         intro="We are glad you are here. Walking into a new church can feel intimidating, so this page covers a Sunday from the front door to the coffee line."
       >
         <Btn href={SITE.googleMapsUrl} variant="primary">Get Directions</Btn>
-        <Btn to="/connect" variant="ghost">Fill Out the Connect Card</Btn>
+        <Btn to="/connect" variant="light">Fill Out the Connect Card</Btn>
       </PageHeader>
 
       <Section tone="cream" className="!pb-0 md:!pb-0">
@@ -45,16 +45,13 @@ export default function PlanYourVisit() {
             ]}
           />
         </div>
-        <div className="grid md:grid-cols-2 gap-6 mt-12">
-          <Photo slot="plan-greeter" />
-          <Photo slot="plan-coffee" />
-        </div>
+        <PhotoGrid slots={['plan-greeter', 'plan-coffee']} className="mt-12" />
       </Section>
 
       <Section tone="sand">
         <SectionHeader kicker="Getting here" title="Parking and getting here" />
         <div className="grid md:grid-cols-2 gap-8 items-start">
-          <div className="space-y-5 text-lg leading-relaxed text-[#2b2f2d]">
+          <div className="space-y-5 text-lg leading-relaxed text-black/80">
             <p><Todo id="parking">[PARKING DETAILS: where to park, which door to use, where greeters stand]</Todo></p>
             <p>{SITE.addressLine}</p>
             <Btn href={SITE.googleMapsUrl} variant="primary">Get Directions</Btn>
@@ -70,7 +67,7 @@ export default function PlanYourVisit() {
         <div className="grid md:grid-cols-2 gap-10">
           <div>
             <SectionHeader kicker="Bringing kids" title="Your kids" className="!mb-5" />
-            <div className="space-y-4 text-lg leading-relaxed text-[#2b2f2d]">
+            <div className="space-y-4 text-lg leading-relaxed text-black/80">
               <p>Upper Room Kids welcomes children from birth through 5th grade. Kids worship with you at the start, then head to age-appropriate classes during the message. The nursery is open for the whole service for infants and toddlers, and a parent viewing room lets you follow the service while you keep an eye on a little one.</p>
               <p>Every volunteer is background-checked and trained. Our check-in system makes sure only authorized adults can pick up your child.</p>
             </div>
@@ -78,7 +75,7 @@ export default function PlanYourVisit() {
           </div>
           <div>
             <SectionHeader kicker="Accessibility" title="Everyone can take part" className="!mb-5" />
-            <div className="space-y-4 text-lg leading-relaxed text-[#2b2f2d]">
+            <div className="space-y-4 text-lg leading-relaxed text-black/80">
               <p>Our building is fully wheelchair accessible, with designated seating areas. If you have trouble hearing, our free Listen Everywhere app streams the service audio to your phone or tablet. Bring your own headphones. It works on iPhone and Android. If you have other needs, tell us ahead of time and we will do our best to help.</p>
             </div>
             <div className="mt-6 flex flex-wrap gap-3">
@@ -97,7 +94,7 @@ export default function PlanYourVisit() {
         <div className="grid md:grid-cols-5 gap-10 items-start">
           <div className="md:col-span-2">
             <SectionHeader kicker="Let us know" title="Let us know you are coming" className="!mb-4" />
-            <p className="text-lg leading-relaxed text-[#2b2f2d]">Fill out the Connect Card and our welcome team will be watching for you. It takes about a minute. We only use your information to help with your visit.</p>
+            <p className="text-lg leading-relaxed text-black/80">Fill out the Connect Card and our welcome team will be watching for you. It takes about a minute. We only use your information to help with your visit.</p>
           </div>
           <div className="md:col-span-3"><FormBlock formKey="connect" /></div>
         </div>

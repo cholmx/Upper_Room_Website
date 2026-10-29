@@ -26,13 +26,13 @@ function EventCard({ e, featured = false }) {
       <div className="p-6 flex gap-5 flex-grow">
         <div className="text-center flex-shrink-0 w-16" aria-hidden="true">
           <div className="text-sm font-bold uppercase tracking-wider text-[#8A6309]">{d.toLocaleDateString('en-US', { month: 'short' })}</div>
-          <div className="text-3xl font-display font-semibold leading-none">{d.getDate()}</div>
+          <div className="text-3xl font-bold leading-none">{d.getDate()}</div>
         </div>
         <div className="min-w-0 flex-grow">
-          {e.ministry && <p className="u-kicker text-[#8A6309] !mb-1">{e.ministry}</p>}
+          {e.ministry && <p className="kicker text-[#8A6309] !mb-1">{e.ministry}</p>}
           <h2 className="text-xl md:text-2xl"><Link to={detailPath(e)} className="hover:text-[#8A6309]">{e.title}</Link></h2>
-          <p className="mt-1 text-[#2b2f2d]"><span className="sr-only">Date: </span>{formatDate(e.occurrence_date)}{e.time ? `, ${e.time}` : ''}{e.location ? `, ${e.location}` : ''}</p>
-          {text && <p className="mt-3 text-[#2b2f2d] leading-relaxed line-clamp-3">{text}</p>}
+          <p className="mt-1 text-black/80"><span className="sr-only">Date: </span>{formatDate(e.occurrence_date)}{e.time ? `, ${e.time}` : ''}{e.location ? `, ${e.location}` : ''}</p>
+          {text && <p className="mt-3 text-black/80 leading-relaxed line-clamp-3">{text}</p>}
           <div className="mt-4 flex flex-wrap gap-3 items-center">
             {reg && <Btn href={reg} variant="primary">Sign up</Btn>}
             <button type="button" onClick={() => downloadIcs(e)} className="inline-flex items-center min-h-[44px] font-semibold underline underline-offset-4 text-[#8A6309]">Add to Calendar</button>
@@ -61,9 +61,9 @@ function MonthView({ events, cursor, setCursor }) {
   return (
     <div>
       <div className="flex items-center justify-between mb-4">
-        <button type="button" onClick={() => move(-1)} className="u-btn bg-transparent text-[#080c0b] border-[#080c0b]/70 hover:bg-[#080c0b] hover:text-[#FFC44F]">Previous<span className="sr-only"> month</span></button>
+        <button type="button" onClick={() => move(-1)} className="btn btn-outline">Previous<span className="sr-only"> month</span></button>
         <h2 className="text-xl md:text-2xl" aria-live="polite">{label}</h2>
-        <button type="button" onClick={() => move(1)} className="u-btn bg-transparent text-[#080c0b] border-[#080c0b]/70 hover:bg-[#080c0b] hover:text-[#FFC44F]">Next<span className="sr-only"> month</span></button>
+        <button type="button" onClick={() => move(1)} className="btn btn-outline">Next<span className="sr-only"> month</span></button>
       </div>
 
       {/* Phones: a plain agenda for the month */}
@@ -80,7 +80,7 @@ function MonthView({ events, cursor, setCursor }) {
       <table className="hidden md:table w-full table-fixed border-collapse bg-white rounded-xl overflow-hidden border border-black/10">
         <caption className="sr-only">{label}</caption>
         <thead>
-          <tr>{['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(d => <th key={d} scope="col" className="p-2 text-sm font-bold text-[#2b2f2d] border-b border-black/10">{d}</th>)}</tr>
+          <tr>{['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(d => <th key={d} scope="col" className="p-2 text-sm font-bold text-black/80 border-b border-black/10">{d}</th>)}</tr>
         </thead>
         <tbody>
           {Array.from({ length: cells.length / 7 }, (_, r) => (
@@ -135,7 +135,7 @@ export default function Events() {
         <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
           <div role="group" aria-label="Calendar view" className="inline-flex rounded-full border border-black/30 overflow-hidden">
             {['list', 'month'].map(v => (
-              <button key={v} type="button" aria-pressed={view === v} onClick={() => setView(v)} className={`min-h-[48px] px-6 font-semibold ${view === v ? 'bg-[#0B1613] text-white' : 'bg-white text-[#080c0b] hover:bg-[#F2F1ED]'}`}>
+              <button key={v} type="button" aria-pressed={view === v} onClick={() => setView(v)} className={`min-h-[48px] px-6 font-semibold ${view === v ? 'bg-[#0B1613] text-white' : 'bg-white text-[#080c0b] hover:bg-white'}`}>
                 {v === 'list' ? 'List' : 'Month'}
               </button>
             ))}
@@ -155,7 +155,7 @@ export default function Events() {
           <>
             {featured && (
               <div className="mb-8">
-                <p className="u-kicker text-[#8A6309]">Featured</p>
+                <p className="kicker text-[#8A6309]">Featured</p>
                 <EventCard e={featured} featured />
               </div>
             )}

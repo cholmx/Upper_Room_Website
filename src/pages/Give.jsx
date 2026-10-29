@@ -1,7 +1,7 @@
 import React from 'react';
 import usePageMeta from '../hooks/usePageMeta';
 import { useSite } from '../settings';
-import { Btn, Section, SectionHeader, PageHeader, Cards, Card, Photo, Todo } from '../components/ui';
+import { Btn, Section, SectionHeader, PageHeader, Cards, Card, PhotoGrid, Todo } from '../components/ui';
 import FormBlock from '../components/FormBlock';
 
 export default function Give() {
@@ -19,7 +19,7 @@ export default function Give() {
       <Section tone="cream">
         <div className="bg-white rounded-3xl border border-black/10 p-8 md:p-12 text-center max-w-3xl mx-auto">
           <h2 className="text-3xl md:text-4xl">Give online</h2>
-          <p className="mt-4 text-lg md:text-xl text-[#2b2f2d] leading-relaxed">Make a secure one-time gift or set up a recurring gift. You can direct it to the general fund or to a specific ministry.</p>
+          <p className="mt-4 text-lg md:text-xl text-black/80 leading-relaxed">Make a secure one-time gift or set up a recurring gift. You can direct it to the general fund or to a specific ministry.</p>
           <div className="mt-8"><Btn href={SITE.giveUrl} variant="primary" className="!min-h-[56px] !px-10 !text-lg">Give Online</Btn></div>
         </div>
       </Section>
@@ -38,22 +38,22 @@ export default function Give() {
         <div className="grid md:grid-cols-2 gap-10">
           <div>
             <SectionHeader kicker="Why we give" title="Why we give" className="!mb-4" />
-            <p className="text-lg leading-relaxed text-[#2b2f2d]">Giving is an act of worship and a way of saying we trust God to provide. It gives us a chance to</p>
-            <ul className="mt-3 list-disc pl-6 space-y-2 text-lg text-[#2b2f2d]">
+            <p className="text-lg leading-relaxed text-black/80">Giving is an act of worship and a way of saying we trust God to provide. It gives us a chance to</p>
+            <ul className="mt-3 list-disc pl-6 space-y-2 text-lg text-black/80">
               <li>Worship God with our money</li>
               <li>Grow in trust as we place our resources in His hands</li>
               <li>Invest in ministry that changes lives here and around the world</li>
               <li>Say thank you for how generous God has been to us</li>
               <li>Partner with God in building His kingdom</li>
             </ul>
-            <blockquote className="mt-6 border-l-4 border-[#8A6309] pl-5 font-display text-xl">
+            <blockquote className="mt-6 border-l-4 border-[#8A6309] pl-5 text-xl">
               Read 2 Corinthians 9:6-7 for the heart behind it.
             </blockquote>
           </div>
           <div>
             <SectionHeader kicker="Accountability" title="Financial accountability" className="!mb-4" />
-            <p className="text-lg leading-relaxed text-[#2b2f2d]">We take care of what you give.</p>
-            <ul className="mt-3 list-disc pl-6 space-y-2 text-lg text-[#2b2f2d]">
+            <p className="text-lg leading-relaxed text-black/80">We take care of what you give.</p>
+            <ul className="mt-3 list-disc pl-6 space-y-2 text-lg text-black/80">
               <li>Our finance team reviews the finances every month</li>
               <li>Our budget follows our mission and values</li>
               <li>We give regular financial updates to the congregation</li>
@@ -65,18 +65,19 @@ export default function Give() {
 
       <Section tone="sand">
         <SectionHeader kicker="Impact" title="Where your gift goes" intro="Your gifts mostly fund our local ministries, our building, our staff, and our outreach, with a portion going to missions." />
-        <div className="grid md:grid-cols-3 gap-6">
-          <div><Photo slot="give-impact-1" /><p className="mt-3"><Todo id="impact-stories">[SHORT IMPACT STORY]</Todo></p></div>
-          <div><Photo slot="give-impact-2" /><p className="mt-3"><Todo id="impact-stories">[SHORT IMPACT STORY]</Todo></p></div>
-          <div><Photo slot="give-impact-3" /><p className="mt-3"><Todo id="impact-stories">[SHORT IMPACT STORY]</Todo></p></div>
-        </div>
+        <ul className="space-y-3 text-lg">
+          <li><Todo id="impact-stories">[SHORT IMPACT STORY]</Todo></li>
+          <li><Todo id="impact-stories">[SHORT IMPACT STORY]</Todo></li>
+          <li><Todo id="impact-stories">[SHORT IMPACT STORY]</Todo></li>
+        </ul>
+        <PhotoGrid slots={['give-impact-1', 'give-impact-2', 'give-impact-3']} className="mt-8 md:!grid-cols-3" />
       </Section>
 
       <Section tone="cream">
         <div className="grid md:grid-cols-5 gap-10 items-start">
           <div className="md:col-span-2">
             <SectionHeader title="Generosity stories" className="!mb-4" />
-            <p className="text-lg leading-relaxed text-[#2b2f2d]">Has giving changed something for you? Share your story and it might encourage someone else.</p>
+            <p className="text-lg leading-relaxed text-black/80">Has giving changed something for you? Share your story and it might encourage someone else.</p>
           </div>
           <div className="md:col-span-3"><FormBlock formKey="generosity" /></div>
         </div>

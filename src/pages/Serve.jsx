@@ -38,7 +38,7 @@ export default function Serve() {
         <div className="grid md:grid-cols-5 gap-10 items-start">
           <div className="md:col-span-2">
             <SectionHeader title="Tell us what interests you" className="!mb-4" />
-            <p className="text-lg leading-relaxed text-[#2b2f2d]">Pick the teams that sound like you, and someone will reach out to talk about the next step.</p>
+            <p className="text-lg leading-relaxed text-black/80">Pick the teams that sound like you, and someone will reach out to talk about the next step.</p>
           </div>
           <div className="md:col-span-3"><FormBlock formKey="serve" /></div>
         </div>

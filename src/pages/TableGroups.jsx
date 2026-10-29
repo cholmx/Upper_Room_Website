@@ -42,18 +42,17 @@ export default function TableGroups() {
         kicker="Table Groups"
         title="Table Groups"
         intro={<>Life goes better with people who know you. <Gloss k="tableGroups" /> in homes around the community.</>}
-        photo="table-group"
       />
 
       <Section tone="cream">
         <div className="grid md:grid-cols-2 gap-10">
           <div>
             <SectionHeader title="Why a small group" className="!mb-4" />
-            <p className="text-lg leading-relaxed text-[#2b2f2d]">In a church our size, smaller circles are where people really get known. A Table Group gives you a place to build friendships, apply what you hear on Sunday to ordinary life, and get support when things get hard.</p>
+            <p className="text-lg leading-relaxed text-black/80">In a church our size, smaller circles are where people really get known. A Table Group gives you a place to build friendships, apply what you hear on Sunday to ordinary life, and get support when things get hard.</p>
           </div>
           <div>
             <SectionHeader title="What to expect" className="!mb-4" />
-            <ul className="list-disc pl-6 space-y-2 text-lg text-[#2b2f2d]">
+            <ul className="list-disc pl-6 space-y-2 text-lg text-black/80">
               <li>Groups for every age and stage of life</li>
               <li>Meetings on different days and at different times</li>
               <li>Most groups run in seasons of 8 to 12 weeks, so you can try one without a long commitment</li>
@@ -68,7 +67,7 @@ export default function TableGroups() {
         <SectionHeader kicker="Group finder" title="Find a group" />
         {groups.length === 0 ? (
           <div className="bg-white rounded-2xl border border-black/10 p-6">
-            <p className="text-lg text-[#2b2f2d]">{error ? 'We could not load the group list just now.' : 'Our current groups are being added.'} Tell us what works for you using the form below and we will help you find a fit.</p>
+            <p className="text-lg text-black/80">{error ? 'We could not load the group list just now.' : 'Our current groups are being added.'} Tell us what works for you using the form below and we will help you find a fit.</p>
             <p className="mt-3"><Todo id="current-groups">[ADD CURRENT GROUPS]</Todo></p>
           </div>
         ) : (
@@ -87,7 +86,7 @@ export default function TableGroups() {
                   <li key={g.id} className="bg-white rounded-2xl border border-black/10 p-6 flex flex-col">
                     <h3 className="text-xl">{g.name}</h3>
                     <p className="mt-1 text-sm font-semibold text-[#8A6309]">{[g.day, g.time_of_day, g.area, g.life_stage].filter(Boolean).join('  |  ')}</p>
-                    {g.description && <p className="mt-3 text-[#2b2f2d]">{g.description}</p>}
+                    {g.description && <p className="mt-3 text-black/80">{g.description}</p>}
                     <div className="mt-auto pt-4 flex items-center gap-4">
                       <span className={`text-sm font-bold ${(g.status || 'open') === 'full' ? 'text-red-800' : 'text-green-900'}`}>{(g.status || 'open') === 'full' ? 'Full' : 'Open'}</span>
                       <Btn onClick={() => join(g)} variant="ghost" aria-label={`${(g.status || 'open') === 'full' ? 'Ask about a spot in' : 'Join'} ${g.name}`}>{(g.status || 'open') === 'full' ? 'Ask about a spot' : 'Join'}</Btn>
@@ -104,8 +103,8 @@ export default function TableGroups() {
         <div ref={formRef} className="grid md:grid-cols-5 gap-10 items-start scroll-mt-24">
           <div className="md:col-span-2">
             <SectionHeader title="Help me find a group" className="!mb-4" />
-            <p className="text-lg leading-relaxed text-[#2b2f2d]">Tell us what days work for you and what stage of life you are in, and we will help you find a fit.</p>
-            <p className="mt-6 text-lg text-[#2b2f2d]">Interested in hosting or leading a group? <Link className="underline underline-offset-4 font-semibold text-[#8A6309]" to="/contact">Send us a message</Link>.</p>
+            <p className="text-lg leading-relaxed text-black/80">Tell us what days work for you and what stage of life you are in, and we will help you find a fit.</p>
+            <p className="mt-6 text-lg text-black/80">Interested in hosting or leading a group? <Link className="underline underline-offset-4 font-semibold text-[#8A6309]" to="/contact">Send us a message</Link>.</p>
             <p className="mt-3"><Todo id="groups-contact">[NAME OF THE PERSON WHO LEADS TABLE GROUPS]</Todo></p>
           </div>
           <div className="md:col-span-3"><FormBlock key={picked} formKey="tablegroup" defaults={{ group: picked }} /></div>

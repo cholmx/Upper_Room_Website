@@ -38,7 +38,7 @@ export default function Contact() {
                 ))}
               </ul>
             </div>
-            <p className="text-[#2b2f2d]">We believe in healthy relationships, and that starts with getting to know you.</p>
+            <p className="text-black/80">We believe in healthy relationships, and that starts with getting to know you.</p>
           </div>
           <div className="md:col-span-3"><FormBlock formKey="contact" /></div>
         </div>

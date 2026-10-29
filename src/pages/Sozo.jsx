@@ -72,7 +72,7 @@ export default function Sozo() {
 
       <Section tone="sand">
         <div className="grid md:grid-cols-2 gap-10">
-          <div><SectionHeader title="What Sozo is not" className="!mb-4" /><p className="text-lg leading-relaxed text-[#2b2f2d]">Sozo does not replace professional counseling or medical care.</p>{PASTE('sozo-text', 'what Sozo is NOT')}</div>
+          <div><SectionHeader title="What Sozo is not" className="!mb-4" /><p className="text-lg leading-relaxed text-black/80">Sozo does not replace professional counseling or medical care.</p>{PASTE('sozo-text', 'what Sozo is NOT')}</div>
           <div><SectionHeader title="Our team" className="!mb-4" />{PASTE('sozo-text', 'our Sozo team')}</div>
           <div><SectionHeader title="Recommended resources" className="!mb-4" />{PASTE('sozo-text', 'recommended resources')}</div>
           <div><SectionHeader title="A closing word" className="!mb-4" />{PASTE('sozo-text', 'closing with Isaiah 61:1')}</div>
@@ -83,7 +83,7 @@ export default function Sozo() {
         <div className="grid md:grid-cols-5 gap-10 items-start">
           <div className="md:col-span-2">
             <SectionHeader title="Request a Sozo session" className="!mb-4" />
-            <p className="text-lg leading-relaxed text-[#2b2f2d]">Your inquiry is confidential. Prefer email? Write to <a className="underline underline-offset-4 font-semibold" href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
+            <p className="text-lg leading-relaxed text-black/80">Your inquiry is confidential. Prefer email? Write to <a className="underline underline-offset-4 font-semibold" href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
           </div>
           <div className="md:col-span-3"><FormBlock formKey="sozo" /></div>
         </div>

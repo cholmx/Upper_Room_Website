@@ -135,7 +135,7 @@ export default function FormBlock({ formKey, heading, intro, defaults = {}, clas
     return (
       <div role="status" className={`bg-white border border-black/10 rounded-2xl p-8 text-center ${className}`}>
         <p className="text-xl font-semibold leading-relaxed">{def.confirmation}</p>
-        <button type="button" onClick={() => setState({ phase: 'idle', error: '' })} className="u-btn bg-transparent text-[#080c0b] border-[#080c0b]/70 hover:bg-[#080c0b] hover:text-[#FFC44F] mt-6">Send another</button>
+        <button type="button" onClick={() => setState({ phase: 'idle', error: '' })} className="btn btn-outline mt-6">Send another</button>
       </div>
     );
   }
@@ -143,7 +143,7 @@ export default function FormBlock({ formKey, heading, intro, defaults = {}, clas
   return (
     <form ref={formRef} onSubmit={submit} noValidate aria-labelledby={heading ? headingId : undefined} className={`bg-white border border-black/10 rounded-2xl p-6 md:p-8 space-y-5 ${className}`}>
       {heading && <h2 id={headingId} className="text-2xl md:text-3xl">{heading}</h2>}
-      {intro && <p className="text-[#2b2f2d] leading-relaxed">{intro}</p>}
+      {intro && <p className="text-black/80 leading-relaxed">{intro}</p>}
       {def.fields.filter(f => isVisible(f, values)).map(f => (
         <Field key={f.name} field={f} value={values[f.name]} onChange={change} error={errors[f.name]} />
       ))}
@@ -151,9 +151,9 @@ export default function FormBlock({ formKey, heading, intro, defaults = {}, clas
       <div aria-hidden="true" className="absolute -left-[9999px] h-0 overflow-hidden">
         <label>Website<input tabIndex={-1} autoComplete="off" name="website" value={values.website || ''} onChange={(e) => change('website', e.target.value)} /></label>
       </div>
-      {def.note && <p className="text-sm text-[#2b2f2d]">{def.note}</p>}
+      {def.note && <p className="text-sm text-black/80">{def.note}</p>}
       {state.phase === 'error' && <p role="alert" className="text-red-700 font-medium">{state.error}</p>}
-      <button type="submit" disabled={state.phase === 'sending'} className="u-btn bg-[#FFC44F] text-[#080c0b] border-[#FFC44F] hover:bg-[#ffce6b] disabled:opacity-60">
+      <button type="submit" disabled={state.phase === 'sending'} className="btn btn-solid disabled:opacity-60">
         {state.phase === 'sending' ? 'Sending...' : def.button}
       </button>
     </form>

@@ -11,7 +11,6 @@ export default function WorshipTeam() {
         kicker="Worship and creative"
         title="Worship and Creative Teams"
         intro="Worship is something we do together, so we choose songs that are rich in meaning and easy to sing. Our style is contemporary with a few traditional touches, and we want it to feel real and Spirit-led."
-        photo="worship-team"
       />
       <Section tone="cream">
         <SectionHeader title="The teams" intro="We create space to meet God through music, art, and technology." />
@@ -26,7 +25,7 @@ export default function WorshipTeam() {
         <div className="grid md:grid-cols-5 gap-10 items-start">
           <div className="md:col-span-2">
             <SectionHeader title="Join us" className="!mb-4" />
-            <p className="text-lg leading-relaxed text-[#2b2f2d]">If you would like to serve with us, we will help you find the right fit. After completing the Growth Track, you can audition for the worship team or shadow one of our production volunteers to learn the ropes.</p>
+            <p className="text-lg leading-relaxed text-black/80">If you would like to serve with us, we will help you find the right fit. After completing the Growth Track, you can audition for the worship team or shadow one of our production volunteers to learn the ropes.</p>
           </div>
           <div className="md:col-span-3"><FormBlock formKey="worship" /></div>
         </div>

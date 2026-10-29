@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { NAV } from '../content/nav';
 import { useSite } from '../settings';
@@ -9,8 +10,9 @@ import * as FiIcons from 'react-icons/fi';
 
 const { FiMenu, FiX, FiChevronDown } = FiIcons;
 
-const linkCls = ({ isActive }) =>
-  `inline-flex items-center min-h-[44px] px-3 rounded-md text-[0.95rem] font-semibold hover:bg-black/5 ${isActive ? 'text-[#8A6309] underline underline-offset-8 decoration-2' : 'text-[#080c0b]'}`;
+const linkBase = 'whitespace-nowrap font-serif italic uppercase text-[0.9rem] tracking-widest py-1 border-b-2 transition-all duration-300 inline-flex items-center gap-1';
+const linkOn = 'border-[#FFC44F] text-black';
+const linkOff = 'border-transparent text-black/70 hover:text-black hover:border-black/20';
 
 function DesktopDropdown({ item }) {
   const [open, setOpen] = useState(false);
@@ -37,23 +39,16 @@ function DesktopDropdown({ item }) {
       onMouseLeave={() => setOpen(false)}
       onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget)) setOpen(false); }}
     >
-      <button
-        ref={btn}
-        type="button"
-        aria-expanded={open}
-        aria-haspopup="true"
-        onClick={() => setOpen(o => !o)}
-        className={`inline-flex items-center gap-1 min-h-[44px] px-3 rounded-md text-[0.95rem] font-semibold hover:bg-black/5 ${active ? 'text-[#8A6309]' : 'text-[#080c0b]'}`}
-      >
+      <button ref={btn} type="button" aria-expanded={open} aria-haspopup="true" onClick={() => setOpen(o => !o)} className={`${linkBase} ${active ? linkOn : linkOff}`}>
         {item.label}
         <SafeIcon icon={FiChevronDown} className={`transition-transform ${open ? 'rotate-180' : ''}`} />
       </button>
       {open && (
-        <div className="absolute left-0 top-full pt-1 z-50 min-w-[15rem]">
-          <ul className="bg-white rounded-xl border border-black/10 shadow-xl py-2">
+        <div className="absolute left-1/2 -translate-x-1/2 top-full pt-3 z-50 min-w-[16rem]">
+          <ul className="bg-white rounded-2xl border border-black/5 shadow-2xl py-3">
             {item.children.map(c => (
               <li key={c.to}>
-                <Link to={c.to} className="block px-4 py-2.5 text-[0.95rem] font-medium text-[#080c0b] hover:bg-[#F2F1ED]">{c.label}</Link>
+                <Link to={c.to} className="block px-6 py-2.5 font-serif italic uppercase text-[0.85rem] tracking-widest text-black/80 hover:text-black hover:bg-[#F9F9F7]">{c.label}</Link>
               </li>
             ))}
           </ul>
@@ -77,72 +72,81 @@ function MobileMenu({ onClose }) {
     return () => { document.removeEventListener('keydown', onKey); document.body.style.overflow = prev; };
   }, [onClose]);
 
-  return (
-    <div id="mobile-menu" className="lg:hidden fixed inset-x-0 top-[var(--header-h,64px)] bottom-0 z-40 bg-[#F9F9F7] overflow-y-auto pb-24" role="dialog" aria-label="Site menu">
-      <div className="px-5 pt-5 grid grid-cols-2 gap-3">
-        <Btn ref={first} to="/plan-your-visit" variant="primary" onClick={onClose}>Plan Your Visit</Btn>
-        <Btn href={SITE.giveUrl} variant="dark">Give</Btn>
+  const big = { fontFamily: "'Google Sans Flex', sans-serif", fontWeight: 900 };
+
+  return createPortal(
+    <div id="mobile-menu" className="xl:hidden fixed inset-0 z-[60] bg-[#F9F9F7] overflow-y-auto" role="dialog" aria-modal="true" aria-label="Site menu">
+      <div className="flex items-center justify-between px-6 h-16">
+        <span className="uppercase text-xl tracking-tight" style={{ fontFamily: "'Google Sans Flex', sans-serif", fontWeight: 1000 }}>{SITE.shortName}</span>
+        <button type="button" aria-label="Close menu" onClick={onClose} className="p-3 bg-white rounded-full shadow-md hover:scale-105 transition-transform">
+          <SafeIcon icon={FiX} size={22} />
+        </button>
       </div>
-      <nav aria-label="Main" className="px-5 py-4">
+      <div className="px-6 pt-2 grid grid-cols-2 gap-3">
+        <Btn ref={first} to="/plan-your-visit" variant="primary" onClick={onClose} className="!px-4 text-center">Plan Your Visit</Btn>
+        <Btn href={SITE.giveUrl} variant="dark" className="!px-4">Give</Btn>
+      </div>
+      <nav aria-label="Main" className="px-6 py-6 pb-28">
         <ul className="divide-y divide-black/10">
           {NAV.map(item => (
             <li key={item.label}>
               {item.children ? (
                 <>
-                  <button
-                    type="button"
-                    aria-expanded={openGroup === item.label}
-                    onClick={() => setOpenGroup(g => (g === item.label ? null : item.label))}
-                    className="w-full flex items-center justify-between min-h-[56px] text-lg font-semibold text-left"
-                  >
+                  <button type="button" aria-expanded={openGroup === item.label} onClick={() => setOpenGroup(g => (g === item.label ? null : item.label))} className="w-full flex items-center justify-between min-h-[60px] uppercase text-2xl text-left" style={big}>
                     {item.label}
                     <SafeIcon icon={FiChevronDown} className={`transition-transform ${openGroup === item.label ? 'rotate-180' : ''}`} />
                   </button>
                   {openGroup === item.label && (
-                    <ul className="pb-3 pl-3">
+                    <ul className="pb-4 pl-2">
                       {item.children.map(c => (
-                        <li key={c.to}><Link to={c.to} onClick={onClose} className="flex items-center min-h-[48px] text-base font-medium text-[#2b2f2d]">{c.label}</Link></li>
+                        <li key={c.to}><Link to={c.to} onClick={onClose} className="flex items-center min-h-[48px] font-serif italic uppercase tracking-widest text-[0.95rem] text-black/80">{c.label}</Link></li>
                       ))}
                     </ul>
                   )}
                 </>
               ) : (
-                <Link to={item.to} onClick={onClose} className="flex items-center min-h-[56px] text-lg font-semibold">{item.label}</Link>
+                <Link to={item.to} onClick={onClose} className="flex items-center min-h-[60px] uppercase text-2xl hover:text-[#CCA866] transition-colors" style={big}>{item.label}</Link>
               )}
             </li>
           ))}
         </ul>
       </nav>
-    </div>
+    </div>,
+    document.body
   );
 }
 
 export default function Header() {
   const SITE = useSite();
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const { pathname } = useLocation();
   useEffect(() => setOpen(false), [pathname]);
+  useEffect(() => {
+    const on = () => setScrolled(window.scrollY > 20);
+    on();
+    window.addEventListener('scroll', on, { passive: true });
+    return () => window.removeEventListener('scroll', on);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-50 bg-[#F9F9F7] border-b border-black/10" style={{ '--header-h': '64px' }}>
-      <div className="max-w-6xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between gap-4">
+    <header className={`sticky top-0 z-50 flex items-center transition-all duration-300 text-black ${scrolled ? 'bg-[#F9F9F7]/90 backdrop-blur-md border-b border-black/5 shadow-sm h-16' : 'bg-[#F9F9F7] border-b border-transparent h-16 xl:h-24'}`}>
+      <div className="max-w-[1320px] w-full mx-auto px-6 flex items-center justify-between gap-6">
         <Logo />
-        <nav aria-label="Main" className="hidden lg:flex items-center gap-1">
+        <nav aria-label="Main" className="hidden xl:flex items-center gap-6 pt-1">
           {NAV.map(item => (item.children
             ? <DesktopDropdown key={item.label} item={item} />
-            : <NavLink key={item.to} to={item.to} className={linkCls}>{item.label}</NavLink>))}
+            : <NavLink key={item.to} to={item.to} className={({ isActive }) => `${linkBase} ${isActive ? linkOn : linkOff}`}>{item.label}</NavLink>))}
+          <a href={SITE.giveUrl} target="_blank" rel="noopener noreferrer" className="px-5 py-2 rounded-full bg-[#0B1613] text-white font-serif italic uppercase text-[0.85rem] tracking-widest hover:bg-[#FFC44F] hover:text-black transition-colors">
+            Give<span className="sr-only"> (opens in a new tab)</span>
+          </a>
         </nav>
-        <div className="flex items-center gap-2">
-          <Btn href={SITE.giveUrl} variant="dark" className="!min-h-[44px] !px-5">Give</Btn>
-          <button
-            type="button"
-            className="lg:hidden inline-flex items-center justify-center w-11 h-11 rounded-md hover:bg-black/5"
-            aria-expanded={open}
-            aria-controls="mobile-menu"
-            aria-label={open ? 'Close menu' : 'Open menu'}
-            onClick={() => setOpen(o => !o)}
-          >
-            <SafeIcon icon={open ? FiX : FiMenu} className="text-2xl" />
+        <div className="flex items-center gap-2 xl:hidden">
+          <a href={SITE.giveUrl} target="_blank" rel="noopener noreferrer" className="px-4 min-[400px]:px-5 py-2 rounded-full bg-[#0B1613] text-white font-serif italic uppercase text-[0.8rem] min-[400px]:text-[0.85rem] tracking-widest">
+            Give<span className="sr-only"> (opens in a new tab)</span>
+          </a>
+          <button type="button" className="p-2 hover:bg-black/5 rounded-full transition-colors" aria-expanded={open} aria-controls="mobile-menu" aria-label="Open menu" onClick={() => setOpen(true)}>
+            <SafeIcon icon={FiMenu} size={24} />
           </button>
         </div>
       </div>

@@ -34,3 +34,9 @@ export function usePhoto(key) {
   const set = map[key];
   return { url: set?.url || '', alt: set?.alt || slot?.alt || '', label: slot?.label || key };
 }
+
+// The photo URLs for several slots at once ('' when a slot has no photo yet).
+export function usePhotoUrls(keys) {
+  const map = useContext(PhotosContext);
+  return keys.map(k => map[k]?.url || '');
+}

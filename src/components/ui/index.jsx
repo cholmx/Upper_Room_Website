@@ -1,21 +1,24 @@
 import React, { forwardRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { usePhoto } from '../../photos';
-import { safeUrl } from '../../utils';
+import { Link, useLocation } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { usePhoto, usePhotoUrls } from '../../photos';
+import { imgUrl, safeUrl } from '../../utils';
 import { GLOSSARY } from '../../content/glossary';
+import { HERO_IMAGES } from '../../content/photos';
+import { SEO_ROUTES } from '../../content/seo';
 
 const isExternal = (to) => /^(https?:|mailto:|tel:|sms:)/i.test(to);
 
 const BTN = {
-  primary: 'bg-[#FFC44F] text-[#080c0b] border-[#FFC44F] hover:bg-[#ffce6b]',
-  dark: 'bg-[#0B1613] text-white border-[#0B1613] hover:bg-black',
-  ghost: 'bg-transparent text-[#080c0b] border-[#080c0b]/70 hover:bg-[#080c0b] hover:text-[#FFC44F]',
-  light: 'bg-transparent text-white border-white/70 hover:bg-white hover:text-[#080c0b]',
+  primary: 'btn btn-solid',
+  dark: 'btn bg-[#0B1613] text-white border-[#0B1613] hover:bg-[#FFC44F] hover:text-black hover:border-[#FFC44F]',
+  ghost: 'btn btn-outline',
+  light: 'btn btn-outline-dark',
 };
 
-// Link or button that looks like a button. One primary button per section.
+// Link or button in the site's pill style. One primary button per section.
 export const Btn = forwardRef(function Btn({ to, href, onClick, variant = 'primary', className = '', children, type = 'button', ...rest }, ref) {
-  const cls = `u-btn ${BTN[variant]} ${className}`;
+  const cls = `${BTN[variant]} ${className}`;
   const target = href || to;
   if (target) {
     if (isExternal(target)) {
@@ -34,17 +37,26 @@ export const Btn = forwardRef(function Btn({ to, href, onClick, variant = 'prima
 });
 
 const TONES = {
-  cream: 'bg-[#F9F9F7] text-[#080c0b]',
-  white: 'bg-white text-[#080c0b]',
-  sand: 'bg-[#F2F1ED] text-[#080c0b]',
-  ink: 'bg-[#0B1613] text-white',
-  gold: 'bg-[#FFC44F] text-[#080c0b]',
+  cream: 'bg-[#F9F9F7] text-black',
+  white: 'bg-white text-black',
+  sand: 'bg-white text-black border-y border-black/5',
+  ink: 'bg-[#0B1613] text-[#F9F9F7] relative overflow-hidden glow-gold',
+  gold: 'bg-[#FFC44F] text-black',
+  bronze: 'bg-[#CCA866] text-black',
 };
 
 export function Section({ tone = 'cream', id, className = '', narrow = false, children, ...rest }) {
   return (
-    <section id={id} className={`${TONES[tone]} ${className}`} {...rest}>
-      <div className={`${narrow ? 'max-w-3xl' : 'max-w-6xl'} mx-auto px-5 sm:px-8 py-14 md:py-20`}>{children}</div>
+    <section id={id} className={`${TONES[tone]} py-20 md:py-24 px-6 ${className}`} {...rest}>
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-60px' }}
+        transition={{ duration: 0.7, ease: 'easeOut' }}
+        className={`${narrow ? 'max-w-[800px]' : 'max-w-[1145px]'} mx-auto relative z-10`}
+      >
+        {children}
+      </motion.div>
     </section>
   );
 }
@@ -52,73 +64,108 @@ export function Section({ tone = 'cream', id, className = '', narrow = false, ch
 export function SectionHeader({ kicker, title, intro, center = false, as: Tag = 'h2', tone = 'light', className = '' }) {
   return (
     <div className={`${center ? 'text-center mx-auto' : ''} max-w-3xl mb-10 md:mb-12 ${className}`}>
-      {kicker && <p className={`u-kicker ${tone === 'dark' ? 'text-[#FFC44F]' : 'text-[#8A6309]'}`}>{kicker}</p>}
-      <Tag className="text-3xl md:text-4xl">{title}</Tag>
-      {intro && <p className={`mt-4 text-lg md:text-xl leading-relaxed ${tone === 'dark' ? 'text-white/85' : 'text-[#2b2f2d]'}`}>{intro}</p>}
+      {kicker && <span className={`kicker ${tone === 'dark' ? 'text-[#FFC44F]' : 'text-[#8A6309]'}`}>{kicker}</span>}
+      <Tag className="text-3xl md:text-5xl">{title}</Tag>
+      {intro && <p className={`mt-4 text-lg leading-relaxed ${tone === 'dark' ? 'text-white/85' : 'text-black/80'}`}>{intro}</p>}
     </div>
   );
 }
 
-// A real photo when there is one, and a visible labeled stand-in until then.
-export function PhotoBox({ src, alt = '', label, className = '', ratio = 'aspect-[4/3]', priority = false, rounded = true }) {
-  const round = rounded ? 'rounded-2xl' : '';
+// A real photo when one is set. Nothing shows until then, so there are no empty boxes.
+export function Photo({ slot, className = '', ratio = 'aspect-[4/3]', priority = false, rounded = true }) {
+  const { url, alt } = usePhoto(slot);
+  if (!url) return null;
+  return (
+    <div className={`${ratio} ${rounded ? 'rounded-3xl' : ''} overflow-hidden border border-black/5 shadow-xl bg-[#0B1613] ${className}`}>
+      <img src={url} alt={alt} loading={priority ? 'eager' : 'lazy'} decoding="async" className="w-full h-full object-cover" />
+    </div>
+  );
+}
+
+// An image from a database row (leader, story, event). Leaders fall back to their initials.
+export function PhotoBox({ src, alt = '', initials, className = '', ratio = 'aspect-[4/3]', rounded = true }) {
   const url = safeUrl(src);
   if (url) {
     return (
-      <div className={`${ratio} ${round} overflow-hidden bg-[#0B1613] ${className}`}>
-        <img src={url} alt={alt} loading={priority ? 'eager' : 'lazy'} decoding="async" className="w-full h-full object-cover" />
+      <div className={`${ratio} ${rounded ? 'rounded-3xl' : ''} overflow-hidden bg-[#0B1613] ${className}`}>
+        <img src={url} alt={alt} loading="lazy" decoding="async" className="w-full h-full object-cover" />
       </div>
     );
   }
+  if (!initials) return null;
   return (
-    <div
-      role="img"
-      aria-label={`Photo placeholder: ${label}`}
-      className={`${ratio} ${round} ${className} border-2 border-dashed border-[#8A6309]/60 bg-[#F2F1ED] flex items-center justify-center text-center p-4`}
-    >
-      <span className="text-sm font-semibold text-[#5c4306] leading-snug">[PHOTO: {label}]</span>
+    <div aria-hidden="true" className={`${ratio} ${rounded ? 'rounded-3xl' : ''} bg-gradient-to-br from-[#0B1613] to-[#1A2E28] flex items-center justify-center text-6xl font-black text-[#FFC44F]/60 ${className}`}>
+      {initials}
     </div>
   );
 }
 
-// A photo slot managed in the admin under Site Photos.
-export function Photo({ slot, ...rest }) {
-  const { url, alt, label } = usePhoto(slot);
-  return <PhotoBox src={url} alt={alt} label={label} {...rest} />;
+// A row of photos that only appears once at least one of them has been added.
+export function PhotoGrid({ slots, className = '' }) {
+  const urls = usePhotoUrls(slots);
+  if (!urls.some(Boolean)) return null;
+  return <div className={`grid gap-6 md:grid-cols-2 ${className}`}>{slots.map(s => <Photo key={s} slot={s} />)}</div>;
 }
 
-// Plain page opening: one H1, a short intro, an optional photo.
-export function PageHeader({ kicker, title, intro, children, photo, photoRatio = 'aspect-[4/3]' }) {
+// Text beside a photo when there is one, and full width text when there is not.
+export function Split({ photo, children, reverse = false, className = '' }) {
+  const { url } = usePhoto(photo);
+  if (!url) return <div className={className}>{children}</div>;
   return (
-    <header className="bg-[#F2F1ED]">
-      <div className={`max-w-6xl mx-auto px-5 sm:px-8 py-12 md:py-16 ${photo ? 'grid md:grid-cols-2 gap-10 items-center' : ''}`}>
-        <div className={photo ? '' : 'max-w-3xl'}>
-          {kicker && <p className="u-kicker text-[#8A6309]">{kicker}</p>}
-          <h1 className="text-4xl md:text-5xl">{title}</h1>
-          {intro && <p className="mt-5 text-lg md:text-xl leading-relaxed text-[#2b2f2d]">{intro}</p>}
-          {children && <div className="mt-7 flex flex-wrap gap-3">{children}</div>}
-        </div>
-        {photo && <Photo slot={photo} ratio={photoRatio} priority />}
-      </div>
+    <div className={`grid md:grid-cols-2 gap-12 items-center ${className}`}>
+      <div className={reverse ? 'md:order-2' : ''}>{children}</div>
+      <Photo slot={photo} />
+    </div>
+  );
+}
+
+const PAGE_KEY_BY_ROUTE = Object.fromEntries(Object.entries(SEO_ROUTES).map(([k, v]) => [v, k]));
+
+function usePageBanner(pageKey) {
+  const { pathname } = useLocation();
+  const key = pageKey || PAGE_KEY_BY_ROUTE[pathname] || (pathname.startsWith('/messages') ? 'messages' : pathname.startsWith('/events') ? 'events' : pathname.startsWith('/blog') ? 'blog' : 'about');
+  const { url } = usePhoto(`banner-${key}`);
+  return url || HERO_IMAGES[key] || HERO_IMAGES.about;
+}
+
+// The page banner: a photo with a dark wash, a gold kicker, a big heading, and an intro.
+export function PageHeader({ kicker, title, intro, children, page }) {
+  const image = usePageBanner(page);
+  return (
+    <header className="photo-section text-[#F9F9F7] py-24 md:py-32 px-6 text-center" style={{ backgroundImage: `url('${imgUrl(image, 1600)}')` }}>
+      <div className="scrim"></div>
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
+        className="max-w-[800px] mx-auto relative z-10"
+      >
+        {kicker && <span className="kicker text-[#FFC44F]">{kicker}</span>}
+        <h1 className="text-4xl md:text-7xl mb-6 drop-shadow-lg">{title}</h1>
+        {intro && <p className="font-serif italic text-xl md:text-2xl text-white/90 max-w-[50ch] mx-auto drop-shadow-md leading-relaxed">{intro}</p>}
+        {children && <div className="mt-8 flex flex-wrap justify-center gap-4">{children}</div>}
+      </motion.div>
     </header>
   );
 }
 
 export function Cards({ children, cols = 3, className = '' }) {
   const grid = cols === 2 ? 'md:grid-cols-2' : cols === 4 ? 'sm:grid-cols-2 lg:grid-cols-4' : 'md:grid-cols-2 lg:grid-cols-3';
-  return <div className={`grid gap-6 ${grid} ${className}`}>{children}</div>;
+  return <div className={`grid gap-6 md:gap-8 ${grid} ${className}`}>{children}</div>;
 }
 
-export function Card({ title, children, to, linkLabel, icon, className = '', tone = 'white', as: Tag = 'h3' }) {
+export function Card({ title, children, to, linkLabel, icon, className = '', as: Tag = 'h3' }) {
   return (
-    <article className={`rounded-2xl border border-black/10 p-6 md:p-7 flex flex-col ${tone === 'white' ? 'bg-white' : 'bg-[#F9F9F7]'} ${className}`}>
+    <article className={`fcard !p-8 flex flex-col ${className}`}>
       {icon && <div className="mb-4">{icon}</div>}
-      <Tag className="text-xl md:text-2xl mb-2">{title}</Tag>
-      <div className="text-[#2b2f2d] leading-relaxed flex-grow space-y-3">{children}</div>
+      <Tag className="text-2xl mb-3">{title}</Tag>
+      <div className="text-black/80 leading-relaxed flex-grow space-y-3">{children}</div>
       {to && (
-        <Btn to={to} variant="ghost" className="mt-5 self-start">
-          {linkLabel || 'Learn more'}
-        </Btn>
+        <div className="mt-6">
+          <Link to={to} className="inline-flex items-center font-bold uppercase tracking-widest text-[#8A6309] hover:text-black transition-colors">
+            {linkLabel || 'Learn more'} <span aria-hidden="true" className="ml-2">&rarr;</span>
+          </Link>
+        </div>
       )}
     </article>
   );
@@ -139,12 +186,12 @@ export function Accordion({ items, className = '' }) {
   return (
     <div className={`space-y-3 ${className}`}>
       {items.map((it, i) => (
-        <details key={it.id || i} id={it.id} className="u-acc group bg-white rounded-xl border border-black/10">
-          <summary className="cursor-pointer list-none px-5 py-4 md:px-6 flex items-center justify-between gap-4 text-lg font-semibold min-h-[56px]">
+        <details key={it.id || i} id={it.id} className="u-acc group bg-white rounded-2xl border border-black/5 shadow-sm">
+          <summary className="cursor-pointer px-6 py-5 flex items-center justify-between gap-4 text-lg font-bold min-h-[56px]">
             <span>{it.title}</span>
             <span aria-hidden="true" className="u-acc-icon flex-shrink-0 text-2xl leading-none text-[#8A6309]">+</span>
           </summary>
-          <div className="px-5 pb-5 md:px-6 md:pb-6 text-[#2b2f2d] leading-relaxed space-y-3">{it.content}</div>
+          <div className="px-6 pb-6 text-black/85 leading-relaxed space-y-3">{it.content}</div>
         </details>
       ))}
     </div>
@@ -157,12 +204,12 @@ export function Steps({ items }) {
       {items.map((it, i) => (
         <li key={it.title} className="flex gap-5">
           <div className="flex flex-col items-center">
-            <span className="w-11 h-11 rounded-full bg-[#FFC44F] text-[#080c0b] font-bold flex items-center justify-center flex-shrink-0">{i + 1}</span>
-            {i < items.length - 1 && <span className="w-px flex-grow bg-[#8A6309]/40 mt-2" aria-hidden="true"></span>}
+            <span className="w-12 h-12 rounded-full bg-[#FFC44F] text-black font-black flex items-center justify-center flex-shrink-0 shadow-[0_0_20px_rgba(255,196,79,0.3)]">{i + 1}</span>
+            {i < items.length - 1 && <span className="w-px flex-grow bg-[#CCA866]/60 mt-2" aria-hidden="true"></span>}
           </div>
           <div className="pb-2">
             <h3 className="text-xl md:text-2xl mb-2">{it.title}</h3>
-            <div className="text-[#2b2f2d] leading-relaxed space-y-3">{it.body}</div>
+            <div className="text-black/80 leading-relaxed space-y-3">{it.body}</div>
           </div>
         </li>
       ))}
@@ -174,9 +221,9 @@ export function QuickFacts({ items }) {
   return (
     <dl className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
       {items.map(f => (
-        <div key={f.label} className="bg-white rounded-xl border border-black/10 p-5">
-          <dt className="u-kicker text-[#8A6309] !mb-1">{f.label}</dt>
-          <dd className="text-lg font-semibold leading-snug">{f.value}</dd>
+        <div key={f.label} className="fcard !p-6">
+          <dt className="kicker text-[#8A6309] !mb-1">{f.label}</dt>
+          <dd className="text-lg font-bold leading-snug">{f.value}</dd>
         </div>
       ))}
     </dl>
@@ -186,14 +233,20 @@ export function QuickFacts({ items }) {
 // Every page ends with one clear call to action.
 export function EndCta({ title, text, to, href, label }) {
   return (
-    <section className="bg-[#0B1613] text-white" aria-label="Next step">
-      <div className="max-w-4xl mx-auto px-5 sm:px-8 py-14 md:py-20 text-center">
-        <h2 className="text-3xl md:text-4xl">{title}</h2>
-        {text && <p className="mt-4 text-lg md:text-xl text-white/85 leading-relaxed">{text}</p>}
-        <div className="mt-8">
-          <Btn to={to} href={href} variant="primary">{label}</Btn>
+    <section className="bg-[#FFC44F] text-black text-center py-20 md:py-28 px-6" aria-label="Next step">
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-60px' }}
+        transition={{ duration: 0.7, ease: 'easeOut' }}
+        className="max-w-[800px] mx-auto"
+      >
+        <h2 className="text-3xl md:text-6xl leading-none">{title}</h2>
+        {text && <p className="mt-5 text-lg md:text-xl font-medium text-black/90 leading-relaxed">{text}</p>}
+        <div className="mt-9">
+          <Btn to={to} href={href} variant="dark">{label}</Btn>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }
@@ -201,7 +254,7 @@ export function EndCta({ title, text, to, href, label }) {
 // A visible reminder that something still needs a real answer from the church.
 export function Todo({ id, children }) {
   return (
-    <span data-todo={id} className="inline bg-[#FFF3C4] text-[#5c4306] border border-dashed border-[#8A6309] rounded px-1.5 py-0.5 text-[0.95em] font-semibold">
+    <span data-todo={id} className="inline bg-[#FFF3C4] text-[#5c4306] border border-dashed border-[#8A6309] rounded px-1.5 py-0.5 text-[0.95em] font-semibold normal-case tracking-normal not-italic">
       {children}
     </span>
   );
@@ -219,5 +272,5 @@ export function Gloss({ k, children }) {
 }
 
 export function Prose({ children, className = '' }) {
-  return <div className={`space-y-5 text-lg leading-relaxed text-[#2b2f2d] ${className}`}>{children}</div>;
+  return <div className={`space-y-5 text-lg leading-relaxed text-black/85 ${className}`}>{children}</div>;
 }

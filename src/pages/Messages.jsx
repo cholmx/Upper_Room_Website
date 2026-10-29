@@ -76,13 +76,13 @@ export default function Messages() {
                 </div>
                 <div className="md:col-span-2">
                   <h3 className="text-2xl md:text-3xl"><Link to={messagePath(latest)} className="hover:text-[#8A6309]">{latest.title}</Link></h3>
-                  <p className="mt-2 text-[#2b2f2d]">{[latest.speaker, latest.date && formatDate(latest.date), latest.scripture].filter(Boolean).join('  |  ')}</p>
-                  {latest.description && <p className="mt-3 text-[#2b2f2d] leading-relaxed line-clamp-4">{plainText(latest.description)}</p>}
+                  <p className="mt-2 text-black/80">{[latest.speaker, latest.date && formatDate(latest.date), latest.scripture].filter(Boolean).join('  |  ')}</p>
+                  {latest.description && <p className="mt-3 text-black/80 leading-relaxed line-clamp-4">{plainText(latest.description)}</p>}
                   <div className="mt-6"><Btn to={messagePath(latest)} variant="primary">Watch, listen, and read</Btn></div>
                 </div>
               </div>
             ) : (
-              <p className="text-lg text-[#2b2f2d]">New messages are on the way. Check back after Sunday.</p>
+              <p className="text-lg text-black/80">New messages are on the way. Check back after Sunday.</p>
             )}
           </Section>
 
@@ -94,11 +94,11 @@ export default function Messages() {
                   <li key={s.name}>
                     <Link to={seriesPath(s.name)} className="block bg-white rounded-2xl border border-black/10 overflow-hidden hover:shadow-lg h-full">
                       <div className="aspect-[16/9] bg-[#0B1613] flex items-center justify-center">
-                        {s.image ? <img src={s.image} alt="" loading="lazy" className="w-full h-full object-cover" /> : <span className="font-display text-2xl text-[#FFC44F] px-4 text-center">{s.name}</span>}
+                        {s.image ? <img src={s.image} alt="" loading="lazy" className="w-full h-full object-cover" /> : <span className="text-2xl text-[#FFC44F] px-4 text-center">{s.name}</span>}
                       </div>
                       <div className="p-5">
                         <h3 className="text-xl">{s.name}</h3>
-                        <p className="mt-1 text-sm text-[#2b2f2d]">{dateRangeLabel(s.first, s.last)}{dateRangeLabel(s.first, s.last) ? '  |  ' : ''}{s.count} {s.count === 1 ? 'message' : 'messages'}</p>
+                        <p className="mt-1 text-sm text-black/80">{dateRangeLabel(s.first, s.last)}{dateRangeLabel(s.first, s.last) ? '  |  ' : ''}{s.count} {s.count === 1 ? 'message' : 'messages'}</p>
                       </div>
                     </Link>
                   </li>
@@ -122,7 +122,7 @@ export default function Messages() {
             </form>
             <p className="sr-only" aria-live="polite">{filtered.length} messages shown</p>
             {filtered.length === 0 ? (
-              <p className="text-lg text-[#2b2f2d]">No messages match yet. Try a different word.</p>
+              <p className="text-lg text-black/80">No messages match yet. Try a different word.</p>
             ) : (
               <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filtered.map(m => <li key={m.id}><MessageCard message={m} /></li>)}
