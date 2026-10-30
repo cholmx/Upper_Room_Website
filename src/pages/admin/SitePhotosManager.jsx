@@ -14,6 +14,7 @@ const { FiSave, FiLoader } = FiIcons;
 const GROUPS = [
   { kind: undefined, title: 'Photos', help: 'Each photo shows where its label says. Until one is added, the site shows the label as a placeholder.' },
   { kind: 'logo', title: 'Logos and sharing image', help: 'The dark logo sits on light backgrounds and the light logo on dark ones.' },
+  { kind: 'model', title: '3D model', help: 'Paste a link to a .glb file from your architect or designer. Until then the site shows a simple concept model. Large files should be under 20 MB.' },
   { kind: 'icon', title: 'Core value icons', help: 'Small square icons shown beside each core value.' },
 ];
 
@@ -46,8 +47,15 @@ function Slot({ slot, row, onSaved }) {
         <h3 className="font-bold text-gray-900">{slot.label.charAt(0).toUpperCase() + slot.label.slice(1)}</h3>
         <p className="text-xs text-gray-500">Slot: {slot.key}</p>
       </div>
-      <FieldInput field={{ name: `photo-${slot.key}`, label: 'Image', type: 'image' }} value={url} onChange={(_, v) => setUrl(v)} />
-      {slot.kind !== 'icon' && slot.kind !== 'logo' && (
+      {slot.kind === 'model' ? (
+        <div>
+          <label htmlFor={`model-${slot.key}`} className="block text-sm font-bold text-gray-800 mb-2">Link to the .glb file</label>
+          <input id={`model-${slot.key}`} type="url" value={url} onChange={(e) => setUrl(e.target.value)} placeholder="https://" className="w-full px-4 py-3 bg-gray-50 rounded-lg border border-gray-200 focus:outline-none focus:border-[#CCA866]" />
+        </div>
+      ) : (
+        <FieldInput field={{ name: `photo-${slot.key}`, label: 'Image', type: 'image' }} value={url} onChange={(_, v) => setUrl(v)} />
+      )}
+      {slot.kind !== 'icon' && slot.kind !== 'logo' && slot.kind !== 'model' && (
         <div>
           <label htmlFor={`alt-${slot.key}`} className="block text-sm font-bold text-gray-800 mb-2">Description for screen readers</label>
           <input id={`alt-${slot.key}`} type="text" value={alt} onChange={(e) => setAlt(e.target.value)} placeholder={slot.alt} className="w-full px-4 py-3 bg-gray-50 rounded-lg border border-gray-200 focus:outline-none focus:border-[#CCA866]" />

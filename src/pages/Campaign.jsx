@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 import usePageMeta from '../hooks/usePageMeta';
 import { useSite } from '../settings';
 import { CAMPAIGN_FAQ } from '../content/campaign';
-import { Btn, Section, SectionHeader, PageHeader, Accordion, Photo, Todo, AdminOnly } from '../components/ui';
+import ScrollStory, { Stage } from '../components/immersive/ScrollStory';
+import ModelStage from '../components/immersive/ModelStage';
+import { Btn, Section, SectionHeader, PageHeader, Accordion, Todo, AdminOnly } from '../components/ui';
 
 export default function Campaign() {
   usePageMeta('growth');
@@ -16,19 +18,29 @@ export default function Campaign() {
 
   return (
     <>
-      <PageHeader kicker="Growth Campaign" title="Transforming Together" photo="campaign-hero">
+      <PageHeader kicker="Growth Campaign" title="Transforming Together" ambient>
         <Btn href={SITE.growthGiveUrl} variant="primary">Give to the Growth Campaign</Btn>
         <Btn href={SITE.pledgeUrl} variant="light">Submit Your Commitment Card</Btn>
       </PageHeader>
 
-      <Section tone="cream" narrow>
-        <div className="space-y-6 text-lg leading-relaxed text-black/80">
-          <p>In 1971, a handful of believers met in an upper room above a vet’s office in Columbiana. They had no building fund and no plan, only a willingness to obey. They prayed, worshiped, and invited friends who needed Jesus. God showed up.</p>
-          <p>Fifty years later, that simple yes has changed lives, healed marriages, broken addictions, and brought generations back to God.</p>
-          <p>Every so often since then, we have faced the same choice. We could stay comfortable, or we could make room. Each time we chose faith, and each time God provided. The generations before us gave sacrificially and put up with construction mess because they believed more people needed Jesus. Now it is our turn.</p>
-          <p>We call this campaign Transforming Together because that is what happens when we move forward as one. We are adding space for more people to meet Jesus, and we are making room in our budgets and in our lives for what God does next. Fifty years from now, people we will never meet will gather in the space we are building today. They will find the same Jesus and the same real community.</p>
-          <p className="font-semibold">Our sanctuary is full, and new people walk through our doors every week. We can stay comfortable, or we can make room.</p>
-        </div>
+      <Section tone="cream">
+        <ScrollStory
+          heading="h2"
+          label="The story of the campaign"
+          beats={[
+            { kicker: '1971', title: 'A simple yes', visual: <Stage big="1971" small="No plan, only obedience" />, body: <p>In 1971, a handful of believers met in an upper room above a vet’s office in Columbiana. They had no building fund and no plan, only a willingness to obey. They prayed, worshiped, and invited friends who needed Jesus. God showed up.</p> },
+            { kicker: 'Fifty years later', title: 'Lives changed', visual: <Stage big="50" small="Years of changed lives" />, body: <p>Fifty years later, that simple yes has changed lives, healed marriages, broken addictions, and brought generations back to God.</p> },
+            { kicker: 'Every so often', title: 'The same choice', visual: <Stage big="Faith" small="Each time God provided" />, body: <p>Every so often since then, we have faced the same choice. We could stay comfortable, or we could make room. Each time we chose faith, and each time God provided. The generations before us gave sacrificially and put up with construction mess because they believed more people needed Jesus. Now it is our turn.</p> },
+            { kicker: 'Our turn', title: 'Transforming Together', visual: <Stage big="Together" small="Moving forward as one" />, body: <p>We call this campaign Transforming Together because that is what happens when we move forward as one. We are adding space for more people to meet Jesus, and we are making room in our budgets and in our lives for what God does next. Fifty years from now, people we will never meet will gather in the space we are building today. They will find the same Jesus and the same real community.</p> },
+            { kicker: 'Right now', title: 'Make room', visual: <Stage big="Full" small="New people every week" />, body: <p className="font-semibold">Our sanctuary is full, and new people walk through our doors every week. We can stay comfortable, or we can make room.</p> },
+          ]}
+        />
+      </Section>
+
+      <Section tone="white">
+        <SectionHeader kicker="See it" title="Explore the plan in 3D" intro="Turn the model, zoom in, and see where the new space fits next to the building we have today." />
+        <ModelStage />
+        <AdminOnly><p className="mt-6"><Todo id="campaign-model">[REPLACE THE CONCEPT MODEL WITH THE ARCHITECT’S 3D MODEL (.glb), in Site Photos]</Todo></p></AdminOnly>
       </Section>
 
       <Section tone="sand">

@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import useFetch from '../hooks/useFetch';
 import { isLive } from '../utils';
 import RichText from '../components/RichText';
+import ScrollStory, { Stage } from '../components/immersive/ScrollStory';
 import usePageMeta from '../hooks/usePageMeta';
 import { Btn, Section, SectionHeader, PageHeader, PhotoBox, Split, Todo, AdminOnly, EndCta } from '../components/ui';
 import { SITE } from '../config';
@@ -49,31 +50,17 @@ export default function About() {
         intro="A church family in Columbiana since 1971."
       />
 
-      <Section tone="cream" narrow>
-        <div className="space-y-6 text-lg leading-relaxed text-black/80">
-          <p>The Upper Room Fellowship started in 1971 when a group of believers met in an upper room above a veterinarian’s office in Columbiana, Ohio. They had no building fund and no master plan. They chose the room because it reminded them of the upper room where Jesus’ first followers gathered to pray and wait for the Holy Spirit. They were hungry for God’s presence, and they wanted a community where people could meet Him and make real friends.</p>
-          <p>That small gathering has grown into a church family that has called Columbiana home for more than fifty years. We have outgrown our space several times, and each time God has provided what we needed. Our commitment has stayed the same since the beginning. We want to be a church that changes lives through the power of the Holy Spirit.</p>
-          <p>Today we help people find the purpose God made them for and enjoy the freedom and fullness Jesus promised. We believe God is calling us to even greater impact in Columbiana and beyond.</p>
-        </div>
-      </Section>
-
-      <Section tone="sand">
-        <SectionHeader kicker="Timeline" title="How we got here" />
-        <ol className="max-w-3xl space-y-8 border-l-2 border-[#8A6309]/50 pl-6">
-          <li>
-            <p className="text-2xl font-bold">1971</p>
-            <p className="text-lg text-black/80">A small group meets above a veterinarian’s office in Columbiana.</p>
-          </li>
-          <AdminOnly>
-            <li>
-              <p className="text-2xl font-bold"><Todo id="milestones">[ADD KEY MILESTONES AND DATES FOR EACH BUILDING EXPANSION]</Todo></p>
-            </li>
-          </AdminOnly>
-          <li>
-            <p className="text-2xl font-bold">Today</p>
-            <p className="text-lg text-black/80">A growing church family at {SITE.address.street}, planning for what comes next.</p>
-          </li>
-        </ol>
+      <Section tone="cream">
+        <ScrollStory
+          heading="h2"
+          label="Our story"
+          beats={[
+            { kicker: '1971', title: 'An upper room', visual: <Stage big="1971" small="Above a vet’s office" />, body: <p>The Upper Room Fellowship started in 1971 when a group of believers met in an upper room above a veterinarian’s office in Columbiana, Ohio. They had no building fund and no master plan. They chose the room because it reminded them of the upper room where Jesus’ first followers gathered to pray and wait for the Holy Spirit. They were hungry for God’s presence, and they wanted a community where people could meet Him and make real friends.</p> },
+            { kicker: 'Since then', title: 'More than fifty years', visual: <Stage big="50+" small="Years in Columbiana" />, body: <p>That small gathering has grown into a church family that has called Columbiana home for more than fifty years. We have outgrown our space several times, and each time God has provided what we needed. Our commitment has stayed the same since the beginning. We want to be a church that changes lives through the power of the Holy Spirit.</p> },
+            { kicker: 'Today', title: 'Where we are headed', visual: <Stage big="Today" small={SITE.address.street} />, body: <p>Today we help people find the purpose God made them for and enjoy the freedom and fullness Jesus promised. We believe God is calling us to even greater impact in Columbiana and beyond.</p> },
+          ]}
+        />
+        <AdminOnly><p className="mt-10 text-lg"><Todo id="milestones">[ADD KEY MILESTONES AND DATES FOR EACH BUILDING EXPANSION]</Todo></p></AdminOnly>
       </Section>
 
       <Section tone="cream">

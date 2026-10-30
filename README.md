@@ -147,3 +147,11 @@ Netlify and Cloudflare Pages. Other hosts need an equivalent rewrite.
 
 
 Old addresses `/worship-team`, `/outreach`, `/prayer`, `/stories` and `/connect` redirect to the pages that now hold that content. Unfinished placeholders show only to signed-in staff.
+
+## Immersive and tactile touches
+
+- **Light field (Home and Growth Campaign banners):** plain WebGL, no library (`src/components/immersive/LightField.jsx`). It pauses off screen and in background tabs. It does not run for visitors who prefer reduced motion, are saving data, or are on a small device.
+- **Scroll stories (Plan Your Visit, About, Growth Campaign):** `ScrollStory` keeps a stage in place on wide screens while the text scrolls. On phones the beats stack. The text is always in reading order.
+- **3D model with AR (Growth Campaign):** `ModelStage` loads the vendored `public/vendor/model-viewer.min.js` (Apache 2.0) only after someone presses "Explore in 3D". "View in your space" appears on phones that support AR. The bundled `public/models/sanctuary-expansion.glb` is a simple concept massing made by `node scripts/make-model.mjs`. Paste a link to the architect's `.glb` in the admin (Site Photos, 3D model) to replace it.
+- **Neumorphic surfaces:** soft raised cards, inset form fields and facts, pressed buttons (see the "Tactile surfaces" block in `src/index.css`). Text and form borders keep full contrast.
+- **Micro interactions:** button ripples (one global listener in `src/lib/ripple.js`), card tilt, staggered entrances, animated form success. All respect `prefers-reduced-motion`.

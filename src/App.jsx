@@ -9,6 +9,7 @@ import { AuthProvider, useAuth } from './auth';
 import { SettingsProvider } from './settings';
 import { PhotosProvider } from './photos';
 import ErrorBoundary from './components/ErrorBoundary';
+import { installRipple } from './lib/ripple';
 
 const Home = lazy(() => import('./pages/Home'));
 const PlanYourVisit = lazy(() => import('./pages/PlanYourVisit'));
@@ -88,6 +89,7 @@ function PublicLayout({ children }) {
 }
 
 export default function App() {
+  useEffect(() => installRipple(), []);
   return (
     <ErrorBoundary>
     <MotionConfig reducedMotion="user">

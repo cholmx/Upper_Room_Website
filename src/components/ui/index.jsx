@@ -7,6 +7,9 @@ import { GLOSSARY } from '../../content/glossary';
 import { HERO_IMAGES } from '../../content/photos';
 import { SEO_ROUTES } from '../../content/seo';
 import { useAuth } from '../../auth';
+import LightField from '../immersive/LightField';
+import useInView from '../../hooks/useInView';
+import useTilt from '../../hooks/useTilt';
 
 const isExternal = (to) => /^(https?:|mailto:|tel:|sms:)/i.test(to);
 
@@ -131,11 +134,12 @@ function usePageBanner(pageKey) {
 }
 
 // The page banner: a photo with a dark wash, a gold kicker, a big heading, and an intro.
-export function PageHeader({ kicker, title, intro, children, page }) {
+export function PageHeader({ kicker, title, intro, children, page, ambient = false }) {
   const image = usePageBanner(page);
   return (
     <header className="photo-section text-[#F9F9F7] py-24 md:py-32 px-6 text-center" style={{ backgroundImage: `url('${imgUrl(image, 1600)}')` }}>
       <div className="scrim"></div>
+      {ambient && <LightField />}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -153,12 +157,18 @@ export function PageHeader({ kicker, title, intro, children, page }) {
 
 export function Cards({ children, cols = 3, className = '' }) {
   const grid = cols === 2 ? 'md:grid-cols-2' : cols === 4 ? 'sm:grid-cols-2 lg:grid-cols-4' : 'md:grid-cols-2 lg:grid-cols-3';
-  return <div className={`grid gap-6 md:gap-8 ${grid} ${className}`}>{children}</div>;
+  const ref = useInView();
+  const tilt = useTilt();
+  return (
+    <div ref={(el) => { ref.current = el; tilt.current = el; }} className={`stagger grid gap-6 md:gap-8 ${grid} ${className}`}>
+      {React.Children.map(children, (c, i) => (c && React.isValidElement(c) ? React.cloneElement(c, { style: { ...(c.props.style || {}), '--i': i } }) : c))}
+    </div>
+  );
 }
 
-export function Card({ title, children, to, linkLabel, icon, className = '', as: Tag = 'h3' }) {
+export function Card({ title, children, to, linkLabel, icon, className = '', as: Tag = 'h3', style }) {
   return (
-    <article className={`fcard !p-8 flex flex-col ${className}`}>
+    <article style={style} className={`fcard !p-8 flex flex-col ${className}`}>
       {icon && <div className="mb-4">{icon}</div>}
       <Tag className="text-2xl mb-3">{title}</Tag>
       <div className="text-black/80 leading-relaxed flex-grow space-y-3">{children}</div>
@@ -188,7 +198,7 @@ export function Accordion({ items, className = '' }) {
   return (
     <div className={`space-y-3 ${className}`}>
       {items.map((it, i) => (
-        <details key={it.id || i} id={it.id} className="u-acc group bg-white rounded-2xl border border-black/5 shadow-sm">
+        <details key={it.id || i} id={it.id} className="u-acc neu-acc group rounded-2xl">
           <summary className="cursor-pointer px-6 py-5 flex items-center justify-between gap-4 text-lg font-bold min-h-[56px]">
             <span>{it.title}</span>
             <span aria-hidden="true" className="u-acc-icon flex-shrink-0 text-2xl leading-none text-[#8A6309]">+</span>
@@ -223,7 +233,7 @@ export function QuickFacts({ items }) {
   return (
     <dl className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
       {items.map(f => (
-        <div key={f.label} className="fcard !p-6">
+        <div key={f.label} className="neu-inset rounded-3xl p-6">
           <dt className="kicker text-[#8A6309] !mb-1">{f.label}</dt>
           <dd className="text-lg font-bold leading-snug">{f.value}</dd>
         </div>

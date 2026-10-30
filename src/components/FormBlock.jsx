@@ -6,7 +6,7 @@ import { useSite } from '../settings';
 
 export const SUBMISSIONS_TABLE = 'form_submissions_church';
 
-const input = 'w-full min-h-[48px] px-4 py-3 bg-white rounded-xl border border-black/25 focus:outline-none focus:ring-2 focus:ring-[#8A6309] focus:border-[#8A6309] text-base';
+const input = 'neu-field w-full min-h-[48px] px-4 py-3 rounded-xl border border-black/25 focus:outline-none focus:ring-2 focus:ring-[#8A6309] focus:border-[#8A6309] text-base';
 
 function Field({ formKey, field, value, onChange, error }) {
   const id = `ff-${formKey}-${field.name}`;
@@ -133,7 +133,8 @@ export default function FormBlock({ formKey, heading, intro, defaults = {}, clas
 
   if (state.phase === 'sent') {
     return (
-      <div role="status" className={`bg-white border border-black/10 rounded-2xl p-8 text-center ${className}`}>
+      <div role="status" className={`neu rounded-2xl p-8 text-center ${className}`}>
+        <svg className="check-draw mx-auto mb-4" width="56" height="56" viewBox="0 0 56 56" fill="none" stroke="#2f7d4f" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="28" cy="28" r="25" /><path d="M17 29l8 8 14-16" /></svg>
         <p className="text-xl font-semibold leading-relaxed">{def.confirmation}</p>
         <button type="button" onClick={() => setState({ phase: 'idle', error: '' })} className="btn btn-outline mt-6">Send another</button>
       </div>
@@ -141,7 +142,7 @@ export default function FormBlock({ formKey, heading, intro, defaults = {}, clas
   }
 
   return (
-    <form ref={formRef} onSubmit={submit} noValidate aria-labelledby={heading ? headingId : undefined} className={`bg-white border border-black/10 rounded-2xl p-6 md:p-8 space-y-5 ${className}`}>
+    <form ref={formRef} onSubmit={submit} noValidate aria-labelledby={heading ? headingId : undefined} className={`neu rounded-2xl p-6 md:p-8 space-y-5 ${className}`}>
       {heading && <h2 id={headingId} className="text-2xl md:text-3xl">{heading}</h2>}
       {intro && <p className="text-black/80 leading-relaxed">{intro}</p>}
       {def.fields.filter(f => isVisible(f, values)).map(f => (
@@ -153,7 +154,7 @@ export default function FormBlock({ formKey, heading, intro, defaults = {}, clas
       </div>
       {def.note && <p className="text-sm text-black/80">{def.note}</p>}
       {state.phase === 'error' && <p role="alert" className="text-red-700 font-medium">{state.error}</p>}
-      <button type="submit" disabled={state.phase === 'sending'} className="btn btn-solid disabled:opacity-60">
+      <button type="submit" disabled={state.phase === 'sending'} aria-busy={state.phase === 'sending'} className="btn btn-solid disabled:opacity-60">
         {state.phase === 'sending' ? 'Sending...' : def.button}
       </button>
     </form>

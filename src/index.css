@@ -326,3 +326,88 @@ details.u-acc > summary .u-acc-icon { transition: transform 0.2s ease; }
 html, body { overflow-x: clip; }
 
 p:empty { display: none; }
+
+/* ------------------------------------------------------------------
+   Tactile surfaces. Soft raised and inset shapes in the warm neutrals.
+   Text and form borders keep full contrast, so only the surfaces get soft.
+   ------------------------------------------------------------------ */
+:root {
+  --neu-hi: rgba(255, 255, 255, 0.95);
+  --neu-lo: rgba(139, 128, 104, 0.3);
+  --neu-raised: 10px 10px 22px var(--neu-lo), -10px -10px 22px var(--neu-hi);
+  --neu-raised-sm: 6px 6px 14px var(--neu-lo), -6px -6px 14px var(--neu-hi);
+  --neu-inset: inset 5px 5px 11px var(--neu-lo), inset -5px -5px 11px var(--neu-hi);
+  --neu-inset-sm: inset 3px 3px 7px var(--neu-lo), inset -3px -3px 7px var(--neu-hi);
+}
+
+.neu { background: linear-gradient(145deg, #ffffff, #f1f0eb); border: 1px solid rgba(255, 255, 255, 0.9); box-shadow: var(--neu-raised-sm); }
+.neu-inset { background: linear-gradient(145deg, #efeee9, #f9f8f5); border: 1px solid rgba(0, 0, 0, 0.06); box-shadow: var(--neu-inset); }
+.neu-field { background: linear-gradient(145deg, #f1f0ec, #fbfaf8); box-shadow: var(--neu-inset-sm); }
+
+.fcard {
+  background: linear-gradient(145deg, #ffffff, #f1f0eb);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: var(--neu-raised-sm);
+  transform: perspective(900px) translateY(var(--ty, 0)) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 0.25s ease, box-shadow 0.3s ease;
+}
+.fcard:hover {
+  --ty: -5px;
+  border-color: rgba(255, 255, 255, 0.9);
+  box-shadow: var(--neu-raised);
+}
+
+details.u-acc.neu-acc { background: linear-gradient(145deg, #ffffff, #f1f0eb); border: 1px solid rgba(255, 255, 255, 0.9); box-shadow: var(--neu-raised-sm); transition: box-shadow 0.25s ease; }
+details.u-acc.neu-acc[open] { background: linear-gradient(145deg, #efeee9, #f9f8f5); box-shadow: var(--neu-inset); }
+
+/* Buttons: soft raised, pressed on click, with a ripple from the point of contact */
+.btn { position: relative; overflow: hidden; transition: transform 0.2s ease, box-shadow 0.25s ease, background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease; }
+.btn-solid { box-shadow: 5px 5px 12px rgba(170, 118, 10, 0.32), -4px -4px 10px rgba(255, 255, 255, 0.6); }
+.photo-section .btn-solid, .glow-gold .btn-solid, .bg-\[\#0B1613\] .btn-solid { box-shadow: 5px 5px 14px rgba(0, 0, 0, 0.5), -3px -3px 10px rgba(255, 255, 255, 0.07); }
+.btn-solid:active { box-shadow: inset 4px 4px 9px rgba(170, 118, 10, 0.5), inset -3px -3px 8px rgba(255, 255, 255, 0.35); transform: translateY(1px); }
+.btn:active { transform: translateY(1px); }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .btn:hover { transform: translateY(-2px); }
+  .btn:active { transform: translateY(1px); }
+}
+.btn-ripple { position: absolute; border-radius: 9999px; background: currentColor; opacity: 0.28; transform: scale(0); pointer-events: none; animation: ripple 0.6s ease-out forwards; }
+@keyframes ripple { to { transform: scale(1); opacity: 0; } }
+
+.btn[aria-busy='true']::after { content: ''; width: 0.9em; height: 0.9em; margin-left: 0.6em; border: 2px solid currentColor; border-right-color: transparent; border-radius: 9999px; animation: spin 0.7s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Micro interactions */
+.fcard a span[aria-hidden='true'] { display: inline-block; transition: transform 0.2s ease; }
+.fcard a:hover span[aria-hidden='true'] { transform: translateX(5px); }
+.photo-zoom img { transition: transform 0.9s ease; }
+.photo-zoom:hover img { transform: scale(1.04); }
+
+@keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+.stagger:not([data-in]) > * { opacity: 0; }
+.stagger[data-in] > * { animation: rise 0.6s ease backwards; animation-delay: calc(var(--i, 0) * 90ms); }
+
+@keyframes shake { 20%, 60% { transform: translateX(-4px); } 40%, 80% { transform: translateX(4px); } }
+.neu-field[aria-invalid='true'] { animation: shake 0.3s ease; border-color: #b91c1c; }
+
+.check-draw circle { stroke-dasharray: 160; stroke-dashoffset: 160; animation: draw 0.6s ease forwards; }
+.check-draw path { stroke-dasharray: 40; stroke-dashoffset: 40; animation: draw 0.4s ease 0.4s forwards; }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+
+/* Scroll story: the stage stays put while the beats scroll past */
+.story-visual { opacity: 0; transform: scale(0.96) translateY(10px); transition: opacity 0.5s ease, transform 0.5s ease; }
+.story-visual[data-active='true'] { opacity: 1; transform: none; }
+.story-beat :is(h2, h3), .story-beat > div:last-child { transition: opacity 0.4s ease; opacity: 0.72; }
+.story-beat[data-active="true"] :is(h2, h3), .story-beat[data-active='true'] > div:last-child { opacity: 1; }
+@media (max-width: 767px) { .story-beat :is(h2, h3), .story-beat > div:last-child { opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .fcard, .btn, .story-visual, .story-beat, .photo-zoom img { transition: none !important; }
+  .stagger:not([data-in]) > * { opacity: 1; }
+  .stagger[data-in] > *, .neu-field[aria-invalid='true'], .check-draw circle, .check-draw path { animation: none !important; stroke-dashoffset: 0; }
+  .btn-ripple { display: none; }
+  .story-beat :is(h2, h3), .story-beat > div:last-child { opacity: 1; transition: none; }
+  .story-visual { transform: none; }
+}
+
+.neu-dark { background: linear-gradient(145deg, #15241f, #0b1613); border: 1px solid rgba(255, 255, 255, 0.06); box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.55), -6px -6px 16px rgba(255, 255, 255, 0.05); }
+.neu-badge { box-shadow: 4px 4px 10px rgba(170, 118, 10, 0.35), -3px -3px 8px rgba(255, 255, 255, 0.6); }

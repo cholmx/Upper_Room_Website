@@ -7,6 +7,7 @@ import { useSite } from '../settings';
 import { usePhoto } from '../photos';
 import { formatDate, imgUrl, isLive, messagePath, ytId } from '../utils';
 import { Btn, Section, SectionHeader, Cards, Card, EndCta } from '../components/ui';
+import LightField from '../components/immersive/LightField';
 import LiteYouTube from '../components/LiteYouTube';
 import SafeIcon from '../common/SafeIcon';
 import * as FiIcons from 'react-icons/fi';
@@ -26,6 +27,7 @@ export default function Home() {
       {/* Banner and service details: time, address and Plan Your Visit show without scrolling on a phone */}
       <section aria-labelledby="home-h1" className="photo-section bg-[#0B1613] py-8 md:py-44 px-6 relative" style={banner ? { backgroundImage: `url('${imgUrl(banner, 1600)}')` } : undefined}>
         <div className="scrim"></div>
+        <LightField />
         <div className="max-w-[1145px] mx-auto relative z-10 text-white">
           <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, ease: 'easeOut' }}>
             <span className="kicker text-[#FFC44F] tracking-widest drop-shadow-md !mb-2 md:!mb-4">{SITE.name}</span>

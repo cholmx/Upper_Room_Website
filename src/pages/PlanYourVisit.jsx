@@ -1,9 +1,14 @@
 import React from 'react';
 import usePageMeta from '../hooks/usePageMeta';
 import { useSite } from '../settings';
-import { Btn, Section, SectionHeader, PageHeader, QuickFacts, Steps, Photo, PhotoGrid, Gloss, Todo, Accordion } from '../components/ui';
+import { Btn, Section, SectionHeader, PageHeader, QuickFacts, Photo, PhotoGrid, Gloss, Todo, Accordion } from '../components/ui';
 import FormBlock from '../components/FormBlock';
+import ScrollStory, { Stage } from '../components/immersive/ScrollStory';
+import SafeIcon from '../common/SafeIcon';
+import * as FiIcons from 'react-icons/fi';
 import { FAQ_PREVIEW } from '../content/faq';
+
+const { FiMapPin, FiMusic, FiCoffee, FiBookOpen, FiHeart } = FiIcons;
 
 export default function PlanYourVisit() {
   usePageMeta('plan');
@@ -34,14 +39,15 @@ export default function PlanYourVisit() {
       <Section tone="cream">
         <SectionHeader kicker="Sunday" title="Your Sunday, step by step" />
         <Todo id="visit-times">[CONFIRM TIMES FOR EACH STEP]</Todo>
-        <div className="mt-8 max-w-3xl">
-          <Steps
-            items={[
-              { title: 'When you arrive', body: <p>Friendly greeters will meet you at the doors, say hello, and help you find your way. If you have kids, they will point you to our secure check-in area.</p> },
-              { title: 'We worship together', body: <p>Everyone starts in the same room, adults and children together. We sing contemporary songs with the lyrics on screen, and Scripture is on screen too, so you do not need a Bible. Stand, sit, or raise your hands.</p> },
-              { title: 'Coffee and connection', body: <p>After worship we take a short break for coffee and conversation. We never single out visitors or ask anyone to stand up and introduce themselves.</p> },
-              { title: 'The message', body: <p>Adults and teens stay for a practical, Bible-based message. Kids from birth through 5th grade go to their own programs right before it starts.</p> },
-              { title: 'After the service', body: <p>The service usually ends {SITE.serviceEnds}. Our team is happy to talk, answer questions, or pray with you. Stop by the <Gloss k="connectionCenter" /> to meet some of us.</p> },
+        <div className="mt-8">
+          <ScrollStory
+            label="Your Sunday, step by step"
+            beats={[
+              { title: 'When you arrive', visual: <Stage big="Arrive" small="Greeters at the door" icon={<SafeIcon icon={FiMapPin} size={34} />} />, body: <p>Friendly greeters will meet you at the doors, say hello, and help you find your way. If you have kids, they will point you to our secure check-in area.</p> },
+              { title: 'We worship together', visual: <Stage big="Worship" small="Lyrics on the screen" icon={<SafeIcon icon={FiMusic} size={34} />} />, body: <p>Everyone starts in the same room, adults and children together. We sing contemporary songs with the lyrics on screen, and Scripture is on screen too, so you do not need a Bible. Stand, sit, or raise your hands.</p> },
+              { title: 'Coffee and connection', visual: <Stage big="Coffee" small="Say hello, no spotlight" icon={<SafeIcon icon={FiCoffee} size={34} />} />, body: <p>After worship we take a short break for coffee and conversation. We never single out visitors or ask anyone to stand up and introduce themselves.</p> },
+              { title: 'The message', visual: <Stage big="Message" small="Practical and Bible-based" icon={<SafeIcon icon={FiBookOpen} size={34} />} />, body: <p>Adults and teens stay for a practical, Bible-based message. Kids from birth through 5th grade go to their own programs right before it starts.</p> },
+              { title: 'After the service', visual: <Stage big="Stay" small="Ask us anything" icon={<SafeIcon icon={FiHeart} size={34} />} />, body: <p>The service usually ends {SITE.serviceEnds}. Our team is happy to talk, answer questions, or pray with you. Stop by the <Gloss k="connectionCenter" /> to meet some of us.</p> },
             ]}
           />
         </div>

@@ -1,6 +1,7 @@
 // The "Content to confirm" list in the admin. Every visible [BRACKETED] placeholder on the site
 // has an entry here (checklist.test.js keeps the two in step).
 export const CHECKLIST = [
+  { id: 'campaign-model', label: 'Replace the concept 3D model with the architect’s model (.glb), and confirm the plans may be shown', where: 'Admin, Site Photos', route: '/transforming-together' },
   { id: 'logo', label: 'Upload the dark and light logo files', where: 'Admin, Site Photos', route: '/' },
   { id: 'photos', label: 'Add real photos to every labeled photo slot', where: 'Admin, Site Photos', route: '/' },
   { id: 'brand-colors', label: 'Confirm brand colors. The site uses warm neutrals with a gold accent until you say otherwise', where: 'Whole site', route: '/' },

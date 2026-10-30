@@ -37,6 +37,7 @@ export const PHOTO_SLOTS = [
   { key: 'give-impact-3', label: 'impact story three', alt: 'A story of what generosity made possible.' },
   { key: 'outreach-1', label: 'an outreach project', alt: 'Church members serving at a community outreach project.' },
   { key: 'campaign-hero', label: 'the sanctuary or the expansion plans', alt: 'The Upper Room Fellowship sanctuary.' },
+  { key: 'campaign-model', label: 'link to the 3D model file (.glb) of the building and expansion', alt: '', kind: 'model' },
   { key: 'logo-dark', label: 'dark logo for light backgrounds', alt: 'The Upper Room Fellowship', kind: 'logo' },
   { key: 'logo-light', label: 'light logo for dark backgrounds', alt: 'The Upper Room Fellowship', kind: 'logo' },
   { key: 'og-image', label: 'social sharing image, 1200 by 630', alt: 'The Upper Room Fellowship in Columbiana, Ohio', kind: 'logo' },
