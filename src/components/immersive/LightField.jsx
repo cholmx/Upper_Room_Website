@@ -77,7 +77,7 @@ export default function LightField({ className = '' }) {
     const canvas = ref.current;
     if (!canvas || !canRunImmersive(readEnvironment()) || !webglAvailable()) return undefined;
     const gl = canvas.getContext('webgl', { alpha: true, antialias: false, premultipliedAlpha: false, powerPreference: 'low-power' });
-    if (!gl) return undefined;
+    if (!gl || gl.isContextLost()) return undefined;
 
     let raf = 0, visible = true, tabVisible = true, dead = false;
     const state = { px: 0, py: 0, tx: 0, ty: 0, scroll: 0 };
@@ -136,6 +136,7 @@ export default function LightField({ className = '' }) {
       gl.uniform1f(gl.getUniformLocation(pts, 'u_aspect'), canvas.width / canvas.height);
       gl.uniform1f(gl.getUniformLocation(pts, 'u_scale'), canvas.height / 600);
       gl.drawArrays(gl.POINTS, 0, COUNT);
+      if (canvas.style.visibility !== 'visible') canvas.style.visibility = 'visible';
       schedule();
     };
     const schedule = () => { if (!raf && visible && tabVisible && !dead) raf = requestAnimationFrame(frame); };
@@ -151,7 +152,8 @@ export default function LightField({ className = '' }) {
       state.scroll = Math.max(-1, Math.min(1, -r.top / Math.max(1, r.height)));
     };
     const onVisibility = () => { tabVisible = !document.hidden; schedule(); };
-    const onLost = (e) => { e.preventDefault(); dead = true; if (raf) cancelAnimationFrame(raf); };
+    // A lost context paints as an opaque white box in some browsers, so hide the canvas.
+    const onLost = (e) => { e.preventDefault(); dead = true; canvas.style.visibility = 'hidden'; if (raf) cancelAnimationFrame(raf); };
 
     const io = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; schedule(); });
     io.observe(canvas);
@@ -171,10 +173,11 @@ export default function LightField({ className = '' }) {
       document.removeEventListener('visibilitychange', onVisibility);
       canvas.removeEventListener('webglcontextlost', onLost);
       delete canvas.dataset.running;
-      const lose = gl.getExtension('WEBGL_lose_context');
-      if (lose) lose.loseContext();
+      canvas.style.visibility = 'hidden';
+      // Free the GPU objects but keep the context, so React's development double mount does not lose it.
+      gl.deleteProgram(pts); gl.deleteProgram(beam); gl.deleteBuffer(buf); gl.deleteBuffer(quad);
     };
   }, []);
 
-  return <canvas ref={ref} aria-hidden="true" className={`absolute inset-0 w-full h-full pointer-events-none z-[1] ${className}`} />;
+  return <canvas ref={ref} aria-hidden="true" style={{ visibility: 'hidden' }} className={`absolute inset-0 w-full h-full pointer-events-none z-[1] ${className}`} />;
 }
