@@ -45,7 +45,7 @@ export default function Blog() {
   const standardPosts = filteredPosts.length > 1 ? filteredPosts.slice(1) : [];
 
   return (
-    <div className="bg-[#F7F5EE] min-h-screen text-black pb-24 pt-20">
+    <div className="bg-[#F9F9F7] min-h-screen text-black pb-24 pt-20">
       <PageHeader kicker="Articles and updates" title="Church blog" intro="Insights, devotions, and updates from the Upper Room family." />
 
       <div className="max-w-[1145px] mx-auto px-6 mt-16">
@@ -83,7 +83,7 @@ export default function Blog() {
                     <button
                       key={cat}
                       onClick={() => setSelectedCategory(cat)}
-                      className={`px-6 py-2.5 rounded-full text-sm font-bold uppercase tracking-wider transition-all duration-300 flex items-center gap-2 ${selectedCategory === cat ? 'bg-[#1E2522] text-white shadow-md scale-105' : 'bg-white hover:border-black/30 hover:bg-gray-50 text-gray-600 border border-black/10'}`}
+                      className={`px-6 py-2.5 rounded-full text-sm font-bold uppercase tracking-wider transition-all duration-300 flex items-center gap-2 ${selectedCategory === cat ? 'bg-[#0B1613] text-white shadow-md scale-105' : 'bg-white hover:border-black/30 hover:bg-gray-50 text-gray-600 border border-black/10'}`}
                     >
                       {cat !== 'All' && <SafeIcon icon={FiTag} className={selectedCategory === cat ? 'text-white' : 'text-[#8A6309]'} />}
                       {cat}
@@ -113,7 +113,7 @@ export default function Blog() {
                   }} className="mb-20">
                     <motion.span variants={slideInLeft} className="kicker text-[#8A6309] mb-4 inline-block">{searchQuery || selectedCategory !== 'All' ? 'Top Result' : 'Latest Article'}</motion.span>
                     <Link to={`/blog/${featuredPost.id}`} className="block bg-white border border-black/5 hover:shadow-2xl transition-all duration-500 rounded-3xl overflow-hidden flex flex-col md:flex-row group translate-y-0 hover:-translate-y-2">
-                      <div className="md:w-1/2 aspect-square md:aspect-auto bg-[#1E2522] relative overflow-hidden flex-shrink-0">
+                      <div className="md:w-1/2 aspect-square md:aspect-auto bg-[#0B1613] relative overflow-hidden flex-shrink-0">
                         {featuredPost.image_url ? (
                           <img 
                             loading="lazy"
@@ -122,7 +122,7 @@ export default function Blog() {
                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" 
                           />
                         ) : (
-                          <div className="absolute inset-0 flex flex-col items-center justify-center text-[#F7F5EE] p-8 text-center bg-gradient-to-br from-[#1E2522] to-[#1A2E28]">
+                          <div className="absolute inset-0 flex flex-col items-center justify-center text-[#F9F9F7] p-8 text-center bg-gradient-to-br from-[#0B1613] to-[#1A2E28]">
                             <span className="text-5xl font-serif mb-2 opacity-50">Upper Room</span>
                             <span className="text-sm tracking-widest uppercase opacity-30">Journal</span>
                           </div>
@@ -177,7 +177,7 @@ export default function Blog() {
                             to={`/blog/${post.id}`}
                             className="bg-white border border-black/5 flex flex-col h-full rounded-2xl overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-400 group"
                           >
-                            <div className="aspect-[16/10] bg-[#1E2522] relative overflow-hidden">
+                            <div className="aspect-[16/10] bg-[#0B1613] relative overflow-hidden">
                               {post.image_url ? (
                                 <img 
                                   loading="lazy"
@@ -186,7 +186,7 @@ export default function Blog() {
                                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
                                 />
                               ) : (
-                                <div className="absolute inset-0 flex items-center justify-center text-white/50 bg-gradient-to-br from-[#1E2522] to-[#1A2E28]">
+                                <div className="absolute inset-0 flex items-center justify-center text-white/50 bg-gradient-to-br from-[#0B1613] to-[#1A2E28]">
                                   <span className="text-3xl font-serif">Upper Room</span>
                                 </div>
                               )}

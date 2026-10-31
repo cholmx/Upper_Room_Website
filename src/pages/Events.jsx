@@ -136,7 +136,7 @@ export default function Events() {
         <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
           <div role="group" aria-label="Calendar view" className="inline-flex rounded-full border border-black/30 overflow-hidden">
             {['list', 'month'].map(v => (
-              <button key={v} type="button" aria-pressed={view === v} onClick={() => setView(v)} className={`min-h-[48px] px-6 font-semibold ${view === v ? 'bg-[#1E2522] text-white' : 'bg-white text-[#080c0b] hover:bg-white'}`}>
+              <button key={v} type="button" aria-pressed={view === v} onClick={() => setView(v)} className={`min-h-[48px] px-6 font-semibold ${view === v ? 'bg-[#0B1613] text-white' : 'bg-white text-[#080c0b] hover:bg-white'}`}>
                 {v === 'list' ? 'List' : 'Month'}
               </button>
             ))}
