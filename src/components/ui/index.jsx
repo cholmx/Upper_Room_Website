@@ -15,7 +15,7 @@ const isExternal = (to) => /^(https?:|mailto:|tel:|sms:)/i.test(to);
 
 const BTN = {
   primary: 'btn btn-solid',
-  dark: 'btn bg-[#0B1613] text-white border-[#0B1613] hover:bg-[#FFC44F] hover:text-black hover:border-[#FFC44F]',
+  dark: 'btn bg-[#1E2522] text-white border-[#1E2522] hover:bg-[#D49E46] hover:text-black hover:border-[#D49E46]',
   ghost: 'btn btn-outline',
   light: 'btn btn-outline-dark',
 };
@@ -41,12 +41,12 @@ export const Btn = forwardRef(function Btn({ to, href, onClick, variant = 'prima
 });
 
 const TONES = {
-  cream: 'bg-[#F9F9F7] text-black',
+  cream: 'bg-[#F7F5EE] text-black',
   white: 'bg-white text-black',
   sand: 'bg-white text-black border-y border-black/5',
-  ink: 'bg-[#0B1613] text-[#F9F9F7] relative overflow-hidden glow-gold',
-  gold: 'bg-[#FFC44F] text-black',
-  bronze: 'bg-[#CCA866] text-black',
+  ink: 'bg-[#1E2522] text-[#F7F5EE] relative overflow-hidden glow-gold',
+  gold: 'bg-[#D49E46] text-black',
+  bronze: 'bg-[#BD8937] text-black',
 };
 
 export function Section({ tone = 'cream', id, className = '', narrow = false, children, ...rest }) {
@@ -68,7 +68,7 @@ export function Section({ tone = 'cream', id, className = '', narrow = false, ch
 export function SectionHeader({ kicker, title, intro, center = false, as: Tag = 'h2', tone = 'light', className = '' }) {
   return (
     <div className={`${center ? 'text-center mx-auto' : ''} max-w-3xl mb-10 md:mb-12 ${className}`}>
-      {kicker && <span className={`kicker ${tone === 'dark' ? 'text-[#FFC44F]' : 'text-[#8A6309]'}`}>{kicker}</span>}
+      {kicker && <span className={`kicker ${tone === 'dark' ? 'text-[#D49E46]' : 'text-[#8A6309]'}`}>{kicker}</span>}
       <Tag className="text-3xl md:text-5xl">{title}</Tag>
       {intro && <p className={`mt-4 text-lg leading-relaxed ${tone === 'dark' ? 'text-white/85' : 'text-black/80'}`}>{intro}</p>}
     </div>
@@ -81,7 +81,7 @@ export function Photo({ slot, className = '', ratio = 'aspect-[4/3]', priority =
   const [failed, setFailed] = useState(null);
   if (!url || failed === url) return null;
   return (
-    <div className={`${ratio} ${rounded ? 'rounded-3xl' : ''} overflow-hidden border border-black/5 shadow-xl bg-[#0B1613] ${className}`}>
+    <div className={`${ratio} ${rounded ? 'rounded-3xl' : ''} overflow-hidden border border-black/5 shadow-xl bg-[#1E2522] ${className}`}>
       <img src={url} alt={alt} loading={priority ? 'eager' : 'lazy'} decoding="async" onError={() => setFailed(url)} className="w-full h-full object-cover" />
     </div>
   );
@@ -92,14 +92,14 @@ export function PhotoBox({ src, alt = '', initials, className = '', ratio = 'asp
   const url = safeUrl(src);
   if (url) {
     return (
-      <div className={`${ratio} ${rounded ? 'rounded-3xl' : ''} overflow-hidden bg-[#0B1613] ${className}`}>
+      <div className={`${ratio} ${rounded ? 'rounded-3xl' : ''} overflow-hidden bg-[#1E2522] ${className}`}>
         <img src={url} alt={alt} loading="lazy" decoding="async" className="w-full h-full object-cover" />
       </div>
     );
   }
   if (!initials) return null;
   return (
-    <div aria-hidden="true" className={`${ratio} ${rounded ? 'rounded-3xl' : ''} bg-gradient-to-br from-[#0B1613] to-[#1A2E28] flex items-center justify-center text-6xl font-black text-[#FFC44F]/60 ${className}`}>
+    <div aria-hidden="true" className={`${ratio} ${rounded ? 'rounded-3xl' : ''} bg-gradient-to-br from-[#1E2522] to-[#1A2E28] flex items-center justify-center text-6xl font-black text-[#D49E46]/60 ${className}`}>
       {initials}
     </div>
   );
@@ -137,7 +137,7 @@ function usePageBanner(pageKey) {
 export function PageHeader({ kicker, title, intro, children, page, ambient = false }) {
   const image = usePageBanner(page);
   return (
-    <header className="photo-section text-[#F9F9F7] py-24 md:py-32 px-6 text-center" style={{ backgroundImage: `url('${imgUrl(image, 1600)}')` }}>
+    <header className="photo-section text-[#F7F5EE] py-24 md:py-32 px-6 text-center" style={{ backgroundImage: `url('${imgUrl(image, 1600)}')` }}>
       <div className="scrim"></div>
       {ambient && <LightField />}
       <motion.div
@@ -146,7 +146,7 @@ export function PageHeader({ kicker, title, intro, children, page, ambient = fal
         transition={{ duration: 0.8, ease: 'easeOut' }}
         className="max-w-[800px] mx-auto relative z-10"
       >
-        {kicker && <span className="kicker text-[#FFC44F]">{kicker}</span>}
+        {kicker && <span className="kicker text-[#D49E46]">{kicker}</span>}
         <h1 className="text-4xl md:text-7xl mb-6 drop-shadow-lg">{title}</h1>
         {intro && <p className="font-serif italic text-xl md:text-2xl text-white/90 max-w-[50ch] mx-auto drop-shadow-md leading-relaxed">{intro}</p>}
         {children && <div className="mt-8 flex flex-wrap justify-center gap-4">{children}</div>}
@@ -216,8 +216,8 @@ export function Steps({ items }) {
       {items.map((it, i) => (
         <li key={it.title} className="flex gap-5">
           <div className="flex flex-col items-center">
-            <span className="w-12 h-12 rounded-full bg-[#FFC44F] text-black font-black flex items-center justify-center flex-shrink-0 shadow-[0_0_20px_rgba(255,196,79,0.3)]">{i + 1}</span>
-            {i < items.length - 1 && <span className="w-px flex-grow bg-[#CCA866]/60 mt-2" aria-hidden="true"></span>}
+            <span className="w-12 h-12 rounded-full bg-[#D49E46] text-black font-black flex items-center justify-center flex-shrink-0 shadow-[0_0_20px_rgba(255,196,79,0.3)]">{i + 1}</span>
+            {i < items.length - 1 && <span className="w-px flex-grow bg-[#BD8937]/60 mt-2" aria-hidden="true"></span>}
           </div>
           <div className="pb-2">
             <h3 className="text-xl md:text-2xl mb-2">{it.title}</h3>
@@ -245,7 +245,7 @@ export function QuickFacts({ items }) {
 // Every page ends with one clear call to action.
 export function EndCta({ title, text, to, href, label }) {
   return (
-    <section className="bg-[#FFC44F] text-black text-center py-20 md:py-28 px-6" aria-label="Next step">
+    <section className="bg-[#D49E46] text-black text-center py-20 md:py-28 px-6" aria-label="Next step">
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}

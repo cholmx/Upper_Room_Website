@@ -82,12 +82,12 @@ export default function About() {
 
       <Section tone="ink">
         <div className="max-w-3xl">
-          <p className="kicker text-[#FFC44F]">Our vision</p>
+          <p className="kicker text-[#D49E46]">Our vision</p>
           <h2 className="text-3xl md:text-4xl">Our vision</h2>
           <p className="mt-4 text-lg md:text-xl text-white/90 leading-relaxed">
             We exist to help people know God deeply, share life authentically, and serve others selflessly. Real change happens from the inside out as our hearts line up with God’s heart. Along the way we pursue healthy relationships, abundant wholeness, our God-given greatness, a supernatural lifestyle, God’s presence, and a life that lives out the Gospel.
           </p>
-          <blockquote className="mt-6 border-l-4 border-[#FFC44F] pl-5 text-xl font-serif italic">
+          <blockquote className="mt-6 border-l-4 border-[#D49E46] pl-5 text-xl font-serif italic">
             “By this everyone will know that you are my disciples, if you love one another.”
             <footer className="mt-2 text-base font-sans text-white/80">John 13:35</footer>
           </blockquote>

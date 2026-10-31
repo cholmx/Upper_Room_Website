@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 :root {
-  --dark: #0B1613;
-  --light: #F9F9F7;
-  --yellow: #FFC44F;
-  --muted: #CCA866;
-  --black: #080c0b;
+  --dark: #1E2522;
+  --light: #F7F5EE;
+  --yellow: #D49E46;
+  --muted: #BD8937;
+  --black: #141B18;
 }
 
 html {
@@ -18,33 +18,32 @@ body {
   margin: 0;
   background: var(--light);
   color: var(--black);
-  font-family: 'Inter', sans-serif;
-  font-weight: 500;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 h1, h2, h3, h4 {
-  font-family: 'Google Sans Flex', sans-serif;
-  text-transform: uppercase;
-  font-weight: 900;
-  letter-spacing: -0.02em;
-  line-height: 1.05;
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
 }
 
 .kicker {
   display: inline-block;
-  font-family: 'Caladea', serif;
-  font-style: italic;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   text-transform: uppercase;
   font-weight: 700;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   letter-spacing: 0.15em;
   margin-bottom: 1rem;
 }
 
 .serif-accent {
-  font-family: 'Caladea', serif;
+  font-family: 'Playfair Display', serif;
   font-style: italic;
   font-weight: 400;
   text-transform: none;
@@ -56,17 +55,15 @@ h1, h2, h3, h4 {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 1rem 2.2rem;
-  font-family: 'Caladea', serif;
-  font-style: italic;
-  text-transform: uppercase;
+  padding: 0.9rem 2rem;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 0.95rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  font-weight: 600;
+  letter-spacing: 0.01em;
   text-decoration: none;
   cursor: pointer;
   border: 2px solid transparent;
-  border-radius: 9999px;
+  border-radius: 0.5rem;
   transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
               box-shadow 0.4s ease, 
               background-color 0.3s ease,
@@ -91,8 +88,8 @@ h1, h2, h3, h4 {
 }
 
 .btn-solid:hover {
-  background: #ffce6b;
-  border-color: #ffce6b;
+  background: #BD8937;
+  border-color: #BD8937;
 }
 
 /* Explicit Button Hover Contrast rules */
@@ -239,7 +236,7 @@ h1, h2, h3, h4 {
 }
 
 /* Legacy support: dark backgrounds that use the raw hex class */
-.bg-\[\#0B1613\] :focus-visible {
+.bg-\[\#1E2522\] :focus-visible {
   outline-color: var(--yellow);
 }
 
@@ -267,7 +264,7 @@ h1, h2, h3, h4 {
 
 /* Admin- and user-authored markdown */
 .rich-text {
-  font-family: 'Caladea', serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   line-height: 1.75;
   overflow-wrap: anywhere;
 }
@@ -279,7 +276,7 @@ h1, h2, h3, h4 {
 .rich-text h1,
 .rich-text h2,
 .rich-text h3 {
-  font-family: 'Google Sans Flex', sans-serif;
+  font-family: 'Playfair Display', serif;
   text-transform: none;
   letter-spacing: -0.01em;
   margin-top: 1.75em;
@@ -315,7 +312,7 @@ details.u-acc > summary .u-acc-icon { transition: transform 0.2s ease; }
   right: 0;
   width: 700px;
   height: 700px;
-  background: #CCA866;
+  background: #BD8937;
   border-radius: 9999px;
   filter: blur(150px);
   opacity: 0.1;
@@ -363,7 +360,7 @@ details.u-acc.neu-acc[open] { background: linear-gradient(145deg, #efeee9, #f9f8
 /* Buttons: soft raised, pressed on click, with a ripple from the point of contact */
 .btn { position: relative; overflow: hidden; transition: transform 0.2s ease, box-shadow 0.25s ease, background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease; }
 .btn-solid { box-shadow: 5px 5px 12px rgba(170, 118, 10, 0.32), -4px -4px 10px rgba(255, 255, 255, 0.6); }
-.photo-section .btn-solid, .glow-gold .btn-solid, .bg-\[\#0B1613\] .btn-solid { box-shadow: 5px 5px 14px rgba(0, 0, 0, 0.5), -3px -3px 10px rgba(255, 255, 255, 0.07); }
+.photo-section .btn-solid, .glow-gold .btn-solid, .bg-\[\#1E2522\] .btn-solid { box-shadow: 5px 5px 14px rgba(0, 0, 0, 0.5), -3px -3px 10px rgba(255, 255, 255, 0.07); }
 .btn-solid:active { box-shadow: inset 4px 4px 9px rgba(170, 118, 10, 0.5), inset -3px -3px 8px rgba(255, 255, 255, 0.35); transform: translateY(1px); }
 .btn:active { transform: translateY(1px); }
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
