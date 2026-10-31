@@ -10,8 +10,20 @@ export default {
         serif: ['Caladea', 'serif'],
         sans: ['Inter', 'sans-serif'],
         display: ['"Google Sans Flex"', 'sans-serif'],
+        headline: ['"Playfair Display"', 'serif'],
+        body: ['"Plus Jakarta Sans"', 'sans-serif'],
       },
       colors: {
+        charcoal: '#1E2522',
+        linen: '#F7F5EE',
+        sandstone: '#EDE9DC',
+        harvest: {
+          DEFAULT: '#D49E46',
+          hover: '#BD8937',
+          light: '#E8B96C',
+        },
+        moss: '#3E584D',
+        stone: '#6E706B',
         ink: {
           DEFAULT: '#0B1613',
           deep: '#080c0b',
