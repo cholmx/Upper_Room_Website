@@ -11,7 +11,7 @@ import * as FiIcons from 'react-icons/fi';
 const { FiMenu, FiX, FiChevronDown } = FiIcons;
 
 const linkBase = 'whitespace-nowrap font-serif italic uppercase text-[0.9rem] tracking-widest py-1 border-b-2 transition-all duration-300 inline-flex items-center gap-1';
-const linkOn = 'border-[#EBC36B] text-black';
+const linkOn = 'border-[#eaa235] text-black';
 const linkOff = 'border-transparent text-black/70 hover:text-black hover:border-black/20';
 
 function DesktopDropdown({ item }) {
@@ -48,7 +48,7 @@ function DesktopDropdown({ item }) {
           <ul className="bg-white rounded-2xl py-3 elev-2">
             {item.children.map(c => (
               <li key={c.to}>
-                <Link to={c.to} className="block px-6 py-2.5 font-serif italic uppercase text-[0.85rem] tracking-widest text-black/80 hover:text-black hover:bg-[#F9F9F7]">{c.label}</Link>
+                <Link to={c.to} className="block px-6 py-2.5 font-serif italic uppercase text-[0.85rem] tracking-widest text-black/80 hover:text-black hover:bg-[#f7f5ee]">{c.label}</Link>
               </li>
             ))}
           </ul>
@@ -75,7 +75,7 @@ function MobileMenu({ onClose }) {
   const big = { fontFamily: "'Google Sans Flex', sans-serif", fontWeight: 900 };
 
   return createPortal(
-    <div id="mobile-menu" className="xl:hidden fixed inset-0 z-[60] bg-[#F9F9F7] overflow-y-auto" role="dialog" aria-modal="true" aria-label="Site menu">
+    <div id="mobile-menu" className="xl:hidden fixed inset-0 z-[60] bg-[#f7f5ee] overflow-y-auto" role="dialog" aria-modal="true" aria-label="Site menu">
       <div className="flex items-center justify-between px-6 h-16">
         <span className="uppercase text-xl tracking-tight" style={{ fontFamily: "'Google Sans Flex', sans-serif", fontWeight: 1000 }}>{SITE.shortName}</span>
         <button type="button" aria-label="Close menu" onClick={onClose} className="p-3 bg-white rounded-full elev-1 hover:scale-105 transition-transform">
@@ -105,7 +105,7 @@ function MobileMenu({ onClose }) {
                   )}
                 </>
               ) : (
-                <Link to={item.to} onClick={onClose} className="flex items-center min-h-[60px] uppercase text-2xl hover:text-[#CCA866] transition-colors" style={big}>{item.label}</Link>
+                <Link to={item.to} onClick={onClose} className="flex items-center min-h-[60px] uppercase text-2xl hover:text-[#d49e46] transition-colors" style={big}>{item.label}</Link>
               )}
             </li>
           ))}
@@ -130,19 +130,19 @@ export default function Header() {
   }, []);
 
   return (
-    <header className={`sticky top-0 z-50 flex items-center transition-all duration-300 text-black ${scrolled ? 'bg-[#F9F9F7]/90 backdrop-blur-md shadow-[0_1px_2px_rgba(20,34,29,0.05),0_6px_18px_-6px_rgba(20,34,29,0.10)] h-16' : 'bg-[#F9F9F7] shadow-[0_1px_2px_rgba(20,34,29,0.05),0_6px_18px_-6px_rgba(20,34,29,0.10)] h-16 xl:h-24'}`}>
+    <header className={`sticky top-0 z-50 flex items-center transition-all duration-300 text-black ${scrolled ? 'bg-[#f7f5ee]/90 backdrop-blur-md shadow-[0_1px_2px_rgba(30,37,34,0.05),0_6px_18px_-6px_rgba(30,37,34,0.10)] h-16' : 'bg-[#f7f5ee] shadow-[0_1px_2px_rgba(30,37,34,0.05),0_6px_18px_-6px_rgba(30,37,34,0.10)] h-16 xl:h-24'}`}>
       <div className="max-w-[1320px] w-full mx-auto px-6 flex items-center justify-between gap-6">
         <Logo />
         <nav aria-label="Main" className="hidden xl:flex items-center gap-6 pt-1">
           {NAV.map(item => (item.children
             ? <DesktopDropdown key={item.label} item={item} />
             : <NavLink key={item.to} to={item.to} className={({ isActive }) => `${linkBase} ${isActive ? linkOn : linkOff}`}>{item.label}</NavLink>))}
-          <a href={SITE.giveUrl} target="_blank" rel="noopener noreferrer" className="px-5 py-2 rounded-full bg-[#14221d] text-white font-serif italic uppercase text-[0.85rem] tracking-widest hover:bg-[#EBC36B] hover:text-black transition-colors">
+          <a href={SITE.giveUrl} target="_blank" rel="noopener noreferrer" className="px-5 py-2 rounded-full bg-[#1e2522] text-white font-serif italic uppercase text-[0.85rem] tracking-widest hover:bg-[#eaa235] hover:text-black transition-colors">
             Give<span className="sr-only"> (opens in a new tab)</span>
           </a>
         </nav>
         <div className="flex items-center gap-2 xl:hidden">
-          <a href={SITE.giveUrl} target="_blank" rel="noopener noreferrer" className="px-4 min-[400px]:px-5 py-2 rounded-full bg-[#14221d] text-white font-serif italic uppercase text-[0.8rem] min-[400px]:text-[0.85rem] tracking-widest">
+          <a href={SITE.giveUrl} target="_blank" rel="noopener noreferrer" className="px-4 min-[400px]:px-5 py-2 rounded-full bg-[#1e2522] text-white font-serif italic uppercase text-[0.8rem] min-[400px]:text-[0.85rem] tracking-widest">
             Give<span className="sr-only"> (opens in a new tab)</span>
           </a>
           <button type="button" className="p-2 hover:bg-black/5 rounded-full transition-colors" aria-expanded={open} aria-controls="mobile-menu" aria-label="Open menu" onClick={() => setOpen(true)}>

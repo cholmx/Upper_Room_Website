@@ -11,7 +11,7 @@ export default function Beliefs() {
     title: b.title,
     content: (
       <>
-        <p className="font-semibold text-[#1c2622]">{b.plain}</p>
+        <p className="font-semibold text-[#1e2522]">{b.plain}</p>
         {b.full ? <RichText value={b.full} /> : <p><Todo id="beliefs-full">[PASTE THE FULL STATEMENT FOR THIS TOPIC]</Todo></p>}
       </>
     ),
@@ -29,7 +29,7 @@ export default function Beliefs() {
           <h2 className="text-xl mb-3">On this page</h2>
           <ul className="grid sm:grid-cols-2 gap-x-6">
             {BELIEFS.map(b => (
-              <li key={b.id}><a href={`#${b.id}`} className="inline-flex items-center min-h-[44px] underline underline-offset-4 text-[#8A6309] font-medium">{b.title}</a></li>
+              <li key={b.id}><a href={`#${b.id}`} className="inline-flex items-center min-h-[44px] underline underline-offset-4 text-[#2b433e] font-medium">{b.title}</a></li>
             ))}
           </ul>
         </nav>

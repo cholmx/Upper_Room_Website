@@ -22,7 +22,7 @@ export default function MessageSeries() {
   return (
     <>
       <PageHeader kicker="Message series" title={info.name} intro={`${info.count} ${info.count === 1 ? 'message' : 'messages'}${dateRangeLabel(info.first, info.last) ? `, ${dateRangeLabel(info.first, info.last)}` : ''}.`}>
-        <Link to="/messages" className="underline underline-offset-4 font-semibold text-[#8A6309] min-h-[44px] inline-flex items-center">All messages</Link>
+        <Link to="/messages" className="underline underline-offset-4 font-semibold text-[#2b433e] min-h-[44px] inline-flex items-center">All messages</Link>
       </PageHeader>
       <Section tone="cream">
         <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">

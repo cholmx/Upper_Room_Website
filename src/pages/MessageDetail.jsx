@@ -49,7 +49,7 @@ export default function MessageDetail() {
       <article>
         <header className="bg-white">
           <div className="max-w-4xl mx-auto px-5 sm:px-8 py-10 md:py-14">
-            <Link to="/messages" className="inline-flex items-center min-h-[44px] font-semibold text-[#8A6309] underline underline-offset-4">All messages</Link>
+            <Link to="/messages" className="inline-flex items-center min-h-[44px] font-semibold text-[#2b433e] underline underline-offset-4">All messages</Link>
             <h1 className="text-3xl md:text-5xl mt-2">{m.title}</h1>
             <dl className="mt-5 grid sm:grid-cols-2 gap-x-8 gap-y-2 text-black/80">
               {m.speaker && <div><dt className="inline font-semibold">Speaker: </dt><dd className="inline">{m.speaker}</dd></div>}
@@ -62,7 +62,7 @@ export default function MessageDetail() {
 
         <Section tone="cream" narrow>
           {vid && (
-            <div className="aspect-video rounded-2xl overflow-hidden bg-[#14221d] mb-8">
+            <div className="aspect-video rounded-2xl overflow-hidden bg-[#1e2522] mb-8">
               <LiteYouTube id={vid} title={m.title} />
             </div>
           )}
@@ -95,7 +95,7 @@ export default function MessageDetail() {
             <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {more.map(x => <li key={x.id}><MessageCard message={x} /></li>)}
             </ul>
-            <p className="mt-6"><Link to={seriesPath(m.series)} className="font-semibold underline underline-offset-4 text-[#8A6309]">See the whole series</Link></p>
+            <p className="mt-6"><Link to={seriesPath(m.series)} className="font-semibold underline underline-offset-4 text-[#2b433e]">See the whole series</Link></p>
           </Section>
         )}
       </article>

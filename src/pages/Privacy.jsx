@@ -24,7 +24,7 @@ export default function Privacy() {
           <h2 className={h}>We do not sell your information</h2>
           <p>We do not sell or rent your information, and we do not use it for advertising.</p>
           <h2 className={h}>Your choices</h2>
-          <p>To see, correct, or delete information you sent us, email <a className="underline underline-offset-4 font-semibold text-[#8A6309]" href={`mailto:${SITE.email}`}>{SITE.email}</a> or call {SITE.phone}.</p>
+          <p>To see, correct, or delete information you sent us, email <a className="underline underline-offset-4 font-semibold text-[#2b433e]" href={`mailto:${SITE.email}`}>{SITE.email}</a> or call {SITE.phone}.</p>
           <AdminOnly><p className="text-base">Last updated: <Todo id="legal-review">[DATE]</Todo></p></AdminOnly>
         </div>
       </Section>

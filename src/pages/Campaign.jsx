@@ -43,7 +43,7 @@ export default function Campaign() {
         <AdminOnly><p className="mt-6"><Todo id="campaign-model">[REPLACE THE CONCEPT MODEL WITH THE ARCHITECT’S 3D MODEL (.glb), in Site Photos]</Todo></p></AdminOnly>
       </Section>
 
-      <Section tone="sand">
+      <Section tone="cream">
         <SectionHeader kicker="Give" title="Three ways to take part" />
         <div className="grid md:grid-cols-3 gap-6">
           <div className="rounded-2xl p-6 flex flex-col neu">
@@ -66,7 +66,7 @@ export default function Campaign() {
       </Section>
 
       <AdminOnly>
-      <Section tone="cream">
+      <Section tone="bronze">
         <div className="grid md:grid-cols-2 gap-10">
           <div>
             <SectionHeader kicker="Timeline" title="Campaign timeline" className="!mb-4" />
@@ -80,13 +80,13 @@ export default function Campaign() {
       </Section>
       </AdminOnly>
 
-      <Section tone="sand" narrow>
+      <Section tone="white" narrow>
         <SectionHeader title="Questions and answers" />
         <Accordion items={faq} />
-        <p className="mt-8 text-lg">More questions? <Link to="/contact" className="underline underline-offset-4 font-semibold text-[#8A6309]">Send us a message</Link>.</p>
+        <p className="mt-8 text-lg">More questions? <Link to="/contact" className="underline underline-offset-4 font-semibold text-[#2b433e]">Send us a message</Link>.</p>
       </Section>
 
-      <Section tone="ink" narrow>
+      <Section tone="forest" narrow>
         <div className="text-center">
           <h2 className="text-3xl md:text-4xl">Help us make room</h2>
           <p className="mt-4 text-lg md:text-xl text-white/90">Pray about what God would have you give, then take the next step.</p>

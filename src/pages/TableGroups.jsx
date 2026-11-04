@@ -5,7 +5,7 @@ import useFetch from '../hooks/useFetch';
 import { Btn, Section, SectionHeader, PageHeader, Photo, Gloss, Todo } from '../components/ui';
 import FormBlock from '../components/FormBlock';
 
-const sel = 'w-full min-h-[48px] px-3 py-2 bg-white rounded-xl border border-black/25 focus:outline-none focus:ring-2 focus:ring-[#8A6309]';
+const sel = 'w-full min-h-[48px] px-3 py-2 bg-white rounded-xl border border-black/25 focus:outline-none focus:ring-2 focus:ring-[#2b433e]';
 
 function F({ label, value, onChange, options }) {
   const id = `tg-${label.replace(/\W+/g, '-').toLowerCase()}`;
@@ -63,7 +63,7 @@ export default function TableGroups() {
         </div>
       </Section>
 
-      <Section tone="sand" id="groups">
+      <Section tone="white" id="groups">
         <SectionHeader kicker="Group finder" title="Find a group" />
         {groups.length === 0 ? (
           <div className="rounded-2xl p-6 neu">
@@ -85,7 +85,7 @@ export default function TableGroups() {
                 {shown.map(g => (
                   <li key={g.id} className="rounded-2xl p-6 flex flex-col neu">
                     <h3 className="text-xl">{g.name}</h3>
-                    <p className="mt-1 text-sm font-semibold text-[#8A6309]">{[g.day, g.time_of_day, g.area, g.life_stage].filter(Boolean).join('  |  ')}</p>
+                    <p className="mt-1 text-sm font-semibold text-[#2b433e]">{[g.day, g.time_of_day, g.area, g.life_stage].filter(Boolean).join('  |  ')}</p>
                     {g.description && <p className="mt-3 text-black/80">{g.description}</p>}
                     <div className="mt-auto pt-4 flex items-center gap-4">
                       <span className={`text-sm font-bold ${(g.status || 'open') === 'full' ? 'text-red-800' : 'text-green-900'}`}>{(g.status || 'open') === 'full' ? 'Full' : 'Open'}</span>
@@ -104,14 +104,14 @@ export default function TableGroups() {
           <div className="md:col-span-2">
             <SectionHeader title="Help me find a group" className="!mb-4" />
             <p className="text-lg leading-relaxed text-black/80">Tell us what days work for you and what stage of life you are in, and we will help you find a fit.</p>
-            <p className="mt-6 text-lg text-black/80">Interested in hosting or leading a group? <Link className="underline underline-offset-4 font-semibold text-[#8A6309]" to="/contact">Send us a message</Link>.</p>
+            <p className="mt-6 text-lg text-black/80">Interested in hosting or leading a group? <Link className="underline underline-offset-4 font-semibold text-[#2b433e]" to="/contact">Send us a message</Link>.</p>
             <p className="mt-3"><Todo id="groups-contact">[NAME OF THE PERSON WHO LEADS TABLE GROUPS]</Todo></p>
           </div>
           <div className="md:col-span-3"><FormBlock key={picked} formKey="tablegroup" defaults={{ group: picked }} /></div>
         </div>
       </Section>
 
-      <Section tone="ink" narrow>
+      <Section tone="forest" narrow>
         <div className="text-center">
           <h2 className="text-3xl md:text-4xl">Not ready to join a group yet?</h2>
           <p className="mt-4 text-lg md:text-xl text-white/90">Come to a Sunday first. We would love to meet you.</p>

@@ -23,7 +23,7 @@ export default function Give() {
         </div>
       </Section>
 
-      <Section tone="sand">
+      <Section tone="white">
         <SectionHeader kicker="Other ways" title="Other ways to give" />
         <Cards cols={4}>
           <Card title="Text to give"><p>Text <strong>{t.keyword} $50</strong> (or any amount) to <strong>{t.number}</strong>.</p></Card>
@@ -45,7 +45,7 @@ export default function Give() {
               <li>Say thank you for how generous God has been to us</li>
               <li>Partner with God in building His kingdom</li>
             </ul>
-            <blockquote className="mt-6 border-l-4 border-[#8A6309] pl-5 text-xl">
+            <blockquote className="mt-6 border-l-4 border-[#2b433e] pl-5 text-xl">
               Read 2 Corinthians 9:6-7 for the heart behind it.
             </blockquote>
           </div>
@@ -62,7 +62,7 @@ export default function Give() {
         </div>
       </Section>
 
-      <Section tone="sand">
+      <Section tone="white">
         <SectionHeader kicker="Impact" title="Where your gift goes" intro="Your gifts mostly fund our local ministries, our building, our staff, and our outreach, with a portion going to missions." />
         <AdminOnly>
           <ul className="space-y-3 text-lg">
@@ -74,7 +74,7 @@ export default function Give() {
         <PhotoGrid slots={['give-impact-1', 'give-impact-2', 'give-impact-3']} className="mt-8 md:!grid-cols-3" />
       </Section>
 
-      <Section tone="ink" narrow>
+      <Section tone="forest" narrow>
         <div className="text-center">
           <h2 className="text-3xl md:text-4xl">Ready to give?</h2>
           <p className="mt-4 text-lg md:text-xl text-white/90">It takes about a minute, and every gift is put to work.</p>

@@ -40,7 +40,7 @@ export default function CarePortal() {
           <Card title="Offer your skills"><p>Repairs, rides, mentoring, and more. Tell us what you are good at.</p></Card>
           <Card title="Pray"><p>Pray for the children and families behind each request.</p></Card>
         </Cards>
-        <p className="mt-8 text-lg">To learn more or join our response team, email <a className="underline underline-offset-4 font-semibold text-[#8A6309]" href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
+        <p className="mt-8 text-lg">To learn more or join our response team, email <a className="underline underline-offset-4 font-semibold text-[#2b433e]" href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
       </Section>
 
       <EndCta title="See the current needs" text="Open requests from our community are listed on CarePortal." href={SITE.careportalUrl} label="Go to the CarePortal" />

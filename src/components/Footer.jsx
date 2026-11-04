@@ -22,10 +22,10 @@ const container = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: {
 const item = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } } };
 
 function FooterLink({ to, external, children }) {
-  const className = 'group flex items-center gap-2 opacity-80 hover:opacity-100 hover:text-[#EBC36B] transition-all duration-300 mb-3 text-[0.9rem]';
+  const className = 'group flex items-center gap-2 opacity-80 hover:opacity-100 hover:text-[#eaa235] transition-all duration-300 mb-3 text-[0.9rem]';
   const content = (
     <>
-      <SafeIcon icon={FiArrowRight} className="text-[#EBC36B] opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
+      <SafeIcon icon={FiArrowRight} className="text-[#eaa235] opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
       {children}
     </>
   );
@@ -41,8 +41,8 @@ const heading = 'font-serif italic uppercase text-[0.85rem] font-bold tracking-w
 export default function Footer() {
   const SITE = useSite();
   return (
-    <footer className="bg-[#14221d] text-[#F9F9F7] relative overflow-hidden pb-20 md:pb-0">
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#EBC36B] rounded-full blur-[150px] opacity-5 pointer-events-none translate-x-1/3 -translate-y-1/3"></div>
+    <footer className="bg-[#1e2522] text-[#f7f5ee] relative overflow-hidden pb-20 md:pb-0">
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#eaa235] rounded-full blur-[150px] opacity-5 pointer-events-none translate-x-1/3 -translate-y-1/3"></div>
 
       <motion.div
         initial="hidden"
@@ -52,14 +52,14 @@ export default function Footer() {
         className="max-w-[1145px] mx-auto px-6 py-20 md:py-24 flex flex-wrap gap-12 justify-between items-start relative z-10"
       >
         <motion.div variants={item} className="max-w-[26ch]">
-          <h2 className="font-serif italic uppercase text-[1rem] tracking-widest text-[#EBC36B] mb-4" style={{ fontWeight: 700 }}>
+          <h2 className="font-serif italic uppercase text-[1rem] tracking-widest text-[#eaa235] mb-4" style={{ fontWeight: 700 }}>
             {SITE.name}
           </h2>
           <p className="opacity-80 text-[0.95rem] leading-relaxed mb-6">Transforming lives that transform communities since {SITE.founded}.</p>
           <ul className="flex flex-wrap gap-x-5" aria-label="Social media">
             {SITE.social.map(s => (
               <li key={s.label}>
-                <a href={s.url} target="_blank" rel="noopener noreferrer" aria-label={`${s.label} (opens in a new tab)`} className="inline-flex items-center min-h-[44px] text-[0.9rem] opacity-80 hover:opacity-100 hover:text-[#EBC36B] underline-offset-4 hover:underline">{s.label}</a>
+                <a href={s.url} target="_blank" rel="noopener noreferrer" aria-label={`${s.label} (opens in a new tab)`} className="inline-flex items-center min-h-[44px] text-[0.9rem] opacity-80 hover:opacity-100 hover:text-[#eaa235] underline-offset-4 hover:underline">{s.label}</a>
               </li>
             ))}
           </ul>
@@ -92,7 +92,7 @@ export default function Footer() {
       <div className="text-center text-[0.8rem] py-6 border-t border-white/10 flex flex-col items-center gap-2 relative z-10 bg-black/20">
         <p className="opacity-80">{SITE.serviceTime}. {SITE.addressLine}.</p>
         <p className="opacity-70">&copy; {new Date().getFullYear()} {SITE.name}. Columbiana, Ohio.</p>
-        <Link to="/admin" className="hover:text-[#EBC36B] transition-colors uppercase tracking-widest font-bold mt-1 opacity-80">Content Studio Login</Link>
+        <Link to="/admin" className="hover:text-[#eaa235] transition-colors uppercase tracking-widest font-bold mt-1 opacity-80">Content Studio Login</Link>
       </div>
     </footer>
   );

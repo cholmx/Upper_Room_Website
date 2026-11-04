@@ -13,7 +13,7 @@ function Stories() {
   return (
     <>
       {stories.length > 0 && (
-        <Section tone="sand" id="stories">
+        <Section tone="white" id="stories">
           <SectionHeader kicker="Stories" title="Stories from our church family" intro="These are real stories from people who call this place home. Each one is shared with permission." />
           <ul className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {stories.map(s => (
@@ -21,10 +21,10 @@ function Stories() {
                 <PhotoBox src={s.photo_url} alt={s.name ? `Photo of ${s.name}` : ''} label={`${s.name || 'story'} photo`} ratio="aspect-[4/3]" rounded={false} />
                 <div className="p-6 flex flex-col flex-grow">
                   <blockquote className="text-xl leading-snug">“{s.quote}”</blockquote>
-                  {s.name && <p className="mt-3 font-semibold text-[#8A6309]">{s.name}</p>}
+                  {s.name && <p className="mt-3 font-semibold text-[#2b433e]">{s.name}</p>}
                   {s.body && (
                     <details className="mt-4 u-acc">
-                      <summary className="cursor-pointer list-none min-h-[44px] flex items-center font-semibold underline underline-offset-4 text-[#8A6309]">Read more</summary>
+                      <summary className="cursor-pointer list-none min-h-[44px] flex items-center font-semibold underline underline-offset-4 text-[#2b433e]">Read more</summary>
                       <RichText value={s.body} className="mt-3" />
                     </details>
                   )}
@@ -35,7 +35,7 @@ function Stories() {
           <p className="mt-8"><Btn to="/contact#story" variant="ghost">Share your story</Btn></p>
         </Section>
       )}
-      {stories.length === 0 && <AdminOnly><Section tone="sand"><Todo id="stories">[ADD 3 TO 5 SHORT STORIES WITH WRITTEN PERMISSION. They appear here once published in the admin.]</Todo></Section></AdminOnly>}
+      {stories.length === 0 && <AdminOnly><Section tone="white"><Todo id="stories">[ADD 3 TO 5 SHORT STORIES WITH WRITTEN PERMISSION. They appear here once published in the admin.]</Todo></Section></AdminOnly>}
     </>
   );
 }
@@ -63,7 +63,7 @@ export default function About() {
         <AdminOnly><p className="mt-10 text-lg"><Todo id="milestones">[ADD KEY MILESTONES AND DATES FOR EACH BUILDING EXPANSION]</Todo></p></AdminOnly>
       </Section>
 
-      <Section tone="cream">
+      <Section tone="white">
         <Split photo="about-columbiana">
           <div>
             <SectionHeader kicker="What we believe" title="What we believe, in brief" intro="Our full statement is on the beliefs page. The short version follows." className="!mb-6" />
@@ -82,12 +82,12 @@ export default function About() {
 
       <Section tone="ink">
         <div className="max-w-3xl">
-          <p className="kicker text-[#EBC36B]">Our vision</p>
+          <p className="kicker text-[#eaa235]">Our vision</p>
           <h2 className="text-3xl md:text-4xl">Our vision</h2>
           <p className="mt-4 text-lg md:text-xl text-white/90 leading-relaxed">
             We exist to help people know God deeply, share life authentically, and serve others selflessly. Real change happens from the inside out as our hearts line up with God’s heart. Along the way we pursue healthy relationships, abundant wholeness, our God-given greatness, a supernatural lifestyle, God’s presence, and a life that lives out the Gospel.
           </p>
-          <blockquote className="mt-6 border-l-4 border-[#EBC36B] pl-5 text-xl font-serif italic">
+          <blockquote className="mt-6 border-l-4 border-[#eaa235] pl-5 text-xl font-serif italic">
             “By this everyone will know that you are my disciples, if you love one another.”
             <footer className="mt-2 text-base font-sans text-white/80">John 13:35</footer>
           </blockquote>

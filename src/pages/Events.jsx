@@ -25,17 +25,17 @@ function EventCard({ e, featured = false }) {
       {safeUrl(e.image_url) && <PhotoBox src={e.image_url} alt="" label={e.title} ratio={featured ? 'aspect-[16/10]' : 'aspect-[16/10] md:aspect-auto md:w-56'} rounded={false} />}
       <div className="p-6 flex gap-5 flex-grow">
         <div className="text-center flex-shrink-0 w-16" aria-hidden="true">
-          <div className="text-sm font-bold uppercase tracking-wider text-[#8A6309]">{d.toLocaleDateString('en-US', { month: 'short' })}</div>
+          <div className="text-sm font-bold uppercase tracking-wider text-[#2b433e]">{d.toLocaleDateString('en-US', { month: 'short' })}</div>
           <div className="text-3xl font-bold leading-none">{d.getDate()}</div>
         </div>
         <div className="min-w-0 flex-grow">
-          {e.ministry && <p className="kicker text-[#8A6309] !mb-1">{e.ministry}</p>}
-          <h2 className="text-xl md:text-2xl"><Link to={detailPath(e)} className="hover:text-[#8A6309]">{e.title}</Link></h2>
+          {e.ministry && <p className="kicker text-[#2b433e] !mb-1">{e.ministry}</p>}
+          <h2 className="text-xl md:text-2xl"><Link to={detailPath(e)} className="hover:text-[#2b433e]">{e.title}</Link></h2>
           <p className="mt-1 text-black/80"><span className="sr-only">Date: </span>{formatDate(e.occurrence_date)}{e.time ? `, ${e.time}` : ''}{e.location ? `, ${e.location}` : ''}</p>
           {text && <p className="mt-3 text-black/80 leading-relaxed line-clamp-3">{text}</p>}
           <div className="mt-4 flex flex-wrap gap-3 items-center">
             {reg && <Btn href={reg} variant="primary">Sign up</Btn>}
-            <button type="button" onClick={() => downloadIcs(e)} className="inline-flex items-center min-h-[44px] font-semibold underline underline-offset-4 text-[#8A6309]">Add to Calendar</button>
+            <button type="button" onClick={() => downloadIcs(e)} className="inline-flex items-center min-h-[44px] font-semibold underline underline-offset-4 text-[#2b433e]">Add to Calendar</button>
           </div>
         </div>
       </div>
@@ -72,7 +72,7 @@ function MonthView({ events, cursor, setCursor }) {
         {Object.keys(byDay).map(Number).sort((a, b) => a - b).map(day => (
           <li key={day} className="neu rounded-xl p-4">
             <p className="font-semibold">{new Date(year, month, day).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}</p>
-            <ul className="mt-1">{byDay[day].map(e => <li key={e.id + e.occurrence_date}><Link to={detailPath(e)} className="underline underline-offset-4 text-[#8A6309]">{e.title}</Link>{e.time ? `, ${e.time}` : ''}</li>)}</ul>
+            <ul className="mt-1">{byDay[day].map(e => <li key={e.id + e.occurrence_date}><Link to={detailPath(e)} className="underline underline-offset-4 text-[#2b433e]">{e.title}</Link>{e.time ? `, ${e.time}` : ''}</li>)}</ul>
           </li>
         ))}
       </ul>
@@ -92,7 +92,7 @@ function MonthView({ events, cursor, setCursor }) {
                       <span className="text-sm font-semibold">{day}</span>
                       <ul className="mt-1 space-y-1">
                         {(byDay[day] || []).map(e => (
-                          <li key={e.id + e.occurrence_date}><Link to={detailPath(e)} className="block text-xs leading-snug underline underline-offset-2 text-[#8A6309]">{e.title}</Link></li>
+                          <li key={e.id + e.occurrence_date}><Link to={detailPath(e)} className="block text-xs leading-snug underline underline-offset-2 text-[#2b433e]">{e.title}</Link></li>
                         ))}
                       </ul>
                     </>
@@ -136,14 +136,14 @@ export default function Events() {
         <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
           <div role="group" aria-label="Calendar view" className="inline-flex rounded-full border border-black/30 overflow-hidden">
             {['list', 'month'].map(v => (
-              <button key={v} type="button" aria-pressed={view === v} onClick={() => setView(v)} className={`min-h-[48px] px-6 font-semibold ${view === v ? 'bg-[#14221d] text-white' : 'bg-white text-[#1c2622] hover:bg-white'}`}>
+              <button key={v} type="button" aria-pressed={view === v} onClick={() => setView(v)} className={`min-h-[48px] px-6 font-semibold ${view === v ? 'bg-[#1e2522] text-white' : 'bg-white text-[#1e2522] hover:bg-white'}`}>
                 {v === 'list' ? 'List' : 'Month'}
               </button>
             ))}
           </div>
           <div>
             <label htmlFor="ev-ministry" className="block text-sm font-semibold mb-1">Show events for</label>
-            <select id="ev-ministry" value={ministry} onChange={(e) => setMinistry(e.target.value)} className="neu-field min-h-[48px] px-3 rounded-xl border border-black/25 focus:outline-none focus:ring-2 focus:ring-[#8A6309]">
+            <select id="ev-ministry" value={ministry} onChange={(e) => setMinistry(e.target.value)} className="neu-field min-h-[48px] px-3 rounded-xl border border-black/25 focus:outline-none focus:ring-2 focus:ring-[#2b433e]">
               <option value="">Everything</option>
               {MINISTRY_FILTERS.map(m => <option key={m} value={m}>{m}</option>)}
             </select>
@@ -156,7 +156,7 @@ export default function Events() {
           <>
             {featured && (
               <div className="mb-8">
-                <p className="kicker text-[#8A6309]">Featured</p>
+                <p className="kicker text-[#2b433e]">Featured</p>
                 <EventCard e={featured} featured />
               </div>
             )}

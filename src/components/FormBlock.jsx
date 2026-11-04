@@ -6,7 +6,7 @@ import { useSite } from '../settings';
 
 export const SUBMISSIONS_TABLE = 'form_submissions_church';
 
-const input = 'neu-field w-full min-h-[48px] px-4 py-3 rounded-xl border border-black/25 focus:outline-none focus:ring-2 focus:ring-[#8A6309] focus:border-[#8A6309] text-base';
+const input = 'neu-field w-full min-h-[48px] px-4 py-3 rounded-xl border border-black/25 focus:outline-none focus:ring-2 focus:ring-[#2b433e] focus:border-[#2b433e] text-base';
 
 function Field({ formKey, field, value, onChange, error }) {
   const id = `ff-${formKey}-${field.name}`;
@@ -30,7 +30,7 @@ function Field({ formKey, field, value, onChange, error }) {
         <div className="flex flex-wrap gap-x-6 gap-y-1">
           {field.options.map(o => (
             <label key={o} className="inline-flex items-center gap-2 min-h-[44px] cursor-pointer">
-              <input type="radio" name={field.name} value={o} checked={value === o} onChange={() => onChange(field.name, o)} className="w-5 h-5 accent-[#8A6309]" />
+              <input type="radio" name={field.name} value={o} checked={value === o} onChange={() => onChange(field.name, o)} className="w-5 h-5 accent-[#2b433e]" />
               <span>{o}</span>
             </label>
           ))}
@@ -50,7 +50,7 @@ function Field({ formKey, field, value, onChange, error }) {
                 type="checkbox"
                 checked={list.includes(o)}
                 onChange={(e) => onChange(field.name, e.target.checked ? [...list, o] : list.filter(x => x !== o))}
-                className="w-5 h-5 accent-[#8A6309]"
+                className="w-5 h-5 accent-[#2b433e]"
               />
               <span>{o}</span>
             </label>
@@ -63,7 +63,7 @@ function Field({ formKey, field, value, onChange, error }) {
     return (
       <div>
         <label className="inline-flex items-start gap-3 min-h-[44px] cursor-pointer">
-          <input id={id} type="checkbox" name={field.name} checked={Boolean(value)} onChange={(e) => onChange(field.name, e.target.checked)} className="w-5 h-5 mt-1 accent-[#8A6309]" />
+          <input id={id} type="checkbox" name={field.name} checked={Boolean(value)} onChange={(e) => onChange(field.name, e.target.checked)} className="w-5 h-5 mt-1 accent-[#2b433e]" />
           <span>{field.label}</span>
         </label>
       </div>
@@ -85,7 +85,7 @@ function Field({ formKey, field, value, onChange, error }) {
   return (
     <div>
       <label htmlFor={id} className="block font-semibold mb-2">
-        {field.label}{field.required && <span aria-hidden="true" className="text-[#8A4B00]"> *</span>}
+        {field.label}{field.required && <span aria-hidden="true" className="text-[#c74f2f]"> *</span>}
       </label>
       {control}
       {error && <p id={describedBy} role="alert" className="text-red-700 text-sm mt-1">{error}</p>}
@@ -134,7 +134,7 @@ export default function FormBlock({ formKey, heading, intro, defaults = {}, clas
   if (state.phase === 'sent') {
     return (
       <div role="status" className={`neu rounded-2xl p-8 text-center ${className}`}>
-        <svg className="check-draw mx-auto mb-4" width="56" height="56" viewBox="0 0 56 56" fill="none" stroke="#2f7d4f" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="28" cy="28" r="25" /><path d="M17 29l8 8 14-16" /></svg>
+        <svg className="check-draw mx-auto mb-4" width="56" height="56" viewBox="0 0 56 56" fill="none" stroke="#597f5c" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="28" cy="28" r="25" /><path d="M17 29l8 8 14-16" /></svg>
         <p className="text-xl font-semibold leading-relaxed">{def.confirmation}</p>
         <button type="button" onClick={() => setState({ phase: 'idle', error: '' })} className="btn btn-outline mt-6">Send another</button>
       </div>

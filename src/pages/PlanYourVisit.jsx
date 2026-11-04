@@ -25,7 +25,7 @@ export default function PlanYourVisit() {
         <Btn to="#connect-card" variant="light">Fill Out the Connect Card</Btn>
       </PageHeader>
 
-      <Section tone="cream" className="!pb-0 md:!pb-0">
+      <Section tone="white">
         <QuickFacts
           items={[
             { label: 'When', value: SITE.serviceTime },
@@ -54,7 +54,7 @@ export default function PlanYourVisit() {
         <PhotoGrid slots={['plan-greeter', 'plan-coffee']} className="mt-12" />
       </Section>
 
-      <Section tone="sand">
+      <Section tone="white">
         <SectionHeader kicker="Getting here" title="Parking and getting here" />
         <div className="grid md:grid-cols-2 gap-8 items-start">
           <div className="space-y-5 text-lg leading-relaxed text-black/80">
@@ -69,7 +69,7 @@ export default function PlanYourVisit() {
         </div>
       </Section>
 
-      <Section tone="white">
+      <Section tone="cream">
         <div className="grid md:grid-cols-2 gap-10">
           <div>
             <SectionHeader kicker="Bringing kids" title="Your kids" className="!mb-5" />
@@ -92,13 +92,13 @@ export default function PlanYourVisit() {
         </div>
       </Section>
 
-      <Section tone="cream">
+      <Section tone="white">
         <SectionHeader kicker="Quick answers" title="Quick answers" />
         <Accordion items={FAQ_PREVIEW} />
         <div className="mt-8"><Btn to="/faq" variant="ghost">See all questions</Btn></div>
       </Section>
 
-      <Section tone="sand" id="connect-card">
+      <Section tone="cream" id="connect-card">
         <div className="grid md:grid-cols-5 gap-10 items-start">
           <div className="md:col-span-2">
             <SectionHeader kicker="Let us know" title="Let us know you are coming" className="!mb-4" />

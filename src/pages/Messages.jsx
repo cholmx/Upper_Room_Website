@@ -10,7 +10,7 @@ import LiteYouTube from '../components/LiteYouTube';
 import MessageCard from '../components/MessageCard';
 import { Spinner, ErrorState } from '../components/StateViews';
 
-const select = 'w-full min-h-[48px] px-3 py-2 bg-white rounded-xl border border-black/25 focus:outline-none focus:ring-2 focus:ring-[#8A6309]';
+const select = 'w-full min-h-[48px] px-3 py-2 bg-white rounded-xl border border-black/25 focus:outline-none focus:ring-2 focus:ring-[#2b433e]';
 
 function Filter({ label, value, onChange, options }) {
   const id = `f-${label.replace(/\W+/g, '-').toLowerCase()}`;
@@ -71,11 +71,11 @@ export default function Messages() {
             <SectionHeader kicker="Latest" title="Latest message" />
             {latest ? (
               <div className="grid md:grid-cols-5 gap-8 items-center">
-                <div className="md:col-span-3 aspect-video rounded-2xl overflow-hidden bg-[#14221d]">
+                <div className="md:col-span-3 aspect-video rounded-2xl overflow-hidden bg-[#1e2522]">
                   {latestVideo ? <LiteYouTube id={latestVideo} title={latest.title} /> : <div className="w-full h-full flex items-center justify-center text-white/80">Video coming soon</div>}
                 </div>
                 <div className="md:col-span-2">
-                  <h3 className="text-2xl md:text-3xl"><Link to={messagePath(latest)} className="hover:text-[#8A6309]">{latest.title}</Link></h3>
+                  <h3 className="text-2xl md:text-3xl"><Link to={messagePath(latest)} className="hover:text-[#2b433e]">{latest.title}</Link></h3>
                   <p className="mt-2 text-black/80">{[latest.speaker, latest.date && formatDate(latest.date), latest.scripture].filter(Boolean).join('  |  ')}</p>
                   {latest.description && <p className="mt-3 text-black/80 leading-relaxed line-clamp-4">{plainText(latest.description)}</p>}
                   <div className="mt-6"><Btn to={messagePath(latest)} variant="primary">Watch, listen, and read</Btn></div>
@@ -93,8 +93,8 @@ export default function Messages() {
                 {seriesList.map(s => (
                   <li key={s.name}>
                     <Link to={seriesPath(s.name)} className="block rounded-2xl overflow-hidden elev-hover h-full neu">
-                      <div className="aspect-[16/9] bg-[#14221d] flex items-center justify-center">
-                        {s.image ? <img src={s.image} alt="" loading="lazy" className="w-full h-full object-cover" /> : <span className="text-2xl text-[#EBC36B] px-4 text-center">{s.name}</span>}
+                      <div className="aspect-[16/9] bg-[#1e2522] flex items-center justify-center">
+                        {s.image ? <img src={s.image} alt="" loading="lazy" className="w-full h-full object-cover" /> : <span className="text-2xl text-[#eaa235] px-4 text-center">{s.name}</span>}
                       </div>
                       <div className="p-5">
                         <h3 className="text-xl">{s.name}</h3>
@@ -118,7 +118,7 @@ export default function Messages() {
                 <Filter label="Scripture book" value={book} onChange={setBook} options={uniq(m => scriptureBook(m.scripture))} />
                 <Filter label="Topic" value={topic} onChange={setTopic} options={uniq(m => m.topic)} />
               </div>
-              {anyFilter && <button type="button" onClick={clear} className="mt-4 underline underline-offset-4 font-semibold text-[#8A6309] min-h-[44px]">Clear search and filters</button>}
+              {anyFilter && <button type="button" onClick={clear} className="mt-4 underline underline-offset-4 font-semibold text-[#2b433e] min-h-[44px]">Clear search and filters</button>}
             </form>
             <p className="sr-only" aria-live="polite">{filtered.length} messages shown</p>
             {filtered.length === 0 ? (

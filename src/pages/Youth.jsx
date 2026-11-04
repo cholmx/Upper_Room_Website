@@ -12,7 +12,7 @@ export default function Youth() {
         intro="Middle school and high school are a lot. Upper Room Youth is a safe place for 6th to 12th graders to make real friends, ask hard questions, and build a faith that holds up after graduation."
       />
 
-      <Section tone="cream" className="!pb-0 md:!pb-0">
+      <Section tone="white">
         <QuickFacts items={[
           { label: 'Who', value: '6th to 12th graders' },
           { label: 'When', value: 'Every Wednesday, 6:30 to 8:00pm' },
@@ -37,7 +37,7 @@ export default function Youth() {
         </div>
       </Section>
 
-      <Section tone="sand">
+      <Section tone="white">
         <AdminOnly>
           <p className="mb-3 text-lg"><Todo id="youth-leader">[YOUTH LEADER NAME, EMAIL, PHONE]</Todo></p>
           <p className="mb-3 text-lg"><Todo id="youth-parents">[PERMISSION FORMS, SAFETY POLICY]</Todo></p>

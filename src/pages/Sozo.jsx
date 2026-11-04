@@ -21,7 +21,7 @@ export default function Sozo() {
         <Btn href="#sozo-form" variant="primary">Request a Sozo session</Btn>
       </PageHeader>
 
-      <Section tone="cream" className="!pb-0 md:!pb-0">
+      <Section tone="white">
         <QuickFacts items={[
           { label: 'Length', value: 'About two hours' },
           { label: 'Arrive', value: '10 to 15 minutes early' },
@@ -47,7 +47,7 @@ export default function Sozo() {
         </div>
       </Section>
 
-      <Section tone="sand">
+      <Section tone="white">
         <SectionHeader title="How to begin" />
         <div className="max-w-3xl">
           <Steps items={[
@@ -71,7 +71,7 @@ export default function Sozo() {
         ]} />
       </Section>
 
-      <Section tone="sand">
+      <Section tone="white">
         <div className="grid md:grid-cols-2 gap-10">
           <div><SectionHeader title="What Sozo is not" className="!mb-4" /><p className="text-lg leading-relaxed text-black/80">Sozo does not replace professional counseling or medical care.</p>{PASTE('sozo-text', 'what Sozo is NOT')}</div>
           <div><SectionHeader title="Our team" className="!mb-4" />{PASTE('sozo-text', 'our Sozo team')}</div>

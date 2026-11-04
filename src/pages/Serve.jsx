@@ -44,7 +44,7 @@ export default function Serve() {
         <p className="mt-8 text-lg leading-relaxed text-black/80 max-w-3xl">After completing the Growth Track, you can audition for the worship team or shadow one of our production volunteers to learn the ropes.</p>
         <div className="mt-10 max-w-3xl"><FormBlock formKey="worship" /></div>
       </Section>
-      <Section tone="sand">
+      <Section tone="cream">
         <div className="grid md:grid-cols-5 gap-10 items-start">
           <div className="md:col-span-2">
             <SectionHeader title="Tell us what interests you" className="!mb-4" />

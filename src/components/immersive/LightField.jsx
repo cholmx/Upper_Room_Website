@@ -35,7 +35,7 @@ void main() {
   float d = distance(gl_PointCoord, vec2(0.5));
   float f = smoothstep(0.5, 0.0, d);
   float a = f * f * v_alpha;
-  gl_FragColor = vec4(vec3(1.0, 0.77, 0.31) * a, a);
+  gl_FragColor = vec4(vec3(0.92, 0.64, 0.21) * a, a);
 }`;
 const BEAM_VERT = `
 attribute vec2 a_pos;
@@ -53,7 +53,7 @@ void main() {
   float beam = smoothstep(0.55, 0.0, abs(ang + 0.35)) * smoothstep(1.6, 0.0, length(d));
   float pulse = 0.85 + 0.15 * sin(u_time * 0.3);
   float b = beam * 0.10 * pulse;
-  gl_FragColor = vec4(vec3(1.0, 0.77, 0.31) * b, b);
+  gl_FragColor = vec4(vec3(0.92, 0.64, 0.21) * b, b);
 }`;
 
 function compile(gl, type, src) {

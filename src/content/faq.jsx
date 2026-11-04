@@ -32,7 +32,7 @@ export function faqToAccordion(items) {
     content: (
       <>
         <p>{it.plain}{it.todo && <> <Todo id={it.todo.id}>{it.todo.text}</Todo></>}</p>
-        {it.more && <p><Link to={it.more.to} className="font-semibold text-[#8A6309] underline underline-offset-4">{it.more.label}</Link></p>}
+        {it.more && <p><Link to={it.more.to} className="font-semibold text-[#2b433e] underline underline-offset-4">{it.more.label}</Link></p>}
       </>
     ),
   }));

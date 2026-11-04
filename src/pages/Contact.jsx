@@ -14,7 +14,7 @@ function Panel({ id, title, intro, formKey, note }) {
     <details id={id} open={open} onToggle={(e) => setOpen(e.currentTarget.open)} className="u-acc neu-acc rounded-2xl">
       <summary className="cursor-pointer list-none min-h-[56px] px-6 py-4 flex items-center justify-between gap-4 text-xl font-bold">
         {title}
-        <span aria-hidden="true" className="text-[#8A6309]">+</span>
+        <span aria-hidden="true" className="text-[#2b433e]">+</span>
       </summary>
       <div className="px-6 pb-6">
         <p className="text-lg leading-relaxed text-black/80 mb-5">{intro}</p>
@@ -48,7 +48,7 @@ export default function Contact() {
                 <p><Todo id="office-hours">[OFFICE HOURS]</Todo></p>
               </address>
               <p className="mt-3">
-                <a href={SITE.googleMapsUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center min-h-[44px] font-semibold text-[#8A6309] underline underline-offset-4">Get directions<span className="sr-only"> (opens in a new tab)</span></a>
+                <a href={SITE.googleMapsUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center min-h-[44px] font-semibold text-[#2b433e] underline underline-offset-4">Get directions<span className="sr-only"> (opens in a new tab)</span></a>
               </p>
             </div>
             <div>

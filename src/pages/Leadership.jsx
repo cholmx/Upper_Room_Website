@@ -13,13 +13,13 @@ function Person({ p }) {
       <PhotoBox src={p.photo_url} alt={`Portrait of ${p.name}, ${p.role}`} label={`${p.name} headshot`} ratio="aspect-[4/5]" rounded={false} />
       <div className="p-6 flex flex-col flex-grow">
         <h2 className="text-2xl">{p.name}</h2>
-        {p.role && <p className="mt-1 font-semibold text-[#8A6309]">{p.role}</p>}
+        {p.role && <p className="mt-1 font-semibold text-[#2b433e]">{p.role}</p>}
         {p.bio && (p.markdown ? <RichText value={p.bio} className="mt-3" /> : <p className="mt-3 text-black/80 leading-relaxed">{p.bio}</p>)}
         {!p.markdown && !p.hasBio && <p className="mt-2 text-sm"><Todo id="leader-bios">[BIO: 2 to 3 sentences]</Todo></p>}
         {p.confirm && <p className="mt-2 text-sm"><Todo id="leader-bios">[CONFIRM THIS BIO]</Todo></p>}
         {p.email && (
           <p className="mt-auto pt-4">
-            <a href={`mailto:${p.email}`} className="inline-flex items-center min-h-[44px] font-semibold underline underline-offset-4 text-[#8A6309]">Email {first}</a>
+            <a href={`mailto:${p.email}`} className="inline-flex items-center min-h-[44px] font-semibold underline underline-offset-4 text-[#2b433e]">Email {first}</a>
           </p>
         )}
       </div>
@@ -40,12 +40,12 @@ export default function Leadership() {
         title="Meet our leaders"
         intro="A team of elders and pastors shares the work of teaching, spiritual oversight, and caring for people here. We believe leadership works best when it is shared and passed along, so we are always looking for the next leader."
       />
-      <Section tone="cream">
+      <Section tone="white">
         <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {people.map(p => <Person key={p.id || p.name} p={p} />)}
           {fromAdmin.length === 0 && (
             <AdminOnly>
-              <li className="rounded-2xl border-2 border-dashed border-[#8A6309]/60 bg-white p-6 flex items-center justify-center text-center">
+              <li className="rounded-2xl border-2 border-dashed border-[#2b433e]/60 bg-white p-6 flex items-center justify-center text-center">
                 <Todo id="fifth-leader">[FIFTH PERSON: NAME AND TITLE, PHOTO SUPPLIED]</Todo>
               </li>
             </AdminOnly>
@@ -54,7 +54,7 @@ export default function Leadership() {
       </Section>
 
       <AdminOnly>
-        <Section tone="sand">
+        <Section tone="bronze">
           <SectionHeader kicker="Elders" title="Our elders" />
           <p className="text-lg"><Todo id="elders">[LIST ELDER NAMES AND PHOTOS]</Todo></p>
         </Section>

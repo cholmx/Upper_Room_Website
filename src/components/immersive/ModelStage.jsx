@@ -49,7 +49,7 @@ export default function ModelStage() {
   return (
     <div>
       <div className="neu rounded-[2rem] p-3 md:p-4">
-        <div className="relative rounded-[1.5rem] overflow-hidden bg-gradient-to-b from-[#16241f] to-[#14221d] aspect-[4/3] md:aspect-[16/9]">
+        <div className="relative rounded-[1.5rem] overflow-hidden bg-gradient-to-b from-[#1e2522] to-[#1e2522] aspect-[4/3] md:aspect-[16/9]">
           {phase === 'ready' ? (
             <model-viewer
               ref={viewer}
@@ -76,7 +76,7 @@ export default function ModelStage() {
             </model-viewer>
           ) : (
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6 text-white">
-              <span className="w-20 h-20 rounded-full neu-dark flex items-center justify-center text-[#EBC36B] mb-5"><SafeIcon icon={FiBox} size={32} /></span>
+              <span className="w-20 h-20 rounded-full neu-dark flex items-center justify-center text-[#eaa235] mb-5"><SafeIcon icon={FiBox} size={32} /></span>
               {phase === 'unsupported' && <p className="max-w-[34ch]">Your browser cannot show 3D here. The plans are described in the text above.</p>}
               {phase === 'error' && <p className="max-w-[34ch]">The 3D view could not load. Please try again in a moment.</p>}
               {(phase === 'idle' || phase === 'loading' || phase === 'error') && (

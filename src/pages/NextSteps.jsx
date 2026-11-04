@@ -8,7 +8,7 @@ import FormBlock from '../components/FormBlock';
 function StepCard({ id, n, title, children, action }) {
   return (
     <li id={id} className="rounded-2xl p-6 flex flex-col scroll-mt-24 neu">
-      <span className="w-10 h-10 rounded-full bg-[#EBC36B] text-[#1c2622] font-bold flex items-center justify-center mb-4" aria-hidden="true">{n}</span>
+      <span className="w-10 h-10 rounded-full bg-[#eaa235] text-[#1e2522] font-bold flex items-center justify-center mb-4" aria-hidden="true">{n}</span>
       <h2 className="text-2xl mb-2">{title}</h2>
       <div className="text-black/80 leading-relaxed space-y-2 flex-grow">{children}</div>
       <div className="mt-5">{action}</div>
@@ -74,7 +74,7 @@ export default function NextSteps() {
           </StepCard>
         </ol>
         <p className="mt-10 text-lg leading-relaxed text-black/80 max-w-3xl">
-          There are other ways in, too. You can <Link className="underline underline-offset-4 font-semibold text-[#8A6309]" to="/sozo">ask about Sozo</Link>, <Link className="underline underline-offset-4 font-semibold text-[#8A6309]" to="/contact">talk with a pastor</Link>, or <a className="underline underline-offset-4 font-semibold text-[#8A6309]" href={SITE.giveUrl}>give online</a>.
+          There are other ways in, too. You can <Link className="underline underline-offset-4 font-semibold text-[#2b433e]" to="/sozo">ask about Sozo</Link>, <Link className="underline underline-offset-4 font-semibold text-[#2b433e]" to="/contact">talk with a pastor</Link>, or <a className="underline underline-offset-4 font-semibold text-[#2b433e]" href={SITE.giveUrl}>give online</a>.
         </p>
       </Section>
       <EndCta title="Not sure where to start?" text="Start with a Sunday. Everything else gets easier once you know a few faces." to="/plan-your-visit" label="Plan Your Visit" />

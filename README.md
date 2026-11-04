@@ -155,3 +155,7 @@ Old addresses `/worship-team`, `/outreach`, `/prayer`, `/stories` and `/connect`
 - **3D model with AR (Growth Campaign):** `ModelStage` loads the vendored `public/vendor/model-viewer.min.js` (Apache 2.0) only after someone presses "Explore in 3D". "View in your space" appears on phones that support AR. The bundled `public/models/sanctuary-expansion.glb` is a simple concept massing made by `node scripts/make-model.mjs`. Paste a link to the architect's `.glb` in the admin (Site Photos, 3D model) to replace it.
 - **Neumorphic surfaces:** soft raised cards, inset form fields and facts, pressed buttons (see the "Tactile surfaces" block in `src/index.css`). Text and form borders keep full contrast.
 - **Micro interactions:** button ripples (one global listener in `src/lib/ripple.js`), card tilt, staggered entrances, animated form success. All respect `prefers-reduced-motion`.
+
+## Colors
+
+The palette is `#1e2522` ink, `#2B433E` forest, `#597F5C` sage, `#C74F2F` terracotta, `#EAA235` amber, `#d49e46` gold, `#F7F5EE` cream and `#FFFFFF` white. Text on cream and white uses ink or forest, because the golds and terracotta do not have enough contrast for small text on light backgrounds. Neighboring sections must differ in color, and the footer is ink, so a closing call to action is forest by default. Check it with `node scripts/check-adjacent-colors.mjs` while a preview is running.

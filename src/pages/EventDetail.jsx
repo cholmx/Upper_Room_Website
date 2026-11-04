@@ -56,8 +56,8 @@ export default function EventDetail() {
       <article>
         <header className="bg-white">
           <div className="max-w-4xl mx-auto px-5 sm:px-8 py-10 md:py-14">
-            <Link to="/events" className="inline-flex items-center min-h-[44px] font-semibold text-[#8A6309] underline underline-offset-4">All events</Link>
-            {ev.ministry && <p className="kicker text-[#8A6309] mt-2">{ev.ministry}</p>}
+            <Link to="/events" className="inline-flex items-center min-h-[44px] font-semibold text-[#2b433e] underline underline-offset-4">All events</Link>
+            {ev.ministry && <p className="kicker text-[#2b433e] mt-2">{ev.ministry}</p>}
             <h1 className="text-3xl md:text-5xl">{ev.title}</h1>
             <dl className="mt-5 grid sm:grid-cols-2 gap-x-8 gap-y-2 text-black/80">
               <div><dt className="inline font-semibold">Date: </dt><dd className="inline">{formatDate(ev.occurrence_date)}</dd></div>
