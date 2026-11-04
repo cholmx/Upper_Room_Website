@@ -14,7 +14,7 @@ import * as FiIcons from 'react-icons/fi';
 const { FiSearch, FiArrowRight, FiUser, FiCalendar, FiClock, FiTag } = FiIcons;
 
 export default function Blog() {
-  usePageMeta('Blog', 'Articles, devotions and updates from the Upper Room Fellowship family.');
+  usePageMeta('Blog', 'Articles, devotions and updates from Upper Room Fellowship family.');
   const { data, loading, error, reload } = useFetch('read/posts?sort=created_at:desc');
   const posts = useMemo(() => (data ?? []).filter(isLive), [data]);
   const [searchQuery, setSearchQuery] = useState('');

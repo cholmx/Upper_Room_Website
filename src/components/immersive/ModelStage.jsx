@@ -54,7 +54,7 @@ export default function ModelStage() {
             <model-viewer
               ref={viewer}
               src={src}
-              alt="A 3D concept model of the Upper Room Fellowship building. The existing building is cream and the proposed expansion is gold."
+              alt="A 3D concept model of Upper Room Fellowship building. The existing building is cream and the proposed expansion is gold."
               camera-controls=""
               touch-action="pan-y"
               auto-rotate={calm ? undefined : ''}

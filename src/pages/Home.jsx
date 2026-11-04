@@ -34,7 +34,7 @@ export default function Home() {
             <span className="kicker text-[#eaa235] !mb-2 md:!mb-4">{SITE.name}</span>
             <h1 id="home-h1" className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl max-w-[18ch] mb-3 md:mb-6 leading-[1.05]">You are welcome here.</h1>
             <p className="font-serif italic text-xl md:text-3xl max-w-[40ch] text-white/90 mb-7 md:mb-10 leading-snug">
-              The Upper Room Fellowship is a church family in Columbiana, Ohio. Join us {SITE.serviceTime}.
+              Upper Room Fellowship is a church family in Columbiana, Ohio. Join us {SITE.serviceTime}.
             </p>
             <div className="flex gap-3 md:gap-4">
               <Btn to="/plan-your-visit" variant="primary" className="max-sm:flex-1 max-sm:!px-3 max-sm:!py-3 max-sm:!text-[0.9rem] max-sm:leading-tight">Plan Your Visit</Btn>
@@ -60,7 +60,7 @@ export default function Home() {
       <Section tone="white">
         <div className="grid md:grid-cols-2 gap-12 items-start">
           <div>
-            <SectionHeader kicker="Welcome" title="Welcome to the Upper Room Fellowship" className="!mb-6" />
+            <SectionHeader kicker="Welcome" title="Welcome to Upper Room Fellowship" className="!mb-6" />
             <div className="space-y-4 text-lg leading-relaxed text-black/80">
               <p>For more than 50 years, our congregation has gathered in Columbiana to worship, grow, and serve together. We love this city and are proud to call it home.</p>
               <p>Together, we are learning to live with more love, joy, and purpose. We support each other and reach out to make our community better. Whether you are just exploring faith or looking for a church family, we would love to meet you and welcome you into ours.</p>

@@ -1,6 +1,6 @@
-# The Upper Room Fellowship website
+# Upper Room Fellowship website
 
-A mobile-first website and content studio for The Upper Room Fellowship in Columbiana, Ohio.
+A mobile-first website and content studio for Upper Room Fellowship in Columbiana, Ohio.
 React 18, Vite, and Tailwind on the front end. Content, forms, and staff logins live in Bolt Database
 (Supabase). The app talks to it through `src/lib/backend.js`, a small client built on `fetch` with no
 extra packages.

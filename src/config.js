@@ -8,7 +8,7 @@ const address = {
 const mapQuery = encodeURIComponent(`${address.street} ${address.city} ${address.region} ${address.postalCode}`);
 
 export const SITE = {
-  name: 'The Upper Room Fellowship',
+  name: 'Upper Room Fellowship',
   shortName: 'Upper Room Fellowship',
   abbr: 'URF',
   tagline: 'Transforming lives that transform communities.',
