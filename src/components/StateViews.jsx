@@ -8,7 +8,12 @@ export function Spinner({ label = 'Loading' }) {
   );
 }
 
+// Setup problems are for the people who run the site, so visitors get a plain message and the detail goes to the console.
 export function ErrorState({ message, onRetry }) {
+  if (/VITE_SUPABASE|not configured/i.test(message || '')) {
+    console.warn(`[site] ${message}`);
+    message = 'This page is not available right now. Please try again later, or call us at 330.482.9058.';
+  }
   return (
     <div role="alert" className="text-center py-24 rounded-3xl px-6 neu">
       <div className="text-5xl mb-6" aria-hidden="true">⚠️</div>
