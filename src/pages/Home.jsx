@@ -26,6 +26,9 @@ export default function Home() {
         <LightField />
         <div className="max-w-[1145px] mx-auto relative z-10 text-white">
           <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, ease: 'easeOut' }}>
+            <p className="kicker text-[#eaa235] !mb-3 md:!mb-5 !text-[1.05rem] md:!text-[1.3rem] uppercase tracking-widest !flex flex-wrap gap-x-3 md:gap-x-5">
+              <span>Know God</span><span aria-hidden="true">&middot;</span><span>Share Life</span><span aria-hidden="true">&middot;</span><span>Serve Others</span>
+            </p>
             <h1 id="home-h1" className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl max-w-[18ch] mb-3 md:mb-6 leading-[1.05]">Transforming lives that transform communities</h1>
             <p className="font-serif italic text-xl md:text-3xl max-w-[40ch] text-white/90 mb-7 md:mb-10 leading-snug">
               Join us {SITE.serviceTime} in Columbiana, Ohio
@@ -37,12 +40,6 @@ export default function Home() {
             </div>
           </motion.div>
         </div>
-      </section>
-
-      <section aria-label="Our mission" className="bg-[#d49e46] text-[#1e2522]">
-        <p className="max-w-[1145px] mx-auto px-6 py-5 md:py-6 font-serif italic uppercase tracking-widest text-[1.1rem] md:text-[1.35rem] flex flex-wrap gap-x-8 gap-y-1 justify-center text-center">
-          <span>Know God</span><span>Share Life</span><span>Serve Others</span>
-        </p>
       </section>
 
       <Section tone="cream">

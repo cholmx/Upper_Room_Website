@@ -415,7 +415,14 @@ details.u-acc.neu-acc[open] { background: linear-gradient(145deg, #f7f5ee, #f7f5
 
 /* A calmer, more refined surface: softer ink instead of pure black, a lighter photo wash, more room around sections */
 .text-black { color: #1e2522; }
-.photo-section .scrim { background: linear-gradient(to bottom, rgba(30, 37, 34, 0.25) 0%, rgba(30, 37, 34, 0.72) 100%); }
+/* The banner overlay matches the sign-in page: a deep, even wash with two soft golden glows that breathe slowly. */
+.photo-section .scrim { background: rgba(30, 37, 34, 0.8); overflow: hidden; }
+.photo-section .scrim::before,
+.photo-section .scrim::after { content: ''; position: absolute; border-radius: 9999px; pointer-events: none; animation: glow-breathe 6s ease-in-out infinite; }
+.photo-section .scrim::before { top: -25%; left: -15%; width: 65%; height: 85%; background: radial-gradient(closest-side, rgba(234, 162, 53, 0.24), rgba(234, 162, 53, 0)); }
+.photo-section .scrim::after { bottom: -25%; right: -15%; width: 60%; height: 80%; background: radial-gradient(closest-side, rgba(212, 158, 70, 0.14), rgba(212, 158, 70, 0)); animation-delay: 2s; animation-duration: 8s; }
+@keyframes glow-breathe { 0%, 100% { opacity: 0.65; } 50% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .photo-section .scrim::before, .photo-section .scrim::after { animation: none; } }
 
 /* One standard surface: white, no outline, a very subtle drop shadow. Form controls keep a thin
    border, because a control needs a visible edge to be easy to find. */

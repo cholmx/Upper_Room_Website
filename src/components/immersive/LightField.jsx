@@ -5,7 +5,7 @@ import { canRunImmersive, readEnvironment, webglAvailable } from '../../lib/imme
 // Plain WebGL with no library. It sits behind the page text, ignores the pointer unless a mouse is
 // present, pauses when off screen or in a background tab, and does not run at all for
 // visitors who prefer reduced motion, are saving data, or are on a small device.
-const COUNT = 48;
+const COUNT = 30;
 
 const VERT = `
 attribute vec3 a_seed;
@@ -17,16 +17,16 @@ uniform float u_scale;
 varying float v_alpha;
 void main() {
   float depth = 0.25 + a_seed.z * 0.75;
-  float speed = 0.006 + depth * 0.014;
+  float speed = 0.004 + depth * 0.009;
   float y = fract(a_seed.y + u_time * speed);
   float x = a_seed.x + sin(u_time * 0.15 + a_seed.y * 12.0) * 0.02 * depth;
   vec2 p = vec2(x * 2.0 - 1.0, y * 2.0 - 1.0);
   p += u_pointer * 0.04 * depth;
   p.y += u_scroll * 0.25 * depth;
   gl_Position = vec4(p, 0.0, 1.0);
-  gl_PointSize = (6.0 + depth * 16.0) * u_scale;
+  gl_PointSize = (10.0 + depth * 22.0) * u_scale;
   float edge = smoothstep(0.0, 0.15, y) * (1.0 - smoothstep(0.75, 1.0, y));
-  v_alpha = edge * (0.12 + depth * 0.22);
+  v_alpha = edge * (0.05 + depth * 0.10);
 }`;
 const FRAG = `
 precision mediump float;
@@ -34,7 +34,7 @@ varying float v_alpha;
 void main() {
   float d = distance(gl_PointCoord, vec2(0.5));
   float f = smoothstep(0.5, 0.0, d);
-  float a = f * f * v_alpha;
+  float a = f * f * f * v_alpha;
   gl_FragColor = vec4(vec3(0.92, 0.64, 0.21) * a, a);
 }`;
 const BEAM_VERT = `
@@ -52,7 +52,7 @@ void main() {
   float ang = atan(d.x, -d.y);
   float beam = smoothstep(0.55, 0.0, abs(ang + 0.35)) * smoothstep(1.6, 0.0, length(d));
   float pulse = 0.85 + 0.15 * sin(u_time * 0.3);
-  float b = beam * 0.10 * pulse;
+  float b = beam * 0.035 * pulse;
   gl_FragColor = vec4(vec3(0.92, 0.64, 0.21) * b, b);
 }`;
 
