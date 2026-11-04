@@ -35,7 +35,7 @@ export default function ScrollStory({ beats, label = 'Story', tone = 'light', he
       <ol className="md:col-span-3 space-y-10 md:space-y-0" aria-label={label}>
         {beats.map((b, i) => (
           <li key={b.title} ref={el => { refs.current[i] = el; }} data-i={i} data-active={i === active} className="story-beat md:min-h-[55vh] md:flex md:flex-col md:justify-center">
-            <div className="md:hidden mb-3 w-12 h-12 rounded-full bg-[#eaa235] text-black font-black flex items-center justify-center neu-badge" aria-hidden="true">{i + 1}</div>
+            <div className="md:hidden mb-3 w-12 h-12 rounded-full bg-[#c74f2f] text-white font-black flex items-center justify-center neu-badge" aria-hidden="true">{i + 1}</div>
             {b.kicker && <span className="kicker text-[#2b433e]">{b.kicker}</span>}
             <Heading className="text-2xl md:text-4xl mb-3">{b.title}</Heading>
             <div className="text-lg leading-relaxed text-black/80 space-y-3">{b.body}</div>

@@ -71,7 +71,7 @@ export default function Contact() {
           <iframe title={`Map of ${SITE.addressLine}`} src={SITE.mapEmbedUrl} loading="lazy" referrerPolicy="no-referrer-when-downgrade" className="w-full h-full border-0"></iframe>
         </div>
       </Section>
-      <EndCta title="Planning a visit?" text="Let us know you are coming and our welcome team will be watching for you." to="/plan-your-visit#connect-card" label="Fill Out the Connect Card" />
+      <EndCta title="Planning a visit?" text="Let us know you are coming and our welcome team will be watching for you." to="/plan-your-visit#connect-card" label="Fill Out the Connect Card" tone="terra" />
     </>
   );
 }

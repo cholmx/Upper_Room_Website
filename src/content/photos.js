@@ -21,7 +21,7 @@ export const HERO_IMAGES = {
 // Every image the site shows. Until a real photo is added in the admin (Site Photos),
 // the slot shows its label so it is clear what belongs there.
 export const PHOTO_SLOTS = [
-  { key: 'home-hero', label: 'congregation worshiping or greeting each other', alt: 'Adults and children worship together on Sunday morning.' },
+  { key: 'home-hero', label: 'Home page banner photo, such as the congregation worshiping or greeting each other', alt: 'Adults and children worship together on Sunday morning.' },
   { key: 'plan-entrance', label: 'front entrance and parking lot', alt: 'The front entrance of Upper Room Fellowship at 500 Sponseller Road in Columbiana.' },
   { key: 'plan-greeter', label: 'families greeting each other at the front door', alt: 'A greeter welcomes a family at the front door of Upper Room Fellowship.' },
   { key: 'plan-coffee', label: 'people talking over coffee during the Sunday break', alt: 'People talking over coffee during the Sunday break.' },
@@ -36,7 +36,6 @@ export const PHOTO_SLOTS = [
   { key: 'give-impact-2', label: 'impact story two', alt: 'A story of what generosity made possible.' },
   { key: 'give-impact-3', label: 'impact story three', alt: 'A story of what generosity made possible.' },
   { key: 'outreach-1', label: 'an outreach project', alt: 'Church members serving at a community outreach project.' },
-  { key: 'campaign-hero', label: 'the sanctuary or the expansion plans', alt: 'The Upper Room Fellowship sanctuary.' },
   { key: 'campaign-model', label: 'link to the 3D model file (.glb) of the building and expansion', alt: '', kind: 'model' },
   { key: 'logo-dark', label: 'dark logo for light backgrounds', alt: 'The Upper Room Fellowship', kind: 'logo' },
   { key: 'logo-light', label: 'light logo for dark backgrounds', alt: 'The Upper Room Fellowship', kind: 'logo' },

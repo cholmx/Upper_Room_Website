@@ -15,6 +15,7 @@ const isExternal = (to) => /^(https?:|mailto:|tel:|sms:)/i.test(to);
 
 const BTN = {
   primary: 'btn btn-solid',
+  accent: 'btn bg-[#c74f2f] text-white border-[#c74f2f] hover:bg-[#2b433e] hover:border-[#2b433e]',
   dark: 'btn bg-[#1e2522] text-white border-[#1e2522] hover:bg-[#eaa235] hover:text-black hover:border-[#eaa235]',
   ghost: 'btn btn-outline',
   light: 'btn btn-outline-dark',
@@ -221,7 +222,7 @@ export function Steps({ items }) {
       {items.map((it, i) => (
         <li key={it.title} className="flex gap-5">
           <div className="flex flex-col items-center">
-            <span className="w-12 h-12 rounded-full bg-[#eaa235] text-black font-black flex items-center justify-center flex-shrink-0 shadow-[0_0_20px_rgba(234,162,53,0.3)]">{i + 1}</span>
+            <span className="w-12 h-12 rounded-full bg-[#c74f2f] text-white font-black flex items-center justify-center flex-shrink-0">{i + 1}</span>
             {i < items.length - 1 && <span className="w-px flex-grow bg-[#d49e46]/60 mt-2" aria-hidden="true"></span>}
           </div>
           <div className="pb-2">

@@ -11,7 +11,7 @@ function ValueIcon({ n }) {
   const [failed, setFailed] = useState(false);
   const src = url || `/images/core-values/core-value-${n}.png`;
   if (failed && !url) {
-    return <span aria-hidden="true" className="w-16 h-16 rounded-full bg-[#eaa235] text-[#1e2522] text-2xl font-semibold flex items-center justify-center">{n}</span>;
+    return <span aria-hidden="true" className="w-16 h-16 rounded-full bg-[#c74f2f] text-white text-2xl font-semibold flex items-center justify-center">{n}</span>;
   }
   return <img src={src} alt="" width="72" height="72" loading="lazy" className="w-[72px] h-[72px] object-contain" onError={() => setFailed(true)} />;
 }

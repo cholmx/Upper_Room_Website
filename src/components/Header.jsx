@@ -11,7 +11,7 @@ import * as FiIcons from 'react-icons/fi';
 const { FiMenu, FiX, FiChevronDown } = FiIcons;
 
 const linkBase = 'whitespace-nowrap font-serif italic uppercase text-[0.9rem] tracking-widest py-1 border-b-2 transition-all duration-300 inline-flex items-center gap-1';
-const linkOn = 'border-[#eaa235] text-black';
+const linkOn = 'border-[#c74f2f] text-black';
 const linkOff = 'border-transparent text-black/70 hover:text-black hover:border-black/20';
 
 function DesktopDropdown({ item }) {
@@ -84,7 +84,7 @@ function MobileMenu({ onClose }) {
       </div>
       <div className="px-6 pt-2 grid grid-cols-2 gap-3">
         <Btn ref={first} to="/plan-your-visit" variant="primary" onClick={onClose} className="!px-4 text-center">Plan Your Visit</Btn>
-        <Btn href={SITE.giveUrl} variant="dark" className="!px-4">Give</Btn>
+        <Btn href={SITE.giveUrl} variant="accent" className="!px-4">Give</Btn>
       </div>
       <nav aria-label="Main" className="px-6 py-6 pb-28">
         <ul className="divide-y divide-black/10">
@@ -137,12 +137,12 @@ export default function Header() {
           {NAV.map(item => (item.children
             ? <DesktopDropdown key={item.label} item={item} />
             : <NavLink key={item.to} to={item.to} className={({ isActive }) => `${linkBase} ${isActive ? linkOn : linkOff}`}>{item.label}</NavLink>))}
-          <a href={SITE.giveUrl} target="_blank" rel="noopener noreferrer" className="px-5 py-2 rounded-full bg-[#1e2522] text-white font-serif italic uppercase text-[0.85rem] tracking-widest hover:bg-[#eaa235] hover:text-black transition-colors">
+          <a href={SITE.giveUrl} target="_blank" rel="noopener noreferrer" className="px-5 py-2 rounded-full bg-[#c74f2f] text-white font-serif italic uppercase text-[0.85rem] tracking-widest hover:bg-[#2b433e] transition-colors">
             Give<span className="sr-only"> (opens in a new tab)</span>
           </a>
         </nav>
         <div className="flex items-center gap-2 xl:hidden">
-          <a href={SITE.giveUrl} target="_blank" rel="noopener noreferrer" className="px-4 min-[400px]:px-5 py-2 rounded-full bg-[#1e2522] text-white font-serif italic uppercase text-[0.8rem] min-[400px]:text-[0.85rem] tracking-widest">
+          <a href={SITE.giveUrl} target="_blank" rel="noopener noreferrer" className="px-4 min-[400px]:px-5 py-2 rounded-full bg-[#c74f2f] text-white font-serif italic uppercase text-[0.8rem] min-[400px]:text-[0.85rem] tracking-widest">
             Give<span className="sr-only"> (opens in a new tab)</span>
           </a>
           <button type="button" className="p-2 hover:bg-black/5 rounded-full transition-colors" aria-expanded={open} aria-controls="mobile-menu" aria-label="Open menu" onClick={() => setOpen(true)}>

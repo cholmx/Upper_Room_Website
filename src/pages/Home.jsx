@@ -20,7 +20,8 @@ export default function Home() {
   const { data } = useFetch('read/sermons?limit=10&sort=created_at:desc');
   const latest = useMemo(() => (data ?? []).filter(isLive)[0], [data]);
   const videoId = ytId(latest?.video_url || latest?.yt);
-  const banner = usePhoto('banner-home').url;
+  const heroPhoto = usePhoto('home-hero').url;
+  const banner = usePhoto('banner-home').url || heroPhoto;
 
   return (
     <>

@@ -13,6 +13,7 @@ const { FiSave, FiLoader } = FiIcons;
 
 const GROUPS = [
   { kind: undefined, title: 'Photos', help: 'Each photo shows where its label says. Until one is added, the site shows the label as a placeholder.' },
+  { kind: 'banner', title: 'Page banners', help: 'The wide photo at the top of each page. The Home banner is the first photo above. Until one is added, each page shows a default photo.' },
   { kind: 'logo', title: 'Logos and sharing image', help: 'The dark logo sits on light backgrounds and the light logo on dark ones.' },
   { kind: 'model', title: '3D model', help: 'Paste a link to a .glb file from your architect or designer. Until then the site shows a simple concept model. Large files should be under 20 MB.' },
   { kind: 'icon', title: 'Core value icons', help: 'Small square icons shown beside each core value.' },
@@ -55,7 +56,7 @@ function Slot({ slot, row, onSaved }) {
       ) : (
         <FieldInput field={{ name: `photo-${slot.key}`, label: 'Image', type: 'image' }} value={url} onChange={(_, v) => setUrl(v)} />
       )}
-      {slot.kind !== 'icon' && slot.kind !== 'logo' && slot.kind !== 'model' && (
+      {slot.kind !== 'icon' && slot.kind !== 'logo' && slot.kind !== 'model' && slot.kind !== 'banner' && (
         <div>
           <label htmlFor={`alt-${slot.key}`} className="block text-sm font-bold text-gray-800 mb-2">Description for screen readers</label>
           <input id={`alt-${slot.key}`} type="text" value={alt} onChange={(e) => setAlt(e.target.value)} placeholder={slot.alt} className="w-full px-4 py-3 bg-gray-50 rounded-lg border border-gray-200 focus:outline-none focus:border-[#CCA866]" />

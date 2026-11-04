@@ -28,7 +28,7 @@ export default function Ministries() {
           <p>If you have an hour a month, there is a place for you. If you feel called to something longer, speak with one of our pastors and we will help you find where your passion meets a need.</p>
         </div>
       </Section>
-      <EndCta title="Not sure which one fits?" text="Tell us a little about you and we will point you the right way." to="/contact" label="Send a message" />
+      <EndCta title="Not sure which one fits?" text="Tell us a little about you and we will point you the right way." to="/contact" label="Send a message" tone="terra" />
     </>
   );
 }

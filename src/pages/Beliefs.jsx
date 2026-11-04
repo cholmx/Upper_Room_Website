@@ -35,7 +35,7 @@ export default function Beliefs() {
         </nav>
         <Accordion items={items} />
       </Section>
-      <EndCta title="Questions about what we believe?" text="We are glad to talk. Send a message and a pastor will reply." to="/contact" label="Send a message" />
+      <EndCta title="Questions about what we believe?" text="We are glad to talk. Send a message and a pastor will reply." to="/contact" label="Send a message" tone="terra" />
     </>
   );
 }

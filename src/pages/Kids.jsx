@@ -46,7 +46,7 @@ export default function Kids() {
         </div>
       </Section>
 
-      <EndCta title="Questions about your child?" text="Send us a message and we will help you get ready for Sunday." to="/contact" label="Send a message" />
+      <EndCta title="Questions about your child?" text="Send us a message and we will help you get ready for Sunday." to="/contact" label="Send a message" tone="terra" />
     </>
   );
 }

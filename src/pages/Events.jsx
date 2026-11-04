@@ -172,7 +172,7 @@ export default function Events() {
         )}
         <AdminOnly><p className="mt-8"><Todo id="events-other">[ADD OTHER EVENTS]</Todo></p></AdminOnly>
       </Section>
-      <EndCta title="Come to Sunday" text="Our weekly gathering is the easiest place to start." to="/plan-your-visit" label="Plan Your Visit" />
+      <EndCta title="Come to Sunday" text="Our weekly gathering is the easiest place to start." to="/plan-your-visit" label="Plan Your Visit" tone="terra" />
     </>
   );
 }

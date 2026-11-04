@@ -101,7 +101,7 @@ export default function About() {
         <Btn to="/leadership" variant="ghost">Meet our leaders</Btn>
       </Section>
 
-      <EndCta title="We would love to meet you" text="The best way to know us is to join us on a Sunday." to="/plan-your-visit" label="Plan Your Visit" />
+      <EndCta title="We would love to meet you" text="The best way to know us is to join us on a Sunday." to="/plan-your-visit" label="Plan Your Visit" tone="terra" />
     </>
   );
 }
