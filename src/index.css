@@ -35,12 +35,10 @@ h1, h2, h3, h4 {
 .kicker {
   display: inline-block;
   font-family: 'Fraunces', Georgia, serif;
-  font-style: italic;
-  text-transform: uppercase;
-  font-weight: 700;
-  font-size: 0.85rem;
-  letter-spacing: 0.15em;
-  margin-bottom: 1rem;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+  margin-bottom: 0.75rem;
 }
 
 .serif-accent {
@@ -58,11 +56,9 @@ h1, h2, h3, h4 {
   gap: 0.5rem;
   padding: 1rem 2.2rem;
   font-family: 'Fraunces', Georgia, serif;
-  font-style: italic;
-  text-transform: uppercase;
-  font-size: 0.95rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
   text-decoration: none;
   cursor: pointer;
   border: 1px solid transparent;
@@ -284,7 +280,7 @@ h1, h2, h3, h4 {
 .rich-text a { color: #2b433e; text-decoration: underline; }
 .rich-text ul { list-style: disc; padding-left: 1.5em; }
 .rich-text ol { list-style: decimal; padding-left: 1.5em; }
-.rich-text blockquote { border-left: 4px solid var(--muted); padding-left: 1em; font-style: italic; }
+.rich-text blockquote { border-left: 4px solid var(--muted); padding-left: 1em; }
 .rich-text img { max-width: 100%; border-radius: 1rem; }
 
 @media (prefers-reduced-motion: reduce) {

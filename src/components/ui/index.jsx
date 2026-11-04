@@ -154,7 +154,7 @@ export function PageHeader({ kicker, title, intro, children, page, ambient = fal
       >
         {kicker && <span className="kicker text-[#eaa235]">{kicker}</span>}
         <h1 className="text-4xl md:text-7xl mb-6">{title}</h1>
-        {intro && <p className="font-serif italic text-xl md:text-2xl text-white/90 max-w-[50ch] mx-auto leading-relaxed">{intro}</p>}
+        {intro && <p className="font-serif text-xl md:text-2xl text-white/90 max-w-[50ch] mx-auto leading-relaxed">{intro}</p>}
         {children && <div className="mt-8 flex flex-wrap justify-center gap-4">{children}</div>}
       </motion.div>
     </header>

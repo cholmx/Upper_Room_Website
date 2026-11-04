@@ -31,14 +31,14 @@ export default function Home() {
         <LightField />
         <div className="max-w-[1145px] mx-auto relative z-10 text-white">
           <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, ease: 'easeOut' }}>
-            <span className="kicker text-[#eaa235] tracking-widest !mb-2 md:!mb-4">{SITE.name}</span>
+            <span className="kicker text-[#eaa235] !mb-2 md:!mb-4">{SITE.name}</span>
             <h1 id="home-h1" className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl max-w-[18ch] mb-3 md:mb-6 leading-[1.05]">You are welcome here.</h1>
-            <p className="font-serif italic text-xl md:text-3xl max-w-[40ch] text-white/90 mb-7 md:mb-10 leading-snug">
+            <p className="font-serif text-xl md:text-3xl max-w-[40ch] text-white/90 mb-7 md:mb-10 leading-snug">
               The Upper Room Fellowship is a church family in Columbiana, Ohio. Join us {SITE.serviceTime}.
             </p>
             <div className="flex gap-3 md:gap-4">
-              <Btn to="/plan-your-visit" variant="primary" className="max-sm:flex-1 max-sm:!px-3 max-sm:!py-3 max-sm:!text-[0.78rem] max-sm:leading-tight">Plan Your Visit</Btn>
-              <Btn to="/messages" variant="light" className="max-sm:flex-1 max-sm:!px-3 max-sm:!py-3 max-sm:!text-[0.78rem] max-sm:leading-tight">Watch the Latest Message</Btn>
+              <Btn to="/plan-your-visit" variant="primary" className="max-sm:flex-1 max-sm:!px-3 max-sm:!py-3 max-sm:!text-[0.9rem] max-sm:leading-tight">Plan Your Visit</Btn>
+              <Btn to="/messages" variant="light" className="max-sm:flex-1 max-sm:!px-3 max-sm:!py-3 max-sm:!text-[0.9rem] max-sm:leading-tight">Watch the Latest Message</Btn>
             </div>
           </motion.div>
         </div>
@@ -69,7 +69,7 @@ export default function Home() {
           <div className="neu rounded-3xl p-8 md:p-10">
             <span className="kicker text-[#2b433e]">Our vision</span>
             <p className="text-lg leading-relaxed text-black/80">We exist to help people know God deeply, share life authentically, and serve others selflessly. Real change happens from the inside out as our hearts line up with God’s heart. Along the way we pursue healthy relationships, abundant wholeness, our God-given greatness, a supernatural lifestyle, God’s presence, and a life that lives out the Gospel in tangible ways.</p>
-            <blockquote className="mt-5 border-l-4 border-[#d49e46] pl-5 font-serif italic text-lg">
+            <blockquote className="mt-5 border-l-4 border-[#d49e46] pl-5 font-serif text-lg">
               “By this everyone will know that you are my disciples, if you love one another.”
               <footer className="mt-1 text-base font-sans not-italic text-black/70">John 13:35</footer>
             </blockquote>
