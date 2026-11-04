@@ -49,7 +49,7 @@ export default function BlogPost() {
         </div>
         <h1 className="text-3xl md:text-5xl mb-10">{live.title}</h1>
         {live.image_url && (
-          <img src={live.image_url} alt="" className="w-full rounded-2xl mb-12 shadow-lg" />
+          <img src={live.image_url} alt="" className="w-full rounded-2xl mb-12 elev-1" />
         )}
         <RichText value={live.body} className="text-lg md:text-xl" />
       </motion.div>

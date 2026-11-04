@@ -143,7 +143,7 @@ export default function Events() {
           </div>
           <div>
             <label htmlFor="ev-ministry" className="block text-sm font-semibold mb-1">Show events for</label>
-            <select id="ev-ministry" value={ministry} onChange={(e) => setMinistry(e.target.value)} className="min-h-[48px] px-3 bg-white rounded-xl border border-black/25 focus:outline-none focus:ring-2 focus:ring-[#8A6309]">
+            <select id="ev-ministry" value={ministry} onChange={(e) => setMinistry(e.target.value)} className="neu-field min-h-[48px] px-3 rounded-xl border border-black/25 focus:outline-none focus:ring-2 focus:ring-[#8A6309]">
               <option value="">Everything</option>
               {MINISTRY_FILTERS.map(m => <option key={m} value={m}>{m}</option>)}
             </select>

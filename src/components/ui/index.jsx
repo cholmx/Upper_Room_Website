@@ -81,7 +81,7 @@ export function Photo({ slot, className = '', ratio = 'aspect-[4/3]', priority =
   const [failed, setFailed] = useState(null);
   if (!url || failed === url) return null;
   return (
-    <div className={`${ratio} ${rounded ? 'rounded-3xl' : ''} overflow-hidden border border-black/5 shadow-xl bg-[#0B1613] ${className}`}>
+    <div className={`${ratio} ${rounded ? 'rounded-3xl' : ''} overflow-hidden border border-black/5 elev-1 bg-[#0B1613] ${className}`}>
       <img src={url} alt={alt} loading={priority ? 'eager' : 'lazy'} decoding="async" onError={() => setFailed(url)} className="w-full h-full object-cover" />
     </div>
   );

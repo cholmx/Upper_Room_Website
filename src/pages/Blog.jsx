@@ -57,7 +57,7 @@ export default function Blog() {
             Loading articles...
           </div>
         ) : posts.length === 0 ? (
-          <div className="text-center py-32 bg-white rounded-3xl border border-black/5 mt-10">
+          <div className="text-center py-32 rounded-3xl mt-10 neu">
             <div className="text-5xl mb-4">📝</div>
             <h2 className="text-2xl font-semibold opacity-50">No articles found.</h2>
           </div>
@@ -73,7 +73,7 @@ export default function Blog() {
                   placeholder="Search articles by title, author, or keyword..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="block w-full pl-16 pr-6 py-5 border border-black/10 rounded-full bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-[#A6790F] focus:border-transparent text-lg transition-all"
+                  className="block w-full pl-16 pr-6 py-5 border border-black/10 rounded-full neu-field focus:outline-none focus:ring-2 focus:ring-[#A6790F] focus:border-transparent text-lg transition-all"
                 />
               </div>
 
@@ -83,7 +83,7 @@ export default function Blog() {
                     <button
                       key={cat}
                       onClick={() => setSelectedCategory(cat)}
-                      className={`px-6 py-2.5 rounded-full text-sm font-semibold uppercase tracking-wider transition-all duration-300 flex items-center gap-2 ${selectedCategory === cat ? 'bg-[#0B1613] text-white shadow-md scale-105' : 'bg-white hover:border-black/30 hover:bg-gray-50 text-gray-600 border border-black/10'}`}
+                      className={`px-6 py-2.5 rounded-full text-sm font-semibold uppercase tracking-wider transition-all duration-300 flex items-center gap-2 ${selectedCategory === cat ? 'bg-[#0B1613] text-white' : 'neu text-black/80'}`}
                     >
                       {cat !== 'All' && <SafeIcon icon={FiTag} className={selectedCategory === cat ? 'text-white' : 'text-[#8A6309]'} />}
                       {cat}
@@ -94,7 +94,7 @@ export default function Blog() {
             </motion.div>
 
             {filteredPosts.length === 0 ? (
-              <motion.div initial="hidden" animate="visible" variants={fadeUp} className="text-center py-24 bg-white rounded-3xl border border-black/5 shadow-sm">
+              <motion.div initial="hidden" animate="visible" variants={fadeUp} className="text-center py-24 rounded-3xl neu">
                 <div className="text-6xl mb-6">🔍</div>
                 <h3 className="text-3xl font-semibold mb-3">No articles found</h3>
                 <p className="opacity-60 text-lg mb-8">We couldn't find any posts matching your criteria.</p>
@@ -112,7 +112,7 @@ export default function Blog() {
                     visible: { transition: { staggerChildren: 0.1 } }
                   }} className="mb-20">
                     <motion.span variants={slideInLeft} className="kicker text-[#8A6309] mb-4 inline-block">{searchQuery || selectedCategory !== 'All' ? 'Top Result' : 'Latest Article'}</motion.span>
-                    <Link to={`/blog/${featuredPost.id}`} className="block bg-white border border-black/5 hover:shadow-2xl transition-all duration-500 rounded-3xl overflow-hidden flex flex-col md:flex-row group translate-y-0 hover:-translate-y-2">
+                    <Link to={`/blog/${featuredPost.id}`} className="block elev-hover transition-all duration-500 rounded-3xl overflow-hidden flex flex-col md:flex-row group translate-y-0 hover:-translate-y-2 neu">
                       <div className="md:w-1/2 aspect-square md:aspect-auto bg-[#0B1613] relative overflow-hidden flex-shrink-0">
                         {featuredPost.image_url ? (
                           <img 
@@ -175,7 +175,7 @@ export default function Blog() {
                         <motion.div key={post.id} variants={fadeUp}>
                           <Link 
                             to={`/blog/${post.id}`}
-                            className="bg-white border border-black/5 flex flex-col h-full rounded-2xl overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-400 group"
+                            className="flex flex-col h-full rounded-2xl overflow-hidden elev-hover hover:-translate-y-2 transition-all duration-400 group neu"
                           >
                             <div className="aspect-[16/10] bg-[#0B1613] relative overflow-hidden">
                               {post.image_url ? (
@@ -191,7 +191,7 @@ export default function Blog() {
                                 </div>
                               )}
                               {post.category && (
-                                <div className="absolute top-4 left-4 bg-white/95 backdrop-blur text-black text-[10px] font-semibold uppercase tracking-wider px-3 py-1.5 rounded-full shadow-sm">
+                                <div className="absolute top-4 left-4 bg-white/95 backdrop-blur text-black text-[10px] font-semibold uppercase tracking-wider px-3 py-1.5 rounded-full">
                                   {post.category}
                                 </div>
                               )}

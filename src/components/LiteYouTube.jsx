@@ -37,7 +37,7 @@ export default function LiteYouTube({ id, title }) {
         onError={(e) => { e.currentTarget.style.display = 'none'; }}
       />
       <span className="absolute inset-0 flex items-center justify-center">
-        <span className="w-20 h-20 bg-[#FFC44F] rounded-full flex items-center justify-center text-black pl-1 shadow-2xl group-hover:scale-110 transition-transform">
+        <span className="w-20 h-20 bg-[#FFC44F] rounded-full flex items-center justify-center text-black pl-1 elev-2 group-hover:scale-110 transition-transform">
           <SafeIcon icon={FiPlay} className="text-3xl" />
         </span>
       </span>

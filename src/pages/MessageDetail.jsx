@@ -82,7 +82,7 @@ export default function MessageDetail() {
           )}
           {notesUrl && <p className="mb-8"><Btn href={notesUrl} variant="ghost">Download the notes</Btn></p>}
           {m.notes && (
-            <div className="bg-white rounded-2xl border border-black/10 p-6 md:p-8">
+            <div className="rounded-2xl p-6 md:p-8 neu">
               <h2 className="text-2xl mb-4">Notes and transcript</h2>
               <RichText value={m.notes} />
             </div>

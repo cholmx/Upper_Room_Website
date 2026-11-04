@@ -92,7 +92,7 @@ export default function Messages() {
               <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {seriesList.map(s => (
                   <li key={s.name}>
-                    <Link to={seriesPath(s.name)} className="block bg-white rounded-2xl border border-black/10 overflow-hidden hover:shadow-lg h-full">
+                    <Link to={seriesPath(s.name)} className="block rounded-2xl overflow-hidden elev-hover h-full neu">
                       <div className="aspect-[16/9] bg-[#0B1613] flex items-center justify-center">
                         {s.image ? <img src={s.image} alt="" loading="lazy" className="w-full h-full object-cover" /> : <span className="text-2xl text-[#FFC44F] px-4 text-center">{s.name}</span>}
                       </div>
@@ -109,7 +109,7 @@ export default function Messages() {
 
           <Section tone="cream" id="archive">
             <SectionHeader kicker="Archive" title="All messages" />
-            <form role="search" aria-label="Search messages" onSubmit={(e) => e.preventDefault()} className="bg-white rounded-2xl border border-black/10 p-5 mb-8">
+            <form role="search" aria-label="Search messages" onSubmit={(e) => e.preventDefault()} className="rounded-2xl p-5 mb-8 neu">
               <label htmlFor="msg-search" className="block text-sm font-semibold mb-1">Search by topic, passage, or speaker</label>
               <input id="msg-search" type="search" value={q} onChange={(e) => setQ(e.target.value)} className={select} />
               <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">

@@ -66,13 +66,13 @@ export default function TableGroups() {
       <Section tone="sand" id="groups">
         <SectionHeader kicker="Group finder" title="Find a group" />
         {groups.length === 0 ? (
-          <div className="bg-white rounded-2xl border border-black/10 p-6">
+          <div className="rounded-2xl p-6 neu">
             <p className="text-lg text-black/80">{error ? 'We could not load the group list just now.' : 'Our current groups are being added.'} Tell us what works for you using the form below and we will help you find a fit.</p>
             <p className="mt-3"><Todo id="current-groups">[ADD CURRENT GROUPS]</Todo></p>
           </div>
         ) : (
           <>
-            <div className="bg-white rounded-2xl border border-black/10 p-5 mb-6 grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            <div className="rounded-2xl p-5 mb-6 grid sm:grid-cols-2 lg:grid-cols-5 gap-4 neu">
               <F label="Day" value={day} onChange={setDay} options={uniq('day')} />
               <F label="Time of day" value={time} onChange={setTime} options={uniq('time_of_day')} />
               <F label="Area" value={area} onChange={setArea} options={uniq('area')} />
@@ -83,7 +83,7 @@ export default function TableGroups() {
             {shown.length === 0 ? <p className="text-lg">No groups match yet. Try different choices, or use the form below.</p> : (
               <ul className="grid md:grid-cols-2 gap-6">
                 {shown.map(g => (
-                  <li key={g.id} className="bg-white rounded-2xl border border-black/10 p-6 flex flex-col">
+                  <li key={g.id} className="rounded-2xl p-6 flex flex-col neu">
                     <h3 className="text-xl">{g.name}</h3>
                     <p className="mt-1 text-sm font-semibold text-[#8A6309]">{[g.day, g.time_of_day, g.area, g.life_stage].filter(Boolean).join('  |  ')}</p>
                     {g.description && <p className="mt-3 text-black/80">{g.description}</p>}

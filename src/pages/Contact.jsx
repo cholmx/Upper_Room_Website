@@ -67,7 +67,7 @@ export default function Contact() {
           <Panel id="prayer" title="Request prayer" intro="Whatever you are carrying, you do not have to carry it alone. Send us a request and our church family will pray." formKey="prayer" note={<p className="mt-5 text-sm text-black/80"><Todo id="prayer-who">[CONFIRM WHO RECEIVES REQUESTS AND WHETHER FOLLOW-UP HAPPENS]</Todo></p>} />
           <Panel id="story" title="Share your story" intro="If God has done something in your life, we would love to hear it. It might encourage someone else." formKey="story" />
         </div>
-        <div className="mt-12 rounded-2xl overflow-hidden border border-black/10 bg-white aspect-[16/9] md:aspect-[21/9]">
+        <div className="mt-12 rounded-2xl overflow-hidden aspect-[16/9] md:aspect-[21/9] neu">
           <iframe title={`Map of ${SITE.addressLine}`} src={SITE.mapEmbedUrl} loading="lazy" referrerPolicy="no-referrer-when-downgrade" className="w-full h-full border-0"></iframe>
         </div>
       </Section>

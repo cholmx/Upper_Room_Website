@@ -63,7 +63,7 @@ export default function PlanYourVisit() {
             <Btn href={SITE.googleMapsUrl} variant="primary">Get Directions</Btn>
             <Photo slot="plan-entrance" />
           </div>
-          <div className="rounded-2xl overflow-hidden border border-black/10 bg-white aspect-[4/3]">
+          <div className="rounded-2xl overflow-hidden aspect-[4/3] neu">
             <iframe title={`Map of ${SITE.addressLine}`} src={SITE.mapEmbedUrl} loading="lazy" referrerPolicy="no-referrer-when-downgrade" className="w-full h-full border-0"></iframe>
           </div>
         </div>

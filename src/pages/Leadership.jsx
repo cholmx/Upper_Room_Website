@@ -9,7 +9,7 @@ import RichText from '../components/RichText';
 function Person({ p }) {
   const first = p.name.split(' ')[0];
   return (
-    <li className="bg-white rounded-2xl border border-black/10 overflow-hidden flex flex-col">
+    <li className="rounded-2xl overflow-hidden flex flex-col neu">
       <PhotoBox src={p.photo_url} alt={`Portrait of ${p.name}, ${p.role}`} label={`${p.name} headshot`} ratio="aspect-[4/5]" rounded={false} />
       <div className="p-6 flex flex-col flex-grow">
         <h2 className="text-2xl">{p.name}</h2>
@@ -64,7 +64,7 @@ export default function Leadership() {
         <SectionHeader kicker="How we lead" title="How we lead" />
         <dl className="grid md:grid-cols-2 gap-6">
           {HOW_WE_LEAD.map(i => (
-            <div key={i.title} className="bg-white rounded-2xl border border-black/10 p-6">
+            <div key={i.title} className="rounded-2xl p-6 neu">
               <dt className="text-xl font-semibold">{i.title}</dt>
               <dd className="mt-2 text-black/80 leading-relaxed">{i.text}</dd>
             </div>

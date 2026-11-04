@@ -40,7 +40,7 @@ export default function CustomPage() {
   if (!page) {
     return (
       <div className="min-h-screen bg-[#F9F9F7] pt-40 px-6 text-center">
-        <div className="max-w-xl mx-auto bg-white p-12 rounded-3xl border border-black/5 shadow-sm">
+        <div className="max-w-xl mx-auto p-12 rounded-3xl neu">
           <div className="text-6xl mb-6">📄</div>
           <h2 className="text-3xl font-semibold mb-4">Page Not Found</h2>
           <p className="opacity-60 text-lg">The page you are looking for does not exist or has been moved.</p>
@@ -52,7 +52,7 @@ export default function CustomPage() {
   return (
     <div className="bg-[#F9F9F7] min-h-screen text-black pt-20 pb-32">
       {/* Hero Banner */}
-      <div className="bg-[#0B1613] text-[#F9F9F7] py-24 px-6 text-center shadow-lg relative overflow-hidden">
+      <div className="bg-[#0B1613] text-[#F9F9F7] py-24 px-6 text-center relative overflow-hidden">
          {/* Subtle abstract background */}
          <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/9562304/pexels-photo-9562304.jpeg?auto=compress&cs=tinysrgb&h=1200')] bg-cover bg-center opacity-[0.08] mix-blend-overlay"></div>
          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#FFC44F] rounded-full blur-[150px] opacity-10 pointer-events-none"></div>
@@ -66,7 +66,7 @@ export default function CustomPage() {
 
       {/* Content Body */}
       <div className="py-24 px-6">
-        <motion.div initial="hidden" animate="visible" variants={fadeUp} className="max-w-[800px] mx-auto bg-white p-8 md:p-16 rounded-3xl border border-black/5 shadow-sm">
+        <motion.div initial="hidden" animate="visible" variants={fadeUp} className="max-w-[800px] mx-auto p-8 md:p-16 rounded-3xl neu">
           <div className="space-y-8 text-lg md:text-xl text-black/80 leading-relaxed font-serif text-gray-800">
             {stripHtml(page.body_content_text).split('\n').filter(Boolean).map((para, i) => (
               <p key={i}>{para}</p>

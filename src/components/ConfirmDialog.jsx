@@ -17,7 +17,7 @@ export default function ConfirmDialog({ title, message, confirmLabel = 'Delete',
         aria-modal="true"
         aria-labelledby="confirm-title"
         aria-describedby="confirm-message"
-        className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8"
+        className="bg-white rounded-2xl elev-2 max-w-md w-full p-8"
         onClick={(e) => e.stopPropagation()}
       >
         <h2 id="confirm-title" className="text-xl font-semibold mb-2 normal-case tracking-normal">{title}</h2>

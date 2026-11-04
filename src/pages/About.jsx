@@ -17,7 +17,7 @@ function Stories() {
           <SectionHeader kicker="Stories" title="Stories from our church family" intro="These are real stories from people who call this place home. Each one is shared with permission." />
           <ul className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {stories.map(s => (
-              <li key={s.id} className="bg-white rounded-2xl border border-black/10 overflow-hidden flex flex-col">
+              <li key={s.id} className="rounded-2xl overflow-hidden flex flex-col neu">
                 <PhotoBox src={s.photo_url} alt={s.name ? `Photo of ${s.name}` : ''} label={`${s.name || 'story'} photo`} ratio="aspect-[4/3]" rounded={false} />
                 <div className="p-6 flex flex-col flex-grow">
                   <blockquote className="text-xl leading-snug">“{s.quote}”</blockquote>

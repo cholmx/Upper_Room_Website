@@ -76,7 +76,7 @@ export default function Home() {
         <SectionHeader kicker="Latest message" title="Catch up on the latest message" intro="Missed a Sunday, or just curious what we teach? Watch it here before you ever walk through the door." />
         {latest ? (
           <div className="grid md:grid-cols-5 gap-10 items-center">
-            <div className="md:col-span-3 aspect-video rounded-3xl overflow-hidden bg-[#0B1613] shadow-xl">
+            <div className="md:col-span-3 aspect-video rounded-3xl overflow-hidden bg-[#0B1613] elev-1">
               {videoId ? <LiteYouTube id={videoId} title={latest.title} /> : (
                 <div className="w-full h-full flex items-center justify-center text-white/80 p-6 text-center">Video coming soon</div>
               )}

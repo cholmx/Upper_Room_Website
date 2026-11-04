@@ -46,17 +46,17 @@ export default function Campaign() {
       <Section tone="sand">
         <SectionHeader kicker="Give" title="Three ways to take part" />
         <div className="grid md:grid-cols-3 gap-6">
-          <div className="bg-white rounded-2xl border border-black/10 p-6 flex flex-col">
+          <div className="rounded-2xl p-6 flex flex-col neu">
             <h3 className="text-xl mb-2">Give to the Building Fund</h3>
             <p className="text-black/80 flex-grow">Choose “Building Donation” from the dropdown on the giving form.</p>
             <div className="mt-4"><Btn href={SITE.giveUrl} variant="ghost">Give to the Building Fund</Btn></div>
           </div>
-          <div className="bg-white rounded-2xl border border-black/10 p-6 flex flex-col">
+          <div className="rounded-2xl p-6 flex flex-col neu">
             <h3 className="text-xl mb-2">Give to the Growth Campaign</h3>
             <p className="text-black/80 flex-grow">Give toward the campaign directly.</p>
             <div className="mt-4"><Btn href={SITE.growthGiveUrl} variant="ghost">Give to the Growth Campaign</Btn></div>
           </div>
-          <div className="bg-white rounded-2xl border border-black/10 p-6 flex flex-col">
+          <div className="rounded-2xl p-6 flex flex-col neu">
             <h3 className="text-xl mb-2">Submit your commitment</h3>
             <p className="text-black/80 flex-grow">Tell us what you plan to give over the three years.</p>
             <div className="mt-4"><Btn href={SITE.pledgeUrl} variant="ghost">Submit Your Commitment Card</Btn></div>

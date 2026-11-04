@@ -29,7 +29,7 @@ export default function CoreValues() {
         <ol className="grid md:grid-cols-2 gap-6">
           {CORE_VALUES.map(v => (
             <li key={v.id}>
-              <details id={v.id} className="u-acc group bg-white rounded-2xl border border-black/10 h-full">
+              <details id={v.id} className="u-acc neu-acc group rounded-2xl h-full">
                 <summary className="cursor-pointer list-none p-6 flex items-start gap-5 min-h-[56px]">
                   <ValueIcon n={v.n} />
                   <span className="flex-grow">

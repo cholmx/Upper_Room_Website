@@ -9,7 +9,7 @@ const { FiPlay, FiHeadphones } = FiIcons;
 export default function MessageCard({ message, as: Heading = 'h3' }) {
   const id = ytId(message.video_url || message.yt);
   return (
-    <article className="bg-white rounded-2xl border border-black/10 overflow-hidden flex flex-col">
+    <article className="rounded-2xl overflow-hidden flex flex-col neu">
       <Link to={messagePath(message)} className="block relative aspect-video bg-[#0B1613]" aria-hidden="true" tabIndex={-1}>
         {id ? (
           <img src={ytThumb(id)} alt="" loading="lazy" className="w-full h-full object-cover text-black/90" onError={(e) => { e.currentTarget.style.display = 'none'; }} />

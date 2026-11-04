@@ -25,7 +25,7 @@ export default function Beliefs() {
         intro="We hold a short list of beliefs tightly and give each other room to grow on the rest. Love holds us together. Each topic below starts with a plain-English line."
       />
       <Section tone="cream" narrow>
-        <nav aria-label="Topics on this page" className="bg-white rounded-2xl border border-black/10 p-6 mb-10">
+        <nav aria-label="Topics on this page" className="rounded-2xl p-6 mb-10 neu">
           <h2 className="text-xl mb-3">On this page</h2>
           <ul className="grid sm:grid-cols-2 gap-x-6">
             {BELIEFS.map(b => (

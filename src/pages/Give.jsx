@@ -16,7 +16,7 @@ export default function Give() {
       />
 
       <Section tone="cream">
-        <div className="bg-white rounded-3xl border border-black/10 p-8 md:p-12 text-center max-w-3xl mx-auto">
+        <div className="rounded-3xl p-8 md:p-12 text-center max-w-3xl mx-auto neu">
           <h2 className="text-3xl md:text-4xl">Give online</h2>
           <p className="mt-4 text-lg md:text-xl text-black/80 leading-relaxed">Make a secure one-time gift or set up a recurring gift. You can direct it to the general fund or to a specific ministry.</p>
           <div className="mt-8"><Btn href={SITE.giveUrl} variant="primary" className="!min-h-[56px] !px-10 !text-lg">Give Online</Btn></div>
