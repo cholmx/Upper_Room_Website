@@ -41,6 +41,7 @@ export default function Leadership() {
         intro="A team of elders and pastors shares the work of teaching, spiritual oversight, and caring for people here. We believe leadership works best when it is shared and passed along, so we are always looking for the next leader."
       />
       <Section tone="white">
+        <p className="max-w-3xl mb-10 text-lg leading-relaxed text-black/80">We believe in shared leadership and not a top-down structure. Our church is led by a team of elders who share responsibility for spiritual oversight, teaching, and pastoral care. Our leaders are committed to living out our core values, showing up authentically, with kindness and honor, and building a community that loves genuinely.</p>
         <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {people.map(p => <Person key={p.id || p.name} p={p} />)}
           {fromAdmin.length === 0 && (

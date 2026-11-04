@@ -57,6 +57,26 @@ export default function Home() {
         </div>
       </section>
 
+      <Section tone="white">
+        <div className="grid md:grid-cols-2 gap-12 items-start">
+          <div>
+            <SectionHeader kicker="Welcome" title="Welcome to the Upper Room Fellowship" className="!mb-6" />
+            <div className="space-y-4 text-lg leading-relaxed text-black/80">
+              <p>For more than 50 years, our congregation has gathered in Columbiana to worship, grow, and serve together. We love this city and are proud to call it home.</p>
+              <p>Together, we are learning to live with more love, joy, and purpose. We support each other and reach out to make our community better. Whether you are just exploring faith or looking for a church family, we would love to meet you and welcome you into ours.</p>
+            </div>
+          </div>
+          <div className="neu rounded-3xl p-8 md:p-10">
+            <span className="kicker text-[#2b433e]">Our vision</span>
+            <p className="text-lg leading-relaxed text-black/80">We exist to help people know God deeply, share life authentically, and serve others selflessly. Real change happens from the inside out as our hearts line up with God’s heart. Along the way we pursue healthy relationships, abundant wholeness, our God-given greatness, a supernatural lifestyle, God’s presence, and a life that lives out the Gospel in tangible ways.</p>
+            <blockquote className="mt-5 border-l-4 border-[#d49e46] pl-5 font-serif italic text-lg">
+              “By this everyone will know that you are my disciples, if you love one another.”
+              <footer className="mt-1 text-base font-sans not-italic text-black/70">John 13:35</footer>
+            </blockquote>
+          </div>
+        </div>
+      </Section>
+
       <Section tone="cream">
         <SectionHeader kicker="What Sunday looks like" title="What to expect on Sunday" intro="Most first visits go better when you know what to expect." />
         <Cards>

@@ -49,6 +49,7 @@ export default function TableGroups() {
           <div>
             <SectionHeader title="Why a small group" className="!mb-4" />
             <p className="text-lg leading-relaxed text-black/80">In a church our size, smaller circles are where people really get known. A Table Group gives you a place to build friendships, apply what you hear on Sunday to ordinary life, and get support when things get hard.</p>
+            <p className="mt-4 text-lg leading-relaxed text-black/80">Life is better together. Table Groups meet throughout the week in homes across the community to study, pray, and share life. They are places to show up authentically, with kindness and honor, and to support one another through life’s ups and downs.</p>
           </div>
           <div>
             <SectionHeader title="What to expect" className="!mb-4" />

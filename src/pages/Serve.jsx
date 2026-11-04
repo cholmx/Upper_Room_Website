@@ -41,7 +41,8 @@ export default function Serve() {
           <Card title="Creative Team"><p>Artists, designers, and decorators who care for how our space looks and feels.</p></Card>
           <Card title="Media Team"><p>Photographers and videographers who capture and share what happens here.</p></Card>
         </Cards>
-        <p className="mt-8 text-lg leading-relaxed text-black/80 max-w-3xl">After completing the Growth Track, you can audition for the worship team or shadow one of our production volunteers to learn the ropes.</p>
+        <p className="mt-8 text-lg leading-relaxed text-black/80 max-w-3xl">Worship is a lifestyle of honoring God in everything we do, and singing is one part of it. When we gather, we make space for people to meet God’s presence through Spirit-led worship that is expressive and easy to join. Our team works for excellence while staying authentic and focused on Jesus. We believe worship is something we do together, so we choose songs that are rich in meaning and easy to sing.</p>
+        <p className="mt-4 text-lg leading-relaxed text-black/80 max-w-3xl">After completing the Growth Track, you can audition for the worship team or shadow one of our production volunteers to learn the ropes.</p>
         <div className="mt-10 max-w-3xl"><FormBlock formKey="worship" /></div>
       </Section>
       <Section tone="cream">

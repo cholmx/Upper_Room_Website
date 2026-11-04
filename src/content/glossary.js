@@ -22,8 +22,6 @@ export const GLOSSARY = {
   },
   spiritBaptism: {
     term: 'Spirit baptism',
-    plain: '',
-    todo: 'spirit-baptism',
-    todoText: '[ONE PLAIN SENTENCE FROM THE PASTORS]',
+    plain: 'a distinct experience, separate from salvation, of being filled with the Holy Spirit for power to witness',
   },
 };

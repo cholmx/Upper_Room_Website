@@ -1,7 +1,7 @@
 import React from 'react';
 import usePageMeta from '../hooks/usePageMeta';
 import { BELIEFS } from '../content/beliefs';
-import { Section, PageHeader, Accordion, Todo, EndCta } from '../components/ui';
+import { Section, PageHeader, Accordion, EndCta } from '../components/ui';
 import RichText from '../components/RichText';
 
 export default function Beliefs() {
@@ -12,7 +12,7 @@ export default function Beliefs() {
     content: (
       <>
         <p className="font-semibold text-[#1e2522]">{b.plain}</p>
-        {b.full ? <RichText value={b.full} /> : <p><Todo id="beliefs-full">[PASTE THE FULL STATEMENT FOR THIS TOPIC]</Todo></p>}
+        {b.full ? <RichText value={b.full} className="!font-sans text-lg text-black/80" /> : null}
       </>
     ),
   }));

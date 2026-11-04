@@ -17,6 +17,7 @@ export default function Kids() {
           <div>
             <SectionHeader title="How Sunday works" className="!mb-4" />
             <p className="text-lg leading-relaxed text-black/80">Kids start the morning with you in worship. Right before the message begins, they head to classes for their age group.</p>
+            <p className="mt-4 text-lg leading-relaxed text-black/80">Children are part of the church today, and our passionate team creates experiences that help kids build a strong spiritual foundation, form healthy relationships, and know from a young age that they have God-given purpose and value. Throughout the year we also host seasonal celebrations and family events.</p>
             <AdminOnly><p className="mt-3"><Todo id="kids-rooms">[AGE GROUPS AND ROOM LOCATIONS]</Todo></p></AdminOnly>
           </div>
           <div>

@@ -1,6 +1,8 @@
+import { BELIEFS_FULL } from './beliefs-full';
+
 // plain: one line in everyday words that sits above the full statement.
-// full: the church's own wording (Markdown). Paste it in when it is ready.
-export const BELIEFS = [
+// full: the church's own wording (Markdown), kept in beliefs-full.js.
+const RAW = [
   { id: 'trinity', title: 'The Trinity', plain: 'One God, three persons. Father, Son, and Holy Spirit are equal and completely united, and together they invite us into relationship.', full: '' },
   { id: 'jesus-christ', title: 'Jesus Christ', plain: 'Jesus is fully God and fully human. He died for the sins of the world, rose from the dead, and reigns today.', full: '' },
   { id: 'holy-spirit', title: 'The Holy Spirit', plain: 'The Holy Spirit is God with us. He guides us, changes us, and gives us power for everyday life.', full: '' },
@@ -18,3 +20,5 @@ export const BELIEFS = [
   { id: 'mission', title: 'Cultural Engagement and Mission', plain: 'We want to be good news in our neighborhoods, workplaces, and city, through both our words and our actions.', full: '' },
   { id: 'creeds', title: 'Our Historic Creeds', plain: 'We stand with Christians across the centuries in the Apostles’ Creed, the Nicene Creed, and the National Association of Evangelicals Statement of Faith.', full: '' },
 ];
+
+export const BELIEFS = RAW.map(b => ({ ...b, full: b.full || BELIEFS_FULL[b.id] || '' }));

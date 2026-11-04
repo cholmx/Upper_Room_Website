@@ -25,6 +25,7 @@ export default function Youth() {
           <div>
             <SectionHeader title="Why it matters" className="!mb-4" />
             <p className="text-lg leading-relaxed text-black/80">The teenage years shape a lot of what comes later. We teach the Bible straight and help students take it with them to school, home, and the community. We also care about helping students live a supernatural lifestyle and build healthy relationships during these years.</p>
+            <p className="mt-4 text-lg leading-relaxed text-black/80">We do not water down the Gospel or fill the night with games alone. We challenge students to go deeper with Jesus and equip them to live out their faith at school, at home, and in their community.</p>
           </div>
           <div>
             <SectionHeader title="What students get" className="!mb-4" />

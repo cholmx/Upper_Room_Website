@@ -13,6 +13,10 @@ export default function Ministries() {
         intro="Nobody watches from the sidelines here. Whatever your age or season of life, there is a place for you to belong and make a difference."
       />
       <Section tone="cream">
+        <div className="max-w-3xl mb-10 space-y-4 text-lg leading-relaxed text-black/80">
+          <p>Ministry is how we live out our faith together. Each person has a unique way of ministering to the world around them with excellence, because there is no spectator Christianity. Every person has great value and destiny.</p>
+          <p>Our ministries are designed to help you connect with God, build meaningful relationships, and discover the joy of serving others. Whatever your age, interests, or season of life, there is a place for you to belong and make a difference.</p>
+        </div>
         <Cards>
           {MINISTRIES.map(m => (
             <Card key={m.to} as="h2" title={m.title} to={m.to} linkLabel="Learn more"><p>{m.text}</p></Card>
