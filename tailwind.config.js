@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        serif: ['Fraunces', 'Georgia', 'serif'],
+        serif: ['Caladea', 'serif'],
         sans: ['Inter', 'sans-serif'],
         display: ['"Google Sans Flex"', 'sans-serif'],
       },

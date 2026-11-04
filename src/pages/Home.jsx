@@ -37,8 +37,8 @@ export default function Home() {
               Upper Room Fellowship is a church family in Columbiana, Ohio. Join us {SITE.serviceTime}.
             </p>
             <div className="flex gap-3 md:gap-4">
-              <Btn to="/plan-your-visit" variant="primary" className="max-sm:flex-1 max-sm:!px-3 max-sm:!py-3 max-sm:!text-[0.9rem] max-sm:leading-tight">Plan Your Visit</Btn>
-              <Btn to="/messages" variant="light" className="max-sm:flex-1 max-sm:!px-3 max-sm:!py-3 max-sm:!text-[0.9rem] max-sm:leading-tight">Watch the Latest Message</Btn>
+              <Btn to="/plan-your-visit" variant="primary" className="max-sm:flex-1 max-sm:!px-3 max-sm:!py-3 max-sm:!text-[1rem] max-sm:leading-tight">Plan Your Visit</Btn>
+              <Btn to="/messages" variant="light" className="max-sm:flex-1 max-sm:!px-3 max-sm:!py-3 max-sm:!text-[1rem] max-sm:leading-tight">Watch the Latest Message</Btn>
             </div>
           </motion.div>
         </div>

@@ -34,16 +34,17 @@ h1, h2, h3, h4 {
 
 .kicker {
   display: inline-block;
-  font-family: 'Fraunces', Georgia, serif;
+  font-family: 'Caladea', serif;
   font-style: italic;
-  font-weight: 600;
-  font-size: 1rem;
-  letter-spacing: 0.01em;
-  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: 0.15em;
+  margin-bottom: 1rem;
 }
 
 .serif-accent {
-  font-family: 'Fraunces', Georgia, serif;
+  font-family: 'Caladea', serif;
   font-style: italic;
   font-weight: 400;
   text-transform: none;
@@ -56,11 +57,12 @@ h1, h2, h3, h4 {
   justify-content: center;
   gap: 0.5rem;
   padding: 1rem 2.2rem;
-  font-family: 'Fraunces', Georgia, serif;
+  font-family: 'Caladea', serif;
   font-style: italic;
-  font-size: 1.05rem;
-  font-weight: 600;
-  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-decoration: none;
   cursor: pointer;
   border: 1px solid transparent;
@@ -258,7 +260,7 @@ h1, h2, h3, h4 {
 
 /* Admin- and user-authored markdown */
 .rich-text {
-  font-family: 'Fraunces', Georgia, serif;
+  font-family: 'Caladea', serif;
   line-height: 1.75;
   overflow-wrap: anywhere;
 }
