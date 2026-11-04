@@ -8,7 +8,7 @@ import FormBlock from '../components/FormBlock';
 function StepCard({ id, n, title, children, action }) {
   return (
     <li id={id} className="rounded-2xl p-6 flex flex-col scroll-mt-24 neu">
-      <span className="w-10 h-10 rounded-full bg-[#FFC44F] text-[#080c0b] font-semibold flex items-center justify-center mb-4" aria-hidden="true">{n}</span>
+      <span className="w-10 h-10 rounded-full bg-[#EBC36B] text-[#1c2622] font-bold flex items-center justify-center mb-4" aria-hidden="true">{n}</span>
       <h2 className="text-2xl mb-2">{title}</h2>
       <div className="text-black/80 leading-relaxed space-y-2 flex-grow">{children}</div>
       <div className="mt-5">{action}</div>

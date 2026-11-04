@@ -88,7 +88,7 @@ export default function TableGroups() {
                     <p className="mt-1 text-sm font-semibold text-[#8A6309]">{[g.day, g.time_of_day, g.area, g.life_stage].filter(Boolean).join('  |  ')}</p>
                     {g.description && <p className="mt-3 text-black/80">{g.description}</p>}
                     <div className="mt-auto pt-4 flex items-center gap-4">
-                      <span className={`text-sm font-semibold ${(g.status || 'open') === 'full' ? 'text-red-800' : 'text-green-900'}`}>{(g.status || 'open') === 'full' ? 'Full' : 'Open'}</span>
+                      <span className={`text-sm font-bold ${(g.status || 'open') === 'full' ? 'text-red-800' : 'text-green-900'}`}>{(g.status || 'open') === 'full' ? 'Full' : 'Open'}</span>
                       <Btn onClick={() => join(g)} variant="ghost" aria-label={`${(g.status || 'open') === 'full' ? 'Ask about a spot in' : 'Join'} ${g.name}`}>{(g.status || 'open') === 'full' ? 'Ask about a spot' : 'Join'}</Btn>
                     </div>
                   </li>

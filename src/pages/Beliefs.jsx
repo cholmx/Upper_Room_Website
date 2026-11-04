@@ -11,7 +11,7 @@ export default function Beliefs() {
     title: b.title,
     content: (
       <>
-        <p className="font-semibold text-[#080c0b]">{b.plain}</p>
+        <p className="font-semibold text-[#1c2622]">{b.plain}</p>
         {b.full ? <RichText value={b.full} /> : <p><Todo id="beliefs-full">[PASTE THE FULL STATEMENT FOR THIS TOPIC]</Todo></p>}
       </>
     ),

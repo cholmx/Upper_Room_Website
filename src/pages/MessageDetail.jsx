@@ -62,7 +62,7 @@ export default function MessageDetail() {
 
         <Section tone="cream" narrow>
           {vid && (
-            <div className="aspect-video rounded-2xl overflow-hidden bg-[#0B1613] mb-8">
+            <div className="aspect-video rounded-2xl overflow-hidden bg-[#14221d] mb-8">
               <LiteYouTube id={vid} title={m.title} />
             </div>
           )}

@@ -15,7 +15,7 @@ const isExternal = (to) => /^(https?:|mailto:|tel:|sms:)/i.test(to);
 
 const BTN = {
   primary: 'btn btn-solid',
-  dark: 'btn bg-[#0B1613] text-white border-[#0B1613] hover:bg-[#FFC44F] hover:text-black hover:border-[#FFC44F]',
+  dark: 'btn bg-[#14221d] text-white border-[#14221d] hover:bg-[#EBC36B] hover:text-black hover:border-[#EBC36B]',
   ghost: 'btn btn-outline',
   light: 'btn btn-outline-dark',
 };
@@ -44,14 +44,14 @@ const TONES = {
   cream: 'bg-[#F9F9F7] text-black',
   white: 'bg-white text-black',
   sand: 'bg-white text-black border-y border-black/5',
-  ink: 'bg-[#0B1613] text-[#F9F9F7] relative overflow-hidden glow-gold',
-  gold: 'bg-[#FFC44F] text-black',
+  ink: 'bg-[#14221d] text-[#F9F9F7] relative overflow-hidden glow-gold',
+  gold: 'bg-[#EBC36B] text-black',
   bronze: 'bg-[#CCA866] text-black',
 };
 
 export function Section({ tone = 'cream', id, className = '', narrow = false, children, ...rest }) {
   return (
-    <section id={id} className={`${TONES[tone]} py-20 md:py-24 px-6 ${className}`} {...rest}>
+    <section id={id} className={`${TONES[tone]} py-24 md:py-32 px-6 ${className}`} {...rest}>
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -68,8 +68,8 @@ export function Section({ tone = 'cream', id, className = '', narrow = false, ch
 export function SectionHeader({ kicker, title, intro, center = false, as: Tag = 'h2', tone = 'light', className = '' }) {
   return (
     <div className={`${center ? 'text-center mx-auto' : ''} max-w-3xl mb-10 md:mb-12 ${className}`}>
-      {kicker && <span className={`kicker ${tone === 'dark' ? 'text-[#FFC44F]' : 'text-[#8A6309]'}`}>{kicker}</span>}
-      <Tag className="text-2xl md:text-4xl">{title}</Tag>
+      {kicker && <span className={`kicker ${tone === 'dark' ? 'text-[#EBC36B]' : 'text-[#8A6309]'}`}>{kicker}</span>}
+      <Tag className="text-3xl md:text-5xl">{title}</Tag>
       {intro && <p className={`mt-4 text-lg leading-relaxed ${tone === 'dark' ? 'text-white/85' : 'text-black/80'}`}>{intro}</p>}
     </div>
   );
@@ -81,7 +81,7 @@ export function Photo({ slot, className = '', ratio = 'aspect-[4/3]', priority =
   const [failed, setFailed] = useState(null);
   if (!url || failed === url) return null;
   return (
-    <div className={`${ratio} ${rounded ? 'rounded-3xl' : ''} overflow-hidden border border-black/5 elev-1 bg-[#0B1613] ${className}`}>
+    <div className={`${ratio} ${rounded ? 'rounded-3xl' : ''} overflow-hidden border border-black/5 elev-1 bg-[#14221d] ${className}`}>
       <img src={url} alt={alt} loading={priority ? 'eager' : 'lazy'} decoding="async" onError={() => setFailed(url)} className="w-full h-full object-cover" />
     </div>
   );
@@ -92,14 +92,14 @@ export function PhotoBox({ src, alt = '', initials, className = '', ratio = 'asp
   const url = safeUrl(src);
   if (url) {
     return (
-      <div className={`${ratio} ${rounded ? 'rounded-3xl' : ''} overflow-hidden bg-[#0B1613] ${className}`}>
+      <div className={`${ratio} ${rounded ? 'rounded-3xl' : ''} overflow-hidden bg-[#14221d] ${className}`}>
         <img src={url} alt={alt} loading="lazy" decoding="async" className="w-full h-full object-cover" />
       </div>
     );
   }
   if (!initials) return null;
   return (
-    <div aria-hidden="true" className={`${ratio} ${rounded ? 'rounded-3xl' : ''} bg-gradient-to-br from-[#0B1613] to-[#1A2E28] flex items-center justify-center text-6xl font-semibold text-[#FFC44F]/60 ${className}`}>
+    <div aria-hidden="true" className={`${ratio} ${rounded ? 'rounded-3xl' : ''} bg-gradient-to-br from-[#14221d] to-[#1A2E28] flex items-center justify-center text-6xl font-black text-[#EBC36B]/60 ${className}`}>
       {initials}
     </div>
   );
@@ -146,9 +146,9 @@ export function PageHeader({ kicker, title, intro, children, page, ambient = fal
         transition={{ duration: 0.8, ease: 'easeOut' }}
         className="max-w-[800px] mx-auto relative z-10"
       >
-        {kicker && <span className="kicker text-[#FFC44F]">{kicker}</span>}
-        <h1 className="text-3xl md:text-6xl mb-6">{title}</h1>
-        {intro && <p className="font-serif italic text-lg md:text-xl text-white/90 max-w-[50ch] mx-auto leading-relaxed">{intro}</p>}
+        {kicker && <span className="kicker text-[#EBC36B]">{kicker}</span>}
+        <h1 className="text-4xl md:text-7xl mb-6">{title}</h1>
+        {intro && <p className="font-serif italic text-xl md:text-2xl text-white/90 max-w-[50ch] mx-auto leading-relaxed">{intro}</p>}
         {children && <div className="mt-8 flex flex-wrap justify-center gap-4">{children}</div>}
       </motion.div>
     </header>
@@ -174,7 +174,7 @@ export function Card({ title, children, to, linkLabel, icon, className = '', as:
       <div className="text-black/80 leading-relaxed flex-grow space-y-3">{children}</div>
       {to && (
         <div className="mt-6">
-          <Link to={to} className="inline-flex items-center font-semibold uppercase tracking-widest text-[#8A6309] hover:text-black transition-colors">
+          <Link to={to} className="inline-flex items-center font-bold uppercase tracking-widest text-[#8A6309] hover:text-black transition-colors">
             {linkLabel || 'Learn more'} <span aria-hidden="true" className="ml-2">&rarr;</span>
           </Link>
         </div>
@@ -199,7 +199,7 @@ export function Accordion({ items, className = '' }) {
     <div className={`space-y-3 ${className}`}>
       {items.map((it, i) => (
         <details key={it.id || i} id={it.id} className="u-acc neu-acc group rounded-2xl">
-          <summary className="cursor-pointer px-6 py-5 flex items-center justify-between gap-4 text-lg font-semibold min-h-[56px]">
+          <summary className="cursor-pointer px-6 py-5 flex items-center justify-between gap-4 text-lg font-bold min-h-[56px]">
             <span>{it.title}</span>
             <span aria-hidden="true" className="u-acc-icon flex-shrink-0 text-2xl leading-none text-[#8A6309]">+</span>
           </summary>
@@ -216,7 +216,7 @@ export function Steps({ items }) {
       {items.map((it, i) => (
         <li key={it.title} className="flex gap-5">
           <div className="flex flex-col items-center">
-            <span className="w-12 h-12 rounded-full bg-[#FFC44F] text-black font-semibold flex items-center justify-center flex-shrink-0">{i + 1}</span>
+            <span className="w-12 h-12 rounded-full bg-[#EBC36B] text-black font-black flex items-center justify-center flex-shrink-0 shadow-[0_0_20px_rgba(235,195,107,0.3)]">{i + 1}</span>
             {i < items.length - 1 && <span className="w-px flex-grow bg-[#CCA866]/60 mt-2" aria-hidden="true"></span>}
           </div>
           <div className="pb-2">
@@ -235,7 +235,7 @@ export function QuickFacts({ items }) {
       {items.map(f => (
         <div key={f.label} className="neu-inset rounded-3xl p-6">
           <dt className="kicker text-[#8A6309] !mb-1">{f.label}</dt>
-          <dd className="text-lg font-semibold leading-snug">{f.value}</dd>
+          <dd className="text-lg font-bold leading-snug">{f.value}</dd>
         </div>
       ))}
     </dl>
@@ -245,7 +245,7 @@ export function QuickFacts({ items }) {
 // Every page ends with one clear call to action.
 export function EndCta({ title, text, to, href, label }) {
   return (
-    <section className="bg-[#0B1613] text-[#F9F9F7] text-center py-20 md:py-28 px-6 border-t border-[#FFC44F]/40" aria-label="Next step">
+    <section className="bg-[#14221d] text-[#F9F9F7] text-center py-20 md:py-28 px-6 border-t border-[#EBC36B]/40" aria-label="Next step">
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -253,7 +253,7 @@ export function EndCta({ title, text, to, href, label }) {
         transition={{ duration: 0.7, ease: 'easeOut' }}
         className="max-w-[800px] mx-auto"
       >
-        <h2 className="text-2xl md:text-5xl leading-tight">{title}</h2>
+        <h2 className="text-3xl md:text-6xl leading-none">{title}</h2>
         {text && <p className="mt-5 text-lg md:text-xl text-white/80 leading-relaxed">{text}</p>}
         <div className="mt-9">
           <Btn to={to} href={href} variant="primary">{label}</Btn>

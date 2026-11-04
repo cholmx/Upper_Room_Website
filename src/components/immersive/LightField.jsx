@@ -26,7 +26,7 @@ void main() {
   gl_Position = vec4(p, 0.0, 1.0);
   gl_PointSize = (6.0 + depth * 16.0) * u_scale;
   float edge = smoothstep(0.0, 0.15, y) * (1.0 - smoothstep(0.75, 1.0, y));
-  v_alpha = edge * (0.16 + depth * 0.30);
+  v_alpha = edge * (0.12 + depth * 0.22);
 }`;
 const FRAG = `
 precision mediump float;

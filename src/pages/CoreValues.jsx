@@ -11,7 +11,7 @@ function ValueIcon({ n }) {
   const [failed, setFailed] = useState(false);
   const src = url || `/images/core-values/core-value-${n}.png`;
   if (failed && !url) {
-    return <span aria-hidden="true" className="w-16 h-16 rounded-full bg-[#FFC44F] text-[#080c0b] text-2xl font-semibold flex items-center justify-center">{n}</span>;
+    return <span aria-hidden="true" className="w-16 h-16 rounded-full bg-[#EBC36B] text-[#1c2622] text-2xl font-semibold flex items-center justify-center">{n}</span>;
   }
   return <img src={src} alt="" width="72" height="72" loading="lazy" className="w-[72px] h-[72px] object-contain" onError={() => setFailed(true)} />;
 }
@@ -33,7 +33,7 @@ export default function CoreValues() {
                 <summary className="cursor-pointer list-none p-6 flex items-start gap-5 min-h-[56px]">
                   <ValueIcon n={v.n} />
                   <span className="flex-grow">
-                    <h2 className="block text-xl md:text-2xl font-semibold">{v.title}</h2>
+                    <h2 className="block text-xl md:text-2xl font-bold">{v.title}</h2>
                     <span className="block mt-1 text-black/80">{v.summary}</span>
                     <span className="block mt-3 text-sm font-semibold text-[#8A6309]"><span className="group-open:hidden">Read more</span><span className="hidden group-open:inline">Show less</span></span>
                   </span>

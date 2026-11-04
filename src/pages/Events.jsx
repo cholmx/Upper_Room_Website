@@ -25,8 +25,8 @@ function EventCard({ e, featured = false }) {
       {safeUrl(e.image_url) && <PhotoBox src={e.image_url} alt="" label={e.title} ratio={featured ? 'aspect-[16/10]' : 'aspect-[16/10] md:aspect-auto md:w-56'} rounded={false} />}
       <div className="p-6 flex gap-5 flex-grow">
         <div className="text-center flex-shrink-0 w-16" aria-hidden="true">
-          <div className="text-sm font-semibold uppercase tracking-wider text-[#8A6309]">{d.toLocaleDateString('en-US', { month: 'short' })}</div>
-          <div className="text-3xl font-semibold leading-none">{d.getDate()}</div>
+          <div className="text-sm font-bold uppercase tracking-wider text-[#8A6309]">{d.toLocaleDateString('en-US', { month: 'short' })}</div>
+          <div className="text-3xl font-bold leading-none">{d.getDate()}</div>
         </div>
         <div className="min-w-0 flex-grow">
           {e.ministry && <p className="kicker text-[#8A6309] !mb-1">{e.ministry}</p>}
@@ -80,7 +80,7 @@ function MonthView({ events, cursor, setCursor }) {
       <table className="hidden md:table w-full table-fixed border-collapse bg-white rounded-xl overflow-hidden border border-black/10">
         <caption className="sr-only">{label}</caption>
         <thead>
-          <tr>{['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(d => <th key={d} scope="col" className="p-2 text-sm font-semibold text-black/80 border-b border-black/10">{d}</th>)}</tr>
+          <tr>{['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(d => <th key={d} scope="col" className="p-2 text-sm font-bold text-black/80 border-b border-black/10">{d}</th>)}</tr>
         </thead>
         <tbody>
           {Array.from({ length: cells.length / 7 }, (_, r) => (
@@ -136,7 +136,7 @@ export default function Events() {
         <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
           <div role="group" aria-label="Calendar view" className="inline-flex rounded-full border border-black/30 overflow-hidden">
             {['list', 'month'].map(v => (
-              <button key={v} type="button" aria-pressed={view === v} onClick={() => setView(v)} className={`min-h-[48px] px-6 font-semibold ${view === v ? 'bg-[#0B1613] text-white' : 'bg-white text-[#080c0b] hover:bg-white'}`}>
+              <button key={v} type="button" aria-pressed={view === v} onClick={() => setView(v)} className={`min-h-[48px] px-6 font-semibold ${view === v ? 'bg-[#14221d] text-white' : 'bg-white text-[#1c2622] hover:bg-white'}`}>
                 {v === 'list' ? 'List' : 'Month'}
               </button>
             ))}

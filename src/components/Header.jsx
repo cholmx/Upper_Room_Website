@@ -11,7 +11,7 @@ import * as FiIcons from 'react-icons/fi';
 const { FiMenu, FiX, FiChevronDown } = FiIcons;
 
 const linkBase = 'whitespace-nowrap font-serif italic uppercase text-[0.9rem] tracking-widest py-1 border-b-2 transition-all duration-300 inline-flex items-center gap-1';
-const linkOn = 'border-[#FFC44F] text-black';
+const linkOn = 'border-[#EBC36B] text-black';
 const linkOff = 'border-transparent text-black/70 hover:text-black hover:border-black/20';
 
 function DesktopDropdown({ item }) {
@@ -72,12 +72,12 @@ function MobileMenu({ onClose }) {
     return () => { document.removeEventListener('keydown', onKey); document.body.style.overflow = prev; };
   }, [onClose]);
 
-  const big = { fontFamily: "'Google Sans Flex', sans-serif", fontWeight: 600 };
+  const big = { fontFamily: "'Google Sans Flex', sans-serif", fontWeight: 900 };
 
   return createPortal(
     <div id="mobile-menu" className="xl:hidden fixed inset-0 z-[60] bg-[#F9F9F7] overflow-y-auto" role="dialog" aria-modal="true" aria-label="Site menu">
       <div className="flex items-center justify-between px-6 h-16">
-        <span className="uppercase text-xl tracking-[0.04em]" style={{ fontFamily: "'Google Sans Flex', sans-serif", fontWeight: 650 }}>{SITE.shortName}</span>
+        <span className="uppercase text-xl tracking-tight" style={{ fontFamily: "'Google Sans Flex', sans-serif", fontWeight: 1000 }}>{SITE.shortName}</span>
         <button type="button" aria-label="Close menu" onClick={onClose} className="p-3 bg-white rounded-full elev-1 hover:scale-105 transition-transform">
           <SafeIcon icon={FiX} size={22} />
         </button>
@@ -137,12 +137,12 @@ export default function Header() {
           {NAV.map(item => (item.children
             ? <DesktopDropdown key={item.label} item={item} />
             : <NavLink key={item.to} to={item.to} className={({ isActive }) => `${linkBase} ${isActive ? linkOn : linkOff}`}>{item.label}</NavLink>))}
-          <a href={SITE.giveUrl} target="_blank" rel="noopener noreferrer" className="px-5 py-2 rounded-full bg-[#0B1613] text-white font-serif italic uppercase text-[0.85rem] tracking-widest hover:bg-[#FFC44F] hover:text-black transition-colors">
+          <a href={SITE.giveUrl} target="_blank" rel="noopener noreferrer" className="px-5 py-2 rounded-full bg-[#14221d] text-white font-serif italic uppercase text-[0.85rem] tracking-widest hover:bg-[#EBC36B] hover:text-black transition-colors">
             Give<span className="sr-only"> (opens in a new tab)</span>
           </a>
         </nav>
         <div className="flex items-center gap-2 xl:hidden">
-          <a href={SITE.giveUrl} target="_blank" rel="noopener noreferrer" className="px-4 min-[400px]:px-5 py-2 rounded-full bg-[#0B1613] text-white font-serif italic uppercase text-[0.8rem] min-[400px]:text-[0.85rem] tracking-widest">
+          <a href={SITE.giveUrl} target="_blank" rel="noopener noreferrer" className="px-4 min-[400px]:px-5 py-2 rounded-full bg-[#14221d] text-white font-serif italic uppercase text-[0.8rem] min-[400px]:text-[0.85rem] tracking-widest">
             Give<span className="sr-only"> (opens in a new tab)</span>
           </a>
           <button type="button" className="p-2 hover:bg-black/5 rounded-full transition-colors" aria-expanded={open} aria-controls="mobile-menu" aria-label="Open menu" onClick={() => setOpen(true)}>

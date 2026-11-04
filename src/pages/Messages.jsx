@@ -71,7 +71,7 @@ export default function Messages() {
             <SectionHeader kicker="Latest" title="Latest message" />
             {latest ? (
               <div className="grid md:grid-cols-5 gap-8 items-center">
-                <div className="md:col-span-3 aspect-video rounded-2xl overflow-hidden bg-[#0B1613]">
+                <div className="md:col-span-3 aspect-video rounded-2xl overflow-hidden bg-[#14221d]">
                   {latestVideo ? <LiteYouTube id={latestVideo} title={latest.title} /> : <div className="w-full h-full flex items-center justify-center text-white/80">Video coming soon</div>}
                 </div>
                 <div className="md:col-span-2">
@@ -93,8 +93,8 @@ export default function Messages() {
                 {seriesList.map(s => (
                   <li key={s.name}>
                     <Link to={seriesPath(s.name)} className="block rounded-2xl overflow-hidden elev-hover h-full neu">
-                      <div className="aspect-[16/9] bg-[#0B1613] flex items-center justify-center">
-                        {s.image ? <img src={s.image} alt="" loading="lazy" className="w-full h-full object-cover" /> : <span className="text-2xl text-[#FFC44F] px-4 text-center">{s.name}</span>}
+                      <div className="aspect-[16/9] bg-[#14221d] flex items-center justify-center">
+                        {s.image ? <img src={s.image} alt="" loading="lazy" className="w-full h-full object-cover" /> : <span className="text-2xl text-[#EBC36B] px-4 text-center">{s.name}</span>}
                       </div>
                       <div className="p-5">
                         <h3 className="text-xl">{s.name}</h3>

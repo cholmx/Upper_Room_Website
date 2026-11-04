@@ -13,9 +13,9 @@ export default {
       },
       colors: {
         ink: {
-          DEFAULT: '#0B1613',
-          deep: '#080c0b',
-          900: '#0B1613',
+          DEFAULT: '#14221d',
+          deep: '#1c2622',
+          900: '#14221d',
           800: '#1A2E28',
         },
         cream: {
@@ -25,12 +25,12 @@ export default {
           200: '#F2F1ED',
         },
         gold: {
-          DEFAULT: '#FFC44F',
+          DEFAULT: '#EBC36B',
           light: '#FFD27A',
           dark: '#A6790F',
           bronze: '#CCA866',
           300: '#FFD27A',
-          400: '#FFC44F',
+          400: '#EBC36B',
           500: '#CCA866',
           600: '#8A6309',
           700: '#A6790F',
