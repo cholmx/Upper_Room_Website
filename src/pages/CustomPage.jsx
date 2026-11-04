@@ -32,7 +32,7 @@ export default function CustomPage() {
     return (
       <div className="min-h-screen bg-[#F9F9F7] pt-32 flex flex-col items-center justify-center opacity-60">
         <div className="w-12 h-12 border-4 border-[#A6790F] border-t-transparent rounded-full animate-spin mb-4"></div>
-        <p className="font-bold uppercase tracking-widest text-sm">Loading Page...</p>
+        <p className="font-semibold uppercase tracking-widest text-sm">Loading Page...</p>
       </div>
     );
   }
@@ -42,7 +42,7 @@ export default function CustomPage() {
       <div className="min-h-screen bg-[#F9F9F7] pt-40 px-6 text-center">
         <div className="max-w-xl mx-auto bg-white p-12 rounded-3xl border border-black/5 shadow-sm">
           <div className="text-6xl mb-6">📄</div>
-          <h2 className="text-3xl font-bold mb-4">Page Not Found</h2>
+          <h2 className="text-3xl font-semibold mb-4">Page Not Found</h2>
           <p className="opacity-60 text-lg">The page you are looking for does not exist or has been moved.</p>
         </div>
       </div>
@@ -59,7 +59,7 @@ export default function CustomPage() {
          
          <motion.div initial="hidden" animate="visible" variants={fadeUp} className="max-w-[800px] mx-auto relative z-10">
            <span className="kicker text-[#FFC44F] mb-4 inline-block">Information</span>
-           <h1 className="text-4xl md:text-6xl mb-8 leading-tight">{page.title_text}</h1>
+           <h1 className="text-3xl md:text-5xl mb-8 leading-tight">{page.title_text}</h1>
            <div className="w-16 h-1 bg-[#FFC44F] mx-auto rounded-full opacity-50"></div>
          </motion.div>
       </div>

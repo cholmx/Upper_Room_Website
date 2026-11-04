@@ -36,7 +36,7 @@ function FooterLink({ to, external, children }) {
   );
 }
 
-const heading = 'font-serif italic uppercase text-[0.85rem] font-bold tracking-widest text-white/70 mb-6';
+const heading = 'font-serif italic uppercase text-[0.85rem] font-semibold tracking-widest text-white/70 mb-6';
 
 export default function Footer() {
   const SITE = useSite();
@@ -72,7 +72,7 @@ export default function Footer() {
             <FooterLink external to={SITE.googleMapsUrl}>Get directions</FooterLink>
             <FooterLink external to={SITE.phoneHref}>{SITE.phone}</FooterLink>
             <FooterLink external to={`mailto:${SITE.email}`}>{SITE.email}</FooterLink>
-            <p className="opacity-90 text-[0.9rem] font-bold mt-1">{SITE.serviceTime}</p>
+            <p className="opacity-90 text-[0.9rem] font-semibold mt-1">{SITE.serviceTime}</p>
           </address>
         </motion.div>
 
@@ -92,7 +92,7 @@ export default function Footer() {
       <div className="text-center text-[0.8rem] py-6 border-t border-white/10 flex flex-col items-center gap-2 relative z-10 bg-black/20">
         <p className="opacity-80">{SITE.serviceTime}. {SITE.addressLine}.</p>
         <p className="opacity-70">&copy; {new Date().getFullYear()} {SITE.name}. Columbiana, Ohio.</p>
-        <Link to="/admin" className="hover:text-[#FFC44F] transition-colors uppercase tracking-widest font-bold mt-1 opacity-80">Content Studio Login</Link>
+        <Link to="/admin" className="hover:text-[#FFC44F] transition-colors uppercase tracking-widest font-semibold mt-1 opacity-80">Content Studio Login</Link>
       </div>
     </footer>
   );

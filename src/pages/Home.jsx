@@ -30,9 +30,9 @@ export default function Home() {
         <LightField />
         <div className="max-w-[1145px] mx-auto relative z-10 text-white">
           <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, ease: 'easeOut' }}>
-            <span className="kicker text-[#FFC44F] tracking-widest drop-shadow-md !mb-2 md:!mb-4">{SITE.name}</span>
-            <h1 id="home-h1" className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl max-w-[18ch] mb-3 md:mb-6 leading-[1.05] drop-shadow-lg">You are welcome here.</h1>
-            <p className="font-serif italic text-xl md:text-3xl max-w-[40ch] text-white/90 mb-7 md:mb-10 drop-shadow-md leading-snug">
+            <span className="kicker text-[#FFC44F] tracking-widest !mb-2 md:!mb-4">{SITE.name}</span>
+            <h1 id="home-h1" className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl max-w-[18ch] mb-3 md:mb-6 leading-[1.1]">You are welcome here.</h1>
+            <p className="font-serif italic text-lg md:text-2xl max-w-[40ch] text-white/90 mb-7 md:mb-10 leading-snug">
               The Upper Room Fellowship is a church family in Columbiana, Ohio. Join us {SITE.serviceTime}.
             </p>
             <div className="flex gap-3 md:gap-4">
@@ -43,8 +43,8 @@ export default function Home() {
         </div>
       </section>
 
-      <section aria-label="Service details" className="bg-[#FFC44F] text-black">
-        <div className="max-w-[1145px] mx-auto px-6 py-4 md:py-5 grid gap-x-8 gap-y-1 sm:grid-cols-2 lg:grid-cols-4 items-center font-bold text-[0.95rem]">
+      <section aria-label="Service details" className="bg-[#F3EEE3] text-black border-y border-[#CCA866]/50">
+        <div className="max-w-[1145px] mx-auto px-6 py-4 md:py-5 grid gap-x-8 gap-y-1 sm:grid-cols-2 lg:grid-cols-4 items-center font-semibold text-[0.95rem]">
           <p className="flex items-center gap-3"><SafeIcon icon={FiClock} className="text-xl flex-shrink-0" /> {SITE.serviceTime}</p>
           <p className="flex items-center gap-3"><SafeIcon icon={FiMapPin} className="text-xl flex-shrink-0" /> {SITE.addressLine}</p>
           <p>Service ends {SITE.serviceEnds}</p>
@@ -94,7 +94,7 @@ export default function Home() {
 
       <section className="bg-[#0B1613] text-white px-6 py-8" aria-label="Growth campaign">
         <div className="max-w-[1145px] mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-          <p className="text-lg"><span className="font-bold text-[#FFC44F]">Transforming Together.</span> Our sanctuary is full, and we are raising money to make room for the people still coming.</p>
+          <p className="text-lg"><span className="font-semibold text-[#FFC44F]">Transforming Together.</span> Our sanctuary is full, and we are raising money to make room for the people still coming.</p>
           <Btn to="/transforming-together" variant="light" className="self-start md:self-auto">Learn about the Growth Campaign</Btn>
         </div>
       </section>

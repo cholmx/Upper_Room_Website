@@ -12,7 +12,7 @@ function Panel({ id, title, intro, formKey, note }) {
   useEffect(() => { if (hash === `#${id}`) setOpen(true); }, [hash, id]);
   return (
     <details id={id} open={open} onToggle={(e) => setOpen(e.currentTarget.open)} className="u-acc neu-acc rounded-2xl">
-      <summary className="cursor-pointer list-none min-h-[56px] px-6 py-4 flex items-center justify-between gap-4 text-xl font-bold">
+      <summary className="cursor-pointer list-none min-h-[56px] px-6 py-4 flex items-center justify-between gap-4 text-xl font-semibold">
         {title}
         <span aria-hidden="true" className="text-[#8A6309]">+</span>
       </summary>

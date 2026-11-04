@@ -65,7 +65,7 @@ export default function Leadership() {
         <dl className="grid md:grid-cols-2 gap-6">
           {HOW_WE_LEAD.map(i => (
             <div key={i.title} className="bg-white rounded-2xl border border-black/10 p-6">
-              <dt className="text-xl font-bold">{i.title}</dt>
+              <dt className="text-xl font-semibold">{i.title}</dt>
               <dd className="mt-2 text-black/80 leading-relaxed">{i.text}</dd>
             </div>
           ))}

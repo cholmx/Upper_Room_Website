@@ -69,7 +69,7 @@ export function SectionHeader({ kicker, title, intro, center = false, as: Tag = 
   return (
     <div className={`${center ? 'text-center mx-auto' : ''} max-w-3xl mb-10 md:mb-12 ${className}`}>
       {kicker && <span className={`kicker ${tone === 'dark' ? 'text-[#FFC44F]' : 'text-[#8A6309]'}`}>{kicker}</span>}
-      <Tag className="text-3xl md:text-5xl">{title}</Tag>
+      <Tag className="text-2xl md:text-4xl">{title}</Tag>
       {intro && <p className={`mt-4 text-lg leading-relaxed ${tone === 'dark' ? 'text-white/85' : 'text-black/80'}`}>{intro}</p>}
     </div>
   );
@@ -99,7 +99,7 @@ export function PhotoBox({ src, alt = '', initials, className = '', ratio = 'asp
   }
   if (!initials) return null;
   return (
-    <div aria-hidden="true" className={`${ratio} ${rounded ? 'rounded-3xl' : ''} bg-gradient-to-br from-[#0B1613] to-[#1A2E28] flex items-center justify-center text-6xl font-black text-[#FFC44F]/60 ${className}`}>
+    <div aria-hidden="true" className={`${ratio} ${rounded ? 'rounded-3xl' : ''} bg-gradient-to-br from-[#0B1613] to-[#1A2E28] flex items-center justify-center text-6xl font-semibold text-[#FFC44F]/60 ${className}`}>
       {initials}
     </div>
   );
@@ -147,8 +147,8 @@ export function PageHeader({ kicker, title, intro, children, page, ambient = fal
         className="max-w-[800px] mx-auto relative z-10"
       >
         {kicker && <span className="kicker text-[#FFC44F]">{kicker}</span>}
-        <h1 className="text-4xl md:text-7xl mb-6 drop-shadow-lg">{title}</h1>
-        {intro && <p className="font-serif italic text-xl md:text-2xl text-white/90 max-w-[50ch] mx-auto drop-shadow-md leading-relaxed">{intro}</p>}
+        <h1 className="text-3xl md:text-6xl mb-6">{title}</h1>
+        {intro && <p className="font-serif italic text-lg md:text-xl text-white/90 max-w-[50ch] mx-auto leading-relaxed">{intro}</p>}
         {children && <div className="mt-8 flex flex-wrap justify-center gap-4">{children}</div>}
       </motion.div>
     </header>
@@ -174,7 +174,7 @@ export function Card({ title, children, to, linkLabel, icon, className = '', as:
       <div className="text-black/80 leading-relaxed flex-grow space-y-3">{children}</div>
       {to && (
         <div className="mt-6">
-          <Link to={to} className="inline-flex items-center font-bold uppercase tracking-widest text-[#8A6309] hover:text-black transition-colors">
+          <Link to={to} className="inline-flex items-center font-semibold uppercase tracking-widest text-[#8A6309] hover:text-black transition-colors">
             {linkLabel || 'Learn more'} <span aria-hidden="true" className="ml-2">&rarr;</span>
           </Link>
         </div>
@@ -199,7 +199,7 @@ export function Accordion({ items, className = '' }) {
     <div className={`space-y-3 ${className}`}>
       {items.map((it, i) => (
         <details key={it.id || i} id={it.id} className="u-acc neu-acc group rounded-2xl">
-          <summary className="cursor-pointer px-6 py-5 flex items-center justify-between gap-4 text-lg font-bold min-h-[56px]">
+          <summary className="cursor-pointer px-6 py-5 flex items-center justify-between gap-4 text-lg font-semibold min-h-[56px]">
             <span>{it.title}</span>
             <span aria-hidden="true" className="u-acc-icon flex-shrink-0 text-2xl leading-none text-[#8A6309]">+</span>
           </summary>
@@ -216,7 +216,7 @@ export function Steps({ items }) {
       {items.map((it, i) => (
         <li key={it.title} className="flex gap-5">
           <div className="flex flex-col items-center">
-            <span className="w-12 h-12 rounded-full bg-[#FFC44F] text-black font-black flex items-center justify-center flex-shrink-0 shadow-[0_0_20px_rgba(255,196,79,0.3)]">{i + 1}</span>
+            <span className="w-12 h-12 rounded-full bg-[#FFC44F] text-black font-semibold flex items-center justify-center flex-shrink-0">{i + 1}</span>
             {i < items.length - 1 && <span className="w-px flex-grow bg-[#CCA866]/60 mt-2" aria-hidden="true"></span>}
           </div>
           <div className="pb-2">
@@ -235,7 +235,7 @@ export function QuickFacts({ items }) {
       {items.map(f => (
         <div key={f.label} className="neu-inset rounded-3xl p-6">
           <dt className="kicker text-[#8A6309] !mb-1">{f.label}</dt>
-          <dd className="text-lg font-bold leading-snug">{f.value}</dd>
+          <dd className="text-lg font-semibold leading-snug">{f.value}</dd>
         </div>
       ))}
     </dl>
@@ -245,7 +245,7 @@ export function QuickFacts({ items }) {
 // Every page ends with one clear call to action.
 export function EndCta({ title, text, to, href, label }) {
   return (
-    <section className="bg-[#FFC44F] text-black text-center py-20 md:py-28 px-6" aria-label="Next step">
+    <section className="bg-[#0B1613] text-[#F9F9F7] text-center py-20 md:py-28 px-6 border-t border-[#FFC44F]/40" aria-label="Next step">
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -253,10 +253,10 @@ export function EndCta({ title, text, to, href, label }) {
         transition={{ duration: 0.7, ease: 'easeOut' }}
         className="max-w-[800px] mx-auto"
       >
-        <h2 className="text-3xl md:text-6xl leading-none">{title}</h2>
-        {text && <p className="mt-5 text-lg md:text-xl font-medium text-black/90 leading-relaxed">{text}</p>}
+        <h2 className="text-2xl md:text-5xl leading-tight">{title}</h2>
+        {text && <p className="mt-5 text-lg md:text-xl text-white/80 leading-relaxed">{text}</p>}
         <div className="mt-9">
-          <Btn to={to} href={href} variant="dark">{label}</Btn>
+          <Btn to={to} href={href} variant="primary">{label}</Btn>
         </div>
       </motion.div>
     </section>

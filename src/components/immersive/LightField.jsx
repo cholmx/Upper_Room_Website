@@ -5,7 +5,7 @@ import { canRunImmersive, readEnvironment, webglAvailable } from '../../lib/imme
 // Plain WebGL with no library. It sits behind the page text, ignores the pointer unless a mouse is
 // present, pauses when off screen or in a background tab, and does not run at all for
 // visitors who prefer reduced motion, are saving data, or are on a small device.
-const COUNT = 90;
+const COUNT = 48;
 
 const VERT = `
 attribute vec3 a_seed;
@@ -17,24 +17,25 @@ uniform float u_scale;
 varying float v_alpha;
 void main() {
   float depth = 0.25 + a_seed.z * 0.75;
-  float speed = 0.012 + depth * 0.03;
+  float speed = 0.006 + depth * 0.014;
   float y = fract(a_seed.y + u_time * speed);
-  float x = a_seed.x + sin(u_time * 0.25 + a_seed.y * 12.0) * 0.03 * depth;
+  float x = a_seed.x + sin(u_time * 0.15 + a_seed.y * 12.0) * 0.02 * depth;
   vec2 p = vec2(x * 2.0 - 1.0, y * 2.0 - 1.0);
   p += u_pointer * 0.04 * depth;
   p.y += u_scroll * 0.25 * depth;
   gl_Position = vec4(p, 0.0, 1.0);
-  gl_PointSize = (3.0 + depth * 9.0) * u_scale;
+  gl_PointSize = (6.0 + depth * 16.0) * u_scale;
   float edge = smoothstep(0.0, 0.15, y) * (1.0 - smoothstep(0.75, 1.0, y));
-  v_alpha = edge * (0.25 + depth * 0.55);
+  v_alpha = edge * (0.16 + depth * 0.30);
 }`;
 const FRAG = `
 precision mediump float;
 varying float v_alpha;
 void main() {
   float d = distance(gl_PointCoord, vec2(0.5));
-  float a = smoothstep(0.5, 0.0, d) * v_alpha;
-  gl_FragColor = vec4(1.0, 0.77, 0.31, a);
+  float f = smoothstep(0.5, 0.0, d);
+  float a = f * f * v_alpha;
+  gl_FragColor = vec4(vec3(1.0, 0.77, 0.31) * a, a);
 }`;
 const BEAM_VERT = `
 attribute vec2 a_pos;
@@ -50,8 +51,9 @@ void main() {
   vec2 d = v_uv - c;
   float ang = atan(d.x, -d.y);
   float beam = smoothstep(0.55, 0.0, abs(ang + 0.35)) * smoothstep(1.6, 0.0, length(d));
-  float pulse = 0.85 + 0.15 * sin(u_time * 0.5);
-  gl_FragColor = vec4(1.0, 0.77, 0.31, beam * 0.22 * pulse);
+  float pulse = 0.85 + 0.15 * sin(u_time * 0.3);
+  float b = beam * 0.10 * pulse;
+  gl_FragColor = vec4(vec3(1.0, 0.77, 0.31) * b, b);
 }`;
 
 function compile(gl, type, src) {
@@ -76,7 +78,7 @@ export default function LightField({ className = '' }) {
   useEffect(() => {
     const canvas = ref.current;
     if (!canvas || !canRunImmersive(readEnvironment()) || !webglAvailable()) return undefined;
-    const gl = canvas.getContext('webgl', { alpha: true, antialias: false, premultipliedAlpha: false, powerPreference: 'low-power' });
+    const gl = canvas.getContext('webgl', { alpha: true, antialias: false, premultipliedAlpha: true, powerPreference: 'low-power' });
     if (!gl || gl.isContextLost()) return undefined;
 
     let raf = 0, visible = true, tabVisible = true, dead = false;
@@ -96,7 +98,7 @@ export default function LightField({ className = '' }) {
     gl.bindBuffer(gl.ARRAY_BUFFER, quad);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
     gl.enable(gl.BLEND);
-    gl.blendFunc(gl.SRC_ALPHA, gl.ONE);
+    gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
 
     const resize = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 1.5);

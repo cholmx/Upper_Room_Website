@@ -29,7 +29,7 @@ export default function AnnouncementBar() {
         <p className="flex-grow text-center sm:text-left font-serif italic uppercase tracking-widest">
           {text}
           {SITE.announcementUrl && (
-            <> <a href={SITE.announcementUrl} className="underline underline-offset-4 font-bold text-[#FFC44F]">Learn more</a></>
+            <> <a href={SITE.announcementUrl} className="underline underline-offset-4 font-semibold text-[#FFC44F]">Learn more</a></>
           )}
         </p>
         <button type="button" onClick={close} aria-label="Dismiss announcement" className="inline-flex items-center justify-center w-10 h-10 -mr-2 rounded hover:bg-white/10">

@@ -19,7 +19,8 @@ body {
   background: var(--light);
   color: var(--black);
   font-family: 'Inter', sans-serif;
-  font-weight: 500;
+  font-weight: 400;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -27,19 +28,20 @@ body {
 h1, h2, h3, h4 {
   font-family: 'Google Sans Flex', sans-serif;
   text-transform: uppercase;
-  font-weight: 900;
-  letter-spacing: -0.02em;
-  line-height: 1.05;
+  font-weight: 560;
+  letter-spacing: 0.02em;
+  line-height: 1.15;
 }
+h3, h4 { font-weight: 600; letter-spacing: 0.025em; }
 
 .kicker {
   display: inline-block;
   font-family: 'Caladea', serif;
   font-style: italic;
   text-transform: uppercase;
-  font-weight: 700;
-  font-size: 0.85rem;
-  letter-spacing: 0.15em;
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
   margin-bottom: 1rem;
 }
 
@@ -56,16 +58,16 @@ h1, h2, h3, h4 {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 1rem 2.2rem;
+  padding: 0.85rem 1.9rem;
   font-family: 'Caladea', serif;
   font-style: italic;
   text-transform: uppercase;
-  font-size: 0.95rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
   text-decoration: none;
   cursor: pointer;
-  border: 2px solid transparent;
+  border: 1px solid transparent;
   border-radius: 9999px;
   transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
               box-shadow 0.4s ease, 
@@ -99,7 +101,7 @@ h1, h2, h3, h4 {
 .btn-outline {
   background: transparent;
   color: var(--black);
-  border: 2px solid rgba(0,0,0, 0.8);
+  border: 1px solid rgba(0,0,0, 0.7);
 }
 
 .btn-outline:hover {
@@ -333,7 +335,7 @@ p:empty { display: none; }
    ------------------------------------------------------------------ */
 :root {
   --neu-hi: rgba(255, 255, 255, 0.95);
-  --neu-lo: rgba(139, 128, 104, 0.3);
+  --neu-lo: rgba(139, 128, 104, 0.2);
   --neu-raised: 10px 10px 22px var(--neu-lo), -10px -10px 22px var(--neu-hi);
   --neu-raised-sm: 6px 6px 14px var(--neu-lo), -6px -6px 14px var(--neu-hi);
   --neu-inset: inset 5px 5px 11px var(--neu-lo), inset -5px -5px 11px var(--neu-hi);
@@ -362,8 +364,8 @@ details.u-acc.neu-acc[open] { background: linear-gradient(145deg, #efeee9, #f9f8
 
 /* Buttons: soft raised, pressed on click, with a ripple from the point of contact */
 .btn { position: relative; overflow: hidden; transition: transform 0.2s ease, box-shadow 0.25s ease, background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease; }
-.btn-solid { box-shadow: 5px 5px 12px rgba(170, 118, 10, 0.32), -4px -4px 10px rgba(255, 255, 255, 0.6); }
-.photo-section .btn-solid, .glow-gold .btn-solid, .bg-\[\#0B1613\] .btn-solid { box-shadow: 5px 5px 14px rgba(0, 0, 0, 0.5), -3px -3px 10px rgba(255, 255, 255, 0.07); }
+.btn-solid { box-shadow: 3px 3px 9px rgba(170, 118, 10, 0.2), -3px -3px 8px rgba(255, 255, 255, 0.5); }
+.photo-section .btn-solid, .glow-gold .btn-solid, .bg-\[\#0B1613\] .btn-solid { box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4), -2px -2px 8px rgba(255, 255, 255, 0.05); }
 .btn-solid:active { box-shadow: inset 4px 4px 9px rgba(170, 118, 10, 0.5), inset -3px -3px 8px rgba(255, 255, 255, 0.35); transform: translateY(1px); }
 .btn:active { transform: translateY(1px); }
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
