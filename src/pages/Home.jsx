@@ -5,7 +5,6 @@ import { useSite } from '../settings';
 import { usePhoto } from '../photos';
 import { imgUrl } from '../utils';
 import { Btn, Section, SectionHeader, Cards, Card } from '../components/ui';
-import FormBlock from '../components/FormBlock';
 import LightField from '../components/immersive/LightField';
 import SafeIcon from '../common/SafeIcon';
 import * as FiIcons from 'react-icons/fi';
@@ -84,17 +83,15 @@ export default function Home() {
       </Section>
 
       <Section tone="cream">
-        <div className="grid md:grid-cols-5 gap-12">
-          <div className="md:col-span-2">
-            <SectionHeader kicker="Contact us" title="Contact us" className="!mb-4" />
-            <p className={P}>Reach out anytime. Have a question or need prayer? Fill out the form, and a member of our church family will connect with you soon.</p>
-            <address className={`not-italic mt-5 space-y-1 ${P}`}>
-              <p>{SITE.address.street}<br />{SITE.address.city} {SITE.address.region} {SITE.address.postalCode}</p>
-              <p><a className="underline underline-offset-4 font-semibold text-[#2b433e]" href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
-              <p><a className="underline underline-offset-4 font-semibold text-[#2b433e]" href={SITE.phoneHref}>{SITE.phone}</a></p>
-            </address>
-          </div>
-          <div className="md:col-span-3"><FormBlock formKey="contact" /></div>
+        <div className="max-w-3xl">
+          <SectionHeader kicker="Contact us" title="Contact us" className="!mb-4" />
+          <p className={P}>Reach out anytime. Have a question or need prayer? Send us a message, and a member of our church family will connect with you soon.</p>
+          <address className={`not-italic mt-5 space-y-1 ${P}`}>
+            <p>{SITE.address.street}<br />{SITE.address.city} {SITE.address.region} {SITE.address.postalCode}</p>
+            <p><a className="underline underline-offset-4 font-semibold text-[#2b433e]" href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
+            <p><a className="underline underline-offset-4 font-semibold text-[#2b433e]" href={SITE.phoneHref}>{SITE.phone}</a></p>
+          </address>
+          <div className="mt-6"><Btn to="/contact" variant="primary">Send a message</Btn></div>
         </div>
       </Section>
     </>
