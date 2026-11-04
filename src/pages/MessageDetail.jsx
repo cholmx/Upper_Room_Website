@@ -9,7 +9,7 @@ import { plainText } from '../lib/markdown';
 import RichText from '../components/RichText';
 import LiteYouTube from '../components/LiteYouTube';
 import MessageCard from '../components/MessageCard';
-import { Btn, Section, EndCta } from '../components/ui';
+import { Btn, Section } from '../components/ui';
 import { Spinner, ErrorState, NotFound } from '../components/StateViews';
 
 export default function MessageDetail() {
@@ -99,7 +99,6 @@ export default function MessageDetail() {
           </Section>
         )}
       </article>
-      <EndCta title="Hear it in person" text="We meet every Sunday, and there is a seat for you." to="/plan-your-visit" label="Plan Your Visit" />
     </>
   );
 }

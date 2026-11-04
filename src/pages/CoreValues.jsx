@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import usePageMeta from '../hooks/usePageMeta';
 import { usePhoto } from '../photos';
-import { CORE_VALUES } from '../content/values';
-import { Section, PageHeader, EndCta } from '../components/ui';
+import { CORE_VALUES, CORE_VALUES_INTRO, INSIDE_OUT, GROWING } from '../content/values';
+import { Section, SectionHeader, PageHeader } from '../components/ui';
 
 // The icon comes from Site Photos in the admin, then from /images/core-values/core-value-N.png,
 // and shows the value's number if neither exists yet.
@@ -20,12 +20,17 @@ export default function CoreValues() {
   usePageMeta('values');
   return (
     <>
-      <PageHeader
-        kicker="Core values"
-        title="What we care about"
-        intro="When what matters to God starts to matter to us, people change. These six values shape how we run the church, how we treat each other, and how we spend our week."
-      />
-      <Section tone="cream">
+      <PageHeader kicker="Core Values" title="Core Values" intro={CORE_VALUES_INTRO} />
+
+      <Section tone="cream" narrow>
+        <SectionHeader title="Living from the inside out" />
+        <div className="space-y-5 text-lg leading-relaxed text-black/80">
+          {INSIDE_OUT.map(p => <p key={p}>{p}</p>)}
+          <p className="font-semibold">The following core values drive everything we do at Upper Room Fellowship.</p>
+        </div>
+      </Section>
+
+      <Section tone="white">
         <ol className="grid md:grid-cols-2 gap-6">
           {CORE_VALUES.map(v => (
             <li key={v.id}>
@@ -33,13 +38,13 @@ export default function CoreValues() {
                 <summary className="cursor-pointer list-none p-6 flex items-start gap-5 min-h-[56px]">
                   <ValueIcon n={v.n} />
                   <span className="flex-grow">
-                    <h2 className="block text-xl md:text-2xl font-bold">{v.title}</h2>
+                    <h2 className="block text-xl md:text-2xl font-semibold">{v.title}</h2>
                     <span className="block mt-1 text-black/80">{v.summary}</span>
                     <span className="block mt-3 text-sm font-semibold text-[#2b433e]"><span className="group-open:hidden">Read more</span><span className="hidden group-open:inline">Show less</span></span>
                   </span>
                 </summary>
-                <div className="px-6 pb-6 -mt-1 text-black/80 leading-relaxed">
-                  <p>{v.body}</p>
+                <div className="px-6 pb-6 -mt-1 text-black/80 leading-relaxed space-y-3">
+                  {v.body.map(p => <p key={p}>{p}</p>)}
                   <h3 className="text-lg mt-5 mb-2">In practice, this means</h3>
                   <ul className="list-disc pl-6 space-y-1">
                     {v.practice.map(p => <li key={p}>{p}</li>)}
@@ -49,11 +54,14 @@ export default function CoreValues() {
             </li>
           ))}
         </ol>
-        <p className="mt-10 max-w-3xl text-lg leading-relaxed text-black/80">
-          Living by these values is hard some days, and we get it wrong sometimes. We keep going because it is worth it. As Psalm 58:11 says in the New Living Translation, “There truly is a reward for those who live for God.”
-        </p>
       </Section>
-      <EndCta title="See these values in action" text="They are easier to feel than to read about. Come see for yourself." to="/plan-your-visit" label="Plan Your Visit" />
+
+      <Section tone="cream" narrow>
+        <SectionHeader title="Growing in our values" />
+        <div className="space-y-5 text-lg leading-relaxed text-black/80">
+          {GROWING.map(p => <p key={p}>{p}</p>)}
+        </div>
+      </Section>
     </>
   );
 }

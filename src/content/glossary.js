@@ -7,8 +7,6 @@ export const GLOSSARY = {
   growthTrack: {
     term: 'Growth Track',
     plain: 'a way to get to know the church and find your place in it',
-    todo: 'growth-track',
-    todoText: '[DESCRIBE THE GROWTH TRACK: length, format, what it covers]',
   },
   sozo: {
     term: 'Sozo',
@@ -17,8 +15,6 @@ export const GLOSSARY = {
   connectionCenter: {
     term: 'Connection Center',
     plain: 'where first-time guests can pick up a small gift and ask questions',
-    todo: 'connection-center',
-    todoText: '[CONFIRM LOCATION]',
   },
   spiritBaptism: {
     term: 'Spirit baptism',

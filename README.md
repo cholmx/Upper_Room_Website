@@ -25,16 +25,17 @@ npm run dev
 
 | Address | Page |
 | --- | --- |
-| `/` | Home: hero, service details strip, what to expect, latest message, next steps, contact form |
-| `/plan-your-visit` | Sunday walkthrough, map, kids, accessibility, Connect Card |
-| `/about`, `/beliefs`, `/core-values`, `/leadership` | Story, accordion of beliefs, six core values, leaders |
+| `/` | Home: hero, welcome, quick links, where and when, vision, contact form |
+| `/plan-your-visit` | New Here: what to expect on Sundays, your first visit, next steps |
+| `/about`, `/core-values`, `/leadership` | Our story and beliefs, six core values, pastors |
+| `/ministries` | Kids, Youth, Table Groups, Worship, and Outreach & Missions |
+| `/sozo` | Sozo ministry |
 | `/messages`, `/messages/series/:series`, `/messages/:id-title` | Sermon library, series, and message pages |
-| `/next-steps` | Eight next steps, with forms that open in place |
-| `/ministries` (includes outreach and missions), `/kids`, `/youth`, `/table-groups`, `/serve` (includes worship and creative teams), `/sozo`, `/careportal` | Ministries |
-| `/events`, `/events/:id` | List and month calendar, ministry filter, Add to Calendar |
-| `/faq` | Questions. Prayer requests and story sharing live on `/contact`; published stories show on `/about` |
-| `/give`, `/transforming-together` | Giving and the Growth Campaign |
-| `/contact`, `/accessibility`, `/privacy` | Contact, policies. The Connect Card is on `/plan-your-visit#connect-card` |
+| `/give` | Giving, with a testimony form |
+| `/contact`, `/connect` | Contact form and the Connect Card |
+| `/accessibility`, `/privacy` | Policies, linked from the footer |
+
+The pages and wording follow urfellowship.com. Old addresses such as `/new-here`, `/about-us`, `/beliefs`, `/kids`, `/youth`, `/table-groups`, `/events`, `/careportal`, and `/transforming-together` redirect to the page that now covers them.
 
 Old addresses (`/visit`, `/sermons`, `/team`, `/podcasts`) redirect to the new ones. The blog and custom pages
 (`/blog`, `/p/your-slug`) still work but are not in the menu.
@@ -150,9 +151,8 @@ Old addresses `/worship-team`, `/outreach`, `/prayer`, `/stories` and `/connect`
 
 ## Immersive and tactile touches
 
-- **Light field (Home and Growth Campaign banners):** plain WebGL, no library (`src/components/immersive/LightField.jsx`). It pauses off screen and in background tabs. It does not run for visitors who prefer reduced motion, are saving data, or are on a small device.
-- **Scroll stories (Plan Your Visit, About, Growth Campaign):** `ScrollStory` keeps a stage in place on wide screens while the text scrolls. On phones the beats stack. The text is always in reading order.
-- **3D model with AR (Growth Campaign):** `ModelStage` loads the vendored `public/vendor/model-viewer.min.js` (Apache 2.0) only after someone presses "Explore in 3D". "View in your space" appears on phones that support AR. The bundled `public/models/sanctuary-expansion.glb` is a simple concept massing made by `node scripts/make-model.mjs`. Paste a link to the architect's `.glb` in the admin (Site Photos, 3D model) to replace it.
+- **Light field (Home banner):** plain WebGL, no library (`src/components/immersive/LightField.jsx`). It pauses off screen and in background tabs. It does not run for visitors who prefer reduced motion, are saving data, or are on a small device.
+- **Scroll stories (New Here and About):** `ScrollStory` keeps a stage in place on wide screens while the text scrolls. On phones the beats stack. The text is always in reading order.
 - **Neumorphic surfaces:** soft raised cards, inset form fields and facts, pressed buttons (see the "Tactile surfaces" block in `src/index.css`). Text and form borders keep full contrast.
 - **Micro interactions:** button ripples (one global listener in `src/lib/ripple.js`), card tilt, staggered entrances, animated form success. All respect `prefers-reduced-motion`.
 

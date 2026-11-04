@@ -71,10 +71,13 @@ export function Section({ tone = 'cream', id, className = '', narrow = false, ch
   );
 }
 
+// A label that only repeats the heading below it adds nothing, so it is left out.
+const same = (a, b) => String(a || '').toLowerCase().replace(/&|\band\b/g, '').replace(/[^a-z]/g, '') === String(b || '').toLowerCase().replace(/&|\band\b/g, '').replace(/[^a-z]/g, '');
+
 export function SectionHeader({ kicker, title, intro, center = false, as: Tag = 'h2', tone = 'light', className = '' }) {
   return (
     <div className={`${center ? 'text-center mx-auto' : ''} max-w-3xl mb-10 md:mb-12 ${className}`}>
-      {kicker && <span className={`kicker ${tone === 'dark' ? 'text-[#eaa235]' : 'text-[#2b433e]'}`}>{kicker}</span>}
+      {kicker && !same(kicker, title) && <span className={`kicker ${tone === 'dark' ? 'text-[#eaa235]' : 'text-[#2b433e]'}`}>{kicker}</span>}
       <Tag className="text-3xl md:text-5xl">{title}</Tag>
       {intro && <p className={`mt-4 text-lg leading-relaxed ${tone === 'dark' ? 'text-white/85' : 'text-black/80'}`}>{intro}</p>}
     </div>
@@ -152,7 +155,7 @@ export function PageHeader({ kicker, title, intro, children, page, ambient = fal
         transition={{ duration: 0.8, ease: 'easeOut' }}
         className="max-w-[800px] mx-auto relative z-10"
       >
-        {kicker && <span className="kicker text-[#eaa235]">{kicker}</span>}
+        {kicker && !same(kicker, title) && <span className="kicker text-[#eaa235]">{kicker}</span>}
         <h1 className="text-4xl md:text-7xl mb-6">{title}</h1>
         {intro && <p className="font-serif italic text-xl md:text-2xl text-white/90 max-w-[50ch] mx-auto leading-relaxed">{intro}</p>}
         {children && <div className="mt-8 flex flex-wrap justify-center gap-4">{children}</div>}
@@ -180,9 +183,15 @@ export function Card({ title, children, to, linkLabel, icon, className = '', as:
       <div className="text-black/80 leading-relaxed flex-grow space-y-3">{children}</div>
       {to && (
         <div className="mt-6">
-          <Link to={to} className="inline-flex items-center font-bold uppercase tracking-widest text-[#2b433e] hover:text-black transition-colors">
-            {linkLabel || 'Learn more'} <span aria-hidden="true" className="ml-2">&rarr;</span>
-          </Link>
+          {isExternal(to) ? (
+            <a href={to} target="_blank" rel="noopener noreferrer" className="inline-flex items-center font-bold uppercase tracking-widest text-[#2b433e] hover:text-black transition-colors">
+              {linkLabel || 'Learn more'} <span aria-hidden="true" className="ml-2">&rarr;</span><span className="sr-only"> (opens in a new tab)</span>
+            </a>
+          ) : (
+            <Link to={to} className="inline-flex items-center font-bold uppercase tracking-widest text-[#2b433e] hover:text-black transition-colors">
+              {linkLabel || 'Learn more'} <span aria-hidden="true" className="ml-2">&rarr;</span>
+            </Link>
+          )}
         </div>
       )}
     </article>

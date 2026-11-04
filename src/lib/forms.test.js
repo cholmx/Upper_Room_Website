@@ -19,7 +19,7 @@ describe('form definitions', () => {
   });
 
   it('use only form types the database accepts', () => {
-    const allowed = ['connect', 'contact', 'prayer', 'sozo', 'tablegroup', 'serve', 'baptism', 'growthtrack', 'worship', 'story', 'generosity'];
+    const allowed = ['connect', 'contact', 'sozo', 'generosity'];
     expect(FORM_KEYS.slice().sort()).toEqual(allowed.slice().sort());
   });
 
@@ -44,7 +44,7 @@ describe('validateForm', () => {
     expect(validateForm('contact', { name: 'A', email: 'a@b.co', message: 'hi' })).toEqual({});
   });
   it('requires at least nothing for optional fields', () => {
-    expect(validateForm('prayer', { message: 'Please pray.' })).toEqual({});
+    expect(validateForm('generosity', { email: 'a@b.co', message: 'Giving is a joy.' })).toEqual({});
   });
   it('ignores a hidden follow-up field', () => {
     expect(isVisible({ showIf: { has_children: 'Yes' } }, { has_children: 'No' })).toBe(false);
@@ -57,10 +57,10 @@ describe('buildSubmission', () => {
     const out = buildSubmission('connect', { name: ' Pat ', email: 'pat@x.org', phone: '', visit_date: '2026-11-01', has_children: 'No', children_ages: 'ignored', website: 'spam' });
     expect(out).toEqual({ form_type: 'connect', name: 'Pat', email: 'pat@x.org', phone: '', data: { visit_date: '2026-11-01', has_children: 'No' } });
   });
-  it('stores checkboxes as Yes and lists as arrays', () => {
-    const out = buildSubmission('serve', { name: 'A', email: 'a@b.co', teams: ['Kids', 'Media'] });
-    expect(out.data.teams).toEqual(['Kids', 'Media']);
-    expect(buildSubmission('prayer', { message: 'x', private: true }).data.private).toBe('Yes');
+  it('drops fields the form does not define', () => {
+    const out = buildSubmission('connect', { name: 'A', email: 'a@b.co', teams: ['Kids', 'Media'], has_children: 'Yes' });
+    expect(out.data.teams).toBeUndefined();
+    expect(out.data.has_children).toBe('Yes');
   });
   it('trims names to the length the database allows', () => {
     expect(buildSubmission('contact', { name: 'a'.repeat(500) }).name.length).toBe(200);

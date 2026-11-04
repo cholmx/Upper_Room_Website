@@ -1,14 +1,14 @@
 import React from 'react';
 import usePageMeta from '../hooks/usePageMeta';
 import { useSite } from '../settings';
-import { Btn, Section, SectionHeader, PageHeader, QuickFacts, Photo, PhotoGrid, Gloss, Todo, Accordion } from '../components/ui';
+import { Btn, Section, SectionHeader, PageHeader, Cards, Card, Steps } from '../components/ui';
 import FormBlock from '../components/FormBlock';
 import ScrollStory, { Stage } from '../components/immersive/ScrollStory';
 import SafeIcon from '../common/SafeIcon';
 import * as FiIcons from 'react-icons/fi';
-import { FAQ_PREVIEW } from '../content/faq';
 
-const { FiMapPin, FiMusic, FiCoffee, FiBookOpen, FiHeart } = FiIcons;
+const { FiHeart, FiCoffee, FiBookOpen, FiSmile } = FiIcons;
+const P = 'text-lg leading-relaxed text-black/80';
 
 export default function PlanYourVisit() {
   usePageMeta('plan');
@@ -17,97 +17,72 @@ export default function PlanYourVisit() {
   return (
     <>
       <PageHeader
-        kicker="Plan your visit"
-        title="Planning your first visit?"
-        intro="We are glad you are here. Walking into a new church can feel intimidating, so this page covers a Sunday from the front door to the coffee line."
+        kicker="New Here?"
+        title="Welcome to Upper Room Fellowship!"
+        intro="We are so glad you found us! Whether you are just curious about church or looking for a spiritual community to call home, you are welcome at Upper Room Fellowship. Visiting a church for the first time can feel intimidating, so we have put together this guide to help you know what to expect."
       >
-        <Btn href={SITE.googleMapsUrl} variant="primary">Get Directions</Btn>
-        <Btn to="#connect-card" variant="light">Fill Out the Connect Card</Btn>
+        <Btn to="/connect" variant="primary">Fill out the Connect Card</Btn>
       </PageHeader>
 
-      <Section tone="white">
-        <QuickFacts
-          items={[
-            { label: 'When', value: SITE.serviceTime },
-            { label: 'Where', value: SITE.addressLine },
-            { label: 'How long', value: `The service usually ends ${SITE.serviceEnds}` },
-            { label: 'What to wear', value: 'Whatever you are comfortable in' },
+      <Section tone="cream">
+        <SectionHeader kicker="Sundays" title="What to expect on Sundays" />
+        <ScrollStory
+          label="What to expect on Sundays"
+          beats={[
+            { title: 'Family worship together', visual: <Stage big="Worship" small="All ages, one room" icon={<SafeIcon icon={FiHeart} size={34} />} />, body: <p>Our Sunday gatherings begin with everyone worshiping together, adults and children of all ages. We believe there is something powerful about families experiencing God’s presence as one community. You will hear contemporary worship music with lyrics projected on screens so everyone can follow along easily. Scripture readings are also displayed, so do not worry if you did not bring a Bible. Feel free to participate however you are comfortable, whether standing, sitting, or raising your hands.</p> },
+            { title: 'Coffee and connection break', visual: <Stage big="Coffee" small="Say hello" icon={<SafeIcon icon={FiCoffee} size={34} />} />, body: <p>After worship, we take a short break to grab coffee and greet each other. This casual time helps everyone, including first-time guests, feel welcome and connected. It is a perfect opportunity to meet someone new or catch up with friends. We never single out visitors or ask you to stand up and introduce yourself.</p> },
+            { title: 'Message time and kids’ programs', visual: <Stage big="Message" small="Practical and Bible-based" icon={<SafeIcon icon={FiBookOpen} size={34} />} />, body: <><p>Following our break, adults and youth remain in the sanctuary for the message, while children (birth through 5th grade) are dismissed to age-appropriate programs. Our nursery is open throughout the entire service for parents to use for infants and toddlers if needed.</p><p>Our messages are practical, Bible-based, and designed to help you live out your faith in everyday life. Each week, we explore how to know God more deeply, build healthy relationships, and discover our purpose.</p></> },
+            { title: 'Casual atmosphere and accessibility', visual: <Stage big="Come" small="As you are" icon={<SafeIcon icon={FiSmile} size={34} />} />, body: <><p>Do not worry about what to wear. Come as you are! You will see people in everything from jeans to business casual. We are more interested in meeting you than in what you are wearing.</p><p>Our building is fully wheelchair accessible with designated seating areas. For those with hearing needs, we offer the Listen Everywhere app that streams our audio directly to your smartphone or tablet. Just bring your own headphones. The free app is available in the Apple App Store and Google Play and works with both iOS and Android devices. If you have other specific needs, please let us know so we can better serve you.</p><div className="flex flex-wrap gap-3 pt-1"><Btn href={SITE.listenApps.apple} variant="ghost">Apple App Store</Btn><Btn href={SITE.listenApps.google} variant="ghost">Google Play</Btn></div></> },
           ]}
         />
       </Section>
 
-      <Section tone="cream">
-        <SectionHeader kicker="Sunday" title="Your Sunday, step by step" />
-        <Todo id="visit-times">[CONFIRM TIMES FOR EACH STEP]</Todo>
-        <div className="mt-8">
-          <ScrollStory
-            label="Your Sunday, step by step"
-            beats={[
-              { title: 'When you arrive', visual: <Stage big="Arrive" small="Greeters at the door" icon={<SafeIcon icon={FiMapPin} size={34} />} />, body: <p>Friendly greeters will meet you at the doors, say hello, and help you find your way. If you have kids, they will point you to our secure check-in area.</p> },
-              { title: 'We worship together', visual: <Stage big="Worship" small="Lyrics on the screen" icon={<SafeIcon icon={FiMusic} size={34} />} />, body: <p>Everyone starts in the same room, adults and children together. We sing contemporary songs with the lyrics on screen, and Scripture is on screen too, so you do not need a Bible. Stand, sit, or raise your hands.</p> },
-              { title: 'Coffee and connection', visual: <Stage big="Coffee" small="Say hello, no spotlight" icon={<SafeIcon icon={FiCoffee} size={34} />} />, body: <p>After worship we take a short break for coffee and conversation. We never single out visitors or ask anyone to stand up and introduce themselves.</p> },
-              { title: 'The message', visual: <Stage big="Message" small="Practical and Bible-based" icon={<SafeIcon icon={FiBookOpen} size={34} />} />, body: <p>Adults and teens stay for a practical, Bible-based message. Kids from birth through 5th grade go to their own programs right before it starts.</p> },
-              { title: 'After the service', visual: <Stage big="Stay" small="Ask us anything" icon={<SafeIcon icon={FiHeart} size={34} />} />, body: <p>The service usually ends {SITE.serviceEnds}. Our team is happy to talk, answer questions, or pray with you. Stop by the <Gloss k="connectionCenter" /> to meet some of us.</p> },
-            ]}
-          />
-        </div>
-        <PhotoGrid slots={['plan-greeter', 'plan-coffee']} className="mt-12" />
-      </Section>
-
-      <Section tone="white">
-        <SectionHeader kicker="Getting here" title="Parking and getting here" />
-        <div className="grid md:grid-cols-2 gap-8 items-start">
-          <div className="space-y-5 text-lg leading-relaxed text-black/80">
-            <p><Todo id="parking">[PARKING DETAILS: where to park, which door to use, where greeters stand]</Todo></p>
-            <p>{SITE.addressLine}</p>
-            <Btn href={SITE.googleMapsUrl} variant="primary">Get Directions</Btn>
-            <Photo slot="plan-entrance" />
+      <Section tone="white" id="connect-card">
+        <div className="grid md:grid-cols-2 gap-10 items-start">
+          <div className={`space-y-4 ${P}`}>
+            <SectionHeader title="Let us know you are coming" className="!mb-4" />
+            <p>Let us know you are coming by filling out our Connect Card, and our welcome team will be ready for you!</p>
+            <p>We meet every Sunday at 10:30am at {SITE.addressLine}.</p>
+            <p>After your first visit, we would love to help you find a small group where you can build relationships and grow in faith.</p>
           </div>
-          <div className="rounded-2xl overflow-hidden aspect-[4/3] neu">
-            <iframe title={`Map of ${SITE.addressLine}`} src={SITE.mapEmbedUrl} loading="lazy" referrerPolicy="no-referrer-when-downgrade" className="w-full h-full border-0"></iframe>
+          <div className={`space-y-4 ${P}`}>
+            <h3 className="text-2xl">Fill out the Connect Card</h3>
+            <p>Our Connect Card is a simple online form. You will just need to provide your name, email, and the date you plan to visit. This helps our welcome team prepare for your arrival. All information is kept confidential and is only used to help us better serve you during your visit.</p>
+            <Btn to="/connect" variant="primary">Go to the Connect Card</Btn>
           </div>
         </div>
       </Section>
 
       <Section tone="cream">
-        <div className="grid md:grid-cols-2 gap-10">
-          <div>
-            <SectionHeader kicker="Bringing kids" title="Your kids" className="!mb-5" />
-            <div className="space-y-4 text-lg leading-relaxed text-black/80">
-              <p>Upper Room Kids welcomes children from birth through 5th grade. The nursery is open for the whole service.</p>
-              <p>Every volunteer is background-checked, and check-in makes sure only authorized adults can pick up your child.</p>
-            </div>
-            <div className="mt-6"><Btn to="/kids" variant="ghost">More about Upper Room Kids</Btn></div>
-          </div>
-          <div>
-            <SectionHeader kicker="Accessibility" title="Everyone can take part" className="!mb-5" />
-            <div className="space-y-4 text-lg leading-relaxed text-black/80">
-              <p>Our building is fully wheelchair accessible. If you have trouble hearing, the free Listen Everywhere app streams the service audio to your phone. Tell us ahead of time about any other needs.</p>
-            </div>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Btn href={SITE.listenApps.apple} variant="ghost">Download on the App Store</Btn>
-              <Btn href={SITE.listenApps.google} variant="ghost">Get it on Google Play</Btn>
-            </div>
-          </div>
-        </div>
+        <SectionHeader kicker="Your first visit" title="Your first visit" />
+        <Cards>
+          <Card title="When you arrive" as="h3"><p>Our friendly greeters will be at the doors to say hello and help you find your way around. If you have children, they will direct you to our secure check-in area.</p></Card>
+          <Card title="For your kids" as="h3"><p>We value your children’s safety. All our volunteers undergo background checks and training. Our check-in system ensures only authorized adults can pick up your child. Children stay with you during the worship time and are dismissed to their programs just before the message begins.</p></Card>
+          <Card title="After the service" as="h3"><p>The service usually ends around 11:45am. Our team members are available to talk, answer questions, or pray with you. We also have a Connection Center where first-time guests can receive a special gift and learn more about our church.</p></Card>
+        </Cards>
       </Section>
 
       <Section tone="white">
-        <SectionHeader kicker="Quick answers" title="Quick answers" />
-        <Accordion items={FAQ_PREVIEW} />
-        <div className="mt-8"><Btn to="/faq" variant="ghost">See all questions</Btn></div>
+        <SectionHeader kicker="Next steps" title="Next steps at Upper Room Fellowship" intro="Ready to check us out? Here is how to get started." />
+        <div className="max-w-3xl">
+          <Steps items={[
+            { title: 'Plan your visit', body: <p>Let us know you are coming by filling out our Connect Card online, and our welcome team will be ready to greet you.</p> },
+            { title: 'Join us this Sunday', body: <p>We meet at 10:30am at {SITE.addressLine}.</p> },
+            { title: 'Connect in community', body: <p>After your first visit, we would love to help you find a small group where you can build relationships and grow in faith.</p> },
+          ]} />
+        </div>
       </Section>
 
-      <Section tone="cream" id="connect-card">
+      <Section tone="cream">
         <div className="grid md:grid-cols-5 gap-10 items-start">
           <div className="md:col-span-2">
-            <SectionHeader kicker="Let us know" title="Let us know you are coming" className="!mb-4" />
-            <p className="text-lg leading-relaxed text-black/80">Fill out the Connect Card and our welcome team will be watching for you. It takes about a minute. We only use your information to help with your visit.</p>
+            <SectionHeader title="Any questions?" className="!mb-4" />
+            <p className={P}>Have questions before you visit? Fill out the form, email us at <a className="underline underline-offset-4 font-semibold text-[#2b433e]" href={`mailto:${SITE.email}`}>{SITE.email}</a>, or call <a className="underline underline-offset-4 font-semibold text-[#2b433e]" href={SITE.phoneHref}>{SITE.phone}</a>.</p>
+            <p className={`mt-4 ${P}`}>We are here to help make your first experience a great one!</p>
           </div>
-          <div className="md:col-span-3"><FormBlock formKey="connect" /></div>
+          <div className="md:col-span-3"><FormBlock formKey="contact" /></div>
         </div>
       </Section>
-
     </>
   );
 }

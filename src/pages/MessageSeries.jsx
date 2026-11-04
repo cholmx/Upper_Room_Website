@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import usePageMeta from '../hooks/usePageMeta';
 import useFetch from '../hooks/useFetch';
 import { dateRangeLabel, groupSeries, isLive, slugify } from '../utils';
-import { Section, PageHeader, EndCta } from '../components/ui';
+import { Section, PageHeader } from '../components/ui';
 import MessageCard from '../components/MessageCard';
 import { Spinner, ErrorState, NotFound } from '../components/StateViews';
 
@@ -29,7 +29,6 @@ export default function MessageSeries() {
           {items.map(m => <li key={m.id}><MessageCard message={m} as="h2" /></li>)}
         </ul>
       </Section>
-      <EndCta title="Join us this Sunday" text="We would love to meet you in person." to="/plan-your-visit" label="Plan Your Visit" />
     </>
   );
 }

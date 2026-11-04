@@ -5,7 +5,7 @@ import useFetch from '../hooks/useFetch';
 import { useSite } from '../settings';
 import { dateRangeLabel, formatDate, groupSeries, isLive, messagePath, scriptureBook, seriesPath, ytId } from '../utils';
 import { plainText } from '../lib/markdown';
-import { Btn, Section, SectionHeader, PageHeader, EndCta } from '../components/ui';
+import { Btn, Section, SectionHeader, PageHeader } from '../components/ui';
 import LiteYouTube from '../components/LiteYouTube';
 import MessageCard from '../components/MessageCard';
 import { Spinner, ErrorState } from '../components/StateViews';
@@ -58,7 +58,7 @@ export default function Messages() {
       <PageHeader
         kicker="Messages"
         title="Messages"
-        intro="Missed a Sunday? Want to hear what we teach before you visit? You can watch, listen, or read right here. Our messages are practical, rooted in the Bible, and aimed at real life."
+        intro="Whether you missed a Sunday, want to revisit a message that impacted you, or are just curious about what we teach, our sermon library provides access to current and past teachings from Upper Room Fellowship."
       />
 
       {error ? (
@@ -133,15 +133,13 @@ export default function Messages() {
       )}
 
       <Section tone="sand">
-        <SectionHeader kicker="Podcast" title="Take us with you" intro="Subscribe on Apple Podcasts or Spotify and new messages show up on their own. They work well for commutes, workouts, and folding laundry." />
+        <SectionHeader kicker="Podcast" title="Subscribe to our podcast" intro="Never miss a message! Subscribe to our podcast on Apple Podcasts, Spotify, or your favorite podcast platform to receive our latest teachings automatically. Perfect for commutes, workouts, or whenever you want to engage with biblical teaching on the go." />
         <div className="flex flex-wrap gap-3">
           <Btn href={SITE.podcasts.apple} variant="dark">Apple Podcasts</Btn>
           <Btn href={SITE.podcasts.spotify} variant="dark">Spotify</Btn>
-          <Btn href={SITE.youtubeChannel} variant="ghost">YouTube channel</Btn>
         </div>
+        <p className="mt-8 max-w-3xl text-lg leading-relaxed text-black/80">Our teachings are designed to help you align your heart with God’s heart, tapping into the freedom and fullness He has always intended for you. Each message combines solid biblical teaching with practical application, helping you live out our core values in your everyday life.</p>
       </Section>
-
-      <EndCta title="Hear it in person" text="Messages are better with a coffee and a friendly face. Come this Sunday." to="/plan-your-visit" label="Plan Your Visit" />
     </>
   );
 }

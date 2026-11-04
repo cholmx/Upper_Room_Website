@@ -187,10 +187,7 @@ const ContentStudio = () => {
     ],
     'Content': [
       { key: 'sermons', label: 'Messages', icon: FiMic },
-      { key: 'events', label: 'Events', icon: FiCalendar },
       { key: 'staff', label: 'Staff & Leaders', icon: FiUsers },
-      { key: 'groups', label: 'Table Groups', icon: FiHeart },
-      { key: 'stories', label: 'Stories', icon: FiMessageSquare },
       { key: 'posts', label: 'Blog Posts', icon: FiFileText },
     ],
     ...(isAdmin ? {

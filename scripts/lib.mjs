@@ -30,8 +30,8 @@ const live = (row) => {
 
 // Every public URL, with a last-modified date when the row has one.
 export async function collectRoutes() {
-  const [sermons, events, pages, posts] = await Promise.all([
-    readTable('sermons'), readTable('events_church'), readTable('custom_pages_church'), readTable('posts'),
+  const [sermons, pages, posts] = await Promise.all([
+    readTable('sermons'), readTable('custom_pages_church'), readTable('posts'),
   ]);
   const lm = (r) => String(r.updated_at || r.created_at || r.date || '').slice(0, 10) || undefined;
   const liveSermons = sermons.filter(live);
@@ -40,7 +40,6 @@ export async function collectRoutes() {
     ...STATIC_ROUTES.map(path => ({ path })),
     ...liveSermons.map(r => ({ path: messagePath(r), lastmod: lm(r) })),
     ...seriesNames.map(name => ({ path: seriesPath(name) })),
-    ...events.filter(live).map(r => ({ path: `/events/${r.id}`, lastmod: lm(r) })),
     ...posts.filter(live).map(r => ({ path: `/blog/${r.id}`, lastmod: lm(r) })),
     ...pages.filter(r => r.slug_key).map(r => ({ path: `/p/${encodeURIComponent(r.slug_key)}`, lastmod: lm(r) })),
   ];

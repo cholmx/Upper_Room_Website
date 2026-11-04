@@ -9,10 +9,6 @@ import * as FiIcons from 'react-icons/fi';
 const { FiArrowRight } = FiIcons;
 
 const MORE = [
-  { label: 'What We Believe', to: '/beliefs' },
-  { label: 'Core Values', to: '/core-values' },
-  { label: 'Leadership', to: '/leadership' },
-  { label: 'Table Groups', to: '/table-groups' },
   { label: 'Give', href: true },
   { label: 'Accessibility', to: '/accessibility' },
   { label: 'Privacy', to: '/privacy' },
@@ -55,7 +51,7 @@ export default function Footer() {
           <h2 className="font-serif italic uppercase text-[1.3rem] tracking-widest text-[#eaa235] mb-4" style={{ fontWeight: 700 }}>
             {SITE.name}
           </h2>
-          <p className="opacity-80 text-[0.95rem] leading-relaxed mb-6">Transforming lives that transform communities since {SITE.founded}.</p>
+          <p className="opacity-80 text-[0.95rem] leading-relaxed mb-6">Transforming lives that transform communities.</p>
           <ul className="flex flex-wrap gap-x-5" aria-label="Social media">
             {SITE.social.map(s => (
               <li key={s.label}>

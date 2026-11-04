@@ -26,10 +26,7 @@ export const SITE = {
   googleMapsUrl: `https://maps.google.com/?q=${mapQuery}`,
   appleMapsUrl: `https://maps.apple.com/?q=${mapQuery}`,
   giveUrl: 'https://onrealm.org/urfellowship/-/form/give/now',
-  growthGiveUrl: 'https://onrealm.org/urfellowship/-/form/give/growthcampaign',
-  pledgeUrl: 'https://onrealm.org/urfellowship/-/form/pledge/goalcard',
   textToGive: { keyword: 'urf', number: '73256', example: 'urf $50' },
-  careportalUrl: 'https://system.careportal.org/church/103440?q%5Bstatus%5D%5B0%5D=Open',
   podcasts: {
     apple: 'https://podcasts.apple.com/us/podcast/the-upper-room-fellowship/id1193235232',
     spotify: 'https://open.spotify.com/show/4vFbmzsFFEt4DSlUMcVKeO?si=51919efc36ae4862',

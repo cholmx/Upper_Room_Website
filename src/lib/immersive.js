@@ -18,27 +18,6 @@ export function readEnvironment() {
   };
 }
 
-export const MODEL_SCRIPT = '/vendor/model-viewer.min.js';
-export const DEFAULT_MODEL = '/models/sanctuary-expansion.glb';
-
-let modelScript;
-// Loads the model viewer once, the first time someone asks for the 3D view.
-export function loadModelViewer() {
-  if (typeof window === 'undefined') return Promise.reject(new Error('no window'));
-  if (window.customElements && window.customElements.get('model-viewer')) return Promise.resolve();
-  if (!modelScript) {
-    modelScript = new Promise((resolve, reject) => {
-      const s = document.createElement('script');
-      s.type = 'module';
-      s.src = MODEL_SCRIPT;
-      s.onload = () => resolve();
-      s.onerror = () => { modelScript = undefined; reject(new Error('model viewer failed to load')); };
-      document.head.appendChild(s);
-    });
-  }
-  return modelScript;
-}
-
 export function webglAvailable() {
   try {
     const c = document.createElement('canvas');

@@ -1,7 +1,7 @@
 import React from 'react';
 import usePageMeta from '../hooks/usePageMeta';
 import { useSite } from '../settings';
-import { Section, PageHeader, EndCta, Todo, AdminOnly } from '../components/ui';
+import { Section, PageHeader, Todo, AdminOnly } from '../components/ui';
 
 export default function Privacy() {
   usePageMeta('privacy');
@@ -14,7 +14,7 @@ export default function Privacy() {
         <p className="mb-6"><Todo id="legal-review">[LEGAL REVIEW: have someone qualified review this page before launch]</Todo></p>
         <div className="space-y-4 text-lg leading-relaxed text-black/80">
           <h2 className={h}>Forms</h2>
-          <p>When you send the Connect Card, a prayer request, or any other form, we receive the information you type. We use it only to reply to you, to prepare for your visit, or to follow up on what you asked about. Forms are stored in our staff dashboard and sent to {SITE.email}. Only our staff and volunteers who need the information can see it. Prayer requests marked private stay with the prayer team.</p>
+          <p>When you send the Connect Card, a contact message, or any other form, we receive the information you type. We use it only to reply to you, to prepare for your visit, or to follow up on what you asked about. Forms are stored in our staff dashboard and sent to {SITE.email}. Only our staff and volunteers who need the information can see it.</p>
           <h2 className={h}>Giving</h2>
           <p>Online giving is handled by Realm, a church management service. When you give, you leave this site and use Realm’s secure form. We do not see or store your card or bank details.</p>
           <h2 className={h}>Videos, maps, and other services</h2>
@@ -28,7 +28,6 @@ export default function Privacy() {
           <AdminOnly><p className="text-base">Last updated: <Todo id="legal-review">[DATE]</Todo></p></AdminOnly>
         </div>
       </Section>
-      <EndCta title="Questions about your information?" text="Ask us. We will answer plainly." to="/contact" label="Contact us" />
     </>
   );
 }

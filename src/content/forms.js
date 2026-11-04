@@ -31,22 +31,7 @@ export const FORMS = {
       { name: 'name', label: 'Name', type: 'text', required: true, autoComplete: 'name' },
       { name: 'email', label: 'Email', type: 'email', required: true, autoComplete: 'email' },
       { name: 'phone', label: 'Phone (optional)', type: 'tel', autoComplete: 'tel' },
-      {
-        name: 'topic', label: 'What is this about?', type: 'select',
-        options: ['Planning a visit', 'Prayer', 'Kids or youth', 'Table Groups', 'Serving', 'Giving', 'Something else'],
-      },
       { name: 'message', label: 'Message', type: 'textarea', required: true },
-    ],
-  },
-  prayer: {
-    label: 'Prayer request',
-    button: 'Send my request',
-    confirmation: 'We received your request, and we are praying.',
-    fields: [
-      { name: 'name', label: 'Your name (optional)', type: 'text', autoComplete: 'name' },
-      { name: 'contact', label: 'Email or phone (optional)', type: 'text' },
-      { name: 'message', label: 'How can we pray for you?', type: 'textarea', required: true },
-      { name: 'private', label: 'Keep my request private to the prayer team', type: 'checkbox' },
     ],
   },
   sozo: {
@@ -59,79 +44,6 @@ export const FORMS = {
       { name: 'phone', label: 'Phone', type: 'tel', required: true, autoComplete: 'tel' },
       { name: 'best_times', label: 'Best times to contact you', type: 'text', required: true },
       { name: 'message', label: 'Why you are interested (optional)', type: 'textarea' },
-    ],
-  },
-  tablegroup: {
-    label: 'Table Group request',
-    button: 'Find me a group',
-    confirmation: 'Thanks. Someone will reach out within 48 hours.',
-    fields: [
-      { name: 'name', label: 'Name', type: 'text', required: true, autoComplete: 'name' },
-      { name: 'email', label: 'Email', type: 'email', required: true, autoComplete: 'email' },
-      { name: 'phone', label: 'Phone', type: 'tel', autoComplete: 'tel' },
-      { name: 'group', label: 'Group you are interested in (optional)', type: 'text' },
-      { name: 'preferred_day', label: 'Preferred day', type: 'select', options: ['Any day', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'] },
-      { name: 'life_stage', label: 'Life stage', type: 'select', options: ['Student', 'Young adult', 'Married, no kids at home', 'Family with kids', 'Empty nester', 'Senior', 'Other'] },
-    ],
-  },
-  serve: {
-    label: 'Serve interest',
-    button: 'Tell us what interests you',
-    confirmation: 'Thank you. Someone from the team will be in touch soon.',
-    fields: [
-      { name: 'name', label: 'Name', type: 'text', required: true, autoComplete: 'name' },
-      { name: 'email', label: 'Email', type: 'email', required: true, autoComplete: 'email' },
-      { name: 'phone', label: 'Phone', type: 'tel', autoComplete: 'tel' },
-      {
-        name: 'teams', label: 'Teams you are interested in', type: 'checkboxes',
-        options: ['Welcome Team', 'Upper Room Kids', 'Upper Room Youth', 'Worship', 'Production', 'Creative', 'Media', 'Table Group host or leader', 'Sozo ministry team', 'CarePortal response team', 'Outreach and Missions'],
-      },
-      { name: 'best_time', label: 'Best time to reach you', type: 'text' },
-    ],
-  },
-  baptism: {
-    label: 'Baptism interest',
-    button: 'Tell us you are interested',
-    confirmation: 'Got it. A pastor will be in touch within 48 hours.',
-    fields: [
-      { name: 'name', label: 'Name', type: 'text', required: true, autoComplete: 'name' },
-      { name: 'email', label: 'Email', type: 'email', required: true, autoComplete: 'email' },
-      { name: 'phone', label: 'Phone (optional)', type: 'tel', autoComplete: 'tel' },
-    ],
-  },
-  growthtrack: {
-    label: 'Growth Track sign-up',
-    button: 'Sign me up',
-    confirmation: 'Got it. Someone will be in touch within 48 hours with the details.',
-    fields: [
-      { name: 'name', label: 'Name', type: 'text', required: true, autoComplete: 'name' },
-      { name: 'email', label: 'Email', type: 'email', required: true, autoComplete: 'email' },
-      { name: 'phone', label: 'Phone (optional)', type: 'tel', autoComplete: 'tel' },
-    ],
-  },
-  worship: {
-    label: 'Worship and creative interest',
-    button: 'I am interested',
-    confirmation: 'Thank you. Someone from the team will be in touch soon.',
-    fields: [
-      { name: 'name', label: 'Name', type: 'text', required: true, autoComplete: 'name' },
-      { name: 'email', label: 'Email', type: 'email', required: true, autoComplete: 'email' },
-      { name: 'phone', label: 'Phone (optional)', type: 'tel', autoComplete: 'tel' },
-      {
-        name: 'teams', label: 'Which team?', type: 'checkboxes',
-        options: ['Worship Team', 'Production Team', 'Creative Team', 'Media Team'],
-      },
-    ],
-  },
-  story: {
-    label: 'Story',
-    button: 'Share my story',
-    confirmation: 'Thank you for sharing. We will be in touch before anything is posted.',
-    fields: [
-      { name: 'name', label: 'Name', type: 'text', required: true, autoComplete: 'name' },
-      { name: 'email', label: 'Email', type: 'email', required: true, autoComplete: 'email' },
-      { name: 'message', label: 'Your story', type: 'textarea', required: true },
-      { name: 'permission', label: 'You may share my story on the website', type: 'checkbox' },
     ],
   },
   generosity: {

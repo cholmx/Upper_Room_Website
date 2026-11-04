@@ -2,8 +2,8 @@ import React, { useMemo } from 'react';
 import usePageMeta from '../hooks/usePageMeta';
 import useFetch from '../hooks/useFetch';
 import { isLive } from '../utils';
-import { DEFAULT_LEADERS, HOW_WE_LEAD, LEADERS_AIM } from '../content/leaders';
-import { Section, SectionHeader, PageHeader, PhotoBox, Todo, AdminOnly, EndCta } from '../components/ui';
+import { DEFAULT_LEADERS, HOW_WE_LEAD, LEADERS_AIM, LEADERSHIP_INTRO, LEADERSHIP_CLOSING } from '../content/leaders';
+import { Section, SectionHeader, PageHeader, PhotoBox } from '../components/ui';
 import RichText from '../components/RichText';
 
 function Person({ p }) {
@@ -15,8 +15,6 @@ function Person({ p }) {
         <h2 className="text-2xl">{p.name}</h2>
         {p.role && <p className="mt-1 font-semibold text-[#2b433e]">{p.role}</p>}
         {p.bio && (p.markdown ? <RichText value={p.bio} className="mt-3" /> : <p className="mt-3 text-black/80 leading-relaxed">{p.bio}</p>)}
-        {!p.markdown && !p.hasBio && <p className="mt-2 text-sm"><Todo id="leader-bios">[BIO: 2 to 3 sentences]</Todo></p>}
-        {p.confirm && <p className="mt-2 text-sm"><Todo id="leader-bios">[CONFIRM THIS BIO]</Todo></p>}
         {p.email && (
           <p className="mt-auto pt-4">
             <a href={`mailto:${p.email}`} className="inline-flex items-center min-h-[44px] font-semibold underline underline-offset-4 text-[#2b433e]">Email {first}</a>
@@ -35,52 +33,38 @@ export default function Leadership() {
 
   return (
     <>
-      <PageHeader
-        kicker="Leadership"
-        title="Meet our leaders"
-        intro="A team of elders and pastors shares the work of teaching, spiritual oversight, and caring for people here. We believe leadership works best when it is shared and passed along, so we are always looking for the next leader."
-      />
+      <PageHeader kicker="Leadership" title="Leadership" intro="Meet the pastors who help lead our church family." />
       <Section tone="white">
-        <p className="max-w-3xl mb-10 text-lg leading-relaxed text-black/80">We believe in shared leadership and not a top-down structure. Our church is led by a team of elders who share responsibility for spiritual oversight, teaching, and pastoral care. Our leaders are committed to living out our core values, showing up authentically, with kindness and honor, and building a community that loves genuinely.</p>
-        <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <ul className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {people.map(p => <Person key={p.id || p.name} p={p} />)}
-          {fromAdmin.length === 0 && (
-            <AdminOnly>
-              <li className="rounded-2xl border-2 border-dashed border-[#2b433e]/60 bg-white p-6 flex items-center justify-center text-center">
-                <Todo id="fifth-leader">[FIFTH PERSON: NAME AND TITLE, PHOTO SUPPLIED]</Todo>
-              </li>
-            </AdminOnly>
-          )}
         </ul>
       </Section>
 
-      <AdminOnly>
-        <Section tone="bronze">
-          <SectionHeader kicker="Elders" title="Our elders" />
-          <p className="text-lg"><Todo id="elders">[LIST ELDER NAMES AND PHOTOS]</Todo></p>
-        </Section>
-      </AdminOnly>
-
       <Section tone="cream">
-        <SectionHeader kicker="How we lead" title="How we lead" />
+        <SectionHeader kicker="Our leadership team" title="Our leadership team" />
+        <div className="max-w-3xl space-y-4 text-lg leading-relaxed text-black/80">
+          {LEADERSHIP_INTRO.map(t => <p key={t}>{t}</p>)}
+        </div>
+      </Section>
+
+      <Section tone="white">
+        <SectionHeader kicker="Our approach" title="Our approach to leadership" intro="At Upper Room Fellowship, we believe that:" />
         <dl className="grid md:grid-cols-2 gap-6">
           {HOW_WE_LEAD.map(i => (
             <div key={i.title} className="rounded-2xl p-6 neu">
-              <dt className="text-xl font-bold">{i.title}</dt>
+              <dt className="text-xl font-semibold">{i.title}</dt>
               <dd className="mt-2 text-black/80 leading-relaxed">{i.text}</dd>
             </div>
           ))}
         </dl>
         <div className="mt-10 max-w-3xl">
-          <h3 className="text-2xl mb-3">Our leaders aim to</h3>
+          <h3 className="text-2xl mb-3">Our leaders strive to</h3>
           <ul className="list-disc pl-6 space-y-1 text-lg text-black/80">
             {LEADERS_AIM.map(a => <li key={a}>{a}</li>)}
           </ul>
-          <p className="mt-6 text-lg text-black/80 leading-relaxed">We are grateful for the men and women who serve this church family with humility and a lot of love for Jesus. Their faithful leadership makes our vision possible.</p>
+          <p className="mt-6 text-lg text-black/80 leading-relaxed">{LEADERSHIP_CLOSING}</p>
         </div>
       </Section>
-
-      <EndCta title="Have a question for a pastor?" text="Send a message and someone will reply within 48 hours." to="/contact" label="Send a message" />
     </>
   );
 }

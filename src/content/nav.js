@@ -1,10 +1,10 @@
+// The pages from urfellowship.com, grouped so the menu stays easy to scan.
 export const NAV = [
-  { label: 'Plan Your Visit', to: '/plan-your-visit' },
+  { label: 'New Here?', to: '/plan-your-visit' },
   {
     label: 'About',
     children: [
-      { label: 'Our Story', to: '/about' },
-      { label: 'What We Believe', to: '/beliefs' },
+      { label: 'About Us', to: '/about' },
       { label: 'Core Values', to: '/core-values' },
       { label: 'Leadership', to: '/leadership' },
     ],
@@ -12,26 +12,29 @@ export const NAV = [
   {
     label: 'Ministries',
     children: [
-      { label: 'All Ministries', to: '/ministries' },
-      { label: 'Kids', to: '/kids' },
-      { label: 'Youth', to: '/youth' },
-      { label: 'Table Groups', to: '/table-groups' },
-      { label: 'Serve', to: '/serve' },
+      { label: 'Ministries', to: '/ministries' },
+      { label: 'Sozo', to: '/sozo' },
     ],
   },
   { label: 'Messages', to: '/messages' },
-  { label: 'Events', to: '/events' },
+  {
+    label: 'Connect',
+    children: [
+      { label: 'Contact', to: '/contact' },
+      { label: 'Connect Card', to: '/connect' },
+    ],
+  },
 ];
 
 // Short site map for the footer.
 export const FOOTER_LINKS = [
-  { label: 'Plan Your Visit', to: '/plan-your-visit' },
+  { label: 'New Here?', to: '/plan-your-visit' },
   { label: 'About Us', to: '/about' },
+  { label: 'Core Values', to: '/core-values' },
   { label: 'Ministries', to: '/ministries' },
+  { label: 'Sozo', to: '/sozo' },
   { label: 'Messages', to: '/messages' },
-  { label: 'Next Steps', to: '/next-steps' },
-  { label: 'Events', to: '/events' },
-  { label: 'Prayer', to: '/contact#prayer' },
-  { label: 'Questions', to: '/faq' },
+  { label: 'Leadership', to: '/leadership' },
   { label: 'Contact', to: '/contact' },
+  { label: 'Connect Card', to: '/connect' },
 ];

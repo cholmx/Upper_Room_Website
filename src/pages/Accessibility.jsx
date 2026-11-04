@@ -1,7 +1,7 @@
 import React from 'react';
 import usePageMeta from '../hooks/usePageMeta';
 import { useSite } from '../settings';
-import { Section, PageHeader, EndCta } from '../components/ui';
+import { Section, PageHeader } from '../components/ui';
 
 export default function Accessibility() {
   usePageMeta('accessibility');
@@ -20,7 +20,6 @@ export default function Accessibility() {
           </p>
         </div>
       </Section>
-      <EndCta title="Tell us what you need" text="We would rather hear about a problem than have you struggle with it." to="/contact" label="Contact us" />
     </>
   );
 }
