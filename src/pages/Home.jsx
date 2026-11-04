@@ -43,7 +43,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section aria-label="Service details" className="bg-[#F3EEE3] text-black border-y border-[#CCA866]/50">
+      <section aria-label="Service details" className="bg-[#F3EEE3] text-black">
         <div className="max-w-[1145px] mx-auto px-6 py-4 md:py-5 grid gap-x-8 gap-y-1 sm:grid-cols-2 lg:grid-cols-4 items-center font-bold text-[0.95rem]">
           <p className="flex items-center gap-3"><SafeIcon icon={FiClock} className="text-xl flex-shrink-0" /> {SITE.serviceTime}</p>
           <p className="flex items-center gap-3"><SafeIcon icon={FiMapPin} className="text-xl flex-shrink-0" /> {SITE.addressLine}</p>

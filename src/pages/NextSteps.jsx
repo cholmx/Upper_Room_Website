@@ -60,10 +60,10 @@ export default function NextSteps() {
             <p>Let us know you are coming and our welcome team will be watching for you.</p>
           </StepCard>
           <StepCard n={2} title="Join a Table Group" action={<Btn to="/table-groups" variant="ghost">Find a Group</Btn>}>
-            <p><Gloss k="tableGroups" /> Most run in seasons of 8 to 12 weeks.</p>
+            <p><Gloss k="tableGroups" />. Most run in seasons of 8 to 12 weeks.</p>
           </StepCard>
           <FormStep id="growth-track" n={3} title="Join the Growth Track" formKey="growthtrack" button="I am interested">
-            <p>The <Gloss k="growthTrack" /> Tell us you are interested and we will send the details.</p>
+            <p>The <Gloss k="growthTrack" />. Tell us you are interested and we will send the details.</p>
           </FormStep>
           <FormStep id="baptism" n={4} title="Get baptized" formKey="baptism" button="I am interested">
             <p>Baptism is a public celebration of following Jesus. If you would like to be baptized, let us know and a pastor will be in touch.</p>

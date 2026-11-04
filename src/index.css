@@ -327,10 +327,12 @@ p:empty { display: none; }
 :root {
   --neu-hi: rgba(255, 255, 255, 0.95);
   --neu-lo: rgba(139, 128, 104, 0.2);
-  --neu-raised: 10px 10px 22px var(--neu-lo), -10px -10px 22px var(--neu-hi);
-  --neu-raised-sm: 6px 6px 14px var(--neu-lo), -6px -6px 14px var(--neu-hi);
-  --neu-inset: inset 5px 5px 11px var(--neu-lo), inset -5px -5px 11px var(--neu-hi);
-  --neu-inset-sm: inset 3px 3px 7px var(--neu-lo), inset -3px -3px 7px var(--neu-hi);
+  --shadow: 0 1px 2px rgba(20, 34, 29, 0.05), 0 6px 18px -6px rgba(20, 34, 29, 0.10);
+  --shadow-float: 0 2px 4px rgba(20, 34, 29, 0.06), 0 14px 32px -10px rgba(20, 34, 29, 0.16);
+  --neu-raised: var(--shadow);
+  --neu-raised-sm: var(--shadow);
+  --neu-inset: none;
+  --neu-inset-sm: none;
 }
 
 .neu { background: linear-gradient(145deg, #ffffff, #f1f0eb); border: 1px solid rgba(255, 255, 255, 0.9); box-shadow: var(--neu-raised-sm); }
@@ -414,3 +416,19 @@ details.u-acc.neu-acc[open] { background: linear-gradient(145deg, #efeee9, #f9f8
 /* A calmer, more refined surface: softer ink instead of pure black, a lighter photo wash, more room around sections */
 .text-black { color: #1c2622; }
 .photo-section .scrim { background: linear-gradient(to bottom, rgba(20, 34, 29, 0.25) 0%, rgba(20, 34, 29, 0.72) 100%); }
+
+/* One standard surface: white, no outline, a very subtle drop shadow. Form controls keep a thin
+   border, because a control needs a visible edge to be easy to find. */
+.neu, .fcard, details.u-acc.neu-acc { background: #ffffff; border: 0; box-shadow: var(--shadow); }
+.fcard:hover, .elev-hover:hover { box-shadow: var(--shadow-float); border-color: transparent; }
+details.u-acc.neu-acc[open] { background: #fbfaf7; box-shadow: var(--shadow); }
+.neu-inset { background: #f4f1ea; border: 0; box-shadow: none; }
+.neu-dark { background: #1b2c26; border: 0; box-shadow: var(--shadow); }
+.neu-field { background: #ffffff; box-shadow: none; }
+.elev-1 { box-shadow: var(--shadow); }
+.elev-2 { box-shadow: var(--shadow-float); }
+.video-card { border: 0; box-shadow: var(--shadow); }
+.video-card:hover { box-shadow: var(--shadow-float); }
+.btn-solid, .photo-section .btn-solid, .glow-gold .btn-solid, .bg-\[\#14221d\] .btn-solid { box-shadow: var(--shadow); }
+.btn-solid:active { box-shadow: none; }
+.neu-badge { box-shadow: var(--shadow); }

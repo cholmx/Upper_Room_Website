@@ -43,7 +43,7 @@ export const Btn = forwardRef(function Btn({ to, href, onClick, variant = 'prima
 const TONES = {
   cream: 'bg-[#F9F9F7] text-black',
   white: 'bg-white text-black',
-  sand: 'bg-white text-black border-y border-black/5',
+  sand: 'bg-white text-black',
   ink: 'bg-[#14221d] text-[#F9F9F7] relative overflow-hidden glow-gold',
   gold: 'bg-[#EBC36B] text-black',
   bronze: 'bg-[#CCA866] text-black',
@@ -81,7 +81,7 @@ export function Photo({ slot, className = '', ratio = 'aspect-[4/3]', priority =
   const [failed, setFailed] = useState(null);
   if (!url || failed === url) return null;
   return (
-    <div className={`${ratio} ${rounded ? 'rounded-3xl' : ''} overflow-hidden border border-black/5 elev-1 bg-[#14221d] ${className}`}>
+    <div className={`${ratio} ${rounded ? 'rounded-3xl' : ''} overflow-hidden elev-1 bg-[#14221d] ${className}`}>
       <img src={url} alt={alt} loading={priority ? 'eager' : 'lazy'} decoding="async" onError={() => setFailed(url)} className="w-full h-full object-cover" />
     </div>
   );
@@ -245,7 +245,7 @@ export function QuickFacts({ items }) {
 // Every page ends with one clear call to action.
 export function EndCta({ title, text, to, href, label }) {
   return (
-    <section className="bg-[#14221d] text-[#F9F9F7] text-center py-20 md:py-28 px-6 border-t border-[#EBC36B]/40" aria-label="Next step">
+    <section className="bg-[#14221d] text-[#F9F9F7] text-center py-20 md:py-28 px-6" aria-label="Next step">
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}

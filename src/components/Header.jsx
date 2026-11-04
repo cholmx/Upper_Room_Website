@@ -45,7 +45,7 @@ function DesktopDropdown({ item }) {
       </button>
       {open && (
         <div className="absolute left-1/2 -translate-x-1/2 top-full pt-3 z-50 min-w-[16rem]">
-          <ul className="bg-white rounded-2xl border border-black/5 py-3 elev-2">
+          <ul className="bg-white rounded-2xl py-3 elev-2">
             {item.children.map(c => (
               <li key={c.to}>
                 <Link to={c.to} className="block px-6 py-2.5 font-serif italic uppercase text-[0.85rem] tracking-widest text-black/80 hover:text-black hover:bg-[#F9F9F7]">{c.label}</Link>
@@ -130,7 +130,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header className={`sticky top-0 z-50 flex items-center transition-all duration-300 text-black ${scrolled ? 'bg-[#F9F9F7]/90 backdrop-blur-md border-b border-black/5 shadow-sm h-16' : 'bg-[#F9F9F7] border-b border-transparent h-16 xl:h-24'}`}>
+    <header className={`sticky top-0 z-50 flex items-center transition-all duration-300 text-black ${scrolled ? 'bg-[#F9F9F7]/90 backdrop-blur-md shadow-[0_1px_2px_rgba(20,34,29,0.05),0_6px_18px_-6px_rgba(20,34,29,0.10)] h-16' : 'bg-[#F9F9F7] shadow-[0_1px_2px_rgba(20,34,29,0.05),0_6px_18px_-6px_rgba(20,34,29,0.10)] h-16 xl:h-24'}`}>
       <div className="max-w-[1320px] w-full mx-auto px-6 flex items-center justify-between gap-6">
         <Logo />
         <nav aria-label="Main" className="hidden xl:flex items-center gap-6 pt-1">

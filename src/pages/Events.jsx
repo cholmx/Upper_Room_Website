@@ -21,7 +21,7 @@ function EventCard({ e, featured = false }) {
   const text = plainText(e.description || e.desc_text);
   const reg = safeUrl(e.registration_url);
   return (
-    <article className={`bg-white rounded-2xl border border-black/10 overflow-hidden ${featured ? 'md:grid md:grid-cols-2' : 'flex flex-col md:flex-row'}`}>
+    <article className={`neu rounded-2xl overflow-hidden ${featured ? 'md:grid md:grid-cols-2' : 'flex flex-col md:flex-row'}`}>
       {safeUrl(e.image_url) && <PhotoBox src={e.image_url} alt="" label={e.title} ratio={featured ? 'aspect-[16/10]' : 'aspect-[16/10] md:aspect-auto md:w-56'} rounded={false} />}
       <div className="p-6 flex gap-5 flex-grow">
         <div className="text-center flex-shrink-0 w-16" aria-hidden="true">
@@ -70,14 +70,14 @@ function MonthView({ events, cursor, setCursor }) {
       <ul className="md:hidden space-y-3">
         {Object.keys(byDay).length === 0 && <li className="text-lg">Nothing scheduled this month.</li>}
         {Object.keys(byDay).map(Number).sort((a, b) => a - b).map(day => (
-          <li key={day} className="bg-white rounded-xl border border-black/10 p-4">
+          <li key={day} className="neu rounded-xl p-4">
             <p className="font-semibold">{new Date(year, month, day).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}</p>
             <ul className="mt-1">{byDay[day].map(e => <li key={e.id + e.occurrence_date}><Link to={detailPath(e)} className="underline underline-offset-4 text-[#8A6309]">{e.title}</Link>{e.time ? `, ${e.time}` : ''}</li>)}</ul>
           </li>
         ))}
       </ul>
 
-      <table className="hidden md:table w-full table-fixed border-collapse bg-white rounded-xl overflow-hidden border border-black/10">
+      <table className="hidden md:table w-full table-fixed border-collapse bg-white elev-1 rounded-xl overflow-hidden">
         <caption className="sr-only">{label}</caption>
         <thead>
           <tr>{['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(d => <th key={d} scope="col" className="p-2 text-sm font-bold text-black/80 border-b border-black/10">{d}</th>)}</tr>
@@ -86,7 +86,7 @@ function MonthView({ events, cursor, setCursor }) {
           {Array.from({ length: cells.length / 7 }, (_, r) => (
             <tr key={r}>
               {cells.slice(r * 7, r * 7 + 7).map((day, i) => (
-                <td key={i} className="align-top h-28 p-2 border border-black/10">
+                <td key={i} className="align-top h-28 p-2">
                   {day && (
                     <>
                       <span className="text-sm font-semibold">{day}</span>

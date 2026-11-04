@@ -73,7 +73,7 @@ export default function Blog() {
                   placeholder="Search articles by title, author, or keyword..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="block w-full pl-16 pr-6 py-5 border border-black/10 rounded-full neu-field focus:outline-none focus:ring-2 focus:ring-[#A6790F] focus:border-transparent text-lg transition-all"
+                  className="block w-full pl-16 pr-6 py-5 rounded-full neu-field focus:outline-none focus:ring-2 focus:ring-[#A6790F] focus:border-transparent text-lg transition-all"
                 />
               </div>
 
