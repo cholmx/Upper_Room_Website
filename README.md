@@ -159,3 +159,7 @@ Old addresses `/worship-team`, `/outreach`, `/prayer`, `/stories` and `/connect`
 ## Colors
 
 The palette is `#1e2522` ink, `#2B433E` forest, `#597F5C` sage, `#C74F2F` terracotta, `#EAA235` amber, `#d49e46` gold, `#F7F5EE` cream and `#FFFFFF` white. Text on cream and white uses ink or forest, because the golds and terracotta do not have enough contrast for small text on light backgrounds. Neighboring sections must differ in color, and the footer is ink, so a closing call to action is forest by default. Check it with `node scripts/check-adjacent-colors.mjs` while a preview is running.
+
+## Photo uploads
+
+Photo fields in the admin have an **Upload a photo** button. Photos go to a public Supabase Storage bucket named `site-images`, and large photos are shrunk in the browser first. Run `supabase/migrations/20261104120000_photo_storage.sql` once (the Bolt prompt for it is in the pull request notes) to create the bucket and its policies. Pasting a link still works under each field.

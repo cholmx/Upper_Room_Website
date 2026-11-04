@@ -31,7 +31,7 @@ export default function Sozo() {
           <div>
             <SectionHeader title="What is Sozo" className="!mb-4" />
             <div className="space-y-4 text-lg leading-relaxed text-black/80">
-              <p>Sozo is a Greek word used more than 100 times in the New Testament. It means to save, deliver, make whole, restore, and heal, and it reflects God’s desire for our complete wholeness: spiritually, emotionally, and relationally.</p>
+              <p className="lead">Sozo is a Greek word used more than 100 times in the New Testament. It means to save, deliver, make whole, restore, and heal, and it reflects God’s desire for our complete wholeness: spiritually, emotionally, and relationally.</p>
               <blockquote className="border-l-4 border-[#d49e46] pl-5 font-serif italic ">
                 “But Jesus turning and seeing her said, ‘Daughter, take courage; your faith has made you well (sozo).’ And at once the woman was made well (sozo).”
                 <footer className="mt-1 text-base font-sans not-italic text-black/70">Matthew 9:22</footer>

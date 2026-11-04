@@ -137,14 +137,11 @@ export default function Header() {
           {NAV.map(item => (item.children
             ? <DesktopDropdown key={item.label} item={item} />
             : <NavLink key={item.to} to={item.to} className={({ isActive }) => `${linkBase} ${isActive ? linkOn : linkOff}`}>{item.label}</NavLink>))}
-          <a href={SITE.giveUrl} target="_blank" rel="noopener noreferrer" className="px-5 py-2 rounded-full bg-[#c74f2f] text-white font-serif italic uppercase text-[1.1rem] tracking-widest hover:bg-[#2b433e] transition-colors">
+          <a href={SITE.giveUrl} target="_blank" rel="noopener noreferrer" className={`${linkBase} ${linkOff}`}>
             Give<span className="sr-only"> (opens in a new tab)</span>
           </a>
         </nav>
         <div className="flex items-center gap-2 xl:hidden">
-          <a href={SITE.giveUrl} target="_blank" rel="noopener noreferrer" className="px-4 min-[400px]:px-5 py-2 rounded-full bg-[#c74f2f] text-white font-serif italic uppercase text-[1rem] min-[400px]:text-[1.1rem] tracking-widest">
-            Give<span className="sr-only"> (opens in a new tab)</span>
-          </a>
           <button type="button" className="p-2 hover:bg-black/5 rounded-full transition-colors" aria-expanded={open} aria-controls="mobile-menu" aria-label="Open menu" onClick={() => setOpen(true)}>
             <SafeIcon icon={FiMenu} size={24} />
           </button>

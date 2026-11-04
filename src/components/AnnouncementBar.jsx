@@ -24,7 +24,7 @@ export default function AnnouncementBar() {
   };
 
   return (
-    <div className="bg-[#1e2522] text-[#f7f5ee]" role="region" aria-label="Announcement">
+    <div className="bg-[#c74f2f] text-white" role="region" aria-label="Announcement">
       <div className="max-w-[1145px] mx-auto px-6 py-2.5 flex items-center justify-between gap-4 text-[0.9rem]">
         <p className="flex-grow text-center sm:text-left font-serif italic uppercase tracking-widest text-[1.1rem]">
           {text}

@@ -19,7 +19,7 @@ export default function StickyMobileBar() {
       <a href={SITE.googleMapsUrl} target="_blank" rel="noopener noreferrer" className={`${item} text-[#f7f5ee] border-x border-white/10`}>
         <SafeIcon icon={FiMapPin} className="text-xl text-[#eaa235]" /> Directions<span className="sr-only"> (opens in a new tab)</span>
       </a>
-      <Link to="/plan-your-visit" className={`${item} bg-[#eaa235] text-black`}>
+      <Link to="/plan-your-visit" className={`${item} bg-[#c74f2f] text-white`}>
         <SafeIcon icon={FiCalendar} className="text-xl" /> Plan Your Visit
       </Link>
     </nav>

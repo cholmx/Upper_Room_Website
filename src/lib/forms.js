@@ -29,14 +29,14 @@ export function buildSubmission(formKey, values) {
   const data = {};
   for (const f of def.fields) {
     if (!isVisible(f, values)) continue;
-    if (['name', 'email', 'phone'].includes(f.name)) continue;
+    if (['name', 'first_name', 'last_name', 'email', 'phone'].includes(f.name)) continue;
     const v = values[f.name];
     if (v === undefined || v === '' || (Array.isArray(v) && v.length === 0)) continue;
     data[f.name] = v === true ? 'Yes' : v;
   }
   return {
     form_type: formKey,
-    name: String(values.name || '').trim().slice(0, 200),
+    name: (values.name !== undefined ? String(values.name || '') : [values.first_name, values.last_name].map(v => String(v || '').trim()).filter(Boolean).join(' ')).trim().slice(0, 200),
     email: String(values.email || '').trim().slice(0, 200),
     phone: String(values.phone || '').trim().slice(0, 60),
     data,

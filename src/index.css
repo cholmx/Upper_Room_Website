@@ -78,14 +78,15 @@ h1, h2, h3, h4 {
 .btn:active { transform: translateY(1px); }
 
 .btn-solid {
-  background: var(--yellow);
-  color: var(--black);
-  border-color: var(--yellow);
+  background: #c74f2f;
+  color: #ffffff;
+  border-color: #c74f2f;
 }
 
 .btn-solid:hover {
-  background: #d49e46;
-  border-color: #d49e46;
+  background: #eaa235;
+  color: #1e2522;
+  border-color: #eaa235;
 }
 
 /* Explicit Button Hover Contrast rules */
@@ -439,3 +440,7 @@ details.u-acc.neu-acc[open] { background: #f7f5ee; box-shadow: var(--shadow); }
 .btn-solid, .photo-section .btn-solid, .glow-gold .btn-solid, .bg-\[\#1e2522\] .btn-solid { box-shadow: var(--shadow); }
 .btn-solid:active { box-shadow: none; }
 .neu-badge { box-shadow: var(--shadow); }
+
+/* Caladea for the voice of the site: lead paragraphs, in a larger size than body text */
+.lead { font-family: 'Caladea', serif; font-size: 1.4rem; line-height: 1.55; color: rgba(0, 0, 0, 0.8); }
+@media (min-width: 768px) { .lead { font-size: 1.6rem; } }

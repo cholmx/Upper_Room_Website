@@ -45,7 +45,7 @@ export default function Home() {
         <div className="max-w-3xl">
           <SectionHeader title="Welcome to Upper Room Fellowship" className="!mb-6" />
           <div className={`space-y-4 ${P}`}>
-            <p>For over 50 years, our congregation has been gathering in Columbiana to worship, grow, and serve together. We love this city and are proud to call it home.</p>
+            <p className="lead">For over 50 years, our congregation has been gathering in Columbiana to worship, grow, and serve together. We love this city and are proud to call it home.</p>
             <p>Together, we are learning to live with more love, joy, and purpose. We support each other and reach out to make our community better. Whether you are just exploring faith or looking for a church family, we would love to meet you and welcome you into ours.</p>
           </div>
         </div>
@@ -60,7 +60,7 @@ export default function Home() {
         </Cards>
       </Section>
 
-      <Section tone="forest">
+      <Section tone="terra">
         <div className="grid md:grid-cols-2 gap-10 items-start">
           <div>
             <SectionHeader kicker="Where and when" title="Where & when" tone="dark" className="!mb-6" />
@@ -74,24 +74,11 @@ export default function Home() {
           <div>
             <SectionHeader kicker="Our vision statement" title="Our vision statement" tone="dark" className="!mb-6" />
             <p className="text-lg leading-relaxed text-white/90">At Upper Room Fellowship, we exist to help people know God deeply, share life authentically, and serve others selflessly. Real change happens from the inside out as we align our hearts with God’s heart. Join us as we pursue healthy relationships, access abundant wholeness, discover our greatness, live supernaturally, treasure God’s presence, and live out the Gospel in tangible ways.</p>
-            <blockquote className="mt-6 border-l-4 border-[#eaa235] pl-5 font-serif italic text-xl text-white">
+            <blockquote className="mt-6 border-l-4 border-white/70 pl-5 font-serif italic text-xl text-white">
               “By this everyone will know that you are my disciples, if you love one another.”
               <footer className="mt-1 text-base font-sans not-italic text-white/80">John 13:35</footer>
             </blockquote>
           </div>
-        </div>
-      </Section>
-
-      <Section tone="cream">
-        <div className="max-w-3xl">
-          <SectionHeader kicker="Contact us" title="Contact us" className="!mb-4" />
-          <p className={P}>Reach out anytime. Have a question or need prayer? Send us a message, and a member of our church family will connect with you soon.</p>
-          <address className={`not-italic mt-5 space-y-1 ${P}`}>
-            <p>{SITE.address.street}<br />{SITE.address.city} {SITE.address.region} {SITE.address.postalCode}</p>
-            <p><a className="underline underline-offset-4 font-semibold text-[#2b433e]" href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
-            <p><a className="underline underline-offset-4 font-semibold text-[#2b433e]" href={SITE.phoneHref}>{SITE.phone}</a></p>
-          </address>
-          <div className="mt-6"><Btn to="/contact" variant="primary">Send a message</Btn></div>
         </div>
       </Section>
     </>

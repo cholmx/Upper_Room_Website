@@ -20,7 +20,7 @@ export default function Ministries() {
 
       <Section tone="cream" narrow>
         <div className={`space-y-5 ${P}`}>
-          <p>At Upper Room Fellowship, ministry is how we live out our faith together. We believe in knowing our greatness, that each person has a unique way of ministering to the world around them with excellence. There is no spectator Christianity, and inherent in every person is great value and destiny.</p>
+          <p className="lead">At Upper Room Fellowship, ministry is how we live out our faith together. We believe in knowing our greatness, that each person has a unique way of ministering to the world around them with excellence. There is no spectator Christianity, and inherent in every person is great value and destiny.</p>
           <p>Our ministries are designed to help you connect with God, build meaningful relationships, and discover the joy of serving others. Whatever your age, interests, or season of life, there is a place for you to belong and make a difference at Upper Room Fellowship.</p>
         </div>
       </Section>

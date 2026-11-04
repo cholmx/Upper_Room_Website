@@ -26,7 +26,7 @@ function Field({ formKey, field, value, onChange, error }) {
   } else if (field.type === 'radio') {
     return (
       <fieldset aria-describedby={describedBy}>
-        <legend className="block font-semibold mb-2">{field.label}</legend>
+        <legend className="block font-serif font-bold text-[1.1rem] mb-2">{field.label}</legend>
         <div className="flex flex-wrap gap-x-6 gap-y-1">
           {field.options.map(o => (
             <label key={o} className="inline-flex items-center gap-2 min-h-[44px] cursor-pointer">
@@ -42,7 +42,7 @@ function Field({ formKey, field, value, onChange, error }) {
     const list = Array.isArray(value) ? value : [];
     return (
       <fieldset aria-describedby={describedBy}>
-        <legend className="block font-semibold mb-2">{field.label}</legend>
+        <legend className="block font-serif font-bold text-[1.1rem] mb-2">{field.label}</legend>
         <div className="grid sm:grid-cols-2 gap-x-6">
           {field.options.map(o => (
             <label key={o} className="inline-flex items-center gap-2 min-h-[44px] cursor-pointer">
@@ -84,7 +84,7 @@ function Field({ formKey, field, value, onChange, error }) {
 
   return (
     <div>
-      <label htmlFor={id} className="block font-semibold mb-2">
+      <label htmlFor={id} className="block font-serif font-bold text-[1.1rem] mb-2">
         {field.label}{field.required && <span aria-hidden="true" className="text-[#c74f2f]"> *</span>}
       </label>
       {control}

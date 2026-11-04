@@ -77,6 +77,7 @@ const same = (a, b) => String(a || '').toLowerCase().replace(/&|\band\b/g, '').r
 export function SectionHeader({ kicker, title, intro, center = false, as: Tag = 'h2', tone = 'light', className = '' }) {
   return (
     <div className={`${center ? 'text-center mx-auto' : ''} max-w-3xl mb-10 md:mb-12 ${className}`}>
+      <span aria-hidden="true" className={`block w-12 h-1 rounded-full bg-[#c74f2f] ${center ? 'mx-auto' : ''} mb-5`}></span>
       {kicker && !same(kicker, title) && <span className={`kicker ${tone === 'dark' ? 'text-[#eaa235]' : 'text-[#2b433e]'}`}>{kicker}</span>}
       <Tag className="text-3xl md:text-5xl">{title}</Tag>
       {intro && <p className={`mt-4 text-lg leading-relaxed ${tone === 'dark' ? 'text-white/85' : 'text-black/80'}`}>{intro}</p>}
@@ -179,16 +180,16 @@ export function Card({ title, children, to, linkLabel, icon, className = '', as:
   return (
     <article style={style} className={`fcard !p-8 flex flex-col ${className}`}>
       {icon && <div className="mb-4">{icon}</div>}
-      <Tag className="text-2xl mb-3">{title}</Tag>
+      <Tag className="font-serif font-bold normal-case tracking-normal text-[1.7rem] leading-tight mb-3">{title}</Tag>
       <div className="text-black/80 leading-relaxed flex-grow space-y-3">{children}</div>
       {to && (
         <div className="mt-6">
           {isExternal(to) ? (
-            <a href={to} target="_blank" rel="noopener noreferrer" className="inline-flex items-center font-bold uppercase tracking-widest text-[#2b433e] hover:text-black transition-colors">
+            <a href={to} target="_blank" rel="noopener noreferrer" className="inline-flex items-center font-serif italic font-bold uppercase tracking-widest text-[1.05rem] text-[#2b433e] hover:text-black transition-colors">
               {linkLabel || 'Learn more'} <span aria-hidden="true" className="ml-2">&rarr;</span><span className="sr-only"> (opens in a new tab)</span>
             </a>
           ) : (
-            <Link to={to} className="inline-flex items-center font-bold uppercase tracking-widest text-[#2b433e] hover:text-black transition-colors">
+            <Link to={to} className="inline-flex items-center font-serif italic font-bold uppercase tracking-widest text-[1.05rem] text-[#2b433e] hover:text-black transition-colors">
               {linkLabel || 'Learn more'} <span aria-hidden="true" className="ml-2">&rarr;</span>
             </Link>
           )}
@@ -215,7 +216,7 @@ export function Accordion({ items, className = '' }) {
       {items.map((it, i) => (
         <details key={it.id || i} id={it.id} className="u-acc neu-acc group rounded-2xl">
           <summary className="cursor-pointer px-6 py-5 flex items-center justify-between gap-4 text-lg font-bold min-h-[56px]">
-            <span>{it.title}</span>
+            <span className="font-serif font-bold text-[1.3rem]">{it.title}</span>
             <span aria-hidden="true" className="u-acc-icon flex-shrink-0 text-2xl leading-none text-[#2b433e]">+</span>
           </summary>
           <div className="px-6 pb-6 text-black/85 leading-relaxed space-y-3">{it.content}</div>
@@ -235,7 +236,7 @@ export function Steps({ items }) {
             {i < items.length - 1 && <span className="w-px flex-grow bg-[#d49e46]/60 mt-2" aria-hidden="true"></span>}
           </div>
           <div className="pb-2">
-            <h3 className="text-xl md:text-2xl mb-2">{it.title}</h3>
+            <h3 className="font-serif font-bold normal-case tracking-normal text-[1.5rem] md:text-[1.7rem] mb-2">{it.title}</h3>
             <div className="text-black/80 leading-relaxed space-y-3">{it.body}</div>
           </div>
         </li>

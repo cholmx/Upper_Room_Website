@@ -29,7 +29,7 @@ export default function ScrollStory({ beats, label = 'Story', tone = 'light', he
           ))}
         </div>
         <div className="mt-6 h-2 rounded-full neu-inset overflow-hidden">
-          <div className="h-full bg-[#eaa235] rounded-full transition-[width] duration-500" style={{ width: `${((active + 1) / beats.length) * 100}%` }}></div>
+          <div className="h-full bg-[#c74f2f] rounded-full transition-[width] duration-500" style={{ width: `${((active + 1) / beats.length) * 100}%` }}></div>
         </div>
       </div>
       <ol className="md:col-span-3 space-y-10 md:space-y-0" aria-label={label}>
@@ -37,7 +37,7 @@ export default function ScrollStory({ beats, label = 'Story', tone = 'light', he
           <li key={b.title} ref={el => { refs.current[i] = el; }} data-i={i} data-active={i === active} className="story-beat md:min-h-[55vh] md:flex md:flex-col md:justify-center">
             <div className="md:hidden mb-3 w-12 h-12 rounded-full bg-[#c74f2f] text-white font-black flex items-center justify-center neu-badge" aria-hidden="true">{i + 1}</div>
             {b.kicker && <span className="kicker text-[#2b433e]">{b.kicker}</span>}
-            <Heading className="text-2xl md:text-4xl mb-3">{b.title}</Heading>
+            <Heading className="font-serif font-bold normal-case tracking-normal text-[1.9rem] md:text-[2.5rem] leading-tight mb-3">{b.title}</Heading>
             <div className="text-lg leading-relaxed text-black/80 space-y-3">{b.body}</div>
           </li>
         ))}

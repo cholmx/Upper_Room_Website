@@ -218,7 +218,31 @@ export function createBackend({
     }
   }
 
-  return { configured, signIn, signOut, getUser, data, getToken };
+  // Uploads a file to Supabase Storage as the signed-in user and returns its public address.
+  async function upload(bucket, path, file) {
+    if (!configured) return fail('The backend is not configured', 0);
+    try {
+      const token = await getToken();
+      if (token === anonKey) return fail('Please sign in again to upload a photo.', 401);
+      const res = await fetchImpl(`${base}/storage/v1/object/${bucket}/${path}`, {
+        method: 'POST',
+        headers: { apikey: anonKey, Authorization: `Bearer ${token}`, 'Content-Type': file.type || 'application/octet-stream', 'Cache-Control': 'max-age=31536000' },
+        body: file,
+      });
+      if (!res.ok) {
+        const json = await res.json().catch(() => ({}));
+        if (res.status === 404 || /bucket not found/i.test(json?.message || json?.error || '')) return fail('Photo storage is not set up yet. Ask Bolt to run the photo storage migration.', 404);
+        if (res.status === 401 || res.status === 403) return fail('You do not have permission to upload photos.', res.status);
+        if (res.status === 413) return fail('That file is too large.', 413);
+        return fail(json?.message || 'Upload failed', res.status);
+      }
+      return ok({ url: `${base}/storage/v1/object/public/${bucket}/${path}` });
+    } catch (err) {
+      return fail(err?.message || 'Network error', 0);
+    }
+  }
+
+  return { configured, signIn, signOut, getUser, data, getToken, upload };
 }
 
 export const backend = createBackend({

@@ -25,7 +25,7 @@ export default function CoreValues() {
       <Section tone="cream" narrow>
         <SectionHeader title="Living from the inside out" />
         <div className="space-y-5 text-lg leading-relaxed text-black/80">
-          {INSIDE_OUT.map(p => <p key={p}>{p}</p>)}
+          {INSIDE_OUT.map((p, i) => <p key={p} className={i === 0 ? 'lead' : undefined}>{p}</p>)}
           <p className="font-semibold">The following core values drive everything we do at Upper Room Fellowship.</p>
         </div>
       </Section>

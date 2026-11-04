@@ -37,7 +37,7 @@ const heading = 'font-serif italic uppercase text-[1.15rem] font-bold tracking-w
 export default function Footer() {
   const SITE = useSite();
   return (
-    <footer className="bg-[#1e2522] text-[#f7f5ee] relative overflow-hidden pb-20 md:pb-0">
+    <footer className="bg-[#1e2522] text-[#f7f5ee] relative overflow-hidden pb-20 md:pb-0 border-t-4 border-[#c74f2f]">
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#eaa235] rounded-full blur-[150px] opacity-5 pointer-events-none translate-x-1/3 -translate-y-1/3"></div>
 
       <motion.div

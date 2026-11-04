@@ -33,21 +33,26 @@ function ImageField({ id, value, onChange, invalid }) {
 
   return (
     <div>
-      <div className="flex gap-3">
-        <input id={id} type="url" value={value || ''} onChange={(e) => onChange(e.target.value)} placeholder="https://..." className={`${base} ${invalid ? bad : ok}`} aria-invalid={invalid} />
-        {uploadsEnabled && (
-          <>
-            <input ref={fileRef} type="file" accept="image/*" className="sr-only" onChange={pick} aria-label="Upload image file" tabIndex={-1} />
-            <button type="button" onClick={() => fileRef.current?.click()} disabled={busy} className="px-5 rounded-lg bg-[#0B1613] text-white font-bold whitespace-nowrap disabled:opacity-60">
-              {busy ? 'Uploading...' : 'Upload'}
-            </button>
-          </>
-        )}
-      </div>
-      {err && <p role="alert" className="text-sm text-red-600 mt-2">{err}</p>}
       {value && !invalid && (
-        <img src={value} alt="Preview" className="mt-3 h-32 rounded-lg border border-gray-200 object-cover bg-gray-100" onError={(e) => { e.currentTarget.style.display = 'none'; }} onLoad={(e) => { e.currentTarget.style.display = ''; }} />
+        <img src={value} alt="Preview" className="mb-3 h-40 rounded-lg border border-gray-200 object-cover bg-gray-100" onError={(e) => { e.currentTarget.style.display = 'none'; }} onLoad={(e) => { e.currentTarget.style.display = ''; }} />
       )}
+      {uploadsEnabled && (
+        <div className="flex flex-wrap items-center gap-3">
+          <input ref={fileRef} type="file" accept="image/jpeg,image/png,image/webp,image/gif" className="sr-only" onChange={pick} aria-label="Choose a photo to upload" tabIndex={-1} />
+          <button type="button" onClick={() => fileRef.current?.click()} disabled={busy} className="px-5 py-3 rounded-lg bg-[#0B1613] text-white font-bold whitespace-nowrap disabled:opacity-60">
+            {busy ? 'Uploading...' : value ? 'Replace photo' : 'Upload a photo'}
+          </button>
+          {value && !busy && (
+            <button type="button" onClick={() => onChange('')} className="px-4 py-3 rounded-lg border border-gray-300 font-semibold text-gray-700 hover:bg-gray-50">Remove</button>
+          )}
+          <span className="text-sm text-gray-500">JPG, PNG, WebP, or GIF. Large photos are shrunk for you.</span>
+        </div>
+      )}
+      <details className="mt-3" open={!uploadsEnabled || undefined}>
+        <summary className="cursor-pointer text-sm font-semibold text-gray-600">{uploadsEnabled ? 'Or paste a link to a photo' : 'Photo link'}</summary>
+        <input id={id} type="url" value={value || ''} onChange={(e) => onChange(e.target.value)} placeholder="https://..." className={`mt-2 ${base} ${invalid ? bad : ok}`} aria-invalid={invalid} />
+      </details>
+      {err && <p role="alert" className="text-sm text-red-600 mt-2">{err}</p>}
     </div>
   );
 }

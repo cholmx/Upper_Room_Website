@@ -35,7 +35,7 @@ export default function About() {
 
       <Section tone="white" id="beliefs" narrow>
         <SectionHeader kicker="Our beliefs" title="Our beliefs" />
-        <p className="mb-8 text-lg leading-relaxed text-black/80">We believe certain truths within Scripture form the essential foundation that unites God’s people in experiencing authentic life within the family of God. While the church may differ on non-essential matters, where there should be liberty within the church family to grow in understanding, we are bound together as a family by love. Right belief, championed by love, reflects what Jesus embodied, and we, the Body of Christ, seek to be a living expression of the same.</p>
+        <p className="lead mb-8">We believe certain truths within Scripture form the essential foundation that unites God’s people in experiencing authentic life within the family of God. While the church may differ on non-essential matters, where there should be liberty within the church family to grow in understanding, we are bound together as a family by love. Right belief, championed by love, reflects what Jesus embodied, and we, the Body of Christ, seek to be a living expression of the same.</p>
         <Accordion items={items} />
       </Section>
     </>

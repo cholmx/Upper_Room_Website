@@ -29,7 +29,7 @@ export default function Give() {
       </PageHeader>
 
       <Section tone="cream" narrow>
-        <p className={P}>At Upper Room Fellowship, we believe in living the Gospel through overwhelming generosity. Just as Jesus gave everything for us, opening the way for our complete salvation, healing, and deliverance, we are called to give freely and joyfully to further His kingdom on earth. When we give, we reflect God’s character and participate in His work of restoration.</p>
+        <p className="lead">At Upper Room Fellowship, we believe in living the Gospel through overwhelming generosity. Just as Jesus gave everything for us, opening the way for our complete salvation, healing, and deliverance, we are called to give freely and joyfully to further His kingdom on earth. When we give, we reflect God’s character and participate in His work of restoration.</p>
       </Section>
 
       <Section tone="white">

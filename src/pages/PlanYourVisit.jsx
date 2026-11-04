@@ -41,7 +41,7 @@ export default function PlanYourVisit() {
         <div className="grid md:grid-cols-2 gap-10 items-start">
           <div className={`space-y-4 ${P}`}>
             <SectionHeader title="Let us know you are coming" className="!mb-4" />
-            <p>Let us know you are coming by filling out our Connect Card, and our welcome team will be ready for you!</p>
+            <p className="lead">Let us know you are coming by filling out our Connect Card, and our welcome team will be ready for you!</p>
             <p>We meet every Sunday at 10:30am at {SITE.addressLine}.</p>
             <p>After your first visit, we would love to help you find a small group where you can build relationships and grow in faith.</p>
           </div>
