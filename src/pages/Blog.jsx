@@ -123,7 +123,7 @@ export default function Blog() {
                           />
                         ) : (
                           <div className="absolute inset-0 flex flex-col items-center justify-center text-[#f7f5ee] p-8 text-center bg-gradient-to-br from-[#1e2522] to-[#2b433e]">
-                            <span className="text-5xl font-serif mb-2 opacity-50">Upper Room</span>
+                            <span className="text-5xl font-serif italic mb-2 opacity-50">Upper Room</span>
                             <span className="text-sm tracking-widest uppercase opacity-30">Journal</span>
                           </div>
                         )}
@@ -187,7 +187,7 @@ export default function Blog() {
                                 />
                               ) : (
                                 <div className="absolute inset-0 flex items-center justify-center text-white/50 bg-gradient-to-br from-[#1e2522] to-[#2b433e]">
-                                  <span className="text-3xl font-serif">Upper Room</span>
+                                  <span className="text-3xl font-serif italic">Upper Room</span>
                                 </div>
                               )}
                               {post.category && (

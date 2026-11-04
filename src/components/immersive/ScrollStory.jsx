@@ -52,7 +52,7 @@ export function Stage({ big, small, icon }) {
     <>
       {icon && <span className="w-20 h-20 rounded-full neu flex items-center justify-center text-[#2b433e] mb-6">{icon}</span>}
       <span className="font-black uppercase text-5xl lg:text-6xl leading-none" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>{big}</span>
-      {small && <span className="mt-4 font-serif text-xl text-black/70 max-w-[20ch]">{small}</span>}
+      {small && <span className="mt-4 font-serif italic text-xl text-black/70 max-w-[20ch]">{small}</span>}
     </>
   );
 }

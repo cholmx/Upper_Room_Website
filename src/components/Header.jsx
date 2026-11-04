@@ -10,7 +10,7 @@ import * as FiIcons from 'react-icons/fi';
 
 const { FiMenu, FiX, FiChevronDown } = FiIcons;
 
-const linkBase = 'whitespace-nowrap font-serif text-[1rem] tracking-normal py-1 border-b-2 transition-all duration-300 inline-flex items-center gap-1';
+const linkBase = 'whitespace-nowrap font-serif italic text-[1rem] tracking-normal py-1 border-b-2 transition-all duration-300 inline-flex items-center gap-1';
 const linkOn = 'border-[#c74f2f] text-black';
 const linkOff = 'border-transparent text-black/70 hover:text-black hover:border-black/20';
 
@@ -48,7 +48,7 @@ function DesktopDropdown({ item }) {
           <ul className="bg-white rounded-2xl py-3 elev-2">
             {item.children.map(c => (
               <li key={c.to}>
-                <Link to={c.to} className="block px-6 py-2.5 font-serif text-[0.95rem] tracking-normal text-black/80 hover:text-black hover:bg-[#f7f5ee]">{c.label}</Link>
+                <Link to={c.to} className="block px-6 py-2.5 font-serif italic text-[0.95rem] tracking-normal text-black/80 hover:text-black hover:bg-[#f7f5ee]">{c.label}</Link>
               </li>
             ))}
           </ul>
@@ -99,7 +99,7 @@ function MobileMenu({ onClose }) {
                   {openGroup === item.label && (
                     <ul className="pb-4 pl-2">
                       {item.children.map(c => (
-                        <li key={c.to}><Link to={c.to} onClick={onClose} className="flex items-center min-h-[48px] font-serif tracking-normal text-[1.05rem] text-black/80">{c.label}</Link></li>
+                        <li key={c.to}><Link to={c.to} onClick={onClose} className="flex items-center min-h-[48px] font-serif italic tracking-normal text-[1.05rem] text-black/80">{c.label}</Link></li>
                       ))}
                     </ul>
                   )}
@@ -137,12 +137,12 @@ export default function Header() {
           {NAV.map(item => (item.children
             ? <DesktopDropdown key={item.label} item={item} />
             : <NavLink key={item.to} to={item.to} className={({ isActive }) => `${linkBase} ${isActive ? linkOn : linkOff}`}>{item.label}</NavLink>))}
-          <a href={SITE.giveUrl} target="_blank" rel="noopener noreferrer" className="px-5 py-2 rounded-full bg-[#c74f2f] text-white font-serif text-[0.95rem] tracking-normal hover:bg-[#2b433e] transition-colors">
+          <a href={SITE.giveUrl} target="_blank" rel="noopener noreferrer" className="px-5 py-2 rounded-full bg-[#c74f2f] text-white font-serif italic text-[0.95rem] tracking-normal hover:bg-[#2b433e] transition-colors">
             Give<span className="sr-only"> (opens in a new tab)</span>
           </a>
         </nav>
         <div className="flex items-center gap-2 xl:hidden">
-          <a href={SITE.giveUrl} target="_blank" rel="noopener noreferrer" className="px-4 min-[400px]:px-5 py-2 rounded-full bg-[#c74f2f] text-white font-serif text-[0.9rem] min-[400px]:text-[0.95rem] tracking-normal">
+          <a href={SITE.giveUrl} target="_blank" rel="noopener noreferrer" className="px-4 min-[400px]:px-5 py-2 rounded-full bg-[#c74f2f] text-white font-serif italic text-[0.9rem] min-[400px]:text-[0.95rem] tracking-normal">
             Give<span className="sr-only"> (opens in a new tab)</span>
           </a>
           <button type="button" className="p-2 hover:bg-black/5 rounded-full transition-colors" aria-expanded={open} aria-controls="mobile-menu" aria-label="Open menu" onClick={() => setOpen(true)}>
