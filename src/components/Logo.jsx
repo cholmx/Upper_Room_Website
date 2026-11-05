@@ -16,7 +16,7 @@ export default function Logo({ tone = 'dark', className = '' }) {
       ) : (
         <span
           className="uppercase text-base min-[400px]:text-xl lg:text-[1.65rem] pt-1 tracking-tight whitespace-nowrap"
-          style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 900 }}
+          style={{ fontFamily: "Arial, Helvetica, sans-serif", fontWeight: 900 }}
         >
           {SITE.shortName}
         </span>

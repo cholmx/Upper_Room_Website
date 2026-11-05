@@ -13,8 +13,10 @@ const { FiMenu, FiX, FiChevronDown } = FiIcons;
 const linkBase = 'whitespace-nowrap font-display font-bold uppercase text-[0.78rem] tracking-[0.1em] py-1 border-b-2 transition-all duration-300 inline-flex items-center gap-1';
 const linkOn = 'border-[#c74f2f] text-black';
 const linkOff = 'border-transparent text-black/70 hover:text-black hover:border-black/20';
+const linkOnLight = 'border-[#eaa235] text-white';
+const linkOffLight = 'border-transparent text-white/90 hover:text-white hover:border-white/50';
 
-function DesktopDropdown({ item }) {
+function DesktopDropdown({ item, light }) {
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
   const btn = useRef(null);
@@ -39,7 +41,7 @@ function DesktopDropdown({ item }) {
       onMouseLeave={() => setOpen(false)}
       onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget)) setOpen(false); }}
     >
-      <button ref={btn} type="button" aria-expanded={open} aria-haspopup="true" onClick={() => setOpen(o => !o)} className={`${linkBase} ${active ? linkOn : linkOff}`}>
+      <button ref={btn} type="button" aria-expanded={open} aria-haspopup="true" onClick={() => setOpen(o => !o)} className={`${linkBase} ${active ? (light ? linkOnLight : linkOn) : (light ? linkOffLight : linkOff)}`}>
         {item.label}
         <SafeIcon icon={FiChevronDown} className={`transition-transform ${open ? 'rotate-180' : ''}`} />
       </button>
@@ -72,12 +74,12 @@ function MobileMenu({ onClose }) {
     return () => { document.removeEventListener('keydown', onKey); document.body.style.overflow = prev; };
   }, [onClose]);
 
-  const big = { fontFamily: "'Archivo', sans-serif", fontWeight: 900 };
+  const big = { fontFamily: "Arial, Helvetica, sans-serif", fontWeight: 900 };
 
   return createPortal(
     <div id="mobile-menu" className="xl:hidden fixed inset-0 z-[60] bg-[#f7f5ee] overflow-y-auto" role="dialog" aria-modal="true" aria-label="Site menu">
       <div className="flex items-center justify-between px-6 h-16">
-        <span className="uppercase text-xl tracking-tight" style={{ fontFamily: "'Archivo', sans-serif", fontWeight: 900 }}>{SITE.shortName}</span>
+        <span className="uppercase text-xl tracking-tight" style={{ fontFamily: "Arial, Helvetica, sans-serif", fontWeight: 900 }}>{SITE.shortName}</span>
         <button type="button" aria-label="Close menu" onClick={onClose} className="p-3 bg-white rounded-full elev-1 hover:scale-105 transition-transform">
           <SafeIcon icon={FiX} size={22} />
         </button>
@@ -120,6 +122,7 @@ export default function Header() {
   const SITE = useSite();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [hasHero, setHasHero] = useState(false);
   const { pathname } = useLocation();
   useEffect(() => setOpen(false), [pathname]);
   useEffect(() => {
@@ -128,21 +131,32 @@ export default function Header() {
     window.addEventListener('scroll', on, { passive: true });
     return () => window.removeEventListener('scroll', on);
   }, []);
+  // When a page opens with a photo hero, the menu sits on top of the photo until the page is scrolled.
+  useEffect(() => {
+    const check = () => {
+      const first = document.querySelector('main')?.firstElementChild;
+      setHasHero(Boolean(first && first.querySelector('.photo-section')));
+    };
+    check();
+    const timers = [120, 500, 1200].map(ms => setTimeout(check, ms));
+    return () => timers.forEach(clearTimeout);
+  }, [pathname]);
+  const light = hasHero && !scrolled;
 
   return (
-    <header className={`sticky top-0 z-50 flex items-center transition-all duration-300 text-black ${scrolled ? 'bg-[#f7f5ee]/90 backdrop-blur-md shadow-[0_1px_2px_rgba(30,37,34,0.05),0_6px_18px_-6px_rgba(30,37,34,0.10)] h-16' : 'bg-[#f7f5ee] shadow-[0_1px_2px_rgba(30,37,34,0.05),0_6px_18px_-6px_rgba(30,37,34,0.10)] h-16 xl:h-24'}`}>
+    <header className={`sticky top-0 z-50 flex items-center h-20 transition-colors duration-300 ${hasHero ? '-mb-20' : ''} ${light ? 'bg-transparent text-white' : 'bg-[#f7f5ee]/95 backdrop-blur-md text-black shadow-[0_1px_2px_rgba(30,37,34,0.05),0_6px_18px_-6px_rgba(30,37,34,0.10)]'}`}>
       <div className="max-w-[1320px] w-full mx-auto px-6 flex items-center justify-between gap-6">
-        <Logo />
+        <Logo tone={light ? 'light' : 'dark'} />
         <nav aria-label="Main" className="hidden xl:flex items-center gap-6 pt-1">
           {NAV.map(item => (item.children
-            ? <DesktopDropdown key={item.label} item={item} />
-            : <NavLink key={item.to} to={item.to} className={({ isActive }) => `${linkBase} ${isActive ? linkOn : linkOff}`}>{item.label}</NavLink>))}
-          <a href={SITE.giveUrl} target="_blank" rel="noopener noreferrer" className={`${linkBase} ${linkOff}`}>
+            ? <DesktopDropdown key={item.label} item={item} light={light} />
+            : <NavLink key={item.to} to={item.to} className={({ isActive }) => `${linkBase} ${isActive ? (light ? linkOnLight : linkOn) : (light ? linkOffLight : linkOff)}`}>{item.label}</NavLink>))}
+          <a href={SITE.giveUrl} target="_blank" rel="noopener noreferrer" className={`${linkBase} ${light ? linkOffLight : linkOff}`}>
             Give<span className="sr-only"> (opens in a new tab)</span>
           </a>
         </nav>
         <div className="flex items-center gap-2 xl:hidden">
-          <button type="button" className="p-2 hover:bg-black/5 rounded-full transition-colors" aria-expanded={open} aria-controls="mobile-menu" aria-label="Open menu" onClick={() => setOpen(true)}>
+          <button type="button" className={`p-2 rounded-full transition-colors ${light ? 'hover:bg-white/10' : 'hover:bg-black/5'}`} aria-expanded={open} aria-controls="mobile-menu" aria-label="Open menu" onClick={() => setOpen(true)}>
             <SafeIcon icon={FiMenu} size={24} />
           </button>
         </div>

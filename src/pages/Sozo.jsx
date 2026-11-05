@@ -34,7 +34,7 @@ export default function Sozo() {
               <p className="lead">Sozo is a Greek word used more than 100 times in the New Testament. It means to save, deliver, make whole, restore, and heal, and it reflects God’s desire for our complete wholeness: spiritually, emotionally, and relationally.</p>
               <blockquote className="border-l-4 border-[#d49e46] pl-5 font-serif italic leading-snug">
                 “But Jesus turning and seeing her said, ‘Daughter, take courage; your faith has made you well (sozo).’ And at once the woman was made well (sozo).”
-                <footer className="mt-1 text-base font-sans not-italic text-black/70">Matthew 9:22</footer>
+                <footer className="mt-1 text-base font-serif not-italic text-black/70">Matthew 9:22</footer>
               </blockquote>
               <p>Are there areas of your life where you feel stuck? Do you sense there is more to your relationship with God than you are experiencing now? Sozo ministry is a gentle, Spirit-led way to find and remove whatever may be getting in the way of knowing God closely and walking in the identity and purpose He gave you.</p>
               <p>A Sozo session is a time of interacting with Father, Son, and Holy Spirit to seek wholeness and pursue your destiny, and it is separate from counseling. During a session, trained Sozo team members sit down with you and, with the help of the Holy Spirit, walk you through the process of freedom and wholeness.</p>
@@ -150,7 +150,7 @@ export default function Sozo() {
           </div>
           <blockquote className="self-center border-l-4 border-[#d49e46] pl-5 text-xl font-serif italic leading-snug">
             “The Spirit of the Lord GOD is upon me, because the LORD has anointed me to bring good news to the afflicted; He has sent me to bind up the brokenhearted, to proclaim liberty to captives and freedom to prisoners.”
-            <footer className="mt-2 text-base font-sans not-italic text-black/70">Isaiah 61:1</footer>
+            <footer className="mt-2 text-base font-serif not-italic text-black/70">Isaiah 61:1</footer>
           </blockquote>
         </div>
       </Section>

@@ -10,7 +10,7 @@ export default function About() {
   const items = BELIEFS.map(b => ({
     id: b.id,
     title: b.title,
-    content: <RichText value={b.full} className="!font-sans text-lg text-black/80" />,
+    content: <RichText value={b.full} className="!font-serif text-lg text-black/80" />,
   }));
   return (
     <>

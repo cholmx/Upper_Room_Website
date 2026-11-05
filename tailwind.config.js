@@ -7,9 +7,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        serif: ['Caladea', 'serif'],
+        serif: ['"Times New Roman"', 'Times', 'serif'],
         sans: ['Inter', 'sans-serif'],
-        display: ['Archivo', 'sans-serif'],
+        display: ['Arial', 'Helvetica', 'sans-serif'],
       },
       colors: {
         ink: {

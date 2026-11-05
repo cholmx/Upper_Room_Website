@@ -11,7 +11,7 @@
 }
 
 html {
-  font-size: 15px;
+  font-size: 16px;
 }
 
 body {
@@ -25,7 +25,7 @@ body {
 }
 
 h1, h2, h3, h4 {
-  font-family: 'Archivo', sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   text-transform: uppercase;
   font-weight: 800;
   letter-spacing: -0.01em;
@@ -34,7 +34,7 @@ h1, h2, h3, h4 {
 
 .kicker {
   display: inline-block;
-  font-family: 'Caladea', serif;
+  font-family: 'Times New Roman', Times, serif;
   font-style: normal;
   text-transform: none;
   font-weight: 400;
@@ -45,7 +45,7 @@ h1, h2, h3, h4 {
 }
 
 .serif-accent {
-  font-family: 'Caladea', serif;
+  font-family: 'Times New Roman', Times, serif;
   font-style: italic;
   font-weight: 400;
   text-transform: none;
@@ -58,7 +58,7 @@ h1, h2, h3, h4 {
   justify-content: center;
   gap: 0.5rem;
   padding: 0.95rem 1.9rem;
-  font-family: 'Archivo', sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   text-transform: uppercase;
   font-size: 0.8rem;
   font-weight: 700;
@@ -262,7 +262,7 @@ h1, h2, h3, h4 {
 
 /* Admin- and user-authored markdown */
 .rich-text {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Times New Roman', Times, serif;
   line-height: 1.5;
   overflow-wrap: anywhere;
 }
@@ -274,7 +274,7 @@ h1, h2, h3, h4 {
 .rich-text h1,
 .rich-text h2,
 .rich-text h3 {
-  font-family: 'Archivo', sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   text-transform: none;
   letter-spacing: -0.01em;
   margin-top: 1.75em;
@@ -443,8 +443,8 @@ details.u-acc.neu-acc[open] { background: #f7f5ee; box-shadow: var(--shadow); }
 .neu-badge { box-shadow: var(--shadow); }
 
 /* Caladea for the voice of the site: lead paragraphs, in a larger size than body text */
-.lead { font-family: 'Inter', sans-serif; font-size: 1.25rem; line-height: 1.5; color: rgba(0, 0, 0, 0.8); }
-@media (min-width: 768px) { .lead { font-size: 1.4rem; } }
+.lead { font-family: 'Times New Roman', Times, serif; font-size: 1.4rem; line-height: 1.4; color: rgba(0, 0, 0, 0.8); }
+@media (min-width: 768px) { .lead { font-size: 1.6rem; } }
 
 /* Caladea runs a little loose by default, so everything set in it is pulled in. */
 :where(.font-serif) { line-height: 1.25; }
@@ -452,13 +452,13 @@ details.u-acc.neu-acc[open] { background: #f7f5ee; box-shadow: var(--shadow); }
 
 /* Titles and headings on the public site are set in Geist, in normal case. The sign-in page and the admin keep their own type. */
 :where(.public-site) :is(h1, h2, h3, h4) {
-  font-family: 'Geist', 'Inter', sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   text-transform: none;
   font-weight: 700;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.01em;
   line-height: 1.1;
 }
-.rich-text h1, .rich-text h2, .rich-text h3 { font-family: 'Geist', 'Inter', sans-serif; font-weight: 700; }
+.rich-text h1, .rich-text h2, .rich-text h3 { font-family: Arial, Helvetica, sans-serif; font-weight: 700; }
 
 /* Content inside the colored boxes keeps the box's text color, with plain list markers and links */
 .box-body a:not(.btn) { color: inherit; text-decoration: underline; text-underline-offset: 4px; font-weight: 600; }
@@ -471,3 +471,8 @@ details.u-acc.neu-acc[open] { background: #f7f5ee; box-shadow: var(--shadow); }
 .public-site .fcard, .public-site .btn, .public-site .video-card {
   border-radius: 8px;
 }
+
+/* The public site is set in two system fonts: Arial Bold for headings and labels, Times New Roman for everything else.
+   Times runs small, so the page scale is a little larger. The sign-in page and the admin keep their own type. */
+.public-site { font-family: 'Times New Roman', Times, serif; font-size: 1.1rem; }
+.public-site .font-display, .public-site .btn { font-family: Arial, Helvetica, sans-serif; }

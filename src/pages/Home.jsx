@@ -78,7 +78,7 @@ export default function Home() {
           <p className="text-lg md:text-xl leading-relaxed text-white">At Upper Room Fellowship, we exist to help people know God deeply, share life authentically, and serve others selflessly. Real change happens from the inside out as we align our hearts with God’s heart. Join us as we pursue healthy relationships, access abundant wholeness, discover our greatness, live supernaturally, treasure God’s presence, and live out the Gospel in tangible ways.</p>
           <blockquote className="mt-8 font-serif italic text-xl md:text-2xl leading-snug">
             “By this everyone will know that you are my disciples, if you love one another.”
-            <footer className="mt-2 text-base font-sans not-italic">John 13:35</footer>
+            <footer className="mt-2 text-base font-serif not-italic">John 13:35</footer>
           </blockquote>
         </div>
       </Section>
