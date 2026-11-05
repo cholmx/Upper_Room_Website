@@ -2,10 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FOOTER_LINKS } from '../content/nav';
 import { useSite } from '../settings';
-import SafeIcon from '../common/SafeIcon';
-import * as FiIcons from 'react-icons/fi';
 
-const { FiArrowRight } = FiIcons;
 
 const MORE = [
   { label: 'Give', href: true },
@@ -13,17 +10,10 @@ const MORE = [
   { label: 'Privacy', to: '/privacy' },
 ];
 
-const container = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.1 } } };
-const item = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } } };
 
 function FooterLink({ to, external, children }) {
-  const className = 'group flex items-center gap-2 opacity-80 hover:opacity-100 hover:text-[#eaa235] mb-3 text-[0.9rem]';
-  const content = (
-    <>
-      <SafeIcon icon={FiArrowRight} className="text-[#eaa235] opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0" />
-      {children}
-    </>
-  );
+  const className = 'block opacity-80 hover:opacity-100 hover:text-[#eaa235] mb-3 text-[0.9rem]';
+  const content = children;
   return external ? (
     <a href={to} target="_blank" rel="noopener noreferrer" className={className}>{content}</a>
   ) : (
