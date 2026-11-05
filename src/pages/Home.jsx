@@ -28,7 +28,7 @@ export default function Home() {
             <p className="kicker text-[#eaa235] !mb-3 md:!mb-5 !text-[1.05rem] md:!text-[1.3rem] uppercase tracking-widest !flex flex-wrap gap-x-3 md:gap-x-5">
               <span>Know God</span><span aria-hidden="true">&middot;</span><span>Share Life</span><span aria-hidden="true">&middot;</span><span>Serve Others</span>
             </p>
-            <h1 id="home-h1" className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl max-w-[18ch] mb-3 md:mb-6 leading-[1.05]">Transforming lives that transform communities</h1>
+            <h1 id="home-h1" className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl max-w-[22ch] mb-3 md:mb-6 leading-[1.08]">Transforming lives that transform communities</h1>
             <p className="font-serif italic text-xl md:text-3xl max-w-[40ch] text-white/90 mb-7 md:mb-10 leading-tight">
               Join us {SITE.serviceTime} in Columbiana, Ohio
               <span className="block text-lg md:text-xl mt-2 text-white/80">{SITE.addressLine}</span>
