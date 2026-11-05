@@ -156,7 +156,7 @@ export default function Header() {
           </a>
         </nav>
         <div className="flex items-center gap-2 xl:hidden">
-          <button type="button" className={`p-2 rounded-full transition-colors ${hasHero ? '-mb-20' : ''} ${light ? 'hover:bg-white/10' : 'hover:bg-[#1e2522]/5'}`} aria-expanded={open} aria-controls="mobile-menu" aria-label="Open menu" onClick={() => setOpen(true)}>
+          <button type="button" className={`p-2 rounded-full transition-colors ${light ? 'hover:bg-white/10' : 'hover:bg-[#1e2522]/5'}`} aria-expanded={open} aria-controls="mobile-menu" aria-label="Open menu" onClick={() => setOpen(true)}>
             <SafeIcon icon={FiMenu} size={24} />
           </button>
         </div>
