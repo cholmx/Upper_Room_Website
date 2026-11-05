@@ -30,8 +30,19 @@ export default function Home() {
   return (
     <>
       <section aria-labelledby="home-h1" className="px-3 md:px-4 pt-3 md:pt-4 pb-1.5 md:pb-2">
-        <div className="photo-section hero-photo rounded-[10px] bg-[#1e2522] min-h-[70vh] md:min-h-[85vh]" role="img" aria-label="Upper Room Fellowship" style={{ backgroundImage: `url('${imgUrl(banner, 1800)}')` }}>
-          <h1 id="home-h1" className="sr-only">Upper Room Fellowship: Transforming lives that transform communities</h1>
+        <div className="photo-section hero-photo rounded-[10px] bg-[#1e2522] min-h-[70vh] md:min-h-[85vh]" style={{ backgroundImage: `url('${imgUrl(banner, 1800)}')` }}>
+          <div className="hero-text max-w-[900px] mx-auto px-6 py-24 md:py-40 text-center text-white">
+            <p className="kicker text-[#eaa235] !mb-3 md:!mb-5">Know God &middot; Share Life &middot; Serve Others</p>
+            <h1 id="home-h1" className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-4 md:mb-6 leading-[1.05]">Transforming lives that transform communities</h1>
+            <p className="font-serif text-lg md:text-xl mb-8 md:mb-10 leading-tight">
+              Join us {SITE.serviceTime} in Columbiana, Ohio
+              <span className="block text-base md:text-lg mt-2">{SITE.addressLine}</span>
+            </p>
+            <div className="flex flex-wrap justify-center gap-3 md:gap-4">
+              <Btn to="/plan-your-visit" variant="primary">Plan Your Visit</Btn>
+              <Btn to="/messages" variant="light">Watch Latest Message</Btn>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -66,15 +77,15 @@ export default function Home() {
         </div>
       </Section>
 
-      <Section tone="sage">
+      <Section tone="white">
         <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
           <div>
-            <p className="kicker text-white">Support Upper Room Fellowship</p>
+            <p className="kicker text-[#c74f2f]">Support Upper Room Fellowship</p>
             <h2 className="text-3xl md:text-5xl mb-5">Give online</h2>
             <p className={`mb-8 ${P}`}>Partner with us in transforming lives and communities through your generous support of our church’s mission and ministries.</p>
             <div className="flex flex-wrap items-center gap-5">
               <Btn href={SITE.giveUrl} variant="dark">Give online</Btn>
-              <Link to="/give" className="font-display font-bold text-[0.95rem] tracking-wide border-b-2 border-white pb-1">Ways to give</Link>
+              <Link to="/give" className="font-display font-bold text-[0.95rem] tracking-wide border-b-2 border-[#1e2522] pb-1">Ways to give</Link>
             </div>
           </div>
           <div className="aspect-[4/3]"><Picture slot="home-give" fallback={HERO_IMAGES.ministries} /></div>
@@ -82,7 +93,7 @@ export default function Home() {
         <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center mt-16 md:mt-24">
           <div className="aspect-[4/3] md:order-first order-last"><Picture slot="home-watch" fallback={HERO_IMAGES.messages} /></div>
           <div>
-            <p className="kicker text-white">Missed a Sunday?</p>
+            <p className="kicker text-[#c74f2f]">Missed a Sunday?</p>
             <h2 className="text-3xl md:text-5xl mb-5">Watch latest message</h2>
             <p className={`mb-8 ${P}`}>Catch up on recent teachings that will help you grow in faith and apply biblical truths to your daily life.</p>
             <Btn to="/messages" variant="dark">Watch now</Btn>

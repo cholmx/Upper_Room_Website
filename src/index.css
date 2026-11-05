@@ -365,3 +365,4 @@ details.u-acc.neu-acc[open] { background: #f7f5ee; box-shadow: var(--shadow); }
 .public-site { font-family: Merriweather, Georgia, serif; font-size: 0.9375rem; line-height: 1.7; }
 .public-site .font-display, .public-site .btn { font-family: Arial, Helvetica, sans-serif; }
 
+.hero-text h1, .hero-text p { text-shadow: 0 1px 14px rgba(0, 0, 0, 0.55); }
