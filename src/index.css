@@ -449,3 +449,13 @@ details.u-acc.neu-acc[open] { background: #f7f5ee; box-shadow: var(--shadow); }
 /* Caladea runs a little loose by default, so everything set in it is pulled in. */
 :where(.font-serif) { line-height: 1.25; }
 .rich-text { line-height: 1.5; }
+
+/* Titles and headings on the public site are set in Geist, in normal case. The sign-in page and the admin keep their own type. */
+:where(.public-site) :is(h1, h2, h3, h4) {
+  font-family: 'Geist', 'Inter', sans-serif;
+  text-transform: none;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+}
+.rich-text h1, .rich-text h2, .rich-text h3 { font-family: 'Geist', 'Inter', sans-serif; font-weight: 600; }
