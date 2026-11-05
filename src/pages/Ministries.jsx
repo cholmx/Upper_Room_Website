@@ -22,7 +22,7 @@ export default function Ministries() {
       </Section>
 
       <Section tone="white">
-        <Boxes>
+        <Boxes on="white">
           <Box tone="sage" id="kids" title="Kids ministry: Upper Room Kids">
             <p>Upper Room Kids is a vibrant, exciting environment, and it is far more than childcare during service. Children from birth through 5th grade discover God’s love through age-appropriate teaching, fun activities, and caring relationships.</p>
             <p>We believe children are part of the church today and are more than the church of tomorrow. Our passionate team creates experiences that help kids build a strong spiritual foundation, form healthy relationships, and understand they have God-given purpose and value from a young age.</p>
@@ -53,7 +53,7 @@ export default function Ministries() {
 
       <Section tone="cream">
         <Boxes>
-          <Box tone="forest" id="table-groups" title="Small groups: Table Groups">
+          <Box tone="forest" light id="table-groups" title="Small groups: Table Groups">
             <p>Life is better together. Living out our value of pursuing healthy relationships, our Table Groups meet throughout the week in homes across the community to study, pray, and share life. These spaces allow us to show up authentically, with kindness and honor.</p>
             <p>In a church family our size, it is vital to have smaller communities where you can be known, loved, and challenged to grow. Table Groups provide that opportunity. They create environments where you can build meaningful relationships, apply biblical teachings to your daily life, and support one another through life’s ups and downs.</p>
             <h3>Our Table Groups are</h3>

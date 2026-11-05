@@ -27,7 +27,7 @@ export default function Contact() {
                 <p>Join us {SITE.serviceTime}</p>
               </address>
             </Box>
-            <Box tone="sage" title="We value healthy relationships" as="h2" className="!p-8">
+            <Box tone="sage" light title="We value healthy relationships" as="h2" className="!p-8">
               <p>At Upper Room Fellowship, we believe in pursuing healthy relationships where we show up authentically, with kindness and honor. We look forward to connecting with you and journeying together in faith.</p>
             </Box>
           </div>

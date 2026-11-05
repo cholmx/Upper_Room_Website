@@ -61,7 +61,7 @@ export default function Give() {
       </Section>
 
       <Section tone="white">
-        <Boxes>
+        <Boxes on="white">
           <Box tone="forest" title="Financial accountability">
             <p>We are committed to stewarding your gifts with integrity and transparency. Upper Room Fellowship follows strict financial protocols including:</p>
             <ul>
@@ -72,7 +72,7 @@ export default function Give() {
             </ul>
             <p>Your contributions primarily support our local church ministries, facilities, staff, and outreach efforts, with a portion designated to missions.</p>
           </Box>
-          <Box tone="sage" title="Generosity testimony">
+          <Box tone="sage" light title="Generosity testimony">
             <p>Living by our values is not always easy, but we have found it incredibly rewarding. There is a real sense of purpose and joy that comes from aligning our lives with what God values. As the Psalms put it, “There truly is a reward for those who live for God” (Psalm 58:11b NLT).</p>
             <p>We have found this to be true in our own lives, especially in the area of generosity. When we give freely as God has given to us, we experience His faithfulness in remarkable ways. Your story of generosity can inspire others as well. Consider sharing how giving has impacted your life by submitting a testimony.</p>
           </Box>

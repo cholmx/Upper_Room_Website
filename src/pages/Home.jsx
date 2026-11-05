@@ -51,18 +51,18 @@ export default function Home() {
             <p>Find service times, directions to our Columbiana location, and helpful information for your first Sunday with us.</p>
             <p className="font-semibold">Join us {SITE.serviceTime} at {SITE.addressLine}.</p>
             <div className="pt-2 flex flex-wrap gap-3">
-              <Btn to="/plan-your-visit" variant="dark">New here?</Btn>
-              <Btn href={SITE.googleMapsUrl} variant="dark">Get directions</Btn>
+              <Btn to="/plan-your-visit" variant="primary">New here?</Btn>
+              <Btn href={SITE.googleMapsUrl} variant="ghost">Get directions</Btn>
             </div>
           </Box>
         </Boxes>
       </Section>
 
       <Section tone="white">
-        <Boxes>
+        <Boxes on="white">
           <Box tone="gold" title="Watch latest message">
             <p>Missed a Sunday? Catch up on recent teachings that will help you grow in faith and apply biblical truths to your daily life.</p>
-            <div className="pt-2"><Btn to="/messages" variant="dark">Watch now</Btn></div>
+            <div className="pt-2"><Btn to="/messages" variant="primary">Watch now</Btn></div>
           </Box>
           <Box tone="ink" title="Give online">
             <p>Partner with us in transforming lives and communities through your generous support of our church’s mission and ministries.</p>
@@ -73,13 +73,13 @@ export default function Home() {
 
       <Section tone="cream">
         <Boxes>
-          <Box tone="terra" title="Where & when">
+          <Box tone="terra" light title="Where & when">
             <address className="not-italic text-xl leading-relaxed">
               <p className="flex items-start gap-3"><SafeIcon icon={FiMapPin} className="mt-1.5 flex-shrink-0" />
                 <span>{SITE.address.street}<br />{SITE.address.city} {SITE.address.region} {SITE.address.postalCode}</span></p>
               <p className="mt-4">Join us {SITE.serviceTime}</p>
             </address>
-            <div className="pt-2"><Btn href={SITE.googleMapsUrl} variant="light">Get directions</Btn></div>
+            <div className="pt-2"><Btn href={SITE.googleMapsUrl} variant="dark">Get directions</Btn></div>
           </Box>
           <Box tone="forest" title="Our vision statement">
             <p>At Upper Room Fellowship, we exist to help people know God deeply, share life authentically, and serve others selflessly. Real change happens from the inside out as we align our hearts with God’s heart. Join us as we pursue healthy relationships, access abundant wholeness, discover our greatness, live supernaturally, treasure God’s presence, and live out the Gospel in tangible ways.</p>

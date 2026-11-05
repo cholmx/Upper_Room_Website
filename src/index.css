@@ -471,3 +471,6 @@ details.u-acc.neu-acc[open] { background: #f7f5ee; box-shadow: var(--shadow); }
 .public-site .fcard, .public-site .btn, .public-site .video-card {
   border-radius: 0;
 }
+
+/* A fine keyline inside the edge of a filled panel, like an engraved card */
+.box-keyline::before { content: ''; position: absolute; inset: 12px; border: 1px solid rgba(212, 158, 70, 0.55); pointer-events: none; }

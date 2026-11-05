@@ -258,26 +258,40 @@ export function QuickFacts({ items }) {
   );
 }
 
-// Two boxes side by side, each in its own palette color, with content inside.
-const BOX_TONES = {
-  forest: 'bg-[#2b433e] text-white',
-  sage: 'bg-[#597f5c] text-white',
-  terra: 'bg-[#c74f2f] text-white',
-  ink: 'bg-[#1e2522] text-white',
-  amber: 'bg-[#eaa235] text-[#1e2522]',
-  gold: 'bg-[#d49e46] text-[#1e2522]',
-  cream: 'bg-[#f7f5ee] text-[#1e2522]',
-  white: 'bg-white text-[#1e2522]',
+// Two panels side by side. A filled panel is a deep color with a fine gold keyline inside its edge.
+// A light panel is a paper-colored panel with a hairline border and a colored rule across its top.
+// Pair one of each, so the page reads like a printed layout.
+const FILL = {
+  forest: 'bg-[#2b433e]',
+  sage: 'bg-[#597f5c]',
+  terra: 'bg-[#c74f2f]',
+  ink: 'bg-[#1e2522]',
 };
+const RULE = {
+  forest: 'bg-[#2b433e]', sage: 'bg-[#597f5c]', terra: 'bg-[#c74f2f]', ink: 'bg-[#1e2522]', amber: 'bg-[#eaa235]', gold: 'bg-[#d49e46]',
+};
+const BoxesContext = React.createContext('cream');
 
-export function Boxes({ children, className = '' }) {
-  return <div className={`grid md:grid-cols-2 gap-6 md:gap-8 items-stretch ${className}`}>{children}</div>;
+// "on" is the color of the section behind the panels, so light panels can be the other paper color.
+export function Boxes({ children, on = 'cream', className = '' }) {
+  return (
+    <BoxesContext.Provider value={on}>
+      <div className={`grid md:grid-cols-2 gap-6 md:gap-10 items-stretch ${className}`}>{children}</div>
+    </BoxesContext.Provider>
+  );
 }
 
-export function Box({ tone = 'forest', id, title, as: Tag = 'h2', children, className = '' }) {
+export function Box({ tone = 'forest', light = false, id, title, as: Tag = 'h2', children, className = '' }) {
+  const on = React.useContext(BoxesContext);
+  const isLight = light || !FILL[tone];
+  const paper = on === 'cream' ? 'bg-white' : 'bg-[#f7f5ee]';
   return (
-    <section id={id} className={`${BOX_TONES[tone]} rounded-[2rem] p-8 md:p-10 shadow-[var(--shadow)] scroll-mt-24 flex flex-col ${className}`}>
-      {title && <Tag className="text-2xl md:text-4xl mb-5">{title}</Tag>}
+    <section
+      id={id}
+      className={`relative flex flex-col scroll-mt-24 p-8 md:p-12 ${isLight ? `${paper} text-[#1e2522] border border-[#1e2522]/15` : `${FILL[tone]} text-white box-keyline`} ${className}`}
+    >
+      {isLight && <span aria-hidden="true" className={`absolute top-0 left-0 right-0 h-1.5 ${RULE[tone]}`}></span>}
+      {title && <Tag className="text-2xl md:text-[2rem] mb-5">{title}</Tag>}
       <div className="box-body space-y-4 text-lg leading-relaxed flex-grow">{children}</div>
     </section>
   );

@@ -37,7 +37,7 @@ export default function Sozo() {
             <p>Are there areas of your life where you feel stuck? Do you sense there is more to your relationship with God than you are experiencing now? Sozo ministry is a gentle, Spirit-led way to find and remove whatever may be getting in the way of knowing God closely and walking in the identity and purpose He gave you.</p>
             <p>A Sozo session is a time of interacting with Father, Son, and Holy Spirit to seek wholeness and pursue your destiny, and it is separate from counseling. During a session, trained Sozo team members sit down with you and, with the help of the Holy Spirit, walk you through the process of freedom and wholeness.</p>
           </Box>
-          <Box tone="sage" title="Biblical foundation and our approach">
+          <Box tone="sage" light title="Biblical foundation and our approach">
             <p>Sozo ministry is built on these biblical truths:</p>
             <ul>
               <li>God desires wholeness and freedom for His children (John 10:10, Isaiah 61:1 to 3)</li>
@@ -110,7 +110,7 @@ export default function Sozo() {
 
       <Section tone="cream">
         <Boxes>
-          <Box tone="terra" title="What Sozo is not">
+          <Box tone="terra" light title="What Sozo is not">
             <ul>
               <li>Sozo is not psychotherapy or psychological counseling</li>
               <li>Sozo is not a substitute for professional mental health services or medical care</li>
@@ -134,7 +134,7 @@ export default function Sozo() {
       </Section>
 
       <Section tone="white">
-        <Boxes>
+        <Boxes on="white">
           <Box tone="amber" title="Recommended resources">
             <p>To go deeper into inner healing and Sozo ministry, these books are a good start.</p>
             <ul>
@@ -145,7 +145,7 @@ export default function Sozo() {
               <li><em>Emotionally Healthy Spirituality</em> by Peter Scazzero</li>
             </ul>
           </Box>
-          <Box tone="gold" title="A word from Isaiah">
+          <Box tone="forest" title="A word from Isaiah">
             <blockquote className="font-serif italic text-xl leading-snug">
               “The Spirit of the Lord GOD is upon me, because the LORD has anointed me to bring good news to the afflicted; He has sent me to bind up the brokenhearted, to proclaim liberty to captives and freedom to prisoners.”
               <footer className="mt-2 text-base font-sans not-italic">Isaiah 61:1</footer>
