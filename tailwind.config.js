@@ -8,7 +8,7 @@ export default {
     extend: {
       fontFamily: {
         serif: ['"Times New Roman"', 'Times', 'serif'],
-        sans: ['Inter', 'sans-serif'],
+        sans: ['"Times New Roman"', 'Times', 'serif'],
         display: ['Arial', 'Helvetica', 'sans-serif'],
       },
       colors: {
