@@ -23,7 +23,6 @@ export default function Home() {
   const SITE = useSite();
   const heroPhoto = usePhoto('home-hero').url;
   const banner = usePhoto('banner-home').url || heroPhoto || HERO_IMAGES.home;
-  const missionPhoto = usePhoto('home-mission').url || HERO_IMAGES.about;
   const connectPhoto = usePhoto('home-connect').url || HERO_IMAGES.connect;
   const { data } = useFetch('read/sermons?limit=10&sort=created_at:desc');
   const latest = useMemo(() => (data ?? []).filter(isLive)[0], [data]);
@@ -32,18 +31,11 @@ export default function Home() {
   return (
     <>
       <section aria-labelledby="home-h1" className="px-3 md:px-4 pt-3 md:pt-4 pb-1.5 md:pb-2">
-        <div className="photo-section hero-photo rounded-[10px] bg-[#1e2522] min-h-[70vh] md:min-h-[85vh]" style={{ backgroundImage: `url('${imgUrl(banner, 1800)}')` }}>
-          <div className="hero-text max-w-[900px] mx-auto px-6 py-24 md:py-40 text-center text-white">
-            <h1 id="home-h1" className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl mb-4 md:mb-5 leading-[1.05]">You are welcome here</h1>
-            <p className="font-serif text-xl md:text-2xl mb-6 md:mb-8 leading-snug">Transforming lives that transform communities</p>
-            <p className="font-serif text-base md:text-[0.95rem] mb-8 md:mb-10 leading-tight">
-              Join us {SITE.serviceTime} in Columbiana, Ohio
-              <span className="block text-sm md:text-base mt-2">{SITE.addressLine}</span>
-            </p>
-            <div className="flex flex-wrap justify-center gap-3 md:gap-4">
-              <Btn to="/plan-your-visit" variant="primary">Plan Your Visit</Btn>
-              <Btn to="/messages" variant="light">Watch Latest Message</Btn>
-            </div>
+        <div className="photo-section hero-photo rounded-[10px] bg-[#1e2522] min-h-[70vh] md:min-h-[85vh] flex items-end justify-center" style={{ backgroundImage: `url('${imgUrl(banner, 1800)}')` }}>
+          <div className="hero-text w-full max-w-[900px] px-6 pb-16 md:pb-24 pt-32 text-center text-white">
+            <p className="font-serif text-lg md:text-2xl mb-4 md:mb-6">You are welcome here</p>
+            <h1 id="home-h1" className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-8 md:mb-10 leading-[1.08]">Know God &middot; Share Life &middot; Serve Others</h1>
+            <Btn to="/plan-your-visit" variant="primary">Plan Your Visit</Btn>
           </div>
         </div>
       </section>
@@ -54,7 +46,7 @@ export default function Home() {
         <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
           <div className="aspect-[4/5] md:aspect-[5/6]"><Picture slot="home-welcome" fallback={HERO_IMAGES.about} /></div>
           <div>
-            <p className="kicker text-[#1e2522]">Welcome</p>
+            <p className="kicker text-[#c74f2f]">Transforming lives that transform communities</p>
             <h2 className="text-3xl md:text-5xl mb-6">Welcome to Upper Room Fellowship</h2>
             <div className={`space-y-4 text-[#1e2522]/80 ${P}`}>
               <p>For over 50 years, our congregation has been gathering in Columbiana to worship, grow, and serve together. We love this city and are proud to call it home.</p>
@@ -80,12 +72,6 @@ export default function Home() {
           </blockquote>
         </div>
       </Section>
-
-      <section aria-label="Our mission" className="px-3 md:px-4 py-1.5 md:py-2">
-        <div data-image-band="true" className="photo-section rounded-[10px] bg-[#1e2522] py-24 md:py-40 px-6 text-center text-white" style={{ backgroundImage: `url('${imgUrl(missionPhoto, 1600)}')` }}>
-          <h2 className="hero-text relative z-10 max-w-3xl mx-auto text-4xl md:text-6xl leading-tight">Know God &middot; Share Life &middot; Serve Others</h2>
-        </div>
-      </section>
 
       <Section tone="white">
         <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
