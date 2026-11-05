@@ -13,9 +13,20 @@ for (const route of STATIC_ROUTES) {
   await page.goto(base + route, { waitUntil: 'load' });
   await page.waitForTimeout(500);
   const colors = await page.evaluate((ink) => {
-    const bg = (el) => (el.classList.contains('photo-section') ? ink : getComputedStyle(el).backgroundColor);
-    // A band is two panels, so it counts as two colors.
-    const colorsOf = (el) => (el.dataset.band ? [...el.children].map(bg) : [bg(el)]);
+    const CREAM = 'rgb(247, 245, 238)';
+    const bg = (el) => {
+      if (!el) return CREAM;
+      if (el.dataset.imageBand) return 'photo';
+      if (el.classList.contains('photo-section')) return ink;
+      const c = getComputedStyle(el).backgroundColor;
+      return c === 'rgba(0, 0, 0, 0)' ? CREAM : c;
+    };
+    // Every section is an inset panel inside a wrapper. A band is two panels, so it counts as two colors.
+    const colorsOf = (el) => {
+      const inner = el.firstElementChild;
+      if (el.dataset.band) return [...inner.children].map(bg);
+      return [bg(inner)];
+    };
     const list = [...document.querySelector('main').children].filter((e) => e.offsetHeight > 0).map(colorsOf);
     list.push(colorsOf([...document.querySelectorAll('footer')].pop()));
     return list;

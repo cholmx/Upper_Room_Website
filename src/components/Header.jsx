@@ -10,7 +10,7 @@ import * as FiIcons from 'react-icons/fi';
 
 const { FiMenu, FiX, FiChevronDown } = FiIcons;
 
-const linkBase = 'whitespace-nowrap font-serif italic uppercase text-[1.2rem] tracking-wider py-1 border-b-2 transition-all duration-300 inline-flex items-center gap-1';
+const linkBase = 'whitespace-nowrap font-display font-bold uppercase text-[0.78rem] tracking-[0.1em] py-1 border-b-2 transition-all duration-300 inline-flex items-center gap-1';
 const linkOn = 'border-[#c74f2f] text-black';
 const linkOff = 'border-transparent text-black/70 hover:text-black hover:border-black/20';
 
@@ -48,7 +48,7 @@ function DesktopDropdown({ item }) {
           <ul className="bg-white rounded-2xl py-3 elev-2">
             {item.children.map(c => (
               <li key={c.to}>
-                <Link to={c.to} className="block px-6 py-2.5 font-serif italic uppercase text-[1.1rem] tracking-widest text-black/80 hover:text-black hover:bg-[#f7f5ee]">{c.label}</Link>
+                <Link to={c.to} className="block px-6 py-2.5 font-display font-semibold uppercase text-[0.78rem] tracking-[0.1em] text-black/80 hover:text-black hover:bg-[#f7f5ee]">{c.label}</Link>
               </li>
             ))}
           </ul>
@@ -99,7 +99,7 @@ function MobileMenu({ onClose }) {
                   {openGroup === item.label && (
                     <ul className="pb-4 pl-2">
                       {item.children.map(c => (
-                        <li key={c.to}><Link to={c.to} onClick={onClose} className="flex items-center min-h-[48px] font-serif italic uppercase tracking-widest text-[1.25rem] text-black/80">{c.label}</Link></li>
+                        <li key={c.to}><Link to={c.to} onClick={onClose} className="flex items-center min-h-[48px] font-display font-bold uppercase tracking-[0.08em] text-[1rem] text-black/80">{c.label}</Link></li>
                       ))}
                     </ul>
                   )}

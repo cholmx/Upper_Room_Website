@@ -35,11 +35,11 @@ h1, h2, h3, h4 {
 .kicker {
   display: inline-block;
   font-family: 'Caladea', serif;
-  font-style: italic;
-  text-transform: uppercase;
-  font-weight: 700;
-  font-size: 1.15rem;
-  letter-spacing: 0.15em;
+  font-style: normal;
+  text-transform: none;
+  font-weight: 400;
+  font-size: 1.2rem;
+  letter-spacing: 0.01em;
   line-height: 1.15;
   margin-bottom: 1rem;
 }
@@ -57,10 +57,10 @@ h1, h2, h3, h4 {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 1rem 2.2rem;
+  padding: 0.95rem 1.9rem;
   font-family: 'Archivo', sans-serif;
   text-transform: uppercase;
-  font-size: 0.95rem;
+  font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   line-height: 1.15;
@@ -466,15 +466,8 @@ details.u-acc.neu-acc[open] { background: #f7f5ee; box-shadow: var(--shadow); }
 .box-body ul li + li { margin-top: 0.5rem; }
 .box-body h3 { font-size: 1.25rem; margin-top: 0.5rem; }
 
-/* Square corners on the public site: boxes, cards, forms, photos and buttons. Round shapes that are circles stay round. */
+/* A small, even corner radius on the public site's panels, cards, forms, photos and buttons. Circles stay round. */
 .public-site [class*="rounded-"]:not(.rounded-full),
 .public-site .fcard, .public-site .btn, .public-site .video-card {
-  border-radius: 0;
-}
-
-
-/* Band panels: the text lines up with the page's content column on the outer edges */
-@media (min-width: 768px) {
-  .band > .band-panel:first-child { padding-left: max(1.5rem, calc((100vw - 1145px) / 2)); padding-right: 3rem; }
-  .band > .band-panel:last-child { padding-right: max(1.5rem, calc((100vw - 1145px) / 2)); padding-left: 3rem; }
+  border-radius: 8px;
 }

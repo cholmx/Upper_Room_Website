@@ -44,7 +44,7 @@ export const Btn = forwardRef(function Btn({ to, href, onClick, variant = 'prima
 // The site palette: ink, forest, sage and terracotta for dark and strong bands, cream and white for light ones,
 // and the two golds for warm bands. Neighboring sections must differ (see the colors check in the README).
 const TONES = {
-  cream: 'bg-[#f7f5ee] text-[#1e2522]',
+  cream: 'text-[#1e2522]',
   white: 'bg-white text-[#1e2522]',
   sand: 'bg-white text-[#1e2522]',
   ink: 'bg-[#1e2522] text-[#f7f5ee] relative overflow-hidden glow-gold',
@@ -56,17 +56,20 @@ const TONES = {
 };
 
 export function Section({ tone = 'cream', id, className = '', narrow = false, children, ...rest }) {
+  const panel = tone !== 'cream';
   return (
-    <section id={id} className={`${TONES[tone]} py-24 md:py-32 px-6 ${className}`} {...rest}>
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-60px' }}
-        transition={{ duration: 0.7, ease: 'easeOut' }}
-        className={`${narrow ? 'max-w-[800px]' : 'max-w-[1145px]'} mx-auto relative z-10`}
-      >
-        {children}
-      </motion.div>
+    <section id={id} className="px-3 md:px-4 py-1.5 md:py-2" {...rest}>
+      <div className={`${TONES[tone]} ${panel ? 'rounded-[10px]' : ''} py-16 md:py-24 px-6 md:px-10 ${className}`}>
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.7, ease: 'easeOut' }}
+          className={`${narrow ? 'max-w-[800px]' : 'max-w-[1145px]'} mx-auto relative z-10`}
+        >
+          {children}
+        </motion.div>
+      </div>
     </section>
   );
 }
@@ -147,20 +150,22 @@ function usePageBanner(pageKey) {
 export function PageHeader({ kicker, title, intro, children, page, ambient = false }) {
   const image = usePageBanner(page);
   return (
-    <header className="photo-section text-[#f7f5ee] py-24 md:py-32 px-6 text-center" style={{ backgroundImage: `url('${imgUrl(image, 1600)}')` }}>
-      <div className="scrim"></div>
-      {ambient && <LightField />}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: 'easeOut' }}
-        className="max-w-[800px] mx-auto relative z-10"
-      >
-        {kicker && !same(kicker, title) && <span className="kicker text-[#eaa235]">{kicker}</span>}
-        <h1 className="text-4xl md:text-7xl mb-6">{title}</h1>
-        {intro && <p className="font-serif italic text-xl md:text-2xl text-white/90 max-w-[50ch] mx-auto leading-snug">{intro}</p>}
-        {children && <div className="mt-8 flex flex-wrap justify-center gap-4">{children}</div>}
-      </motion.div>
+    <header className="px-3 md:px-4 pt-3 md:pt-4 pb-1.5 md:pb-2">
+      <div className="photo-section rounded-[10px] text-[#f7f5ee] py-24 md:py-36 px-6 text-center" style={{ backgroundImage: `url('${imgUrl(image, 1600)}')` }}>
+        <div className="scrim"></div>
+        {ambient && <LightField />}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+          className="max-w-[800px] mx-auto relative z-10"
+        >
+          {kicker && !same(kicker, title) && <span className="kicker text-[#eaa235]">{kicker}</span>}
+          <h1 className="text-4xl md:text-6xl mb-6">{title}</h1>
+          {intro && <p className="font-serif text-xl md:text-2xl text-white/90 max-w-[50ch] mx-auto leading-snug">{intro}</p>}
+          {children && <div className="mt-8 flex flex-wrap justify-center gap-4">{children}</div>}
+        </motion.div>
+      </div>
     </header>
   );
 }
@@ -272,12 +277,16 @@ const PANEL = {
 };
 
 export function Band({ children, id, className = '' }) {
-  return <section id={id} data-band="true" className={`band grid md:grid-cols-2 ${className}`}>{children}</section>;
+  return (
+    <section id={id} data-band="true" className={`px-3 md:px-4 py-1.5 md:py-2 ${className}`}>
+      <div className="band grid md:grid-cols-2 overflow-hidden rounded-[10px]">{children}</div>
+    </section>
+  );
 }
 
 export function Panel({ tone = 'forest', title, as: Tag = 'h2', children, id, className = '' }) {
   return (
-    <div id={id} className={`${PANEL[tone]} band-panel scroll-mt-24 py-16 md:py-24 px-6 ${className}`}>
+    <div id={id} className={`${PANEL[tone]} band-panel scroll-mt-24 py-14 md:py-20 px-8 md:px-12 ${className}`}>
       {title && <Tag className="text-3xl md:text-4xl mb-6">{title}</Tag>}
       <div className="box-body space-y-4 text-lg leading-relaxed max-w-[34rem]">{children}</div>
     </div>

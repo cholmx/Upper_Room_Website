@@ -1,86 +1,138 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import usePageMeta from '../hooks/usePageMeta';
+import useFetch from '../hooks/useFetch';
 import { useSite } from '../settings';
 import { usePhoto } from '../photos';
-import { imgUrl } from '../utils';
-import { Btn, Section, SectionHeader, Cards, Card, Band, Panel } from '../components/ui';
+import { HERO_IMAGES } from '../content/photos';
+import { formatDate, imgUrl, isLive, messagePath, ytId } from '../utils';
+import { Btn, Section } from '../components/ui';
+import LiteYouTube from '../components/LiteYouTube';
 import LightField from '../components/immersive/LightField';
-import SafeIcon from '../common/SafeIcon';
-import * as FiIcons from 'react-icons/fi';
 
-const { FiMapPin } = FiIcons;
-const P = 'text-lg leading-relaxed text-black/80';
+const P = 'text-lg leading-relaxed';
+
+// A rounded photo that falls back to a default picture until one is uploaded in Site Photos.
+function Picture({ slot, fallback, className = '' }) {
+  const { url, alt } = usePhoto(slot);
+  return <img src={imgUrl(url || fallback, 1000)} alt={url ? alt : ''} loading="lazy" className={`w-full h-full object-cover rounded-[10px] ${className}`} />;
+}
 
 export default function Home() {
   usePageMeta('home');
   const SITE = useSite();
   const heroPhoto = usePhoto('home-hero').url;
-  const banner = usePhoto('banner-home').url || heroPhoto;
+  const banner = usePhoto('banner-home').url || heroPhoto || HERO_IMAGES.home;
+  const connectPhoto = usePhoto('home-connect').url || HERO_IMAGES.connect;
+  const { data } = useFetch('read/sermons?limit=10&sort=created_at:desc');
+  const latest = useMemo(() => (data ?? []).filter(isLive)[0], [data]);
+  const videoId = ytId(latest?.video_url || latest?.yt);
 
   return (
     <>
-      <section aria-labelledby="home-h1" className="photo-section bg-[#1e2522] py-8 md:py-44 px-6 relative" style={banner ? { backgroundImage: `url('${imgUrl(banner, 1600)}')` } : undefined}>
-        <div className="scrim"></div>
-        <LightField />
-        <div className="max-w-[1145px] mx-auto relative z-10 text-white">
-          <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, ease: 'easeOut' }}>
-            <p className="kicker text-[#eaa235] !mb-3 md:!mb-5 !text-[1.05rem] md:!text-[1.3rem] uppercase tracking-widest !flex flex-wrap gap-x-3 md:gap-x-5">
-              <span>Know God</span><span aria-hidden="true">&middot;</span><span>Share Life</span><span aria-hidden="true">&middot;</span><span>Serve Others</span>
-            </p>
-            <h1 id="home-h1" className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl max-w-[22ch] mb-3 md:mb-6 leading-[1.08]">Transforming lives that transform communities</h1>
-            <p className="font-serif italic text-xl md:text-3xl max-w-[40ch] text-white/90 mb-7 md:mb-10 leading-tight">
-              Join us {SITE.serviceTime} in Columbiana, Ohio
-              <span className="block text-lg md:text-xl mt-2 text-white/80">{SITE.addressLine}</span>
-            </p>
-            <div className="flex gap-3 md:gap-4">
-              <Btn to="/plan-your-visit" variant="primary" className="max-sm:flex-1 max-sm:!px-3 max-sm:!py-3 max-sm:!text-[0.85rem] max-sm:leading-tight">Plan Your Visit</Btn>
-              <Btn to="/messages" variant="light" className="max-sm:flex-1 max-sm:!px-3 max-sm:!py-3 max-sm:!text-[0.85rem] max-sm:leading-tight">Watch Latest Message</Btn>
-            </div>
-          </motion.div>
+      <section aria-labelledby="home-h1" className="px-3 md:px-4 pt-3 md:pt-4 pb-1.5 md:pb-2">
+        <div className="photo-section rounded-[10px] bg-[#1e2522] py-20 md:py-40 px-6 relative text-center" style={{ backgroundImage: `url('${imgUrl(banner, 1800)}')` }}>
+          <div className="scrim"></div>
+          <LightField />
+          <div className="max-w-[900px] mx-auto relative z-10 text-white">
+            <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, ease: 'easeOut' }}>
+              <p className="kicker text-[#eaa235] !mb-3 md:!mb-5">Know God &middot; Share Life &middot; Serve Others</p>
+              <h1 id="home-h1" className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-4 md:mb-6 leading-[1.05]">Transforming lives that transform communities</h1>
+              <p className="font-serif text-xl md:text-2xl text-white/90 mb-8 md:mb-10 leading-tight">
+                Join us {SITE.serviceTime} in Columbiana, Ohio
+                <span className="block text-lg md:text-xl mt-2 text-white/80">{SITE.addressLine}</span>
+              </p>
+              <div className="flex flex-wrap justify-center gap-3 md:gap-4">
+                <Btn to="/plan-your-visit" variant="primary">Plan Your Visit</Btn>
+                <Btn to="/messages" variant="light">Watch Latest Message</Btn>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
-      <Band>
-        <Panel tone="sage" title="Welcome to Upper Room Fellowship">
-          <p className="font-serif text-[1.5rem] leading-snug">For over 50 years, our congregation has been gathering in Columbiana to worship, grow, and serve together. We love this city and are proud to call it home.</p>
-          <p>Together, we are learning to live with more love, joy, and purpose. We support each other and reach out to make our community better. Whether you are just exploring faith or looking for a church family, we would love to meet you and welcome you into ours.</p>
-        </Panel>
-        <Panel tone="amber" title="Plan your visit">
-          <p>Find service times, directions to our Columbiana location, and helpful information for your first Sunday with us.</p>
-          <p className="font-semibold">Join us {SITE.serviceTime} at {SITE.addressLine}.</p>
-          <div className="pt-2 flex flex-wrap gap-3">
-            <Btn to="/plan-your-visit" variant="dark">New here?</Btn>
-            <Btn href={SITE.googleMapsUrl} variant="dark">Get directions</Btn>
-          </div>
-        </Panel>
-      </Band>
-
       <Section tone="cream">
-        <SectionHeader kicker="Quick links" title="Quick links" />
-        <Cards cols={2}>
-          <Card title="Watch latest message" to="/messages" linkLabel="Watch now"><p>Missed a Sunday? Catch up on recent teachings that will help you grow in faith and apply biblical truths to your daily life.</p></Card>
-          <Card title="Give online" to={SITE.giveUrl} linkLabel="Give online"><p>Partner with us in transforming lives and communities through your generous support of our church’s mission and ministries.</p></Card>
-        </Cards>
+        <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+          <div className="aspect-[4/5] md:aspect-[5/6]"><Picture slot="home-welcome" fallback={HERO_IMAGES.about} /></div>
+          <div>
+            <p className="kicker text-[#2b433e]">Welcome</p>
+            <h2 className="text-3xl md:text-5xl mb-6">Welcome to Upper Room Fellowship</h2>
+            <div className={`space-y-4 text-black/80 ${P}`}>
+              <p>For over 50 years, our congregation has been gathering in Columbiana to worship, grow, and serve together. We love this city and are proud to call it home.</p>
+              <p>Together, we are learning to live with more love, joy, and purpose. We support each other and reach out to make our community better. Whether you are just exploring faith or looking for a church family, we would love to meet you and welcome you into ours.</p>
+              <p><strong>{SITE.serviceTime}</strong><br /><strong>Location:</strong> {SITE.addressLine}</p>
+            </div>
+            <div className="mt-8 flex flex-wrap items-center gap-5">
+              <Btn to="/plan-your-visit" variant="primary">New here?</Btn>
+              <Link to="/about" className="font-display font-bold uppercase text-[0.8rem] tracking-[0.1em] border-b-2 border-[#1e2522] pb-1 hover:border-[#c74f2f]">More about us &rarr;</Link>
+            </div>
+          </div>
+        </div>
       </Section>
 
-      <Band>
-        <Panel tone="gold" title="Where & when">
-          <address className="not-italic text-xl leading-relaxed">
-            <p className="flex items-start gap-3"><SafeIcon icon={FiMapPin} className="mt-1.5 flex-shrink-0" />
-              <span>{SITE.address.street}<br />{SITE.address.city} {SITE.address.region} {SITE.address.postalCode}</span></p>
-            <p className="mt-4">Join us {SITE.serviceTime}</p>
-          </address>
-          <div className="pt-2"><Btn href={SITE.googleMapsUrl} variant="dark">Get directions</Btn></div>
-        </Panel>
-        <Panel tone="forest" title="Our vision statement">
-          <p>At Upper Room Fellowship, we exist to help people know God deeply, share life authentically, and serve others selflessly. Real change happens from the inside out as we align our hearts with God’s heart. Join us as we pursue healthy relationships, access abundant wholeness, discover our greatness, live supernaturally, treasure God’s presence, and live out the Gospel in tangible ways.</p>
-          <blockquote className="border-l-4 border-[#eaa235] pl-5 font-serif italic text-xl leading-snug">
+      <Section tone="forest">
+        <div className="max-w-3xl mx-auto text-center">
+          <p className="kicker text-[#eaa235]">Our vision</p>
+          <h2 className="text-3xl md:text-5xl mb-6">Our vision statement</h2>
+          <p className="text-lg md:text-xl leading-relaxed text-white">At Upper Room Fellowship, we exist to help people know God deeply, share life authentically, and serve others selflessly. Real change happens from the inside out as we align our hearts with God’s heart. Join us as we pursue healthy relationships, access abundant wholeness, discover our greatness, live supernaturally, treasure God’s presence, and live out the Gospel in tangible ways.</p>
+          <blockquote className="mt-8 font-serif italic text-xl md:text-2xl leading-snug">
             “By this everyone will know that you are my disciples, if you love one another.”
-            <footer className="mt-1 text-base font-sans not-italic">John 13:35</footer>
+            <footer className="mt-2 text-base font-sans not-italic">John 13:35</footer>
           </blockquote>
-        </Panel>
-      </Band>
+        </div>
+      </Section>
+
+      <Section tone="sage">
+        <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+          <div>
+            <p className="kicker text-white">Support Upper Room Fellowship</p>
+            <h2 className="text-3xl md:text-5xl mb-5">Give online</h2>
+            <p className={`mb-8 ${P}`}>Partner with us in transforming lives and communities through your generous support of our church’s mission and ministries.</p>
+            <div className="flex flex-wrap items-center gap-5">
+              <Btn href={SITE.giveUrl} variant="dark">Give online</Btn>
+              <Link to="/give" className="font-display font-bold uppercase text-[0.8rem] tracking-[0.1em] border-b-2 border-white pb-1">Ways to give</Link>
+            </div>
+          </div>
+          <div className="aspect-[4/3]"><Picture slot="home-give" fallback={HERO_IMAGES.ministries} /></div>
+        </div>
+        <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center mt-16 md:mt-24">
+          <div className="aspect-[4/3] md:order-first order-last"><Picture slot="home-watch" fallback={HERO_IMAGES.messages} /></div>
+          <div>
+            <p className="kicker text-white">Missed a Sunday?</p>
+            <h2 className="text-3xl md:text-5xl mb-5">Watch latest message</h2>
+            <p className={`mb-8 ${P}`}>Catch up on recent teachings that will help you grow in faith and apply biblical truths to your daily life.</p>
+            <Btn to="/messages" variant="dark">Watch now</Btn>
+          </div>
+        </div>
+      </Section>
+
+      {latest && (
+        <Section tone="cream">
+          <div className="text-center mb-8">
+            <p className="kicker text-[#2b433e]">This week’s message</p>
+            <h2 className="text-3xl md:text-5xl">Our latest message</h2>
+          </div>
+          <div className="max-w-4xl mx-auto">
+            <div className="aspect-video bg-[#1e2522] rounded-[10px] overflow-hidden elev-1">
+              {videoId ? <LiteYouTube id={videoId} title={latest.title} /> : <div className="w-full h-full flex items-center justify-center text-white/80 p-6 text-center">Video coming soon</div>}
+            </div>
+            <p className="mt-5 text-center text-xl"><Link to={messagePath(latest)} className="font-semibold hover:text-[#c74f2f]">{latest.title}</Link></p>
+            <p className="mt-1 text-center text-black/70">{[latest.speaker, latest.date && formatDate(latest.date)].filter(Boolean).join(', ')}</p>
+          </div>
+        </Section>
+      )}
+
+      <section aria-labelledby="stay-h" className="px-3 md:px-4 py-1.5 md:py-2">
+        <div data-image-band="true" className="photo-section rounded-[10px] bg-[#1e2522] py-20 md:py-28 px-6 text-center text-white" style={{ backgroundImage: `url('${imgUrl(connectPhoto, 1600)}')` }}>
+          <div className="scrim"></div>
+          <div className="relative z-10 max-w-2xl mx-auto">
+            <h2 id="stay-h" className="text-3xl md:text-5xl mb-4">We would love to meet you</h2>
+            <p className="text-lg md:text-xl mb-8">Whether you are planning your first visit or have just been with us, fill out the Connect Card so we can welcome you properly and help you find your place in our church family.</p>
+            <Btn to="/connect" variant="primary">Fill out the Connect Card</Btn>
+          </div>
+        </div>
+      </section>
     </>
   );
 }
