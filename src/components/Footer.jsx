@@ -32,7 +32,7 @@ function FooterLink({ to, external, children }) {
   );
 }
 
-const heading = 'font-display uppercase text-[0.9rem] font-bold tracking-widest text-white/70 mb-6';
+const heading = 'text-[1.05rem] font-bold text-white/70 mb-5';
 
 export default function Footer() {
   const SITE = useSite();
@@ -48,7 +48,7 @@ export default function Footer() {
         className="max-w-[1145px] mx-auto px-6 py-20 md:py-24 flex flex-wrap gap-12 justify-between items-start relative z-10"
       >
         <motion.div variants={item} className="max-w-[26ch]">
-          <h2 className="font-display uppercase text-[1.1rem] tracking-widest text-[#eaa235] mb-4" style={{ fontWeight: 800 }}>
+          <h2 className="text-[1.4rem] font-extrabold text-[#eaa235] mb-4">
             {SITE.name}
           </h2>
           <p className="opacity-80 text-[0.95rem] leading-relaxed mb-6">Transforming lives that transform communities.</p>

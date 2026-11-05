@@ -454,8 +454,8 @@ details.u-acc.neu-acc[open] { background: #f7f5ee; box-shadow: var(--shadow); }
 :where(.public-site) :is(h1, h2, h3, h4) {
   font-family: 'Geist', 'Inter', sans-serif;
   text-transform: none;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: -0.025em;
   line-height: 1.1;
 }
-.rich-text h1, .rich-text h2, .rich-text h3 { font-family: 'Geist', 'Inter', sans-serif; font-weight: 600; }
+.rich-text h1, .rich-text h2, .rich-text h3 { font-family: 'Geist', 'Inter', sans-serif; font-weight: 700; }
