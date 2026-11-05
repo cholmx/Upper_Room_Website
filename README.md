@@ -152,7 +152,7 @@ Old addresses `/worship-team`, `/outreach`, `/prayer`, `/stories` and `/connect`
 
 ## Colors
 
-The palette is `#1e2522` ink, `#2B433E` forest, `#597F5C` sage, `#C74F2F` terracotta, `#EAA235` amber, `#d49e46` gold, `#fcf9ed` cream and `#FFFFFF` white. Text on cream and white uses ink or forest, because the golds and terracotta do not have enough contrast for small text on light backgrounds. Neighboring panels should differ in color, and the footer is ink, so a closing call to action is forest by default. Check it with `node scripts/check-adjacent-colors.mjs` while a preview is running.
+The palette is five colors: `#1E2522` ink, `#EAA235` amber, `#C74F2F` terracotta, `#FFFFFF` white and `#FCF9ED` cream. Text on cream and white uses ink, because amber and terracotta do not have enough contrast for small text on light backgrounds. Neighboring panels should differ in color, and the footer is ink. Check it with `node scripts/check-adjacent-colors.mjs` while a preview is running.
 
 ## Photo uploads
 

@@ -5,7 +5,7 @@ import { MemoryRouter } from 'react-router-dom';
 
 const rows = [
   { id: 1, published: 1, sort_order_num: 1, layout: 'centered', tone: 'white', title: 'Easter service', body: 'Join us.', button_label: 'Plan your visit', button_url: '/plan-your-visit' },
-  { id: 2, published: 0, sort_order_num: 2, layout: 'banner', tone: 'forest', title: 'Hidden layout' },
+  { id: 2, published: 0, sort_order_num: 2, layout: 'banner', tone: 'ink', title: 'Hidden layout' },
   { id: 3, published: 1, sort_order_num: 3, layout: 'banner', tone: 'white', title: 'Second layout', button_label: 'Go', button_url: 'https://example.com' },
 ];
 vi.mock('../hooks/useFetch', () => ({ default: () => ({ data: rows }) }));

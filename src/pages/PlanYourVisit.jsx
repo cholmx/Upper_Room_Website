@@ -4,7 +4,7 @@ import { useSite } from '../settings';
 import { Btn, Section, SectionHeader, PageHeader, Cards, Card, Steps, Band, Panel, Beats } from '../components/ui';
 import FormBlock from '../components/FormBlock';
 
-const P = 'text-[0.95rem] leading-relaxed text-black/80';
+const P = 'text-[0.95rem] leading-relaxed text-[#1e2522]/80';
 
 export default function PlanYourVisit() {
   usePageMeta('plan');
@@ -67,7 +67,7 @@ export default function PlanYourVisit() {
         <div className="grid md:grid-cols-5 gap-10 items-start">
           <div className="md:col-span-2">
             <SectionHeader title="Any questions?" className="!mb-4" />
-            <p className={P}>Have questions before you visit? Fill out the form, email us at <a className="underline underline-offset-4 font-semibold text-[#2b433e]" href={`mailto:${SITE.email}`}>{SITE.email}</a>, or call <a className="underline underline-offset-4 font-semibold text-[#2b433e]" href={SITE.phoneHref}>{SITE.phone}</a>.</p>
+            <p className={P}>Have questions before you visit? Fill out the form, email us at <a className="underline underline-offset-4 font-semibold text-[#1e2522]" href={`mailto:${SITE.email}`}>{SITE.email}</a>, or call <a className="underline underline-offset-4 font-semibold text-[#1e2522]" href={SITE.phoneHref}>{SITE.phone}</a>.</p>
             <p className={`mt-4 ${P}`}>We are here to help make your first experience a great one!</p>
           </div>
           <div className="md:col-span-3"><FormBlock formKey="contact" /></div>

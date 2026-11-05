@@ -43,7 +43,7 @@ export default function Blog() {
   const standardPosts = filteredPosts.length > 1 ? filteredPosts.slice(1) : [];
 
   return (
-    <div className="bg-[#fcf9ed] min-h-screen text-black pb-24 pt-20">
+    <div className="bg-[#fcf9ed] min-h-screen text-[#1e2522] pb-24 pt-20">
       <PageHeader kicker="Articles and updates" title="Church blog" intro="Insights, devotions, and updates from the Upper Room family." />
 
       <div className="max-w-[1145px] mx-auto px-6 mt-16">
@@ -51,7 +51,7 @@ export default function Blog() {
           <ErrorState message={error} onRetry={reload} />
         ) : loading ? (
           <div className="text-center py-32 opacity-50 flex flex-col items-center">
-            <div className="w-10 h-10 border-4 border-[#d49e46] border-t-transparent rounded-full animate-spin mb-4"></div>
+            <div className="w-10 h-10 border-4 border-[#eaa235] border-t-transparent rounded-full animate-spin mb-4"></div>
             Loading articles...
           </div>
         ) : posts.length === 0 ? (
@@ -63,15 +63,15 @@ export default function Blog() {
           <>
             <div className="mb-16 max-w-3xl mx-auto">
               <div className="relative mb-8 group">
-                <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none group-focus-within:text-[#2b433e] transition-colors">
-                  <SafeIcon icon={FiSearch} className="text-gray-400 text-xl" />
+                <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none group-focus-within:text-[#1e2522] transition-colors">
+                  <SafeIcon icon={FiSearch} className="text-[#1e2522]/70 text-xl" />
                 </div>
                 <input
                   type="text"
                   placeholder="Search articles by title, author, or keyword..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="block w-full pl-16 pr-6 py-5 rounded-full neu-field focus:outline-none focus:ring-2 focus:ring-[#d49e46] focus:border-transparent text-lg"
+                  className="block w-full pl-16 pr-6 py-5 rounded-full neu-field focus:outline-none focus:ring-2 focus:ring-[#eaa235] focus:border-transparent text-lg"
                 />
               </div>
 
@@ -81,9 +81,9 @@ export default function Blog() {
                     <button
                       key={cat}
                       onClick={() => setSelectedCategory(cat)}
-                      className={`px-6 py-2.5 rounded-full text-sm font-bold tracking-normal flex items-center gap-2 ${selectedCategory === cat ? 'bg-[#1e2522] text-white' : 'neu text-black/80'}`}
+                      className={`px-6 py-2.5 rounded-full text-sm font-bold tracking-normal flex items-center gap-2 ${selectedCategory === cat ? 'bg-[#1e2522] text-white' : 'neu text-[#1e2522]/80'}`}
                     >
-                      {cat !== 'All' && <SafeIcon icon={FiTag} className={selectedCategory === cat ? 'text-white' : 'text-[#2b433e]'} />}
+                      {cat !== 'All' && <SafeIcon icon={FiTag} className={selectedCategory === cat ? 'text-white' : 'text-[#1e2522]'} />}
                       {cat}
                     </button>
                   ))}
@@ -107,7 +107,7 @@ export default function Blog() {
               <>
                 {featuredPost && (
                   <div className="mb-20">
-                    <span className="kicker text-[#2b433e] mb-4 inline-block">{searchQuery || selectedCategory !== 'All' ? 'Top Result' : 'Latest Article'}</span>
+                    <span className="kicker text-[#1e2522] mb-4 inline-block">{searchQuery || selectedCategory !== 'All' ? 'Top Result' : 'Latest Article'}</span>
                     <Link to={`/blog/${featuredPost.id}`} className="block elev-hover rounded-3xl overflow-hidden flex flex-col md:flex-row group neu">
                       <div className="md:w-1/2 aspect-square md:aspect-auto bg-[#1e2522] relative overflow-hidden flex-shrink-0">
                         {featuredPost.image_url ? (
@@ -118,7 +118,7 @@ export default function Blog() {
                             className="w-full h-full object-cover transition-transform" 
                           />
                         ) : (
-                          <div className="absolute inset-0 flex flex-col items-center justify-center text-[#fcf9ed] p-8 text-center bg-gradient-to-br from-[#1e2522] to-[#2b433e]">
+                          <div className="absolute inset-0 flex flex-col items-center justify-center text-[#fcf9ed] p-8 text-center bg-gradient-to-br from-[#1e2522] to-[#1e2522]">
                             <span className="text-5xl font-serif italic mb-2 opacity-50">Upper Room</span>
                             <span className="text-sm tracking-wide opacity-30">Journal</span>
                           </div>
@@ -126,30 +126,30 @@ export default function Blog() {
                       </div>
                       
                       <div className="p-8 md:p-14 flex flex-col justify-center md:w-1/2 relative">
-                        <div className="flex flex-wrap items-center gap-4 text-sm font-bold text-[#2b433e] tracking-wide mb-6">
+                        <div className="flex flex-wrap items-center gap-4 text-sm font-bold text-[#1e2522] tracking-wide mb-6">
                           {featuredPost.category && (
-                            <span className="bg-[#d49e46]/10 text-[#2b433e] px-4 py-1.5 rounded-full">{featuredPost.category}</span>
+                            <span className="bg-[#eaa235]/10 text-[#1e2522] px-4 py-1.5 rounded-full">{featuredPost.category}</span>
                           )}
-                          <span className="flex items-center gap-1.5 text-gray-500"><SafeIcon icon={FiCalendar} /> {featuredPost.date ? formatDate(featuredPost.date) : formatDate(featuredPost.created_at)}</span>
-                          <span className="flex items-center gap-1.5 text-gray-500"><SafeIcon icon={FiClock} /> {getReadTime(featuredPost.body)}</span>
+                          <span className="flex items-center gap-1.5 text-[#1e2522]/70"><SafeIcon icon={FiCalendar} /> {featuredPost.date ? formatDate(featuredPost.date) : formatDate(featuredPost.created_at)}</span>
+                          <span className="flex items-center gap-1.5 text-[#1e2522]/70"><SafeIcon icon={FiClock} /> {getReadTime(featuredPost.body)}</span>
                         </div>
                         
-                        <h2 className="text-4xl lg:text-5xl font-bold mb-6 group-hover:text-[#2b433e] transition-colors leading-tight">{featuredPost.title}</h2>
+                        <h2 className="text-4xl lg:text-5xl font-bold mb-6 group-hover:text-[#1e2522] transition-colors leading-tight">{featuredPost.title}</h2>
                         
                         <p className="opacity-70 mb-10 line-clamp-4 text-lg leading-relaxed">
                           {plainText(featuredPost.body) || 'Read this article to learn more...'}
                         </p>
                         
-                        <div className="mt-auto flex items-center justify-between border-t border-black/5 pt-8">
+                        <div className="mt-auto flex items-center justify-between border-t border-[#1e2522]/5 pt-8">
                           {featuredPost.author ? (
-                            <div className="flex items-center gap-3 text-sm font-bold text-gray-600">
-                              <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-400">
+                            <div className="flex items-center gap-3 text-sm font-bold text-[#1e2522]/70">
+                              <div className="w-8 h-8 rounded-full bg-[#1e2522]/5 flex items-center justify-center text-[#1e2522]/70">
                                 <SafeIcon icon={FiUser} />
                               </div>
                               {featuredPost.author}
                             </div>
                           ) : <div />}
-                          <div className="flex items-center text-sm font-bold tracking-wide text-[#2b433e] group-hover:text-black transition-colors">
+                          <div className="flex items-center text-sm font-bold tracking-wide text-[#1e2522] group-hover:text-[#1e2522] transition-colors">
                             Read Article <SafeIcon icon={FiArrowRight} className="ml-2 transform transition-transform" />
                           </div>
                         </div>
@@ -160,7 +160,7 @@ export default function Blog() {
 
                 {standardPosts.length > 0 && (
                   <div>
-                    <h3 className="text-3xl font-bold mb-10 border-b border-black/10 pb-4">
+                    <h3 className="text-3xl font-bold mb-10 border-b border-[#1e2522]/10 pb-4">
                       {searchQuery || selectedCategory !== 'All' ? 'More Results' : 'More Articles'}
                     </h3>
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -179,24 +179,24 @@ export default function Blog() {
                                   className="w-full h-full object-cover transition-transform" 
                                 />
                               ) : (
-                                <div className="absolute inset-0 flex items-center justify-center text-white/50 bg-gradient-to-br from-[#1e2522] to-[#2b433e]">
+                                <div className="absolute inset-0 flex items-center justify-center text-white/50 bg-gradient-to-br from-[#1e2522] to-[#1e2522]">
                                   <span className="text-3xl font-serif italic">Upper Room</span>
                                 </div>
                               )}
                               {post.category && (
-                                <div className="absolute top-4 left-4 bg-white text-black text-[0.75rem] font-bold tracking-wide px-3 py-1.5 rounded-full">
+                                <div className="absolute top-4 left-4 bg-white text-[#1e2522] text-[0.75rem] font-bold tracking-wide px-3 py-1.5 rounded-full">
                                   {post.category}
                                 </div>
                               )}
                             </div>
                             
                             <div className="p-8 flex flex-col flex-grow">
-                              <div className="flex flex-wrap gap-3 text-[0.75rem] font-bold text-[#2b433e] tracking-wide mb-4">
-                                <span className="flex items-center gap-1 bg-[#d49e46]/10 px-2.5 py-1 rounded text-black/70"><SafeIcon icon={FiClock} /> {getReadTime(post.body)}</span>
+                              <div className="flex flex-wrap gap-3 text-[0.75rem] font-bold text-[#1e2522] tracking-wide mb-4">
+                                <span className="flex items-center gap-1 bg-[#eaa235]/10 px-2.5 py-1 rounded text-[#1e2522]/70"><SafeIcon icon={FiClock} /> {getReadTime(post.body)}</span>
                                 <span className="flex items-center gap-1"><SafeIcon icon={FiCalendar} /> {post.date ? formatDate(post.date) : formatDate(post.created_at)}</span>
                               </div>
                               
-                              <h3 className="text-2xl font-bold mb-4 group-hover:text-[#2b433e] transition-colors leading-tight">
+                              <h3 className="text-2xl font-bold mb-4 group-hover:text-[#1e2522] transition-colors leading-tight">
                                 {post.title}
                               </h3>
                               
@@ -204,13 +204,13 @@ export default function Blog() {
                                 {plainText(post.body) || 'Read this article to learn more...'}
                               </p>
                               
-                              <div className="mt-auto pt-5 border-t border-black/5 flex items-center justify-between">
+                              <div className="mt-auto pt-5 border-t border-[#1e2522]/5 flex items-center justify-between">
                                 {post.author ? (
-                                  <div className="text-xs font-bold text-gray-500 truncate max-w-[120px] flex items-center gap-1.5">
+                                  <div className="text-xs font-bold text-[#1e2522]/70 truncate max-w-[120px] flex items-center gap-1.5">
                                     <SafeIcon icon={FiUser} /> {post.author}
                                   </div>
                                 ) : <div />}
-                                <div className="flex items-center text-sm font-bold tracking-wide text-[#2b433e] group-hover:text-black transition-colors">
+                                <div className="flex items-center text-sm font-bold tracking-wide text-[#1e2522] group-hover:text-[#1e2522] transition-colors">
                                   Read <SafeIcon icon={FiArrowRight} className="ml-1.5 transform transition-transform" />
                                 </div>
                               </div>

@@ -11,7 +11,7 @@ export default function ConfirmDialog({ title, message, confirmLabel = 'Delete',
   }, [onCancel]);
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/50" onClick={onCancel}>
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-[#1e2522]/50" onClick={onCancel}>
       <div
         role="alertdialog"
         aria-modal="true"
@@ -21,10 +21,10 @@ export default function ConfirmDialog({ title, message, confirmLabel = 'Delete',
         onClick={(e) => e.stopPropagation()}
       >
         <h2 id="confirm-title" className="text-xl font-bold mb-2 normal-case tracking-normal">{title}</h2>
-        <p id="confirm-message" className="text-gray-600 mb-8">{message}</p>
+        <p id="confirm-message" className="text-[#1e2522]/70 mb-8">{message}</p>
         <div className="flex justify-end gap-3">
-          <button ref={cancelRef} onClick={onCancel} className="px-5 py-2.5 font-bold text-gray-600 hover:text-black">Cancel</button>
-          <button onClick={onConfirm} className="px-5 py-2.5 rounded-lg font-bold bg-red-600 text-white hover:bg-red-700">{confirmLabel}</button>
+          <button ref={cancelRef} onClick={onCancel} className="px-5 py-2.5 font-bold text-[#1e2522]/70 hover:text-[#1e2522]">Cancel</button>
+          <button onClick={onConfirm} className="px-5 py-2.5 rounded-lg font-bold bg-[#c74f2f] text-white hover:bg-[#c74f2f]">{confirmLabel}</button>
         </div>
       </div>
     </div>

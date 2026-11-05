@@ -4,7 +4,7 @@ import { useSite } from '../settings';
 import { Section, SectionHeader, PageHeader } from '../components/ui';
 import FormBlock from '../components/FormBlock';
 
-const P = 'text-[0.95rem] leading-relaxed text-black/80';
+const P = 'text-[0.95rem] leading-relaxed text-[#1e2522]/80';
 
 export default function Contact() {
   usePageMeta('contact');
@@ -23,8 +23,8 @@ export default function Contact() {
               <h2 className="text-2xl mb-3">Find us</h2>
               <address className={`not-italic space-y-1 ${P}`}>
                 <p>{SITE.address.street}<br />{SITE.address.city}, {SITE.address.region} {SITE.address.postalCode}</p>
-                <p><a className="underline underline-offset-4 font-semibold text-[#2b433e]" href={SITE.phoneHref}>{SITE.phone}</a></p>
-                <p><a className="underline underline-offset-4 font-semibold text-[#2b433e]" href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
+                <p><a className="underline underline-offset-4 font-semibold text-[#1e2522]" href={SITE.phoneHref}>{SITE.phone}</a></p>
+                <p><a className="underline underline-offset-4 font-semibold text-[#1e2522]" href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
                 <p>Join us {SITE.serviceTime}</p>
               </address>
             </div>

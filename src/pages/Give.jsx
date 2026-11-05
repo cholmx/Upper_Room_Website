@@ -4,7 +4,7 @@ import { useSite } from '../settings';
 import { Btn, Section, SectionHeader, PageHeader, Cards, Card, Band, Panel } from '../components/ui';
 import FormBlock from '../components/FormBlock';
 
-const P = 'text-[0.95rem] leading-relaxed text-black/80';
+const P = 'text-[0.95rem] leading-relaxed text-[#1e2522]/80';
 
 const WHY = [
   'Worship God by honoring Him with our finances',
@@ -42,7 +42,7 @@ export default function Give() {
           {WHY.map((w, i) => (
             <li key={w} className="rounded-2xl p-5 neu flex items-start gap-4">
               <span aria-hidden="true" className="w-10 h-10 rounded-full bg-[#c74f2f] text-white font-semibold flex items-center justify-center flex-shrink-0">{String(i + 1).padStart(2, '0')}</span>
-              <span className="text-lg text-black/80 leading-snug pt-1.5">{w}</span>
+              <span className="text-lg text-[#1e2522]/80 leading-snug pt-1.5">{w}</span>
             </li>
           ))}
         </ol>

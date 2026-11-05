@@ -6,7 +6,7 @@
   --dark: #1e2522;
   --light: #fcf9ed;
   --yellow: #eaa235;
-  --muted: #d49e46;
+  --muted: #eaa235;
   --black: #1e2522;
 }
 
@@ -190,7 +190,7 @@ h1, h2, h3, h4 {
 }
 /* Keyboard focus is always visible */
 :focus-visible {
-  outline: 3px solid #2b433e;
+  outline: 3px solid #1e2522;
   outline-offset: 2px;
 }
 
@@ -242,7 +242,7 @@ h1, h2, h3, h4 {
 .rich-text h1 { font-size: 1.9em; }
 .rich-text h2 { font-size: 1.5em; }
 .rich-text h3 { font-size: 1.25em; }
-.rich-text a { color: #2b433e; text-decoration: underline; }
+.rich-text a { color: #1e2522; text-decoration: underline; }
 .rich-text ul { list-style: disc; padding-left: 1.5em; }
 .rich-text ol { list-style: decimal; padding-left: 1.5em; }
 .rich-text blockquote { border-left: 4px solid var(--muted); padding-left: 1em; font-style: italic; }
@@ -263,7 +263,7 @@ p:empty { display: none; }
    ------------------------------------------------------------------ */
 :root {
   --neu-hi: rgba(255, 255, 255, 0.95);
-  --neu-lo: rgba(139, 128, 104, 0.2);
+  --neu-lo: rgba(30, 37, 34, 0.2);
   --shadow: 0 1px 2px rgba(30, 37, 34, 0.05), 0 6px 18px -6px rgba(30, 37, 34, 0.10);
   --shadow-float: 0 2px 4px rgba(30, 37, 34, 0.06), 0 14px 32px -10px rgba(30, 37, 34, 0.16);
   --neu-raised: var(--shadow);
@@ -287,14 +287,14 @@ details.u-acc.neu-acc[open] { background: linear-gradient(145deg, #fcf9ed, #fcf9
 
 /* Buttons */
 .btn { position: relative; transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease; }
-.btn-solid { box-shadow: 3px 3px 9px rgba(170, 118, 10, 0.2), -3px -3px 8px rgba(255, 255, 255, 0.5); }
+.btn-solid { box-shadow: 3px 3px 9px rgba(234, 162, 53, 0.2), -3px -3px 8px rgba(255, 255, 255, 0.5); }
 .photo-section .btn-solid, .glow-gold .btn-solid, .bg-\[\#1e2522\] .btn-solid { box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4), -2px -2px 8px rgba(255, 255, 255, 0.05); }
 
 .btn[aria-busy='true']::after { content: ''; width: 0.9em; height: 0.9em; margin-left: 0.6em; border: 2px solid currentColor; border-right-color: transparent; border-radius: 9999px; animation: spin 0.7s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
 .neu-dark { background: linear-gradient(145deg, #1e2522, #1e2522); border: 1px solid rgba(255, 255, 255, 0.06); box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.55), -6px -6px 16px rgba(255, 255, 255, 0.05); }
-.neu-badge { box-shadow: 4px 4px 10px rgba(170, 118, 10, 0.35), -3px -3px 8px rgba(255, 255, 255, 0.6); }
+.neu-badge { box-shadow: 4px 4px 10px rgba(234, 162, 53, 0.35), -3px -3px 8px rgba(255, 255, 255, 0.6); }
 
 /* One elevation scale: flat, raised (.neu), floating (.elev-2), inset (.neu-inset, .neu-field). */
 .elev-1 { box-shadow: var(--neu-raised-sm); }
@@ -302,7 +302,7 @@ details.u-acc.neu-acc[open] { background: linear-gradient(145deg, #fcf9ed, #fcf9
 .elev-hover:hover { box-shadow: var(--neu-raised); }
 
 /* A calmer, more refined surface: softer ink instead of pure black, a lighter photo wash, more room around sections */
-.text-black { color: #1e2522; }
+.text-[#1e2522] { color: #1e2522; }
 /* The banner overlay matches the sign-in page: a deep, even wash with two soft golden glows. */
 
 /* One standard surface: white, no outline, a very subtle drop shadow. Form controls keep a thin
@@ -311,7 +311,7 @@ details.u-acc.neu-acc[open] { background: linear-gradient(145deg, #fcf9ed, #fcf9
 .fcard:hover, .elev-hover:hover { box-shadow: var(--shadow-float); border-color: transparent; }
 details.u-acc.neu-acc[open] { background: #fcf9ed; box-shadow: var(--shadow); }
 .neu-inset { background: #fcf9ed; border: 0; box-shadow: none; }
-.neu-dark { background: #2b433e; border: 0; box-shadow: var(--shadow); }
+.neu-dark { background: #1e2522; border: 0; box-shadow: var(--shadow); }
 .neu-field { background: #ffffff; box-shadow: none; }
 .elev-1 { box-shadow: var(--shadow); }
 .elev-2 { box-shadow: var(--shadow-float); }
@@ -322,7 +322,7 @@ details.u-acc.neu-acc[open] { background: #fcf9ed; box-shadow: var(--shadow); }
 .neu-badge { box-shadow: var(--shadow); }
 
 /* Merriweather for lead paragraphs, in a larger size than body text */
-.lead { font-family: Merriweather, Georgia, serif; font-size: 1.1rem; line-height: 1.5; color: rgba(0, 0, 0, 0.8); }
+.lead { font-family: Merriweather, Georgia, serif; font-size: 1.1rem; line-height: 1.5; color: rgba(30, 37, 34, 0.8); }
 @media (min-width: 768px) { .lead { font-size: 1.2rem; } }
 
 /* Tighter line height for serif display text. */

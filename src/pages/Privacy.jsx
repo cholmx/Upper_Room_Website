@@ -12,7 +12,7 @@ export default function Privacy() {
       <PageHeader kicker="Privacy" title="Privacy" intro="Here is what this website collects, why, and what we do with it." />
       <Section tone="cream" narrow>
         <p className="mb-6"><Todo id="legal-review">[LEGAL REVIEW: have someone qualified review this page before launch]</Todo></p>
-        <div className="space-y-4 text-lg leading-relaxed text-black/80">
+        <div className="space-y-4 text-lg leading-relaxed text-[#1e2522]/80">
           <h2 className={h}>Forms</h2>
           <p>When you send the Connect Card, a contact message, or any other form, we receive the information you type. We use it only to reply to you, to prepare for your visit, or to follow up on what you asked about. Forms are stored in our staff dashboard and sent to {SITE.email}. Only our staff and volunteers who need the information can see it.</p>
           <h2 className={h}>Giving</h2>
@@ -24,7 +24,7 @@ export default function Privacy() {
           <h2 className={h}>We do not sell your information</h2>
           <p>We do not sell or rent your information, and we do not use it for advertising.</p>
           <h2 className={h}>Your choices</h2>
-          <p>To see, correct, or delete information you sent us, email <a className="underline underline-offset-4 font-semibold text-[#2b433e]" href={`mailto:${SITE.email}`}>{SITE.email}</a> or call {SITE.phone}.</p>
+          <p>To see, correct, or delete information you sent us, email <a className="underline underline-offset-4 font-semibold text-[#1e2522]" href={`mailto:${SITE.email}`}>{SITE.email}</a> or call {SITE.phone}.</p>
           <AdminOnly><p className="text-base">Last updated: <Todo id="legal-review">[DATE]</Todo></p></AdminOnly>
         </div>
       </Section>

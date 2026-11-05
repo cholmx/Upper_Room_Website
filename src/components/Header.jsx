@@ -11,8 +11,8 @@ import * as FiIcons from 'react-icons/fi';
 const { FiMenu, FiX, FiChevronDown } = FiIcons;
 
 const linkBase = 'whitespace-nowrap font-display font-bold text-[0.95rem] tracking-wide py-1 border-b-2 inline-flex items-center gap-1';
-const linkOn = 'border-[#c74f2f] text-black';
-const linkOff = 'border-transparent text-black/70 hover:text-black hover:border-black/20';
+const linkOn = 'border-[#c74f2f] text-[#1e2522]';
+const linkOff = 'border-transparent text-[#1e2522]/70 hover:text-[#1e2522] hover:border-[#1e2522]/20';
 const linkOnLight = 'border-[#eaa235] text-white';
 const linkOffLight = 'border-transparent text-white/90 hover:text-white hover:border-white/50';
 
@@ -50,7 +50,7 @@ function DesktopDropdown({ item, light }) {
           <ul className="bg-white rounded-2xl py-3 elev-2">
             {item.children.map(c => (
               <li key={c.to}>
-                <Link to={c.to} className="block px-6 py-2.5 font-display font-semibold text-[0.95rem] tracking-wide text-black/80 hover:text-black hover:bg-[#fcf9ed]">{c.label}</Link>
+                <Link to={c.to} className="block px-6 py-2.5 font-display font-semibold text-[0.95rem] tracking-wide text-[#1e2522]/80 hover:text-[#1e2522] hover:bg-[#fcf9ed]">{c.label}</Link>
               </li>
             ))}
           </ul>
@@ -89,7 +89,7 @@ function MobileMenu({ onClose }) {
         <Btn href={SITE.giveUrl} variant="accent" className="!px-4">Give</Btn>
       </div>
       <nav aria-label="Main" className="px-6 py-6 pb-28">
-        <ul className="divide-y divide-black/10">
+        <ul className="divide-y divide-[#1e2522]/10">
           {NAV.map(item => (
             <li key={item.label}>
               {item.children ? (
@@ -101,13 +101,13 @@ function MobileMenu({ onClose }) {
                   {openGroup === item.label && (
                     <ul className="pb-4 pl-2">
                       {item.children.map(c => (
-                        <li key={c.to}><Link to={c.to} onClick={onClose} className="flex items-center min-h-[48px] font-display font-bold tracking-wide text-[1rem] text-black/80">{c.label}</Link></li>
+                        <li key={c.to}><Link to={c.to} onClick={onClose} className="flex items-center min-h-[48px] font-display font-bold tracking-wide text-[1rem] text-[#1e2522]/80">{c.label}</Link></li>
                       ))}
                     </ul>
                   )}
                 </>
               ) : (
-                <Link to={item.to} onClick={onClose} className="flex items-center min-h-[60px] text-2xl hover:text-[#d49e46] transition-colors" style={big}>{item.label}</Link>
+                <Link to={item.to} onClick={onClose} className="flex items-center min-h-[60px] text-2xl hover:text-[#eaa235] transition-colors" style={big}>{item.label}</Link>
               )}
             </li>
           ))}
@@ -144,7 +144,7 @@ export default function Header() {
   const light = hasHero && !scrolled;
 
   return (
-    <header className={`sticky top-0 z-50 flex items-center h-20 transition-colors ${hasHero ? '-mb-20' : ''} ${light ? 'bg-transparent text-white' : 'bg-white text-black shadow-[0_1px_2px_rgba(30,37,34,0.05),0_6px_18px_-6px_rgba(30,37,34,0.10)]'}`}>
+    <header className={`sticky top-0 z-50 flex items-center h-20 transition-colors ${hasHero ? '-mb-20' : ''} ${light ? 'bg-transparent text-white' : 'bg-white text-[#1e2522] shadow-[0_1px_2px_rgba(30,37,34,0.05),0_6px_18px_-6px_rgba(30,37,34,0.10)]'}`}>
       <div className="max-w-[1320px] w-full mx-auto px-6 flex items-center justify-between gap-6">
         <Logo tone={light ? 'light' : 'dark'} />
         <nav aria-label="Main" className="hidden xl:flex items-center gap-6 pt-1">
@@ -156,7 +156,7 @@ export default function Header() {
           </a>
         </nav>
         <div className="flex items-center gap-2 xl:hidden">
-          <button type="button" className={`p-2 rounded-full transition-colors ${hasHero ? '-mb-20' : ''} ${light ? 'hover:bg-white/10' : 'hover:bg-black/5'}`} aria-expanded={open} aria-controls="mobile-menu" aria-label="Open menu" onClick={() => setOpen(true)}>
+          <button type="button" className={`p-2 rounded-full transition-colors ${hasHero ? '-mb-20' : ''} ${light ? 'hover:bg-white/10' : 'hover:bg-[#1e2522]/5'}`} aria-expanded={open} aria-controls="mobile-menu" aria-label="Open menu" onClick={() => setOpen(true)}>
             <SafeIcon icon={FiMenu} size={24} />
           </button>
         </div>

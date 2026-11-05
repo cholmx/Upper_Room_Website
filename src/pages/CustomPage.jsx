@@ -26,7 +26,7 @@ export default function CustomPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-[#fcf9ed] pt-32 flex flex-col items-center justify-center opacity-60">
-        <div className="w-12 h-12 border-4 border-[#d49e46] border-t-transparent rounded-full animate-spin mb-4"></div>
+        <div className="w-12 h-12 border-4 border-[#eaa235] border-t-transparent rounded-full animate-spin mb-4"></div>
         <p className="font-bold tracking-wide text-sm">Loading Page...</p>
       </div>
     );
@@ -45,7 +45,7 @@ export default function CustomPage() {
   }
 
   return (
-    <div className="bg-[#fcf9ed] min-h-screen text-black pt-20 pb-32">
+    <div className="bg-[#fcf9ed] min-h-screen text-[#1e2522] pt-20 pb-32">
       {/* Hero Banner */}
       <div className="bg-[#1e2522] text-[#fcf9ed] py-24 px-6 text-center relative overflow-hidden">
          {/* Subtle abstract background */}
@@ -61,7 +61,7 @@ export default function CustomPage() {
       {/* Content Body */}
       <div className="py-24 px-6">
         <div className="max-w-[800px] mx-auto p-8 md:p-16 rounded-3xl neu">
-          <div className="space-y-8 text-lg md:text-xl text-black/80 leading-snug font-serif italic text-gray-800">
+          <div className="space-y-8 text-lg md:text-xl text-[#1e2522]/80 leading-snug font-serif italic text-[#1e2522]">
             {stripHtml(page.body_content_text).split('\n').filter(Boolean).map((para, i) => (
               <p key={i}>{para}</p>
             ))}

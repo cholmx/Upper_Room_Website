@@ -24,7 +24,7 @@ export default function CoreValues() {
 
       <Section tone="cream" narrow>
         <SectionHeader title="Living from the inside out" />
-        <div className="space-y-5 text-lg leading-relaxed text-black/80">
+        <div className="space-y-5 text-lg leading-relaxed text-[#1e2522]/80">
           {INSIDE_OUT.map((p, i) => <p key={p} className={i === 0 ? 'lead' : undefined}>{p}</p>)}
           <p className="font-semibold">The following core values drive everything we do at Upper Room Fellowship.</p>
         </div>
@@ -39,11 +39,11 @@ export default function CoreValues() {
                   <ValueIcon n={v.n} />
                   <span className="flex-grow">
                     <h2 className="block text-xl md:text-2xl font-semibold">{v.title}</h2>
-                    <span className="block mt-1 text-black/80">{v.summary}</span>
-                    <span className="block mt-3 text-sm font-semibold text-[#2b433e]"><span className="group-open:hidden">Read more</span><span className="hidden group-open:inline">Show less</span></span>
+                    <span className="block mt-1 text-[#1e2522]/80">{v.summary}</span>
+                    <span className="block mt-3 text-sm font-semibold text-[#1e2522]"><span className="group-open:hidden">Read more</span><span className="hidden group-open:inline">Show less</span></span>
                   </span>
                 </summary>
-                <div className="px-6 pb-6 -mt-1 text-black/80 leading-relaxed space-y-3">
+                <div className="px-6 pb-6 -mt-1 text-[#1e2522]/80 leading-relaxed space-y-3">
                   {v.body.map(p => <p key={p}>{p}</p>)}
                   <h3 className="text-lg mt-5 mb-2">In practice, this means</h3>
                   <ul className="list-disc pl-6 space-y-1">
@@ -58,7 +58,7 @@ export default function CoreValues() {
 
       <Section tone="cream" narrow>
         <SectionHeader title="Growing in our values" />
-        <div className="space-y-5 text-lg leading-relaxed text-black/80">
+        <div className="space-y-5 text-lg leading-relaxed text-[#1e2522]/80">
           {GROWING.map(p => <p key={p}>{p}</p>)}
         </div>
       </Section>

@@ -10,7 +10,7 @@ import LiteYouTube from '../components/LiteYouTube';
 import MessageCard from '../components/MessageCard';
 import { Spinner, ErrorState } from '../components/StateViews';
 
-const select = 'w-full min-h-[48px] px-3 py-2 bg-white rounded-xl border border-black/25 focus:outline-none focus:ring-2 focus:ring-[#2b433e]';
+const select = 'w-full min-h-[48px] px-3 py-2 bg-white rounded-xl border border-[#1e2522]/25 focus:outline-none focus:ring-2 focus:ring-[#1e2522]';
 
 function Filter({ label, value, onChange, options }) {
   const id = `f-${label.replace(/\W+/g, '-').toLowerCase()}`;
@@ -75,14 +75,14 @@ export default function Messages() {
                   {latestVideo ? <LiteYouTube id={latestVideo} title={latest.title} /> : <div className="w-full h-full flex items-center justify-center text-white/80">Video coming soon</div>}
                 </div>
                 <div className="md:col-span-2">
-                  <h3 className="text-2xl md:text-3xl"><Link to={messagePath(latest)} className="hover:text-[#2b433e]">{latest.title}</Link></h3>
-                  <p className="mt-2 text-black/80">{[latest.speaker, latest.date && formatDate(latest.date), latest.scripture].filter(Boolean).join('  |  ')}</p>
-                  {latest.description && <p className="mt-3 text-black/80 leading-relaxed line-clamp-4">{plainText(latest.description)}</p>}
+                  <h3 className="text-2xl md:text-3xl"><Link to={messagePath(latest)} className="hover:text-[#1e2522]">{latest.title}</Link></h3>
+                  <p className="mt-2 text-[#1e2522]/80">{[latest.speaker, latest.date && formatDate(latest.date), latest.scripture].filter(Boolean).join('  |  ')}</p>
+                  {latest.description && <p className="mt-3 text-[#1e2522]/80 leading-relaxed line-clamp-4">{plainText(latest.description)}</p>}
                   <div className="mt-6"><Btn to={messagePath(latest)} variant="primary">Watch, listen, and read</Btn></div>
                 </div>
               </div>
             ) : (
-              <p className="text-lg text-black/80">New messages are on the way. Check back after Sunday.</p>
+              <p className="text-lg text-[#1e2522]/80">New messages are on the way. Check back after Sunday.</p>
             )}
           </Section>
 
@@ -98,7 +98,7 @@ export default function Messages() {
                       </div>
                       <div className="p-5">
                         <h3 className="text-xl">{s.name}</h3>
-                        <p className="mt-1 text-sm text-black/80">{dateRangeLabel(s.first, s.last)}{dateRangeLabel(s.first, s.last) ? '  |  ' : ''}{s.count} {s.count === 1 ? 'message' : 'messages'}</p>
+                        <p className="mt-1 text-sm text-[#1e2522]/80">{dateRangeLabel(s.first, s.last)}{dateRangeLabel(s.first, s.last) ? '  |  ' : ''}{s.count} {s.count === 1 ? 'message' : 'messages'}</p>
                       </div>
                     </Link>
                   </li>
@@ -118,11 +118,11 @@ export default function Messages() {
                 <Filter label="Scripture book" value={book} onChange={setBook} options={uniq(m => scriptureBook(m.scripture))} />
                 <Filter label="Topic" value={topic} onChange={setTopic} options={uniq(m => m.topic)} />
               </div>
-              {anyFilter && <button type="button" onClick={clear} className="mt-4 underline underline-offset-4 font-semibold text-[#2b433e] min-h-[44px]">Clear search and filters</button>}
+              {anyFilter && <button type="button" onClick={clear} className="mt-4 underline underline-offset-4 font-semibold text-[#1e2522] min-h-[44px]">Clear search and filters</button>}
             </form>
             <p className="sr-only" aria-live="polite">{filtered.length} messages shown</p>
             {filtered.length === 0 ? (
-              <p className="text-lg text-black/80">No messages match yet. Try a different word.</p>
+              <p className="text-lg text-[#1e2522]/80">No messages match yet. Try a different word.</p>
             ) : (
               <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filtered.map(m => <li key={m.id}><MessageCard message={m} /></li>)}
@@ -138,7 +138,7 @@ export default function Messages() {
           <Btn href={SITE.podcasts.apple} variant="dark">Apple Podcasts</Btn>
           <Btn href={SITE.podcasts.spotify} variant="dark">Spotify</Btn>
         </div>
-        <p className="mt-8 max-w-3xl text-lg leading-relaxed text-black/80">Our teachings are designed to help you align your heart with God’s heart, tapping into the freedom and fullness He has always intended for you. Each message combines solid biblical teaching with practical application, helping you live out our core values in your everyday life.</p>
+        <p className="mt-8 max-w-3xl text-lg leading-relaxed text-[#1e2522]/80">Our teachings are designed to help you align your heart with God’s heart, tapping into the freedom and fullness He has always intended for you. Each message combines solid biblical teaching with practical application, helping you live out our core values in your everyday life.</p>
       </Section>
     </>
   );

@@ -13,11 +13,11 @@ function Person({ p }) {
       <PhotoBox src={p.photo_url} alt={`Portrait of ${p.name}, ${p.role}`} label={`${p.name} headshot`} ratio="aspect-[4/5]" rounded={false} />
       <div className="p-6 flex flex-col flex-grow">
         <h2 className="text-2xl">{p.name}</h2>
-        {p.role && <p className="mt-1 font-semibold text-[#2b433e]">{p.role}</p>}
-        {p.bio && (p.markdown ? <RichText value={p.bio} className="mt-3" /> : <p className="mt-3 text-black/80 leading-relaxed">{p.bio}</p>)}
+        {p.role && <p className="mt-1 font-semibold text-[#1e2522]">{p.role}</p>}
+        {p.bio && (p.markdown ? <RichText value={p.bio} className="mt-3" /> : <p className="mt-3 text-[#1e2522]/80 leading-relaxed">{p.bio}</p>)}
         {p.email && (
           <p className="mt-auto pt-4">
-            <a href={`mailto:${p.email}`} className="inline-flex items-center min-h-[44px] font-semibold underline underline-offset-4 text-[#2b433e]">Email {first}</a>
+            <a href={`mailto:${p.email}`} className="inline-flex items-center min-h-[44px] font-semibold underline underline-offset-4 text-[#1e2522]">Email {first}</a>
           </p>
         )}
       </div>
@@ -42,7 +42,7 @@ export default function Leadership() {
 
       <Section tone="cream">
         <SectionHeader kicker="Our leadership team" title="Our leadership team" />
-        <div className="max-w-3xl space-y-4 text-lg leading-relaxed text-black/80">
+        <div className="max-w-3xl space-y-4 text-lg leading-relaxed text-[#1e2522]/80">
           {LEADERSHIP_INTRO.map(t => <p key={t}>{t}</p>)}
         </div>
       </Section>
@@ -53,16 +53,16 @@ export default function Leadership() {
           {HOW_WE_LEAD.map(i => (
             <div key={i.title} className="rounded-2xl p-6 neu">
               <dt className="text-xl font-semibold">{i.title}</dt>
-              <dd className="mt-2 text-black/80 leading-relaxed">{i.text}</dd>
+              <dd className="mt-2 text-[#1e2522]/80 leading-relaxed">{i.text}</dd>
             </div>
           ))}
         </dl>
         <div className="mt-10 max-w-3xl">
           <h3 className="text-2xl mb-3">Our leaders strive to</h3>
-          <ul className="list-disc pl-6 space-y-1 text-lg text-black/80">
+          <ul className="list-disc pl-6 space-y-1 text-lg text-[#1e2522]/80">
             {LEADERS_AIM.map(a => <li key={a}>{a}</li>)}
           </ul>
-          <p className="mt-6 text-lg text-black/80 leading-relaxed">{LEADERSHIP_CLOSING}</p>
+          <p className="mt-6 text-lg text-[#1e2522]/80 leading-relaxed">{LEADERSHIP_CLOSING}</p>
         </div>
       </Section>
     </>

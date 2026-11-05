@@ -30,11 +30,11 @@ export default function Sozo() {
         <div className="grid md:grid-cols-2 gap-10">
           <div>
             <SectionHeader title="What is Sozo" className="!mb-4" />
-            <div className="space-y-4 text-lg leading-relaxed text-black/80">
+            <div className="space-y-4 text-lg leading-relaxed text-[#1e2522]/80">
               <p className="lead">Sozo is a Greek word used more than 100 times in the New Testament. It means to save, deliver, make whole, restore, and heal, and it reflects God’s desire for our complete wholeness: spiritually, emotionally, and relationally.</p>
-              <blockquote className="border-l-4 border-[#d49e46] pl-5 font-serif italic leading-snug">
+              <blockquote className="border-l-4 border-[#eaa235] pl-5 font-serif italic leading-snug">
                 “But Jesus turning and seeing her said, ‘Daughter, take courage; your faith has made you well (sozo).’ And at once the woman was made well (sozo).”
-                <footer className="mt-1 text-base font-serif not-italic text-black/70">Matthew 9:22</footer>
+                <footer className="mt-1 text-base font-serif not-italic text-[#1e2522]/70">Matthew 9:22</footer>
               </blockquote>
               <p>Are there areas of your life where you feel stuck? Do you sense there is more to your relationship with God than you are experiencing now? Sozo ministry is a gentle, Spirit-led way to find and remove whatever may be getting in the way of knowing God closely and walking in the identity and purpose He gave you.</p>
               <p>A Sozo session is a time of interacting with Father, Son, and Holy Spirit to seek wholeness and pursue your destiny, and it is separate from counseling. During a session, trained Sozo team members sit down with you and, with the help of the Holy Spirit, walk you through the process of freedom and wholeness.</p>
@@ -42,16 +42,16 @@ export default function Sozo() {
           </div>
           <div>
             <SectionHeader title="Biblical foundation" className="!mb-4" />
-            <p className="text-lg leading-relaxed text-black/80 mb-3">Sozo ministry is built on these biblical truths:</p>
-            <ul className="list-disc pl-6 space-y-2 text-lg text-black/80">
+            <p className="text-lg leading-relaxed text-[#1e2522]/80 mb-3">Sozo ministry is built on these biblical truths:</p>
+            <ul className="list-disc pl-6 space-y-2 text-lg text-[#1e2522]/80">
               <li>God desires wholeness and freedom for His children (John 10:10, Isaiah 61:1 to 3)</li>
               <li>Truth sets us free from bondage (John 8:32)</li>
               <li>We are transformed by the renewing of our minds (Romans 12:2)</li>
               <li>Healing comes through our relationship with the Father, Son, and Holy Spirit (James 5:16, Psalm 147:3)</li>
             </ul>
             <SectionHeader title="Our approach" className="!mt-10 !mb-4" />
-            <p className="text-lg leading-relaxed text-black/80 mb-3">We aim to love people and give them a safe place where the healing of past wounds can break strongholds, replace lies with truth, and close doors to the enemy. Through gentle, Spirit-led prayer ministry, we help you:</p>
-            <ul className="list-disc pl-6 space-y-2 text-lg text-black/80">
+            <p className="text-lg leading-relaxed text-[#1e2522]/80 mb-3">We aim to love people and give them a safe place where the healing of past wounds can break strongholds, replace lies with truth, and close doors to the enemy. Through gentle, Spirit-led prayer ministry, we help you:</p>
+            <ul className="list-disc pl-6 space-y-2 text-lg text-[#1e2522]/80">
               <li>Find freedom from emotional wounds and pain</li>
               <li>Break unhealthy ties and thought patterns</li>
               <li>Identify and remove barriers to your relationship with God</li>
@@ -140,7 +140,7 @@ export default function Sozo() {
         <div className="grid md:grid-cols-2 gap-10">
           <div>
             <SectionHeader title="Recommended resources" intro="To go deeper into inner healing and Sozo ministry, these books are a good start." className="!mb-4" />
-            <ul className="list-disc pl-6 space-y-2 text-lg text-black/80">
+            <ul className="list-disc pl-6 space-y-2 text-lg text-[#1e2522]/80">
               <li><em>Healing the Wounded Heart</em> by Dan Allender</li>
               <li><em>The Transformation of the Inner Man</em> by John and Paula Sandford</li>
               <li><em>Healing for Damaged Emotions</em> by David Seamands</li>
@@ -148,9 +148,9 @@ export default function Sozo() {
               <li><em>Emotionally Healthy Spirituality</em> by Peter Scazzero</li>
             </ul>
           </div>
-          <blockquote className="self-center border-l-4 border-[#d49e46] pl-5 text-xl font-serif italic leading-snug">
+          <blockquote className="self-center border-l-4 border-[#eaa235] pl-5 text-xl font-serif italic leading-snug">
             “The Spirit of the Lord GOD is upon me, because the LORD has anointed me to bring good news to the afflicted; He has sent me to bind up the brokenhearted, to proclaim liberty to captives and freedom to prisoners.”
-            <footer className="mt-2 text-base font-serif not-italic text-black/70">Isaiah 61:1</footer>
+            <footer className="mt-2 text-base font-serif not-italic text-[#1e2522]/70">Isaiah 61:1</footer>
           </blockquote>
         </div>
       </Section>
@@ -159,7 +159,7 @@ export default function Sozo() {
         <div className="grid md:grid-cols-5 gap-10 items-start">
           <div className="md:col-span-2">
             <SectionHeader title="Request a Sozo session" className="!mb-4" />
-            <p className="text-lg leading-relaxed text-black/80">Your inquiry is confidential. Prefer email? Write to <a className="underline underline-offset-4 font-semibold" href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
+            <p className="text-lg leading-relaxed text-[#1e2522]/80">Your inquiry is confidential. Prefer email? Write to <a className="underline underline-offset-4 font-semibold" href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
           </div>
           <div className="md:col-span-3"><FormBlock formKey="sozo" /></div>
         </div>

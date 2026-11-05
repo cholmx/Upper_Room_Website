@@ -54,9 +54,9 @@ export default function Home() {
         <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
           <div className="aspect-[4/5] md:aspect-[5/6]"><Picture slot="home-welcome" fallback={HERO_IMAGES.about} /></div>
           <div>
-            <p className="kicker text-[#2b433e]">Welcome</p>
+            <p className="kicker text-[#1e2522]">Welcome</p>
             <h2 className="text-3xl md:text-5xl mb-6">Welcome to Upper Room Fellowship</h2>
-            <div className={`space-y-4 text-black/80 ${P}`}>
+            <div className={`space-y-4 text-[#1e2522]/80 ${P}`}>
               <p>For over 50 years, our congregation has been gathering in Columbiana to worship, grow, and serve together. We love this city and are proud to call it home.</p>
               <p>Together, we are learning to live with more love, joy, and purpose. We support each other and reach out to make our community better. Whether you are just exploring faith or looking for a church family, we would love to meet you and welcome you into ours.</p>
               <p><strong>{SITE.serviceTime}</strong><br /><strong>Location:</strong> {SITE.addressLine}</p>
@@ -113,7 +113,7 @@ export default function Home() {
 
       <Section tone="cream">
         <div className="text-center mb-8">
-          <p className="kicker text-[#2b433e]">This Week’s Sermon</p>
+          <p className="kicker text-[#1e2522]">This Week’s Sermon</p>
           <h2 className="text-3xl md:text-5xl">Our Latest Message</h2>
         </div>
         <div className="max-w-4xl mx-auto">
@@ -123,10 +123,10 @@ export default function Home() {
                 {videoId ? <LiteYouTube id={videoId} title={latest.title} /> : <div className="w-full h-full flex items-center justify-center text-white/80 p-6 text-center">Video coming soon</div>}
               </div>
               <p className="mt-5 text-center text-xl"><Link to={messagePath(latest)} className="font-semibold hover:text-[#c74f2f]">{latest.title}</Link></p>
-              <p className="mt-1 text-center text-black/70">{[latest.speaker, latest.date && formatDate(latest.date)].filter(Boolean).join(', ')}</p>
+              <p className="mt-1 text-center text-[#1e2522]/70">{[latest.speaker, latest.date && formatDate(latest.date)].filter(Boolean).join(', ')}</p>
             </>
           ) : (
-            <p className="text-center text-black/70">{data ? 'This week’s message will be posted soon.' : 'Loading the latest message.'}</p>
+            <p className="text-center text-[#1e2522]/70">{data ? 'This week’s message will be posted soon.' : 'Loading the latest message.'}</p>
           )}
           <p className="mt-6 text-center"><Link to="/messages" className="font-display font-bold text-[0.95rem] border-b-2 border-[#1e2522] pb-1">All messages</Link></p>
         </div>

@@ -33,11 +33,11 @@ export default function LiteYouTube({ id, title }) {
         src={ytThumb(id)}
         alt=""
         loading="lazy"
-        className="w-full h-full object-cover text-black/80 group-hover:opacity-60"
+        className="w-full h-full object-cover text-[#1e2522]/80 group-hover:opacity-60"
         onError={(e) => { e.currentTarget.style.display = 'none'; }}
       />
       <span className="absolute inset-0 flex items-center justify-center">
-        <span className="w-20 h-20 bg-[#eaa235] rounded-full flex items-center justify-center text-black pl-1 elev-2 transition-transform">
+        <span className="w-20 h-20 bg-[#eaa235] rounded-full flex items-center justify-center text-[#1e2522] pl-1 elev-2 transition-transform">
           <SafeIcon icon={FiPlay} className="text-3xl" />
         </span>
       </span>

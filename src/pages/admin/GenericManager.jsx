@@ -357,7 +357,7 @@ export default function GenericManager({ config }) {
                       })}
                       {config.toggleField && (
                         <td className="px-4 py-4">
-                          <button type="button" role="switch" aria-checked={Boolean(Number(item[config.toggleField]))} aria-label={`${item[titleField] || 'Item'} is ${Number(item[config.toggleField]) ? 'on' : 'off'}`} onClick={() => toggle(item)} className={`relative w-11 h-6 rounded-full transition-colors ${Number(item[config.toggleField]) ? 'bg-[#597F5C]' : 'bg-gray-300'}`}>
+                          <button type="button" role="switch" aria-checked={Boolean(Number(item[config.toggleField]))} aria-label={`${item[titleField] || 'Item'} is ${Number(item[config.toggleField]) ? 'on' : 'off'}`} onClick={() => toggle(item)} className={`relative w-11 h-6 rounded-full transition-colors ${Number(item[config.toggleField]) ? 'bg-[#1e2522]' : 'bg-gray-300'}`}>
                             <span className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform ${Number(item[config.toggleField]) ? 'translate-x-5' : ''}`} />
                           </button>
                         </td>

@@ -11,8 +11,8 @@ const isExternal = (to) => /^(https?:|mailto:|tel:|sms:)/i.test(to);
 
 const BTN = {
   primary: 'btn btn-solid',
-  accent: 'btn bg-[#c74f2f] text-white border-[#c74f2f] hover:bg-[#2b433e] hover:border-[#2b433e]',
-  dark: 'btn bg-[#1e2522] text-white border-[#1e2522] hover:bg-[#eaa235] hover:text-black hover:border-[#eaa235]',
+  accent: 'btn bg-[#c74f2f] text-white border-[#c74f2f] hover:bg-[#1e2522] hover:border-[#1e2522]',
+  dark: 'btn bg-[#1e2522] text-white border-[#1e2522] hover:bg-[#eaa235] hover:text-[#1e2522] hover:border-[#eaa235]',
   ghost: 'btn btn-outline',
   light: 'btn btn-outline-dark',
 };
@@ -37,18 +37,18 @@ export const Btn = forwardRef(function Btn({ to, href, onClick, variant = 'prima
   return <button ref={ref} type={type} onClick={onClick} className={cls} {...rest}>{children}</button>;
 });
 
-// The site palette: ink, forest, sage and terracotta for dark and strong bands, cream and white for light ones,
+// The site palette: ink, terracotta and amber for strong bands, cream and white for light ones (forest, sage and bronze are kept as names for amber and ink).
 // and the two golds for warm bands. Neighboring sections must differ (see the colors check in the README).
 const TONES = {
   cream: 'text-[#1e2522]',
   white: 'bg-white text-[#1e2522]',
   sand: 'bg-white text-[#1e2522]',
   ink: 'bg-[#1e2522] text-[#fcf9ed] relative overflow-hidden glow-gold',
-  forest: 'bg-[#2b433e] text-[#fcf9ed] relative overflow-hidden',
-  sage: 'bg-[#597f5c] text-white',
+  forest: 'bg-[#1e2522] text-[#fcf9ed] relative overflow-hidden',
+  sage: 'bg-[#eaa235] text-[#1e2522]',
   terra: 'bg-[#c74f2f] text-white',
   gold: 'bg-[#eaa235] text-[#1e2522]',
-  bronze: 'bg-[#d49e46] text-[#1e2522]',
+  bronze: 'bg-[#eaa235] text-[#1e2522]',
 };
 
 export function Section({ tone = 'cream', id, className = '', narrow = false, children, ...rest }) {
@@ -71,9 +71,9 @@ export function SectionHeader({ kicker, title, intro, center = false, as: Tag = 
   return (
     <div className={`${center ? 'text-center mx-auto' : ''} max-w-3xl mb-10 md:mb-12 ${className}`}>
       <span aria-hidden="true" className={`block w-12 h-1 bg-[#c74f2f] ${center ? 'mx-auto' : ''} mb-5`}></span>
-      {kicker && !same(kicker, title) && <span className={`kicker ${tone === 'dark' ? 'text-[#eaa235]' : 'text-[#2b433e]'}`}>{kicker}</span>}
+      {kicker && !same(kicker, title) && <span className={`kicker ${tone === 'dark' ? 'text-[#eaa235]' : 'text-[#1e2522]'}`}>{kicker}</span>}
       <Tag className="text-3xl md:text-5xl">{title}</Tag>
-      {intro && <p className={`mt-4 text-lg leading-relaxed ${tone === 'dark' ? 'text-white/85' : 'text-black/80'}`}>{intro}</p>}
+      {intro && <p className={`mt-4 text-lg leading-relaxed ${tone === 'dark' ? 'text-white/85' : 'text-[#1e2522]/80'}`}>{intro}</p>}
     </div>
   );
 }
@@ -102,7 +102,7 @@ export function PhotoBox({ src, alt = '', initials, className = '', ratio = 'asp
   }
   if (!initials) return null;
   return (
-    <div aria-hidden="true" className={`${ratio} ${rounded ? 'rounded-3xl' : ''} bg-gradient-to-br from-[#1e2522] to-[#2b433e] flex items-center justify-center text-6xl font-black text-[#eaa235]/60 ${className}`}>
+    <div aria-hidden="true" className={`${ratio} ${rounded ? 'rounded-3xl' : ''} bg-gradient-to-br from-[#1e2522] to-[#1e2522] flex items-center justify-center text-6xl font-black text-[#eaa235]/60 ${className}`}>
       {initials}
     </div>
   );
@@ -164,9 +164,9 @@ export function Beats({ beats, heading: Heading = 'h3' }) {
     <div className="max-w-3xl space-y-12">
       {beats.map(b => (
         <div key={b.title}>
-          {b.kicker && <p className="kicker text-[#2b433e] !mb-1">{b.kicker}</p>}
+          {b.kicker && <p className="kicker text-[#1e2522] !mb-1">{b.kicker}</p>}
           <Heading className="text-2xl md:text-3xl mb-3">{b.title}</Heading>
-          <div className="text-lg leading-relaxed text-black/80 space-y-3">{b.body}</div>
+          <div className="text-lg leading-relaxed text-[#1e2522]/80 space-y-3">{b.body}</div>
         </div>
       ))}
     </div>
@@ -178,15 +178,15 @@ export function Card({ title, children, to, linkLabel, icon, className = '', as:
     <article className={`fcard !p-8 flex flex-col ${className}`}>
       {icon && <div className="mb-4">{icon}</div>}
       <Tag className="text-2xl mb-3">{title}</Tag>
-      <div className="text-black/80 leading-relaxed flex-grow space-y-3">{children}</div>
+      <div className="text-[#1e2522]/80 leading-relaxed flex-grow space-y-3">{children}</div>
       {to && (
         <div className="mt-6">
           {isExternal(to) ? (
-            <a href={to} target="_blank" rel="noopener noreferrer" className="inline-flex items-center font-display font-bold tracking-wide text-[0.9rem] text-[#2b433e] hover:text-black transition-colors">
+            <a href={to} target="_blank" rel="noopener noreferrer" className="inline-flex items-center font-display font-bold tracking-wide text-[0.9rem] text-[#1e2522] hover:text-[#1e2522] transition-colors">
               {linkLabel || 'Learn more'} <span aria-hidden="true" className="ml-2">&rarr;</span><span className="sr-only"> (opens in a new tab)</span>
             </a>
           ) : (
-            <Link to={to} className="inline-flex items-center font-display font-bold tracking-wide text-[0.9rem] text-[#2b433e] hover:text-black transition-colors">
+            <Link to={to} className="inline-flex items-center font-display font-bold tracking-wide text-[0.9rem] text-[#1e2522] hover:text-[#1e2522] transition-colors">
               {linkLabel || 'Learn more'} <span aria-hidden="true" className="ml-2">&rarr;</span>
             </Link>
           )}
@@ -214,9 +214,9 @@ export function Accordion({ items, className = '' }) {
         <details key={it.id || i} id={it.id} className="u-acc neu-acc group rounded-2xl">
           <summary className="cursor-pointer px-6 py-5 flex items-center justify-between gap-4 text-lg font-bold min-h-[56px]">
             <span className="font-semibold text-lg">{it.title}</span>
-            <span aria-hidden="true" className="u-acc-icon flex-shrink-0 text-2xl leading-none text-[#2b433e]">+</span>
+            <span aria-hidden="true" className="u-acc-icon flex-shrink-0 text-2xl leading-none text-[#1e2522]">+</span>
           </summary>
-          <div className="px-6 pb-6 text-black/85 leading-relaxed space-y-3">{it.content}</div>
+          <div className="px-6 pb-6 text-[#1e2522]/85 leading-relaxed space-y-3">{it.content}</div>
         </details>
       ))}
     </div>
@@ -230,11 +230,11 @@ export function Steps({ items }) {
         <li key={it.title} className="flex gap-5">
           <div className="flex flex-col items-center">
             <span className="w-12 h-12 rounded-full bg-[#c74f2f] text-white font-black flex items-center justify-center flex-shrink-0">{i + 1}</span>
-            {i < items.length - 1 && <span className="w-px flex-grow bg-[#d49e46]/60 mt-2" aria-hidden="true"></span>}
+            {i < items.length - 1 && <span className="w-px flex-grow bg-[#eaa235]/60 mt-2" aria-hidden="true"></span>}
           </div>
           <div className="pb-2">
             <h3 className="text-xl md:text-2xl mb-2">{it.title}</h3>
-            <div className="text-black/80 leading-relaxed space-y-3">{it.body}</div>
+            <div className="text-[#1e2522]/80 leading-relaxed space-y-3">{it.body}</div>
           </div>
         </li>
       ))}
@@ -247,7 +247,7 @@ export function QuickFacts({ items }) {
     <dl className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
       {items.map(f => (
         <div key={f.label} className="neu-inset rounded-3xl p-6">
-          <dt className="kicker text-[#2b433e] !mb-1">{f.label}</dt>
+          <dt className="kicker text-[#1e2522] !mb-1">{f.label}</dt>
           <dd className="text-lg font-bold leading-snug">{f.value}</dd>
         </div>
       ))}
@@ -258,12 +258,12 @@ export function QuickFacts({ items }) {
 // A band of two panels side by side, edge to edge. The panels are the section: each one is a block of color
 // with its own content, and the text lines up with the rest of the page. Use sparingly, one or two per page.
 const PANEL = {
-  forest: 'bg-[#2b433e] text-white',
-  sage: 'bg-[#597f5c] text-white',
+  forest: 'bg-[#1e2522] text-white',
+  sage: 'bg-[#eaa235] text-[#1e2522]',
   terra: 'bg-[#c74f2f] text-white',
   ink: 'bg-[#1e2522] text-white',
   amber: 'bg-[#eaa235] text-[#1e2522]',
-  gold: 'bg-[#d49e46] text-[#1e2522]',
+  gold: 'bg-[#eaa235] text-[#1e2522]',
   cream: 'bg-[#fcf9ed] text-[#1e2522]',
   white: 'bg-white text-[#1e2522]',
 };
@@ -285,7 +285,7 @@ export function Panel({ tone = 'forest', title, as: Tag = 'h2', children, id, cl
   );
 }
 
-const CTA_TONES = { forest: 'bg-[#2b433e] text-[#fcf9ed]', ink: 'bg-[#1e2522] text-[#fcf9ed]', sage: 'bg-[#597f5c] text-white', terra: 'bg-[#c74f2f] text-white', gold: 'bg-[#eaa235] text-[#1e2522]' };
+const CTA_TONES = { forest: 'bg-[#1e2522] text-[#fcf9ed]', ink: 'bg-[#1e2522] text-[#fcf9ed]', sage: 'bg-[#eaa235] text-[#1e2522]', terra: 'bg-[#c74f2f] text-white', gold: 'bg-[#eaa235] text-[#1e2522]' };
 export function EndCta({ title, text, to, href, label, tone = 'forest' }) {
   const light = tone === 'gold';
   return (
@@ -311,7 +311,7 @@ export function Todo({ id, children }) {
   const user = useAuth()?.user;
   if (!user) return null;
   return (
-    <span data-todo={id} className="inline bg-[#FFF3C4] text-[#5c4306] border border-dashed border-[#2b433e] rounded px-1.5 py-0.5 text-[0.95em] font-semibold normal-case tracking-normal not-italic">
+    <span data-todo={id} className="inline bg-[#eaa235] text-[#1e2522] border border-dashed border-[#1e2522] rounded px-1.5 py-0.5 text-[0.95em] font-semibold normal-case tracking-normal not-italic">
       {children}
     </span>
   );
@@ -333,5 +333,5 @@ export function Gloss({ k, children }) {
 }
 
 export function Prose({ children, className = '' }) {
-  return <div className={`space-y-5 text-lg leading-relaxed text-black/85 ${className}`}>{children}</div>;
+  return <div className={`space-y-5 text-lg leading-relaxed text-[#1e2522]/85 ${className}`}>{children}</div>;
 }

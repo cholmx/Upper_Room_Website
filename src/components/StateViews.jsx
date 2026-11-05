@@ -3,7 +3,7 @@ import React from 'react';
 export function Spinner({ label = 'Loading' }) {
   return (
     <div className="flex justify-center items-center py-32" role="status" aria-label={label}>
-      <div className="w-10 h-10 border-4 border-[#d49e46] border-t-transparent rounded-full animate-spin"></div>
+      <div className="w-10 h-10 border-4 border-[#eaa235] border-t-transparent rounded-full animate-spin"></div>
     </div>
   );
 }

@@ -52,7 +52,7 @@ function SermonRedirect() {
 function Loading() {
   return (
     <div className="min-h-screen flex items-center justify-center" role="status" aria-label="Loading">
-      <div className="w-10 h-10 border-4 border-[#d49e46] border-t-transparent rounded-full animate-spin"></div>
+      <div className="w-10 h-10 border-4 border-[#eaa235] border-t-transparent rounded-full animate-spin"></div>
     </div>
   );
 }
