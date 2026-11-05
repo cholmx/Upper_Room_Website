@@ -77,7 +77,7 @@ const same = (a, b) => String(a || '').toLowerCase().replace(/&|\band\b/g, '').r
 export function SectionHeader({ kicker, title, intro, center = false, as: Tag = 'h2', tone = 'light', className = '' }) {
   return (
     <div className={`${center ? 'text-center mx-auto' : ''} max-w-3xl mb-10 md:mb-12 ${className}`}>
-      <span aria-hidden="true" className={`block w-12 h-1 rounded-full bg-[#c74f2f] ${center ? 'mx-auto' : ''} mb-5`}></span>
+      <span aria-hidden="true" className={`block w-12 h-1 bg-[#c74f2f] ${center ? 'mx-auto' : ''} mb-5`}></span>
       {kicker && !same(kicker, title) && <span className={`kicker ${tone === 'dark' ? 'text-[#eaa235]' : 'text-[#2b433e]'}`}>{kicker}</span>}
       <Tag className="text-3xl md:text-5xl">{title}</Tag>
       {intro && <p className={`mt-4 text-lg leading-relaxed ${tone === 'dark' ? 'text-white/85' : 'text-black/80'}`}>{intro}</p>}

@@ -28,8 +28,8 @@ export default function ScrollStory({ beats, label = 'Story', tone = 'light', he
             </div>
           ))}
         </div>
-        <div className="mt-6 h-2 rounded-full neu-inset overflow-hidden">
-          <div className="h-full bg-[#c74f2f] rounded-full transition-[width] duration-500" style={{ width: `${((active + 1) / beats.length) * 100}%` }}></div>
+        <div className="mt-6 h-2 neu-inset overflow-hidden">
+          <div className="h-full bg-[#c74f2f] transition-[width] duration-500" style={{ width: `${((active + 1) / beats.length) * 100}%` }}></div>
         </div>
       </div>
       <ol className="md:col-span-3 space-y-10 md:space-y-0" aria-label={label}>
