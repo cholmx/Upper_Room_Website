@@ -450,3 +450,12 @@ details.u-acc.neu-acc[open] { background: #f7f5ee; box-shadow: var(--shadow); }
 /* Caladea runs a little loose by default, so everything set in it is pulled in. */
 :where(.font-serif) { line-height: 1.25; }
 .rich-text { line-height: 1.5; }
+
+/* Titles and headings on the public site are set in Caladea bold. The sign-in page and the admin keep their own type. */
+:where(.public-site) :is(h1, h2, h3, h4) {
+  font-family: 'Caladea', serif;
+  text-transform: none;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
