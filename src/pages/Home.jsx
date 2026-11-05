@@ -29,7 +29,7 @@ export default function Home() {
               <span>Know God</span><span aria-hidden="true">&middot;</span><span>Share Life</span><span aria-hidden="true">&middot;</span><span>Serve Others</span>
             </p>
             <h1 id="home-h1" className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl max-w-[18ch] mb-3 md:mb-6 leading-[1.05]">Transforming lives that transform communities</h1>
-            <p className="font-serif italic text-xl md:text-3xl max-w-[40ch] text-white/90 mb-7 md:mb-10 leading-snug">
+            <p className="font-serif italic text-xl md:text-3xl max-w-[40ch] text-white/90 mb-7 md:mb-10 leading-tight">
               Join us {SITE.serviceTime} in Columbiana, Ohio
               <span className="block text-lg md:text-xl mt-2 text-white/80">{SITE.addressLine}</span>
             </p>
@@ -74,7 +74,7 @@ export default function Home() {
           <div>
             <SectionHeader kicker="Our vision statement" title="Our vision statement" tone="dark" className="!mb-6" />
             <p className="text-lg leading-relaxed text-white/90">At Upper Room Fellowship, we exist to help people know God deeply, share life authentically, and serve others selflessly. Real change happens from the inside out as we align our hearts with God’s heart. Join us as we pursue healthy relationships, access abundant wholeness, discover our greatness, live supernaturally, treasure God’s presence, and live out the Gospel in tangible ways.</p>
-            <blockquote className="mt-6 border-l-4 border-white/70 pl-5 font-serif italic text-xl text-white">
+            <blockquote className="mt-6 border-l-4 border-white/70 pl-5 font-serif italic text-xl text-white leading-snug">
               “By this everyone will know that you are my disciples, if you love one another.”
               <footer className="mt-1 text-base font-sans not-italic text-white/80">John 13:35</footer>
             </blockquote>

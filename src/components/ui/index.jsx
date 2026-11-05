@@ -158,7 +158,7 @@ export function PageHeader({ kicker, title, intro, children, page, ambient = fal
       >
         {kicker && !same(kicker, title) && <span className="kicker text-[#eaa235]">{kicker}</span>}
         <h1 className="text-4xl md:text-7xl mb-6">{title}</h1>
-        {intro && <p className="font-serif italic text-xl md:text-2xl text-white/90 max-w-[50ch] mx-auto leading-relaxed">{intro}</p>}
+        {intro && <p className="font-serif italic text-xl md:text-2xl text-white/90 max-w-[50ch] mx-auto leading-snug">{intro}</p>}
         {children && <div className="mt-8 flex flex-wrap justify-center gap-4">{children}</div>}
       </motion.div>
     </header>
@@ -180,7 +180,7 @@ export function Card({ title, children, to, linkLabel, icon, className = '', as:
   return (
     <article style={style} className={`fcard !p-8 flex flex-col ${className}`}>
       {icon && <div className="mb-4">{icon}</div>}
-      <Tag className="font-serif font-bold normal-case tracking-normal text-[1.7rem] leading-tight mb-3">{title}</Tag>
+      <Tag className="font-serif font-bold normal-case tracking-normal text-[1.7rem] leading-[1.15] mb-3">{title}</Tag>
       <div className="text-black/80 leading-relaxed flex-grow space-y-3">{children}</div>
       {to && (
         <div className="mt-6">
@@ -236,7 +236,7 @@ export function Steps({ items }) {
             {i < items.length - 1 && <span className="w-px flex-grow bg-[#d49e46]/60 mt-2" aria-hidden="true"></span>}
           </div>
           <div className="pb-2">
-            <h3 className="font-serif font-bold normal-case tracking-normal text-[1.5rem] md:text-[1.7rem] mb-2">{it.title}</h3>
+            <h3 className="font-serif font-bold normal-case tracking-normal text-[1.5rem] md:text-[1.7rem] leading-[1.15] mb-2">{it.title}</h3>
             <div className="text-black/80 leading-relaxed space-y-3">{it.body}</div>
           </div>
         </li>
