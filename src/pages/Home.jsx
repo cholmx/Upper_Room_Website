@@ -36,7 +36,7 @@ export default function Home() {
           <div className="hero-text max-w-[900px] mx-auto px-6 py-24 md:py-40 text-center text-white">
             <h1 id="home-h1" className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl mb-4 md:mb-5 leading-[1.05]">You are welcome here</h1>
             <p className="font-serif text-xl md:text-2xl mb-6 md:mb-8 leading-snug">Transforming lives that transform communities</p>
-            <p className="font-serif text-base md:text-lg mb-8 md:mb-10 leading-tight">
+            <p className="font-serif text-base md:text-[0.95rem] mb-8 md:mb-10 leading-tight">
               Join us {SITE.serviceTime} in Columbiana, Ohio
               <span className="block text-sm md:text-base mt-2">{SITE.addressLine}</span>
             </p>
@@ -73,7 +73,7 @@ export default function Home() {
         <div className="max-w-3xl mx-auto text-center">
           <p className="kicker text-[#eaa235]">Our vision</p>
           <h2 className="text-3xl md:text-5xl mb-6">Our vision statement</h2>
-          <p className="text-lg md:text-xl leading-relaxed text-white">At Upper Room Fellowship, we exist to help people know God deeply, share life authentically, and serve others selflessly. Real change happens from the inside out as we align our hearts with God’s heart. Join us as we pursue healthy relationships, access abundant wholeness, discover our greatness, live supernaturally, treasure God’s presence, and live out the Gospel in tangible ways.</p>
+          <p className="text-[0.95rem] md:text-base leading-relaxed text-white">At Upper Room Fellowship, we exist to help people know God deeply, share life authentically, and serve others selflessly. Real change happens from the inside out as we align our hearts with God’s heart. Join us as we pursue healthy relationships, access abundant wholeness, discover our greatness, live supernaturally, treasure God’s presence, and live out the Gospel in tangible ways.</p>
           <blockquote className="mt-8 font-serif italic text-xl md:text-2xl leading-snug">
             “By this everyone will know that you are my disciples, if you love one another.”
             <footer className="mt-2 text-base font-serif not-italic">John 13:35</footer>
@@ -136,7 +136,7 @@ export default function Home() {
         <div data-image-band="true" className="photo-section rounded-[10px] bg-[#1e2522] py-20 md:py-28 px-6 text-center text-white" style={{ backgroundImage: `url('${imgUrl(connectPhoto, 1600)}')` }}>
           <div className="hero-text relative z-10 max-w-2xl mx-auto">
             <h2 id="stay-h" className="text-3xl md:text-5xl mb-4">We would love to meet you</h2>
-            <p className="text-lg md:text-xl mb-8">Whether you are planning your first visit or have just been with us, fill out the Connect Card so we can welcome you properly and help you find your place in our church family.</p>
+            <p className="text-[0.95rem] md:text-base mb-8">Whether you are planning your first visit or have just been with us, fill out the Connect Card so we can welcome you properly and help you find your place in our church family.</p>
             <Btn to="/connect" variant="primary">Fill out the Connect Card</Btn>
           </div>
         </div>

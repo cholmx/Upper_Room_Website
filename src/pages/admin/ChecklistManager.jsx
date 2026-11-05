@@ -41,33 +41,33 @@ export default function ChecklistManager() {
     }
   };
 
-  if (loading) return <div className="flex justify-center p-12" role="status" aria-label="Loading"><SafeIcon icon={FiLoader} className="animate-spin text-3xl text-[#CCA866]" /></div>;
+  if (loading) return <div className="flex justify-center p-12" role="status" aria-label="Loading"><SafeIcon icon={FiLoader} className="animate-spin text-3xl text-[#c74f2f]" /></div>;
 
   const shown = CHECKLIST.filter(i => !(hideDone && rows[i.id]?.done === 1));
   const pct = Math.round((doneCount / CHECKLIST.length) * 100);
 
   return (
     <div>
-      <p className="text-gray-600 mb-4">Everything still shown in brackets on the site is listed here. Check an item once the real answer is on the site, and it stops being a reminder.</p>
-      <div className="bg-white rounded-2xl border border-gray-100 p-5 mb-6">
+      <p className="text-[#1e2522]/70 mb-4">Everything still shown in brackets on the site is listed here. Check an item once the real answer is on the site, and it stops being a reminder.</p>
+      <div className="bg-white rounded-2xl border border-[#1e2522]/10 p-5 mb-6">
         <div className="flex flex-wrap items-center justify-between gap-3 mb-3">
           <p className="font-bold" aria-live="polite">{doneCount} of {CHECKLIST.length} confirmed</p>
           <label className="inline-flex items-center gap-2 text-sm cursor-pointer"><input type="checkbox" checked={hideDone} onChange={(e) => setHideDone(e.target.checked)} className="w-4 h-4" /> Hide finished items</label>
         </div>
-        <div className="h-3 rounded-full bg-gray-100 overflow-hidden" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={pct} aria-label="Checklist progress">
-          <div className="h-full bg-[#CCA866]" style={{ width: `${pct}%` }}></div>
+        <div className="h-3 rounded-full bg-[#1e2522]/5 overflow-hidden" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={pct} aria-label="Checklist progress">
+          <div className="h-full bg-[#eaa235]" style={{ width: `${pct}%` }}></div>
         </div>
       </div>
-      {error && <div role="alert" className="mb-4 p-4 rounded-lg bg-red-50 border border-red-200 text-red-700 text-sm font-medium">{error}</div>}
-      <ul className="bg-white rounded-2xl border border-gray-100 divide-y divide-gray-100">
+      {error && <div role="alert" className="mb-4 p-4 rounded-lg bg-[#c74f2f]/10 border border-[#c74f2f] text-[#c74f2f] text-sm font-medium">{error}</div>}
+      <ul className="bg-white rounded-2xl border border-[#1e2522]/10 divide-y divide-[#1e2522]/10">
         {shown.map(i => {
           const done = rows[i.id]?.done === 1;
           return (
             <li key={i.id} className="p-4 flex items-start gap-4">
               <input id={`chk-${i.id}`} type="checkbox" checked={done} onChange={() => toggle(i)} className="w-5 h-5 mt-1 accent-[#8A6309]" />
               <label htmlFor={`chk-${i.id}`} className="flex-grow cursor-pointer">
-                <span className={`block font-medium ${done ? 'line-through text-gray-400' : 'text-gray-900'}`}>{i.label}</span>
-                <span className="block text-sm text-gray-500">{i.where}</span>
+                <span className={`block font-medium ${done ? 'line-through text-[#1e2522]/50' : 'text-[#1e2522]'}`}>{i.label}</span>
+                <span className="block text-sm text-[#1e2522]/70">{i.where}</span>
               </label>
               {i.route && <Link to={i.route} target="_blank" className="text-sm font-bold text-[#8A6309] underline">View page</Link>}
             </li>

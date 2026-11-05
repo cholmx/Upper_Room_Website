@@ -27,7 +27,7 @@ export default function Footer() {
   const SITE = useSite();
   return (
     <footer className="px-3 md:px-4 pt-1.5 md:pt-2 pb-20 md:pb-4">
-    <div className="bg-[#1e2522] text-[#fcf9ed] relative overflow-hidden rounded-[10px]">
+    <div className="bg-[#1e2522] text-[#ffffff] relative overflow-hidden rounded-[10px]">
       <div className="max-w-[1145px] mx-auto px-6 py-20 md:py-24 flex flex-wrap gap-12 justify-between items-start relative z-10">
         <div className="max-w-[26ch]">
           <h2 className="text-[1.4rem] font-extrabold text-[#eaa235] mb-4">

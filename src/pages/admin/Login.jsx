@@ -24,7 +24,7 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0B1613] flex items-center justify-center p-6 relative overflow-hidden">
+    <div className="min-h-screen bg-[#1e2522] flex items-center justify-center p-6 relative overflow-hidden">
       {/* Animated Background Ambience */}
 
       <div className="bg-[#11201B] p-10 rounded-3xl shadow-2xl max-w-md w-full border border-white/10 relative z-10">
@@ -32,11 +32,11 @@ export default function Login() {
           <h1 className="text-3xl font-black text-white mb-2 tracking-tight">
             Content Studio
           </h1>
-          <p className="font-serif italic text-[#FFC44F] text-sm">Upper Room Fellowship</p>
+          <p className="font-serif italic text-[#eaa235] text-sm">Upper Room Fellowship</p>
         </div>
 
         {error && (
-          <div className="bg-red-500/10 border border-red-500/50 text-red-200 p-4 rounded-xl mb-6 text-sm font-medium text-center">
+          <div className="bg-[#c74f2f]/10 border border-[#c74f2f] text-[#c74f2f] p-4 rounded-xl mb-6 text-sm font-medium text-center">
             {error}
           </div>
         )}
@@ -52,7 +52,7 @@ export default function Login() {
               autoComplete="username"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full p-4 bg-black/20 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#FFC44F] focus:border-transparent text-white placeholder-white/20"
+              className="w-full p-4 bg-[#1e2522]/20 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#eaa235] focus:border-transparent text-white placeholder-white/20"
               required
             />
           </div>
@@ -66,14 +66,14 @@ export default function Login() {
               autoComplete="current-password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-                            className="w-full p-4 bg-black/20 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#FFC44F] focus:border-transparent text-white placeholder-white/20"
+                            className="w-full p-4 bg-[#1e2522]/20 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#eaa235] focus:border-transparent text-white placeholder-white/20"
               required
             />
           </div>
           <button
             type="submit"
             disabled={submitting}
-            className="w-full disabled:opacity-60 bg-[#FFC44F] text-[#0B1613] font-bold text-sm tracking-wide py-4 rounded-xl hover:bg-white transition-colors shadow-[0_0_20px_rgba(255,196,79,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)]"
+            className="w-full disabled:opacity-60 bg-[#eaa235] text-[#1e2522] font-bold text-sm tracking-wide py-4 rounded-xl hover:bg-white transition-colors shadow-[0_0_20px_rgba(255,196,79,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)]"
           >
             {submitting ? 'Signing in...' : 'Enter Studio'}
           </button>

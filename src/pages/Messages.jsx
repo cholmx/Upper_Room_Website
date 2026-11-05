@@ -82,7 +82,7 @@ export default function Messages() {
                 </div>
               </div>
             ) : (
-              <p className="text-lg text-[#1e2522]/80">New messages are on the way. Check back after Sunday.</p>
+              <p className="text-[0.95rem] text-[#1e2522]/80">New messages are on the way. Check back after Sunday.</p>
             )}
           </Section>
 
@@ -122,7 +122,7 @@ export default function Messages() {
             </form>
             <p className="sr-only" aria-live="polite">{filtered.length} messages shown</p>
             {filtered.length === 0 ? (
-              <p className="text-lg text-[#1e2522]/80">No messages match yet. Try a different word.</p>
+              <p className="text-[0.95rem] text-[#1e2522]/80">No messages match yet. Try a different word.</p>
             ) : (
               <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filtered.map(m => <li key={m.id}><MessageCard message={m} /></li>)}
@@ -138,7 +138,7 @@ export default function Messages() {
           <Btn href={SITE.podcasts.apple} variant="dark">Apple Podcasts</Btn>
           <Btn href={SITE.podcasts.spotify} variant="dark">Spotify</Btn>
         </div>
-        <p className="mt-8 max-w-3xl text-lg leading-relaxed text-[#1e2522]/80">Our teachings are designed to help you align your heart with God’s heart, tapping into the freedom and fullness He has always intended for you. Each message combines solid biblical teaching with practical application, helping you live out our core values in your everyday life.</p>
+        <p className="mt-8 max-w-3xl text-[0.95rem] leading-relaxed text-[#1e2522]/80">Our teachings are designed to help you align your heart with God’s heart, tapping into the freedom and fullness He has always intended for you. Each message combines solid biblical teaching with practical application, helping you live out our core values in your everyday life.</p>
       </Section>
     </>
   );

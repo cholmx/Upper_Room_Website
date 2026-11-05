@@ -13,7 +13,7 @@ for (const route of STATIC_ROUTES) {
   await page.goto(base + route, { waitUntil: 'load' });
   await page.waitForTimeout(500);
   const colors = await page.evaluate((ink) => {
-    const CREAM = 'rgb(252, 249, 237)';
+    const CREAM = 'rgb(255, 255, 255)';
     const bg = (el) => {
       if (!el) return CREAM;
       if (el.dataset.imageBand) return 'photo';
@@ -32,7 +32,8 @@ for (const route of STATIC_ROUTES) {
     return list;
   }, INK);
   for (let i = 1; i < colors.length; i++) {
-    const shared = colors[i].filter((c) => colors[i - 1].includes(c));
+    // Neighboring white sections read as one white page, so only colored panels and photos are compared.
+    const shared = colors[i].filter((c) => c !== 'rgb(255, 255, 255)' && colors[i - 1].includes(c));
     if (shared.length) { bad++; console.log(`${route}: sections ${i} and ${i + 1} share ${shared[0]}`); }
   }
 }

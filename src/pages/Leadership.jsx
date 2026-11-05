@@ -42,7 +42,7 @@ export default function Leadership() {
 
       <Section tone="cream">
         <SectionHeader kicker="Our leadership team" title="Our leadership team" />
-        <div className="max-w-3xl space-y-4 text-lg leading-relaxed text-[#1e2522]/80">
+        <div className="max-w-3xl space-y-4 text-[0.95rem] leading-relaxed text-[#1e2522]/80">
           {LEADERSHIP_INTRO.map(t => <p key={t}>{t}</p>)}
         </div>
       </Section>
@@ -59,10 +59,10 @@ export default function Leadership() {
         </dl>
         <div className="mt-10 max-w-3xl">
           <h3 className="text-2xl mb-3">Our leaders strive to</h3>
-          <ul className="list-disc pl-6 space-y-1 text-lg text-[#1e2522]/80">
+          <ul className="list-disc pl-6 space-y-1 text-[0.95rem] text-[#1e2522]/80">
             {LEADERS_AIM.map(a => <li key={a}>{a}</li>)}
           </ul>
-          <p className="mt-6 text-lg text-[#1e2522]/80 leading-relaxed">{LEADERSHIP_CLOSING}</p>
+          <p className="mt-6 text-[0.95rem] text-[#1e2522]/80 leading-relaxed">{LEADERSHIP_CLOSING}</p>
         </div>
       </Section>
     </>

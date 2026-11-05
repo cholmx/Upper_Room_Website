@@ -77,7 +77,7 @@ export default function MessageDetail() {
           {m.description && (
             <div className="mb-8">
               <h2 className="text-2xl mb-3">Summary</h2>
-              <RichText value={m.description} className="text-lg" />
+              <RichText value={m.description} className="text-[0.95rem]" />
             </div>
           )}
           {notesUrl && <p className="mb-8"><Btn href={notesUrl} variant="ghost">Download the notes</Btn></p>}

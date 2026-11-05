@@ -9,31 +9,31 @@ const { FiLoader } = FiIcons;
 export default function ActivityLog() {
   const { data, loading, error, reload } = useFetch(`read/${ACTIVITY_TABLE}?sort=id:desc&limit=100`, { admin: true });
 
-  if (loading) return <div className="flex justify-center p-12" role="status" aria-label="Loading"><SafeIcon icon={FiLoader} className="animate-spin text-3xl text-[#CCA866]" /></div>;
+  if (loading) return <div className="flex justify-center p-12" role="status" aria-label="Loading"><SafeIcon icon={FiLoader} className="animate-spin text-3xl text-[#c74f2f]" /></div>;
   if (error) {
     return (
-      <div role="alert" className="p-4 rounded-lg bg-red-50 border border-red-200 text-red-700 text-sm font-medium">
+      <div role="alert" className="p-4 rounded-lg bg-[#c74f2f]/10 border border-[#c74f2f] text-[#c74f2f] text-sm font-medium">
         Could not load activity: {error} <button onClick={reload} className="underline font-bold ml-2">Retry</button>
       </div>
     );
   }
-  if (!data?.length) return <div className="bg-white rounded-2xl border border-gray-100 p-12 text-center text-gray-500">No activity recorded yet.</div>;
+  if (!data?.length) return <div className="bg-white rounded-2xl border border-[#1e2522]/10 p-12 text-center text-[#1e2522]/70">No activity recorded yet.</div>;
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-x-auto">
+    <div className="bg-white rounded-2xl shadow-sm border border-[#1e2522]/10 overflow-x-auto">
       <table className="w-full text-left text-sm">
         <thead>
-          <tr className="bg-gray-50 border-b border-gray-100 text-sm font-bold text-gray-500 tracking-wide">
+          <tr className="bg-[#1e2522]/5 border-b border-[#1e2522]/10 text-sm font-bold text-[#1e2522]/70 tracking-wide">
             <th className="px-6 py-4">When</th><th className="px-6 py-4">Who</th><th className="px-6 py-4">What</th><th className="px-6 py-4">Item</th>
           </tr>
         </thead>
         <tbody>
           {data.map(row => (
-            <tr key={row.id} className="border-b border-gray-50">
-              <td className="px-6 py-3 whitespace-nowrap text-gray-500">{row.created_at ? new Date(row.created_at).toLocaleString() : '-'}</td>
+            <tr key={row.id} className="border-b border-[#1e2522]/10">
+              <td className="px-6 py-3 whitespace-nowrap text-[#1e2522]/70">{row.created_at ? new Date(row.created_at).toLocaleString() : '-'}</td>
               <td className="px-6 py-3">{row.actor}</td>
               <td className="px-6 py-3">{row.action} in {row.area}</td>
-              <td className="px-6 py-3 text-gray-600">{row.item_label || '-'}</td>
+              <td className="px-6 py-3 text-[#1e2522]/70">{row.item_label || '-'}</td>
             </tr>
           ))}
         </tbody>

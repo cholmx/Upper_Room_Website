@@ -43,30 +43,30 @@ function Slot({ slot, row, onSaved }) {
   };
 
   return (
-    <div className="bg-white rounded-xl border border-gray-100 p-5 space-y-4">
+    <div className="bg-white rounded-xl border border-[#1e2522]/10 p-5 space-y-4">
       <div>
-        <h3 className="font-bold text-gray-900">{slot.label.charAt(0).toUpperCase() + slot.label.slice(1)}</h3>
-        <p className="text-xs text-gray-500">Slot: {slot.key}</p>
+        <h3 className="font-bold text-[#1e2522]">{slot.label.charAt(0).toUpperCase() + slot.label.slice(1)}</h3>
+        <p className="text-xs text-[#1e2522]/70">Slot: {slot.key}</p>
       </div>
       {slot.kind === 'model' ? (
         <div>
-          <label htmlFor={`model-${slot.key}`} className="block text-sm font-bold text-gray-800 mb-2">Link to the .glb file</label>
-          <input id={`model-${slot.key}`} type="url" value={url} onChange={(e) => setUrl(e.target.value)} placeholder="https://" className="w-full px-4 py-3 bg-gray-50 rounded-lg border border-gray-200 focus:outline-none focus:border-[#CCA866]" />
+          <label htmlFor={`model-${slot.key}`} className="block text-sm font-bold text-[#1e2522] mb-2">Link to the .glb file</label>
+          <input id={`model-${slot.key}`} type="url" value={url} onChange={(e) => setUrl(e.target.value)} placeholder="https://" className="w-full px-4 py-3 bg-[#1e2522]/5 rounded-lg border border-[#1e2522]/20 focus:outline-none focus:border-[#eaa235]" />
         </div>
       ) : (
         <FieldInput field={{ name: `photo-${slot.key}`, label: 'Image', type: 'image' }} value={url} onChange={(_, v) => setUrl(v)} />
       )}
       {slot.kind !== 'icon' && slot.kind !== 'logo' && slot.kind !== 'model' && slot.kind !== 'banner' && (
         <div>
-          <label htmlFor={`alt-${slot.key}`} className="block text-sm font-bold text-gray-800 mb-2">Description for screen readers</label>
-          <input id={`alt-${slot.key}`} type="text" value={alt} onChange={(e) => setAlt(e.target.value)} placeholder={slot.alt} className="w-full px-4 py-3 bg-gray-50 rounded-lg border border-gray-200 focus:outline-none focus:border-[#CCA866]" />
+          <label htmlFor={`alt-${slot.key}`} className="block text-sm font-bold text-[#1e2522] mb-2">Description for screen readers</label>
+          <input id={`alt-${slot.key}`} type="text" value={alt} onChange={(e) => setAlt(e.target.value)} placeholder={slot.alt} className="w-full px-4 py-3 bg-[#1e2522]/5 rounded-lg border border-[#1e2522]/20 focus:outline-none focus:border-[#eaa235]" />
         </div>
       )}
       <div className="flex items-center gap-4">
-        <button type="button" onClick={save} disabled={state.busy || !dirty} className="bg-[#0B1613] text-white font-bold py-2.5 px-6 rounded-lg hover:bg-black disabled:bg-gray-300 flex items-center gap-2">
+        <button type="button" onClick={save} disabled={state.busy || !dirty} className="bg-[#1e2522] text-white font-bold py-2.5 px-6 rounded-lg hover:bg-[#1e2522] disabled:bg-[#1e2522]/20 flex items-center gap-2">
           {state.busy ? <SafeIcon icon={FiLoader} className="animate-spin" /> : <SafeIcon icon={FiSave} />} Save
         </button>
-        {state.msg && <span role={state.msg.type === 'error' ? 'alert' : 'status'} className={`text-sm font-medium ${state.msg.type === 'error' ? 'text-red-700' : 'text-green-700'}`}>{state.msg.text}</span>}
+        {state.msg && <span role={state.msg.type === 'error' ? 'alert' : 'status'} className={`text-sm font-medium ${state.msg.type === 'error' ? 'text-[#c74f2f]' : 'text-[#1e2522]'}`}>{state.msg.text}</span>}
       </div>
     </div>
   );
@@ -84,16 +84,16 @@ export default function SitePhotosManager() {
   };
   useEffect(() => { load(); }, []);
 
-  if (loading) return <div className="flex justify-center p-12" role="status" aria-label="Loading"><SafeIcon icon={FiLoader} className="animate-spin text-3xl text-[#CCA866]" /></div>;
+  if (loading) return <div className="flex justify-center p-12" role="status" aria-label="Loading"><SafeIcon icon={FiLoader} className="animate-spin text-3xl text-[#c74f2f]" /></div>;
   const byKey = Object.fromEntries(rows.map(r => [r.slot_key, r]));
 
   return (
     <div className="space-y-10">
-      {error && <div role="alert" className="p-4 rounded-lg bg-red-50 border border-red-200 text-red-700 text-sm font-medium">{error}</div>}
+      {error && <div role="alert" className="p-4 rounded-lg bg-[#c74f2f]/10 border border-[#c74f2f] text-[#c74f2f] text-sm font-medium">{error}</div>}
       {GROUPS.map(g => (
         <section key={g.title} aria-labelledby={`grp-${g.title}`}>
           <h2 id={`grp-${g.title}`} className="text-xl font-bold mb-1">{g.title}</h2>
-          <p className="text-gray-600 mb-4">{g.help}</p>
+          <p className="text-[#1e2522]/70 mb-4">{g.help}</p>
           <div className="grid xl:grid-cols-2 gap-5">
             {PHOTO_SLOTS.filter(s => s.kind === g.kind).map(s => <Slot key={s.key + (byKey[s.key]?.id || '')} slot={s} row={byKey[s.key]} onSaved={load} />)}
           </div>

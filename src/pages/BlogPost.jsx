@@ -36,7 +36,7 @@ export default function BlogPost() {
   if (!live) return <NotFound what="article" />;
 
   return (
-    <article className="bg-[#fcf9ed] min-h-screen pt-32 pb-24 px-6">
+    <article className="bg-[#ffffff] min-h-screen pt-32 pb-24 px-6">
       <div className="max-w-[800px] mx-auto">
         <Link to="/blog" className="inline-flex items-center gap-2 text-sm font-bold tracking-wide text-[#1e2522] hover:text-[#1e2522] mb-8">
           <SafeIcon icon={FiArrowLeft} /> All Articles
@@ -50,7 +50,7 @@ export default function BlogPost() {
         {live.image_url && (
           <img src={live.image_url} alt="" className="w-full rounded-2xl mb-12 elev-1" />
         )}
-        <RichText value={live.body} className="text-lg md:text-xl" />
+        <RichText value={live.body} className="text-[0.95rem] md:text-base" />
       </div>
     </article>
   );

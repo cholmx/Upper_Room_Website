@@ -42,7 +42,7 @@ export default function Give() {
           {WHY.map((w, i) => (
             <li key={w} className="rounded-2xl p-5 neu flex items-start gap-4">
               <span aria-hidden="true" className="w-10 h-10 rounded-full bg-[#c74f2f] text-white font-semibold flex items-center justify-center flex-shrink-0">{String(i + 1).padStart(2, '0')}</span>
-              <span className="text-lg text-[#1e2522]/80 leading-snug pt-1.5">{w}</span>
+              <span className="text-[0.95rem] text-[#1e2522]/80 leading-snug pt-1.5">{w}</span>
             </li>
           ))}
         </ol>

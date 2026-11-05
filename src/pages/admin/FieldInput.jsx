@@ -3,9 +3,9 @@ import { ytId, ytEmbed } from '../../utils';
 import { uploadImage, uploadsEnabled } from '../../lib/upload';
 import RichText from '../../components/RichText';
 
-const base = 'w-full px-4 py-3 bg-gray-50 rounded-lg border focus:outline-none focus:ring-1 transition';
-const ok = 'border-gray-200 focus:border-[#CCA866] focus:ring-[#CCA866]';
-const bad = 'border-red-400 focus:border-red-500 focus:ring-red-500';
+const base = 'w-full px-4 py-3 bg-[#1e2522]/5 rounded-lg border focus:outline-none focus:ring-1 transition';
+const ok = 'border-[#1e2522]/20 focus:border-[#eaa235] focus:ring-[#eaa235]';
+const bad = 'border-[#c74f2f] focus:border-[#c74f2f] focus:ring-[#c74f2f]';
 
 export const isChecked = (v, fallback = false) => {
   if (v === undefined || v === null || v === '') return fallback;
@@ -34,25 +34,25 @@ function ImageField({ id, value, onChange, invalid }) {
   return (
     <div>
       {value && !invalid && (
-        <img src={value} alt="Preview" className="mb-3 h-40 rounded-lg border border-gray-200 object-cover bg-gray-100" onError={(e) => { e.currentTarget.style.display = 'none'; }} onLoad={(e) => { e.currentTarget.style.display = ''; }} />
+        <img src={value} alt="Preview" className="mb-3 h-40 rounded-lg border border-[#1e2522]/20 object-cover bg-[#1e2522]/5" onError={(e) => { e.currentTarget.style.display = 'none'; }} onLoad={(e) => { e.currentTarget.style.display = ''; }} />
       )}
       {uploadsEnabled && (
         <div className="flex flex-wrap items-center gap-3">
           <input ref={fileRef} type="file" accept="image/jpeg,image/png,image/webp,image/gif" className="sr-only" onChange={pick} aria-label="Choose a photo to upload" tabIndex={-1} />
-          <button type="button" onClick={() => fileRef.current?.click()} disabled={busy} className="px-5 py-3 rounded-lg bg-[#0B1613] text-white font-bold whitespace-nowrap disabled:opacity-60">
+          <button type="button" onClick={() => fileRef.current?.click()} disabled={busy} className="px-5 py-3 rounded-lg bg-[#1e2522] text-white font-bold whitespace-nowrap disabled:opacity-60">
             {busy ? 'Uploading...' : value ? 'Replace photo' : 'Upload a photo'}
           </button>
           {value && !busy && (
-            <button type="button" onClick={() => onChange('')} className="px-4 py-3 rounded-lg border border-gray-300 font-semibold text-gray-700 hover:bg-gray-50">Remove</button>
+            <button type="button" onClick={() => onChange('')} className="px-4 py-3 rounded-lg border border-[#1e2522]/20 font-semibold text-[#1e2522] hover:bg-[#1e2522]/5">Remove</button>
           )}
-          <span className="text-sm text-gray-500">JPG, PNG, WebP, or GIF. Large photos are shrunk for you.</span>
+          <span className="text-sm text-[#1e2522]/70">JPG, PNG, WebP, or GIF. Large photos are shrunk for you.</span>
         </div>
       )}
       <details className="mt-3" open={!uploadsEnabled || undefined}>
-        <summary className="cursor-pointer text-sm font-semibold text-gray-600">{uploadsEnabled ? 'Or paste a link to a photo' : 'Photo link'}</summary>
+        <summary className="cursor-pointer text-sm font-semibold text-[#1e2522]/70">{uploadsEnabled ? 'Or paste a link to a photo' : 'Photo link'}</summary>
         <input id={id} type="url" value={value || ''} onChange={(e) => onChange(e.target.value)} placeholder="https://..." className={`mt-2 ${base} ${invalid ? bad : ok}`} aria-invalid={invalid} />
       </details>
-      {err && <p role="alert" className="text-sm text-red-600 mt-2">{err}</p>}
+      {err && <p role="alert" className="text-sm text-[#c74f2f] mt-2">{err}</p>}
     </div>
   );
 }
@@ -91,18 +91,18 @@ function MarkdownField({ id, value, onChange, invalid }) {
     <div>
       <div className="flex flex-wrap items-center gap-2 mb-2" role="toolbar" aria-label="Formatting">
         {tools.map(([label, text, fn]) => (
-          <button key={label} type="button" aria-label={label} onClick={fn} disabled={preview} className="px-3 py-1.5 text-sm font-bold rounded border border-gray-200 bg-white hover:bg-gray-100 disabled:opacity-40">{text}</button>
+          <button key={label} type="button" aria-label={label} onClick={fn} disabled={preview} className="px-3 py-1.5 text-sm font-bold rounded border border-[#1e2522]/20 bg-white hover:bg-[#1e2522]/5 disabled:opacity-40">{text}</button>
         ))}
-        <button type="button" onClick={() => setPreview(p => !p)} aria-pressed={preview} className="ml-auto px-3 py-1.5 text-sm font-bold rounded border border-gray-200 bg-white hover:bg-gray-100">
+        <button type="button" onClick={() => setPreview(p => !p)} aria-pressed={preview} className="ml-auto px-3 py-1.5 text-sm font-bold rounded border border-[#1e2522]/20 bg-white hover:bg-[#1e2522]/5">
           {preview ? 'Edit' : 'Preview'}
         </button>
       </div>
       {preview ? (
-        <div className="min-h-[10rem] p-4 rounded-lg border border-gray-200 bg-white"><RichText value={value} /></div>
+        <div className="min-h-[10rem] p-4 rounded-lg border border-[#1e2522]/20 bg-white"><RichText value={value} /></div>
       ) : (
         <textarea ref={ref} id={id} rows={10} value={value || ''} onChange={(e) => onChange(e.target.value)} className={`${base} ${invalid ? bad : ok} text-sm`} aria-invalid={invalid} />
       )}
-      <p className="text-xs text-gray-500 mt-2">Supports **bold**, *italic*, ## headings, - lists and [links](https://example.com). Leave a blank line between paragraphs.</p>
+      <p className="text-xs text-[#1e2522]/70 mt-2">Supports **bold**, *italic*, ## headings, - lists and [links](https://example.com). Leave a blank line between paragraphs.</p>
     </div>
   );
 }
@@ -126,8 +126,8 @@ export default function FieldInput({ field, value, onChange, error }) {
     case 'checkbox':
       control = (
         <label className="inline-flex items-center gap-3 cursor-pointer">
-          <input id={id} type="checkbox" checked={isChecked(value, field.defaultChecked)} onChange={(e) => set(e.target.checked ? 1 : 0)} className="w-5 h-5 accent-[#CCA866]" />
-          <span className="text-gray-700">{field.help}</span>
+          <input id={id} type="checkbox" checked={isChecked(value, field.defaultChecked)} onChange={(e) => set(e.target.checked ? 1 : 0)} className="w-5 h-5 accent-[#eaa235]" />
+          <span className="text-[#1e2522]">{field.help}</span>
         </label>
       );
       break;
@@ -143,7 +143,7 @@ export default function FieldInput({ field, value, onChange, error }) {
         <div>
           <input id={id} type="url" value={value || ''} onChange={(e) => set(e.target.value)} placeholder="https://www.youtube.com/watch?v=..." className={`${base} ${invalid ? bad : ok}`} aria-invalid={invalid} />
           {ytId(value) && (
-            <div className="mt-3 aspect-video max-w-sm rounded-lg overflow-hidden border border-gray-200 bg-black">
+            <div className="mt-3 aspect-video max-w-sm rounded-lg overflow-hidden border border-[#1e2522]/20 bg-[#1e2522]">
               <iframe src={ytEmbed(value)} title="Video preview" className="w-full h-full" loading="lazy" allowFullScreen></iframe>
             </div>
           )}
@@ -159,12 +159,12 @@ export default function FieldInput({ field, value, onChange, error }) {
 
   return (
     <div>
-      <label htmlFor={id} className="block text-sm font-bold text-gray-800 mb-2">
-        {field.label}{field.required && <span className="text-red-600" aria-hidden="true"> *</span>}
+      <label htmlFor={id} className="block text-sm font-bold text-[#1e2522] mb-2">
+        {field.label}{field.required && <span className="text-[#c74f2f]" aria-hidden="true"> *</span>}
       </label>
       {control}
-      {field.type === 'slug' && <p className="text-xs text-gray-500 mt-2">Appears in the page address. Filled in from the title if left blank.</p>}
-      {invalid && <p role="alert" className="text-sm text-red-600 mt-2">{error}</p>}
+      {field.type === 'slug' && <p className="text-xs text-[#1e2522]/70 mt-2">Appears in the page address. Filled in from the title if left blank.</p>}
+      {invalid && <p role="alert" className="text-sm text-[#c74f2f] mt-2">{error}</p>}
     </div>
   );
 }

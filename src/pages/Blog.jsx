@@ -43,7 +43,7 @@ export default function Blog() {
   const standardPosts = filteredPosts.length > 1 ? filteredPosts.slice(1) : [];
 
   return (
-    <div className="bg-[#fcf9ed] min-h-screen text-[#1e2522] pb-24 pt-20">
+    <div className="bg-[#ffffff] min-h-screen text-[#1e2522] pb-24 pt-20">
       <PageHeader kicker="Articles and updates" title="Church blog" intro="Insights, devotions, and updates from the Upper Room family." />
 
       <div className="max-w-[1145px] mx-auto px-6 mt-16">
@@ -95,7 +95,7 @@ export default function Blog() {
               <div className="text-center py-24 rounded-3xl neu">
                 <div className="text-6xl mb-6">🔍</div>
                 <h3 className="text-3xl font-bold mb-3">No articles found</h3>
-                <p className="opacity-60 text-lg mb-8">We couldn't find any posts matching your criteria.</p>
+                <p className="opacity-60 text-[0.95rem] mb-8">We couldn't find any posts matching your criteria.</p>
                 <button 
                   onClick={() => { setSearchQuery(''); setSelectedCategory('All'); }}
                   className="btn btn-solid"
@@ -118,7 +118,7 @@ export default function Blog() {
                             className="w-full h-full object-cover transition-transform" 
                           />
                         ) : (
-                          <div className="absolute inset-0 flex flex-col items-center justify-center text-[#fcf9ed] p-8 text-center bg-gradient-to-br from-[#1e2522] to-[#1e2522]">
+                          <div className="absolute inset-0 flex flex-col items-center justify-center text-[#ffffff] p-8 text-center bg-gradient-to-br from-[#1e2522] to-[#1e2522]">
                             <span className="text-5xl font-serif italic mb-2 opacity-50">Upper Room</span>
                             <span className="text-sm tracking-wide opacity-30">Journal</span>
                           </div>
@@ -136,7 +136,7 @@ export default function Blog() {
                         
                         <h2 className="text-4xl lg:text-5xl font-bold mb-6 group-hover:text-[#1e2522] transition-colors leading-tight">{featuredPost.title}</h2>
                         
-                        <p className="opacity-70 mb-10 line-clamp-4 text-lg leading-relaxed">
+                        <p className="opacity-70 mb-10 line-clamp-4 text-[0.95rem] leading-relaxed">
                           {plainText(featuredPost.body) || 'Read this article to learn more...'}
                         </p>
                         

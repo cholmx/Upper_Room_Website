@@ -19,10 +19,10 @@ export default {
           800: '#1e2522',
         },
         cream: {
-          DEFAULT: '#fcf9ed',
-          50: '#fcf9ed',
-          100: '#fcf9ed',
-          200: '#fcf9ed',
+          DEFAULT: '#ffffff',
+          50: '#ffffff',
+          100: '#ffffff',
+          200: '#ffffff',
         },
         gold: {
           DEFAULT: '#eaa235',

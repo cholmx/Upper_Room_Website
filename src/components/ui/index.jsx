@@ -43,8 +43,8 @@ const TONES = {
   cream: 'text-[#1e2522]',
   white: 'bg-white text-[#1e2522]',
   sand: 'bg-white text-[#1e2522]',
-  ink: 'bg-[#1e2522] text-[#fcf9ed] relative overflow-hidden glow-gold',
-  forest: 'bg-[#1e2522] text-[#fcf9ed] relative overflow-hidden',
+  ink: 'bg-[#1e2522] text-[#ffffff] relative overflow-hidden glow-gold',
+  forest: 'bg-[#1e2522] text-[#ffffff] relative overflow-hidden',
   sage: 'bg-[#eaa235] text-[#1e2522]',
   terra: 'bg-[#c74f2f] text-white',
   gold: 'bg-[#eaa235] text-[#1e2522]',
@@ -52,7 +52,7 @@ const TONES = {
 };
 
 export function Section({ tone = 'cream', id, className = '', narrow = false, children, ...rest }) {
-  const panel = tone !== 'cream';
+  const panel = tone !== 'cream' && tone !== 'white';
   return (
     <section id={id} className="px-3 md:px-4 py-1.5 md:py-2" {...rest}>
       <div className={`${TONES[tone]} ${panel ? 'rounded-[10px]' : ''} py-16 md:py-24 px-6 md:px-10 ${className}`}>
@@ -73,7 +73,7 @@ export function SectionHeader({ kicker, title, intro, center = false, as: Tag = 
       <span aria-hidden="true" className={`block w-12 h-1 bg-[#c74f2f] ${center ? 'mx-auto' : ''} mb-5`}></span>
       {kicker && !same(kicker, title) && <span className={`kicker ${tone === 'dark' ? 'text-[#eaa235]' : 'text-[#1e2522]'}`}>{kicker}</span>}
       <Tag className="text-3xl md:text-5xl">{title}</Tag>
-      {intro && <p className={`mt-4 text-lg leading-relaxed ${tone === 'dark' ? 'text-white/85' : 'text-[#1e2522]/80'}`}>{intro}</p>}
+      {intro && <p className={`mt-4 text-[0.95rem] leading-relaxed ${tone === 'dark' ? 'text-white/85' : 'text-[#1e2522]/80'}`}>{intro}</p>}
     </div>
   );
 }
@@ -141,7 +141,7 @@ export function PageHeader({ kicker, title, intro, children, page }) {
   const image = usePageBanner(page);
   return (
     <header className="px-3 md:px-4 pt-3 md:pt-4 pb-1.5 md:pb-2">
-      <div className="photo-section rounded-[10px] text-[#fcf9ed] py-24 md:py-36 px-6 text-center" style={{ backgroundImage: `url('${imgUrl(image, 1600)}')` }}>
+      <div className="photo-section rounded-[10px] text-[#ffffff] py-24 md:py-36 px-6 text-center" style={{ backgroundImage: `url('${imgUrl(image, 1600)}')` }}>
         <div className="hero-text max-w-[800px] mx-auto relative z-10">
           {kicker && !same(kicker, title) && <span className="kicker text-[#eaa235]">{kicker}</span>}
           <h1 className="text-4xl md:text-6xl mb-6">{title}</h1>
@@ -166,7 +166,7 @@ export function Beats({ beats, heading: Heading = 'h3' }) {
         <div key={b.title}>
           {b.kicker && <p className="kicker text-[#1e2522] !mb-1">{b.kicker}</p>}
           <Heading className="text-2xl md:text-3xl mb-3">{b.title}</Heading>
-          <div className="text-lg leading-relaxed text-[#1e2522]/80 space-y-3">{b.body}</div>
+          <div className="text-[0.95rem] leading-relaxed text-[#1e2522]/80 space-y-3">{b.body}</div>
         </div>
       ))}
     </div>
@@ -264,7 +264,7 @@ const PANEL = {
   ink: 'bg-[#1e2522] text-white',
   amber: 'bg-[#eaa235] text-[#1e2522]',
   gold: 'bg-[#eaa235] text-[#1e2522]',
-  cream: 'bg-[#fcf9ed] text-[#1e2522]',
+  cream: 'bg-[#ffffff] text-[#1e2522]',
   white: 'bg-white text-[#1e2522]',
 };
 
@@ -280,19 +280,19 @@ export function Panel({ tone = 'forest', title, as: Tag = 'h2', children, id, cl
   return (
     <div id={id} className={`${PANEL[tone]} band-panel scroll-mt-24 py-14 md:py-20 px-8 md:px-12 ${className}`}>
       {title && <Tag className="text-3xl md:text-4xl mb-6">{title}</Tag>}
-      <div className="box-body space-y-4 text-lg leading-relaxed max-w-[34rem]">{children}</div>
+      <div className="box-body space-y-4 text-[0.95rem] leading-relaxed max-w-[34rem]">{children}</div>
     </div>
   );
 }
 
-const CTA_TONES = { forest: 'bg-[#1e2522] text-[#fcf9ed]', ink: 'bg-[#1e2522] text-[#fcf9ed]', sage: 'bg-[#eaa235] text-[#1e2522]', terra: 'bg-[#c74f2f] text-white', gold: 'bg-[#eaa235] text-[#1e2522]' };
+const CTA_TONES = { forest: 'bg-[#1e2522] text-[#ffffff]', ink: 'bg-[#1e2522] text-[#ffffff]', sage: 'bg-[#eaa235] text-[#1e2522]', terra: 'bg-[#c74f2f] text-white', gold: 'bg-[#eaa235] text-[#1e2522]' };
 export function EndCta({ title, text, to, href, label, tone = 'forest' }) {
   const light = tone === 'gold';
   return (
     <section className={`${CTA_TONES[tone]} text-center py-20 md:py-28 px-6`} aria-label="Next step">
       <div className="max-w-[800px] mx-auto">
         <h2 className="text-3xl md:text-6xl leading-none">{title}</h2>
-        {text && <p className={`mt-5 text-lg md:text-xl leading-relaxed ${light ? 'text-[#1e2522]' : 'text-white/85'}`}>{text}</p>}
+        {text && <p className={`mt-5 text-[0.95rem] md:text-base leading-relaxed ${light ? 'text-[#1e2522]' : 'text-white/85'}`}>{text}</p>}
         <div className="mt-9">
           <Btn to={to} href={href} variant={light ? 'dark' : 'primary'}>{label}</Btn>
         </div>
@@ -333,5 +333,5 @@ export function Gloss({ k, children }) {
 }
 
 export function Prose({ children, className = '' }) {
-  return <div className={`space-y-5 text-lg leading-relaxed text-[#1e2522]/85 ${className}`}>{children}</div>;
+  return <div className={`space-y-5 text-[0.95rem] leading-relaxed text-[#1e2522]/85 ${className}`}>{children}</div>;
 }

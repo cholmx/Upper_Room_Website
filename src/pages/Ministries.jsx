@@ -3,7 +3,7 @@ import usePageMeta from '../hooks/usePageMeta';
 import { Btn, Section, SectionHeader, PageHeader } from '../components/ui';
 
 function Bullets({ items }) {
-  return <ul className="list-disc pl-6 space-y-2 text-lg text-[#1e2522]/80">{items.map(i => <li key={i}>{i}</li>)}</ul>;
+  return <ul className="list-disc pl-6 space-y-2 text-[0.95rem] text-[#1e2522]/80">{items.map(i => <li key={i}>{i}</li>)}</ul>;
 }
 
 const P = 'text-[0.95rem] leading-relaxed text-[#1e2522]/80';
