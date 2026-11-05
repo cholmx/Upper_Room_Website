@@ -121,12 +121,30 @@ function MobileMenu({ onClose }) {
 export default function Header() {
   const SITE = useSite();
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [hasHero, setHasHero] = useState(false);
   const { pathname } = useLocation();
   useEffect(() => setOpen(false), [pathname]);
-  const light = false;
+  useEffect(() => {
+    const on = () => setScrolled(window.scrollY > 20);
+    on();
+    window.addEventListener('scroll', on, { passive: true });
+    return () => window.removeEventListener('scroll', on);
+  }, []);
+  // When a page opens with a photo hero, the menu sits on top of the photo until the page is scrolled.
+  useEffect(() => {
+    const check = () => {
+      const first = document.querySelector('main')?.firstElementChild;
+      setHasHero(Boolean(first && first.querySelector('.photo-section')));
+    };
+    check();
+    const timers = [120, 500, 1200].map(ms => setTimeout(check, ms));
+    return () => timers.forEach(clearTimeout);
+  }, [pathname]);
+  const light = hasHero && !scrolled;
 
   return (
-    <header className={`sticky top-0 z-50 flex items-center h-20 transition-colors ${light ? 'bg-transparent text-white' : 'bg-white text-black shadow-[0_1px_2px_rgba(30,37,34,0.05),0_6px_18px_-6px_rgba(30,37,34,0.10)]'}`}>
+    <header className={`sticky top-0 z-50 flex items-center h-20 transition-colors ${hasHero ? '-mb-20' : ''} ${light ? 'bg-transparent text-white' : 'bg-white text-black shadow-[0_1px_2px_rgba(30,37,34,0.05),0_6px_18px_-6px_rgba(30,37,34,0.10)]'}`}>
       <div className="max-w-[1320px] w-full mx-auto px-6 flex items-center justify-between gap-6">
         <Logo tone={light ? 'light' : 'dark'} />
         <nav aria-label="Main" className="hidden xl:flex items-center gap-6 pt-1">
@@ -138,7 +156,7 @@ export default function Header() {
           </a>
         </nav>
         <div className="flex items-center gap-2 xl:hidden">
-          <button type="button" className={`p-2 rounded-full transition-colors ${light ? 'hover:bg-white/10' : 'hover:bg-black/5'}`} aria-expanded={open} aria-controls="mobile-menu" aria-label="Open menu" onClick={() => setOpen(true)}>
+          <button type="button" className={`p-2 rounded-full transition-colors ${hasHero ? '-mb-20' : ''} ${light ? 'hover:bg-white/10' : 'hover:bg-black/5'}`} aria-expanded={open} aria-controls="mobile-menu" aria-label="Open menu" onClick={() => setOpen(true)}>
             <SafeIcon icon={FiMenu} size={24} />
           </button>
         </div>
