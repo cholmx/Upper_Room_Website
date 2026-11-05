@@ -1,15 +1,11 @@
 import React, { forwardRef, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import { usePhoto, usePhotoUrls } from '../../photos';
 import { imgUrl, safeUrl } from '../../utils';
 import { GLOSSARY } from '../../content/glossary';
 import { HERO_IMAGES } from '../../content/photos';
 import { SEO_ROUTES } from '../../content/seo';
 import { useAuth } from '../../auth';
-import LightField from '../immersive/LightField';
-import useInView from '../../hooks/useInView';
-import useTilt from '../../hooks/useTilt';
 
 const isExternal = (to) => /^(https?:|mailto:|tel:|sms:)/i.test(to);
 
@@ -60,15 +56,9 @@ export function Section({ tone = 'cream', id, className = '', narrow = false, ch
   return (
     <section id={id} className="px-3 md:px-4 py-1.5 md:py-2" {...rest}>
       <div className={`${TONES[tone]} ${panel ? 'rounded-[10px]' : ''} py-16 md:py-24 px-6 md:px-10 ${className}`}>
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.7, ease: 'easeOut' }}
-          className={`${narrow ? 'max-w-[800px]' : 'max-w-[1145px]'} mx-auto relative z-10`}
-        >
+        <div className={`${narrow ? 'max-w-[800px]' : 'max-w-[1145px]'} mx-auto relative z-10`}>
           {children}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
@@ -147,24 +137,18 @@ function usePageBanner(pageKey) {
 }
 
 // The page banner: a photo with a dark wash, a gold kicker, a big heading, and an intro.
-export function PageHeader({ kicker, title, intro, children, page, ambient = false }) {
+export function PageHeader({ kicker, title, intro, children, page }) {
   const image = usePageBanner(page);
   return (
     <header className="px-3 md:px-4 pt-3 md:pt-4 pb-1.5 md:pb-2">
       <div className="photo-section rounded-[10px] text-[#f7f5ee] py-24 md:py-36 px-6 text-center" style={{ backgroundImage: `url('${imgUrl(image, 1600)}')` }}>
         <div className="scrim"></div>
-        {ambient && <LightField />}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="max-w-[800px] mx-auto relative z-10"
-        >
+        <div className="max-w-[800px] mx-auto relative z-10">
           {kicker && !same(kicker, title) && <span className="kicker text-[#eaa235]">{kicker}</span>}
           <h1 className="text-4xl md:text-6xl mb-6">{title}</h1>
           {intro && <p className="font-serif text-xl md:text-2xl text-white/90 max-w-[50ch] mx-auto leading-snug">{intro}</p>}
           {children && <div className="mt-8 flex flex-wrap justify-center gap-4">{children}</div>}
-        </motion.div>
+        </div>
       </div>
     </header>
   );
@@ -172,18 +156,27 @@ export function PageHeader({ kicker, title, intro, children, page, ambient = fal
 
 export function Cards({ children, cols = 3, className = '' }) {
   const grid = cols === 2 ? 'md:grid-cols-2' : cols === 4 ? 'sm:grid-cols-2 lg:grid-cols-4' : 'md:grid-cols-2 lg:grid-cols-3';
-  const ref = useInView();
-  const tilt = useTilt();
+  return <div className={`grid gap-6 md:gap-8 ${grid} ${className}`}>{children}</div>;
+}
+
+// A plain run of titled passages, one after another.
+export function Beats({ beats, heading: Heading = 'h3' }) {
   return (
-    <div ref={(el) => { ref.current = el; tilt.current = el; }} className={`stagger grid gap-6 md:gap-8 ${grid} ${className}`}>
-      {React.Children.map(children, (c, i) => (c && React.isValidElement(c) ? React.cloneElement(c, { style: { ...(c.props.style || {}), '--i': i } }) : c))}
+    <div className="max-w-3xl space-y-12">
+      {beats.map(b => (
+        <div key={b.title}>
+          {b.kicker && <p className="kicker text-[#2b433e] !mb-1">{b.kicker}</p>}
+          <Heading className="text-2xl md:text-3xl mb-3">{b.title}</Heading>
+          <div className="text-lg leading-relaxed text-black/80 space-y-3">{b.body}</div>
+        </div>
+      ))}
     </div>
   );
 }
 
-export function Card({ title, children, to, linkLabel, icon, className = '', as: Tag = 'h3', style }) {
+export function Card({ title, children, to, linkLabel, icon, className = '', as: Tag = 'h3' }) {
   return (
-    <article style={style} className={`fcard !p-8 flex flex-col ${className}`}>
+    <article className={`fcard !p-8 flex flex-col ${className}`}>
       {icon && <div className="mb-4">{icon}</div>}
       <Tag className="text-2xl mb-3">{title}</Tag>
       <div className="text-black/80 leading-relaxed flex-grow space-y-3">{children}</div>
@@ -298,19 +291,13 @@ export function EndCta({ title, text, to, href, label, tone = 'forest' }) {
   const light = tone === 'gold';
   return (
     <section className={`${CTA_TONES[tone]} text-center py-20 md:py-28 px-6`} aria-label="Next step">
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-60px' }}
-        transition={{ duration: 0.7, ease: 'easeOut' }}
-        className="max-w-[800px] mx-auto"
-      >
+      <div className="max-w-[800px] mx-auto">
         <h2 className="text-3xl md:text-6xl leading-none">{title}</h2>
         {text && <p className={`mt-5 text-lg md:text-xl leading-relaxed ${light ? 'text-[#1e2522]' : 'text-white/85'}`}>{text}</p>}
         <div className="mt-9">
           <Btn to={to} href={href} variant={light ? 'dark' : 'primary'}>{label}</Btn>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

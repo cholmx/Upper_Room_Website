@@ -1,5 +1,4 @@
 import React, { useEffect, Suspense, lazy } from 'react';
-import { MotionConfig } from 'framer-motion';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation, useParams } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -9,7 +8,6 @@ import { AuthProvider, useAuth } from './auth';
 import { SettingsProvider } from './settings';
 import { PhotosProvider } from './photos';
 import ErrorBoundary from './components/ErrorBoundary';
-import { installRipple } from './lib/ripple';
 
 const Home = lazy(() => import('./pages/Home'));
 const PlanYourVisit = lazy(() => import('./pages/PlanYourVisit'));
@@ -79,10 +77,8 @@ function PublicLayout({ children }) {
 }
 
 export default function App() {
-  useEffect(() => installRipple(), []);
   return (
     <ErrorBoundary>
-    <MotionConfig reducedMotion="user">
     <Router>
       <SettingsProvider>
       <PhotosProvider>
@@ -136,7 +132,6 @@ export default function App() {
       </PhotosProvider>
       </SettingsProvider>
     </Router>
-    </MotionConfig>
     </ErrorBoundary>
   );
 }

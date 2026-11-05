@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import usePageMeta from '../hooks/usePageMeta';
 import useFetch from '../hooks/useFetch';
 import { useSite } from '../settings';
@@ -9,7 +8,6 @@ import { HERO_IMAGES } from '../content/photos';
 import { formatDate, imgUrl, isLive, messagePath, ytId } from '../utils';
 import { Btn, Section } from '../components/ui';
 import LiteYouTube from '../components/LiteYouTube';
-import LightField from '../components/immersive/LightField';
 
 const P = 'text-lg leading-relaxed';
 
@@ -34,9 +32,8 @@ export default function Home() {
       <section aria-labelledby="home-h1" className="px-3 md:px-4 pt-3 md:pt-4 pb-1.5 md:pb-2">
         <div className="photo-section rounded-[10px] bg-[#1e2522] py-20 md:py-40 px-6 relative text-center" style={{ backgroundImage: `url('${imgUrl(banner, 1800)}')` }}>
           <div className="scrim"></div>
-          <LightField />
           <div className="max-w-[900px] mx-auto relative z-10 text-white">
-            <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, ease: 'easeOut' }}>
+            <div>
               <p className="kicker text-[#eaa235] !mb-3 md:!mb-5">Know God &middot; Share Life &middot; Serve Others</p>
               <h1 id="home-h1" className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-4 md:mb-6 leading-[1.05]">Transforming lives that transform communities</h1>
               <p className="font-serif text-xl md:text-2xl text-white/90 mb-8 md:mb-10 leading-tight">
@@ -47,7 +44,7 @@ export default function Home() {
                 <Btn to="/plan-your-visit" variant="primary">Plan Your Visit</Btn>
                 <Btn to="/messages" variant="light">Watch Latest Message</Btn>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>

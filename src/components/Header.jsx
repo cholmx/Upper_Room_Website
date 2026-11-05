@@ -10,7 +10,7 @@ import * as FiIcons from 'react-icons/fi';
 
 const { FiMenu, FiX, FiChevronDown } = FiIcons;
 
-const linkBase = 'whitespace-nowrap font-display font-bold text-[0.95rem] tracking-wide py-1 border-b-2 transition-all duration-300 inline-flex items-center gap-1';
+const linkBase = 'whitespace-nowrap font-display font-bold text-[0.95rem] tracking-wide py-1 border-b-2 inline-flex items-center gap-1';
 const linkOn = 'border-[#c74f2f] text-black';
 const linkOff = 'border-transparent text-black/70 hover:text-black hover:border-black/20';
 const linkOnLight = 'border-[#eaa235] text-white';
@@ -80,7 +80,7 @@ function MobileMenu({ onClose }) {
     <div id="mobile-menu" className="xl:hidden fixed inset-0 z-[60] bg-[#f7f5ee] overflow-y-auto" role="dialog" aria-modal="true" aria-label="Site menu">
       <div className="flex items-center justify-between px-6 h-16">
         <span className="text-2xl tracking-tight" style={{ fontFamily: "Arial, Helvetica, sans-serif", fontWeight: 700 }}>{SITE.shortName}</span>
-        <button type="button" aria-label="Close menu" onClick={onClose} className="p-3 bg-white rounded-full elev-1 hover:scale-105 transition-transform">
+        <button type="button" aria-label="Close menu" onClick={onClose} className="p-3 bg-white rounded-full elev-1 transition-transform">
           <SafeIcon icon={FiX} size={22} />
         </button>
       </div>
@@ -144,7 +144,7 @@ export default function Header() {
   const light = hasHero && !scrolled;
 
   return (
-    <header className={`sticky top-0 z-50 flex items-center h-20 transition-colors duration-300 ${hasHero ? '-mb-20' : ''} ${light ? 'bg-transparent text-white' : 'bg-[#f7f5ee]/95 backdrop-blur-md text-black shadow-[0_1px_2px_rgba(30,37,34,0.05),0_6px_18px_-6px_rgba(30,37,34,0.10)]'}`}>
+    <header className={`sticky top-0 z-50 flex items-center h-20 transition-colors ${hasHero ? '-mb-20' : ''} ${light ? 'bg-transparent text-white' : 'bg-[#f7f5ee] text-black shadow-[0_1px_2px_rgba(30,37,34,0.05),0_6px_18px_-6px_rgba(30,37,34,0.10)]'}`}>
       <div className="max-w-[1320px] w-full mx-auto px-6 flex items-center justify-between gap-6">
         <Logo tone={light ? 'light' : 'dark'} />
         <nav aria-label="Main" className="hidden xl:flex items-center gap-6 pt-1">

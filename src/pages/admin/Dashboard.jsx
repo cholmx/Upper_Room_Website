@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import SafeIcon from '../../common/SafeIcon';
 import * as FiIcons from 'react-icons/fi';
 import GenericManager from './GenericManager';
@@ -13,7 +12,7 @@ import { useAuth } from '../../auth';
 const { FiLayout, FiMic, FiCalendar, FiFileText, FiCamera, FiLogOut, FiMenu, FiX, FiMail, FiSettings, FiActivity, FiUsers, FiCheckSquare, FiHeart, FiMessageSquare } = FiIcons;
 
 const NavItem = ({ icon, children, ...rest }) => (
-  <button {...rest} className="w-full flex items-center gap-4 px-4 py-3 text-left text-gray-300 hover:bg-[#CCA866] hover:text-black rounded-lg transition-colors duration-200">
+  <button {...rest} className="w-full flex items-center gap-4 px-4 py-3 text-left text-gray-300 hover:bg-[#CCA866] hover:text-black rounded-lg transition-colors">
     <SafeIcon icon={icon} className="text-xl" />
     <span className="font-semibold">{children}</span>
   </button>
@@ -206,20 +205,11 @@ const ContentStudio = () => {
       return 'Dashboard';
   }
 
-  const sidebarVariants = {
-    open: { x: 0, transition: { type: "spring", stiffness: 300, damping: 30 } },
-    closed: { x: "-100%", transition: { type: "spring", stiffness: 300, damping: 30 } }
-  };
 
   return (
     <div className="min-h-screen bg-gray-50 text-gray-800 flex">
       {/* Sidebar */}
-      <motion.aside 
-        variants={sidebarVariants}
-        initial="open"
-        animate={isSidebarOpen ? "open" : "closed"}
-        className={`w-72 bg-[#0B1613] text-white p-6 flex-col fixed lg:relative h-full z-50 lg:z-auto ${isSidebarOpen ? 'flex' : 'hidden'}`}
-      >
+      <aside className={`w-72 bg-[#0B1613] text-white p-6 flex-col fixed lg:relative h-full z-50 lg:z-auto ${isSidebarOpen ? 'flex' : 'hidden'}`}>
         <div className="flex items-center justify-between mb-10">
             <h1 className="text-2xl font-bold text-white tracking-wider">Content <span className="text-[#CCA866]">Studio</span></h1>
             <button aria-label="Close menu" onClick={() => setIsSidebarOpen(false)} className="lg:hidden text-2xl text-gray-400 hover:text-white">
@@ -245,7 +235,7 @@ const ContentStudio = () => {
                 Log Out
             </NavItem>
         </div>
-      </motion.aside>
+      </aside>
 
       {/* Main Content */}
       <main className="flex-1 p-4 sm:p-6 lg:p-10 flex flex-col">
@@ -257,17 +247,9 @@ const ContentStudio = () => {
         </header>
         
         <div className="flex-1 overflow-y-auto">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeTab}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.2 }}
-              >
+              <div key={activeTab}>
                 {renderContent()}
-              </motion.div>
-            </AnimatePresence>
+              </div>
         </div>
       </main>
     </div>

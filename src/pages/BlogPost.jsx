@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import useFetch from '../hooks/useFetch';
 import usePageMeta from '../hooks/usePageMeta';
 import useJsonLd from '../hooks/useJsonLd';
@@ -38,7 +37,7 @@ export default function BlogPost() {
 
   return (
     <article className="bg-[#f7f5ee] min-h-screen pt-32 pb-24 px-6">
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-[800px] mx-auto">
+      <div className="max-w-[800px] mx-auto">
         <Link to="/blog" className="inline-flex items-center gap-2 text-sm font-bold tracking-wide text-[#2b433e] hover:text-black mb-8">
           <SafeIcon icon={FiArrowLeft} /> All Articles
         </Link>
@@ -52,7 +51,7 @@ export default function BlogPost() {
           <img src={live.image_url} alt="" className="w-full rounded-2xl mb-12 elev-1" />
         )}
         <RichText value={live.body} className="text-lg md:text-xl" />
-      </motion.div>
+      </div>
     </article>
   );
 }

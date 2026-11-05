@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import { publicDataFetch } from '../api';
 import usePageMeta from '../hooks/usePageMeta';
 import { stripHtml } from '../utils';
@@ -23,10 +22,6 @@ export default function CustomPage() {
     fetchPage();
   }, [slug]);
 
-  const fadeUp = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
-  };
 
   if (loading) {
     return (
@@ -55,24 +50,23 @@ export default function CustomPage() {
       <div className="bg-[#1e2522] text-[#f7f5ee] py-24 px-6 text-center relative overflow-hidden">
          {/* Subtle abstract background */}
          <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/9562304/pexels-photo-9562304.jpeg?auto=compress&cs=tinysrgb&h=1200')] bg-cover bg-center opacity-[0.08] mix-blend-overlay"></div>
-         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#eaa235] rounded-full blur-[150px] opacity-10 pointer-events-none"></div>
          
-         <motion.div initial="hidden" animate="visible" variants={fadeUp} className="max-w-[800px] mx-auto relative z-10">
+         <div className="max-w-[800px] mx-auto relative z-10">
            <span className="kicker text-[#eaa235] mb-4 inline-block">Information</span>
            <h1 className="text-4xl md:text-6xl mb-8 leading-tight">{page.title_text}</h1>
            <div className="w-16 h-1 bg-[#eaa235] mx-auto rounded-full opacity-50"></div>
-         </motion.div>
+         </div>
       </div>
 
       {/* Content Body */}
       <div className="py-24 px-6">
-        <motion.div initial="hidden" animate="visible" variants={fadeUp} className="max-w-[800px] mx-auto p-8 md:p-16 rounded-3xl neu">
+        <div className="max-w-[800px] mx-auto p-8 md:p-16 rounded-3xl neu">
           <div className="space-y-8 text-lg md:text-xl text-black/80 leading-snug font-serif italic text-gray-800">
             {stripHtml(page.body_content_text).split('\n').filter(Boolean).map((para, i) => (
               <p key={i}>{para}</p>
             ))}
           </div>
-        </motion.div>
+        </div>
       </div>
     </div>
   );

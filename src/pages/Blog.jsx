@@ -1,6 +1,5 @@
 import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import usePageMeta from '../hooks/usePageMeta';
 import { formatDate, isLive } from '../utils';
 import { plainText } from '../lib/markdown';
@@ -8,7 +7,6 @@ import useFetch from '../hooks/useFetch';
 import { ErrorState } from '../components/StateViews';
 import { PageHeader } from '../components/ui';
 import SafeIcon from '../common/SafeIcon';
-import { slideInLeft, slideInRight, fadeUp } from '../lib/motion';
 import * as FiIcons from 'react-icons/fi';
 
 const { FiSearch, FiArrowRight, FiUser, FiCalendar, FiClock, FiTag } = FiIcons;
@@ -63,7 +61,7 @@ export default function Blog() {
           </div>
         ) : (
           <>
-            <motion.div initial="hidden" animate="visible" variants={fadeUp} className="mb-16 max-w-3xl mx-auto">
+            <div className="mb-16 max-w-3xl mx-auto">
               <div className="relative mb-8 group">
                 <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none group-focus-within:text-[#2b433e] transition-colors">
                   <SafeIcon icon={FiSearch} className="text-gray-400 text-xl" />
@@ -73,7 +71,7 @@ export default function Blog() {
                   placeholder="Search articles by title, author, or keyword..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="block w-full pl-16 pr-6 py-5 rounded-full neu-field focus:outline-none focus:ring-2 focus:ring-[#d49e46] focus:border-transparent text-lg transition-all"
+                  className="block w-full pl-16 pr-6 py-5 rounded-full neu-field focus:outline-none focus:ring-2 focus:ring-[#d49e46] focus:border-transparent text-lg"
                 />
               </div>
 
@@ -83,7 +81,7 @@ export default function Blog() {
                     <button
                       key={cat}
                       onClick={() => setSelectedCategory(cat)}
-                      className={`px-6 py-2.5 rounded-full text-sm font-bold tracking-normal transition-all duration-300 flex items-center gap-2 ${selectedCategory === cat ? 'bg-[#1e2522] text-white' : 'neu text-black/80'}`}
+                      className={`px-6 py-2.5 rounded-full text-sm font-bold tracking-normal flex items-center gap-2 ${selectedCategory === cat ? 'bg-[#1e2522] text-white' : 'neu text-black/80'}`}
                     >
                       {cat !== 'All' && <SafeIcon icon={FiTag} className={selectedCategory === cat ? 'text-white' : 'text-[#2b433e]'} />}
                       {cat}
@@ -91,10 +89,10 @@ export default function Blog() {
                   ))}
                 </div>
               )}
-            </motion.div>
+            </div>
 
             {filteredPosts.length === 0 ? (
-              <motion.div initial="hidden" animate="visible" variants={fadeUp} className="text-center py-24 rounded-3xl neu">
+              <div className="text-center py-24 rounded-3xl neu">
                 <div className="text-6xl mb-6">🔍</div>
                 <h3 className="text-3xl font-bold mb-3">No articles found</h3>
                 <p className="opacity-60 text-lg mb-8">We couldn't find any posts matching your criteria.</p>
@@ -104,22 +102,20 @@ export default function Blog() {
                 >
                   Clear Filters
                 </button>
-              </motion.div>
+              </div>
             ) : (
               <>
                 {featuredPost && (
-                  <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={{
-                    visible: { transition: { staggerChildren: 0.1 } }
-                  }} className="mb-20">
-                    <motion.span variants={slideInLeft} className="kicker text-[#2b433e] mb-4 inline-block">{searchQuery || selectedCategory !== 'All' ? 'Top Result' : 'Latest Article'}</motion.span>
-                    <Link to={`/blog/${featuredPost.id}`} className="block elev-hover transition-all duration-500 rounded-3xl overflow-hidden flex flex-col md:flex-row group translate-y-0 hover:-translate-y-2 neu">
+                  <div className="mb-20">
+                    <span className="kicker text-[#2b433e] mb-4 inline-block">{searchQuery || selectedCategory !== 'All' ? 'Top Result' : 'Latest Article'}</span>
+                    <Link to={`/blog/${featuredPost.id}`} className="block elev-hover rounded-3xl overflow-hidden flex flex-col md:flex-row group neu">
                       <div className="md:w-1/2 aspect-square md:aspect-auto bg-[#1e2522] relative overflow-hidden flex-shrink-0">
                         {featuredPost.image_url ? (
                           <img 
                             loading="lazy"
                             src={featuredPost.image_url} 
                             alt={featuredPost.title} 
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" 
+                            className="w-full h-full object-cover transition-transform" 
                           />
                         ) : (
                           <div className="absolute inset-0 flex flex-col items-center justify-center text-[#f7f5ee] p-8 text-center bg-gradient-to-br from-[#1e2522] to-[#2b433e]">
@@ -130,19 +126,19 @@ export default function Blog() {
                       </div>
                       
                       <div className="p-8 md:p-14 flex flex-col justify-center md:w-1/2 relative">
-                        <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-4 text-sm font-bold text-[#2b433e] tracking-wide mb-6">
+                        <div className="flex flex-wrap items-center gap-4 text-sm font-bold text-[#2b433e] tracking-wide mb-6">
                           {featuredPost.category && (
                             <span className="bg-[#d49e46]/10 text-[#2b433e] px-4 py-1.5 rounded-full">{featuredPost.category}</span>
                           )}
                           <span className="flex items-center gap-1.5 text-gray-500"><SafeIcon icon={FiCalendar} /> {featuredPost.date ? formatDate(featuredPost.date) : formatDate(featuredPost.created_at)}</span>
                           <span className="flex items-center gap-1.5 text-gray-500"><SafeIcon icon={FiClock} /> {getReadTime(featuredPost.body)}</span>
-                        </motion.div>
+                        </div>
                         
-                        <motion.h2 variants={slideInRight} className="text-4xl lg:text-5xl font-bold mb-6 group-hover:text-[#2b433e] transition-colors leading-tight">{featuredPost.title}</motion.h2>
+                        <h2 className="text-4xl lg:text-5xl font-bold mb-6 group-hover:text-[#2b433e] transition-colors leading-tight">{featuredPost.title}</h2>
                         
-                        <motion.p variants={fadeUp} className="opacity-70 mb-10 line-clamp-4 text-lg leading-relaxed">
+                        <p className="opacity-70 mb-10 line-clamp-4 text-lg leading-relaxed">
                           {plainText(featuredPost.body) || 'Read this article to learn more...'}
-                        </motion.p>
+                        </p>
                         
                         <div className="mt-auto flex items-center justify-between border-t border-black/5 pt-8">
                           {featuredPost.author ? (
@@ -154,28 +150,25 @@ export default function Blog() {
                             </div>
                           ) : <div />}
                           <div className="flex items-center text-sm font-bold tracking-wide text-[#2b433e] group-hover:text-black transition-colors">
-                            Read Article <SafeIcon icon={FiArrowRight} className="ml-2 transform group-hover:translate-x-1 transition-transform" />
+                            Read Article <SafeIcon icon={FiArrowRight} className="ml-2 transform transition-transform" />
                           </div>
                         </div>
                       </div>
                     </Link>
-                  </motion.div>
+                  </div>
                 )}
 
                 {standardPosts.length > 0 && (
-                  <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={{
-                    hidden: { opacity: 0 },
-                    visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
-                  }}>
-                    <motion.h3 variants={slideInLeft} className="text-3xl font-bold mb-10 border-b border-black/10 pb-4">
+                  <div>
+                    <h3 className="text-3xl font-bold mb-10 border-b border-black/10 pb-4">
                       {searchQuery || selectedCategory !== 'All' ? 'More Results' : 'More Articles'}
-                    </motion.h3>
+                    </h3>
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                       {standardPosts.map(post => (
-                        <motion.div key={post.id} variants={fadeUp}>
+                        <div key={post.id}>
                           <Link 
                             to={`/blog/${post.id}`}
-                            className="flex flex-col h-full rounded-2xl overflow-hidden elev-hover hover:-translate-y-2 transition-all duration-400 group neu"
+                            className="flex flex-col h-full rounded-2xl overflow-hidden elev-hover group neu"
                           >
                             <div className="aspect-[16/10] bg-[#1e2522] relative overflow-hidden">
                               {post.image_url ? (
@@ -183,7 +176,7 @@ export default function Blog() {
                                   loading="lazy"
                                   src={post.image_url} 
                                   alt={post.title} 
-                                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+                                  className="w-full h-full object-cover transition-transform" 
                                 />
                               ) : (
                                 <div className="absolute inset-0 flex items-center justify-center text-white/50 bg-gradient-to-br from-[#1e2522] to-[#2b433e]">
@@ -191,7 +184,7 @@ export default function Blog() {
                                 </div>
                               )}
                               {post.category && (
-                                <div className="absolute top-4 left-4 bg-white/95 backdrop-blur text-black text-[0.75rem] font-bold tracking-wide px-3 py-1.5 rounded-full">
+                                <div className="absolute top-4 left-4 bg-white text-black text-[0.75rem] font-bold tracking-wide px-3 py-1.5 rounded-full">
                                   {post.category}
                                 </div>
                               )}
@@ -218,15 +211,15 @@ export default function Blog() {
                                   </div>
                                 ) : <div />}
                                 <div className="flex items-center text-sm font-bold tracking-wide text-[#2b433e] group-hover:text-black transition-colors">
-                                  Read <SafeIcon icon={FiArrowRight} className="ml-1.5 transform group-hover:translate-x-1 transition-transform" />
+                                  Read <SafeIcon icon={FiArrowRight} className="ml-1.5 transform transition-transform" />
                                 </div>
                               </div>
                             </div>
                           </Link>
-                        </motion.div>
+                        </div>
                       ))}
                     </div>
-                  </motion.div>
+                  </div>
                 )}
               </>
             )}

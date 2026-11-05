@@ -69,15 +69,8 @@ h1, h2, h3, h4 {
   cursor: pointer;
   border: 1px solid transparent;
   border-radius: 0;
-  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
-              box-shadow 0.4s ease, 
-              background-color 0.3s ease,
-              border-color 0.3s ease,
-              color 0.3s ease;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 }
-
-.btn:hover { transform: translateY(-2px); }
-.btn:active { transform: translateY(1px); }
 
 .btn-solid {
   background: #c74f2f;
@@ -133,7 +126,6 @@ h1, h2, h3, h4 {
   background-color: var(--black);
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
   overflow: hidden;
 }
 
@@ -149,13 +141,6 @@ h1, h2, h3, h4 {
   background: #ffffff;
   color: var(--black);
   border-radius: 0;
-  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, border-color 0.4s ease;
-}
-
-.fcard:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--neu-raised);
-  border-color: rgba(255, 255, 255, 0.9);
 }
 
 .video-card {
@@ -164,13 +149,7 @@ h1, h2, h3, h4 {
   display: block;
   text-decoration: none;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
   border-radius: 1rem;
-}
-
-.video-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--neu-raised);
 }
 
 .video-card .text-panel {
@@ -180,11 +159,6 @@ h1, h2, h3, h4 {
   bottom: 0;
   background: linear-gradient(to top, rgba(0,0,0,0.95), rgba(0,0,0,0));
   padding: 3rem 1.5rem 1.5rem 1.5rem;
-  transition: padding-bottom 0.3s ease;
-}
-
-.video-card:hover .text-panel {
-  padding-bottom: 2rem;
 }
 
 .play-btn {
@@ -192,7 +166,6 @@ h1, h2, h3, h4 {
   height: 64px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(8px);
   border: 2px solid rgba(255, 255, 255, 0.5);
   display: flex;
   align-items: center;
@@ -201,13 +174,11 @@ h1, h2, h3, h4 {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .video-card:hover .play-btn {
   background: var(--yellow);
   border-color: var(--yellow);
-  transform: translate(-50%, -50%) scale(1.1);
   box-shadow: 0 10px 30px rgba(234, 162, 53, 0.5);
 }
 
@@ -217,7 +188,6 @@ h1, h2, h3, h4 {
   border-top: 12px solid transparent;
   border-bottom: 12px solid transparent;
   margin-left: 6px;
-  transition: border-color 0.3s ease;
 }
 
 .video-card:hover .play-btn:after {
@@ -237,13 +207,6 @@ h1, h2, h3, h4 {
 /* Legacy support: dark backgrounds that use the raw hex class */
 .bg-\[\#1e2522\] :focus-visible {
   outline-color: var(--yellow);
-}
-
-/* Fixed backgrounds stutter on touch devices (notably iOS Safari) */
-@media (hover: none), (prefers-reduced-motion: reduce) {
-  .photo-section {
-    background-attachment: scroll;
-  }
 }
 
 .skip-link {
@@ -290,34 +253,10 @@ h1, h2, h3, h4 {
 .rich-text blockquote { border-left: 4px solid var(--muted); padding-left: 1em; font-style: italic; }
 .rich-text img { max-width: 100%; border-radius: 0; }
 
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-
 /* Native details and summary used by the accordions and expandable cards */
 details.u-acc > summary { list-style: none; }
 details.u-acc > summary::-webkit-details-marker { display: none; }
 details.u-acc[open] > summary .u-acc-icon { transform: rotate(45deg); }
-details.u-acc > summary .u-acc-icon { transition: transform 0.2s ease; }
-
-/* Section glow used on dark bands */
-.glow-gold::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 700px;
-  height: 700px;
-  background: #d49e46;
-  border-radius: 9999px;
-  filter: blur(150px);
-  opacity: 0.1;
-  transform: translate(33%, -33%);
-  pointer-events: none;
-}
 
 html, body { overflow-x: clip; }
 
@@ -346,66 +285,18 @@ p:empty { display: none; }
   background: linear-gradient(145deg, #ffffff, #f7f5ee);
   border: 1px solid rgba(255, 255, 255, 0.9);
   box-shadow: var(--neu-raised-sm);
-  transform: perspective(900px) translateY(var(--ty, 0)) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
-  transition: transform 0.25s ease, box-shadow 0.3s ease;
-}
-.fcard:hover {
-  --ty: -5px;
-  border-color: rgba(255, 255, 255, 0.9);
-  box-shadow: var(--neu-raised);
 }
 
-details.u-acc.neu-acc { background: linear-gradient(145deg, #ffffff, #f7f5ee); border: 1px solid rgba(255, 255, 255, 0.9); box-shadow: var(--neu-raised-sm); transition: box-shadow 0.25s ease; }
+details.u-acc.neu-acc { background: linear-gradient(145deg, #ffffff, #f7f5ee); border: 1px solid rgba(255, 255, 255, 0.9); box-shadow: var(--neu-raised-sm); }
 details.u-acc.neu-acc[open] { background: linear-gradient(145deg, #f7f5ee, #f7f5ee); box-shadow: var(--neu-inset); }
 
-/* Buttons: soft raised, pressed on click, with a ripple from the point of contact */
-.btn { position: relative; overflow: hidden; transition: transform 0.2s ease, box-shadow 0.25s ease, background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease; }
+/* Buttons */
+.btn { position: relative; transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease; }
 .btn-solid { box-shadow: 3px 3px 9px rgba(170, 118, 10, 0.2), -3px -3px 8px rgba(255, 255, 255, 0.5); }
 .photo-section .btn-solid, .glow-gold .btn-solid, .bg-\[\#1e2522\] .btn-solid { box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4), -2px -2px 8px rgba(255, 255, 255, 0.05); }
-.btn-solid:active { box-shadow: inset 4px 4px 9px rgba(170, 118, 10, 0.5), inset -3px -3px 8px rgba(255, 255, 255, 0.35); transform: translateY(1px); }
-.btn:active { transform: translateY(1px); }
-@media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .btn:hover { transform: translateY(-2px); }
-  .btn:active { transform: translateY(1px); }
-}
-.btn-ripple { position: absolute; border-radius: 9999px; background: currentColor; opacity: 0.28; transform: scale(0); pointer-events: none; animation: ripple 0.6s ease-out forwards; }
-@keyframes ripple { to { transform: scale(1); opacity: 0; } }
 
 .btn[aria-busy='true']::after { content: ''; width: 0.9em; height: 0.9em; margin-left: 0.6em; border: 2px solid currentColor; border-right-color: transparent; border-radius: 9999px; animation: spin 0.7s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
-
-/* Micro interactions */
-.fcard a span[aria-hidden='true'] { display: inline-block; transition: transform 0.2s ease; }
-.fcard a:hover span[aria-hidden='true'] { transform: translateX(5px); }
-.photo-zoom img { transition: transform 0.9s ease; }
-.photo-zoom:hover img { transform: scale(1.04); }
-
-@keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
-.stagger:not([data-in]) > * { opacity: 0; }
-.stagger[data-in] > * { animation: rise 0.6s ease backwards; animation-delay: calc(var(--i, 0) * 90ms); }
-
-@keyframes shake { 20%, 60% { transform: translateX(-4px); } 40%, 80% { transform: translateX(4px); } }
-.neu-field[aria-invalid='true'] { animation: shake 0.3s ease; border-color: #b91c1c; }
-
-.check-draw circle { stroke-dasharray: 160; stroke-dashoffset: 160; animation: draw 0.6s ease forwards; }
-.check-draw path { stroke-dasharray: 40; stroke-dashoffset: 40; animation: draw 0.4s ease 0.4s forwards; }
-@keyframes draw { to { stroke-dashoffset: 0; } }
-
-/* Scroll story: the stage stays put while the beats scroll past */
-.story-visual { opacity: 0; transform: scale(0.96) translateY(10px); transition: opacity 0.5s ease, transform 0.5s ease; }
-.story-visual[data-active='true'] { opacity: 1; transform: none; }
-.story-beat :is(h2, h3), .story-beat > div:last-child { transition: opacity 0.4s ease; opacity: 0.72; }
-.story-beat[data-active="true"] :is(h2, h3), .story-beat[data-active='true'] > div:last-child { opacity: 1; }
-@media (max-width: 767px) { .story-beat :is(h2, h3), .story-beat > div:last-child { opacity: 1; } }
-
-@media (prefers-reduced-motion: reduce) {
-  .fcard, .btn, .story-visual, .story-beat, .photo-zoom img { transition: none !important; }
-  .stagger:not([data-in]) > * { opacity: 1; }
-  .stagger[data-in] > *, .neu-field[aria-invalid='true'], .check-draw circle, .check-draw path { animation: none !important; stroke-dashoffset: 0; }
-  .btn-ripple { display: none; }
-  .story-beat :is(h2, h3), .story-beat > div:last-child { opacity: 1; transition: none; }
-  .story-visual { transform: none; }
-}
 
 .neu-dark { background: linear-gradient(145deg, #1e2522, #1e2522); border: 1px solid rgba(255, 255, 255, 0.06); box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.55), -6px -6px 16px rgba(255, 255, 255, 0.05); }
 .neu-badge { box-shadow: 4px 4px 10px rgba(170, 118, 10, 0.35), -3px -3px 8px rgba(255, 255, 255, 0.6); }
@@ -413,19 +304,16 @@ details.u-acc.neu-acc[open] { background: linear-gradient(145deg, #f7f5ee, #f7f5
 /* One elevation scale: flat, raised (.neu), floating (.elev-2), inset (.neu-inset, .neu-field). */
 .elev-1 { box-shadow: var(--neu-raised-sm); }
 .elev-2 { box-shadow: 0 18px 40px -14px rgba(30, 37, 34, 0.3), 0 2px 6px rgba(30, 37, 34, 0.08); }
-.elev-hover { transition: box-shadow 0.3s ease, transform 0.25s ease; }
 .elev-hover:hover { box-shadow: var(--neu-raised); }
 
 /* A calmer, more refined surface: softer ink instead of pure black, a lighter photo wash, more room around sections */
 .text-black { color: #1e2522; }
-/* The banner overlay matches the sign-in page: a deep, even wash with two soft golden glows that breathe slowly. */
+/* The banner overlay matches the sign-in page: a deep, even wash with two soft golden glows. */
 .photo-section .scrim { background: rgba(30, 37, 34, 0.8); overflow: hidden; }
 .photo-section .scrim::before,
-.photo-section .scrim::after { content: ''; position: absolute; border-radius: 9999px; pointer-events: none; animation: glow-breathe 6s ease-in-out infinite; }
+.photo-section .scrim::after { content: ''; position: absolute; border-radius: 9999px; pointer-events: none; }
 .photo-section .scrim::before { top: -25%; left: -15%; width: 65%; height: 85%; background: radial-gradient(closest-side, rgba(234, 162, 53, 0.24), rgba(234, 162, 53, 0)); }
-.photo-section .scrim::after { bottom: -25%; right: -15%; width: 60%; height: 80%; background: radial-gradient(closest-side, rgba(212, 158, 70, 0.14), rgba(212, 158, 70, 0)); animation-delay: 2s; animation-duration: 8s; }
-@keyframes glow-breathe { 0%, 100% { opacity: 0.65; } 50% { opacity: 1; } }
-@media (prefers-reduced-motion: reduce) { .photo-section .scrim::before, .photo-section .scrim::after { animation: none; } }
+.photo-section .scrim::after { bottom: -25%; right: -15%; width: 60%; height: 80%; background: radial-gradient(closest-side, rgba(212, 158, 70, 0.14), rgba(212, 158, 70, 0)); }
 
 /* One standard surface: white, no outline, a very subtle drop shadow. Form controls keep a thin
    border, because a control needs a visible edge to be easy to find. */

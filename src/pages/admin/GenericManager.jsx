@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
-import { motion } from 'framer-motion';
 import { dataFetch } from '../../api';
 import { useAuth } from '../../auth';
 import { logActivity } from '../../lib/activity';
@@ -205,7 +204,7 @@ export default function GenericManager({ config }) {
 
   if (view === 'form') {
     return (
-      <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2 }}>
+      <div>
         <div className="flex items-center gap-4 mb-6">
           <button type="button" aria-label="Back to list" onClick={requestLeaveForm} className="p-2 hover:bg-gray-200 rounded-full transition text-gray-500 hover:text-black">
             <SafeIcon icon={FiArrowLeft} className="text-xl" />
@@ -235,12 +234,12 @@ export default function GenericManager({ config }) {
             onConfirm={() => { setConfirmDiscard(false); setView('list'); }}
           />
         )}
-      </motion.div>
+      </div>
     );
   }
 
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.2 }}>
+    <div>
       {errorBanner}
       <div className="flex flex-wrap justify-between items-center gap-4 mb-6">
         <h2 className="text-2xl font-bold text-gray-800">Manage {config.title}</h2>
@@ -366,6 +365,6 @@ export default function GenericManager({ config }) {
           onConfirm={handleDelete}
         />
       )}
-    </motion.div>
+    </div>
   );
 }

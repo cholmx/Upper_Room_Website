@@ -1,13 +1,9 @@
 import React from 'react';
 import usePageMeta from '../hooks/usePageMeta';
 import { useSite } from '../settings';
-import { Btn, Section, SectionHeader, PageHeader, Cards, Card, Steps, Band, Panel } from '../components/ui';
+import { Btn, Section, SectionHeader, PageHeader, Cards, Card, Steps, Band, Panel, Beats } from '../components/ui';
 import FormBlock from '../components/FormBlock';
-import ScrollStory, { Stage } from '../components/immersive/ScrollStory';
-import SafeIcon from '../common/SafeIcon';
-import * as FiIcons from 'react-icons/fi';
 
-const { FiHeart, FiCoffee, FiBookOpen, FiSmile } = FiIcons;
 const P = 'text-lg leading-relaxed text-black/80';
 
 export default function PlanYourVisit() {
@@ -26,13 +22,11 @@ export default function PlanYourVisit() {
 
       <Section tone="cream">
         <SectionHeader kicker="Sundays" title="What to expect on Sundays" />
-        <ScrollStory
-          label="What to expect on Sundays"
-          beats={[
-            { title: 'Family worship together', visual: <Stage big="Worship" small="All ages, one room" icon={<SafeIcon icon={FiHeart} size={34} />} />, body: <p>Our Sunday gatherings begin with everyone worshiping together, adults and children of all ages. We believe there is something powerful about families experiencing God’s presence as one community. You will hear contemporary worship music with lyrics projected on screens so everyone can follow along easily. Scripture readings are also displayed, so do not worry if you did not bring a Bible. Feel free to participate however you are comfortable, whether standing, sitting, or raising your hands.</p> },
-            { title: 'Coffee and connection break', visual: <Stage big="Coffee" small="Say hello" icon={<SafeIcon icon={FiCoffee} size={34} />} />, body: <p>After worship, we take a short break to grab coffee and greet each other. This casual time helps everyone, including first-time guests, feel welcome and connected. It is a perfect opportunity to meet someone new or catch up with friends. We never single out visitors or ask you to stand up and introduce yourself.</p> },
-            { title: 'Message time and kids’ programs', visual: <Stage big="Message" small="Practical and Bible-based" icon={<SafeIcon icon={FiBookOpen} size={34} />} />, body: <><p>Following our break, adults and youth remain in the sanctuary for the message, while children (birth through 5th grade) are dismissed to age-appropriate programs. Our nursery is open throughout the entire service for parents to use for infants and toddlers if needed.</p><p>Our messages are practical, Bible-based, and designed to help you live out your faith in everyday life. Each week, we explore how to know God more deeply, build healthy relationships, and discover our purpose.</p></> },
-            { title: 'Casual atmosphere and accessibility', visual: <Stage big="Come" small="As you are" icon={<SafeIcon icon={FiSmile} size={34} />} />, body: <><p>Do not worry about what to wear. Come as you are! You will see people in everything from jeans to business casual. We are more interested in meeting you than in what you are wearing.</p><p>Our building is fully wheelchair accessible with designated seating areas. For those with hearing needs, we offer the Listen Everywhere app that streams our audio directly to your smartphone or tablet. Just bring your own headphones. The free app is available in the Apple App Store and Google Play and works with both iOS and Android devices. If you have other specific needs, please let us know so we can better serve you.</p><div className="flex flex-wrap gap-3 pt-1"><Btn href={SITE.listenApps.apple} variant="ghost">Apple App Store</Btn><Btn href={SITE.listenApps.google} variant="ghost">Google Play</Btn></div></> },
+        <Beats heading="h3" beats={[
+            { title: 'Family worship together', body: <p>Our Sunday gatherings begin with everyone worshiping together, adults and children of all ages. We believe there is something powerful about families experiencing God’s presence as one community. You will hear contemporary worship music with lyrics projected on screens so everyone can follow along easily. Scripture readings are also displayed, so do not worry if you did not bring a Bible. Feel free to participate however you are comfortable, whether standing, sitting, or raising your hands.</p> },
+            { title: 'Coffee and connection break', body: <p>After worship, we take a short break to grab coffee and greet each other. This casual time helps everyone, including first-time guests, feel welcome and connected. It is a perfect opportunity to meet someone new or catch up with friends. We never single out visitors or ask you to stand up and introduce yourself.</p> },
+            { title: 'Message time and kids’ programs', body: <><p>Following our break, adults and youth remain in the sanctuary for the message, while children (birth through 5th grade) are dismissed to age-appropriate programs. Our nursery is open throughout the entire service for parents to use for infants and toddlers if needed.</p><p>Our messages are practical, Bible-based, and designed to help you live out your faith in everyday life. Each week, we explore how to know God more deeply, build healthy relationships, and discover our purpose.</p></> },
+            { title: 'Casual atmosphere and accessibility', body: <><p>Do not worry about what to wear. Come as you are! You will see people in everything from jeans to business casual. We are more interested in meeting you than in what you are wearing.</p><p>Our building is fully wheelchair accessible with designated seating areas. For those with hearing needs, we offer the Listen Everywhere app that streams our audio directly to your smartphone or tablet. Just bring your own headphones. The free app is available in the Apple App Store and Google Play and works with both iOS and Android devices. If you have other specific needs, please let us know so we can better serve you.</p><div className="flex flex-wrap gap-3 pt-1"><Btn href={SITE.listenApps.apple} variant="ghost">Apple App Store</Btn><Btn href={SITE.listenApps.google} variant="ghost">Google Play</Btn></div></> },
           ]}
         />
       </Section>

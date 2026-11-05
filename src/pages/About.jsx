@@ -1,8 +1,7 @@
 import React from 'react';
 import usePageMeta from '../hooks/usePageMeta';
-import { Section, SectionHeader, PageHeader, Accordion } from '../components/ui';
+import { Section, SectionHeader, PageHeader, Accordion, Beats } from '../components/ui';
 import RichText from '../components/RichText';
-import ScrollStory, { Stage } from '../components/immersive/ScrollStory';
 import { BELIEFS } from '../content/beliefs';
 
 export default function About() {
@@ -22,13 +21,10 @@ export default function About() {
 
       <Section tone="cream">
         <SectionHeader kicker="Our story" title="Our story" />
-        <ScrollStory
-          heading="h3"
-          label="Our story"
-          beats={[
-            { kicker: '1971', title: 'An upper room', visual: <Stage big="1971" small="Above a veterinarian’s office" />, body: <p>Upper Room Fellowship began in 1971 when a group of believers gathered in an upper room above a veterinarian’s office in Columbiana, Ohio. This location reflected the biblical Upper Room where Jesus’ disciples gathered to pray and wait for the Holy Spirit. United by a hunger for God’s presence and a desire to experience authentic Christianity, they created a community where people could encounter God and build meaningful relationships.</p> },
-            { kicker: 'Since then', title: 'More than five decades', visual: <Stage big="50+" small="Years in Columbiana" />, body: <p>For over five decades, we have remained committed to being a church that transforms lives through the power of the Holy Spirit. What started as a small gathering has grown into a thriving community dedicated to pursuing healthy relationships, accessing abundant wholeness, knowing our greatness, owning a supernatural lifestyle, treasuring His presence, and living the Gospel.</p> },
-            { kicker: 'Today', title: 'Serving Columbiana and beyond', visual: <Stage big="Today" small="Columbiana and beyond" />, body: <p>Today, we continue helping people in our community discover their God-given purpose and experience the freedom and fullness Jesus promised. We believe God is calling us to greater impact as we serve Columbiana and beyond with the love and power of Jesus Christ.</p> },
+        <Beats heading="h3" beats={[
+            { kicker: '1971', title: 'An upper room', body: <p>Upper Room Fellowship began in 1971 when a group of believers gathered in an upper room above a veterinarian’s office in Columbiana, Ohio. This location reflected the biblical Upper Room where Jesus’ disciples gathered to pray and wait for the Holy Spirit. United by a hunger for God’s presence and a desire to experience authentic Christianity, they created a community where people could encounter God and build meaningful relationships.</p> },
+            { kicker: 'Since then', title: 'More than five decades', body: <p>For over five decades, we have remained committed to being a church that transforms lives through the power of the Holy Spirit. What started as a small gathering has grown into a thriving community dedicated to pursuing healthy relationships, accessing abundant wholeness, knowing our greatness, owning a supernatural lifestyle, treasuring His presence, and living the Gospel.</p> },
+            { kicker: 'Today', title: 'Serving Columbiana and beyond', body: <p>Today, we continue helping people in our community discover their God-given purpose and experience the freedom and fullness Jesus promised. We believe God is calling us to greater impact as we serve Columbiana and beyond with the love and power of Jesus Christ.</p> },
           ]}
         />
       </Section>
