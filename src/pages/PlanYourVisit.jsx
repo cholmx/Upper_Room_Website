@@ -1,7 +1,7 @@
 import React from 'react';
 import usePageMeta from '../hooks/usePageMeta';
 import { useSite } from '../settings';
-import { Btn, Section, SectionHeader, PageHeader, Cards, Card, Steps, Boxes, Box } from '../components/ui';
+import { Btn, Section, SectionHeader, PageHeader, Cards, Card, Steps, Band, Panel } from '../components/ui';
 import FormBlock from '../components/FormBlock';
 import ScrollStory, { Stage } from '../components/immersive/ScrollStory';
 import SafeIcon from '../common/SafeIcon';
@@ -37,19 +37,17 @@ export default function PlanYourVisit() {
         />
       </Section>
 
-      <Section tone="white" id="connect-card">
-        <Boxes on="white">
-          <Box tone="forest" title="Let us know you are coming">
-            <p className="font-serif text-[1.5rem] leading-snug">Let us know you are coming by filling out our Connect Card, and our welcome team will be ready for you!</p>
-            <p>We meet every Sunday at 10:30am at {SITE.addressLine}.</p>
-            <p>After your first visit, we would love to help you find a small group where you can build relationships and grow in faith.</p>
-          </Box>
-          <Box tone="terra" light title="Fill out the Connect Card">
-            <p>Our Connect Card is a simple online form. You will just need to provide your name, email, and the date you plan to visit. This helps our welcome team prepare for your arrival. All information is kept confidential and is only used to help us better serve you during your visit.</p>
-            <div className="pt-2"><Btn to="/connect" variant="primary">Go to the Connect Card</Btn></div>
-          </Box>
-        </Boxes>
-      </Section>
+      <Band id="connect-card">
+        <Panel tone="forest" title="Let us know you are coming">
+          <p className="font-serif text-[1.5rem] leading-snug">Let us know you are coming by filling out our Connect Card, and our welcome team will be ready for you!</p>
+          <p>We meet every Sunday at 10:30am at {SITE.addressLine}.</p>
+          <p>After your first visit, we would love to help you find a small group where you can build relationships and grow in faith.</p>
+        </Panel>
+        <Panel tone="terra" title="Fill out the Connect Card">
+          <p>Our Connect Card is a simple online form. You will just need to provide your name, email, and the date you plan to visit. This helps our welcome team prepare for your arrival. All information is kept confidential and is only used to help us better serve you during your visit.</p>
+          <div className="pt-2"><Btn to="/connect" variant="light">Go to the Connect Card</Btn></div>
+        </Panel>
+      </Band>
 
       <Section tone="cream">
         <SectionHeader kicker="Your first visit" title="Your first visit" />

@@ -14,12 +14,15 @@ for (const route of STATIC_ROUTES) {
   await page.waitForTimeout(500);
   const colors = await page.evaluate((ink) => {
     const bg = (el) => (el.classList.contains('photo-section') ? ink : getComputedStyle(el).backgroundColor);
-    const list = [...document.querySelector('main').children].filter((e) => e.offsetHeight > 0).map(bg);
-    list.push(bg([...document.querySelectorAll('footer')].pop()));
+    // A band is two panels, so it counts as two colors.
+    const colorsOf = (el) => (el.dataset.band ? [...el.children].map(bg) : [bg(el)]);
+    const list = [...document.querySelector('main').children].filter((e) => e.offsetHeight > 0).map(colorsOf);
+    list.push(colorsOf([...document.querySelectorAll('footer')].pop()));
     return list;
   }, INK);
   for (let i = 1; i < colors.length; i++) {
-    if (colors[i] === colors[i - 1]) { bad++; console.log(`${route}: sections ${i} and ${i + 1} share ${colors[i]}`); }
+    const shared = colors[i].filter((c) => colors[i - 1].includes(c));
+    if (shared.length) { bad++; console.log(`${route}: sections ${i} and ${i + 1} share ${shared[0]}`); }
   }
 }
 await browser.close();

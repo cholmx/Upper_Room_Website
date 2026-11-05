@@ -163,3 +163,7 @@ The palette is `#1e2522` ink, `#2B433E` forest, `#597F5C` sage, `#C74F2F` terrac
 ## Photo uploads
 
 Photo fields in the admin have an **Upload a photo** button. Photos go to a public Supabase Storage bucket named `site-images`, and large photos are shrunk in the browser first. Run `supabase/migrations/20261104120000_photo_storage.sql` once (the Bolt prompt for it is in the pull request notes) to create the bucket and its policies. Pasting a link still works under each field.
+
+## Color bands
+
+`Band` and `Panel` (in `src/components/ui/index.jsx`) make a full-width section of two colored panels side by side. The panels are the section, with no space around them, and the text lines up with the page's content column. Use one or two per page. `scripts/check-adjacent-colors.mjs` counts a band as two colors.

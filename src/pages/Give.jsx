@@ -1,7 +1,7 @@
 import React from 'react';
 import usePageMeta from '../hooks/usePageMeta';
 import { useSite } from '../settings';
-import { Btn, Section, SectionHeader, PageHeader, Cards, Card, Boxes, Box } from '../components/ui';
+import { Btn, Section, SectionHeader, PageHeader, Cards, Card, Band, Panel } from '../components/ui';
 import FormBlock from '../components/FormBlock';
 
 const P = 'text-lg leading-relaxed text-black/80';
@@ -60,24 +60,22 @@ export default function Give() {
         </Cards>
       </Section>
 
-      <Section tone="white">
-        <Boxes on="white">
-          <Box tone="forest" title="Financial accountability">
-            <p>We are committed to stewarding your gifts with integrity and transparency. Upper Room Fellowship follows strict financial protocols including:</p>
-            <ul>
-              <li>Monthly financial reviews by our finance team</li>
-              <li>Clear budgeting processes aligned with our mission and values</li>
-              <li>Regular financial updates to the congregation</li>
-              <li>Adherence to all accounting standards and legal requirements</li>
-            </ul>
-            <p>Your contributions primarily support our local church ministries, facilities, staff, and outreach efforts, with a portion designated to missions.</p>
-          </Box>
-          <Box tone="sage" light title="Generosity testimony">
-            <p>Living by our values is not always easy, but we have found it incredibly rewarding. There is a real sense of purpose and joy that comes from aligning our lives with what God values. As the Psalms put it, “There truly is a reward for those who live for God” (Psalm 58:11b NLT).</p>
-            <p>We have found this to be true in our own lives, especially in the area of generosity. When we give freely as God has given to us, we experience His faithfulness in remarkable ways. Your story of generosity can inspire others as well. Consider sharing how giving has impacted your life by submitting a testimony.</p>
-          </Box>
-        </Boxes>
-      </Section>
+      <Band>
+        <Panel tone="forest" title="Financial accountability">
+          <p>We are committed to stewarding your gifts with integrity and transparency. Upper Room Fellowship follows strict financial protocols including:</p>
+          <ul>
+            <li>Monthly financial reviews by our finance team</li>
+            <li>Clear budgeting processes aligned with our mission and values</li>
+            <li>Regular financial updates to the congregation</li>
+            <li>Adherence to all accounting standards and legal requirements</li>
+          </ul>
+          <p>Your contributions primarily support our local church ministries, facilities, staff, and outreach efforts, with a portion designated to missions.</p>
+        </Panel>
+        <Panel tone="sage" title="Generosity testimony">
+          <p>Living by our values is not always easy, but we have found it incredibly rewarding. There is a real sense of purpose and joy that comes from aligning our lives with what God values. As the Psalms put it, “There truly is a reward for those who live for God” (Psalm 58:11b NLT).</p>
+          <p>We have found this to be true in our own lives, especially in the area of generosity. When we give freely as God has given to us, we experience His faithfulness in remarkable ways. Your story of generosity can inspire others as well. Consider sharing how giving has impacted your life by submitting a testimony.</p>
+        </Panel>
+      </Band>
 
       <Section tone="cream" narrow>
         <FormBlock formKey="generosity" heading="Drop us a testimony" />

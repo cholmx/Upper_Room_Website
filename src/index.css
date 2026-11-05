@@ -472,5 +472,9 @@ details.u-acc.neu-acc[open] { background: #f7f5ee; box-shadow: var(--shadow); }
   border-radius: 0;
 }
 
-/* A fine keyline inside the edge of a filled panel, like an engraved card */
-.box-keyline::before { content: ''; position: absolute; inset: 12px; border: 1px solid rgba(212, 158, 70, 0.55); pointer-events: none; }
+
+/* Band panels: the text lines up with the page's content column on the outer edges */
+@media (min-width: 768px) {
+  .band > .band-panel:first-child { padding-left: max(1.5rem, calc((100vw - 1145px) / 2)); padding-right: 3rem; }
+  .band > .band-panel:last-child { padding-right: max(1.5rem, calc((100vw - 1145px) / 2)); padding-left: 3rem; }
+}
