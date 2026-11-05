@@ -67,7 +67,7 @@ function ProtectedRoute({ children }) {
 
 function PublicLayout({ children }) {
   return (
-    <div className="public-site min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col">
       <a href="#main" className="skip-link">Skip to content</a>
       <AnnouncementBar />
       <Header />
