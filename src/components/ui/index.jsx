@@ -142,8 +142,7 @@ export function PageHeader({ kicker, title, intro, children, page }) {
   return (
     <header className="px-3 md:px-4 pt-3 md:pt-4 pb-1.5 md:pb-2">
       <div className="photo-section rounded-[10px] text-[#f7f5ee] py-24 md:py-36 px-6 text-center" style={{ backgroundImage: `url('${imgUrl(image, 1600)}')` }}>
-        <div className="scrim"></div>
-        <div className="max-w-[800px] mx-auto relative z-10">
+        <div className="hero-text max-w-[800px] mx-auto relative z-10">
           {kicker && !same(kicker, title) && <span className="kicker text-[#eaa235]">{kicker}</span>}
           <h1 className="text-4xl md:text-6xl mb-6">{title}</h1>
           {intro && <p className="font-serif text-xl md:text-2xl text-white/90 max-w-[50ch] mx-auto leading-snug">{intro}</p>}

@@ -119,8 +119,7 @@ export default function Home() {
 
       <section aria-labelledby="stay-h" className="px-3 md:px-4 py-1.5 md:py-2">
         <div data-image-band="true" className="photo-section rounded-[10px] bg-[#1e2522] py-20 md:py-28 px-6 text-center text-white" style={{ backgroundImage: `url('${imgUrl(connectPhoto, 1600)}')` }}>
-          <div className="scrim"></div>
-          <div className="relative z-10 max-w-2xl mx-auto">
+          <div className="hero-text relative z-10 max-w-2xl mx-auto">
             <h2 id="stay-h" className="text-3xl md:text-5xl mb-4">We would love to meet you</h2>
             <p className="text-lg md:text-xl mb-8">Whether you are planning your first visit or have just been with us, fill out the Connect Card so we can welcome you properly and help you find your place in our church family.</p>
             <Btn to="/connect" variant="primary">Fill out the Connect Card</Btn>

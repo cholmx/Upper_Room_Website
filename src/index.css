@@ -129,11 +129,6 @@ h1, h2, h3, h4 {
   overflow: hidden;
 }
 
-.photo-section .scrim {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, rgba(30, 37, 34, 0.3) 0%, rgba(30, 37, 34, 0.85) 100%);
-}
 
 .fcard {
   border: 1px solid rgba(0, 0, 0, 0.05);
@@ -309,11 +304,6 @@ details.u-acc.neu-acc[open] { background: linear-gradient(145deg, #f7f5ee, #f7f5
 /* A calmer, more refined surface: softer ink instead of pure black, a lighter photo wash, more room around sections */
 .text-black { color: #1e2522; }
 /* The banner overlay matches the sign-in page: a deep, even wash with two soft golden glows. */
-.photo-section .scrim { background: rgba(30, 37, 34, 0.8); overflow: hidden; }
-.photo-section .scrim::before,
-.photo-section .scrim::after { content: ''; position: absolute; border-radius: 9999px; pointer-events: none; }
-.photo-section .scrim::before { top: -25%; left: -15%; width: 65%; height: 85%; background: radial-gradient(closest-side, rgba(234, 162, 53, 0.24), rgba(234, 162, 53, 0)); }
-.photo-section .scrim::after { bottom: -25%; right: -15%; width: 60%; height: 80%; background: radial-gradient(closest-side, rgba(212, 158, 70, 0.14), rgba(212, 158, 70, 0)); }
 
 /* One standard surface: white, no outline, a very subtle drop shadow. Form controls keep a thin
    border, because a control needs a visible edge to be easy to find. */
@@ -365,4 +355,4 @@ details.u-acc.neu-acc[open] { background: #f7f5ee; box-shadow: var(--shadow); }
 .public-site { font-family: Merriweather, Georgia, serif; font-size: 0.9375rem; line-height: 1.7; }
 .public-site .font-display, .public-site .btn { font-family: Arial, Helvetica, sans-serif; }
 
-.hero-text h1, .hero-text p { text-shadow: 0 1px 14px rgba(0, 0, 0, 0.55); }
+.hero-text h1, .hero-text h2, .hero-text p, .hero-text span { text-shadow: 0 1px 14px rgba(0, 0, 0, 0.55); }
