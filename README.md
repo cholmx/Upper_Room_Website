@@ -152,7 +152,7 @@ Old addresses `/worship-team`, `/outreach`, `/prayer`, `/stories` and `/connect`
 
 ## Colors
 
-The palette is `#1e2522` ink, `#2B433E` forest, `#597F5C` sage, `#C74F2F` terracotta, `#EAA235` amber, `#d49e46` gold, `#F7F5EE` cream and `#FFFFFF` white. Text on cream and white uses ink or forest, because the golds and terracotta do not have enough contrast for small text on light backgrounds. Neighboring panels should differ in color, and the footer is ink, so a closing call to action is forest by default. Check it with `node scripts/check-adjacent-colors.mjs` while a preview is running.
+The palette is `#1e2522` ink, `#2B433E` forest, `#597F5C` sage, `#C74F2F` terracotta, `#EAA235` amber, `#d49e46` gold, `#fcf9ed` cream and `#FFFFFF` white. Text on cream and white uses ink or forest, because the golds and terracotta do not have enough contrast for small text on light backgrounds. Neighboring panels should differ in color, and the footer is ink, so a closing call to action is forest by default. Check it with `node scripts/check-adjacent-colors.mjs` while a preview is running.
 
 ## Photo uploads
 
@@ -165,3 +165,7 @@ Photo fields in the admin have an **Upload a photo** button. Photos go to a publ
 ## Keeping it fast
 
 The site avoids heavy effects on purpose: no animation library, no WebGL, no scroll-linked motion, no parallax or tilt. Pages are lazy-loaded, photos load lazily, and the only external font is Merriweather (regular, bold, and italic). Keep it that way unless there is a clear reason.
+
+## Front page area
+
+The area below the hero is managed in the admin under Site, Front Page Area. Each row is a saved layout (centered text, photo left or right, or a slim banner). The switch in the list turns a layout on or off, Copy saves a variation, and a layout can have optional start and end days. Every layout that is on shows in order. Requires `supabase/migrations/20261105120000_home_spotlights.sql`.

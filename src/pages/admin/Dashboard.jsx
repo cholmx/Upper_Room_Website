@@ -8,6 +8,7 @@ import SitePhotosManager from './SitePhotosManager';
 import ChecklistManager from './ChecklistManager';
 import FormSubmissionsManager from './FormSubmissionsManager';
 import { useAuth } from '../../auth';
+import { LAYOUTS, TONES } from '../../lib/spotlights';
 
 const { FiLayout, FiMic, FiCalendar, FiFileText, FiCamera, FiLogOut, FiMenu, FiX, FiMail, FiSettings, FiActivity, FiUsers, FiCheckSquare, FiHeart, FiMessageSquare } = FiIcons;
 
@@ -108,6 +109,33 @@ const TAB_CONFIGS = {
       { name: 'published', label: 'Published', type: 'checkbox', defaultChecked: true, help: 'Visible on the website' }
     ]
   },
+  spotlights: {
+    table: 'home_spotlights_church',
+    title: 'Front Page Area',
+    titleField: 'name',
+    thumbField: 'image_url',
+    sortField: 'sort_order_num',
+    toggleField: 'published',
+    duplicable: true,
+    columns: ['name', 'layout'],
+    fields: [
+      { name: 'name', label: 'Layout name (only you see this, for example Easter service)', type: 'text', required: true },
+      { name: 'published', label: 'On', type: 'checkbox', defaultChecked: false, help: 'Show this layout on the front page, below the hero' },
+      { name: 'publish_date', label: 'Start showing on (optional)', type: 'date' },
+      { name: 'end_date', label: 'Stop showing after (optional)', type: 'date' },
+      { name: 'layout', label: 'Layout', type: 'select', options: LAYOUTS },
+      { name: 'tone', label: 'Background color', type: 'select', options: TONES },
+      { name: 'kicker', label: 'Small label above the title (optional)', type: 'text' },
+      { name: 'title', label: 'Title', type: 'text' },
+      { name: 'body', label: 'Text', type: 'markdown' },
+      { name: 'image_url', label: 'Photo (used by the photo layouts)', type: 'image' },
+      { name: 'button_label', label: 'Button text (optional)', type: 'text' },
+      { name: 'button_url', label: 'Button link (a full web address, or a page such as /plan-your-visit)', type: 'text' },
+      { name: 'button2_label', label: 'Second button text (optional)', type: 'text' },
+      { name: 'button2_url', label: 'Second button link', type: 'text' },
+      { name: 'sort_order_num', label: 'Order on the page (lower shows first)', type: 'number' },
+    ]
+  },
   stories: {
     table: 'stories_church',
     title: 'Stories',
@@ -181,6 +209,7 @@ const ContentStudio = () => {
     ],
     'Site': [
       { key: 'checklist', label: 'Content to Confirm', icon: FiCheckSquare },
+      { key: 'spotlights', label: 'Front Page Area', icon: FiLayout },
       { key: 'photos', label: 'Site Photos', icon: FiCamera },
       { key: 'pages', label: 'Custom Pages', icon: FiLayout },
     ],

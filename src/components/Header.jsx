@@ -50,7 +50,7 @@ function DesktopDropdown({ item, light }) {
           <ul className="bg-white rounded-2xl py-3 elev-2">
             {item.children.map(c => (
               <li key={c.to}>
-                <Link to={c.to} className="block px-6 py-2.5 font-display font-semibold text-[0.95rem] tracking-wide text-black/80 hover:text-black hover:bg-[#f7f5ee]">{c.label}</Link>
+                <Link to={c.to} className="block px-6 py-2.5 font-display font-semibold text-[0.95rem] tracking-wide text-black/80 hover:text-black hover:bg-[#fcf9ed]">{c.label}</Link>
               </li>
             ))}
           </ul>
@@ -77,7 +77,7 @@ function MobileMenu({ onClose }) {
   const big = { fontFamily: "Arial, Helvetica, sans-serif", fontWeight: 700 };
 
   return createPortal(
-    <div id="mobile-menu" className="xl:hidden fixed inset-0 z-[60] bg-[#f7f5ee] overflow-y-auto" role="dialog" aria-modal="true" aria-label="Site menu">
+    <div id="mobile-menu" className="xl:hidden fixed inset-0 z-[60] bg-[#fcf9ed] overflow-y-auto" role="dialog" aria-modal="true" aria-label="Site menu">
       <div className="flex items-center justify-between px-6 h-16">
         <span className="text-2xl tracking-tight" style={{ fontFamily: "Arial, Helvetica, sans-serif", fontWeight: 700 }}>{SITE.shortName}</span>
         <button type="button" aria-label="Close menu" onClick={onClose} className="p-3 bg-white rounded-full elev-1 transition-transform">

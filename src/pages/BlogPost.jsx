@@ -36,7 +36,7 @@ export default function BlogPost() {
   if (!live) return <NotFound what="article" />;
 
   return (
-    <article className="bg-[#f7f5ee] min-h-screen pt-32 pb-24 px-6">
+    <article className="bg-[#fcf9ed] min-h-screen pt-32 pb-24 px-6">
       <div className="max-w-[800px] mx-auto">
         <Link to="/blog" className="inline-flex items-center gap-2 text-sm font-bold tracking-wide text-[#2b433e] hover:text-black mb-8">
           <SafeIcon icon={FiArrowLeft} /> All Articles

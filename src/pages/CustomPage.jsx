@@ -25,7 +25,7 @@ export default function CustomPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#f7f5ee] pt-32 flex flex-col items-center justify-center opacity-60">
+      <div className="min-h-screen bg-[#fcf9ed] pt-32 flex flex-col items-center justify-center opacity-60">
         <div className="w-12 h-12 border-4 border-[#d49e46] border-t-transparent rounded-full animate-spin mb-4"></div>
         <p className="font-bold tracking-wide text-sm">Loading Page...</p>
       </div>
@@ -34,7 +34,7 @@ export default function CustomPage() {
 
   if (!page) {
     return (
-      <div className="min-h-screen bg-[#f7f5ee] pt-40 px-6 text-center">
+      <div className="min-h-screen bg-[#fcf9ed] pt-40 px-6 text-center">
         <div className="max-w-xl mx-auto p-12 rounded-3xl neu">
           <div className="text-6xl mb-6">📄</div>
           <h2 className="text-3xl font-bold mb-4">Page Not Found</h2>
@@ -45,9 +45,9 @@ export default function CustomPage() {
   }
 
   return (
-    <div className="bg-[#f7f5ee] min-h-screen text-black pt-20 pb-32">
+    <div className="bg-[#fcf9ed] min-h-screen text-black pt-20 pb-32">
       {/* Hero Banner */}
-      <div className="bg-[#1e2522] text-[#f7f5ee] py-24 px-6 text-center relative overflow-hidden">
+      <div className="bg-[#1e2522] text-[#fcf9ed] py-24 px-6 text-center relative overflow-hidden">
          {/* Subtle abstract background */}
          <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/9562304/pexels-photo-9562304.jpeg?auto=compress&cs=tinysrgb&h=1200')] bg-cover bg-center opacity-[0.08] mix-blend-overlay"></div>
          

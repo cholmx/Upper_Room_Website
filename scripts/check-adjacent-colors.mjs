@@ -13,7 +13,7 @@ for (const route of STATIC_ROUTES) {
   await page.goto(base + route, { waitUntil: 'load' });
   await page.waitForTimeout(500);
   const colors = await page.evaluate((ink) => {
-    const CREAM = 'rgb(247, 245, 238)';
+    const CREAM = 'rgb(252, 249, 237)';
     const bg = (el) => {
       if (!el) return CREAM;
       if (el.dataset.imageBand) return 'photo';

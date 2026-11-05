@@ -8,6 +8,7 @@ import { HERO_IMAGES } from '../content/photos';
 import { formatDate, imgUrl, isLive, messagePath, ytId } from '../utils';
 import { Btn, Section } from '../components/ui';
 import LiteYouTube from '../components/LiteYouTube';
+import Spotlights from '../components/Spotlights';
 
 const P = 'text-[0.95rem] leading-relaxed';
 
@@ -46,6 +47,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <Spotlights />
 
       <Section tone="cream">
         <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">

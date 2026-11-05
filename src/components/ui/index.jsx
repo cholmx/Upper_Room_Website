@@ -43,8 +43,8 @@ const TONES = {
   cream: 'text-[#1e2522]',
   white: 'bg-white text-[#1e2522]',
   sand: 'bg-white text-[#1e2522]',
-  ink: 'bg-[#1e2522] text-[#f7f5ee] relative overflow-hidden glow-gold',
-  forest: 'bg-[#2b433e] text-[#f7f5ee] relative overflow-hidden',
+  ink: 'bg-[#1e2522] text-[#fcf9ed] relative overflow-hidden glow-gold',
+  forest: 'bg-[#2b433e] text-[#fcf9ed] relative overflow-hidden',
   sage: 'bg-[#597f5c] text-white',
   terra: 'bg-[#c74f2f] text-white',
   gold: 'bg-[#eaa235] text-[#1e2522]',
@@ -141,7 +141,7 @@ export function PageHeader({ kicker, title, intro, children, page }) {
   const image = usePageBanner(page);
   return (
     <header className="px-3 md:px-4 pt-3 md:pt-4 pb-1.5 md:pb-2">
-      <div className="photo-section rounded-[10px] text-[#f7f5ee] py-24 md:py-36 px-6 text-center" style={{ backgroundImage: `url('${imgUrl(image, 1600)}')` }}>
+      <div className="photo-section rounded-[10px] text-[#fcf9ed] py-24 md:py-36 px-6 text-center" style={{ backgroundImage: `url('${imgUrl(image, 1600)}')` }}>
         <div className="hero-text max-w-[800px] mx-auto relative z-10">
           {kicker && !same(kicker, title) && <span className="kicker text-[#eaa235]">{kicker}</span>}
           <h1 className="text-4xl md:text-6xl mb-6">{title}</h1>
@@ -264,7 +264,7 @@ const PANEL = {
   ink: 'bg-[#1e2522] text-white',
   amber: 'bg-[#eaa235] text-[#1e2522]',
   gold: 'bg-[#d49e46] text-[#1e2522]',
-  cream: 'bg-[#f7f5ee] text-[#1e2522]',
+  cream: 'bg-[#fcf9ed] text-[#1e2522]',
   white: 'bg-white text-[#1e2522]',
 };
 
@@ -285,7 +285,7 @@ export function Panel({ tone = 'forest', title, as: Tag = 'h2', children, id, cl
   );
 }
 
-const CTA_TONES = { forest: 'bg-[#2b433e] text-[#f7f5ee]', ink: 'bg-[#1e2522] text-[#f7f5ee]', sage: 'bg-[#597f5c] text-white', terra: 'bg-[#c74f2f] text-white', gold: 'bg-[#eaa235] text-[#1e2522]' };
+const CTA_TONES = { forest: 'bg-[#2b433e] text-[#fcf9ed]', ink: 'bg-[#1e2522] text-[#fcf9ed]', sage: 'bg-[#597f5c] text-white', terra: 'bg-[#c74f2f] text-white', gold: 'bg-[#eaa235] text-[#1e2522]' };
 export function EndCta({ title, text, to, href, label, tone = 'forest' }) {
   const light = tone === 'gold';
   return (

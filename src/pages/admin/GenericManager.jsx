@@ -98,6 +98,32 @@ export default function GenericManager({ config }) {
     fetchItems();
   };
 
+  const toggle = async (item) => {
+    const field = config.toggleField;
+    const next = Number(item[field]) ? 0 : 1;
+    setItems(prev => prev.map(i => (i.id === item.id ? { ...i, [field]: next } : i)));
+    const res = await dataFetch(`update/${config.table}/${item.id}`, { method: 'PUT', body: JSON.stringify({ [field]: next }) });
+    if (res.status !== 'success') {
+      setError(`Could not change that: ${res.error}`);
+      fetchItems();
+      return;
+    }
+    logActivity(user, next ? 'turned on' : 'turned off', config.title, item[titleField]);
+  };
+
+  const duplicate = async (item) => {
+    const copy = { ...item, [titleField]: `${item[titleField] || 'Layout'} (copy)` };
+    if (config.toggleField) copy[config.toggleField] = 0;
+    if (sortable) copy[config.sortField] = items.length + 1;
+    const res = await dataFetch(`create/${config.table}`, { method: 'POST', body: JSON.stringify(copy) });
+    if (res.status !== 'success') {
+      setError(`Could not copy that: ${res.error}`);
+      return;
+    }
+    logActivity(user, 'copied', config.title, item[titleField]);
+    fetchItems();
+  };
+
   const handleChange = (name, value) => {
     setFormData(prev => ({ ...prev, [name]: value }));
     if (errors[name]) setErrors(prev => ({ ...prev, [name]: undefined }));
@@ -286,6 +312,7 @@ export default function GenericManager({ config }) {
                   {columns.map(name => (
                     <th key={name} className="px-6 py-4 text-sm font-bold text-gray-500 tracking-wide">{labelOf(name)}</th>
                   ))}
+                  {config.toggleField && <th className="px-4 py-4 text-sm font-bold text-gray-500 tracking-wide">On</th>}
                   <th className="px-6 py-4 text-right text-sm font-bold text-gray-500 tracking-wide">Actions</th>
                 </tr>
               </thead>
@@ -328,8 +355,18 @@ export default function GenericManager({ config }) {
                           </td>
                         );
                       })}
+                      {config.toggleField && (
+                        <td className="px-4 py-4">
+                          <button type="button" role="switch" aria-checked={Boolean(Number(item[config.toggleField]))} aria-label={`${item[titleField] || 'Item'} is ${Number(item[config.toggleField]) ? 'on' : 'off'}`} onClick={() => toggle(item)} className={`relative w-11 h-6 rounded-full transition-colors ${Number(item[config.toggleField]) ? 'bg-[#597F5C]' : 'bg-gray-300'}`}>
+                            <span className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform ${Number(item[config.toggleField]) ? 'translate-x-5' : ''}`} />
+                          </button>
+                        </td>
+                      )}
                       <td className="px-6 py-4 text-right">
                         <div className="flex items-center justify-end gap-2">
+                          {config.duplicable && (
+                            <button onClick={() => duplicate(item)} aria-label={`Make a copy of ${item[titleField] || 'item'}`} className="px-3 py-2 text-sm font-bold text-gray-500 hover:text-[#CCA866] bg-white border border-gray-100 rounded-lg transition" title="Save as a copy">Copy</button>
+                          )}
                           <button onClick={() => openForm({ ...item })} aria-label={`Edit ${item[titleField] || 'item'}`} className="p-2 text-gray-400 hover:text-[#CCA866] bg-white hover:bg-[#CCA866]/10 border border-gray-100 rounded-lg transition" title="Edit">
                             <SafeIcon icon={FiEdit2} />
                           </button>

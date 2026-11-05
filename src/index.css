@@ -4,7 +4,7 @@
 
 :root {
   --dark: #1e2522;
-  --light: #f7f5ee;
+  --light: #fcf9ed;
   --yellow: #eaa235;
   --muted: #d49e46;
   --black: #1e2522;
@@ -272,18 +272,18 @@ p:empty { display: none; }
   --neu-inset-sm: none;
 }
 
-.neu { background: linear-gradient(145deg, #ffffff, #f7f5ee); border: 1px solid rgba(255, 255, 255, 0.9); box-shadow: var(--neu-raised-sm); }
-.neu-inset { background: linear-gradient(145deg, #f7f5ee, #f7f5ee); border: 1px solid rgba(0, 0, 0, 0.06); box-shadow: var(--neu-inset); }
-.neu-field { background: linear-gradient(145deg, #f7f5ee, #f7f5ee); box-shadow: var(--neu-inset-sm); }
+.neu { background: linear-gradient(145deg, #ffffff, #fcf9ed); border: 1px solid rgba(255, 255, 255, 0.9); box-shadow: var(--neu-raised-sm); }
+.neu-inset { background: linear-gradient(145deg, #fcf9ed, #fcf9ed); border: 1px solid rgba(0, 0, 0, 0.06); box-shadow: var(--neu-inset); }
+.neu-field { background: linear-gradient(145deg, #fcf9ed, #fcf9ed); box-shadow: var(--neu-inset-sm); }
 
 .fcard {
-  background: linear-gradient(145deg, #ffffff, #f7f5ee);
+  background: linear-gradient(145deg, #ffffff, #fcf9ed);
   border: 1px solid rgba(255, 255, 255, 0.9);
   box-shadow: var(--neu-raised-sm);
 }
 
-details.u-acc.neu-acc { background: linear-gradient(145deg, #ffffff, #f7f5ee); border: 1px solid rgba(255, 255, 255, 0.9); box-shadow: var(--neu-raised-sm); }
-details.u-acc.neu-acc[open] { background: linear-gradient(145deg, #f7f5ee, #f7f5ee); box-shadow: var(--neu-inset); }
+details.u-acc.neu-acc { background: linear-gradient(145deg, #ffffff, #fcf9ed); border: 1px solid rgba(255, 255, 255, 0.9); box-shadow: var(--neu-raised-sm); }
+details.u-acc.neu-acc[open] { background: linear-gradient(145deg, #fcf9ed, #fcf9ed); box-shadow: var(--neu-inset); }
 
 /* Buttons */
 .btn { position: relative; transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease; }
@@ -309,8 +309,8 @@ details.u-acc.neu-acc[open] { background: linear-gradient(145deg, #f7f5ee, #f7f5
    border, because a control needs a visible edge to be easy to find. */
 .neu, .fcard, details.u-acc.neu-acc { background: #ffffff; border: 0; box-shadow: var(--shadow); }
 .fcard:hover, .elev-hover:hover { box-shadow: var(--shadow-float); border-color: transparent; }
-details.u-acc.neu-acc[open] { background: #f7f5ee; box-shadow: var(--shadow); }
-.neu-inset { background: #f7f5ee; border: 0; box-shadow: none; }
+details.u-acc.neu-acc[open] { background: #fcf9ed; box-shadow: var(--shadow); }
+.neu-inset { background: #fcf9ed; border: 0; box-shadow: none; }
 .neu-dark { background: #2b433e; border: 0; box-shadow: var(--shadow); }
 .neu-field { background: #ffffff; box-shadow: none; }
 .elev-1 { box-shadow: var(--shadow); }
@@ -356,3 +356,4 @@ details.u-acc.neu-acc[open] { background: #f7f5ee; box-shadow: var(--shadow); }
 .public-site .font-display, .public-site .btn { font-family: Arial, Helvetica, sans-serif; }
 
 .hero-text h1, .hero-text h2, .hero-text p, .hero-text span { text-shadow: 0 1px 8px rgba(0, 0, 0, 0.25); }
+.spotlight-dark .rich-text a { color: inherit; }

@@ -43,7 +43,7 @@ export default function Blog() {
   const standardPosts = filteredPosts.length > 1 ? filteredPosts.slice(1) : [];
 
   return (
-    <div className="bg-[#f7f5ee] min-h-screen text-black pb-24 pt-20">
+    <div className="bg-[#fcf9ed] min-h-screen text-black pb-24 pt-20">
       <PageHeader kicker="Articles and updates" title="Church blog" intro="Insights, devotions, and updates from the Upper Room family." />
 
       <div className="max-w-[1145px] mx-auto px-6 mt-16">
@@ -118,7 +118,7 @@ export default function Blog() {
                             className="w-full h-full object-cover transition-transform" 
                           />
                         ) : (
-                          <div className="absolute inset-0 flex flex-col items-center justify-center text-[#f7f5ee] p-8 text-center bg-gradient-to-br from-[#1e2522] to-[#2b433e]">
+                          <div className="absolute inset-0 flex flex-col items-center justify-center text-[#fcf9ed] p-8 text-center bg-gradient-to-br from-[#1e2522] to-[#2b433e]">
                             <span className="text-5xl font-serif italic mb-2 opacity-50">Upper Room</span>
                             <span className="text-sm tracking-wide opacity-30">Journal</span>
                           </div>

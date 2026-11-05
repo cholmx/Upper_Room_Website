@@ -13,10 +13,10 @@ export default function StickyMobileBar() {
   const SITE = useSite();
   return (
     <nav aria-label="Quick actions" className="md:hidden fixed bottom-0 inset-x-0 z-40 bg-[#1e2522] border-t border-white/10 flex pb-[env(safe-area-inset-bottom)]">
-      <a href={SITE.phoneHref} className={`${item} text-[#f7f5ee]`}>
+      <a href={SITE.phoneHref} className={`${item} text-[#fcf9ed]`}>
         <SafeIcon icon={FiPhone} className="text-xl text-[#eaa235]" /> Call
       </a>
-      <a href={SITE.googleMapsUrl} target="_blank" rel="noopener noreferrer" className={`${item} text-[#f7f5ee] border-x border-white/10`}>
+      <a href={SITE.googleMapsUrl} target="_blank" rel="noopener noreferrer" className={`${item} text-[#fcf9ed] border-x border-white/10`}>
         <SafeIcon icon={FiMapPin} className="text-xl text-[#eaa235]" /> Directions<span className="sr-only"> (opens in a new tab)</span>
       </a>
       <Link to="/plan-your-visit" className={`${item} bg-[#c74f2f] text-white`}>
