@@ -32,7 +32,7 @@ export default function Sozo() {
             <SectionHeader title="What is Sozo" className="!mb-4" />
             <div className="space-y-4 text-[0.95rem] leading-relaxed text-[#1e2522]/80">
               <p className="lead">Sozo is a Greek word used more than 100 times in the New Testament. It means to save, deliver, make whole, restore, and heal, and it reflects God’s desire for our complete wholeness: spiritually, emotionally, and relationally.</p>
-              <blockquote className="border-l-4 border-[#eaa235] pl-5 font-serif italic leading-snug">
+              <blockquote className="font-serif italic leading-snug">
                 “But Jesus turning and seeing her said, ‘Daughter, take courage; your faith has made you well (sozo).’ And at once the woman was made well (sozo).”
                 <footer className="mt-1 text-base font-serif not-italic text-[#1e2522]/70">Matthew 9:22</footer>
               </blockquote>
@@ -148,7 +148,7 @@ export default function Sozo() {
               <li><em>Emotionally Healthy Spirituality</em> by Peter Scazzero</li>
             </ul>
           </div>
-          <blockquote className="self-center border-l-4 border-[#eaa235] pl-5 text-xl font-serif italic leading-snug">
+          <blockquote className="self-center text-xl font-serif italic leading-snug">
             “The Spirit of the Lord GOD is upon me, because the LORD has anointed me to bring good news to the afflicted; He has sent me to bind up the brokenhearted, to proclaim liberty to captives and freedom to prisoners.”
             <footer className="mt-2 text-base font-serif not-italic text-[#1e2522]/70">Isaiah 61:1</footer>
           </blockquote>

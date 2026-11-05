@@ -54,7 +54,6 @@ export default function CustomPage() {
          <div className="max-w-[800px] mx-auto relative z-10">
            <span className="kicker text-[#eaa235] mb-4 inline-block">Information</span>
            <h1 className="text-4xl md:text-6xl mb-8 leading-tight">{page.title_text}</h1>
-           <div className="w-16 h-1 bg-[#eaa235] mx-auto rounded-full opacity-50"></div>
          </div>
       </div>
 
