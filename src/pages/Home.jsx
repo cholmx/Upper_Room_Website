@@ -30,22 +30,8 @@ export default function Home() {
   return (
     <>
       <section aria-labelledby="home-h1" className="px-3 md:px-4 pt-3 md:pt-4 pb-1.5 md:pb-2">
-        <div className="photo-section rounded-[10px] bg-[#1e2522] py-20 md:py-40 px-6 relative text-center" style={{ backgroundImage: `url('${imgUrl(banner, 1800)}')` }}>
-          <div className="scrim"></div>
-          <div className="max-w-[900px] mx-auto relative z-10 text-white">
-            <div>
-              <p className="kicker text-[#eaa235] !mb-3 md:!mb-5">Know God &middot; Share Life &middot; Serve Others</p>
-              <h1 id="home-h1" className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-4 md:mb-6 leading-[1.05]">Transforming lives that transform communities</h1>
-              <p className="font-serif text-xl md:text-2xl text-white/90 mb-8 md:mb-10 leading-tight">
-                Join us {SITE.serviceTime} in Columbiana, Ohio
-                <span className="block text-lg md:text-xl mt-2 text-white/80">{SITE.addressLine}</span>
-              </p>
-              <div className="flex flex-wrap justify-center gap-3 md:gap-4">
-                <Btn to="/plan-your-visit" variant="primary">Plan Your Visit</Btn>
-                <Btn to="/messages" variant="light">Watch Latest Message</Btn>
-              </div>
-            </div>
-          </div>
+        <div className="photo-section hero-photo rounded-[10px] bg-[#1e2522] min-h-[70vh] md:min-h-[85vh]" role="img" aria-label="Upper Room Fellowship" style={{ backgroundImage: `url('${imgUrl(banner, 1800)}')` }}>
+          <h1 id="home-h1" className="sr-only">Upper Room Fellowship: Transforming lives that transform communities</h1>
         </div>
       </section>
 

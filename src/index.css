@@ -364,3 +364,5 @@ details.u-acc.neu-acc[open] { background: #f7f5ee; box-shadow: var(--shadow); }
 /* The whole site is set in two fonts: Arial Bold for headings and labels, Merriweather for everything else. */
 .public-site { font-family: Merriweather, Georgia, serif; font-size: 1rem; line-height: 1.7; }
 .public-site .font-display, .public-site .btn { font-family: Arial, Helvetica, sans-serif; }
+
+.hero-photo::before { content: ''; position: absolute; inset: 0 0 auto 0; height: 7rem; background: linear-gradient(to bottom, rgba(30, 37, 34, 0.45), rgba(30, 37, 34, 0)); pointer-events: none; }
