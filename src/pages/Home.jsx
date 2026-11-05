@@ -33,7 +33,7 @@ export default function Home() {
       <section aria-labelledby="home-h1" className="px-3 md:px-4 pt-3 md:pt-4 pb-1.5 md:pb-2">
         <div className="photo-section hero-photo rounded-[10px] bg-[#1e2522] min-h-[70vh] md:min-h-[85vh] flex items-end justify-center" style={{ backgroundImage: `url('${imgUrl(banner, 1800)}')` }}>
           <div className="hero-text w-full max-w-[900px] px-6 pb-16 md:pb-24 pt-32 text-center text-white">
-            <h1 id="home-h1" className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl mb-8 md:mb-10 leading-[1.05]">You are welcome here</h1>
+            <h1 id="home-h1" className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-6 md:mb-8 leading-[1.1]">You are welcome here</h1>
             <Btn to="/plan-your-visit" variant="primary">Plan Your Visit</Btn>
           </div>
         </div>
