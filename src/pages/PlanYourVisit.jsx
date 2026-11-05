@@ -4,7 +4,7 @@ import { useSite } from '../settings';
 import { Btn, Section, SectionHeader, PageHeader, Cards, Card, Steps, Band, Panel, Beats } from '../components/ui';
 import FormBlock from '../components/FormBlock';
 
-const P = 'text-lg leading-relaxed text-black/80';
+const P = 'text-[0.95rem] leading-relaxed text-black/80';
 
 export default function PlanYourVisit() {
   usePageMeta('plan');

@@ -9,7 +9,7 @@ import { formatDate, imgUrl, isLive, messagePath, ytId } from '../utils';
 import { Btn, Section } from '../components/ui';
 import LiteYouTube from '../components/LiteYouTube';
 
-const P = 'text-lg leading-relaxed';
+const P = 'text-[0.95rem] leading-relaxed';
 
 // A rounded photo that falls back to a default picture until one is uploaded in Site Photos.
 function Picture({ slot, fallback, className = '' }) {

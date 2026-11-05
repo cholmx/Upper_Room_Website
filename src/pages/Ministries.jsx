@@ -6,7 +6,7 @@ function Bullets({ items }) {
   return <ul className="list-disc pl-6 space-y-2 text-lg text-black/80">{items.map(i => <li key={i}>{i}</li>)}</ul>;
 }
 
-const P = 'text-lg leading-relaxed text-black/80';
+const P = 'text-[0.95rem] leading-relaxed text-black/80';
 
 export default function Ministries() {
   usePageMeta('ministries');
