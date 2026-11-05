@@ -22,6 +22,7 @@ export default function Home() {
   const SITE = useSite();
   const heroPhoto = usePhoto('home-hero').url;
   const banner = usePhoto('banner-home').url || heroPhoto || HERO_IMAGES.home;
+  const missionPhoto = usePhoto('home-mission').url || HERO_IMAGES.about;
   const connectPhoto = usePhoto('home-connect').url || HERO_IMAGES.connect;
   const { data } = useFetch('read/sermons?limit=10&sort=created_at:desc');
   const latest = useMemo(() => (data ?? []).filter(isLive)[0], [data]);
@@ -32,11 +33,11 @@ export default function Home() {
       <section aria-labelledby="home-h1" className="px-3 md:px-4 pt-3 md:pt-4 pb-1.5 md:pb-2">
         <div className="photo-section hero-photo rounded-[10px] bg-[#1e2522] min-h-[70vh] md:min-h-[85vh]" style={{ backgroundImage: `url('${imgUrl(banner, 1800)}')` }}>
           <div className="hero-text max-w-[900px] mx-auto px-6 py-24 md:py-40 text-center text-white">
-            <p className="kicker text-[#eaa235] !mb-3 md:!mb-5">Know God &middot; Share Life &middot; Serve Others</p>
-            <h1 id="home-h1" className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-4 md:mb-6 leading-[1.05]">Transforming lives that transform communities</h1>
-            <p className="font-serif text-lg md:text-xl mb-8 md:mb-10 leading-tight">
+            <h1 id="home-h1" className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl mb-4 md:mb-5 leading-[1.05]">You are welcome here</h1>
+            <p className="font-serif text-xl md:text-2xl mb-6 md:mb-8 leading-snug">Transforming lives that transform communities</p>
+            <p className="font-serif text-base md:text-lg mb-8 md:mb-10 leading-tight">
               Join us {SITE.serviceTime} in Columbiana, Ohio
-              <span className="block text-base md:text-lg mt-2">{SITE.addressLine}</span>
+              <span className="block text-sm md:text-base mt-2">{SITE.addressLine}</span>
             </p>
             <div className="flex flex-wrap justify-center gap-3 md:gap-4">
               <Btn to="/plan-your-visit" variant="primary">Plan Your Visit</Btn>
@@ -77,6 +78,12 @@ export default function Home() {
         </div>
       </Section>
 
+      <section aria-label="Our mission" className="px-3 md:px-4 py-1.5 md:py-2">
+        <div data-image-band="true" className="photo-section rounded-[10px] bg-[#1e2522] py-24 md:py-40 px-6 text-center text-white" style={{ backgroundImage: `url('${imgUrl(missionPhoto, 1600)}')` }}>
+          <h2 className="hero-text relative z-10 max-w-3xl mx-auto text-4xl md:text-6xl leading-tight">Know God &middot; Share Life &middot; Serve Others</h2>
+        </div>
+      </section>
+
       <Section tone="white">
         <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
           <div>
@@ -101,21 +108,26 @@ export default function Home() {
         </div>
       </Section>
 
-      {latest && (
-        <Section tone="cream">
-          <div className="text-center mb-8">
-            <p className="kicker text-[#2b433e]">This week’s message</p>
-            <h2 className="text-3xl md:text-5xl">Our latest message</h2>
-          </div>
-          <div className="max-w-4xl mx-auto">
-            <div className="aspect-video bg-[#1e2522] rounded-[10px] overflow-hidden elev-1">
-              {videoId ? <LiteYouTube id={videoId} title={latest.title} /> : <div className="w-full h-full flex items-center justify-center text-white/80 p-6 text-center">Video coming soon</div>}
-            </div>
-            <p className="mt-5 text-center text-xl"><Link to={messagePath(latest)} className="font-semibold hover:text-[#c74f2f]">{latest.title}</Link></p>
-            <p className="mt-1 text-center text-black/70">{[latest.speaker, latest.date && formatDate(latest.date)].filter(Boolean).join(', ')}</p>
-          </div>
-        </Section>
-      )}
+      <Section tone="cream">
+        <div className="text-center mb-8">
+          <p className="kicker text-[#2b433e]">This Week’s Sermon</p>
+          <h2 className="text-3xl md:text-5xl">Our Latest Message</h2>
+        </div>
+        <div className="max-w-4xl mx-auto">
+          {latest ? (
+            <>
+              <div className="aspect-video bg-[#1e2522] rounded-[10px] overflow-hidden elev-1">
+                {videoId ? <LiteYouTube id={videoId} title={latest.title} /> : <div className="w-full h-full flex items-center justify-center text-white/80 p-6 text-center">Video coming soon</div>}
+              </div>
+              <p className="mt-5 text-center text-xl"><Link to={messagePath(latest)} className="font-semibold hover:text-[#c74f2f]">{latest.title}</Link></p>
+              <p className="mt-1 text-center text-black/70">{[latest.speaker, latest.date && formatDate(latest.date)].filter(Boolean).join(', ')}</p>
+            </>
+          ) : (
+            <p className="text-center text-black/70">{data ? 'This week’s message will be posted soon.' : 'Loading the latest message.'}</p>
+          )}
+          <p className="mt-6 text-center"><Link to="/messages" className="font-display font-bold text-[0.95rem] border-b-2 border-[#1e2522] pb-1">All messages</Link></p>
+        </div>
+      </Section>
 
       <section aria-labelledby="stay-h" className="px-3 md:px-4 py-1.5 md:py-2">
         <div data-image-band="true" className="photo-section rounded-[10px] bg-[#1e2522] py-20 md:py-28 px-6 text-center text-white" style={{ backgroundImage: `url('${imgUrl(connectPhoto, 1600)}')` }}>
