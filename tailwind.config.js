@@ -7,8 +7,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        serif: ['"Times New Roman"', 'Times', 'serif'],
-        sans: ['"Times New Roman"', 'Times', 'serif'],
+        serif: ['Merriweather', 'Georgia', 'serif'],
+        sans: ['Merriweather', 'Georgia', 'serif'],
         display: ['Arial', 'Helvetica', 'sans-serif'],
       },
       colors: {

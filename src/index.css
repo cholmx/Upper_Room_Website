@@ -18,8 +18,8 @@ body {
   margin: 0;
   background: var(--light);
   color: var(--black);
-  font-family: 'Times New Roman', Times, serif;
-  font-size: 1.1rem;
+  font-family: Merriweather, Georgia, serif;
+  font-size: 1rem;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -35,7 +35,7 @@ h1, h2, h3, h4 {
 
 .kicker {
   display: inline-block;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: Merriweather, Georgia, serif;
   font-style: normal;
   text-transform: none;
   font-weight: 400;
@@ -46,7 +46,7 @@ h1, h2, h3, h4 {
 }
 
 .serif-accent {
-  font-family: 'Times New Roman', Times, serif;
+  font-family: Merriweather, Georgia, serif;
   font-style: italic;
   font-weight: 400;
   text-transform: none;
@@ -263,7 +263,7 @@ h1, h2, h3, h4 {
 
 /* Admin- and user-authored markdown */
 .rich-text {
-  font-family: 'Times New Roman', Times, serif;
+  font-family: Merriweather, Georgia, serif;
   line-height: 1.5;
   overflow-wrap: anywhere;
 }
@@ -444,8 +444,8 @@ details.u-acc.neu-acc[open] { background: #f7f5ee; box-shadow: var(--shadow); }
 .neu-badge { box-shadow: var(--shadow); }
 
 /* Caladea for the voice of the site: lead paragraphs, in a larger size than body text */
-.lead { font-family: 'Times New Roman', Times, serif; font-size: 1.4rem; line-height: 1.4; color: rgba(0, 0, 0, 0.8); }
-@media (min-width: 768px) { .lead { font-size: 1.6rem; } }
+.lead { font-family: Merriweather, Georgia, serif; font-size: 1.2rem; line-height: 1.5; color: rgba(0, 0, 0, 0.8); }
+@media (min-width: 768px) { .lead { font-size: 1.35rem; } }
 
 /* Caladea runs a little loose by default, so everything set in it is pulled in. */
 :where(.font-serif) { line-height: 1.25; }
@@ -473,7 +473,6 @@ details.u-acc.neu-acc[open] { background: #f7f5ee; box-shadow: var(--shadow); }
   border-radius: 8px;
 }
 
-/* The public site is set in two system fonts: Arial Bold for headings and labels, Times New Roman for everything else.
-   Times runs small, so the page scale is a little larger. The sign-in page and the admin keep their own type. */
-.public-site { font-family: 'Times New Roman', Times, serif; font-size: 1.1rem; }
+/* The whole site is set in two fonts: Arial Bold for headings and labels, Merriweather for everything else. */
+.public-site { font-family: Merriweather, Georgia, serif; font-size: 1rem; line-height: 1.7; }
 .public-site .font-display, .public-site .btn { font-family: Arial, Helvetica, sans-serif; }
