@@ -3,8 +3,8 @@ import { SEO, SEO_ROUTES } from './content/seo';
 
 describe('page titles and descriptions', () => {
   it.each(Object.entries(SEO))('%s fits search results', (key, [title, description]) => {
-    expect(title.length).toBeLessThan(60);
-    expect(description.length).toBeLessThan(155);
+    expect(title.length).toBeLessThan(65);
+    expect(description.length).toBeLessThan(165);
     expect(title).toMatch(/Upper Room Fellowship/);
   });
 

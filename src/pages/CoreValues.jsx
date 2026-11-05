@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import usePageMeta from '../hooks/usePageMeta';
 import { usePhoto } from '../photos';
 import { CORE_VALUES, CORE_VALUES_INTRO, INSIDE_OUT, GROWING } from '../content/values';
-import { Section, SectionHeader, PageHeader } from '../components/ui';
+import { Btn, Section, SectionHeader, PageHeader } from '../components/ui';
 
 // The icon comes from Site Photos in the admin, then from /images/core-values/core-value-N.png,
 // and shows the value's number if neither exists yet.
@@ -20,47 +20,32 @@ export default function CoreValues() {
   usePageMeta('values');
   return (
     <>
-      <PageHeader kicker="Core Values" title="Core Values" intro={CORE_VALUES_INTRO} />
+      <PageHeader kicker="Core Values" title="Our Core Values" intro={CORE_VALUES_INTRO} />
 
-      <Section tone="cream" narrow>
+      <Section tone="white" narrow>
         <SectionHeader title="Living from the inside out" />
-        <div className="space-y-5 text-[0.95rem] leading-relaxed text-[#1e2522]/80">
-          {INSIDE_OUT.map((p, i) => <p key={p} className={i === 0 ? 'lead' : undefined}>{p}</p>)}
-          <p className="font-semibold">The following core values drive everything we do at Upper Room Fellowship.</p>
-        </div>
+        <p className="lead">{INSIDE_OUT}</p>
       </Section>
 
       <Section tone="white">
         <ol className="grid md:grid-cols-2 gap-6">
           {CORE_VALUES.map(v => (
-            <li key={v.id}>
-              <details id={v.id} className="u-acc neu-acc group rounded-2xl h-full">
-                <summary className="cursor-pointer list-none p-6 flex items-start gap-5 min-h-[56px]">
-                  <ValueIcon n={v.n} />
-                  <span className="flex-grow">
-                    <h2 className="block text-xl md:text-2xl font-semibold">{v.title}</h2>
-                    <span className="block mt-1 text-[#1e2522]/80">{v.summary}</span>
-                    <span className="block mt-3 text-sm font-semibold text-[#1e2522]"><span className="group-open:hidden">Read more</span><span className="hidden group-open:inline">Show less</span></span>
-                  </span>
-                </summary>
-                <div className="px-6 pb-6 -mt-1 text-[#1e2522]/80 leading-relaxed space-y-3">
-                  {v.body.map(p => <p key={p}>{p}</p>)}
-                  <h3 className="text-lg mt-5 mb-2">In practice, this means</h3>
-                  <ul className="list-disc pl-6 space-y-1">
-                    {v.practice.map(p => <li key={p}>{p}</li>)}
-                  </ul>
-                </div>
-              </details>
+            <li key={v.id} id={v.id} className="fcard !p-8">
+              <div className="flex items-center gap-4 mb-4">
+                <ValueIcon n={v.n} />
+                <h2 className="text-xl md:text-2xl">{v.n}. {v.title}</h2>
+              </div>
+              <p className="text-[0.95rem] leading-relaxed text-[#1e2522]/80">{v.body}</p>
+              <p className="mt-3 text-[0.95rem] leading-relaxed text-[#1e2522]/80">{v.practice}</p>
             </li>
           ))}
         </ol>
       </Section>
 
-      <Section tone="cream" narrow>
+      <Section tone="white" narrow>
         <SectionHeader title="Growing in our values" />
-        <div className="space-y-5 text-[0.95rem] leading-relaxed text-[#1e2522]/80">
-          {GROWING.map(p => <p key={p}>{p}</p>)}
-        </div>
+        <p className="text-[0.95rem] leading-relaxed text-[#1e2522]/80">{GROWING}</p>
+        <div className="mt-6"><Btn to="/discipleship" variant="primary">Explore Adult Discipleship Training</Btn></div>
       </Section>
     </>
   );

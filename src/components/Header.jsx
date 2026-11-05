@@ -107,7 +107,9 @@ function MobileMenu({ onClose }) {
                   )}
                 </>
               ) : (
-                <Link to={item.to} onClick={onClose} className="flex items-center min-h-[60px] text-2xl hover:text-[#eaa235] transition-colors" style={big}>{item.label}</Link>
+                item.external
+                  ? <a href={SITE.giveUrl} target="_blank" rel="noopener noreferrer" onClick={onClose} className="flex items-center min-h-[60px] text-2xl hover:text-[#eaa235] transition-colors" style={big}>{item.label}<span className="sr-only"> (opens in a new tab)</span></a>
+                  : <Link to={item.to} onClick={onClose} className="flex items-center min-h-[60px] text-2xl hover:text-[#eaa235] transition-colors" style={big}>{item.label}</Link>
               )}
             </li>
           ))}
@@ -147,13 +149,12 @@ export default function Header() {
     <header className={`sticky top-0 z-50 flex items-center h-20 transition-colors ${hasHero ? '-mb-20' : ''} ${light ? 'bg-transparent text-white' : 'bg-white text-[#1e2522] shadow-[0_1px_2px_rgba(30,37,34,0.05),0_6px_18px_-6px_rgba(30,37,34,0.10)]'}`}>
       <div className="max-w-[1320px] w-full mx-auto px-6 flex items-center justify-between gap-6">
         <Logo tone={light ? 'light' : 'dark'} />
-        <nav aria-label="Main" className="hidden xl:flex items-center gap-6 pt-1">
+        <nav aria-label="Main" className="hidden xl:flex items-center gap-5 pt-1">
           {NAV.map(item => (item.children
             ? <DesktopDropdown key={item.label} item={item} light={light} />
-            : <NavLink key={item.to} to={item.to} className={({ isActive }) => `${linkBase} ${isActive ? (light ? linkOnLight : linkOn) : (light ? linkOffLight : linkOff)}`}>{item.label}</NavLink>))}
-          <a href={SITE.giveUrl} target="_blank" rel="noopener noreferrer" className={`${linkBase} ${light ? linkOffLight : linkOff}`}>
-            Give<span className="sr-only"> (opens in a new tab)</span>
-          </a>
+            : item.external
+              ? <a key={item.label} href={SITE.giveUrl} target="_blank" rel="noopener noreferrer" className={`${linkBase} ${light ? linkOffLight : linkOff}`}>{item.label}<span className="sr-only"> (opens in a new tab)</span></a>
+              : <NavLink key={item.to} to={item.to} end={item.to === '/'} className={({ isActive }) => `${linkBase} ${isActive ? (light ? linkOnLight : linkOn) : (light ? linkOffLight : linkOff)}`}>{item.label}</NavLink>))}
         </nav>
         <div className="flex items-center gap-2 xl:hidden">
           <button type="button" className={`p-2 rounded-full transition-colors ${light ? 'hover:bg-white/10' : 'hover:bg-[#1e2522]/5'}`} aria-expanded={open} aria-controls="mobile-menu" aria-label="Open menu" onClick={() => setOpen(true)}>

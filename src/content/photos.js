@@ -11,7 +11,8 @@ export const HERO_IMAGES = {
   about: ABOUT, values: ABOUT,
   leadership: PX(3184393),
   messages: PX(34328505),
-  ministries: MINISTRY,
+  discipleship: MINISTRY,
+  careportal: MINISTRY,
   sozo: GENERAL, give: GENERAL, accessibility: GENERAL, privacy: GENERAL,
   blog: PX(6779632),
 };
@@ -21,9 +22,6 @@ export const HERO_IMAGES = {
 export const PHOTO_SLOTS = [
   { key: 'home-hero', label: 'Home page banner photo, such as the congregation worshiping or greeting each other', alt: 'Adults and children worship together on Sunday morning.' },
   { key: 'home-welcome', label: 'Home page welcome photo, such as people gathered after church', alt: 'People gathered at Upper Room Fellowship.' },
-  { key: 'home-give', label: 'Home page giving photo', alt: 'A moment of generosity at Upper Room Fellowship.' },
-  { key: 'home-watch', label: 'Home page messages photo', alt: 'A message at Upper Room Fellowship.' },
-  { key: 'home-connect', label: 'Home page Connect Card photo, a friendly welcome', alt: 'A warm welcome at Upper Room Fellowship.' },
   { key: 'plan-entrance', label: 'front entrance and parking lot', alt: 'The front entrance of Upper Room Fellowship at 500 Sponseller Road in Columbiana.' },
   { key: 'plan-greeter', label: 'families greeting each other at the front door', alt: 'A greeter welcomes a family at the front door of Upper Room Fellowship.' },
   { key: 'plan-coffee', label: 'people talking over coffee during the Sunday break', alt: 'People talking over coffee during the Sunday break.' },

@@ -14,10 +14,11 @@ const PlanYourVisit = lazy(() => import('./pages/PlanYourVisit'));
 const About = lazy(() => import('./pages/About'));
 const CoreValues = lazy(() => import('./pages/CoreValues'));
 const Leadership = lazy(() => import('./pages/Leadership'));
+const Discipleship = lazy(() => import('./pages/Discipleship'));
+const CarePortal = lazy(() => import('./pages/CarePortal'));
 const Messages = lazy(() => import('./pages/Messages'));
 const MessageSeries = lazy(() => import('./pages/MessageSeries'));
 const MessageDetail = lazy(() => import('./pages/MessageDetail'));
-const Ministries = lazy(() => import('./pages/Ministries'));
 const Sozo = lazy(() => import('./pages/Sozo'));
 const Give = lazy(() => import('./pages/Give'));
 const Contact = lazy(() => import('./pages/Contact'));
@@ -94,7 +95,7 @@ export default function App() {
         {[
           ['/', Home], ['/plan-your-visit', PlanYourVisit], ['/about', About], ['/core-values', CoreValues],
           ['/leadership', Leadership], ['/messages', Messages], ['/messages/series/:series', MessageSeries], ['/messages/:slug', MessageDetail],
-          ['/ministries', Ministries], ['/sozo', Sozo],
+          ['/discipleship', Discipleship], ['/sozo', Sozo], ['/careportal', CarePortal],
           ['/give', Give], ['/contact', Contact], ['/connect', Connect],
           ['/accessibility', Accessibility], ['/privacy', Privacy], ['/blog', Blog], ['/blog/:id', BlogPost], ['/p/:slug', CustomPage],
         ].map(([path, Page]) => (
@@ -111,15 +112,15 @@ export default function App() {
         <Route path="/stories" element={<Navigate to="/about" replace />} />
         <Route path="/sermons" element={<Navigate to="/messages" replace />} />
         <Route path="/podcasts" element={<Navigate to="/messages" replace />} />
-        <Route path="/kids" element={<Navigate to="/ministries#kids" replace />} />
-        <Route path="/youth" element={<Navigate to="/ministries#youth" replace />} />
-        <Route path="/table-groups" element={<Navigate to="/ministries#table-groups" replace />} />
-        <Route path="/worship-team" element={<Navigate to="/ministries#worship" replace />} />
-        <Route path="/serve" element={<Navigate to="/ministries" replace />} />
-        <Route path="/outreach" element={<Navigate to="/ministries#outreach" replace />} />
         <Route path="/prayer" element={<Navigate to="/contact" replace />} />
         <Route path="/events" element={<Navigate to="/" replace />} />
-        <Route path="/careportal" element={<Navigate to="/" replace />} />
+        <Route path="/ministries" element={<Navigate to="/discipleship" replace />} />
+        <Route path="/kids" element={<Navigate to="/plan-your-visit" replace />} />
+        <Route path="/youth" element={<Navigate to="/plan-your-visit" replace />} />
+        <Route path="/table-groups" element={<Navigate to="/discipleship" replace />} />
+        <Route path="/worship-team" element={<Navigate to="/plan-your-visit" replace />} />
+        <Route path="/serve" element={<Navigate to="/discipleship" replace />} />
+        <Route path="/outreach" element={<Navigate to="/careportal" replace />} />
         <Route path="/transforming-together" element={<Navigate to="/give" replace />} />
         <Route path="/team" element={<Navigate to="/leadership" replace />} />
         <Route path="/sermons/:id" element={<SermonRedirect />} />

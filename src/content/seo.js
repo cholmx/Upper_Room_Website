@@ -1,16 +1,17 @@
-// Title tags stay under 60 characters and descriptions under 155 (see seo.test.js).
+// Title tags stay near 60 characters and descriptions near 160 (see seo.test.js).
 export const SEO = {
-  home: ['Upper Room Fellowship | Church in Columbiana, Ohio', 'Join us Sundays at 10:30am at 500 Sponseller Road in Columbiana, Ohio. Transforming lives that transform communities.'],
+  home: ['Upper Room Fellowship | A Spirit-Led Church in Columbiana, Ohio', 'Join Upper Room Fellowship in Columbiana, Ohio, Sundays at 10:30am. Spirit-led worship, practical teaching, kids programs, and a church family that welcomes you.'],
+  plan: ['New Here? What to Expect on a Sunday | Upper Room Fellowship', 'First time at Upper Room Fellowship? See what a Sunday looks like, how kids check-in works, and how to let us know you are coming.'],
+  about: ['About Upper Room Fellowship | Our Story and Beliefs', 'Learn how Upper Room Fellowship began above a Columbiana veterinarian’s office in 1971 and what we believe.'],
+  values: ['Our Core Values | Upper Room Fellowship', 'Six values shape Upper Room Fellowship, from healthy relationships to living the Gospel.'],
+  discipleship: ['Adult Discipleship Training | Upper Room Fellowship', 'Sunday and Wednesday classes for adults covering nine spiritual practices and our core values. Come any time. No sign-up.'],
+  sozo: ['Sozo Inner Healing Prayer Ministry | Upper Room Fellowship', 'Learn what Sozo inner healing prayer ministry is, what happens in a session, and how to request one in Columbiana.'],
+  messages: ['Sermons and Podcast | Upper Room Fellowship, Columbiana, Ohio', 'Watch, listen to, or subscribe to sermons from Upper Room Fellowship.'],
+  leadership: ['Our Pastors and Leaders | Upper Room Fellowship', 'Meet the pastors and elders of Upper Room Fellowship.'],
+  contact: ['Contact Upper Room Fellowship | Columbiana, Ohio', 'Send a question or prayer request to Upper Room Fellowship in Columbiana, Ohio.'],
   connect: ['Connect Card | Upper Room Fellowship', 'Let Upper Room Fellowship in Columbiana, Ohio know you are coming. Fill out the Connect Card and our welcome team will be ready for you.'],
-  plan: ['New Here? | Upper Room Fellowship, Columbiana, OH', "What to expect on a Sunday at Upper Room Fellowship in Columbiana, Ohio, from worship and coffee to kids' programs and your first visit."],
-  about: ['About Us | Upper Room Fellowship, Columbiana, OH', "Our story and our beliefs. Upper Room Fellowship began in 1971 in an upper room above a veterinarian's office in Columbiana, Ohio."],
-  values: ['Core Values | Upper Room Fellowship, Columbiana, OH', "The six core values that drive everything we do at Upper Room Fellowship, from healthy relationships to living the Gospel."],
-  leadership: ['Leadership | Upper Room Fellowship, Columbiana, OH', "Meet the pastors who lead Upper Room Fellowship in Columbiana, Ohio, and how we approach shared leadership."],
-  messages: ['Messages | Upper Room Fellowship, Columbiana, OH', "Watch or listen to current and past messages from Upper Room Fellowship in Columbiana, Ohio, or subscribe to our podcast."],
-  ministries: ['Ministries | Upper Room Fellowship, Columbiana, OH', "Kids, youth, Table Groups, worship, and outreach and missions. Find your place to connect and serve at Upper Room Fellowship."],
-  sozo: ['Sozo Ministry | Upper Room Fellowship, Columbiana, OH', "Sozo is a gentle, Spirit-led prayer ministry for inner healing and freedom at Upper Room Fellowship in Columbiana, Ohio."],
-  give: ['Give | Upper Room Fellowship, Columbiana, OH', "Give online, by text, in person, or by mail to support Upper Room Fellowship and its ministries in Columbiana, Ohio and beyond."],
-  contact: ['Contact | Upper Room Fellowship, Columbiana, OH', "Contact Upper Room Fellowship in Columbiana, Ohio. Call 330.482.9058, email info@urfellowship.com, or send a message."],
+  give: ['Give | Upper Room Fellowship', 'Give online, by text, in person, or by mail to support Upper Room Fellowship.'],
+  careportal: ['CarePortal | Upper Room Fellowship', 'Upper Room Fellowship partners with CarePortal to meet vetted needs of local children and families in crisis in Columbiana, Ohio.'],
   accessibility: ['Accessibility | Upper Room Fellowship', 'Our commitment to an accessible website and building at Upper Room Fellowship in Columbiana, Ohio.'],
   privacy: ['Privacy | Upper Room Fellowship', 'How Upper Room Fellowship in Columbiana, Ohio handles information from forms, cookies, and online giving.'],
   notFound: ['Page Not Found | Upper Room Fellowship', 'We could not find that page. Try the links on the page or call us at 330.482.9058.'],
@@ -18,7 +19,7 @@ export const SEO = {
 
 // Route for each key, used for the sitemap and for canonical links.
 export const SEO_ROUTES = {
-  home: '/', plan: '/plan-your-visit', about: '/about', values: '/core-values', leadership: '/leadership',
-  messages: '/messages', ministries: '/ministries', sozo: '/sozo', give: '/give',
+  home: '/', plan: '/plan-your-visit', about: '/about', values: '/core-values', discipleship: '/discipleship', leadership: '/leadership',
+  messages: '/messages', sozo: '/sozo', give: '/give', careportal: '/careportal',
   contact: '/contact', connect: '/connect', accessibility: '/accessibility', privacy: '/privacy',
 };

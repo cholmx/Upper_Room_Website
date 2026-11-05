@@ -29,15 +29,15 @@ describe('form definitions', () => {
   });
 
   it('shows the Connect Card confirmation from the brief', () => {
-    expect(FORMS.connect.confirmation).toBe('Thanks! We can’t wait to meet you on Sunday. A member of our welcome team will be watching for you.');
+    expect(FORMS.connect.confirmation).toBe('Thank you. We received your Connect Card, and a member of our welcome team will be in touch within 48 hours.');
   });
 });
 
 describe('validateForm', () => {
   it('asks for required fields in plain words', () => {
     const e = validateForm('connect', {});
-    expect(e.first_name).toBe('Please fill in first name.');
-    expect(e.last_name).toBe('Please fill in last name.');
+    expect(e.name).toBe('Please fill in name.');
+    expect(e.email).toBe('Please fill in email.');
   });
   it('checks email shape', () => {
     expect(validateForm('contact', { name: 'A', email: 'nope', message: 'hi' }).email).toMatch(/valid email/);
@@ -54,11 +54,11 @@ describe('validateForm', () => {
 
 describe('buildSubmission', () => {
   it('moves name, email, and phone into columns and the rest into data', () => {
-    const out = buildSubmission('connect', { first_name: ' Pat ', last_name: 'Visitor', email: 'pat@x.org', phone: '', visit_date: '2026-11-01', has_children: 'No', website: 'spam' });
-    expect(out).toEqual({ form_type: 'connect', name: 'Pat Visitor', email: 'pat@x.org', phone: '', data: { visit_date: '2026-11-01', has_children: 'No' } });
+    const out = buildSubmission('connect', { name: ' Pat Visitor ', email: 'pat@x.org', phone: '', visit_status: 'I have visited once', has_children: 'No', website: 'spam' });
+    expect(out).toEqual({ form_type: 'connect', name: 'Pat Visitor', email: 'pat@x.org', phone: '', data: { visit_status: 'I have visited once', has_children: 'No' } });
   });
   it('drops fields the form does not define', () => {
-    const out = buildSubmission('connect', { first_name: 'A', last_name: 'B', email: 'a@b.co', teams: ['Kids', 'Media'], has_children: 'Yes' });
+    const out = buildSubmission('connect', { name: 'A B', email: 'a@b.co', teams: ['Kids', 'Media'], has_children: 'Yes' });
     expect(out.data.teams).toBeUndefined();
     expect(out.data.has_children).toBe('Yes');
   });

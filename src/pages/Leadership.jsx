@@ -33,36 +33,26 @@ export default function Leadership() {
 
   return (
     <>
-      <PageHeader kicker="Leadership" title="Leadership" intro="Meet the pastors who help lead our church family." />
+      <PageHeader kicker="Leadership" title="Meet our leaders" intro={LEADERSHIP_INTRO} />
       <Section tone="white">
         <ul className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {people.map(p => <Person key={p.id || p.name} p={p} />)}
         </ul>
       </Section>
 
-      <Section tone="cream">
-        <SectionHeader kicker="Our leadership team" title="Our leadership team" />
-        <div className="max-w-3xl space-y-4 text-[0.95rem] leading-relaxed text-[#1e2522]/80">
-          {LEADERSHIP_INTRO.map(t => <p key={t}>{t}</p>)}
-        </div>
-      </Section>
-
       <Section tone="white">
-        <SectionHeader kicker="Our approach" title="Our approach to leadership" intro="At Upper Room Fellowship, we believe that:" />
+        <SectionHeader title="How we lead" />
         <dl className="grid md:grid-cols-2 gap-6">
           {HOW_WE_LEAD.map(i => (
-            <div key={i.title} className="rounded-2xl p-6 neu">
+            <div key={i.title} className="fcard !p-6">
               <dt className="text-xl font-semibold">{i.title}</dt>
               <dd className="mt-2 text-[#1e2522]/80 leading-relaxed">{i.text}</dd>
             </div>
           ))}
         </dl>
-        <div className="mt-10 max-w-3xl">
-          <h3 className="text-2xl mb-3">Our leaders strive to</h3>
-          <ul className="list-disc pl-6 space-y-1 text-[0.95rem] text-[#1e2522]/80">
-            {LEADERS_AIM.map(a => <li key={a}>{a}</li>)}
-          </ul>
-          <p className="mt-6 text-[0.95rem] text-[#1e2522]/80 leading-relaxed">{LEADERSHIP_CLOSING}</p>
+        <div className="mt-10 max-w-3xl space-y-4 text-[0.95rem] text-[#1e2522]/80 leading-relaxed">
+          <p>{LEADERS_AIM}</p>
+          <p>{LEADERSHIP_CLOSING}</p>
         </div>
       </Section>
     </>

@@ -1,23 +1,12 @@
-import { BELIEFS_FULL } from './beliefs-full';
-
-// The statement of beliefs shown on the About page, in the church's own words (see beliefs-full.js).
-const TOPICS = [
-  ['trinity', 'The Trinity'],
-  ['jesus-christ', 'Jesus Christ'],
-  ['holy-spirit', 'The Holy Spirit'],
-  ['scripture', 'Scripture'],
-  ['humanity', 'Humanity and the Fall'],
-  ['salvation', 'Salvation'],
-  ['gospel', 'The Gospel'],
-  ['church', 'The Church'],
-  ['kingdom', 'The Kingdom of God'],
-  ['return', 'The Return of Christ'],
-  ['women-in-leadership', 'Women in Leadership'],
-  ['marriage', 'Marriage and Sexuality'],
-  ['formation', 'Spiritual Formation and Discipleship'],
-  ['supernatural', 'Supernatural Ministry and Spiritual Gifts'],
-  ['mission', 'Cultural Engagement and Mission'],
-  ['creeds', 'Our Historic Creeds'],
+// The statement of beliefs shown on the About Us page. Keep the wording free of em dashes.
+export const BELIEFS = [
+  { id: 'god', title: 'God', full: 'We believe in one God who exists eternally as Father, Son, and Holy Spirit, equal in power, authority, and glory. God is relational at His core, and He invites us into honest, honoring community with Him and with one another.' },
+  { id: 'jesus-christ', title: 'Jesus Christ', full: 'Jesus is the Son of God, fully God and fully human. He was born of a virgin, lived a perfect life, died on the cross for the sins of the world, rose bodily on the third day, and ascended to the right hand of the Father. He will return personally and visibly to judge, to renew the earth, and to reign forever.' },
+  { id: 'holy-spirit', title: 'The Holy Spirit', full: 'The Holy Spirit is fully God. He gives new life to every believer, lives within us, and empowers us for daily living. We believe in Spirit baptism, which is available to all believers, and in the active gifts of the Spirit today, including prophecy, healing, and miracles. We practice them with biblical order and the oversight of our elders.' },
+  { id: 'scripture', title: 'Scripture', full: 'The Old and New Testaments are the inspired Word of God and our final authority for faith and practice. God continues to speak, and He never contradicts what Scripture says.' },
+  { id: 'people-and-salvation', title: 'People and Salvation', full: 'Every person is made in God’s image and carries inherent worth. Sin has broken our relationship with God, with each other, and with ourselves. God has come to rescue us and renew all things through Jesus. Salvation is a free gift received by faith in His death and resurrection, and no one can earn it.' },
+  { id: 'church', title: 'The Church', full: 'The church is the body of Christ, a diverse family from every race, language, and country, with Jesus as its head. Our local church is led by Spirit-led elders who share spiritual oversight.' },
+  { id: 'women-in-leadership', title: 'Women in Leadership', full: 'God gifts both women and men to serve as elders, pastors, and teachers. Leadership follows calling, gifting, and character.' },
+  { id: 'marriage', title: 'Marriage and Sexuality', full: 'We hold the historic Christian view that marriage is a lifelong covenant between one man and one woman, and that sexual practice outside of marriage is sin. We hold that belief with the heart of Jesus. Everyone is welcome to worship with us, regardless of background, orientation, or belief, and we follow Jesus’ example of radical love and compassion.' },
+  { id: 'mission', title: 'Mission and Discipleship', full: 'Following Jesus means apprenticing ourselves to Him through daily time in worship, prayer, and Scripture, and letting the Spirit grow love, joy, peace, patience, kindness, goodness, faithfulness, gentleness, and self-control in us. We serve our neighborhoods, workplaces, and city with generosity, stand with the marginalized, and make disciples through both words and actions. Our Adult Discipleship Training puts these convictions into weekly practice.' },
 ];
-
-export const BELIEFS = TOPICS.map(([id, title]) => ({ id, title, full: BELIEFS_FULL[id] }));

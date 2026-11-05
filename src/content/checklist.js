@@ -3,6 +3,7 @@
 export const CHECKLIST = [
   { id: 'logo', label: 'Upload the dark and light logo files', where: 'Admin, Site Photos', route: '/' },
   { id: 'photos', label: 'Add real photos to every labeled photo slot', where: 'Admin, Site Photos', route: '/' },
+  { id: 'schedule-pdf', label: 'Upload the full ten-year Adult Discipleship schedule and add its link in config.js as scheduleUrl', where: 'Discipleship', route: '/discipleship' },
   { id: 'analytics', label: 'Add the Google Analytics ID (or similar) and update the privacy page', where: 'Privacy', route: '/privacy' },
   { id: 'legal-review', label: 'Have the privacy page reviewed by someone qualified', where: 'Privacy', route: '/privacy' },
   { id: 'announcement', label: 'Write a current announcement for the top of the site (optional)', where: 'Admin, Settings', route: '/' },

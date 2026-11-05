@@ -1,168 +1,117 @@
 import React from 'react';
 import usePageMeta from '../hooks/usePageMeta';
-import { Btn, Section, SectionHeader, PageHeader, Accordion, Steps, QuickFacts, Cards, Card, Band, Panel } from '../components/ui';
-import FormBlock from '../components/FormBlock';
+import { Section, SectionHeader, PageHeader, Accordion, Steps, Band, Panel } from '../components/ui';
 import { useSite } from '../settings';
+
+const P = 'text-[0.95rem] leading-relaxed text-[#1e2522]/80';
+
+const TOOLS = [
+  ['The Father Ladder', 'Our earliest relationships shape how we see God. This tool explores those connections and heals the places where past experiences have distorted your view of the Father, Jesus, or the Holy Spirit. Many people discover a Heavenly Father who is nothing like the human authorities who let them down.'],
+  ['The Wall', 'Hurt, false beliefs, unforgiveness, and sin patterns can build barriers between us and God. As each brick comes to light, you invite Jesus into that area for healing. Many people feel real freedom as the wall comes down.'],
+  ['Presenting Jesus', 'This tool invites Jesus into painful memories. Instead of analyzing the past, you experience His healing presence in it. Many people see an old event from a new angle as Jesus shows them what was true.'],
+];
+
+const FAQ = [
+  ['How many sessions will I need?', 'Many people experience significant breakthrough in one session. Others benefit from follow-up sessions, especially when several areas need healing or the roots run deep. Your team will guide you.'],
+  ['Will I have to share deeply personal information?', 'Some sharing is part of the process, and you decide what to share. Our team follows the Holy Spirit’s leading and will not pressure you. The focus stays on connecting with God.'],
+  ['Is what I share confidential?', 'Yes. What you share stays with the ministry team, except where the law requires us to report, such as intent to harm yourself or others or cases of abuse.'],
+  ['Do I have to be a member of this church?', 'No. Sozo is open to members and non-members alike.'],
+  ['How should I prepare?', 'Pray beforehand, get a good night’s rest, eat a meal, and come with an open heart, honest with yourself and with God.'],
+  ['What if I do not feel anything during my session?', 'Healing can be quiet and subtle. Many people notice positive changes in the days and weeks that follow.'],
+  ['Is Sozo deliverance ministry?', 'Sozo can include elements of deliverance, but its main focus is inner healing through connection with God. It approaches deliverance by removing the lies that gave the enemy access.'],
+  ['What makes Sozo different from other prayer ministry?', 'Sozo connects you directly with each member of the Trinity. The team serves as guides, and God Himself is the source of healing. The tools make that connection practical and reach root issues as well as symptoms.'],
+];
+
+const READING = [
+  'Healing the Wounded Heart by Dan Allender',
+  'The Transformation of the Inner Man by John and Paula Sandford',
+  'Healing for Damaged Emotions by David Seamands',
+  'Restoration Year by John Eldredge',
+  'Emotionally Healthy Spirituality by Peter Scazzero',
+];
 
 export default function Sozo() {
   usePageMeta('sozo');
   const SITE = useSite();
   return (
     <>
-      <PageHeader
-        kicker="Sozo"
-        title="Sozo ministry"
-        intro="Sozo is a Greek word that appears over a hundred times in the New Testament. It means to save, deliver, make whole, restore, and heal. Sozo ministry is a gentle, prayer-based time to ask the Father, Son, and Holy Spirit about the places where you feel stuck. If you sense there is more to your relationship with God than you are experiencing now, this is a good place to start."
-      >
-        <Btn href="#sozo-form" variant="primary">Request a Sozo session</Btn>
-      </PageHeader>
+      <PageHeader kicker="Sozo" title="What is Sozo?" intro="Sozo is a Greek word that appears more than 100 times in the New Testament. It means to save, deliver, make whole, restore, and heal." />
 
-      <Section tone="white">
-        <QuickFacts items={[
-          { label: 'Length', value: 'About two hours' },
-          { label: 'Arrive', value: '10 to 15 minutes early' },
-          { label: 'Suggested donation', value: '$40. Financial assistance is available.' },
-          { label: 'Who can come', value: 'Members and non-members' },
-        ]} />
+      <Section tone="white" narrow>
+        <div className={`space-y-4 ${P}`}>
+          <p className="lead">“Sozo” is a Greek word that appears more than 100 times in the New Testament. It means to save, deliver, make whole, restore, and heal. In Matthew 9:22, Jesus uses it when He tells a woman her faith has made her well.</p>
+          <p>Do you feel stuck in some area of your life? Do you sense there is more to your relationship with God than you are experiencing? Sozo is gentle, Spirit-led prayer ministry that helps you find and remove the barriers between you and God, and step into the identity and purpose He has given you.</p>
+        </div>
       </Section>
 
-      <Section tone="cream">
-        <div className="grid md:grid-cols-2 gap-10">
+      <Section tone="white">
+        <div className="grid md:grid-cols-2 gap-10 md:gap-16">
           <div>
-            <SectionHeader title="What is Sozo" className="!mb-4" />
-            <div className="space-y-4 text-[0.95rem] leading-relaxed text-[#1e2522]/80">
-              <p className="lead">Sozo is a Greek word used more than 100 times in the New Testament. It means to save, deliver, make whole, restore, and heal, and it reflects God’s desire for our complete wholeness: spiritually, emotionally, and relationally.</p>
-              <blockquote className="font-serif italic leading-snug">
-                “But Jesus turning and seeing her said, ‘Daughter, take courage; your faith has made you well (sozo).’ And at once the woman was made well (sozo).”
-                <footer className="mt-1 text-base font-serif not-italic text-[#1e2522]/70">Matthew 9:22</footer>
-              </blockquote>
-              <p>Are there areas of your life where you feel stuck? Do you sense there is more to your relationship with God than you are experiencing now? Sozo ministry is a gentle, Spirit-led way to find and remove whatever may be getting in the way of knowing God closely and walking in the identity and purpose He gave you.</p>
-              <p>A Sozo session is a time of interacting with Father, Son, and Holy Spirit to seek wholeness and pursue your destiny, and it is separate from counseling. During a session, trained Sozo team members sit down with you and, with the help of the Holy Spirit, walk you through the process of freedom and wholeness.</p>
+            <SectionHeader title="What happens in a session" className="!mb-4" />
+            <p className={P}>Two trained team members sit down with you and, with the help of the Holy Spirit, guide you through a series of questions and tools. The session opens with prayer, moves through the tools as the Spirit leads, and closes with prayer and a short conversation about next steps. A session lasts about two hours, and you decide what you share.</p>
+          </div>
+          <div>
+            <SectionHeader title="Our approach" className="!mb-4" />
+            <p className={P}>We aim to love people and offer a safe place where old wounds can heal, lies give way to truth, and doors opened to the enemy are closed. Through prayer, we help you find freedom from emotional pain, break unhealthy ties and thought patterns, uncover barriers between you and God, discover your identity in Christ, and walk in the destiny He has for you.</p>
+          </div>
+        </div>
+      </Section>
+
+      <Section tone="gold">
+        <SectionHeader title="Biblical foundation" />
+        <ul className="list-disc pl-6 space-y-2 text-[0.95rem] max-w-3xl">
+          <li>God wants His children whole and free (John 10:10, Isaiah 61:1-3).</li>
+          <li>Truth sets us free (John 8:32).</li>
+          <li>We are transformed by the renewing of our minds (Romans 12:2).</li>
+          <li>Healing comes through relationship with the Father, Son, and Holy Spirit (James 5:16, Psalm 147:3).</li>
+        </ul>
+      </Section>
+
+      <Section tone="white">
+        <SectionHeader title="Our Sozo tools" />
+        <div className="grid md:grid-cols-3 gap-6">
+          {TOOLS.map(([t, d]) => (
+            <div key={t} className="fcard !p-8">
+              <h3 className="text-2xl mb-3">{t}</h3>
+              <p className={P}>{d}</p>
             </div>
-          </div>
-          <div>
-            <SectionHeader title="Biblical foundation" className="!mb-4" />
-            <p className="text-[0.95rem] leading-relaxed text-[#1e2522]/80 mb-3">Sozo ministry is built on these biblical truths:</p>
-            <ul className="list-disc pl-6 space-y-2 text-[0.95rem] text-[#1e2522]/80">
-              <li>God desires wholeness and freedom for His children (John 10:10, Isaiah 61:1 to 3)</li>
-              <li>Truth sets us free from bondage (John 8:32)</li>
-              <li>We are transformed by the renewing of our minds (Romans 12:2)</li>
-              <li>Healing comes through our relationship with the Father, Son, and Holy Spirit (James 5:16, Psalm 147:3)</li>
-            </ul>
-            <SectionHeader title="Our approach" className="!mt-10 !mb-4" />
-            <p className="text-[0.95rem] leading-relaxed text-[#1e2522]/80 mb-3">We aim to love people and give them a safe place where the healing of past wounds can break strongholds, replace lies with truth, and close doors to the enemy. Through gentle, Spirit-led prayer ministry, we help you:</p>
-            <ul className="list-disc pl-6 space-y-2 text-[0.95rem] text-[#1e2522]/80">
-              <li>Find freedom from emotional wounds and pain</li>
-              <li>Break unhealthy ties and thought patterns</li>
-              <li>Identify and remove barriers to your relationship with God</li>
-              <li>Replace lies with God’s truth</li>
-              <li>Discover your true identity in Christ</li>
-              <li>Walk in the destiny God has called you to</li>
-            </ul>
-          </div>
+          ))}
         </div>
-      </Section>
-
-      <Section tone="white">
-        <SectionHeader title="Our Sozo tools" intro="Three tools help connect you with the Father, Son, and Holy Spirit during a session." />
-        <Cards>
-          <Card title="The Father Ladder" as="h3">
-            <p><strong>Restoring divine connections.</strong> The Father Ladder helps you see how early relationships shaped the way you see God. By exploring those connections, we can identify and heal places where past experiences may have bent your view of the Father, Jesus, or the Holy Spirit.</p>
-            <p>Many people discover the love of a heavenly Father who is nothing like the human authorities who disappointed them. As those connections are restored, many experience God’s love in deeply transforming ways.</p>
-          </Card>
-          <Card title="The Wall" as="h3">
-            <p><strong>Breaking through barriers.</strong> The Wall helps identify what may be blocking your closeness with God. These obstacles often grow out of past hurts, false beliefs, unforgiveness, or patterns of sin that create separation.</p>
-            <p>As each brick in the wall is named, you can invite Jesus into that place for healing and change. Many people find real freedom as these walls come down, and they experience God’s presence in new ways.</p>
-          </Card>
-          <Card title="Presenting Jesus" as="h3">
-            <p><strong>Healing in His presence.</strong> This tool invites Jesus into painful memories to bring His healing perspective and presence. Instead of only analyzing old hurts, Presenting Jesus focuses on experiencing Christ’s healing presence inside those memories.</p>
-            <p>Many people see past events from a completely new angle as Jesus shows His truth about what happened. That often brings deep healing to wounds that have affected them for years.</p>
-          </Card>
-        </Cards>
-      </Section>
-
-      <Section tone="cream">
-        <SectionHeader title="How to begin" intro="Taking the first step toward inner healing is a courageous decision. Here is how to start." />
-        <div className="max-w-3xl">
-          <Steps items={[
-            { title: 'Prepare your heart', body: <ul className="list-disc pl-6 space-y-1"><li>Ask God in prayer about receiving Sozo ministry</li><li>Think about the areas where you want more freedom and healing</li><li>Come with an open heart, ready to meet God in a fresh way</li></ul> },
-            { title: 'Reach out', body: <p>Fill out the form below, or email <a className="underline underline-offset-4 font-semibold" href={`mailto:${SITE.email}`}>{SITE.email}</a> with your full name, phone number, best times to reach you, and, if you like, a short note about why you are seeking Sozo. Your inquiry is confidential and handled with care.</p> },
-            { title: 'Connect and schedule', body: <ul className="list-disc pl-6 space-y-1"><li>Our Sozo coordinator will contact you within 3 to 5 business days</li><li>We will answer your questions about the process</li><li>You will be matched with a trained ministry team that fits your needs</li><li>We will find a time that works for you (sessions last about 2 hours)</li></ul> },
-            { title: 'Partner in ministry', body: <ul className="list-disc pl-6 space-y-1"><li>A suggested donation of $40 supports our Sozo ministry</li><li>Financial assistance is available, because healing should be open to everyone</li><li>Your gift helps others receive the same ministry</li><li>Payment can be made at your appointment by cash, check, or card</li></ul> },
-          ]} />
-        </div>
-      </Section>
-
-      <Section tone="white">
-        <SectionHeader title="Common questions" />
-        <Accordion items={[
-          { id: 'q-heal', title: 'Can one Sozo session heal a lie that has been believed for many years?', content: <p>Yes. Once the Lord heals the lie that settled into your spirit, the rest of your life experiences built on that lie realign to His truth. Many people report significant breakthroughs in a single session, though some benefit from more sessions.</p> },
-          { id: 'q-counsel', title: 'Is Sozo counseling?', content: <p>No. Sozo sessions do not include psychological counseling, Bible study, or teaching. Sozo is prayer ministry that helps heal your relationship with God so you can fulfill your destiny. It should not replace professional counseling or medical treatment when needed.</p> },
-          { id: 'q-length', title: 'How long is a session?', content: <p>A typical session lasts about two hours. Please arrive 10 to 15 minutes early to complete any necessary paperwork.</p> },
-          { id: 'q-many', title: 'How many sessions will I need?', content: <p>Many people find significant breakthrough in one session. Some benefit from follow-up sessions, especially when several areas need healing or the issues are complex and deeply rooted. Our team will tell you whether more sessions might help.</p> },
-          { id: 'q-happens', title: 'What happens during a session?', content: <p>You meet with two trained team members who guide you through a series of questions and tools designed to find root issues and connect you with the Father, Son, and Holy Spirit. The session begins with prayer, then uses the Sozo tools as the Holy Spirit leads. It ends with prayer and a short conversation about any follow-up steps.</p> },
-          { id: 'q-personal', title: 'Will I have to share deeply personal information?', content: <p>Some personal sharing is part of the process, and you stay in control of what you share. Our team is trained to be sensitive and to follow the Holy Spirit without pressing you to share more than you are comfortable with. The focus is on connecting with God, with no detailed analysis of your past.</p> },
-          { id: 'q-private', title: 'Is what I share confidential?', content: <p>Yes. Confidentiality is a core value of our Sozo ministry. What you share stays among the ministry team, except where we are legally required to report, such as intent to harm yourself or others, or cases of abuse.</p> },
-          { id: 'q-who', title: 'Do I need to be a member of this church?', content: <p>No. Sozo is open to members and non-members. We welcome anyone who wants greater freedom and a deeper connection with God.</p> },
-          { id: 'q-prepare', title: 'How should I prepare for my session?', content: <><p>We recommend that you:</p><ul className="list-disc pl-6 space-y-1"><li>Spend time in prayer before your session</li><li>Get enough rest the night before</li><li>Eat a meal before you come</li><li>Come with an open heart and a willingness to hear from God</li><li>Be honest with yourself and with God</li></ul></> },
-          { id: 'q-nothing', title: 'What if I do not experience anything during my session?', content: <p>Not everyone has a dramatic emotional experience. Healing can be quiet and subtle. Even if you do not feel an immediate change, trust that God is working. Many people notice positive changes in the days and weeks after their session.</p> },
-          { id: 'q-deliverance', title: 'Is Sozo deliverance ministry?', content: <p>Sozo may include elements of deliverance, which means addressing places where the enemy has gained influence, but its main focus is inner healing through connection with God. Sozo approaches deliverance by removing the lies that gave the enemy access, and it does not focus on confronting demonic influence.</p> },
-          { id: 'q-different', title: 'What makes Sozo different from other prayer ministries?', content: <p>Sozo focuses on connecting you directly with each member of the Trinity for healing, so the ministry team is not the source of healing. The tools make that connection practical and go after root issues and not only symptoms.</p> },
-          { id: 'q-cost', title: 'What does it cost?', content: <p>We suggest a donation of $40. Financial assistance is available.</p> },
-          { id: 'q-reply', title: 'How soon will I hear back?', content: <p>Our Sozo coordinator will contact you within 3 to 5 business days.</p> },
-        ]} />
       </Section>
 
       <Band>
         <Panel tone="terra" title="What Sozo is not">
-          <ul>
-            <li>Sozo is not psychotherapy or psychological counseling</li>
-            <li>Sozo is not a substitute for professional mental health services or medical care</li>
-            <li>Sozo is not fortune-telling or predictive prophecy</li>
-            <li>Sozo is not a formula or technique that works automatically</li>
-            <li>Sozo is not a ministry that forces healing or deliverance on anyone</li>
-          </ul>
+          <p>Sozo is prayer ministry. It does not replace counseling, professional mental health care, or medical care. It is not fortune-telling, it is not a formula that works automatically, and it never forces healing or deliverance on anyone. If you are in crisis, call or text 988 right away.</p>
         </Panel>
         <Panel tone="forest" title="Our team">
-          <p>Our Sozo team is made up of dedicated believers who have:</p>
-          <ul>
-            <li>Received specialized Sozo training</li>
-            <li>Committed to ongoing spiritual growth</li>
-            <li>A heart for seeing people walk in freedom and wholeness</li>
-            <li>A strong prayer life and relationship with the Lord</li>
-            <li>Agreed to strict confidentiality standards</li>
-          </ul>
-          <p>Each team member goes through a thorough application process, receives training, and serves under the covering and accountability of our church leadership. Our team approaches every session with humility, knowing that the Holy Spirit brings healing and the team members do not.</p>
+          <p>Every Sozo team member has completed specialized training, committed to ongoing spiritual growth, agreed to strict confidentiality standards, and gone through a thorough application process. They serve under the covering and accountability of our church leadership, and they know that the Holy Spirit brings the healing.</p>
         </Panel>
       </Band>
 
-      <Section tone="white">
-        <div className="grid md:grid-cols-2 gap-10">
-          <div>
-            <SectionHeader title="Recommended resources" intro="To go deeper into inner healing and Sozo ministry, these books are a good start." className="!mb-4" />
-            <ul className="list-disc pl-6 space-y-2 text-[0.95rem] text-[#1e2522]/80">
-              <li><em>Healing the Wounded Heart</em> by Dan Allender</li>
-              <li><em>The Transformation of the Inner Man</em> by John and Paula Sandford</li>
-              <li><em>Healing for Damaged Emotions</em> by David Seamands</li>
-              <li><em>Restoration Year</em> by John Eldredge</li>
-              <li><em>Emotionally Healthy Spirituality</em> by Peter Scazzero</li>
-            </ul>
-          </div>
-          <blockquote className="self-center text-xl font-serif italic leading-snug">
-            “The Spirit of the Lord GOD is upon me, because the LORD has anointed me to bring good news to the afflicted; He has sent me to bind up the brokenhearted, to proclaim liberty to captives and freedom to prisoners.”
-            <footer className="mt-2 text-base font-serif not-italic text-[#1e2522]/70">Isaiah 61:1</footer>
-          </blockquote>
-        </div>
+      <Section tone="white" narrow id="begin">
+        <SectionHeader title="How to begin" />
+        <Steps items={[
+          { title: 'Prepare your heart', body: <p>Pray about receiving Sozo, think about the areas where you want more freedom, and come ready to meet with God.</p> },
+          { title: 'Reach out', body: <p>Email <a className="underline underline-offset-4 font-semibold" href={`mailto:${SITE.email}`}>{SITE.email}</a> with your full name, phone number, and best times to reach you. A brief note about why you are seeking Sozo is optional. Your inquiry is confidential.</p> },
+          { title: 'Schedule', body: <p>Our Sozo coordinator will contact you within 3 to 5 business days, answer your questions, match you with a ministry team, and find a time that works.</p> },
+          { title: 'Partner with us', body: <p>We suggest a $40 donation to support the ministry, and financial help is available. Healing should be within reach of everyone. You can pay at your appointment by cash, check, or card.</p> },
+        ]} />
       </Section>
 
-      <Section tone="cream" id="sozo-form">
-        <div className="grid md:grid-cols-5 gap-10 items-start">
-          <div className="md:col-span-2">
-            <SectionHeader title="Request a Sozo session" className="!mb-4" />
-            <p className="text-[0.95rem] leading-relaxed text-[#1e2522]/80">Your inquiry is confidential. Prefer email? Write to <a className="underline underline-offset-4 font-semibold" href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
-          </div>
-          <div className="md:col-span-3"><FormBlock formKey="sozo" /></div>
-        </div>
+      <Section tone="white" narrow>
+        <SectionHeader title="Frequently asked questions" />
+        <Accordion items={FAQ.map(([q, a]) => ({ id: q.toLowerCase().replace(/[^a-z]+/g, '-'), title: q, content: <p className={P}>{a}</p> }))} />
+      </Section>
+
+      <Section tone="white" narrow>
+        <SectionHeader title="Recommended reading" />
+        <ul className="list-disc pl-6 space-y-2 text-[0.95rem] text-[#1e2522]/80">
+          {READING.map(r => <li key={r}>{r}</li>)}
+        </ul>
+        <blockquote className="mt-10 font-serif italic text-xl leading-snug">
+          “The Spirit of the Lord GOD is upon me, because the LORD has anointed me to bring good news to the afflicted; He has sent me to bind up the brokenhearted, to proclaim liberty to captives and freedom to prisoners.”
+          <footer className="mt-2 text-base font-serif not-italic text-[#1e2522]/70">Isaiah 61:1</footer>
+        </blockquote>
       </Section>
     </>
   );

@@ -25,17 +25,17 @@ npm run dev
 
 | Address | Page |
 | --- | --- |
-| `/` | Home: hero, welcome, quick links, where and when, vision, contact form |
-| `/plan-your-visit` | New Here: what to expect on Sundays, your first visit, next steps |
+| `/` | Home: hero, welcome, Know God, Share Life, Serve Others, quick links, latest message, where and when, vision, contact |
+| `/plan-your-visit` | New Here: Sunday at a glance, what to expect, next steps |
 | `/about`, `/core-values`, `/leadership` | Our story and beliefs, six core values, pastors |
-| `/ministries` | Kids, Youth, Table Groups, Worship, and Outreach & Missions |
-| `/sozo` | Sozo ministry |
+| `/discipleship`, `/sozo` | Adult Discipleship Training and Sozo ministry |
+| `/careportal` | CarePortal partnership |
 | `/messages`, `/messages/series/:series`, `/messages/:id-title` | Sermon library, series, and message pages |
-| `/give` | Giving, with a testimony form |
+| `/give` | Giving, with a link to share a testimony |
 | `/contact`, `/connect` | Contact form and the Connect Card |
 | `/accessibility`, `/privacy` | Policies, linked from the footer |
 
-The pages and wording follow urfellowship.com. Old addresses such as `/new-here`, `/about-us`, `/beliefs`, `/kids`, `/youth`, `/table-groups`, `/events`, `/careportal`, and `/transforming-together` redirect to the page that now covers them.
+The pages and wording follow urfellowship.com. Old addresses such as `/new-here`, `/about-us`, `/beliefs`, `/ministries`, `/kids`, `/youth`, `/table-groups`, `/events`, and `/transforming-together` redirect to the page that now covers them.
 
 Old addresses (`/visit`, `/sermons`, `/team`, `/podcasts`) redirect to the new ones. The blog and custom pages
 (`/blog`, `/p/your-slug`) still work but are not in the menu.
