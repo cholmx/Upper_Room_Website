@@ -321,15 +321,15 @@ details.u-acc.neu-acc[open] { background: #f7f5ee; box-shadow: var(--shadow); }
 .btn-solid:active { box-shadow: none; }
 .neu-badge { box-shadow: var(--shadow); }
 
-/* Caladea for the voice of the site: lead paragraphs, in a larger size than body text */
+/* Merriweather for lead paragraphs, in a larger size than body text */
 .lead { font-family: Merriweather, Georgia, serif; font-size: 1.1rem; line-height: 1.5; color: rgba(0, 0, 0, 0.8); }
 @media (min-width: 768px) { .lead { font-size: 1.2rem; } }
 
-/* Caladea runs a little loose by default, so everything set in it is pulled in. */
+/* Tighter line height for serif display text. */
 :where(.font-serif) { line-height: 1.25; }
 .rich-text { line-height: 1.5; }
 
-/* Titles and headings on the public site are set in Geist, in normal case. The sign-in page and the admin keep their own type. */
+/* Titles and headings on the public site are set in Arial Bold, in normal case. The sign-in page and the admin keep their own type. */
 :where(.public-site) :is(h1, h2, h3, h4) {
   font-family: Arial, Helvetica, sans-serif;
   text-transform: none;

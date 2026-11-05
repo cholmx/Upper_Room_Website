@@ -100,7 +100,7 @@ function MarkdownField({ id, value, onChange, invalid }) {
       {preview ? (
         <div className="min-h-[10rem] p-4 rounded-lg border border-gray-200 bg-white"><RichText value={value} /></div>
       ) : (
-        <textarea ref={ref} id={id} rows={10} value={value || ''} onChange={(e) => onChange(e.target.value)} className={`${base} ${invalid ? bad : ok} font-mono text-sm`} aria-invalid={invalid} />
+        <textarea ref={ref} id={id} rows={10} value={value || ''} onChange={(e) => onChange(e.target.value)} className={`${base} ${invalid ? bad : ok} text-sm`} aria-invalid={invalid} />
       )}
       <p className="text-xs text-gray-500 mt-2">Supports **bold**, *italic*, ## headings, - lists and [links](https://example.com). Leave a blank line between paragraphs.</p>
     </div>
