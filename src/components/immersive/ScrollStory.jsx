@@ -37,7 +37,7 @@ export default function ScrollStory({ beats, label = 'Story', tone = 'light', he
           <li key={b.title} ref={el => { refs.current[i] = el; }} data-i={i} data-active={i === active} className="story-beat md:min-h-[55vh] md:flex md:flex-col md:justify-center">
             <div className="md:hidden mb-3 w-12 h-12 rounded-full bg-[#c74f2f] text-white font-black flex items-center justify-center neu-badge" aria-hidden="true">{i + 1}</div>
             {b.kicker && <span className="kicker text-[#2b433e]">{b.kicker}</span>}
-            <Heading className="font-serif font-bold normal-case tracking-normal text-[1.9rem] md:text-[2.5rem] leading-[1.1] mb-3">{b.title}</Heading>
+            <Heading className="text-2xl md:text-4xl mb-3">{b.title}</Heading>
             <div className="text-lg leading-relaxed text-black/80 space-y-3">{b.body}</div>
           </li>
         ))}
@@ -51,7 +51,7 @@ export function Stage({ big, small, icon }) {
   return (
     <>
       {icon && <span className="w-20 h-20 rounded-full neu flex items-center justify-center text-[#2b433e] mb-6">{icon}</span>}
-      <span className="font-black uppercase text-5xl lg:text-6xl leading-none" style={{ fontFamily: "'Google Sans Flex', sans-serif" }}>{big}</span>
+      <span className="font-display font-black uppercase text-5xl lg:text-6xl leading-none">{big}</span>
       {small && <span className="mt-4 font-serif italic text-xl leading-tight text-black/70 max-w-[20ch]">{small}</span>}
     </>
   );

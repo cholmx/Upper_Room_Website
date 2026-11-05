@@ -9,7 +9,7 @@ export default {
       fontFamily: {
         serif: ['Caladea', 'serif'],
         sans: ['Inter', 'sans-serif'],
-        display: ['"Google Sans Flex"', 'sans-serif'],
+        display: ['Archivo', 'sans-serif'],
       },
       colors: {
         ink: {

@@ -6,7 +6,7 @@ import * as FiIcons from 'react-icons/fi';
 
 const { FiPhone, FiMapPin, FiCalendar } = FiIcons;
 
-const item = 'flex-1 flex flex-col items-center justify-center gap-0.5 min-h-[56px] text-[0.9rem] font-serif italic uppercase tracking-wider font-bold whitespace-nowrap';
+const item = 'flex-1 flex flex-col items-center justify-center gap-0.5 min-h-[56px] text-[0.78rem] font-display uppercase tracking-wider font-bold whitespace-nowrap';
 
 // Phones only: the three things a first-time visitor needs, always within reach.
 export default function StickyMobileBar() {

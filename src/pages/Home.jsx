@@ -34,8 +34,8 @@ export default function Home() {
               <span className="block text-lg md:text-xl mt-2 text-white/80">{SITE.addressLine}</span>
             </p>
             <div className="flex gap-3 md:gap-4">
-              <Btn to="/plan-your-visit" variant="primary" className="max-sm:flex-1 max-sm:!px-3 max-sm:!py-3 max-sm:!text-[1rem] max-sm:leading-tight">Plan Your Visit</Btn>
-              <Btn to="/messages" variant="light" className="max-sm:flex-1 max-sm:!px-3 max-sm:!py-3 max-sm:!text-[1rem] max-sm:leading-tight">Watch Latest Message</Btn>
+              <Btn to="/plan-your-visit" variant="primary" className="max-sm:flex-1 max-sm:!px-3 max-sm:!py-3 max-sm:!text-[0.85rem] max-sm:leading-tight">Plan Your Visit</Btn>
+              <Btn to="/messages" variant="light" className="max-sm:flex-1 max-sm:!px-3 max-sm:!py-3 max-sm:!text-[0.85rem] max-sm:leading-tight">Watch Latest Message</Btn>
             </div>
           </motion.div>
         </div>
