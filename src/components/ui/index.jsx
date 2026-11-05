@@ -258,6 +258,31 @@ export function QuickFacts({ items }) {
   );
 }
 
+// Two boxes side by side, each in its own palette color, with content inside.
+const BOX_TONES = {
+  forest: 'bg-[#2b433e] text-white',
+  sage: 'bg-[#597f5c] text-white',
+  terra: 'bg-[#c74f2f] text-white',
+  ink: 'bg-[#1e2522] text-white',
+  amber: 'bg-[#eaa235] text-[#1e2522]',
+  gold: 'bg-[#d49e46] text-[#1e2522]',
+  cream: 'bg-[#f7f5ee] text-[#1e2522]',
+  white: 'bg-white text-[#1e2522]',
+};
+
+export function Boxes({ children, className = '' }) {
+  return <div className={`grid md:grid-cols-2 gap-6 md:gap-8 items-stretch ${className}`}>{children}</div>;
+}
+
+export function Box({ tone = 'forest', id, title, as: Tag = 'h2', children, className = '' }) {
+  return (
+    <section id={id} className={`${BOX_TONES[tone]} rounded-[2rem] p-8 md:p-10 shadow-[var(--shadow)] scroll-mt-24 flex flex-col ${className}`}>
+      {title && <Tag className="text-2xl md:text-4xl mb-5">{title}</Tag>}
+      <div className="box-body space-y-4 text-lg leading-relaxed flex-grow">{children}</div>
+    </section>
+  );
+}
+
 // Every page ends with one clear call to action.
 const CTA_TONES = { forest: 'bg-[#2b433e] text-[#f7f5ee]', ink: 'bg-[#1e2522] text-[#f7f5ee]', sage: 'bg-[#597f5c] text-white', terra: 'bg-[#c74f2f] text-white', gold: 'bg-[#eaa235] text-[#1e2522]' };
 export function EndCta({ title, text, to, href, label, tone = 'forest' }) {

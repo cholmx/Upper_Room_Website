@@ -459,3 +459,9 @@ details.u-acc.neu-acc[open] { background: #f7f5ee; box-shadow: var(--shadow); }
   line-height: 1.1;
 }
 .rich-text h1, .rich-text h2, .rich-text h3 { font-family: 'Geist', 'Inter', sans-serif; font-weight: 700; }
+
+/* Content inside the colored boxes keeps the box's text color, with plain list markers and links */
+.box-body a:not(.btn) { color: inherit; text-decoration: underline; text-underline-offset: 4px; font-weight: 600; }
+.box-body ul { list-style: disc; padding-left: 1.5rem; }
+.box-body ul li + li { margin-top: 0.5rem; }
+.box-body h3 { font-size: 1.25rem; margin-top: 0.5rem; }

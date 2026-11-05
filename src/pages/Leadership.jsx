@@ -3,7 +3,7 @@ import usePageMeta from '../hooks/usePageMeta';
 import useFetch from '../hooks/useFetch';
 import { isLive } from '../utils';
 import { DEFAULT_LEADERS, HOW_WE_LEAD, LEADERS_AIM, LEADERSHIP_INTRO, LEADERSHIP_CLOSING } from '../content/leaders';
-import { Section, SectionHeader, PageHeader, PhotoBox } from '../components/ui';
+import { Section, SectionHeader, PageHeader, PhotoBox, Boxes, Box } from '../components/ui';
 import RichText from '../components/RichText';
 
 function Person({ p }) {
@@ -41,10 +41,17 @@ export default function Leadership() {
       </Section>
 
       <Section tone="cream">
-        <SectionHeader kicker="Our leadership team" title="Our leadership team" />
-        <div className="max-w-3xl space-y-4 text-lg leading-relaxed text-black/80">
-          {LEADERSHIP_INTRO.map(t => <p key={t}>{t}</p>)}
-        </div>
+        <Boxes>
+          <Box tone="forest" title="Our leadership team">
+            {LEADERSHIP_INTRO.map(t => <p key={t}>{t}</p>)}
+          </Box>
+          <Box tone="gold" title="Our leaders strive to">
+            <ul>
+              {LEADERS_AIM.map(a => <li key={a}>{a}</li>)}
+            </ul>
+            <p>{LEADERSHIP_CLOSING}</p>
+          </Box>
+        </Boxes>
       </Section>
 
       <Section tone="white">
@@ -57,13 +64,6 @@ export default function Leadership() {
             </div>
           ))}
         </dl>
-        <div className="mt-10 max-w-3xl">
-          <h3 className="text-2xl mb-3">Our leaders strive to</h3>
-          <ul className="list-disc pl-6 space-y-1 text-lg text-black/80">
-            {LEADERS_AIM.map(a => <li key={a}>{a}</li>)}
-          </ul>
-          <p className="mt-6 text-lg text-black/80 leading-relaxed">{LEADERSHIP_CLOSING}</p>
-        </div>
       </Section>
     </>
   );

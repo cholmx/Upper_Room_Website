@@ -1,6 +1,6 @@
 import React from 'react';
 import usePageMeta from '../hooks/usePageMeta';
-import { Btn, Section, SectionHeader, PageHeader, Accordion, Steps, QuickFacts, Cards, Card } from '../components/ui';
+import { Btn, Section, SectionHeader, PageHeader, Accordion, Steps, QuickFacts, Cards, Card, Boxes, Box } from '../components/ui';
 import FormBlock from '../components/FormBlock';
 import { useSite } from '../settings';
 
@@ -27,31 +27,26 @@ export default function Sozo() {
       </Section>
 
       <Section tone="cream">
-        <div className="grid md:grid-cols-2 gap-10">
-          <div>
-            <SectionHeader title="What is Sozo" className="!mb-4" />
-            <div className="space-y-4 text-lg leading-relaxed text-black/80">
-              <p className="lead">Sozo is a Greek word used more than 100 times in the New Testament. It means to save, deliver, make whole, restore, and heal, and it reflects God’s desire for our complete wholeness: spiritually, emotionally, and relationally.</p>
-              <blockquote className="border-l-4 border-[#d49e46] pl-5 font-serif italic leading-snug">
-                “But Jesus turning and seeing her said, ‘Daughter, take courage; your faith has made you well (sozo).’ And at once the woman was made well (sozo).”
-                <footer className="mt-1 text-base font-sans not-italic text-black/70">Matthew 9:22</footer>
-              </blockquote>
-              <p>Are there areas of your life where you feel stuck? Do you sense there is more to your relationship with God than you are experiencing now? Sozo ministry is a gentle, Spirit-led way to find and remove whatever may be getting in the way of knowing God closely and walking in the identity and purpose He gave you.</p>
-              <p>A Sozo session is a time of interacting with Father, Son, and Holy Spirit to seek wholeness and pursue your destiny, and it is separate from counseling. During a session, trained Sozo team members sit down with you and, with the help of the Holy Spirit, walk you through the process of freedom and wholeness.</p>
-            </div>
-          </div>
-          <div>
-            <SectionHeader title="Biblical foundation" className="!mb-4" />
-            <p className="text-lg leading-relaxed text-black/80 mb-3">Sozo ministry is built on these biblical truths:</p>
-            <ul className="list-disc pl-6 space-y-2 text-lg text-black/80">
+        <Boxes>
+          <Box tone="forest" title="What is Sozo">
+            <p className="font-serif text-[1.5rem] leading-snug">Sozo is a Greek word used more than 100 times in the New Testament. It means to save, deliver, make whole, restore, and heal, and it reflects God’s desire for our complete wholeness: spiritually, emotionally, and relationally.</p>
+            <blockquote className="border-l-4 border-[#eaa235] pl-5 font-serif italic leading-snug">
+              “But Jesus turning and seeing her said, ‘Daughter, take courage; your faith has made you well (sozo).’ And at once the woman was made well (sozo).”
+              <footer className="mt-1 text-base font-sans not-italic">Matthew 9:22</footer>
+            </blockquote>
+            <p>Are there areas of your life where you feel stuck? Do you sense there is more to your relationship with God than you are experiencing now? Sozo ministry is a gentle, Spirit-led way to find and remove whatever may be getting in the way of knowing God closely and walking in the identity and purpose He gave you.</p>
+            <p>A Sozo session is a time of interacting with Father, Son, and Holy Spirit to seek wholeness and pursue your destiny, and it is separate from counseling. During a session, trained Sozo team members sit down with you and, with the help of the Holy Spirit, walk you through the process of freedom and wholeness.</p>
+          </Box>
+          <Box tone="sage" title="Biblical foundation and our approach">
+            <p>Sozo ministry is built on these biblical truths:</p>
+            <ul>
               <li>God desires wholeness and freedom for His children (John 10:10, Isaiah 61:1 to 3)</li>
               <li>Truth sets us free from bondage (John 8:32)</li>
               <li>We are transformed by the renewing of our minds (Romans 12:2)</li>
               <li>Healing comes through our relationship with the Father, Son, and Holy Spirit (James 5:16, Psalm 147:3)</li>
             </ul>
-            <SectionHeader title="Our approach" className="!mt-10 !mb-4" />
-            <p className="text-lg leading-relaxed text-black/80 mb-3">We aim to love people and give them a safe place where the healing of past wounds can break strongholds, replace lies with truth, and close doors to the enemy. Through gentle, Spirit-led prayer ministry, we help you:</p>
-            <ul className="list-disc pl-6 space-y-2 text-lg text-black/80">
+            <p>We aim to love people and give them a safe place where the healing of past wounds can break strongholds, replace lies with truth, and close doors to the enemy. Through gentle, Spirit-led prayer ministry, we help you:</p>
+            <ul>
               <li>Find freedom from emotional wounds and pain</li>
               <li>Break unhealthy ties and thought patterns</li>
               <li>Identify and remove barriers to your relationship with God</li>
@@ -59,8 +54,8 @@ export default function Sozo() {
               <li>Discover your true identity in Christ</li>
               <li>Walk in the destiny God has called you to</li>
             </ul>
-          </div>
-        </div>
+          </Box>
+        </Boxes>
       </Section>
 
       <Section tone="white">
@@ -114,49 +109,49 @@ export default function Sozo() {
       </Section>
 
       <Section tone="cream">
-        <div className="grid md:grid-cols-2 gap-10">
-          <div>
-            <SectionHeader title="What Sozo is not" className="!mb-4" />
-            <ul className="list-disc pl-6 space-y-2 text-lg text-black/80">
+        <Boxes>
+          <Box tone="terra" title="What Sozo is not">
+            <ul>
               <li>Sozo is not psychotherapy or psychological counseling</li>
               <li>Sozo is not a substitute for professional mental health services or medical care</li>
               <li>Sozo is not fortune-telling or predictive prophecy</li>
               <li>Sozo is not a formula or technique that works automatically</li>
               <li>Sozo is not a ministry that forces healing or deliverance on anyone</li>
             </ul>
-          </div>
-          <div>
-            <SectionHeader title="Our team" className="!mb-4" />
-            <p className="text-lg leading-relaxed text-black/80 mb-3">Our Sozo team is made up of dedicated believers who have:</p>
-            <ul className="list-disc pl-6 space-y-2 text-lg text-black/80">
+          </Box>
+          <Box tone="ink" title="Our team">
+            <p>Our Sozo team is made up of dedicated believers who have:</p>
+            <ul>
               <li>Received specialized Sozo training</li>
               <li>Committed to ongoing spiritual growth</li>
               <li>A heart for seeing people walk in freedom and wholeness</li>
               <li>A strong prayer life and relationship with the Lord</li>
               <li>Agreed to strict confidentiality standards</li>
             </ul>
-            <p className="mt-4 text-lg leading-relaxed text-black/80">Each team member goes through a thorough application process, receives training, and serves under the covering and accountability of our church leadership. Our team approaches every session with humility, knowing that the Holy Spirit brings healing and the team members do not.</p>
-          </div>
-        </div>
+            <p>Each team member goes through a thorough application process, receives training, and serves under the covering and accountability of our church leadership. Our team approaches every session with humility, knowing that the Holy Spirit brings healing and the team members do not.</p>
+          </Box>
+        </Boxes>
       </Section>
 
       <Section tone="white">
-        <div className="grid md:grid-cols-2 gap-10">
-          <div>
-            <SectionHeader title="Recommended resources" intro="To go deeper into inner healing and Sozo ministry, these books are a good start." className="!mb-4" />
-            <ul className="list-disc pl-6 space-y-2 text-lg text-black/80">
+        <Boxes>
+          <Box tone="amber" title="Recommended resources">
+            <p>To go deeper into inner healing and Sozo ministry, these books are a good start.</p>
+            <ul>
               <li><em>Healing the Wounded Heart</em> by Dan Allender</li>
               <li><em>The Transformation of the Inner Man</em> by John and Paula Sandford</li>
               <li><em>Healing for Damaged Emotions</em> by David Seamands</li>
               <li><em>Restoration Year</em> by John Eldredge</li>
               <li><em>Emotionally Healthy Spirituality</em> by Peter Scazzero</li>
             </ul>
-          </div>
-          <blockquote className="self-center border-l-4 border-[#d49e46] pl-5 text-xl font-serif italic leading-snug">
-            “The Spirit of the Lord GOD is upon me, because the LORD has anointed me to bring good news to the afflicted; He has sent me to bind up the brokenhearted, to proclaim liberty to captives and freedom to prisoners.”
-            <footer className="mt-2 text-base font-sans not-italic text-black/70">Isaiah 61:1</footer>
-          </blockquote>
-        </div>
+          </Box>
+          <Box tone="gold" title="A word from Isaiah">
+            <blockquote className="font-serif italic text-xl leading-snug">
+              “The Spirit of the Lord GOD is upon me, because the LORD has anointed me to bring good news to the afflicted; He has sent me to bind up the brokenhearted, to proclaim liberty to captives and freedom to prisoners.”
+              <footer className="mt-2 text-base font-sans not-italic">Isaiah 61:1</footer>
+            </blockquote>
+          </Box>
+        </Boxes>
       </Section>
 
       <Section tone="cream" id="sozo-form">

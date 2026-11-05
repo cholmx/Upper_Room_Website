@@ -4,7 +4,7 @@ import usePageMeta from '../hooks/usePageMeta';
 import { useSite } from '../settings';
 import { usePhoto } from '../photos';
 import { imgUrl } from '../utils';
-import { Btn, Section, SectionHeader, Cards, Card } from '../components/ui';
+import { Btn, Section, Boxes, Box } from '../components/ui';
 import LightField from '../components/immersive/LightField';
 import SafeIcon from '../common/SafeIcon';
 import * as FiIcons from 'react-icons/fi';
@@ -42,44 +42,53 @@ export default function Home() {
       </section>
 
       <Section tone="cream">
-        <div className="max-w-3xl">
-          <SectionHeader title="Welcome to Upper Room Fellowship" className="!mb-6" />
-          <div className={`space-y-4 ${P}`}>
-            <p className="lead">For over 50 years, our congregation has been gathering in Columbiana to worship, grow, and serve together. We love this city and are proud to call it home.</p>
+        <Boxes>
+          <Box tone="sage" title="Welcome to Upper Room Fellowship">
+            <p className="font-serif text-[1.5rem] leading-snug">For over 50 years, our congregation has been gathering in Columbiana to worship, grow, and serve together. We love this city and are proud to call it home.</p>
             <p>Together, we are learning to live with more love, joy, and purpose. We support each other and reach out to make our community better. Whether you are just exploring faith or looking for a church family, we would love to meet you and welcome you into ours.</p>
-          </div>
-        </div>
+          </Box>
+          <Box tone="amber" title="Plan your visit">
+            <p>Find service times, directions to our Columbiana location, and helpful information for your first Sunday with us.</p>
+            <p className="font-semibold">Join us {SITE.serviceTime} at {SITE.addressLine}.</p>
+            <div className="pt-2 flex flex-wrap gap-3">
+              <Btn to="/plan-your-visit" variant="dark">New here?</Btn>
+              <Btn href={SITE.googleMapsUrl} variant="dark">Get directions</Btn>
+            </div>
+          </Box>
+        </Boxes>
       </Section>
 
       <Section tone="white">
-        <SectionHeader kicker="Quick links" title="Quick links" />
-        <Cards>
-          <Card title="Plan your visit" to="/plan-your-visit" linkLabel="Plan your visit"><p>Find service times, directions to our Columbiana location, and helpful information for your first Sunday with us.</p></Card>
-          <Card title="Watch latest message" to="/messages" linkLabel="Watch now"><p>Missed a Sunday? Catch up on recent teachings that will help you grow in faith and apply biblical truths to your daily life.</p></Card>
-          <Card title="Give online" to={SITE.giveUrl} linkLabel="Give online"><p>Partner with us in transforming lives and communities through your generous support of our church’s mission and ministries.</p></Card>
-        </Cards>
+        <Boxes>
+          <Box tone="gold" title="Watch latest message">
+            <p>Missed a Sunday? Catch up on recent teachings that will help you grow in faith and apply biblical truths to your daily life.</p>
+            <div className="pt-2"><Btn to="/messages" variant="dark">Watch now</Btn></div>
+          </Box>
+          <Box tone="ink" title="Give online">
+            <p>Partner with us in transforming lives and communities through your generous support of our church’s mission and ministries.</p>
+            <div className="pt-2"><Btn href={SITE.giveUrl} variant="primary">Give online</Btn></div>
+          </Box>
+        </Boxes>
       </Section>
 
-      <Section tone="terra">
-        <div className="grid md:grid-cols-2 gap-10 items-start">
-          <div>
-            <SectionHeader kicker="Where and when" title="Where & when" tone="dark" className="!mb-6" />
-            <address className="not-italic text-xl leading-relaxed text-white/90">
-              <p className="flex items-start gap-3"><SafeIcon icon={FiMapPin} className="mt-1.5 flex-shrink-0 text-[#eaa235]" />
+      <Section tone="cream">
+        <Boxes>
+          <Box tone="terra" title="Where & when">
+            <address className="not-italic text-xl leading-relaxed">
+              <p className="flex items-start gap-3"><SafeIcon icon={FiMapPin} className="mt-1.5 flex-shrink-0" />
                 <span>{SITE.address.street}<br />{SITE.address.city} {SITE.address.region} {SITE.address.postalCode}</span></p>
               <p className="mt-4">Join us {SITE.serviceTime}</p>
             </address>
-            <div className="mt-6"><Btn href={SITE.googleMapsUrl} variant="light">Get directions</Btn></div>
-          </div>
-          <div>
-            <SectionHeader kicker="Our vision statement" title="Our vision statement" tone="dark" className="!mb-6" />
-            <p className="text-lg leading-relaxed text-white/90">At Upper Room Fellowship, we exist to help people know God deeply, share life authentically, and serve others selflessly. Real change happens from the inside out as we align our hearts with God’s heart. Join us as we pursue healthy relationships, access abundant wholeness, discover our greatness, live supernaturally, treasure God’s presence, and live out the Gospel in tangible ways.</p>
-            <blockquote className="mt-6 border-l-4 border-white/70 pl-5 font-serif italic text-xl text-white leading-snug">
+            <div className="pt-2"><Btn href={SITE.googleMapsUrl} variant="light">Get directions</Btn></div>
+          </Box>
+          <Box tone="forest" title="Our vision statement">
+            <p>At Upper Room Fellowship, we exist to help people know God deeply, share life authentically, and serve others selflessly. Real change happens from the inside out as we align our hearts with God’s heart. Join us as we pursue healthy relationships, access abundant wholeness, discover our greatness, live supernaturally, treasure God’s presence, and live out the Gospel in tangible ways.</p>
+            <blockquote className="border-l-4 border-[#eaa235] pl-5 font-serif italic text-xl leading-snug">
               “By this everyone will know that you are my disciples, if you love one another.”
-              <footer className="mt-1 text-base font-sans not-italic text-white/80">John 13:35</footer>
+              <footer className="mt-1 text-base font-sans not-italic">John 13:35</footer>
             </blockquote>
-          </div>
-        </div>
+          </Box>
+        </Boxes>
       </Section>
     </>
   );
