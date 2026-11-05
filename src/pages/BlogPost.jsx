@@ -39,10 +39,10 @@ export default function BlogPost() {
   return (
     <article className="bg-[#f7f5ee] min-h-screen pt-32 pb-24 px-6">
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="max-w-[800px] mx-auto">
-        <Link to="/blog" className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-[#2b433e] hover:text-black mb-8">
+        <Link to="/blog" className="inline-flex items-center gap-2 text-sm font-bold tracking-wide text-[#2b433e] hover:text-black mb-8">
           <SafeIcon icon={FiArrowLeft} /> All Articles
         </Link>
-        <div className="flex flex-wrap items-center gap-3 text-xs font-bold uppercase tracking-wider text-gray-500 mb-6">
+        <div className="flex flex-wrap items-center gap-3 text-sm font-bold tracking-wide text-gray-500 mb-6">
           {live.category && <span className="bg-[#d49e46]/10 text-[#2b433e] px-4 py-1.5 rounded-full">{live.category}</span>}
           <span>{formatDate(live.date || live.created_at?.slice(0, 10))}</span>
           {live.author && <><span>•</span><span>{live.author}</span></>}

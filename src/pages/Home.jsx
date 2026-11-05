@@ -65,7 +65,7 @@ export default function Home() {
             </div>
             <div className="mt-8 flex flex-wrap items-center gap-5">
               <Btn to="/plan-your-visit" variant="primary">New here?</Btn>
-              <Link to="/about" className="font-display font-bold uppercase text-[0.8rem] tracking-[0.1em] border-b-2 border-[#1e2522] pb-1 hover:border-[#c74f2f]">More about us &rarr;</Link>
+              <Link to="/about" className="font-display font-bold text-[0.95rem] tracking-wide border-b-2 border-[#1e2522] pb-1 hover:border-[#c74f2f]">More about us &rarr;</Link>
             </div>
           </div>
         </div>
@@ -91,7 +91,7 @@ export default function Home() {
             <p className={`mb-8 ${P}`}>Partner with us in transforming lives and communities through your generous support of our church’s mission and ministries.</p>
             <div className="flex flex-wrap items-center gap-5">
               <Btn href={SITE.giveUrl} variant="dark">Give online</Btn>
-              <Link to="/give" className="font-display font-bold uppercase text-[0.8rem] tracking-[0.1em] border-b-2 border-white pb-1">Ways to give</Link>
+              <Link to="/give" className="font-display font-bold text-[0.95rem] tracking-wide border-b-2 border-white pb-1">Ways to give</Link>
             </div>
           </div>
           <div className="aspect-[4/3]"><Picture slot="home-give" fallback={HERO_IMAGES.ministries} /></div>

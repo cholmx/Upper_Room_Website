@@ -106,7 +106,7 @@ export default function FormSubmissionsManager() {
           {shown.map(r => (
             <li key={r.id} className="bg-white rounded-xl border border-gray-100">
               <div className="p-4 flex flex-wrap items-center gap-3">
-                <span className={`text-[10px] font-bold uppercase px-2 py-1 rounded ${r.handled === 1 ? 'bg-gray-100 text-gray-600' : 'bg-amber-100 text-amber-800'}`}>{r.handled === 1 ? 'Handled' : 'New'}</span>
+                <span className={`text-[10px] font-bold px-2 py-1 rounded ${r.handled === 1 ? 'bg-gray-100 text-gray-600' : 'bg-amber-100 text-amber-800'}`}>{r.handled === 1 ? 'Handled' : 'New'}</span>
                 <span className="font-bold">{label(r.form_type)}</span>
                 <span className="text-gray-700">{r.name || 'No name'}</span>
                 <span className="text-gray-500 text-sm">{[r.email, r.phone].filter(Boolean).join('  |  ')}</span>

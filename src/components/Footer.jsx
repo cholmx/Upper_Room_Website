@@ -89,7 +89,7 @@ export default function Footer() {
       <div className="text-center text-[0.8rem] py-6 border-t border-white/10 flex flex-col items-center gap-2 relative z-10 bg-black/20">
         <p className="opacity-80">{SITE.serviceTime}. {SITE.addressLine}.</p>
         <p className="opacity-70">&copy; {new Date().getFullYear()} {SITE.name}. Columbiana, Ohio.</p>
-        <Link to="/admin" className="hover:text-[#eaa235] transition-colors uppercase tracking-widest font-bold mt-1 opacity-80">Content Studio Login</Link>
+        <Link to="/admin" className="hover:text-[#eaa235] transition-colors tracking-wide font-bold mt-1 opacity-80">Content Studio Login</Link>
       </div>
     </div>
     </footer>

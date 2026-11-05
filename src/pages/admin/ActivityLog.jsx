@@ -23,7 +23,7 @@ export default function ActivityLog() {
     <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-x-auto">
       <table className="w-full text-left text-sm">
         <thead>
-          <tr className="bg-gray-50 border-b border-gray-100 text-xs font-bold text-gray-500 uppercase tracking-wider">
+          <tr className="bg-gray-50 border-b border-gray-100 text-sm font-bold text-gray-500 tracking-wide">
             <th className="px-6 py-4">When</th><th className="px-6 py-4">Who</th><th className="px-6 py-4">What</th><th className="px-6 py-4">Item</th>
           </tr>
         </thead>

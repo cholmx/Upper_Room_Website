@@ -10,7 +10,7 @@ import * as FiIcons from 'react-icons/fi';
 
 const { FiMenu, FiX, FiChevronDown } = FiIcons;
 
-const linkBase = 'whitespace-nowrap font-display font-bold uppercase text-[0.78rem] tracking-[0.1em] py-1 border-b-2 transition-all duration-300 inline-flex items-center gap-1';
+const linkBase = 'whitespace-nowrap font-display font-bold text-[0.95rem] tracking-wide py-1 border-b-2 transition-all duration-300 inline-flex items-center gap-1';
 const linkOn = 'border-[#c74f2f] text-black';
 const linkOff = 'border-transparent text-black/70 hover:text-black hover:border-black/20';
 const linkOnLight = 'border-[#eaa235] text-white';
@@ -50,7 +50,7 @@ function DesktopDropdown({ item, light }) {
           <ul className="bg-white rounded-2xl py-3 elev-2">
             {item.children.map(c => (
               <li key={c.to}>
-                <Link to={c.to} className="block px-6 py-2.5 font-display font-semibold uppercase text-[0.78rem] tracking-[0.1em] text-black/80 hover:text-black hover:bg-[#f7f5ee]">{c.label}</Link>
+                <Link to={c.to} className="block px-6 py-2.5 font-display font-semibold text-[0.95rem] tracking-wide text-black/80 hover:text-black hover:bg-[#f7f5ee]">{c.label}</Link>
               </li>
             ))}
           </ul>
@@ -74,12 +74,12 @@ function MobileMenu({ onClose }) {
     return () => { document.removeEventListener('keydown', onKey); document.body.style.overflow = prev; };
   }, [onClose]);
 
-  const big = { fontFamily: "Arial, Helvetica, sans-serif", fontWeight: 900 };
+  const big = { fontFamily: "Arial, Helvetica, sans-serif", fontWeight: 700 };
 
   return createPortal(
     <div id="mobile-menu" className="xl:hidden fixed inset-0 z-[60] bg-[#f7f5ee] overflow-y-auto" role="dialog" aria-modal="true" aria-label="Site menu">
       <div className="flex items-center justify-between px-6 h-16">
-        <span className="uppercase text-xl tracking-tight" style={{ fontFamily: "Arial, Helvetica, sans-serif", fontWeight: 900 }}>{SITE.shortName}</span>
+        <span className="text-2xl tracking-tight" style={{ fontFamily: "Arial, Helvetica, sans-serif", fontWeight: 700 }}>{SITE.shortName}</span>
         <button type="button" aria-label="Close menu" onClick={onClose} className="p-3 bg-white rounded-full elev-1 hover:scale-105 transition-transform">
           <SafeIcon icon={FiX} size={22} />
         </button>
@@ -94,20 +94,20 @@ function MobileMenu({ onClose }) {
             <li key={item.label}>
               {item.children ? (
                 <>
-                  <button type="button" aria-expanded={openGroup === item.label} onClick={() => setOpenGroup(g => (g === item.label ? null : item.label))} className="w-full flex items-center justify-between min-h-[60px] uppercase text-2xl text-left" style={big}>
+                  <button type="button" aria-expanded={openGroup === item.label} onClick={() => setOpenGroup(g => (g === item.label ? null : item.label))} className="w-full flex items-center justify-between min-h-[60px] text-2xl text-left" style={big}>
                     {item.label}
                     <SafeIcon icon={FiChevronDown} className={`transition-transform ${openGroup === item.label ? 'rotate-180' : ''}`} />
                   </button>
                   {openGroup === item.label && (
                     <ul className="pb-4 pl-2">
                       {item.children.map(c => (
-                        <li key={c.to}><Link to={c.to} onClick={onClose} className="flex items-center min-h-[48px] font-display font-bold uppercase tracking-[0.08em] text-[1rem] text-black/80">{c.label}</Link></li>
+                        <li key={c.to}><Link to={c.to} onClick={onClose} className="flex items-center min-h-[48px] font-display font-bold tracking-wide text-[1rem] text-black/80">{c.label}</Link></li>
                       ))}
                     </ul>
                   )}
                 </>
               ) : (
-                <Link to={item.to} onClick={onClose} className="flex items-center min-h-[60px] uppercase text-2xl hover:text-[#d49e46] transition-colors" style={big}>{item.label}</Link>
+                <Link to={item.to} onClick={onClose} className="flex items-center min-h-[60px] text-2xl hover:text-[#d49e46] transition-colors" style={big}>{item.label}</Link>
               )}
             </li>
           ))}

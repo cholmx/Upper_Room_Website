@@ -190,11 +190,11 @@ export function Card({ title, children, to, linkLabel, icon, className = '', as:
       {to && (
         <div className="mt-6">
           {isExternal(to) ? (
-            <a href={to} target="_blank" rel="noopener noreferrer" className="inline-flex items-center font-display font-bold uppercase tracking-widest text-[0.9rem] text-[#2b433e] hover:text-black transition-colors">
+            <a href={to} target="_blank" rel="noopener noreferrer" className="inline-flex items-center font-display font-bold tracking-wide text-[0.9rem] text-[#2b433e] hover:text-black transition-colors">
               {linkLabel || 'Learn more'} <span aria-hidden="true" className="ml-2">&rarr;</span><span className="sr-only"> (opens in a new tab)</span>
             </a>
           ) : (
-            <Link to={to} className="inline-flex items-center font-display font-bold uppercase tracking-widest text-[0.9rem] text-[#2b433e] hover:text-black transition-colors">
+            <Link to={to} className="inline-flex items-center font-display font-bold tracking-wide text-[0.9rem] text-[#2b433e] hover:text-black transition-colors">
               {linkLabel || 'Learn more'} <span aria-hidden="true" className="ml-2">&rarr;</span>
             </Link>
           )}

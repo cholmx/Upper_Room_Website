@@ -32,7 +32,7 @@ export default function CustomPage() {
     return (
       <div className="min-h-screen bg-[#f7f5ee] pt-32 flex flex-col items-center justify-center opacity-60">
         <div className="w-12 h-12 border-4 border-[#d49e46] border-t-transparent rounded-full animate-spin mb-4"></div>
-        <p className="font-bold uppercase tracking-widest text-sm">Loading Page...</p>
+        <p className="font-bold tracking-wide text-sm">Loading Page...</p>
       </div>
     );
   }

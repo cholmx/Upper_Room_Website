@@ -230,7 +230,7 @@ const ContentStudio = () => {
         <nav aria-label="Content Studio" className="flex-grow space-y-4">
           {Object.entries(TABS).map(([category, items]) => (
             <div key={category}>
-              <h2 className="px-4 text-sm font-bold text-gray-500 uppercase tracking-widest mb-2">{category}</h2>
+              <h2 className="px-4 text-sm font-bold text-gray-500 tracking-wide mb-2">{category}</h2>
               {items.map(tab => (
                  <NavItem key={tab.key} icon={tab.icon} aria-current={activeTab === tab.key ? 'page' : undefined} onClick={() => { setActiveTab(tab.key); if (window.innerWidth < 1024) setIsSidebarOpen(false); }}>
                     {tab.label}

@@ -15,8 +15,8 @@ export default function Logo({ tone = 'dark', className = '' }) {
         <img src={img.url} alt={SITE.name} className="h-10 w-auto" />
       ) : (
         <span
-          className="uppercase text-base min-[400px]:text-xl lg:text-[1.65rem] pt-1 tracking-tight whitespace-nowrap"
-          style={{ fontFamily: "Arial, Helvetica, sans-serif", fontWeight: 900 }}
+          className="text-lg min-[400px]:text-2xl lg:text-[1.9rem] pt-0.5 tracking-tight whitespace-nowrap"
+          style={{ fontFamily: "Arial, Helvetica, sans-serif", fontWeight: 700 }}
         >
           {SITE.shortName}
         </span>

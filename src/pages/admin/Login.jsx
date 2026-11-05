@@ -37,7 +37,7 @@ export default function Login() {
         className="bg-[#11201B]/80 backdrop-blur-2xl p-10 rounded-3xl shadow-2xl max-w-md w-full border border-white/10 relative z-10"
       >
         <div className="text-center mb-10">
-          <h1 className="text-3xl font-black uppercase text-white mb-2 tracking-tight">
+          <h1 className="text-3xl font-black text-white mb-2 tracking-tight">
             Content Studio
           </h1>
           <p className="font-serif italic text-[#FFC44F] text-sm">Upper Room Fellowship</p>
@@ -51,7 +51,7 @@ export default function Login() {
 
         <form onSubmit={handleLogin} className="space-y-6">
           <div>
-            <label htmlFor="login-email" className="block text-[0.75rem] font-bold uppercase tracking-wider mb-3 text-white/50">
+            <label htmlFor="login-email" className="block text-[0.9rem] font-bold tracking-wide mb-3 text-white/50">
               Email
             </label>
             <input
@@ -65,7 +65,7 @@ export default function Login() {
             />
           </div>
           <div>
-            <label htmlFor="login-password" className="block text-[0.75rem] font-bold uppercase tracking-wider mb-3 text-white/50">
+            <label htmlFor="login-password" className="block text-[0.9rem] font-bold tracking-wide mb-3 text-white/50">
               Studio Password
             </label>
             <input
@@ -81,7 +81,7 @@ export default function Login() {
           <button
             type="submit"
             disabled={submitting}
-            className="w-full disabled:opacity-60 bg-[#FFC44F] text-[#0B1613] font-bold uppercase text-xs tracking-widest py-4 rounded-xl hover:bg-white transition-colors shadow-[0_0_20px_rgba(255,196,79,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)]"
+            className="w-full disabled:opacity-60 bg-[#FFC44F] text-[#0B1613] font-bold text-sm tracking-wide py-4 rounded-xl hover:bg-white transition-colors shadow-[0_0_20px_rgba(255,196,79,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)]"
           >
             {submitting ? 'Signing in...' : 'Enter Studio'}
           </button>

@@ -285,9 +285,9 @@ export default function GenericManager({ config }) {
                   {sortable && <th className="w-24 px-4 py-4"><span className="sr-only">Order</span></th>}
                   {config.thumbField && <th className="w-20 px-4 py-4"><span className="sr-only">Image</span></th>}
                   {columns.map(name => (
-                    <th key={name} className="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">{labelOf(name)}</th>
+                    <th key={name} className="px-6 py-4 text-sm font-bold text-gray-500 tracking-wide">{labelOf(name)}</th>
                   ))}
-                  <th className="px-6 py-4 text-right text-xs font-bold text-gray-500 uppercase tracking-wider">Actions</th>
+                  <th className="px-6 py-4 text-right text-sm font-bold text-gray-500 tracking-wide">Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -324,7 +324,7 @@ export default function GenericManager({ config }) {
                           <td key={name} className="px-6 py-4 text-gray-800 text-sm">
                             {text ? (text.length > 50 ? `${text.slice(0, 50)}...` : text) : '-'}
                             {i === 0 && status && (
-                              <span className={`ml-2 text-[10px] font-bold uppercase px-2 py-0.5 rounded ${status === 'Draft' ? 'bg-gray-200 text-gray-700' : 'bg-blue-100 text-blue-700'}`}>{status}</span>
+                              <span className={`ml-2 text-[10px] font-bold px-2 py-0.5 rounded ${status === 'Draft' ? 'bg-gray-200 text-gray-700' : 'bg-blue-100 text-blue-700'}`}>{status}</span>
                             )}
                           </td>
                         );
