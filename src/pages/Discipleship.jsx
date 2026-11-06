@@ -1,7 +1,7 @@
 import React from 'react';
 import usePageMeta from '../hooks/usePageMeta';
 import { useSite } from '../settings';
-import { Btn, Section, SectionHeader, PageHeader, Accordion, Todo, Band, Panel, PhotoSplit, SlotImage } from '../components/ui';
+import { Section, SectionHeader, PageHeader, Accordion, Band, Panel, PhotoSplit, SlotImage } from '../components/ui';
 
 const P = 'text-[0.95rem] leading-relaxed text-[#1e2522]/80';
 
@@ -104,25 +104,6 @@ export default function Discipleship() {
               ))}
             </ol>
             <p className={`mt-4 ${P}`}>Join whatever class is meeting now. After about five years, you will have covered everything.</p>
-            <div className="mt-6">
-              {SITE.scheduleUrl
-                ? <Btn href={SITE.scheduleUrl} variant="primary">Download the Full Ten-Year Schedule</Btn>
-                : <Todo id="schedule-pdf">[Upload the ten-year schedule and link it here]</Todo>}
-            </div>
-          </div>
-        </div>
-      </Section>
-
-      <Section tone="gold">
-        <SectionHeader title="This year, 2026-27" />
-        <div className="grid md:grid-cols-2 gap-10">
-          <div>
-            <h3 className="text-2xl mb-3">Sunday mornings, Practice Year One</h3>
-            <ul className="space-y-1 text-[0.95rem]"><li>Fall: Sabbath</li><li>Winter: Prayer</li><li>Spring: Service</li></ul>
-          </div>
-          <div>
-            <h3 className="text-2xl mb-3">Wednesday evening enrichment classes</h3>
-            <ul className="space-y-1 text-[0.95rem]"><li>Fall: Marriage</li><li>Winter: Spirit Class</li><li>Spring: Open Class</li></ul>
           </div>
         </div>
       </Section>
