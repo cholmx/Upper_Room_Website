@@ -36,6 +36,12 @@ export function mergeSettings(row) {
     googleMapsUrl: `https://maps.google.com/?q=${q}`,
     appleMapsUrl: `https://maps.apple.com/?q=${q}`,
     giveUrl: safeUrl(row.give_url) || SITE.giveUrl,
+    hero: {
+      title: (row.hero_title || '').trim() || SITE.hero.title,
+      subtitle: (row.hero_subtitle || '').trim(),
+      buttonLabel: (row.hero_button_label || '').trim() || SITE.hero.buttonLabel,
+      buttonUrl: (row.hero_button_url || '').trim() || SITE.hero.buttonUrl,
+    },
     announcementText: (row.announcement_text || '').trim(),
     announcementUrl: safeUrl(row.announcement_url),
     social,

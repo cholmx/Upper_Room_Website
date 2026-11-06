@@ -42,6 +42,7 @@ export const SITE = {
     { label: 'Instagram', url: import.meta.env.VITE_INSTAGRAM_URL || 'https://www.instagram.com/urfellowship/' },
     { label: 'YouTube', url: import.meta.env.VITE_YOUTUBE_URL || 'https://www.youtube.com/c/TheUpperRoomFellowship' },
   ],
+  hero: { title: 'You are welcome here', subtitle: '', buttonLabel: 'Plan Your Visit', buttonUrl: '/plan-your-visit' },
   announcementText: '',
   announcementUrl: '',
   defaultOgImage: '/og-default.png',

@@ -11,6 +11,10 @@ import * as FiIcons from 'react-icons/fi';
 const { FiSave, FiLoader } = FiIcons;
 
 const FIELDS = [
+  { name: 'hero_title', label: 'Home hero heading (blank uses “You are welcome here”)', type: 'text' },
+  { name: 'hero_subtitle', label: 'Home hero line under the heading (optional)', type: 'text' },
+  { name: 'hero_button_label', label: 'Home hero button text (blank uses “Plan Your Visit”)', type: 'text' },
+  { name: 'hero_button_url', label: 'Home hero button link (a page such as /plan-your-visit, or a full web address)', type: 'text' },
   { name: 'announcement_text', label: 'Announcement bar text (leave blank for none)', type: 'text' },
   { name: 'announcement_url', label: 'Announcement link (optional)', type: 'url' },
   { name: 'service_time', label: 'Service Time (for example Sundays at 10:30am)', type: 'text', required: true },
