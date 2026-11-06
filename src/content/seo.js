@@ -4,7 +4,7 @@ export const SEO = {
   plan: ['New Here? What to Expect on a Sunday | Upper Room Fellowship', 'First time at Upper Room Fellowship? See what a Sunday looks like, how kids check-in works, and how to let us know you are coming.'],
   about: ['About Upper Room Fellowship | Our Story and Beliefs', 'Learn how Upper Room Fellowship began above a Columbiana veterinarian’s office in 1971 and what we believe.'],
   values: ['Our Core Values | Upper Room Fellowship', 'Six values shape Upper Room Fellowship, from healthy relationships to living the Gospel.'],
-  discipleship: ['Adult Discipleship Training | Upper Room Fellowship', 'Sunday and Wednesday classes for adults covering nine spiritual practices and our core values. Come any time. No sign-up.'],
+  discipleship: ['Adult Discipleship Training | Upper Room Fellowship', 'Sunday morning classes for adults covering nine spiritual practices and our core values. Come any time. No sign-up.'],
   sozo: ['Sozo Inner Healing Prayer Ministry | Upper Room Fellowship', 'Learn what Sozo inner healing prayer ministry is, what happens in a session, and how to request one in Columbiana.'],
   messages: ['Sermons and Podcast | Upper Room Fellowship, Columbiana, Ohio', 'Watch, listen to, or subscribe to sermons from Upper Room Fellowship.'],
   leadership: ['Our Pastors and Leaders | Upper Room Fellowship', 'Meet the pastors and elders of Upper Room Fellowship.'],

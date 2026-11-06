@@ -35,8 +35,9 @@ const FAQ = [
   ['Do I have to sign up?', 'No. Come to any class that is meeting.'],
   ['Do I have to start in the fall?', 'No. Come whenever you are ready. The classes run on a repeating schedule, so whatever you miss at the start comes back around.'],
   ['What does VIK mean?', 'VIK stands for Values in the Kingdom. VIK Yellow and VIK Green are two classes that each run all year and cover the core values of our church.'],
-  ['What is Spirit Class?', 'Spirit Class is a Wednesday evening class on the Holy Spirit.'],
-  ['What is Open Class?', 'Open Class is a slot for a topic that has not been chosen yet. We announce it ahead of time.'],
+  ['Is Wednesday evening part of Adult Discipleship Training?', 'No. Adult Discipleship Training meets on Sunday mornings. Wednesday evenings are for enrichment classes such as Marriage, Parenting, and Finances.'],
+  ['What is Spirit Class?', 'Spirit Class is a Wednesday evening enrichment class on the Holy Spirit.'],
+  ['What is Open Class?', 'Open Class is a Wednesday evening slot for a topic that has not been chosen yet. We announce it ahead of time.'],
   ['Where should I begin?', 'Whichever class is meeting now. Just come.'],
 ];
 
@@ -48,16 +49,15 @@ export default function Discipleship() {
       <PageHeader kicker="Discipleship" title="Adult Discipleship Training" intro="Grow in Know God, Share Life, and Serve Others." />
 
       <PhotoSplit tone="white" slot="discipleship-intro" side="right">
-        <p className="lead">Adult Discipleship Training is a set of Sunday morning and Wednesday evening classes for adults. Over about five years, you work through nine spiritual practices and study the core values of our church. There is nothing to sign up for. Come to any class, and the schedule repeats so you will not miss anything.</p>
+        <p className="lead">Adult Discipleship Training is a set of Sunday morning classes for adults. Over about five years, you work through nine spiritual practices and study the core values of our church. There is nothing to sign up for. Come to any class, and the schedule repeats so you will not miss anything.</p>
       </PhotoSplit>
 
       <Band>
         <Panel tone="forest" title="When we meet">
           <p>Sunday mornings at 9:30am, one hour before worship. Kids classes meet at the same time.</p>
-          <p>Wednesday evenings from 6:30 to 8:00pm. Childcare is provided.</p>
         </Panel>
         <Panel tone="sage" title="Just come">
-          <p>There is no sign-up. Show up on a Sunday at 9:30am or a Wednesday at 6:30pm and join the class that is meeting. If you would like help finding the right room, ask anyone on our welcome team or email <a className="underline underline-offset-4 font-semibold" href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
+          <p>There is no sign-up. Show up on a Sunday at 9:30am and join the class that is meeting. If you would like help finding the right room, ask anyone on our welcome team or email <a className="underline underline-offset-4 font-semibold" href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
         </Panel>
       </Band>
 
@@ -104,6 +104,11 @@ export default function Discipleship() {
               ))}
             </ol>
             <p className={`mt-4 ${P}`}>Join whatever class is meeting now. After about five years, you will have covered everything.</p>
+            <div className="mt-6">
+              {SITE.scheduleUrl
+                ? <Btn href={SITE.scheduleUrl} variant="primary">Download the Full Ten-Year Schedule</Btn>
+                : <Todo id="schedule-pdf">[Upload the ten-year schedule and link it here]</Todo>}
+            </div>
           </div>
         </div>
       </Section>
@@ -116,20 +121,15 @@ export default function Discipleship() {
             <ul className="space-y-1 text-[0.95rem]"><li>Fall: Sabbath</li><li>Winter: Prayer</li><li>Spring: Service</li></ul>
           </div>
           <div>
-            <h3 className="text-2xl mb-3">Wednesday evenings</h3>
+            <h3 className="text-2xl mb-3">Wednesday evening enrichment classes</h3>
             <ul className="space-y-1 text-[0.95rem]"><li>Fall: Marriage</li><li>Winter: Spirit Class</li><li>Spring: Open Class</li></ul>
           </div>
         </div>
       </Section>
 
       <PhotoSplit tone="white" slot="discipleship-wednesday" side="left">
-        <SectionHeader title="Wednesday evenings" className="!mb-6" />
-        <p className={P}>Wednesday adult classes cover everyday life. Topics include Marriage, Parenting, Finances, and Spirit Class, a class on the Holy Spirit. Open Class is a slot for a topic still to be chosen, and we announce it ahead of time. Junior high (6th through 8th grade) and high school (9th through 12th grade) youth groups meet at the same time, and childcare is offered during Wednesday classes.</p>
-        <div className="mt-6">
-          {SITE.scheduleUrl
-            ? <Btn href={SITE.scheduleUrl} variant="primary">Download the Full Ten-Year Schedule</Btn>
-            : <Todo id="schedule-pdf">[Upload the ten-year schedule and link it here]</Todo>}
-        </div>
+        <SectionHeader title="Wednesday evening enrichment classes" className="!mb-6" />
+        <p className={P}>Wednesday evenings from 6:30 to 8:00pm are for enrichment classes on everyday life. They are separate from Adult Discipleship Training. Topics include Marriage, Parenting, Finances, and Spirit Class, a class on the Holy Spirit. Open Class is a slot for a topic still to be chosen, and we announce it ahead of time. Junior high (6th through 8th grade) and high school (9th through 12th grade) youth groups meet at the same time, and childcare is offered during Wednesday classes.</p>
       </PhotoSplit>
 
       <Section tone="white" narrow>
