@@ -71,7 +71,7 @@ export default function Home() {
         <Cards cols={4}>
           <Card title="Plan Your Visit" as="h3" icon={<SlotImage slot="home-plan" />} to="/plan-your-visit" linkLabel="Plan your visit"><p>See what a Sunday looks like and tell us you are coming so we can greet you.</p></Card>
           <Card title="Hear the Latest Message" as="h3" icon={<SlotImage slot="home-messages" />} to="/messages" linkLabel="Hear the latest message"><p>Catch up on recent teaching or browse the full library.</p></Card>
-          <Card title="Grow With Us" as="h3" icon={<SlotImage slot="home-grow" />} to="/discipleship" linkLabel="Grow with us"><p>Join a Sunday morning adult class at any time. Nothing to sign up for.</p></Card>
+          <Card title="Grow With Us" as="h3" icon={<SlotImage slot="home-grow" />} to="/discipleship" linkLabel="Grow with us"><p>Join a Sunday morning adult class. Our welcome team can help you find a place.</p></Card>
           <Card title="Give Online" as="h3" icon={<SlotImage slot="home-give" />} to={SITE.giveUrl} linkLabel="Give online"><p>Support the ministries and outreach of our church family.</p></Card>
         </Cards>
       </Section>

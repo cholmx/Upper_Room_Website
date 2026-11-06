@@ -32,13 +32,13 @@ const LOOP = [
 ];
 
 const FAQ = [
-  ['Do I have to sign up?', 'No. Come to any class that is meeting.'],
+  ['Do I have to sign up?', 'Some classes have a sign-up and some do not. Ask anyone on our welcome team or send us a message, and we will point you to the right one.'],
   ['Do I have to start in the fall?', 'No. Come whenever you are ready. The classes run on a repeating schedule, so whatever you miss at the start comes back around.'],
   ['What does VIK mean?', 'VIK stands for Values in the Kingdom. VIK Yellow and VIK Green are two classes that each run all year and cover the core values of our church.'],
   ['Is Wednesday evening part of Adult Discipleship Training?', 'No. Adult Discipleship Training meets on Sunday mornings. Wednesday evenings are for enrichment classes such as Marriage, Parenting, and Finances.'],
   ['What is Spirit Class?', 'Spirit Class is a Wednesday evening enrichment class on the Holy Spirit.'],
   ['What is Open Class?', 'Open Class is a Wednesday evening slot for a topic that has not been chosen yet. We announce it ahead of time.'],
-  ['Where should I begin?', 'Whichever class is meeting now. Just come.'],
+  ['Where should I begin?', 'Whichever class is meeting now. If you are not sure which one fits, ask our welcome team.'],
 ];
 
 export default function Discipleship() {
@@ -49,15 +49,15 @@ export default function Discipleship() {
       <PageHeader kicker="Discipleship" title="Adult Discipleship Training" intro="Grow in Know God, Share Life, and Serve Others." />
 
       <PhotoSplit tone="white" slot="discipleship-intro" side="right">
-        <p className="lead">Adult Discipleship Training is a set of Sunday morning classes for adults. Over about five years, you work through nine spiritual practices and study the core values of our church. There is nothing to sign up for. Come to any class, and the schedule repeats so you will not miss anything.</p>
+        <p className="lead">Adult Discipleship Training is a set of Sunday morning classes for adults. Over about five years, you work through nine spiritual practices and study the core values of our church. The schedule repeats, so you will not miss anything.</p>
       </PhotoSplit>
 
       <Band>
         <Panel tone="forest" title="When we meet">
           <p>Sunday mornings at 9:30am, one hour before worship. Kids classes meet at the same time.</p>
         </Panel>
-        <Panel tone="sage" title="Just come">
-          <p>There is no sign-up. Show up on a Sunday at 9:30am and join the class that is meeting. If you would like help finding the right room, ask anyone on our welcome team or email <a className="underline underline-offset-4 font-semibold" href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
+        <Panel tone="sage" title="Where to begin">
+          <p>Join the class that is meeting on a Sunday at 9:30am. Some classes have a sign-up. If you would like help finding the right room or getting signed up, ask anyone on our welcome team or email <a className="underline underline-offset-4 font-semibold" href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
         </Panel>
       </Band>
 
