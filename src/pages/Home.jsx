@@ -23,9 +23,9 @@ export default function Home() {
 
   return (
     <>
-      <section aria-labelledby="home-h1" className="px-3 md:px-4 pt-3 md:pt-4 pb-1.5 md:pb-2">
+      <section aria-labelledby="home-h1" className="max-w-[1312px] mx-auto px-3 md:px-4 pt-3 md:pt-4 pb-1.5 md:pb-2">
         <div className="photo-section hero-photo rounded-[10px] bg-[#1e2522] min-h-[70vh] md:min-h-[85vh] flex items-end" style={{ backgroundImage: `url('${imgUrl(banner, 1800)}')` }}>
-          <div className="hero-text w-full max-w-[900px] px-6 md:px-12 pb-14 md:pb-20 pt-32 text-left text-white">
+          <div className="hero-text w-full max-w-[900px] px-6 md:px-10 pb-14 md:pb-20 pt-32 text-left text-white">
             <h1 id="home-h1" className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-4 leading-[1.1]">{SITE.hero.title}</h1>
             {SITE.hero.subtitle && <p className="font-serif text-lg md:text-2xl mb-6 leading-snug">{SITE.hero.subtitle}</p>}
             <div className="mt-4">{SITE.hero.buttonLabel && SITE.hero.buttonUrl && <Btn to={SITE.hero.buttonUrl} variant="primary">{SITE.hero.buttonLabel}</Btn>}</div>

@@ -46,7 +46,7 @@ export default function Blog() {
     <div className="bg-[#ffffff] min-h-screen text-[#1e2522] pb-24 pt-20">
       <PageHeader kicker="Articles and updates" title="Church blog" intro="Insights, devotions, and updates from the Upper Room family." />
 
-      <div className="max-w-[1145px] mx-auto px-6 mt-16">
+      <div className="max-w-[1312px] mx-auto px-9 md:px-14 mt-16">
         {error ? (
           <ErrorState message={error} onRetry={reload} />
         ) : loading ? (

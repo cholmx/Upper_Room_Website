@@ -147,7 +147,7 @@ export default function Header() {
 
   return (
     <header className={`sticky top-0 z-50 flex items-center h-20 transition-colors ${hasHero ? '-mb-20' : ''} ${light ? 'bg-transparent text-white' : 'bg-white text-[#1e2522] shadow-[0_1px_2px_rgba(30,37,34,0.05),0_6px_18px_-6px_rgba(30,37,34,0.10)]'}`}>
-      <div className="max-w-[1320px] w-full mx-auto px-6 flex items-center justify-between gap-6">
+      <div className="max-w-[1312px] w-full mx-auto px-9 md:px-14 flex items-center justify-between gap-6">
         <Logo tone={light ? 'light' : 'dark'} />
         <nav aria-label="Main" className="hidden xl:flex items-center gap-5 pt-1">
           {NAV.map(item => (item.children

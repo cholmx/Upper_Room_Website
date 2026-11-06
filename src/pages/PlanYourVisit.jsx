@@ -69,7 +69,7 @@ export default function PlanYourVisit() {
           <Steps items={[
             { title: 'Let us know you are coming', body: <p>Fill out the <Link className="underline underline-offset-4 font-semibold" to="/connect">Connect Card</Link>.</p> },
             { title: 'Join us Sunday', body: <p>Worship starts at 10:30am at {SITE.addressLine}.</p> },
-            { title: 'Find your people', body: <p>Join a Sunday morning adult class. Our welcome team can help you find the right one and tell you if it has a sign-up.</p> },
+            { title: 'Find your people', body: <p>Join a Sunday morning adult class. Our welcome team can help you find the right one.</p> },
           ]} />
         </div>
       </Section>

@@ -25,7 +25,7 @@ export default function AnnouncementBar() {
 
   return (
     <div className="bg-[#c74f2f] text-white" role="region" aria-label="Announcement">
-      <div className="max-w-[1145px] mx-auto px-6 py-2.5 flex items-center justify-between gap-4 text-[0.9rem]">
+      <div className="max-w-[1312px] mx-auto px-9 md:px-14 py-2.5 flex items-center justify-between gap-4 text-[0.9rem]">
         <p className="flex-grow text-center sm:text-left font-display font-semibold tracking-wide text-[0.85rem]">
           {text}
           {SITE.announcementUrl && (

@@ -61,7 +61,7 @@ export default function Give() {
         <p className={P}>We handle your gifts with integrity and transparency. Our finance team reviews finances monthly, our budget follows our mission and values, we give the congregation regular financial updates, and we meet all accounting standards and legal requirements. Your giving mainly supports our local ministries, facilities, staff, and outreach, with a portion set aside for missions.</p>
       </Section>
 
-      <Section tone="terra" narrow>
+      <Section tone="terra" narrow center>
         <div className="text-center">
           <h2 className="text-3xl md:text-5xl mb-5">Share your story</h2>
           <p className="text-[0.95rem] leading-relaxed text-white">Many of us have seen God’s faithfulness in remarkable ways through giving. If generosity has changed something in your life, we invite you to share a testimony.</p>

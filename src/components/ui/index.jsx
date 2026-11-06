@@ -51,12 +51,12 @@ const TONES = {
   bronze: 'bg-[#eaa235] text-[#1e2522]',
 };
 
-export function Section({ tone = 'cream', id, className = '', narrow = false, children, ...rest }) {
+export function Section({ tone = 'cream', id, className = '', narrow = false, center = false, children, ...rest }) {
   const panel = tone !== 'cream' && tone !== 'white';
   return (
-    <section id={id} className="px-3 md:px-4 py-1.5 md:py-2" {...rest}>
+    <section id={id} className="max-w-[1312px] mx-auto px-3 md:px-4 py-1.5 md:py-2" {...rest}>
       <div className={`${TONES[tone]} ${panel ? 'rounded-[10px]' : ''} py-16 md:py-24 px-6 md:px-10 ${className}`}>
-        <div className={`${narrow ? 'max-w-[800px]' : 'max-w-[1145px]'} mx-auto relative z-10`}>
+        <div className={`${narrow ? `max-w-[800px] ${center ? 'mx-auto' : ''}` : ''} relative z-10`}>
           {children}
         </div>
       </div>
@@ -152,8 +152,8 @@ function usePageBanner(pageKey) {
 export function PageHeader({ kicker, title, intro, children, page }) {
   const image = usePageBanner(page);
   return (
-    <header className="px-3 md:px-4 pt-3 md:pt-4 pb-1.5 md:pb-2">
-      <div className="photo-section rounded-[10px] text-[#ffffff] py-24 md:py-36 px-6 md:px-12 text-left flex items-end" style={{ backgroundImage: `url('${imgUrl(image, 1600)}')` }}>
+    <header className="max-w-[1312px] mx-auto px-3 md:px-4 pt-3 md:pt-4 pb-1.5 md:pb-2">
+      <div className="photo-section rounded-[10px] text-[#ffffff] py-24 md:py-36 px-6 md:px-10 text-left flex items-end" style={{ backgroundImage: `url('${imgUrl(image, 1600)}')` }}>
         <div className="hero-text max-w-[800px] relative z-10">
           {kicker && !same(kicker, title) && <span className="kicker text-[#eaa235]">{kicker}</span>}
           <h1 className="text-4xl md:text-6xl mb-6">{title}</h1>
@@ -292,7 +292,7 @@ const PANEL = {
 
 export function Band({ children, id, className = '' }) {
   return (
-    <section id={id} data-band="true" className={`px-3 md:px-4 py-1.5 md:py-2 ${className}`}>
+    <section id={id} data-band="true" className={`max-w-[1312px] mx-auto px-3 md:px-4 py-1.5 md:py-2 ${className}`}>
       <div className="band grid md:grid-cols-2 overflow-hidden rounded-[10px]">{children}</div>
     </section>
   );

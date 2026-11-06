@@ -62,7 +62,7 @@ function Spotlight({ s }) {
     );
   }
   return (
-    <Section tone={tone} narrow className={cls}>
+    <Section tone={tone} narrow center className={cls}>
       <Copy s={s} center />
     </Section>
   );
