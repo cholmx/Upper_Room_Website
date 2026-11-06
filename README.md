@@ -168,3 +168,7 @@ The site avoids heavy effects on purpose: no animation library, no WebGL, no scr
 ## Front page area
 
 The area below the hero is managed in the admin under Site, Front Page Area. Each row is a saved layout (centered text, photo left or right, or a slim banner). The switch in the list turns a layout on or off, Copy saves a variation, and a layout can have optional start and end days. Every layout that is on shows in order. Requires `supabase/migrations/20261105120000_home_spotlights.sql`.
+
+## Importing messages from YouTube
+
+In the admin, Messages has an Import from YouTube button. It lists the videos on the Upper Room Fellowship channel, skips any already in the library, and creates a message for each one picked. Titles like `Acts 10-11 :: Who Is the Gospel For? // Josh Osborn` fill in the passage, title and speaker. It needs the edge function in `supabase/functions/youtube-feed` deployed. Without a key it sees the 15 newest videos. Add a YouTube Data API key as the secret `YOUTUBE_API_KEY` to list the whole channel.

@@ -30,6 +30,7 @@ const opts = (list) => list.map(v => ({ value: v, label: v }));
 const TAB_CONFIGS = {
   sermons: {
     table: 'sermons',
+    youtubeImport: true,
     title: 'Messages',
     titleField: 'title',
     columns: ['title', 'speaker', 'series', 'date'],

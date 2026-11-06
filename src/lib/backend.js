@@ -242,7 +242,24 @@ export function createBackend({
     }
   }
 
-  return { configured, signIn, signOut, getUser, data, getToken, upload };
+  // Calls an edge function as the signed-in user and returns its JSON answer.
+  async function invoke(name) {
+    if (!configured) return fail('The backend is not configured', 0);
+    if (!/^[a-z][a-z0-9-]*$/.test(name)) return fail('Invalid function name', 400);
+    try {
+      const token = await getToken();
+      if (token === anonKey) return fail('Please sign in again.', 401);
+      const res = await fetchImpl(`${base}/functions/v1/${name}`, { headers: { apikey: anonKey, Authorization: `Bearer ${token}` } });
+      const json = await res.json().catch(() => null);
+      if (res.status === 404) return fail('The YouTube import is not set up yet. Ask Bolt to deploy the youtube-feed function.', 404);
+      if (!res.ok) return fail(json?.error || 'That did not work. Please try again.', res.status);
+      return ok(json);
+    } catch (err) {
+      return fail(err?.message || 'Network error', 0);
+    }
+  }
+
+  return { configured, signIn, signOut, getUser, data, getToken, upload, invoke };
 }
 
 export const backend = createBackend({

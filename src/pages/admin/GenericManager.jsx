@@ -5,6 +5,7 @@ import { logActivity } from '../../lib/activity';
 import { isLive } from '../../utils';
 import { plainText } from '../../lib/markdown';
 import ConfirmDialog from '../../components/ConfirmDialog';
+import YouTubeImport from './YouTubeImport';
 import FieldInput from './FieldInput';
 import { validate, autoSlug } from './validate';
 import SafeIcon from '../../common/SafeIcon';
@@ -35,6 +36,7 @@ export default function GenericManager({ config }) {
   const [page, setPage] = useState(0);
   const [pendingDelete, setPendingDelete] = useState(null);
   const [confirmDiscard, setConfirmDiscard] = useState(false);
+  const [importing, setImporting] = useState(false);
   const dragId = useRef(null);
 
   const sortable = Boolean(config.sortField);
@@ -269,12 +271,21 @@ export default function GenericManager({ config }) {
       {errorBanner}
       <div className="flex flex-wrap justify-between items-center gap-4 mb-6">
         <h2 className="text-2xl font-bold text-[#1e2522]">Manage {config.title}</h2>
-        {canCreate && (
-          <button onClick={handleAddNew} className="bg-[#eaa235] hover:bg-[#eaa235] text-[#1e2522] font-bold py-2.5 px-5 rounded-lg flex items-center gap-2 transition shadow-sm">
-            <SafeIcon icon={FiPlus} /> Add New
-          </button>
-        )}
+        <div className="flex flex-wrap items-center gap-3">
+          {config.youtubeImport && (
+            <button onClick={() => setImporting(true)} className="border border-[#1e2522]/20 bg-white text-[#1e2522] font-bold py-2.5 px-5 rounded-lg transition">
+              Import from YouTube
+            </button>
+          )}
+          {canCreate && (
+            <button onClick={handleAddNew} className="bg-[#eaa235] hover:bg-[#eaa235] text-[#1e2522] font-bold py-2.5 px-5 rounded-lg flex items-center gap-2 transition shadow-sm">
+              <SafeIcon icon={FiPlus} /> Add New
+            </button>
+          )}
+        </div>
       </div>
+
+      {importing && <YouTubeImport existing={items} onClose={() => setImporting(false)} onImported={fetchItems} />}
 
       {items.length > 0 && !sortable && (
         <div className="relative mb-4 max-w-md">
