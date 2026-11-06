@@ -5,7 +5,7 @@ import useFetch from '../hooks/useFetch';
 import { useSite } from '../settings';
 import { dateRangeLabel, formatDate, groupSeries, isLive, messagePath, safeUrl, scriptureBook, seriesPath, ytId } from '../utils';
 import { plainText } from '../lib/markdown';
-import { Btn, Section, SectionHeader, PageHeader } from '../components/ui';
+import { Btn, Section, SectionHeader, PageHeader, PhotoSplit } from '../components/ui';
 import LiteYouTube from '../components/LiteYouTube';
 import MessageCard from '../components/MessageCard';
 import { Spinner, ErrorState } from '../components/StateViews';
@@ -86,13 +86,13 @@ export default function Messages() {
             )}
           </Section>
 
-          <Section tone="gold">
+          <PhotoSplit tone="gold" slot="messages-podcast" side="right">
             <SectionHeader title="Listen anywhere" intro="Subscribe to our podcast on Apple Podcasts, Spotify, or your favorite podcast app, and new messages arrive automatically. Take them along on a commute, a workout, or a quiet morning." />
             <div className="flex flex-wrap gap-3">
               <Btn href={SITE.podcasts.apple} variant="dark">Apple Podcasts</Btn>
               <Btn href={SITE.podcasts.spotify} variant="dark">Spotify</Btn>
             </div>
-          </Section>
+          </PhotoSplit>
 
           {seriesList.length > 0 && (
             <Section tone="sand">

@@ -114,15 +114,28 @@ export function PhotoGrid({ slots, className = '' }) {
   return <div className={`grid gap-6 md:grid-cols-2 ${className}`}>{slots.map(s => <Photo key={s} slot={s} />)}</div>;
 }
 
-// Text beside a photo when there is one, and full width text when there is not.
-export function Split({ photo, children, reverse = false, className = '' }) {
-  const { url } = usePhoto(photo);
-  if (!url) return <div className={className}>{children}</div>;
+// Photos for the places on the site that sit beside text. A photo added in Site Photos replaces the stand-in picture.
+const STOCK = [...new Set(Object.values(HERO_IMAGES))];
+const stockFor = (slot) => STOCK[[...slot].reduce((n, c) => n + c.charCodeAt(0), 0) % STOCK.length];
+
+export function SlotImage({ slot, ratio = 'aspect-[4/3]', className = '' }) {
+  const { url, alt } = usePhoto(slot);
   return (
-    <div className={`grid md:grid-cols-2 gap-12 items-center ${className}`}>
-      <div className={reverse ? 'md:order-2' : ''}>{children}</div>
-      <Photo slot={photo} />
+    <div className={`${ratio} overflow-hidden rounded-[10px] bg-[#1e2522] ${className}`}>
+      <img src={imgUrl(url || stockFor(slot), 1000)} alt={url ? alt : ''} loading="lazy" decoding="async" className="w-full h-full object-cover" />
     </div>
+  );
+}
+
+// A section with text on one side and a photo on the other.
+export function PhotoSplit({ slot, side = 'right', tone = 'white', id, ratio, className = '', children }) {
+  return (
+    <Section tone={tone} id={id} className={className}>
+      <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+        <div className={side === 'left' ? 'md:order-2' : ''}>{children}</div>
+        <SlotImage slot={slot} ratio={ratio} className={side === 'left' ? 'md:order-1' : ''} />
+      </div>
+    </Section>
   );
 }
 
@@ -159,15 +172,25 @@ export function Cards({ children, cols = 3, className = '' }) {
 
 // A plain run of titled passages, one after another.
 export function Beats({ beats, heading: Heading = 'h3' }) {
+  const withPhotos = beats.some(b => b.photo);
   return (
-    <div className="max-w-3xl space-y-12">
-      {beats.map(b => (
-        <div key={b.title}>
-          {b.kicker && <p className="kicker text-[#1e2522] !mb-1">{b.kicker}</p>}
-          <Heading className="text-2xl md:text-3xl mb-3">{b.title}</Heading>
-          <div className="text-[0.95rem] leading-relaxed text-[#1e2522]/80 space-y-3">{b.body}</div>
-        </div>
-      ))}
+    <div className={withPhotos ? 'space-y-14 md:space-y-20' : 'max-w-3xl space-y-12'}>
+      {beats.map((b, i) => {
+        const text = (
+          <div>
+            {b.kicker && <p className="kicker text-[#1e2522] !mb-1">{b.kicker}</p>}
+            <Heading className="text-2xl md:text-3xl mb-3">{b.title}</Heading>
+            <div className="text-[0.95rem] leading-relaxed text-[#1e2522]/80 space-y-3">{b.body}</div>
+          </div>
+        );
+        if (!b.photo) return <div key={b.title}>{text}</div>;
+        return (
+          <div key={b.title} className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
+            <div className={i % 2 ? 'md:order-2' : ''}>{text}</div>
+            <SlotImage slot={b.photo} className={i % 2 ? 'md:order-1' : ''} />
+          </div>
+        );
+      })}
     </div>
   );
 }

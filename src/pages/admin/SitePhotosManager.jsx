@@ -12,7 +12,7 @@ import * as FiIcons from 'react-icons/fi';
 const { FiSave, FiLoader } = FiIcons;
 
 const GROUPS = [
-  { kind: undefined, title: 'Photos', help: 'Each photo shows where its label says. Until one is added, the site shows the label as a placeholder.' },
+  { kind: undefined, title: 'Photos', help: 'Each photo shows beside the text its label names. Until one is added, the site shows a stand-in picture.' },
   { kind: 'banner', title: 'Page banners', help: 'The wide photo at the top of each page. The Home banner is the first photo above. Until one is added, each page shows a default photo.' },
   { kind: 'logo', title: 'Logos and sharing image', help: 'The dark logo sits on light backgrounds and the light logo on dark ones.' },
   { kind: 'model', title: '3D model', help: 'Paste a link to a .glb file from your architect or designer. Until then the site shows a simple concept model. Large files should be under 20 MB.' },

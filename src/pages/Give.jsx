@@ -1,7 +1,7 @@
 import React from 'react';
 import usePageMeta from '../hooks/usePageMeta';
 import { useSite } from '../settings';
-import { Btn, Section, SectionHeader, PageHeader, Cards, Card } from '../components/ui';
+import { Btn, Section, SectionHeader, PageHeader, Cards, Card, PhotoSplit, SlotImage } from '../components/ui';
 
 const P = 'text-[0.95rem] leading-relaxed text-[#1e2522]/80';
 
@@ -27,9 +27,9 @@ export default function Give() {
         <Btn href={SITE.giveUrl} variant="primary">Give Now</Btn>
       </PageHeader>
 
-      <Section tone="white" narrow>
+      <PhotoSplit tone="white" slot="give-intro" side="right">
         <p className="lead">We live the Gospel through generosity. Jesus gave everything for us and opened the way to complete salvation, healing, and deliverance. We give freely and joyfully in response, and in giving, we reflect God’s character and join His work of restoration.</p>
-      </Section>
+      </PhotoSplit>
 
       <Section tone="white">
         <SectionHeader title="Why we give" />
@@ -46,6 +46,7 @@ export default function Give() {
 
       <Section tone="gold">
         <SectionHeader title="Ways to give" />
+        <SlotImage slot="give-ways" ratio="aspect-[21/9]" className="mb-10" />
         <Cards>
           <Card title="Online" as="h3"><p>Make a secure one-time gift or set up recurring giving, and direct it to the general fund or a specific ministry.</p><div className="pt-2"><Btn href={SITE.giveUrl} variant="dark">Give Now</Btn></div></Card>
           <Card title="Text" as="h3"><p>Text <strong>{t.keyword} $50</strong> (or any amount) to <strong>{t.number}</strong>.</p></Card>

@@ -6,17 +6,11 @@ import { useSite } from '../settings';
 import { usePhoto } from '../photos';
 import { HERO_IMAGES } from '../content/photos';
 import { formatDate, imgUrl, isLive, messagePath, ytId } from '../utils';
-import { Btn, Section, Cards, Card } from '../components/ui';
+import { Btn, Section, Cards, Card, SlotImage, PhotoSplit } from '../components/ui';
 import LiteYouTube from '../components/LiteYouTube';
 import Spotlights from '../components/Spotlights';
 
 const P = 'text-[0.95rem] leading-relaxed';
-
-// A rounded photo that falls back to a default picture until one is uploaded in Site Photos.
-function Picture({ slot, fallback, className = '' }) {
-  const { url, alt } = usePhoto(slot);
-  return <img src={imgUrl(url || fallback, 1000)} alt={url ? alt : ''} loading="lazy" className={`w-full h-full object-cover rounded-[10px] ${className}`} />;
-}
 
 export default function Home() {
   usePageMeta('home');
@@ -42,7 +36,7 @@ export default function Home() {
 
       <Section tone="white">
         <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
-          <div className="aspect-[4/5] md:aspect-[5/6]"><Picture slot="home-welcome" fallback={HERO_IMAGES.about} /></div>
+          <SlotImage slot="home-welcome" ratio="aspect-[4/5] md:aspect-[5/6]" />
           <div>
             <p className="kicker text-[#c74f2f]">Transforming lives that transform communities</p>
             <h2 className="text-3xl md:text-5xl mb-6">Welcome to Upper Room Fellowship</h2>
@@ -57,13 +51,14 @@ export default function Home() {
       </Section>
 
       <Section tone="ink">
-        <div className="grid md:grid-cols-3 gap-10 text-center md:text-left">
+        <div className="grid md:grid-cols-3 gap-10">
           {[
-            ['Know God', 'Draw close to Him through worship, prayer, and Scripture.'],
-            ['Share Life', 'Build honest friendships and find a church family.'],
-            ['Serve Others', 'Use your gifts to love your neighbors and your city.'],
-          ].map(([t, d]) => (
+            ['Know God', 'Draw close to Him through worship, prayer, and Scripture.', 'home-know'],
+            ['Share Life', 'Build honest friendships and find a church family.', 'home-share'],
+            ['Serve Others', 'Use your gifts to love your neighbors and your city.', 'home-serve'],
+          ].map(([t, d, slot]) => (
             <div key={t}>
+              <SlotImage slot={slot} className="mb-5" />
               <h2 className="text-3xl md:text-4xl mb-3 text-[#eaa235]">{t}</h2>
               <p className="text-[0.95rem] leading-relaxed text-white">{d}</p>
             </div>
@@ -73,10 +68,10 @@ export default function Home() {
 
       <Section tone="white">
         <Cards cols={4}>
-          <Card title="Plan Your Visit" as="h3" to="/plan-your-visit" linkLabel="Plan your visit"><p>See what a Sunday looks like and tell us you are coming so we can greet you.</p></Card>
-          <Card title="Hear the Latest Message" as="h3" to="/messages" linkLabel="Hear the latest message"><p>Catch up on recent teaching or browse the full library.</p></Card>
-          <Card title="Grow With Us" as="h3" to="/discipleship" linkLabel="Grow with us"><p>Join a Sunday or Wednesday adult class at any time. Nothing to sign up for.</p></Card>
-          <Card title="Give Online" as="h3" to={SITE.giveUrl} linkLabel="Give online"><p>Support the ministries and outreach of our church family.</p></Card>
+          <Card title="Plan Your Visit" as="h3" icon={<SlotImage slot="home-plan" />} to="/plan-your-visit" linkLabel="Plan your visit"><p>See what a Sunday looks like and tell us you are coming so we can greet you.</p></Card>
+          <Card title="Hear the Latest Message" as="h3" icon={<SlotImage slot="home-messages" />} to="/messages" linkLabel="Hear the latest message"><p>Catch up on recent teaching or browse the full library.</p></Card>
+          <Card title="Grow With Us" as="h3" icon={<SlotImage slot="home-grow" />} to="/discipleship" linkLabel="Grow with us"><p>Join a Sunday or Wednesday adult class at any time. Nothing to sign up for.</p></Card>
+          <Card title="Give Online" as="h3" icon={<SlotImage slot="home-give" />} to={SITE.giveUrl} linkLabel="Give online"><p>Support the ministries and outreach of our church family.</p></Card>
         </Cards>
       </Section>
 
@@ -101,38 +96,32 @@ export default function Home() {
         </div>
       </Section>
 
-      <Section tone="gold">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl md:text-5xl mb-5">Where and When</h2>
-          <p className="text-[0.95rem] leading-relaxed">500 Sponseller Road, Columbiana, Ohio 44408</p>
-          <p className="text-[0.95rem] leading-relaxed">Sunday classes at 9:30am. Worship at 10:30am.</p>
-          <div className="mt-6"><Btn href={SITE.googleMapsUrl} variant="dark">Get Directions</Btn></div>
-        </div>
-      </Section>
+      <PhotoSplit tone="gold" slot="home-where" side="right">
+        <h2 className="text-3xl md:text-5xl mb-5">Where and When</h2>
+        <p className="text-[0.95rem] leading-relaxed">500 Sponseller Road, Columbiana, Ohio 44408</p>
+        <p className="text-[0.95rem] leading-relaxed">Sunday classes at 9:30am. Worship at 10:30am.</p>
+        <div className="mt-6"><Btn href={SITE.googleMapsUrl} variant="dark">Get Directions</Btn></div>
+      </PhotoSplit>
 
-      <Section tone="ink">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl md:text-5xl mb-6">Our Vision</h2>
-          <p className="text-xl md:text-2xl leading-snug mb-5 font-serif">We exist to help people know God deeply, share life authentically, and serve others selflessly.</p>
-          <p className="text-[0.95rem] leading-relaxed text-white">Lasting change starts on the inside, as our hearts line up with God’s heart. That conviction shapes how we build relationships, how we pray, and how we serve.</p>
-          <div className="mt-6"><Btn to="/core-values" variant="primary">Read Our Core Values</Btn></div>
-          <blockquote className="mt-10 font-serif italic text-xl md:text-2xl leading-snug">
-            “By this everyone will know that you are my disciples, if you love one another.”
-            <footer className="mt-2 text-base font-serif not-italic">John 13:35</footer>
-          </blockquote>
-        </div>
-      </Section>
+      <PhotoSplit tone="ink" slot="home-vision" side="left">
+        <h2 className="text-3xl md:text-5xl mb-6">Our Vision</h2>
+        <p className="text-xl md:text-2xl leading-snug mb-5 font-serif">We exist to help people know God deeply, share life authentically, and serve others selflessly.</p>
+        <p className="text-[0.95rem] leading-relaxed text-white">Lasting change starts on the inside, as our hearts line up with God’s heart. That conviction shapes how we build relationships, how we pray, and how we serve.</p>
+        <div className="mt-6"><Btn to="/core-values" variant="primary">Read Our Core Values</Btn></div>
+        <blockquote className="mt-8 font-serif italic text-xl leading-snug">
+          “By this everyone will know that you are my disciples, if you love one another.”
+          <footer className="mt-2 text-base font-serif not-italic">John 13:35</footer>
+        </blockquote>
+      </PhotoSplit>
 
-      <Section tone="white">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl md:text-5xl mb-5">Contact Us</h2>
-          <p className={`${P} mb-4`}>Have a question or a prayer request? Send us a message, and someone from our church family will reply within 48 hours.</p>
-          <p className={P}>500 Sponseller Road, Columbiana, Ohio 44408</p>
-          <p className={P}><a className="underline underline-offset-4 font-semibold" href="mailto:Info@urfellowship.com">Info@urfellowship.com</a></p>
-          <p className={P}><a className="underline underline-offset-4 font-semibold" href={SITE.phoneHref}>330.482.9058</a></p>
-          <div className="mt-6"><Btn to="/contact" variant="primary">Send a Message</Btn></div>
-        </div>
-      </Section>
+      <PhotoSplit tone="white" slot="home-contact" side="right">
+        <h2 className="text-3xl md:text-5xl mb-5">Contact Us</h2>
+        <p className={`${P} mb-4`}>Have a question or a prayer request? Send us a message, and someone from our church family will reply within 48 hours.</p>
+        <p className={P}>500 Sponseller Road, Columbiana, Ohio 44408</p>
+        <p className={P}><a className="underline underline-offset-4 font-semibold" href="mailto:Info@urfellowship.com">Info@urfellowship.com</a></p>
+        <p className={P}><a className="underline underline-offset-4 font-semibold" href={SITE.phoneHref}>330.482.9058</a></p>
+        <div className="mt-6"><Btn to="/contact" variant="primary">Send a Message</Btn></div>
+      </PhotoSplit>
     </>
   );
 }

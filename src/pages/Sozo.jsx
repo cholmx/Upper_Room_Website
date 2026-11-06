@@ -1,6 +1,6 @@
 import React from 'react';
 import usePageMeta from '../hooks/usePageMeta';
-import { Section, SectionHeader, PageHeader, Accordion, Steps, Band, Panel } from '../components/ui';
+import { Section, SectionHeader, PageHeader, Accordion, Steps, Band, Panel, PhotoSplit, SlotImage } from '../components/ui';
 import { useSite } from '../settings';
 
 const P = 'text-[0.95rem] leading-relaxed text-[#1e2522]/80';
@@ -37,14 +37,15 @@ export default function Sozo() {
     <>
       <PageHeader kicker="Sozo" title="What is Sozo?" intro="Sozo is a Greek word that appears more than 100 times in the New Testament. It means to save, deliver, make whole, restore, and heal." />
 
-      <Section tone="white" narrow>
+      <PhotoSplit tone="white" slot="sozo-intro" side="right">
         <div className={`space-y-4 ${P}`}>
           <p className="lead">“Sozo” is a Greek word that appears more than 100 times in the New Testament. It means to save, deliver, make whole, restore, and heal. In Matthew 9:22, Jesus uses it when He tells a woman her faith has made her well.</p>
           <p>Do you feel stuck in some area of your life? Do you sense there is more to your relationship with God than you are experiencing? Sozo is gentle, Spirit-led prayer ministry that helps you find and remove the barriers between you and God, and step into the identity and purpose He has given you.</p>
         </div>
-      </Section>
+      </PhotoSplit>
 
       <Section tone="white">
+        <SlotImage slot="sozo-session" ratio="aspect-[21/9]" className="mb-10" />
         <div className="grid md:grid-cols-2 gap-10 md:gap-16">
           <div>
             <SectionHeader title="What happens in a session" className="!mb-4" />
@@ -88,15 +89,15 @@ export default function Sozo() {
         </Panel>
       </Band>
 
-      <Section tone="white" narrow id="begin">
-        <SectionHeader title="How to begin" />
+      <PhotoSplit tone="white" slot="sozo-begin" side="left" id="begin">
+        <SectionHeader title="How to begin" className="!mb-6" />
         <Steps items={[
           { title: 'Prepare your heart', body: <p>Pray about receiving Sozo, think about the areas where you want more freedom, and come ready to meet with God.</p> },
           { title: 'Reach out', body: <p>Email <a className="underline underline-offset-4 font-semibold" href={`mailto:${SITE.email}`}>{SITE.email}</a> with your full name, phone number, and best times to reach you. A brief note about why you are seeking Sozo is optional. Your inquiry is confidential.</p> },
           { title: 'Schedule', body: <p>Our Sozo coordinator will contact you within 3 to 5 business days, answer your questions, match you with a ministry team, and find a time that works.</p> },
           { title: 'Partner with us', body: <p>We suggest a $40 donation to support the ministry, and financial help is available. Healing should be within reach of everyone. You can pay at your appointment by cash, check, or card.</p> },
         ]} />
-      </Section>
+      </PhotoSplit>
 
       <Section tone="white" narrow>
         <SectionHeader title="Frequently asked questions" />

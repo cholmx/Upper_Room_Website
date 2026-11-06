@@ -1,7 +1,7 @@
 import React from 'react';
 import usePageMeta from '../hooks/usePageMeta';
 import { useSite } from '../settings';
-import { Section, SectionHeader, PageHeader } from '../components/ui';
+import { Section, SectionHeader, PageHeader, SlotImage } from '../components/ui';
 import FormBlock from '../components/FormBlock';
 
 const P = 'text-[0.95rem] leading-relaxed text-[#1e2522]/80';
@@ -23,6 +23,7 @@ export default function Contact() {
             <FormBlock formKey="contact" />
           </div>
           <div className="md:col-span-2 space-y-8">
+            <SlotImage slot="contact-visit" />
             <div>
               <h2 className="text-2xl mb-3">Visit or call</h2>
               <address className={`not-italic space-y-1 ${P}`}>

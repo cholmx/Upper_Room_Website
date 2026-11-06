@@ -1,7 +1,7 @@
 import React from 'react';
 import usePageMeta from '../hooks/usePageMeta';
 import { useSite } from '../settings';
-import { Btn, Section, SectionHeader, PageHeader, Accordion, Todo, Band, Panel } from '../components/ui';
+import { Btn, Section, SectionHeader, PageHeader, Accordion, Todo, Band, Panel, PhotoSplit, SlotImage } from '../components/ui';
 
 const P = 'text-[0.95rem] leading-relaxed text-[#1e2522]/80';
 
@@ -47,9 +47,9 @@ export default function Discipleship() {
     <>
       <PageHeader kicker="Discipleship" title="Adult Discipleship Training" intro="Grow in Know God, Share Life, and Serve Others." />
 
-      <Section tone="white" narrow>
+      <PhotoSplit tone="white" slot="discipleship-intro" side="right">
         <p className="lead">Adult Discipleship Training is a set of Sunday morning and Wednesday evening classes for adults. Over about five years, you work through nine spiritual practices and study the core values of our church. There is nothing to sign up for. Come to any class, and the schedule repeats so you will not miss anything.</p>
-      </Section>
+      </PhotoSplit>
 
       <Band>
         <Panel tone="forest" title="When we meet">
@@ -63,6 +63,7 @@ export default function Discipleship() {
 
       <Section tone="white">
         <SectionHeader title="The nine practices" />
+        <SlotImage slot="discipleship-practices" ratio="aspect-[21/9]" className="mb-10" />
         <div className="grid md:grid-cols-3 gap-6 mb-10">
           {GROUPS.map(([t, d]) => (
             <div key={t} className="fcard !p-6">
@@ -121,15 +122,15 @@ export default function Discipleship() {
         </div>
       </Section>
 
-      <Section tone="white" narrow>
-        <SectionHeader title="Wednesday evenings" />
+      <PhotoSplit tone="white" slot="discipleship-wednesday" side="left">
+        <SectionHeader title="Wednesday evenings" className="!mb-6" />
         <p className={P}>Wednesday adult classes cover everyday life. Topics include Marriage, Parenting, Finances, and Spirit Class, a class on the Holy Spirit. Open Class is a slot for a topic still to be chosen, and we announce it ahead of time. Junior high (6th through 8th grade) and high school (9th through 12th grade) youth groups meet at the same time, and childcare is offered during Wednesday classes.</p>
         <div className="mt-6">
           {SITE.scheduleUrl
             ? <Btn href={SITE.scheduleUrl} variant="primary">Download the Full Ten-Year Schedule</Btn>
             : <Todo id="schedule-pdf">[Upload the ten-year schedule and link it here]</Todo>}
         </div>
-      </Section>
+      </PhotoSplit>
 
       <Section tone="white" narrow>
         <SectionHeader title="Questions" />

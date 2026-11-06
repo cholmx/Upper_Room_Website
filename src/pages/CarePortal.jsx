@@ -1,7 +1,7 @@
 import React from 'react';
 import usePageMeta from '../hooks/usePageMeta';
 import { useSite } from '../settings';
-import { Btn, Section, SectionHeader, PageHeader, Steps, Band, Panel } from '../components/ui';
+import { Btn, Section, SectionHeader, PageHeader, Steps, Band, Panel, PhotoSplit } from '../components/ui';
 
 const P = 'text-[0.95rem] leading-relaxed text-[#1e2522]/80';
 const PORTAL = 'https://system.careportal.org/church/103440?q[status][0]=Open';
@@ -19,9 +19,9 @@ export default function CarePortal() {
         <Btn href={PORTAL} variant="primary">Go to the CarePortal</Btn>
       </PageHeader>
 
-      <Section tone="white">
-        <SectionHeader title="How CarePortal works" />
-        <div className="max-w-3xl">
+      <PhotoSplit tone="white" slot="careportal-intro" side="right">
+        <SectionHeader title="How CarePortal works" className="!mb-6" />
+        <div>
           <Steps items={[
             { title: 'Uncovering real needs', body: <p>Child welfare professionals, teachers, law enforcement officers, and other community workers identify specific needs of vulnerable children and families they serve. When those needs are met, children stay safe, families stay together, and communities grow stronger.</p> },
             { title: 'Sharing verified requests', body: <p>After thorough vetting, these professionals enter specific needs into the CarePortal system. Each request is legitimate and accurate. Needs range from basic necessities like beds and appliances to mentoring, transportation, or housing assistance.</p> },
@@ -29,7 +29,7 @@ export default function CarePortal() {
             { title: 'Our church family responds', body: <p>When we see a need we can meet, our team coordinates the response, gathering needed items, funds, or volunteers. Over half of CarePortal requests receive responses within 48 hours. Trained team members often help deliver items, which creates real connections with the families we serve.</p> },
           ]} />
         </div>
-      </Section>
+      </PhotoSplit>
 
       <Band>
         <Panel tone="forest" title="The impact of CarePortal">
@@ -46,11 +46,11 @@ export default function CarePortal() {
         </Panel>
       </Band>
 
-      <Section tone="white" narrow>
-        <SectionHeader title="Connect with our CarePortal ministry" />
+      <PhotoSplit tone="white" slot="careportal-involved" side="left">
+        <SectionHeader title="Connect with our CarePortal ministry" className="!mb-6" />
         <p className={P}>To learn more about our involvement with CarePortal or to join our response team, email <a className="underline underline-offset-4 font-semibold text-[#1e2522]" href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
         <p className={`mt-4 ${P}`}>CarePortal is a platform that connects churches to vetted needs in their community. Through this technology, we respond to the needs of local children and families in crisis. Together, we are building a community where every child is safe and loved.</p>
-      </Section>
+      </PhotoSplit>
     </>
   );
 }

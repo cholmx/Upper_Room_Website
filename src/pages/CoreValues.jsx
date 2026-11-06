@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import usePageMeta from '../hooks/usePageMeta';
 import { usePhoto } from '../photos';
 import { CORE_VALUES, CORE_VALUES_INTRO, INSIDE_OUT, GROWING } from '../content/values';
-import { Btn, Section, SectionHeader, PageHeader } from '../components/ui';
+import { Btn, Section, SectionHeader, PageHeader, PhotoSplit } from '../components/ui';
 
 // The icon comes from Site Photos in the admin, then from /images/core-values/core-value-N.png,
 // and shows the value's number if neither exists yet.
@@ -22,10 +22,10 @@ export default function CoreValues() {
     <>
       <PageHeader kicker="Core Values" title="Our Core Values" intro={CORE_VALUES_INTRO} />
 
-      <Section tone="white" narrow>
-        <SectionHeader title="Living from the inside out" />
+      <PhotoSplit tone="white" slot="values-intro" side="right">
+        <SectionHeader title="Living from the inside out" className="!mb-6" />
         <p className="lead">{INSIDE_OUT}</p>
-      </Section>
+      </PhotoSplit>
 
       <Section tone="white">
         <ol className="grid md:grid-cols-2 gap-6">
@@ -42,11 +42,11 @@ export default function CoreValues() {
         </ol>
       </Section>
 
-      <Section tone="white" narrow>
-        <SectionHeader title="Growing in our values" />
+      <PhotoSplit tone="white" slot="values-growing" side="left">
+        <SectionHeader title="Growing in our values" className="!mb-6" />
         <p className="text-[0.95rem] leading-relaxed text-[#1e2522]/80">{GROWING}</p>
         <div className="mt-6"><Btn to="/discipleship" variant="primary">Explore Adult Discipleship Training</Btn></div>
-      </Section>
+      </PhotoSplit>
     </>
   );
 }

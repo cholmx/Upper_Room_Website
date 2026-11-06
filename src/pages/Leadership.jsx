@@ -3,7 +3,7 @@ import usePageMeta from '../hooks/usePageMeta';
 import useFetch from '../hooks/useFetch';
 import { isLive } from '../utils';
 import { DEFAULT_LEADERS, HOW_WE_LEAD, LEADERS_AIM, LEADERSHIP_INTRO, LEADERSHIP_CLOSING } from '../content/leaders';
-import { Section, SectionHeader, PageHeader, PhotoBox } from '../components/ui';
+import { Section, SectionHeader, PageHeader, PhotoBox, SlotImage } from '../components/ui';
 import RichText from '../components/RichText';
 
 function Person({ p }) {
@@ -42,6 +42,7 @@ export default function Leadership() {
 
       <Section tone="white">
         <SectionHeader title="How we lead" />
+        <SlotImage slot="leadership-how" ratio="aspect-[21/9]" className="mb-10" />
         <dl className="grid md:grid-cols-2 gap-6">
           {HOW_WE_LEAD.map(i => (
             <div key={i.title} className="fcard !p-6">
