@@ -153,12 +153,12 @@ export function PageHeader({ kicker, title, intro, children, page }) {
   const image = usePageBanner(page);
   return (
     <header className="px-3 md:px-4 pt-3 md:pt-4 pb-1.5 md:pb-2">
-      <div className="photo-section rounded-[10px] text-[#ffffff] py-24 md:py-36 px-6 text-center" style={{ backgroundImage: `url('${imgUrl(image, 1600)}')` }}>
-        <div className="hero-text max-w-[800px] mx-auto relative z-10">
+      <div className="photo-section rounded-[10px] text-[#ffffff] py-24 md:py-36 px-6 md:px-12 text-left flex items-end" style={{ backgroundImage: `url('${imgUrl(image, 1600)}')` }}>
+        <div className="hero-text max-w-[800px] relative z-10">
           {kicker && !same(kicker, title) && <span className="kicker text-[#eaa235]">{kicker}</span>}
           <h1 className="text-4xl md:text-6xl mb-6">{title}</h1>
-          {intro && <p className="font-serif text-xl md:text-2xl text-white/90 max-w-[50ch] mx-auto leading-snug">{intro}</p>}
-          {children && <div className="mt-8 flex flex-wrap justify-center gap-4">{children}</div>}
+          {intro && <p className="font-serif text-xl md:text-2xl text-white/90 max-w-[50ch] leading-snug">{intro}</p>}
+          {children && <div className="mt-8 flex flex-wrap gap-4">{children}</div>}
         </div>
       </div>
     </header>

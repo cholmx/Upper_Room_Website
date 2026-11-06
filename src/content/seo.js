@@ -11,7 +11,6 @@ export const SEO = {
   contact: ['Contact Upper Room Fellowship | Columbiana, Ohio', 'Send a question or prayer request to Upper Room Fellowship in Columbiana, Ohio.'],
   connect: ['Connect Card | Upper Room Fellowship', 'Let Upper Room Fellowship in Columbiana, Ohio know you are coming. Fill out the Connect Card and our welcome team will be ready for you.'],
   give: ['Give | Upper Room Fellowship', 'Give online, by text, in person, or by mail to support Upper Room Fellowship.'],
-  careportal: ['CarePortal | Upper Room Fellowship', 'Upper Room Fellowship partners with CarePortal to meet vetted needs of local children and families in crisis in Columbiana, Ohio.'],
   accessibility: ['Accessibility | Upper Room Fellowship', 'Our commitment to an accessible website and building at Upper Room Fellowship in Columbiana, Ohio.'],
   privacy: ['Privacy | Upper Room Fellowship', 'How Upper Room Fellowship in Columbiana, Ohio handles information from forms, cookies, and online giving.'],
   notFound: ['Page Not Found | Upper Room Fellowship', 'We could not find that page. Try the links on the page or call us at 330.482.9058.'],
@@ -20,6 +19,6 @@ export const SEO = {
 // Route for each key, used for the sitemap and for canonical links.
 export const SEO_ROUTES = {
   home: '/', plan: '/plan-your-visit', about: '/about', values: '/core-values', discipleship: '/discipleship', leadership: '/leadership',
-  messages: '/messages', sozo: '/sozo', give: '/give', careportal: '/careportal',
+  messages: '/messages', sozo: '/sozo', give: '/give',
   contact: '/contact', connect: '/connect', accessibility: '/accessibility', privacy: '/privacy',
 };

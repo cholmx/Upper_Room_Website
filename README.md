@@ -29,7 +29,6 @@ npm run dev
 | `/plan-your-visit` | New Here: Sunday at a glance, what to expect, next steps |
 | `/about`, `/core-values`, `/leadership` | Our story and beliefs, six core values, pastors |
 | `/discipleship`, `/sozo` | Adult Discipleship Training and Sozo ministry |
-| `/careportal` | CarePortal partnership |
 | `/messages`, `/messages/series/:series`, `/messages/:id-title` | Sermon library, series, and message pages |
 | `/give` | Giving, with a link to share a testimony |
 | `/contact`, `/connect` | Contact form and the Connect Card |
@@ -48,7 +47,7 @@ Anything the church still has to supply shows on the live page as a yellow brack
 `npm test` fails if a bracketed note is added to a page without a matching checklist entry.
 
 Long pages are set up to take existing text: paste each topic into `src/content/beliefs.js` (`full`), and
-the Sozo and CarePortal text into `src/pages/Sozo.jsx` and `src/pages/CarePortal.jsx`.
+the Sozo text into `src/pages/Sozo.jsx`.
 
 ## Photos, logos, and icons
 

@@ -12,7 +12,6 @@ export const HERO_IMAGES = {
   leadership: PX(3184393),
   messages: PX(34328505),
   discipleship: MINISTRY,
-  careportal: MINISTRY,
   sozo: GENERAL, give: GENERAL, accessibility: GENERAL, privacy: GENERAL,
   blog: PX(6779632),
 };
@@ -51,8 +50,6 @@ export const PHOTO_SLOTS = [
   { key: 'give-intro', label: 'Give page, introduction photo', alt: 'Generosity in action.' },
   { key: 'give-ways', label: 'Give page, ways to give photo', alt: 'Giving at the Connection Center.' },
   { key: 'contact-visit', label: 'Contact page, visit photo, such as the front of the building', alt: 'The front of Upper Room Fellowship.' },
-  { key: 'careportal-intro', label: 'CarePortal page, introduction photo', alt: 'Volunteers helping local families.' },
-  { key: 'careportal-involved', label: 'CarePortal page, get involved photo', alt: 'Church members delivering needed items.' },
   { key: 'messages-podcast', label: 'Messages page, podcast photo', alt: 'Listening to a message.' },
   { key: 'plan-entrance', label: 'front entrance and parking lot', alt: 'The front entrance of Upper Room Fellowship at 500 Sponseller Road in Columbiana.' },
   { key: 'plan-greeter', label: 'families greeting each other at the front door', alt: 'A greeter welcomes a family at the front door of Upper Room Fellowship.' },

@@ -26,7 +26,6 @@ export const NAV = [
     ],
   },
   { label: 'Give', to: '/give', external: true },
-  { label: 'CarePortal', to: '/careportal' },
 ];
 
 // Short site map for the footer.
@@ -40,5 +39,4 @@ export const FOOTER_LINKS = [
   { label: 'Leadership', to: '/leadership' },
   { label: 'Contact', to: '/contact' },
   { label: 'Connect Card', to: '/connect' },
-  { label: 'CarePortal', to: '/careportal' },
 ];
