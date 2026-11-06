@@ -13,7 +13,7 @@ import { LAYOUTS, TONES } from '../../lib/spotlights';
 const { FiLayout, FiMic, FiCalendar, FiFileText, FiCamera, FiLogOut, FiMenu, FiX, FiMail, FiSettings, FiActivity, FiUsers, FiCheckSquare, FiHeart, FiMessageSquare } = FiIcons;
 
 const NavItem = ({ icon, children, ...rest }) => (
-  <button {...rest} className="w-full flex items-center gap-4 px-4 py-3 text-left text-[#1e2522]/50 hover:bg-[#eaa235] hover:text-[#1e2522] rounded-lg transition-colors">
+  <button {...rest} className="w-full flex items-center gap-4 px-4 py-3 text-left text-white/80 hover:bg-[#eaa235] hover:text-[#1e2522] rounded-lg transition-colors">
     <SafeIcon icon={icon} className="text-xl" />
     <span className="font-semibold">{children}</span>
   </button>
@@ -240,8 +240,8 @@ const ContentStudio = () => {
       {/* Sidebar */}
       <aside className={`w-72 bg-[#1e2522] text-white p-6 flex-col fixed lg:relative h-full z-50 lg:z-auto ${isSidebarOpen ? 'flex' : 'hidden'}`}>
         <div className="flex items-center justify-between mb-10">
-            <h1 className="text-2xl font-bold text-white tracking-wider">Content <span className="text-[#c74f2f]">Studio</span></h1>
-            <button aria-label="Close menu" onClick={() => setIsSidebarOpen(false)} className="lg:hidden text-2xl text-[#1e2522]/50 hover:text-white">
+            <h1 className="text-2xl font-bold text-white tracking-wider">Content <span className="text-[#eaa235]">Studio</span></h1>
+            <button aria-label="Close menu" onClick={() => setIsSidebarOpen(false)} className="lg:hidden text-2xl text-white/70 hover:text-white">
                 <SafeIcon icon={FiX} />
             </button>
         </div>
@@ -249,7 +249,7 @@ const ContentStudio = () => {
         <nav aria-label="Content Studio" className="flex-grow space-y-4">
           {Object.entries(TABS).map(([category, items]) => (
             <div key={category}>
-              <h2 className="px-4 text-sm font-bold text-[#1e2522]/70 tracking-wide mb-2">{category}</h2>
+              <h2 className="px-4 text-sm font-bold text-white/60 tracking-wide mb-2">{category}</h2>
               {items.map(tab => (
                  <NavItem key={tab.key} icon={tab.icon} aria-current={activeTab === tab.key ? 'page' : undefined} onClick={() => { setActiveTab(tab.key); if (window.innerWidth < 1024) setIsSidebarOpen(false); }}>
                     {tab.label}

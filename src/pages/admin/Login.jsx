@@ -43,7 +43,7 @@ export default function Login() {
 
         <form onSubmit={handleLogin} className="space-y-6">
           <div>
-            <label htmlFor="login-email" className="block text-[0.9rem] font-bold tracking-wide mb-3 text-white/50">
+            <label htmlFor="login-email" className="block text-[0.9rem] font-bold tracking-wide mb-3 text-white/70">
               Email
             </label>
             <input
@@ -52,12 +52,12 @@ export default function Login() {
               autoComplete="username"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full p-4 bg-[#1e2522]/20 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#eaa235] focus:border-transparent text-white placeholder-white/20"
+              className="w-full p-4 bg-white/10 border border-white/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#eaa235] focus:border-transparent text-white placeholder-white/20"
               required
             />
           </div>
           <div>
-            <label htmlFor="login-password" className="block text-[0.9rem] font-bold tracking-wide mb-3 text-white/50">
+            <label htmlFor="login-password" className="block text-[0.9rem] font-bold tracking-wide mb-3 text-white/70">
               Studio Password
             </label>
             <input
@@ -66,7 +66,7 @@ export default function Login() {
               autoComplete="current-password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-                            className="w-full p-4 bg-[#1e2522]/20 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#eaa235] focus:border-transparent text-white placeholder-white/20"
+                            className="w-full p-4 bg-white/10 border border-white/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#eaa235] focus:border-transparent text-white placeholder-white/20"
               required
             />
           </div>
