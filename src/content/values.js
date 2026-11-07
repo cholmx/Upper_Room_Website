@@ -3,7 +3,7 @@ export const CORE_VALUES_INTRO = 'When what matters to God becomes precious to u
 
 export const INSIDE_OUT = 'Lasting change begins in the heart. As our hearts line up with God’s heart, we stop chasing perfection and let Him do the work. His priorities become ours, and we show more of Jesus at home, at work, and across our community.';
 
-export const GROWING = 'These values take practice, and our VIK classes in Adult Discipleship Training walk through them together. Whether you are exploring faith or have followed Jesus for decades, there is more to discover. Psalm 58:11 promises a reward for those who live for God, and we have seen that play out in our own lives.';
+export const GROWING = 'These values take practice, and our Values In The Kingdom classes in Adult Discipleship Training walk through them together. Whether you are exploring faith or have followed Jesus for decades, there is more to discover. Psalm 58:11 promises a reward for those who live for God, and we have seen that play out in our own lives.';
 
 export const CORE_VALUES = [
   {

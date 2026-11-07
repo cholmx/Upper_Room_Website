@@ -42,6 +42,7 @@ export const PHOTO_SLOTS = [
   { key: 'values-growing', label: 'Core Values page, growing photo', alt: 'A class studying together.' },
   { key: 'discipleship-intro', label: 'Discipleship page, introduction photo', alt: 'An adult class meeting on Sunday.' },
   { key: 'discipleship-practices', label: 'Discipleship page, nine practices photo', alt: 'Adults praying together.' },
+  { key: 'discipleship-values', label: 'Discipleship page, Values In The Kingdom photo', alt: 'A class studying together.' },
   { key: 'discipleship-wednesday', label: 'Discipleship page, Wednesday evenings photo', alt: 'A Wednesday evening class.' },
   { key: 'sozo-intro', label: 'Sozo page, introduction photo', alt: 'A quiet place for prayer.' },
   { key: 'sozo-session', label: 'Sozo page, what happens in a session photo', alt: 'Two people praying together.' },
