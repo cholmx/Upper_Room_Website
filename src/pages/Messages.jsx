@@ -5,6 +5,7 @@ import useFetch from '../hooks/useFetch';
 import { useSite } from '../settings';
 import { dateRangeLabel, formatDate, groupSeries, isLive, messagePath, newestFirst, safeUrl, scriptureBook, seriesPath, ytId } from '../utils';
 import { plainText } from '../lib/markdown';
+import { parseCategories } from '../lib/categories';
 import { Btn, Section, SectionHeader, PageHeader, PhotoBand } from '../components/ui';
 import LiteYouTube from '../components/LiteYouTube';
 import MessageCard from '../components/MessageCard';
@@ -45,6 +46,7 @@ export default function Messages() {
     // The newest message in the series that has a video lends its cover picture.
     thumb: ytId(messages.find(m => (m.series || '').trim() === g.name && ytId(m.video_url || m.yt))?.video_url || ''),
   })), [messages]);
+  const categoryOptions = useMemo(() => [...new Set(messages.flatMap(m => parseCategories(m.topic)))].sort((a, b) => a.localeCompare(b)), [messages]);
   const uniq = (fn) => [...new Set(messages.map(fn).filter(Boolean))].sort();
   const filtered = useMemo(() => {
     const needle = q.trim().toLowerCase();
@@ -52,7 +54,7 @@ export default function Messages() {
       (!series || m.series === series) &&
       (!speaker || m.speaker === speaker) &&
       (!book || scriptureBook(m.scripture) === book) &&
-      (!topic || m.topic === topic) &&
+      (!topic || parseCategories(m.topic).includes(topic)) &&
       (!needle || [m.title, m.speaker, m.scripture, m.topic, m.series, plainText(m.description)].some(v => String(v || '').toLowerCase().includes(needle)))
     ));
   }, [messages, q, series, speaker, book, topic]);
@@ -136,7 +138,7 @@ export default function Messages() {
                 <Filter label="Series" value={series} onChange={setSeries} options={uniq(m => m.series)} />
                 <Filter label="Speaker" value={speaker} onChange={setSpeaker} options={uniq(m => m.speaker)} />
                 <Filter label="Scripture book" value={book} onChange={setBook} options={uniq(m => scriptureBook(m.scripture))} />
-                <Filter label="Category" value={topic} onChange={setTopic} options={uniq(m => m.topic)} />
+                <Filter label="Category" value={topic} onChange={setTopic} options={categoryOptions} />
               </div>
               {anyFilter && <button type="button" onClick={clear} className="mt-4 underline underline-offset-4 font-semibold text-[#1e2522] min-h-[44px]">Clear search and filters</button>}
             </form>

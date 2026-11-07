@@ -7,6 +7,7 @@ import { plainText } from '../../lib/markdown';
 import ConfirmDialog from '../../components/ConfirmDialog';
 import YouTubeImport from './YouTubeImport';
 import BulkBar from './BulkBar';
+import { parseCategories } from '../../lib/categories';
 import FieldInput from './FieldInput';
 import { validate, autoSlug } from './validate';
 import SafeIcon from '../../common/SafeIcon';
@@ -256,7 +257,7 @@ export default function GenericManager({ config }) {
         {errorBanner}
         <form onSubmit={handleSave} noValidate className="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-[#1e2522]/10 space-y-6">
           {config.fields.map(field => (field.name === 'topic' && config.categorySelect && categories.length > 0
-            ? { ...field, type: 'select', options: [{ value: '', label: 'No category' }, ...[...new Set([...(formData.topic ? [formData.topic] : []), ...categories])].map(c => ({ value: c, label: c }))] }
+            ? { ...field, type: 'categories', options: [...new Set([...categories, ...parseCategories(formData.topic)])] }
             : field
           )).map(field => (
             <FieldInput key={field.name} field={field} value={formData[field.name]} onChange={handleChange} error={errors[field.name]} />

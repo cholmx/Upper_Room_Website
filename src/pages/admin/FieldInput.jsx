@@ -1,3 +1,4 @@
+import { parseCategories, joinCategories } from '../../lib/categories';
 import React, { useRef, useState } from 'react';
 import { ytId, ytEmbed } from '../../utils';
 import { uploadImage, uploadsEnabled } from '../../lib/upload';
@@ -131,6 +132,22 @@ export default function FieldInput({ field, value, onChange, error }) {
         </label>
       );
       break;
+    case 'categories': {
+      const chosen = parseCategories(value);
+      const toggle = (name) => set(joinCategories(chosen.some(c => c.toLowerCase() === name.toLowerCase()) ? chosen.filter(c => c.toLowerCase() !== name.toLowerCase()) : [...chosen, name]));
+      control = (
+        <div role="group" aria-labelledby={`${id}-label`} className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-2 p-4 rounded-lg border border-[#1e2522]/20 bg-white max-h-72 overflow-y-auto">
+          {field.options.map(name => (
+            <label key={name} className="flex items-center gap-3 cursor-pointer text-sm">
+              <input type="checkbox" checked={chosen.some(c => c.toLowerCase() === name.toLowerCase())} onChange={() => toggle(name)} className="w-5 h-5 accent-[#c74f2f]" />
+              <span>{name}</span>
+            </label>
+          ))}
+          {field.options.length === 0 && <p className="text-sm text-[#1e2522]/70">Add categories under Message Categories first.</p>}
+        </div>
+      );
+      break;
+    }
     case 'select':
       control = (
         <select id={id} value={value || field.options[0].value} onChange={(e) => set(e.target.value)} className={`${base} ${ok}`}>
@@ -159,7 +176,7 @@ export default function FieldInput({ field, value, onChange, error }) {
 
   return (
     <div>
-      <label htmlFor={id} className="block text-sm font-bold text-[#1e2522] mb-2">
+      <label id={`${id}-label`} htmlFor={id} className="block text-sm font-bold text-[#1e2522] mb-2">
         {field.label}{field.required && <span className="text-[#c74f2f]" aria-hidden="true"> *</span>}
       </label>
       {control}

@@ -7,6 +7,7 @@ import { useSite } from '../settings';
 import { formatDate, isLive, messagePath, newestFirst, parseMessageId, safeUrl, seriesPath, ytEmbed, ytId, ytThumb } from '../utils';
 import { plainText } from '../lib/markdown';
 import RichText from '../components/RichText';
+import { parseCategories } from '../lib/categories';
 import LiteYouTube from '../components/LiteYouTube';
 import MessageCard from '../components/MessageCard';
 import { Btn, Section } from '../components/ui';
@@ -56,7 +57,7 @@ export default function MessageDetail() {
               {m.date && <div><dt className="inline font-semibold">Date: </dt><dd className="inline">{formatDate(m.date)}</dd></div>}
               {m.series && <div><dt className="inline font-semibold">Series: </dt><dd className="inline"><Link to={seriesPath(m.series)} className="underline underline-offset-4">{m.series}</Link></dd></div>}
               {m.scripture && <div><dt className="inline font-semibold">Scripture: </dt><dd className="inline">{m.scripture}</dd></div>}
-              {m.topic && <div><dt className="inline font-semibold">Category: </dt><dd className="inline">{m.topic}</dd></div>}
+              {parseCategories(m.topic).length > 0 && <div><dt className="inline font-semibold">{parseCategories(m.topic).length > 1 ? 'Categories' : 'Category'}: </dt><dd className="inline">{parseCategories(m.topic).join(', ')}</dd></div>}
             </dl>
           </div>
         </header>

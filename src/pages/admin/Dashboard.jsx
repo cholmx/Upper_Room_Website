@@ -46,7 +46,7 @@ const TAB_CONFIGS = {
       { name: 'series_image_url', label: 'Series cover art (any message in the series)', type: 'image' },
       { name: 'date', label: 'Date', type: 'date', required: true },
       { name: 'scripture', label: 'Main Scripture passage (for example John 3:16-21)', type: 'text' },
-      { name: 'topic', label: 'Category', type: 'text' },
+      { name: 'topic', label: 'Categories (choose all that fit)', type: 'text' },
       { name: 'description', label: 'Sermon summary', type: 'markdown' },
       { name: 'discussion_questions', label: 'Discussion questions', type: 'markdown' },
       { name: 'notes', label: 'Notes, transcript, or written summary', type: 'markdown' },

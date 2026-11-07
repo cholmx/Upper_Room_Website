@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { dataFetch } from '../../api';
 import { useAuth } from '../../auth';
+import { addCategory, removeCategory, parseCategories } from '../../lib/categories';
 import { logActivity } from '../../lib/activity';
 import ConfirmDialog from '../../components/ConfirmDialog';
 
@@ -17,7 +18,7 @@ export default function BulkBar({ table, title, items, filtered, selected, setSe
   const distinct = (key) => [...new Set(items.map(i => String(i[key] || '').trim()).filter(Boolean))].sort((a, b) => a.localeCompare(b));
   const seriesList = useMemo(() => distinct('series'), [items]);
   const speakers = useMemo(() => distinct('speaker'), [items]);
-  const topics = useMemo(() => [...new Set([...categories, ...distinct('topic')])].sort((a, b) => a.localeCompare(b)), [items, categories]);
+  const topics = useMemo(() => [...new Set([...categories, ...items.flatMap(i => parseCategories(i.topic))])].sort((a, b) => a.localeCompare(b)), [items, categories]);
 
   const chosen = items.filter(i => selected.has(i.id));
   const busy = progress && !progress.finished;
@@ -89,7 +90,17 @@ export default function BulkBar({ table, title, items, filtered, selected, setSe
           <div className="grid lg:grid-cols-2 gap-5">
             {field('series', 'Series', seriesList, 'Set series', 'Series name')}
             {field('speaker', 'Speaker', speakers, 'Set speaker', 'Speaker name')}
-            {field('topic', 'Category', topics, 'Set category', 'Category')}
+            <div className="flex flex-wrap items-end gap-2">
+              <label className="text-sm font-semibold">
+                <span className="block mb-1">Categories</span>
+                <input list="bulk-topic" value={values.topic} onChange={(e) => set('topic', e.target.value)} placeholder="Category" className={input} />
+                <datalist id="bulk-topic">{topics.map(v => <option key={v} value={v} />)}</datalist>
+              </label>
+              <button type="button" disabled={busy || !values.topic.trim()} onClick={() => run(`Add category ${values.topic.trim()}`, r => { const next = addCategory(r.topic, values.topic); return next === (r.topic || '') ? null : { topic: next }; })} className={btn}>Add</button>
+              <button type="button" disabled={busy || !values.topic.trim()} onClick={() => run(`Remove category ${values.topic.trim()}`, r => { const next = removeCategory(r.topic, values.topic); return next === (r.topic || '') ? null : { topic: next }; })} className={btn}>Remove</button>
+              <button type="button" disabled={busy || !values.topic.trim()} onClick={() => run(`Set category ${values.topic.trim()}`, () => ({ topic: values.topic.trim() }))} className={btn}>Set only this</button>
+              <button type="button" disabled={busy} onClick={() => clearField('topic', 'Clear categories')} className={btn}>Clear</button>
+            </div>
             <div className="flex flex-wrap items-end gap-2">
               <span className="text-sm font-semibold block w-full">On the website</span>
               <button type="button" disabled={busy} onClick={() => run('Show on website', () => ({ published: 1 }))} className={btn}>Show</button>
