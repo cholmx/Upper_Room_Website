@@ -32,7 +32,7 @@ export default function CoreValues() {
           const dark = v.n % 2 === 1;
           return (
             <li key={v.id} id={v.id} className="contents">
-              <Section tone={dark ? 'tan' : 'white'}>
+              <Section tone={dark ? 'gray' : 'white'}>
                 <div className="grid md:grid-cols-[220px_1fr] gap-8 md:gap-14 items-center">
                   <div className="flex md:flex-col items-center md:items-start gap-5">
                     <ValueIcon n={v.n} />

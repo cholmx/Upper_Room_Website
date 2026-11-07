@@ -6,7 +6,7 @@ import { useSite } from '../settings';
 import { usePhoto } from '../photos';
 import { HERO_IMAGES } from '../content/photos';
 import { formatDate, imgUrl, isLive, messagePath, newestFirst, ytId } from '../utils';
-import { Btn, Section, Cards, Card, SlotImage, PhotoSplit } from '../components/ui';
+import { Btn, Section, Cards, Card, SlotImage, PhotoSplit, PhotoBand } from '../components/ui';
 import LiteYouTube from '../components/LiteYouTube';
 import Spotlights from '../components/Spotlights';
 
@@ -53,7 +53,7 @@ export default function Home() {
         </div>
       </Section>
 
-      <Section tone="tan">
+      <Section tone="gray">
         <div className="grid md:grid-cols-3 gap-10">
           {[
             ['Know God', 'Draw close to Him through worship, prayer, and Scripture.', 'home-know'],
@@ -99,14 +99,14 @@ export default function Home() {
         </div>
       </Section>
 
-      <PhotoSplit tone="gold" slot="home-where" side="right">
+      <PhotoBand slot="home-where">
         <h2 className="text-3xl md:text-5xl mb-5">Where and When</h2>
-        <p className="text-[0.95rem] leading-relaxed">500 Sponseller Road, Columbiana, Ohio 44408</p>
-        <p className="text-[0.95rem] leading-relaxed">Sunday classes at 9:30am. Worship at 10:30am.</p>
-        <div className="mt-6"><Btn href={SITE.googleMapsUrl} variant="dark">Get Directions</Btn></div>
-      </PhotoSplit>
+        <p className="text-base leading-relaxed">500 Sponseller Road, Columbiana, Ohio 44408</p>
+        <p className="text-base leading-relaxed">Sunday classes at 9:30am. Worship at 10:30am.</p>
+        <div className="mt-6"><Btn href={SITE.googleMapsUrl} variant="primary">Get Directions</Btn></div>
+      </PhotoBand>
 
-      <PhotoSplit tone="tan" slot="home-vision" side="left">
+      <PhotoSplit tone="gray" slot="home-vision" side="left">
         <h2 className="text-3xl md:text-5xl mb-6">Our Vision</h2>
         <p className="text-xl md:text-2xl leading-snug mb-5 font-serif">We exist to help people know God deeply, share life authentically, and serve others selflessly.</p>
         <p className="text-[0.95rem] leading-relaxed text-[#1e2522]/80">Lasting change starts on the inside, as our hearts line up with God’s heart. That conviction shapes how we build relationships, how we pray, and how we serve.</p>

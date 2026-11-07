@@ -51,10 +51,10 @@ export default function Discipleship() {
       </PhotoSplit>
 
       <Band>
-        <Panel tone="forest" title="When we meet">
+        <Panel title="When we meet">
           <p>Sunday mornings at 9:30am, one hour before worship. Kids classes meet at the same time.</p>
         </Panel>
-        <Panel tone="sage" title="Where to begin">
+        <Panel title="Where to begin">
           <p>Join the class that is meeting on a Sunday at 9:30am. If you would like help finding the right room, ask anyone on our welcome team or email <a className="underline underline-offset-4 font-semibold" href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
         </Panel>
       </Band>

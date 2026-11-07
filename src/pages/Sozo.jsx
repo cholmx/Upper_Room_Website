@@ -1,6 +1,6 @@
 import React from 'react';
 import usePageMeta from '../hooks/usePageMeta';
-import { Section, SectionHeader, PageHeader, Accordion, Steps, Band, Panel, PhotoSplit, SlotImage } from '../components/ui';
+import { Section, SectionHeader, PageHeader, Accordion, Steps, Band, Panel, PhotoSplit, PhotoBand, SlotImage } from '../components/ui';
 import { useSite } from '../settings';
 
 const P = 'text-[0.95rem] leading-relaxed text-[#1e2522]/80';
@@ -58,15 +58,15 @@ export default function Sozo() {
         </div>
       </Section>
 
-      <Section tone="gold">
-        <SectionHeader title="Biblical foundation" />
-        <ul className="list-disc pl-6 space-y-2 text-[0.95rem] max-w-3xl">
+      <PhotoBand slot="sozo-foundation">
+        <h2 className="text-3xl md:text-5xl mb-5">Biblical foundation</h2>
+        <ul className="list-disc pl-6 space-y-2 text-base">
           <li>God wants His children whole and free (John 10:10, Isaiah 61:1-3).</li>
           <li>Truth sets us free (John 8:32).</li>
           <li>We are transformed by the renewing of our minds (Romans 12:2).</li>
           <li>Healing comes through relationship with the Father, Son, and Holy Spirit (James 5:16, Psalm 147:3).</li>
         </ul>
-      </Section>
+      </PhotoBand>
 
       <Section tone="white">
         <SectionHeader title="Our Sozo tools" />
@@ -81,10 +81,10 @@ export default function Sozo() {
       </Section>
 
       <Band>
-        <Panel tone="terra" title="What Sozo is not">
+        <Panel title="What Sozo is not">
           <p>Sozo is prayer ministry. It does not replace counseling, professional mental health care, or medical care. It is not fortune-telling, it is not a formula that works automatically, and it never forces healing or deliverance on anyone. If you are in crisis, call or text 988 right away.</p>
         </Panel>
-        <Panel tone="forest" title="Our team">
+        <Panel title="Our team">
           <p>Every Sozo team member has completed specialized training, committed to ongoing spiritual growth, agreed to strict confidentiality standards, and gone through a thorough application process. They serve under the covering and accountability of our church leadership, and they know that the Holy Spirit brings the healing.</p>
         </Panel>
       </Band>

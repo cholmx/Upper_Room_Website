@@ -1,5 +1,6 @@
 // Checks that no two neighboring sections on a page share a background color, including the
-// banner above the first section and the footer below the last one.
+// banner above the first section and the footer below the last one. Sections are white, light gray or a photo,
+// and neighboring white sections are allowed because they read as one white page.
 // Usage: npm run build && npx vite preview --port 4173 &  then  node scripts/check-adjacent-colors.mjs [baseUrl]
 import { chromium } from 'playwright';
 import { STATIC_ROUTES } from './lib.mjs';
@@ -17,7 +18,7 @@ for (const route of STATIC_ROUTES) {
     const bg = (el) => {
       if (!el) return CREAM;
       if (el.dataset.imageBand) return 'photo';
-      if (el.classList.contains('photo-section')) return ink;
+      if (el.classList.contains('photo-section')) return 'photo';
       const c = getComputedStyle(el).backgroundColor;
       return c === 'rgba(0, 0, 0, 0)' ? CREAM : c;
     };

@@ -54,11 +54,11 @@ export default function PlanYourVisit() {
       </Section>
 
       <Band id="connect-card">
-        <Panel tone="forest" title="Let us know you are coming">
+        <Panel title="Let us know you are coming">
           <p>Fill out our short online Connect Card, and our welcome team will be ready to greet you. We keep your information confidential and use it only to serve you well.</p>
           <div className="pt-2"><Btn to="/connect" variant="primary">Fill Out the Connect Card</Btn></div>
         </Panel>
-        <Panel tone="terra" title="After the service">
+        <Panel title="After the service">
           <p>Stop by the Connection Center to pick up a welcome gift and learn more about our church. Our team members are glad to answer questions or pray with you.</p>
         </Panel>
       </Band>

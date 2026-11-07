@@ -6,14 +6,12 @@ export const LAYOUTS = [
   { value: 'photo-right', label: 'Text with photo on the right' },
   { value: 'photo-left', label: 'Text with photo on the left' },
   { value: 'banner', label: 'Slim banner with one button' },
+  { value: 'photo', label: 'Full photo background with white words' },
 ];
 
 export const TONES = [
   { value: 'white', label: 'White' },
-  { value: 'tan', label: 'Sand' },
-  { value: 'ink', label: 'Near black' },
-  { value: 'terra', label: 'Orange red' },
-  { value: 'gold', label: 'Amber' },
+  { value: 'gray', label: 'Light gray' },
 ];
 
 const off = (v) => v === false || v === 0 || v === '0' || v === 'false';

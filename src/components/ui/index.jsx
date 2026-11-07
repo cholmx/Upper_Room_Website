@@ -43,17 +43,11 @@ const TONES = {
   cream: 'text-[#1e2522]',
   white: 'bg-white text-[#1e2522]',
   sand: 'bg-white text-[#1e2522]',
-  ink: 'bg-[#1e2522] text-[#ffffff] relative overflow-hidden glow-gold',
-  forest: 'bg-[#1e2522] text-[#ffffff] relative overflow-hidden',
-  sage: 'bg-[#eaa235] text-[#1e2522]',
-  terra: 'bg-[#c74f2f] text-white',
-  gold: 'bg-[#eaa235] text-[#1e2522]',
-  tan: 'bg-[#e8e7e3] text-[#1e2522]',
-  bronze: 'bg-[#eaa235] text-[#1e2522]',
+  gray: 'bg-[#e8e7e3] text-[#1e2522]',
 };
 
 export function Section({ tone = 'cream', id, className = '', narrow = false, center = false, children, ...rest }) {
-  const panel = tone !== 'cream' && tone !== 'white';
+  const panel = tone === 'gray';
   return (
     <section id={id} className="max-w-[1312px] mx-auto px-3 md:px-4 py-1.5 md:py-2" {...rest}>
       <div className={`${TONES[tone]} ${panel ? 'rounded-[10px]' : ''} py-16 md:py-24 px-6 md:px-10 ${className}`}>
@@ -137,6 +131,20 @@ export function PhotoSplit({ slot, side = 'right', tone = 'white', id, ratio, cl
         <SlotImage slot={slot} ratio={ratio} className={side === 'left' ? 'md:order-1' : ''} />
       </div>
     </Section>
+  );
+}
+
+// A section whose whole background is a photo, with white text on it. Photos are never darkened,
+// so choose a photo with a calm area for the words.
+export function PhotoBand({ slot, id, className = '', children }) {
+  const { url, loaded } = usePhoto(slot);
+  const src = loaded ? imgUrl(url || stockFor(slot), 1600) : '';
+  return (
+    <section id={id} data-image-band="true" className="max-w-[1312px] mx-auto px-3 md:px-4 py-1.5 md:py-2">
+      <div className={`photo-section rounded-[10px] bg-[#1e2522] text-white py-24 md:py-36 px-6 md:px-10 ${className}`} style={src ? { backgroundImage: `url('${src}')` } : undefined}>
+        <div className="hero-text relative z-10 max-w-3xl">{children}</div>
+      </div>
+    </section>
   );
 }
 
@@ -281,47 +289,22 @@ export function QuickFacts({ items }) {
 
 // A band of two panels side by side, edge to edge. The panels are the section: each one is a block of color
 // with its own content, and the text lines up with the rest of the page. Use sparingly, one or two per page.
-const PANEL = {
-  forest: 'bg-[#1e2522] text-white',
-  sage: 'bg-[#eaa235] text-[#1e2522]',
-  terra: 'bg-[#c74f2f] text-white',
-  ink: 'bg-[#1e2522] text-white',
-  amber: 'bg-[#eaa235] text-[#1e2522]',
-  gold: 'bg-[#eaa235] text-[#1e2522]',
-  cream: 'bg-[#ffffff] text-[#1e2522]',
-  white: 'bg-white text-[#1e2522]',
-};
+const PANEL = 'bg-[#e8e7e3] text-[#1e2522]';
 
 export function Band({ children, id, className = '' }) {
   return (
     <section id={id} data-band="true" className={`max-w-[1312px] mx-auto px-3 md:px-4 py-1.5 md:py-2 ${className}`}>
-      <div className="band grid md:grid-cols-2 overflow-hidden rounded-[10px]">{children}</div>
+      <div className="grid md:grid-cols-2 gap-3 md:gap-4">{children}</div>
     </section>
   );
 }
 
-export function Panel({ tone = 'forest', title, as: Tag = 'h2', children, id, className = '' }) {
+export function Panel({ title, as: Tag = 'h2', children, id, className = '' }) {
   return (
-    <div id={id} className={`${PANEL[tone]} band-panel scroll-mt-24 py-14 md:py-20 px-8 md:px-12 ${className}`}>
+    <div id={id} className={`${PANEL} rounded-[10px] scroll-mt-24 py-14 md:py-20 px-8 md:px-12 ${className}`}>
       {title && <Tag className="text-3xl md:text-4xl mb-6">{title}</Tag>}
       <div className="box-body space-y-4 text-[0.95rem] leading-relaxed max-w-[34rem]">{children}</div>
     </div>
-  );
-}
-
-const CTA_TONES = { forest: 'bg-[#1e2522] text-[#ffffff]', ink: 'bg-[#1e2522] text-[#ffffff]', sage: 'bg-[#eaa235] text-[#1e2522]', terra: 'bg-[#c74f2f] text-white', gold: 'bg-[#eaa235] text-[#1e2522]' };
-export function EndCta({ title, text, to, href, label, tone = 'forest' }) {
-  const light = tone === 'gold';
-  return (
-    <section className={`${CTA_TONES[tone]} text-center py-20 md:py-28 px-6`} aria-label="Next step">
-      <div className="max-w-[800px] mx-auto">
-        <h2 className="text-3xl md:text-6xl leading-none">{title}</h2>
-        {text && <p className={`mt-5 text-[0.95rem] md:text-base leading-relaxed ${light ? 'text-[#1e2522]' : 'text-white/85'}`}>{text}</p>}
-        <div className="mt-9">
-          <Btn to={to} href={href} variant={light ? 'dark' : 'primary'}>{label}</Btn>
-        </div>
-      </div>
-    </section>
   );
 }
 
