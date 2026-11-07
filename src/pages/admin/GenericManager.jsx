@@ -61,7 +61,7 @@ export default function GenericManager({ config }) {
     const sort = sortable ? `${config.sortField}:asc` : 'id:desc';
     const res = await dataFetch(`read/${config.table}?sort=${sort}`);
     if (res.status === 'success') {
-      setItems(res.data ?? []);
+      setItems(config.sortItems ? config.sortItems(res.data ?? []) : (res.data ?? []));
       setError('');
     } else {
       setError(`Could not load ${config.title}: ${res.error}`);

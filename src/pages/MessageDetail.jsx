@@ -4,7 +4,7 @@ import usePageMeta from '../hooks/usePageMeta';
 import useFetch from '../hooks/useFetch';
 import useJsonLd from '../hooks/useJsonLd';
 import { useSite } from '../settings';
-import { formatDate, isLive, messagePath, parseMessageId, safeUrl, seriesPath, ytEmbed, ytId, ytThumb } from '../utils';
+import { formatDate, isLive, messagePath, newestFirst, parseMessageId, safeUrl, seriesPath, ytEmbed, ytId, ytThumb } from '../utils';
 import { plainText } from '../lib/markdown';
 import RichText from '../components/RichText';
 import LiteYouTube from '../components/LiteYouTube';
@@ -20,7 +20,7 @@ export default function MessageDetail() {
   const found = data?.find(s => String(s.id) === id);
   const m = found && isLive(found) ? found : null;
   const related = useFetch(m?.series ? `read/sermons?series=${encodeURIComponent(m.series)}&sort=date:desc` : null);
-  const more = (related.data ?? []).filter(isLive).filter(x => x.id !== m?.id).slice(0, 3);
+  const more = newestFirst(related.data).filter(isLive).filter(x => x.id !== m?.id).slice(0, 3);
 
   const video = m?.video_url || m?.yt;
   const vid = ytId(video);

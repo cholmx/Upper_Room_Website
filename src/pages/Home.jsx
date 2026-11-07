@@ -5,7 +5,7 @@ import useFetch from '../hooks/useFetch';
 import { useSite } from '../settings';
 import { usePhoto } from '../photos';
 import { HERO_IMAGES } from '../content/photos';
-import { formatDate, imgUrl, isLive, messagePath, ytId } from '../utils';
+import { formatDate, imgUrl, isLive, messagePath, newestFirst, ytId } from '../utils';
 import { Btn, Section, Cards, Card, SlotImage, PhotoSplit } from '../components/ui';
 import LiteYouTube from '../components/LiteYouTube';
 import Spotlights from '../components/Spotlights';
@@ -19,8 +19,8 @@ export default function Home() {
   const bannerSlot = usePhoto('banner-home');
   // Nothing is drawn until the saved photos arrive, so the stock picture never flashes before the real one.
   const banner = !bannerSlot.loaded ? '' : bannerSlot.url || heroPhoto || HERO_IMAGES.home;
-  const { data } = useFetch('read/sermons?limit=10&sort=created_at:desc');
-  const latest = useMemo(() => (data ?? []).filter(isLive)[0], [data]);
+  const { data } = useFetch('read/sermons?sort=date:desc');
+  const latest = useMemo(() => newestFirst(data).filter(isLive)[0], [data]);
   const videoId = ytId(latest?.video_url || latest?.yt);
 
   return (

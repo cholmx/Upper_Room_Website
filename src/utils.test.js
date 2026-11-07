@@ -130,7 +130,7 @@ describe('mergeSectionOrder', () => {
   });
 });
 
-import { messagePath, parseMessageId, seriesPath, scriptureBook, groupSeries, dateRangeLabel } from './utils';
+import { messagePath, parseMessageId, seriesPath, scriptureBook, groupSeries, dateRangeLabel, newestFirst } from './utils';
 
 describe('message urls', () => {
   it('builds and parses readable message paths', () => {
@@ -168,5 +168,27 @@ describe('groupSeries', () => {
     expect(dateRangeLabel('2025-02-02', '2025-03-02')).toBe('Feb 2025 to Mar 2025');
     expect(dateRangeLabel('2025-02-02', '2025-02-20')).toBe('Feb 2025');
     expect(dateRangeLabel(null)).toBe('');
+  });
+});
+
+describe('newestFirst', () => {
+  it('orders by date, newest first, with undated messages last', () => {
+    const out = newestFirst([
+      { id: 1, date: '2026-01-04' },
+      { id: 2, date: null },
+      { id: 3, date: '2026-03-01' },
+      { id: 4, date: '2025-12-28' },
+    ]);
+    expect(out.map(m => m.id)).toEqual([3, 1, 4, 2]);
+  });
+  it('puts the newest upload first when dates match', () => {
+    const out = newestFirst([
+      { id: 1, date: '2026-03-01', created_at: '2026-03-02T10:00:00Z' },
+      { id: 2, date: '2026-03-01', created_at: '2026-03-03T10:00:00Z' },
+    ]);
+    expect(out.map(m => m.id)).toEqual([2, 1]);
+  });
+  it('handles no data', () => {
+    expect(newestFirst(null)).toEqual([]);
   });
 });

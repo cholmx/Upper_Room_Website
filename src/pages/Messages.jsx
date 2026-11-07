@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import usePageMeta from '../hooks/usePageMeta';
 import useFetch from '../hooks/useFetch';
 import { useSite } from '../settings';
-import { dateRangeLabel, formatDate, groupSeries, isLive, messagePath, safeUrl, scriptureBook, seriesPath, ytId } from '../utils';
+import { dateRangeLabel, formatDate, groupSeries, isLive, messagePath, newestFirst, safeUrl, scriptureBook, seriesPath, ytId } from '../utils';
 import { plainText } from '../lib/markdown';
 import { Btn, Section, SectionHeader, PageHeader, PhotoSplit } from '../components/ui';
 import LiteYouTube from '../components/LiteYouTube';
@@ -29,7 +29,7 @@ export default function Messages() {
   usePageMeta('messages');
   const SITE = useSite();
   const { data, loading, error, reload } = useFetch('read/sermons?sort=date:desc');
-  const messages = useMemo(() => (data ?? []).filter(isLive), [data]);
+  const messages = useMemo(() => newestFirst(data).filter(isLive), [data]);
   const [q, setQ] = useState('');
   const [series, setSeries] = useState('');
   const [speaker, setSpeaker] = useState('');

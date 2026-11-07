@@ -9,6 +9,7 @@ import ChecklistManager from './ChecklistManager';
 import FormSubmissionsManager from './FormSubmissionsManager';
 import { useAuth } from '../../auth';
 import { LAYOUTS, TONES } from '../../lib/spotlights';
+import { newestFirst } from '../../utils';
 
 const { FiLayout, FiMic, FiCalendar, FiFileText, FiCamera, FiLogOut, FiMenu, FiX, FiMail, FiSettings, FiActivity, FiUsers, FiCheckSquare, FiHeart, FiMessageSquare } = FiIcons;
 
@@ -31,6 +32,7 @@ const TAB_CONFIGS = {
   sermons: {
     table: 'sermons',
     youtubeImport: true,
+    sortItems: newestFirst,
     title: 'Messages',
     titleField: 'title',
     columns: ['title', 'speaker', 'series', 'date'],

@@ -196,6 +196,15 @@ export function scriptureBook(ref) {
 }
 
 // Groups messages into series with a count, a date range, and the first cover image found.
+// Messages in date order, newest first. A message with no date goes last, and ties keep the newest upload first.
+export function newestFirst(messages) {
+  const day = (m) => String(m.date || '').slice(0, 10);
+  return [...(messages ?? [])].sort((a, b) =>
+    day(b).localeCompare(day(a))
+    || String(b.created_at || '').localeCompare(String(a.created_at || ''))
+    || (Number(b.id) || 0) - (Number(a.id) || 0));
+}
+
 export function groupSeries(messages) {
   const map = new Map();
   for (const m of messages) {

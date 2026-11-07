@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import usePageMeta from '../hooks/usePageMeta';
 import useFetch from '../hooks/useFetch';
-import { dateRangeLabel, groupSeries, isLive, slugify } from '../utils';
+import { dateRangeLabel, groupSeries, isLive, newestFirst, slugify } from '../utils';
 import { Section, PageHeader } from '../components/ui';
 import MessageCard from '../components/MessageCard';
 import { Spinner, ErrorState, NotFound } from '../components/StateViews';
@@ -10,7 +10,7 @@ import { Spinner, ErrorState, NotFound } from '../components/StateViews';
 export default function MessageSeries() {
   const { series: slug } = useParams();
   const { data, loading, error, reload } = useFetch('read/sermons?sort=date:desc');
-  const all = useMemo(() => (data ?? []).filter(isLive), [data]);
+  const all = useMemo(() => newestFirst(data).filter(isLive), [data]);
   const items = useMemo(() => all.filter(m => m.series && slugify(m.series) === slug), [all, slug]);
   const info = groupSeries(items)[0];
   usePageMeta(info ? `${info.name} message series` : 'Message series', info ? `Messages from the ${info.name} series at Upper Room Fellowship in Columbiana, Ohio.` : 'Message series from Upper Room Fellowship.');
