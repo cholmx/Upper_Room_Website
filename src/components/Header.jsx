@@ -10,11 +10,11 @@ import * as FiIcons from 'react-icons/fi';
 
 const { FiMenu, FiX, FiChevronDown } = FiIcons;
 
-const linkBase = 'whitespace-nowrap font-display font-bold text-[0.95rem] tracking-wide py-1 border-b-2 inline-flex items-center gap-1';
-const linkOn = 'border-[#c74f2f] text-[#1e2522]';
-const linkOff = 'border-transparent text-[#1e2522]/70 hover:text-[#1e2522] hover:border-[#1e2522]/20';
-const linkOnLight = 'border-[#eaa235] text-white';
-const linkOffLight = 'border-transparent text-white/90 hover:text-white hover:border-white/50';
+const linkBase = 'whitespace-nowrap font-display font-bold text-[0.95rem] tracking-wide py-1 inline-flex items-center gap-1';
+const linkOn = 'text-[#c74f2f]';
+const linkOff = 'text-[#1e2522]/70 hover:text-[#1e2522]';
+const linkOnLight = 'text-[#eaa235]';
+const linkOffLight = 'text-white/90 hover:text-white';
 
 function DesktopDropdown({ item, light }) {
   const [open, setOpen] = useState(false);
@@ -89,7 +89,7 @@ function MobileMenu({ onClose }) {
         <Btn href={SITE.giveUrl} variant="accent" className="!px-4">Give</Btn>
       </div>
       <nav aria-label="Main" className="px-6 py-6 pb-28">
-        <ul className="divide-y divide-[#1e2522]/10">
+        <ul>
           {NAV.map(item => (
             <li key={item.label}>
               {item.children ? (
