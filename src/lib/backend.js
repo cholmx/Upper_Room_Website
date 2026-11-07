@@ -251,12 +251,12 @@ export function createBackend({
       if (token === anonKey) return fail('Please sign in again.', 401);
       const res = await fetchImpl(`${base}/functions/v1/${name}`, { headers: { apikey: anonKey, Authorization: `Bearer ${token}` } });
       const json = await res.json().catch(() => null);
-      if (res.status === 404) return fail('The YouTube import is not set up yet. Ask Bolt to deploy the youtube-videos function.', 404);
+      if (res.status === 404) return fail('The YouTube import is not set up yet. Add a YouTube Data API key (VITE_YOUTUBE_API_KEY), or ask Bolt to deploy the youtube-videos function.', 404);
       if (!res.ok) return fail(json?.error || 'That did not work. Please try again.', res.status);
       return ok(json);
     } catch (err) {
       // A browser reports a missing function and a blocked request the same way, as a failed fetch.
-      return fail('Could not reach the YouTube import. It is most likely not deployed yet. Ask Bolt to deploy the youtube-videos function.', 0);
+      return fail('Could not reach the YouTube import. It is most likely not deployed yet. Add a YouTube Data API key (VITE_YOUTUBE_API_KEY), or ask Bolt to deploy the youtube-videos function.', 0);
     }
   }
 

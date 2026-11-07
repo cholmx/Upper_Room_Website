@@ -3,7 +3,7 @@ import { backend } from '../../lib/backend';
 import { dataFetch } from '../../api';
 import { useAuth } from '../../auth';
 import { logActivity } from '../../lib/activity';
-import { toMessage } from '../../lib/youtube';
+import { toMessage, fetchChannelVideos } from '../../lib/youtube';
 import { ytId, formatDate } from '../../utils';
 
 // Lists the videos on the church's YouTube channel and creates a message for each one picked.
@@ -18,7 +18,14 @@ export default function YouTubeImport({ existing, onClose, onImported }) {
 
   useEffect(() => {
     let live = true;
-    backend.invoke('youtube-videos').then(res => {
+    const key = import.meta.env.VITE_YOUTUBE_API_KEY;
+    const load = key
+      ? fetchChannelVideos(key).then(
+        videos => ({ status: 'success', data: { videos, source: 'api' } }),
+        err => ({ status: 'error', error: err.message || 'Could not read the channel.' }),
+      )
+      : backend.invoke('youtube-videos');
+    load.then(res => {
       if (!live) return;
       if (res.status !== 'success') { setState({ phase: 'error', error: res.error, videos: [], source: '' }); return; }
       const videos = res.data?.videos ?? [];
@@ -62,7 +69,7 @@ export default function YouTubeImport({ existing, onClose, onImported }) {
 
       {state.phase === 'ready' && (
         <>
-          {state.source === 'feed' && <p className="text-sm text-[#1e2522]/70 mb-3">This list shows the 15 newest videos. To bring in older ones, ask Bolt to add a YouTube Data API key as the secret YOUTUBE_API_KEY.</p>}
+          {state.source === 'feed' && <p className="text-sm text-[#1e2522]/70 mb-3">This list shows the 15 newest videos. To bring in older ones, ask Bolt to add a YouTube Data API key as VITE_YOUTUBE_API_KEY.</p>}
           {fresh.length === 0 ? (
             <p className="text-[#1e2522]/70">Every video on the channel is already in your messages.</p>
           ) : (
