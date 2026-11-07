@@ -119,10 +119,10 @@ const STOCK = [...new Set(Object.values(HERO_IMAGES))];
 const stockFor = (slot) => STOCK[[...slot].reduce((n, c) => n + c.charCodeAt(0), 0) % STOCK.length];
 
 export function SlotImage({ slot, ratio = 'aspect-[4/3]', className = '' }) {
-  const { url, alt } = usePhoto(slot);
+  const { url, alt, loaded } = usePhoto(slot);
   return (
     <div className={`${ratio} overflow-hidden rounded-[10px] bg-[#1e2522] ${className}`}>
-      <img src={imgUrl(url || stockFor(slot), 1000)} alt={url ? alt : ''} loading="lazy" decoding="async" className="w-full h-full object-cover" />
+      {loaded && <img src={imgUrl(url || stockFor(slot), 1000)} alt={url ? alt : ''} loading="lazy" decoding="async" className="w-full h-full object-cover" />}
     </div>
   );
 }
@@ -144,7 +144,8 @@ const PAGE_KEY_BY_ROUTE = Object.fromEntries(Object.entries(SEO_ROUTES).map(([k,
 function usePageBanner(pageKey) {
   const { pathname } = useLocation();
   const key = pageKey || PAGE_KEY_BY_ROUTE[pathname] || (pathname.startsWith('/messages') ? 'messages' : pathname.startsWith('/events') ? 'events' : pathname.startsWith('/blog') ? 'blog' : 'about');
-  const { url } = usePhoto(`banner-${key}`);
+  const { url, loaded } = usePhoto(`banner-${key}`);
+  if (!loaded) return '';
   return url || HERO_IMAGES[key] || HERO_IMAGES.about;
 }
 
@@ -153,7 +154,7 @@ export function PageHeader({ kicker, title, intro, children, page }) {
   const image = usePageBanner(page);
   return (
     <header className="max-w-[1312px] mx-auto px-3 md:px-4 pt-3 md:pt-4 pb-1.5 md:pb-2">
-      <div className="photo-section rounded-[10px] text-[#ffffff] py-24 md:py-36 px-6 md:px-10 text-left flex items-end" style={{ backgroundImage: `url('${imgUrl(image, 1600)}')` }}>
+      <div className="photo-section rounded-[10px] text-[#ffffff] py-24 md:py-36 px-6 md:px-10 text-left flex items-end" style={image ? { backgroundImage: `url('${imgUrl(image, 1600)}')` } : undefined}>
         <div className="hero-text max-w-[800px] relative z-10">
           {kicker && !same(kicker, title) && <span className="kicker text-[#eaa235]">{kicker}</span>}
           <h1 className="text-4xl md:text-6xl mb-6">{title}</h1>
