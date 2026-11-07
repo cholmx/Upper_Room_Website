@@ -165,7 +165,7 @@ export function PageHeader({ kicker, title, intro, children, page, image: imageO
   const image = banner && imageOverride ? imageOverride : banner;
   return (
     <header className="max-w-[1312px] mx-auto px-3 md:px-4 pt-3 md:pt-4 pb-1.5 md:pb-2">
-      <div className="photo-section nav-fade rounded-[10px] text-[#ffffff] py-24 md:py-36 px-6 md:px-10 text-left flex items-end">
+      <div className="photo-section nav-fade text-shade rounded-[10px] text-[#ffffff] py-24 md:py-36 px-6 md:px-10 text-left flex items-end">
         {image && <img src={imgUrl(image, 1600)} alt="" fetchpriority="high" decoding="async" className="photo-bg" />}
         <div className="hero-text max-w-[800px]">
           {kicker && !same(kicker, title) && <span className="kicker text-[#eaa235]">{kicker}</span>}
