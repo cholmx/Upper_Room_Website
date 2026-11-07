@@ -30,7 +30,7 @@ export default function Footer() {
     <div className="bg-[#1e2522] text-[#ffffff] relative overflow-hidden rounded-[10px]">
       <div className="px-6 md:px-10 py-20 md:py-24 flex flex-wrap gap-12 justify-between items-start relative z-10">
         <div className="max-w-[26ch]">
-          <h2 className="text-[1.4rem] font-extrabold text-[#eaa235] mb-4">
+          <h2 className="text-[1.4rem] font-normal text-[#eaa235] mb-4">
             {SITE.name}
           </h2>
           <p className="opacity-80 text-[0.95rem] leading-relaxed mb-6">Transforming lives that transform communities.</p>
