@@ -2,24 +2,22 @@ import React, { useMemo, useState } from 'react';
 import { dataFetch } from '../../api';
 import { useAuth } from '../../auth';
 import { logActivity } from '../../lib/activity';
-import { addTag, removeTag, parseTags } from '../../lib/tags';
 import ConfirmDialog from '../../components/ConfirmDialog';
 
 const btn = 'px-4 py-2 rounded-lg border border-[#1e2522]/20 bg-white font-bold text-sm disabled:opacity-40';
 const input = 'px-3 py-2 rounded-lg border border-[#1e2522]/20 bg-white text-sm min-w-[12rem]';
 
-// Edits many messages at once: choose messages, then change their series, speaker, category, tags or visibility.
-export default function BulkBar({ table, title, items, filtered, selected, setSelected, onDone }) {
+// Edits many messages at once: choose messages, then change their series, speaker, category or visibility.
+export default function BulkBar({ table, title, items, filtered, selected, setSelected, onDone, categories = [] }) {
   const { user } = useAuth();
-  const [values, setValues] = useState({ series: '', speaker: '', topic: '', addTag: '', removeTag: '' });
+  const [values, setValues] = useState({ series: '', speaker: '', topic: '' });
   const [progress, setProgress] = useState(null);
   const [confirmDelete, setConfirmDelete] = useState(false);
 
   const distinct = (key) => [...new Set(items.map(i => String(i[key] || '').trim()).filter(Boolean))].sort((a, b) => a.localeCompare(b));
   const seriesList = useMemo(() => distinct('series'), [items]);
   const speakers = useMemo(() => distinct('speaker'), [items]);
-  const topics = useMemo(() => distinct('topic'), [items]);
-  const tagList = useMemo(() => [...new Set(items.flatMap(i => parseTags(i.tags)))].sort((a, b) => a.localeCompare(b)), [items]);
+  const topics = useMemo(() => [...new Set([...categories, ...distinct('topic')])].sort((a, b) => a.localeCompare(b)), [items, categories]);
 
   const chosen = items.filter(i => selected.has(i.id));
   const busy = progress && !progress.finished;
@@ -92,28 +90,6 @@ export default function BulkBar({ table, title, items, filtered, selected, setSe
             {field('series', 'Series', seriesList, 'Set series', 'Series name')}
             {field('speaker', 'Speaker', speakers, 'Set speaker', 'Speaker name')}
             {field('topic', 'Category', topics, 'Set category', 'Category')}
-            <div className="flex flex-wrap items-end gap-2">
-              <label className="text-sm font-semibold">
-                <span className="block mb-1">Add a tag</span>
-                <input list="bulk-tags-add" value={values.addTag} onChange={(e) => set('addTag', e.target.value)} placeholder="Tag" className={input} />
-                <datalist id="bulk-tags-add">{tagList.map(v => <option key={v} value={v} />)}</datalist>
-              </label>
-              <button type="button" disabled={busy || !parseTags(values.addTag).length} onClick={() => run(`Add tag ${values.addTag.trim()}`, r => {
-                const next = parseTags(values.addTag).reduce((t, tag) => addTag(t, tag), r.tags || '');
-                return next === (r.tags || '') ? null : { tags: next };
-              })} className={btn}>Add</button>
-            </div>
-            <div className="flex flex-wrap items-end gap-2">
-              <label className="text-sm font-semibold">
-                <span className="block mb-1">Remove a tag</span>
-                <input list="bulk-tags-remove" value={values.removeTag} onChange={(e) => set('removeTag', e.target.value)} placeholder="Tag" className={input} />
-                <datalist id="bulk-tags-remove">{tagList.map(v => <option key={v} value={v} />)}</datalist>
-              </label>
-              <button type="button" disabled={busy || !parseTags(values.removeTag).length} onClick={() => run(`Remove tag ${values.removeTag.trim()}`, r => {
-                const next = parseTags(values.removeTag).reduce((t, tag) => removeTag(t, tag), r.tags || '');
-                return next === (r.tags || '') ? null : { tags: next };
-              })} className={btn}>Remove</button>
-            </div>
             <div className="flex flex-wrap items-end gap-2">
               <span className="text-sm font-semibold block w-full">On the website</span>
               <button type="button" disabled={busy} onClick={() => run('Show on website', () => ({ published: 1 }))} className={btn}>Show</button>

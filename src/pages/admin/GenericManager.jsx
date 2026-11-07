@@ -38,6 +38,7 @@ export default function GenericManager({ config }) {
   const [pendingDelete, setPendingDelete] = useState(null);
   const [confirmDiscard, setConfirmDiscard] = useState(false);
   const [importing, setImporting] = useState(false);
+  const [categories, setCategories] = useState([]);
   const [selected, setSelected] = useState(() => new Set());
   const toggleSelected = (id) => setSelected(prev => { const next = new Set(prev); if (next.has(id)) next.delete(id); else next.add(id); return next; });
   const dragId = useRef(null);
@@ -51,6 +52,14 @@ export default function GenericManager({ config }) {
   useEffect(() => {
     fetchItems();
   }, [config.table]);
+
+  // Messages pick a category from the approved list kept under Message Categories.
+  useEffect(() => {
+    if (!config.categorySelect) return;
+    dataFetch('read/message_categories_church?sort=name:asc').then(res => {
+      if (res.status === 'success') setCategories((res.data ?? []).map(c => c.name));
+    });
+  }, [config.categorySelect]);
 
   // Warn before closing the tab with unsaved edits.
   useEffect(() => {
@@ -246,7 +255,10 @@ export default function GenericManager({ config }) {
         </div>
         {errorBanner}
         <form onSubmit={handleSave} noValidate className="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-[#1e2522]/10 space-y-6">
-          {config.fields.map(field => (
+          {config.fields.map(field => (field.name === 'topic' && config.categorySelect && categories.length > 0
+            ? { ...field, type: 'select', options: [{ value: '', label: 'No category' }, ...[...new Set([...(formData.topic ? [formData.topic] : []), ...categories])].map(c => ({ value: c, label: c }))] }
+            : field
+          )).map(field => (
             <FieldInput key={field.name} field={field} value={formData[field.name]} onChange={handleChange} error={errors[field.name]} />
           ))}
           <div className="flex justify-end gap-4 pt-6 border-t border-[#1e2522]/10">
@@ -291,7 +303,7 @@ export default function GenericManager({ config }) {
 
       {importing && <YouTubeImport existing={items} onClose={() => setImporting(false)} onImported={fetchItems} />}
 
-      {config.bulk && items.length > 0 && <BulkBar table={config.table} title={config.title} items={items} filtered={filtered} selected={selected} setSelected={setSelected} onDone={fetchItems} />}
+      {config.bulk && items.length > 0 && <BulkBar table={config.table} title={config.title} items={items} filtered={filtered} selected={selected} setSelected={setSelected} onDone={fetchItems} categories={categories} />}
 
       {items.length > 0 && !sortable && (
         <div className="relative mb-4 max-w-md">

@@ -5,7 +5,6 @@ import useFetch from '../hooks/useFetch';
 import { useSite } from '../settings';
 import { dateRangeLabel, formatDate, groupSeries, isLive, messagePath, newestFirst, safeUrl, scriptureBook, seriesPath, ytId } from '../utils';
 import { plainText } from '../lib/markdown';
-import { parseTags } from '../lib/tags';
 import { Btn, Section, SectionHeader, PageHeader, PhotoBand } from '../components/ui';
 import LiteYouTube from '../components/LiteYouTube';
 import MessageCard from '../components/MessageCard';
@@ -38,7 +37,6 @@ export default function Messages() {
   const [speaker, setSpeaker] = useState('');
   const [book, setBook] = useState('');
   const [topic, setTopic] = useState('');
-  const [tag, setTag] = useState('');
   const [shown, setShown] = useState(12);
 
   const latest = messages[0];
@@ -47,7 +45,6 @@ export default function Messages() {
     // The newest message in the series that has a video lends its cover picture.
     thumb: ytId(messages.find(m => (m.series || '').trim() === g.name && ytId(m.video_url || m.yt))?.video_url || ''),
   })), [messages]);
-  const tagOptions = useMemo(() => [...new Set(messages.flatMap(m => parseTags(m.tags)))].sort((a, b) => a.localeCompare(b)), [messages]);
   const uniq = (fn) => [...new Set(messages.map(fn).filter(Boolean))].sort();
   const filtered = useMemo(() => {
     const needle = q.trim().toLowerCase();
@@ -56,13 +53,12 @@ export default function Messages() {
       (!speaker || m.speaker === speaker) &&
       (!book || scriptureBook(m.scripture) === book) &&
       (!topic || m.topic === topic) &&
-      (!tag || parseTags(m.tags).includes(tag)) &&
-      (!needle || [m.title, m.speaker, m.scripture, m.topic, m.tags, m.series, plainText(m.description)].some(v => String(v || '').toLowerCase().includes(needle)))
+      (!needle || [m.title, m.speaker, m.scripture, m.topic, m.series, plainText(m.description)].some(v => String(v || '').toLowerCase().includes(needle)))
     ));
-  }, [messages, q, series, speaker, book, topic, tag]);
-  const anyFilter = q || series || speaker || book || topic || tag;
-  useEffect(() => { setShown(12); }, [q, series, speaker, book, topic, tag]);
-  const clear = () => { setQ(''); setSeries(''); setSpeaker(''); setBook(''); setTopic(''); setTag(''); };
+  }, [messages, q, series, speaker, book, topic]);
+  const anyFilter = q || series || speaker || book || topic;
+  useEffect(() => { setShown(12); }, [q, series, speaker, book, topic]);
+  const clear = () => { setQ(''); setSeries(''); setSpeaker(''); setBook(''); setTopic(''); };
   const latestVideo = ytId(latest?.video_url || latest?.yt);
 
   return (
@@ -134,14 +130,13 @@ export default function Messages() {
           <Section tone="cream" id="archive">
             <SectionHeader title="Sermon library" intro="Missed a Sunday? Want to hear a message again? Browse current and past teaching from Upper Room Fellowship below." />
             <form role="search" aria-label="Search messages" onSubmit={(e) => e.preventDefault()} className="rounded-[10px] p-5 md:p-6 mb-6 bg-[#e8e7e3]">
-              <label htmlFor="msg-search" className="block text-sm font-semibold mb-1">Search by category, tag, passage, or speaker</label>
+              <label htmlFor="msg-search" className="block text-sm font-semibold mb-1">Search by category, passage, or speaker</label>
               <input id="msg-search" type="search" value={q} onChange={(e) => setQ(e.target.value)} className={select} />
               <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
                 <Filter label="Series" value={series} onChange={setSeries} options={uniq(m => m.series)} />
                 <Filter label="Speaker" value={speaker} onChange={setSpeaker} options={uniq(m => m.speaker)} />
                 <Filter label="Scripture book" value={book} onChange={setBook} options={uniq(m => scriptureBook(m.scripture))} />
                 <Filter label="Category" value={topic} onChange={setTopic} options={uniq(m => m.topic)} />
-                {tagOptions.length > 0 && <Filter label="Tag" value={tag} onChange={setTag} options={tagOptions} />}
               </div>
               {anyFilter && <button type="button" onClick={clear} className="mt-4 underline underline-offset-4 font-semibold text-[#1e2522] min-h-[44px]">Clear search and filters</button>}
             </form>
