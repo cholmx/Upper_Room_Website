@@ -47,7 +47,8 @@ export default function BulkBar({ table, title, items, filtered, selected, setSe
     '!no_key': 'The Anthropic key is not saved in the database yet.',
     '!request_failed': 'The request to the AI service failed.',
     '!unreadable': 'The AI answer could not be read.',
-    '!no_match': 'No approved category fit.',
+    '!no_match': 'The AI did not name an approved category.',
+    '!no_categories': 'There are no approved categories yet. Add some under Message Categories.',
     '!already_set': 'Already has a category.',
     '!not_found': 'That message no longer exists.',
   };
@@ -58,7 +59,7 @@ export default function BulkBar({ table, title, items, filtered, selected, setSe
       const res = await backend.rpc('ai_review_message', { sermon_id: r.id, replace: replaceAll });
       const out = res.status === 'success' ? String(res.data ?? '') : '';
       if (res.status === 'success' && out && out[0] !== '!') done += 1;
-      else { failed += 1; reason = reason || (res.status !== 'success' ? res.error : (WHY[out] || (out.startsWith('!status_') ? `The AI service answered ${out.slice(8)}.` : 'No change.'))); }
+      else { failed += 1; reason = reason || (res.status !== 'success' ? res.error : (WHY[out] || (out.startsWith('!no_match') ? `${WHY['!no_match']} It said: ${out.slice(11)}` : out.startsWith('!status_') ? `The AI service answered ${out.slice(8)}.` : 'No change.'))); }
       setProgress({ label: 'AI review', done, failed, total: chosen.length, reason });
       if (reason === WHY['!no_key']) break;
     }

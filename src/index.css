@@ -35,10 +35,10 @@ h1, h2, h3, h4 {
 
 .kicker {
   display: inline-block;
-  font-family: Merriweather, Georgia, serif;
+  font-family: Arial, Helvetica, sans-serif;
   font-style: normal;
   text-transform: none;
-  font-weight: 400;
+  font-weight: 700;
   font-size: 1.2rem;
   letter-spacing: 0.01em;
   line-height: 1.15;
@@ -322,7 +322,7 @@ details.u-acc.neu-acc[open] { background: #ffffff; box-shadow: var(--shadow); }
 .neu-badge { box-shadow: var(--shadow); }
 
 /* Merriweather for lead paragraphs, in a larger size than body text */
-.lead { font-family: Merriweather, Georgia, serif; font-size: 1.1rem; line-height: 1.5; color: rgba(30, 37, 34, 0.8); }
+.lead { font-family: Arial, Helvetica, sans-serif; font-weight: 700; font-size: 1.1rem; line-height: 1.45; color: rgba(30, 37, 34, 0.85); }
 @media (min-width: 768px) { .lead { font-size: 1.2rem; } }
 
 /* Tighter line height for serif display text. */
@@ -402,4 +402,16 @@ details.u-acc.neu-acc[open] { background: #ffffff; box-shadow: var(--shadow); }
 .img-fade.img-in { opacity: 1; transition: opacity 0.35s ease; }
 @media (prefers-reduced-motion: reduce) {
   .img-fade, .img-fade.img-in { opacity: 1; transition: none; }
+}
+
+/* Merriweather is only for the small reading size. Anything set larger than that is Arial Bold.
+   An element marked font-normal keeps its own weight. */
+:is(
+  [class*="text-lg"], [class*="text-xl"], [class*="text-2xl"], [class*="text-3xl"], [class*="text-4xl"],
+  [class*="text-5xl"], [class*="text-6xl"], [class*="text-7xl"], [class*="text-8xl"], [class*="text-9xl"],
+  [class*="text-[1.05rem]"], [class*="text-[1.4rem]"], [class*="text-[1.6rem]"]
+):not(.font-normal) {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-style: normal;
 }
