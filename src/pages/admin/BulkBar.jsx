@@ -92,8 +92,11 @@ export default function BulkBar({ table, title, items, filtered, selected, setSe
       if (i < chosen.length - 1) await sleep(1100);
     }
     if (done) logActivity(user, 'AI reviewed', title, `${done} messages`);
+    // Read the list back from the database, so the report is about what was really saved.
+    const fresh = await dataFetch('read/sermons?sort=id:desc');
+    const stillBlank = fresh.status === 'success' ? (fresh.data ?? []).filter(m => chosen.some(c => c.id === m.id) && !String(m.topic || '').trim()).length : null;
     await onDone();
-    setProgress({ label: 'AI review', done, failed, total: chosen.length, finished: true, reasons: { ...reasons } });
+    setProgress({ label: 'AI review', done, failed, total: chosen.length, finished: true, reasons: { ...reasons }, stillBlank });
   };
 
   const deleteAll = async () => {
@@ -179,7 +182,7 @@ export default function BulkBar({ table, title, items, filtered, selected, setSe
         <div role="status" className="mt-4 text-sm">
           <p className="font-semibold">
             {progress.finished
-              ? `${progress.label}: ${progress.done} updated${progress.failed ? `, ${progress.failed} not changed` : ''}.`
+              ? `${progress.label}: ${progress.done} updated${progress.failed ? `, ${progress.failed} not changed` : ''}.${typeof progress.stillBlank === 'number' ? ` ${progress.stillBlank} of the ${progress.total} still have no category in the database.` : ''}`
               : `${progress.label}: ${progress.done + progress.failed} of ${progress.total}`}
           </p>
           {progress.finished && progress.reasons && Object.keys(progress.reasons).some(k => k !== '__sample') && (
