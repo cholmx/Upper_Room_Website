@@ -255,7 +255,8 @@ export function createBackend({
       if (!res.ok) return fail(json?.error || 'That did not work. Please try again.', res.status);
       return ok(json);
     } catch (err) {
-      return fail(err?.message || 'Network error', 0);
+      // A browser reports a missing function and a blocked request the same way, as a failed fetch.
+      return fail('Could not reach the YouTube import. It is most likely not deployed yet. Ask Bolt to deploy the youtube-feed function.', 0);
     }
   }
 
