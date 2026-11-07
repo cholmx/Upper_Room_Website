@@ -8,6 +8,7 @@ import { AuthProvider, useAuth } from './auth';
 import { SettingsProvider } from './settings';
 import { PhotosProvider } from './photos';
 import Amen from './components/Amen';
+import useImageFade from './hooks/useImageFade';
 import ErrorBoundary from './components/ErrorBoundary';
 
 const Home = lazy(() => import('./pages/Home'));
@@ -65,6 +66,7 @@ function ProtectedRoute({ children }) {
 }
 
 function PublicLayout({ children }) {
+  useImageFade();
   return (
     <div className="public-site min-h-screen flex flex-col">
       <a href="#main" className="skip-link">Skip to content</a>

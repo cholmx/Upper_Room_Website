@@ -141,8 +141,9 @@ export function PhotoBand({ slot, id, className = '', children }) {
   const src = loaded ? imgUrl(url || stockFor(slot), 1600) : '';
   return (
     <section id={id} data-image-band="true" className="max-w-[1312px] mx-auto px-3 md:px-4 py-1.5 md:py-2">
-      <div className={`photo-section rounded-[10px] bg-[#1e2522] text-white py-24 md:py-36 px-6 md:px-10 ${className}`} style={src ? { backgroundImage: `url('${src}')` } : undefined}>
-        <div className="hero-text relative z-10 max-w-3xl">{children}</div>
+      <div className={`photo-section rounded-[10px] bg-[#1e2522] text-white py-24 md:py-36 px-6 md:px-10 ${className}`}>
+        {src && <img src={src} alt="" loading="lazy" decoding="async" className="photo-bg" />}
+        <div className="hero-text max-w-3xl">{children}</div>
       </div>
     </section>
   );
@@ -164,8 +165,9 @@ export function PageHeader({ kicker, title, intro, children, page, image: imageO
   const image = banner && imageOverride ? imageOverride : banner;
   return (
     <header className="max-w-[1312px] mx-auto px-3 md:px-4 pt-3 md:pt-4 pb-1.5 md:pb-2">
-      <div className="photo-section nav-fade rounded-[10px] text-[#ffffff] py-24 md:py-36 px-6 md:px-10 text-left flex items-end" style={image ? { backgroundImage: `url('${imgUrl(image, 1600)}')` } : undefined}>
-        <div className="hero-text max-w-[800px] relative z-10">
+      <div className="photo-section nav-fade rounded-[10px] text-[#ffffff] py-24 md:py-36 px-6 md:px-10 text-left flex items-end">
+        {image && <img src={imgUrl(image, 1600)} alt="" fetchpriority="high" decoding="async" className="photo-bg" />}
+        <div className="hero-text max-w-[800px]">
           {kicker && !same(kicker, title) && <span className="kicker text-[#eaa235]">{kicker}</span>}
           <h1 className="text-4xl md:text-6xl mb-6">{title}</h1>
           {intro && <p className="font-serif text-xl md:text-2xl text-white/90 max-w-[50ch] leading-snug">{intro}</p>}

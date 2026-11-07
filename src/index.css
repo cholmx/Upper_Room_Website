@@ -359,8 +359,11 @@ details.u-acc.neu-acc[open] { background: #ffffff; box-shadow: var(--shadow); }
 .spotlight-dark .rich-text a { color: inherit; }
 
 /* A very light shade at the top of photos that sit behind the menu, so the menu stays readable. */
+.photo-section > img.photo-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+.photo-section > :not(img.photo-bg) { position: relative; z-index: 2; }
 .nav-fade::before {
   content: '';
+  z-index: 1;
   position: absolute;
   inset: 0 0 auto 0;
   height: 12rem;
@@ -392,4 +395,11 @@ details.u-acc.neu-acc[open] { background: #ffffff; box-shadow: var(--shadow); }
 @media (prefers-reduced-motion: reduce) {
   .thumb-link img, .thumb-link .thumb-play { transition: none; }
   .thumb-link:hover img, .thumb-link:hover .thumb-play { transform: none; }
+}
+
+/* Pictures fade in quickly once they have loaded, instead of appearing all at once. */
+.img-fade { opacity: 0; }
+.img-fade.img-in { opacity: 1; transition: opacity 0.35s ease; }
+@media (prefers-reduced-motion: reduce) {
+  .img-fade, .img-fade.img-in { opacity: 1; transition: none; }
 }
