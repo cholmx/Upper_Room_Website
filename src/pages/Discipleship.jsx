@@ -1,7 +1,7 @@
 import React from 'react';
 import usePageMeta from '../hooks/usePageMeta';
 import { useSite } from '../settings';
-import { Section, SectionHeader, PageHeader, Accordion, Band, Panel, PhotoSplit, SlotImage } from '../components/ui';
+import { Section, SectionHeader, PageHeader, Accordion, Band, Panel, PhotoSplit, PhotoBand } from '../components/ui';
 
 const P = 'text-[0.95rem] leading-relaxed text-[#1e2522]/80';
 
@@ -54,11 +54,16 @@ export default function Discipleship() {
         </Panel>
       </Band>
 
+      <Section tone="white" narrow>
+        <SectionHeader title="What you will learn" intro="There are two kinds of classes. Some teach the nine spiritual practices. Others teach the core values of our church." className="!mb-0" />
+      </Section>
+
+      <PhotoBand slot="discipleship-practices">
+        <h2 className="text-3xl md:text-5xl mb-5">The nine spiritual practices</h2>
+        <p className="text-base leading-relaxed">A spiritual practice is a regular habit that helps you grow closer to God. We group the nine practices under our three words: Know God, Share Life, and Serve Others.</p>
+      </PhotoBand>
+
       <Section tone="white">
-        <SectionHeader title="What you will learn" intro="There are two kinds of classes. Some teach the nine spiritual practices. Others teach the core values of our church." />
-        <h3 className="text-2xl md:text-3xl mb-3">The nine spiritual practices</h3>
-        <p className={`max-w-3xl mb-8 ${P}`}>A spiritual practice is a regular habit that helps you grow closer to God. We group the nine practices under our three words: Know God, Share Life, and Serve Others.</p>
-        <SlotImage slot="discipleship-practices" ratio="aspect-[21/9]" className="mb-10" />
         <div className="grid md:grid-cols-3 gap-6">
           {GROUPS.map(g => (
             <div key={g.name} className="fcard !p-8">
