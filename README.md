@@ -176,3 +176,7 @@ In the admin, Messages has an Import from YouTube button. It lists the videos on
 ### Automatic import
 
 `supabase/migrations/20261107120000_auto_import_youtube.sql` schedules an hourly database job that reads the channel's public feed and adds each new video to Messages, live right away. It reads `Series :: Title // Speaker`, and splits the video description into `Sermon Summary` and `Discussion Questions` when those words are on their own lines. A message that already has a summary or questions is never overwritten.
+
+## Editing many messages at once
+
+In the admin, Messages has an Edit many at once panel above the list. Tick messages (or use Select all shown, or Select a whole series), then set their series, speaker or category, add or remove a tag, show them on the website, make them drafts, or delete them. Renaming a series is the same thing: select the whole series and set the new name. Tags need `supabase/migrations/20261107140000_message_tags.sql`. The Messages page lets visitors filter by series, speaker, scripture book, category and tag.

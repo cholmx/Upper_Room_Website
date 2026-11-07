@@ -6,6 +6,7 @@ import { isLive } from '../../utils';
 import { plainText } from '../../lib/markdown';
 import ConfirmDialog from '../../components/ConfirmDialog';
 import YouTubeImport from './YouTubeImport';
+import BulkBar from './BulkBar';
 import FieldInput from './FieldInput';
 import { validate, autoSlug } from './validate';
 import SafeIcon from '../../common/SafeIcon';
@@ -37,6 +38,8 @@ export default function GenericManager({ config }) {
   const [pendingDelete, setPendingDelete] = useState(null);
   const [confirmDiscard, setConfirmDiscard] = useState(false);
   const [importing, setImporting] = useState(false);
+  const [selected, setSelected] = useState(() => new Set());
+  const toggleSelected = (id) => setSelected(prev => { const next = new Set(prev); if (next.has(id)) next.delete(id); else next.add(id); return next; });
   const dragId = useRef(null);
 
   const sortable = Boolean(config.sortField);
@@ -287,6 +290,8 @@ export default function GenericManager({ config }) {
 
       {importing && <YouTubeImport existing={items} onClose={() => setImporting(false)} onImported={fetchItems} />}
 
+      {config.bulk && items.length > 0 && <BulkBar table={config.table} title={config.title} items={items} filtered={filtered} selected={selected} setSelected={setSelected} onDone={fetchItems} />}
+
       {items.length > 0 && !sortable && (
         <div className="relative mb-4 max-w-md">
           <SafeIcon icon={FiSearch} className="absolute left-4 top-1/2 -translate-y-1/2 text-[#1e2522]/50" />
@@ -318,6 +323,7 @@ export default function GenericManager({ config }) {
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="bg-[#1e2522]/5 border-b border-[#1e2522]/10">
+                  {config.bulk && <th className="w-10 px-4 py-4"><span className="sr-only">Select</span></th>}
                   {sortable && <th className="w-24 px-4 py-4"><span className="sr-only">Order</span></th>}
                   {config.thumbField && <th className="w-20 px-4 py-4"><span className="sr-only">Image</span></th>}
                   {columns.map(name => (
@@ -339,6 +345,11 @@ export default function GenericManager({ config }) {
                       onDrop={() => sortable && onDrop(item.id)}
                       className="border-b border-[#1e2522]/10 hover:bg-[#1e2522]/5 transition"
                     >
+                      {config.bulk && (
+                        <td className="px-4 py-4">
+                          <input type="checkbox" checked={selected.has(item.id)} onChange={() => toggleSelected(item.id)} aria-label={`Select ${item[titleField] || 'item'}`} className="w-5 h-5 accent-[#c74f2f]" />
+                        </td>
+                      )}
                       {sortable && (
                         <td className="px-4 py-3">
                           <div className="flex items-center gap-1 text-[#1e2522]/50">
