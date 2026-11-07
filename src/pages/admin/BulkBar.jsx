@@ -16,6 +16,7 @@ export default function BulkBar({ table, title, items, filtered, selected, setSe
   const [progress, setProgress] = useState(null);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [replaceAll, setReplaceAll] = useState(false);
+  const [testResult, setTestResult] = useState(null);
 
   const distinct = (key) => [...new Set(items.map(i => String(i[key] || '').trim()).filter(Boolean))].sort((a, b) => a.localeCompare(b));
   const seriesList = useMemo(() => distinct('series'), [items]);
@@ -64,6 +65,12 @@ export default function BulkBar({ table, title, items, filtered, selected, setSe
   };
   const transient = (res, out) => res.status !== 'success' || out === '!request_failed' || /^!status_(429|500|502|503|529)$/.test(out);
   const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+
+  const testOne = async () => {
+    setTestResult({ loading: true });
+    const res = await backend.rpc('ai_review_test', { sermon_id: chosen[0].id });
+    setTestResult(res.status === 'success' ? { data: res.data } : { error: res.error });
+  };
 
   const reviewWithAi = async () => {
     setProgress({ label: 'AI review', done: 0, failed: 0, total: chosen.length, reasons: {} });
@@ -163,6 +170,7 @@ export default function BulkBar({ table, title, items, filtered, selected, setSe
             <div className="flex flex-wrap items-end gap-3">
               <span className="text-sm font-semibold block w-full">Review with AI</span>
               <button type="button" disabled={busy} onClick={reviewWithAi} className={btn}>Review {selected.size} with AI</button>
+              {selected.size === 1 && <button type="button" disabled={busy || testResult?.loading} onClick={testOne} className={btn}>Test this one (saves nothing)</button>}
               <label className="flex items-center gap-2 text-sm cursor-pointer">
                 <input type="checkbox" checked={replaceAll} onChange={(e) => setReplaceAll(e.target.checked)} className="w-5 h-5 accent-[#c74f2f]" />
                 Replace categories already set
@@ -175,6 +183,20 @@ export default function BulkBar({ table, title, items, filtered, selected, setSe
               <button type="button" disabled={busy} onClick={() => setConfirmDelete(true)} className={`${btn} !text-[#c74f2f]`}>Delete selected</button>
             </div>
           </div>
+        </div>
+      )}
+
+      {testResult && (
+        <div role="status" className="mt-4 text-sm rounded-[10px] bg-[#e8e7e3] p-4">
+          {testResult.loading && <p>Asking the AI.</p>}
+          {testResult.error && <p className="text-[#c74f2f] font-semibold">{testResult.error}</p>}
+          {testResult.data && (
+            <dl className="space-y-1">
+              {Object.entries(testResult.data).map(([k, v]) => (
+                <div key={k} className="flex flex-wrap gap-2"><dt className="font-semibold">{k.replace(/_/g, ' ')}:</dt><dd className="break-words">{Array.isArray(v) ? v.join(', ') || 'none' : String(v)}</dd></div>
+              ))}
+            </dl>
+          )}
         </div>
       )}
 
