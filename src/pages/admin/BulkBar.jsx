@@ -52,20 +52,48 @@ export default function BulkBar({ table, title, items, filtered, selected, setSe
     '!already_set': 'Already has a category.',
     '!not_found': 'That message no longer exists.',
   };
+  const explain = (res, out) => {
+    if (res.status !== 'success') return res.error;
+    if (WHY[out]) return WHY[out];
+    if (out.startsWith('!no_match')) return `${WHY['!no_match']} It said: ${out.slice(11) || 'nothing'}`;
+    if (out.startsWith('!status_')) {
+      const code = out.slice(8);
+      return code === '429' ? 'The AI service asked us to slow down (rate limit).' : code === '401' ? 'The AI service did not accept the key.' : `The AI service answered ${code}.`;
+    }
+    return 'No change.';
+  };
+  const transient = (res, out) => res.status !== 'success' || out === '!request_failed' || /^!status_(429|500|502|503|529)$/.test(out);
+  const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+
   const reviewWithAi = async () => {
-    setProgress({ label: 'AI review', done: 0, failed: 0, total: chosen.length });
-    let done = 0; let failed = 0; let reason = '';
-    for (const r of chosen) {
-      const res = await backend.rpc('ai_review_message', { sermon_id: r.id, replace: replaceAll });
-      const out = res.status === 'success' ? String(res.data ?? '') : '';
+    setProgress({ label: 'AI review', done: 0, failed: 0, total: chosen.length, reasons: {} });
+    let done = 0; let failed = 0;
+    const reasons = {};
+    for (let i = 0; i < chosen.length; i += 1) {
+      const r = chosen[i];
+      let res; let out = '';
+      // A busy or rate limited AI service gets a short rest and up to two more tries.
+      for (let attempt = 0; attempt < 3; attempt += 1) {
+        res = await backend.rpc('ai_review_message', { sermon_id: r.id, replace: replaceAll });
+        out = res.status === 'success' ? String(res.data ?? '') : '';
+        if (!transient(res, out)) break;
+        await sleep(3000 * (attempt + 1));
+      }
       if (res.status === 'success' && out && out[0] !== '!') done += 1;
-      else { failed += 1; reason = reason || (res.status !== 'success' ? res.error : (WHY[out] || (out.startsWith('!no_match') ? `${WHY['!no_match']} It said: ${out.slice(11)}` : out.startsWith('!status_') ? `The AI service answered ${out.slice(8)}.` : 'No change.'))); }
-      setProgress({ label: 'AI review', done, failed, total: chosen.length, reason });
-      if (reason === WHY['!no_key']) break;
+      else {
+        failed += 1;
+        const why = explain(res, out).replace(/ It said:.*$/, '');
+        reasons[why] = (reasons[why] || 0) + 1;
+        if (!reasons.__sample && out.startsWith('!no_match')) reasons.__sample = explain(res, out);
+      }
+      setProgress({ label: 'AI review', done, failed, total: chosen.length, reasons: { ...reasons } });
+      if (out === '!no_key' || out === '!no_categories') break;
+      // A short pause keeps a new account under the AI service's requests-per-minute limit.
+      if (i < chosen.length - 1) await sleep(1100);
     }
     if (done) logActivity(user, 'AI reviewed', title, `${done} messages`);
     await onDone();
-    setProgress({ label: 'AI review', done, failed, total: chosen.length, finished: true, reason });
+    setProgress({ label: 'AI review', done, failed, total: chosen.length, finished: true, reasons: { ...reasons } });
   };
 
   const deleteAll = async () => {
@@ -148,11 +176,19 @@ export default function BulkBar({ table, title, items, filtered, selected, setSe
       )}
 
       {progress && (
-        <p role="status" className="mt-4 text-sm font-semibold">
-          {progress.finished
-            ? `${progress.label}: ${progress.done} updated${progress.failed ? `, ${progress.failed} not changed` : ''}.${progress.reason ? ` ${progress.reason}` : ''}`
-            : `${progress.label}: ${progress.done + progress.failed} of ${progress.total}`}
-        </p>
+        <div role="status" className="mt-4 text-sm">
+          <p className="font-semibold">
+            {progress.finished
+              ? `${progress.label}: ${progress.done} updated${progress.failed ? `, ${progress.failed} not changed` : ''}.`
+              : `${progress.label}: ${progress.done + progress.failed} of ${progress.total}`}
+          </p>
+          {progress.finished && progress.reasons && Object.keys(progress.reasons).some(k => k !== '__sample') && (
+            <ul className="mt-2 list-disc pl-5 space-y-1 text-[#1e2522]/80">
+              {Object.entries(progress.reasons).filter(([k]) => k !== '__sample').map(([why, n]) => <li key={why}>{n} {n === 1 ? 'message' : 'messages'}: {why}</li>)}
+              {progress.reasons.__sample && <li>{progress.reasons.__sample}</li>}
+            </ul>
+          )}
+        </div>
       )}
 
       {confirmDelete && (
