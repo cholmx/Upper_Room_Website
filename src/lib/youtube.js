@@ -43,14 +43,36 @@ export function parseVideoTitle(raw) {
   return { title, speaker, series, date };
 }
 
+// A video description can hold a "Sermon Summary" and "Discussion Questions" part. Each heading sits on its own line
+// (an optional colon is fine). With neither heading, the whole description is the summary.
+const SUMMARY_HEAD = /^\s*(?:sermon\s+)?summary\s*:?\s*$/i;
+const QUESTIONS_HEAD = /^\s*(?:discussion\s+questions?|questions?\s+for\s+discussion)\s*:?\s*$/i;
+
+export function splitDescription(text) {
+  const lines = String(text || '').replace(/\r/g, '').split('\n');
+  const out = { summary: [], questions: [] };
+  let mode = null;
+  let sawHeading = false;
+  for (const line of lines) {
+    if (SUMMARY_HEAD.test(line)) { mode = 'summary'; sawHeading = true; continue; }
+    if (QUESTIONS_HEAD.test(line)) { mode = 'questions'; sawHeading = true; continue; }
+    if (mode) out[mode].push(line);
+  }
+  const clean = (a) => a.join('\n').trim();
+  if (!sawHeading) return { summary: String(text || '').trim(), questions: '' };
+  return { summary: clean(out.summary), questions: clean(out.questions) };
+}
+
 export function toMessage(video) {
   const { title, speaker, series, date } = parseVideoTitle(video.title);
+  const split = splitDescription(video.description);
   return {
     title: title || video.title,
     speaker,
     series,
     date: date || String(video.published || '').slice(0, 10) || null,
-    description: String(video.description || '').trim().slice(0, 4000),
+    description: split.summary.slice(0, 4000),
+    discussion_questions: split.questions.slice(0, 8000),
     video_url: `https://www.youtube.com/watch?v=${video.id}`,
   };
 }

@@ -61,8 +61,13 @@ export default function YouTubeImport({ existing, onClose, onImported }) {
     setFixed({ done: 0, failed: 0, total: known.length });
     let done = 0; let failed = 0;
     for (const v of known) {
-      const { title, speaker, series, date } = toMessage(v);
-      const res = await dataFetch(`update/sermons/${rowById[v.id].id}`, { method: 'PUT', body: JSON.stringify({ title, speaker, series, date }) });
+      const { title, speaker, series, date, description, discussion_questions: questions } = toMessage(v);
+      const row = rowById[v.id];
+      // The summary and questions are only filled in when the message has none yet, so edits to them are kept.
+      const extra = {};
+      if (!String(row.description || '').trim() && description) extra.description = description;
+      if (!String(row.discussion_questions || '').trim() && questions) extra.discussion_questions = questions;
+      const res = await dataFetch(`update/sermons/${row.id}`, { method: 'PUT', body: JSON.stringify({ title, speaker, series, date, ...extra }) });
       if (res.status === 'success') done += 1; else failed += 1;
       setFixed({ done, failed, total: known.length });
     }
@@ -94,7 +99,7 @@ export default function YouTubeImport({ existing, onClose, onImported }) {
               <p><strong>{known.length}</strong> of these are already in your messages. If their titles, speakers or dates came in wrong, you can read them again from the channel.</p>
               {confirmFix ? (
                 <div className="mt-3 flex flex-wrap items-center gap-3">
-                  <span className="font-semibold">This replaces the title, speaker, series and date of {known.length} messages. Changes you made to those fields will be lost.</span>
+                  <span className="font-semibold">This replaces the title, speaker, series and date of {known.length} messages, and fills in any empty summary or discussion questions. Changes you made to the title, speaker, series or date will be lost.</span>
                   <button type="button" onClick={fix} className="bg-[#c74f2f] text-white font-bold py-2 px-4 rounded-lg">Replace them</button>
                   <button type="button" onClick={() => setConfirmFix(false)} className="px-4 py-2 rounded-lg border border-[#1e2522]/20 font-bold">Cancel</button>
                 </div>

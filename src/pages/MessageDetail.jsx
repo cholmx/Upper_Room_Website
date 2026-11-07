@@ -76,8 +76,14 @@ export default function MessageDetail() {
           )}
           {m.description && (
             <div className="mb-8">
-              <h2 className="text-2xl mb-3">Summary</h2>
+              <h2 className="text-2xl mb-3">Sermon summary</h2>
               <RichText value={m.description} className="text-[0.95rem]" />
+            </div>
+          )}
+          {m.discussion_questions && (
+            <div className="mb-8">
+              <h2 className="text-2xl mb-3">Discussion questions</h2>
+              <RichText value={m.discussion_questions} className="text-[0.95rem]" />
             </div>
           )}
           {notesUrl && <p className="mb-8"><Btn href={notesUrl} variant="ghost">Download the notes</Btn></p>}

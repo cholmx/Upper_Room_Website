@@ -172,3 +172,7 @@ The area below the hero is managed in the admin under Site, Front Page Area. Eac
 ## Importing messages from YouTube
 
 In the admin, Messages has an Import from YouTube button. It lists the videos on the Upper Room Fellowship channel, skips any already in the library, and creates a message for each one picked. Titles written as `Series :: Title // Speaker` fill in the series, title and speaker. Set `VITE_YOUTUBE_API_KEY` (a YouTube Data API v3 key restricted to this website and to that one API) to list the whole channel, up to 300 videos. Without it, the import falls back to the edge function in `supabase/functions/youtube-videos`, which sees only the 15 newest videos.
+
+### Automatic import
+
+`supabase/migrations/20261107120000_auto_import_youtube.sql` schedules an hourly database job that reads the channel's public feed and adds each new video to Messages, live right away. It reads `Series :: Title // Speaker`, and splits the video description into `Sermon Summary` and `Discussion Questions` when those words are on their own lines. A message that already has a summary or questions is never overwritten.
