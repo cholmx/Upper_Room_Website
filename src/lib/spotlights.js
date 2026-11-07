@@ -10,6 +10,7 @@ export const LAYOUTS = [
 
 export const TONES = [
   { value: 'white', label: 'White' },
+  { value: 'tan', label: 'Sand' },
   { value: 'ink', label: 'Near black' },
   { value: 'terra', label: 'Orange red' },
   { value: 'gold', label: 'Amber' },

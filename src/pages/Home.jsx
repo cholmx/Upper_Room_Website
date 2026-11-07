@@ -53,7 +53,7 @@ export default function Home() {
         </div>
       </Section>
 
-      <Section tone="ink">
+      <Section tone="tan">
         <div className="grid md:grid-cols-3 gap-10">
           {[
             ['Know God', 'Draw close to Him through worship, prayer, and Scripture.', 'home-know'],
@@ -62,8 +62,8 @@ export default function Home() {
           ].map(([t, d, slot]) => (
             <div key={t}>
               <SlotImage slot={slot} className="mb-5" />
-              <h2 className="text-3xl md:text-4xl mb-3 text-[#eaa235]">{t}</h2>
-              <p className="text-[0.95rem] leading-relaxed text-white">{d}</p>
+              <h2 className="text-3xl md:text-4xl mb-3">{t}</h2>
+              <p className="text-[0.95rem] leading-relaxed text-[#1e2522]/80">{d}</p>
             </div>
           ))}
         </div>
@@ -106,10 +106,10 @@ export default function Home() {
         <div className="mt-6"><Btn href={SITE.googleMapsUrl} variant="dark">Get Directions</Btn></div>
       </PhotoSplit>
 
-      <PhotoSplit tone="ink" slot="home-vision" side="left">
+      <PhotoSplit tone="tan" slot="home-vision" side="left">
         <h2 className="text-3xl md:text-5xl mb-6">Our Vision</h2>
         <p className="text-xl md:text-2xl leading-snug mb-5 font-serif">We exist to help people know God deeply, share life authentically, and serve others selflessly.</p>
-        <p className="text-[0.95rem] leading-relaxed text-white">Lasting change starts on the inside, as our hearts line up with God’s heart. That conviction shapes how we build relationships, how we pray, and how we serve.</p>
+        <p className="text-[0.95rem] leading-relaxed text-[#1e2522]/80">Lasting change starts on the inside, as our hearts line up with God’s heart. That conviction shapes how we build relationships, how we pray, and how we serve.</p>
         <div className="mt-6"><Btn to="/core-values" variant="primary">Read Our Core Values</Btn></div>
         <blockquote className="mt-8 font-serif italic text-xl leading-snug">
           “By this everyone will know that you are my disciples, if you love one another.”

@@ -5,8 +5,8 @@ import { Btn, Section } from './ui';
 import RichText from './RichText';
 import { activeSpotlights } from '../lib/spotlights';
 
-const FIRST = { white: 'primary', ink: 'primary', terra: 'light', gold: 'dark' };
-const SECOND = { white: 'dark', ink: 'light', terra: 'dark', gold: 'light' };
+const FIRST = { white: 'primary', tan: 'primary', ink: 'primary', terra: 'light', gold: 'dark' };
+const SECOND = { white: 'dark', tan: 'dark', ink: 'light', terra: 'dark', gold: 'light' };
 const DARK_TONES = ['ink', 'terra'];
 
 function Buttons({ s, center }) {
@@ -73,7 +73,7 @@ export default function Spotlights() {
   const { data } = useFetch('read/home_spotlights_church?sort=sort_order_num:asc');
   const active = useMemo(() => activeSpotlights(data), [data]);
   // Neighboring panels must differ in color, so a layout that repeats the one above it takes the next color.
-  const ORDER = ['white', 'ink', 'terra', 'gold'];
+  const ORDER = ['white', 'tan', 'ink', 'terra', 'gold'];
   let prev = '';
   const shown = active.map(s => {
     let tone = ORDER.includes(s.tone) ? s.tone : 'white';

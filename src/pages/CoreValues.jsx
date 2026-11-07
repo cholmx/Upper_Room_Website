@@ -32,16 +32,16 @@ export default function CoreValues() {
           const dark = v.n % 2 === 1;
           return (
             <li key={v.id} id={v.id} className="contents">
-              <Section tone={dark ? 'ink' : 'white'}>
+              <Section tone={dark ? 'tan' : 'white'}>
                 <div className="grid md:grid-cols-[220px_1fr] gap-8 md:gap-14 items-center">
                   <div className="flex md:flex-col items-center md:items-start gap-5">
                     <ValueIcon n={v.n} />
-                    <span className={`font-display font-bold text-5xl md:text-6xl ${dark ? 'text-[#eaa235]' : 'text-[#c74f2f]'}`}>{String(v.n).padStart(2, '0')}</span>
+                    <span className={`font-display font-bold text-5xl md:text-6xl text-[#c74f2f]`}>{String(v.n).padStart(2, '0')}</span>
                   </div>
                   <div>
                     <h2 className="text-3xl md:text-4xl mb-4">{v.title}</h2>
-                    <p className={`text-[0.95rem] leading-relaxed ${dark ? 'text-white' : 'text-[#1e2522]/80'}`}>{v.body}</p>
-                    <p className={`mt-5 rounded-[10px] p-5 text-[0.95rem] leading-relaxed ${dark ? 'bg-white/10 text-white' : 'bg-[#1e2522]/5 text-[#1e2522]/80'}`}>{v.practice}</p>
+                    <p className={`text-[0.95rem] leading-relaxed text-[#1e2522]/80`}>{v.body}</p>
+                    <p className={`mt-5 rounded-[10px] p-5 text-[0.95rem] leading-relaxed ${dark ? 'bg-white/60' : 'bg-[#1e2522]/5'} text-[#1e2522]/80`}>{v.practice}</p>
                   </div>
                 </div>
               </Section>
