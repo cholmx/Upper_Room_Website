@@ -324,7 +324,17 @@ export default function GenericManager({ config }) {
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="bg-[#1e2522]/5 border-b border-[#1e2522]/10">
-                  {config.bulk && <th className="w-10 px-4 py-4"><span className="sr-only">Select</span></th>}
+                  {config.bulk && (
+                    <th className="w-10 px-4 py-4">
+                      <input
+                        type="checkbox"
+                        aria-label={visible.length > 0 && visible.every(i => selected.has(i.id)) ? 'Deselect everything on this page' : 'Select everything on this page'}
+                        checked={visible.length > 0 && visible.every(i => selected.has(i.id))}
+                        onChange={(e) => setSelected(prev => { const next = new Set(prev); visible.forEach(i => (e.target.checked ? next.add(i.id) : next.delete(i.id))); return next; })}
+                        className="w-5 h-5 accent-[#c74f2f]"
+                      />
+                    </th>
+                  )}
                   {sortable && <th className="w-24 px-4 py-4"><span className="sr-only">Order</span></th>}
                   {config.thumbField && <th className="w-20 px-4 py-4"><span className="sr-only">Image</span></th>}
                   {columns.map(name => (

@@ -74,7 +74,7 @@ export default function BulkBar({ table, title, items, filtered, selected, setSe
       <div className="flex flex-wrap items-center gap-3 text-sm">
         <strong>Edit many at once</strong>
         <button type="button" className={btn} onClick={() => setSelected(new Set(filtered.map(i => i.id)))}>Select all {filtered.length} shown</button>
-        <button type="button" className={btn} onClick={() => setSelected(new Set())} disabled={selected.size === 0}>Select none</button>
+        <button type="button" className={btn} onClick={() => setSelected(new Set())} disabled={selected.size === 0}>Deselect all</button>
         <label className="flex items-center gap-2">
           <span className="font-semibold">Select a whole series</span>
           <select value="" onChange={(e) => { const name = e.target.value; if (name) setSelected(new Set(items.filter(i => String(i.series || '').trim() === name).map(i => i.id))); }} className={input}>
