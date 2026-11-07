@@ -63,6 +63,18 @@ export function splitDescription(text) {
   return { summary: clean(out.summary), questions: clean(out.questions) };
 }
 
+// The sermon is given on Sunday and the video is posted afterward, so a video's sermon date is the Sunday on or
+// before the day it was posted, by the clock in Ohio. A video posted on a Sunday counts as that Sunday.
+export function sundayOnOrBefore(timestamp, timeZone = 'America/New_York') {
+  const t = new Date(timestamp);
+  if (!timestamp || Number.isNaN(t.getTime())) return '';
+  const parts = new Intl.DateTimeFormat('en-CA', { timeZone, year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(t);
+  const get = (type) => Number(parts.find(p => p.type === type)?.value);
+  const local = new Date(Date.UTC(get('year'), get('month') - 1, get('day')));
+  local.setUTCDate(local.getUTCDate() - local.getUTCDay());
+  return local.toISOString().slice(0, 10);
+}
+
 export function toMessage(video) {
   const { title, speaker, series, date } = parseVideoTitle(video.title);
   const split = splitDescription(video.description);
@@ -70,7 +82,7 @@ export function toMessage(video) {
     title: title || video.title,
     speaker,
     series,
-    date: date || String(video.published || '').slice(0, 10) || null,
+    date: date || sundayOnOrBefore(video.published) || null,
     description: split.summary.slice(0, 4000),
     discussion_questions: split.questions.slice(0, 8000),
     video_url: `https://www.youtube.com/watch?v=${video.id}`,

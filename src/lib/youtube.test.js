@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { parseVideoTitle, toMessage, fetchChannelVideos, fullSpeakerName, splitDescription } from './youtube';
+import { parseVideoTitle, toMessage, fetchChannelVideos, fullSpeakerName, splitDescription, sundayOnOrBefore } from './youtube';
 
 describe('parseVideoTitle', () => {
   it('splits series, title and speaker', () => {
@@ -50,7 +50,7 @@ describe('fullSpeakerName', () => {
 describe('toMessage', () => {
   it('builds a message from a video', () => {
     const m = toMessage({ id: 'abc123DEF45', title: 'Acts 1 :: Wait // Kate Holm', published: '2026-11-04T15:36:05+00:00', description: ' Hello ' });
-    expect(m).toEqual({ title: 'Wait', speaker: 'Kate Holm', series: 'Acts 1', date: '2026-11-04', description: 'Hello', discussion_questions: '', video_url: 'https://www.youtube.com/watch?v=abc123DEF45' });
+    expect(m).toEqual({ title: 'Wait', speaker: 'Kate Holm', series: 'Acts 1', date: '2026-11-01', description: 'Hello', discussion_questions: '', video_url: 'https://www.youtube.com/watch?v=abc123DEF45' });
   });
   it('prefers the date in the title over the upload date', () => {
     expect(toMessage({ id: 'x'.repeat(11), title: 'Joy // Chris Holm // 8.8.2021', published: '2022-01-01T00:00:00Z' }).date).toBe('2021-08-08');
@@ -75,5 +75,23 @@ describe('fetchChannelVideos', () => {
   it('explains a refused key', async () => {
     const fake = async () => ({ ok: false, status: 403, json: async () => ({ error: { errors: [{ reason: 'accessNotConfigured' }] } }) });
     await expect(fetchChannelVideos('KEY', fake)).rejects.toThrow(/YouTube Data API v3 is enabled/);
+  });
+});
+
+describe('sundayOnOrBefore', () => {
+  it('goes back to the Sunday before a weekday post', () => {
+    expect(sundayOnOrBefore('2026-11-04T15:36:05+00:00')).toBe('2026-11-01'); // Wednesday
+    expect(sundayOnOrBefore('2026-11-07T23:00:00+00:00')).toBe('2026-11-01'); // Saturday
+    expect(sundayOnOrBefore('2026-11-02T14:00:00+00:00')).toBe('2026-11-01'); // Monday
+  });
+  it('keeps a Sunday post on that Sunday', () => {
+    expect(sundayOnOrBefore('2026-11-08T20:00:00+00:00')).toBe('2026-11-08');
+  });
+  it('uses the day in Ohio, not the day in UTC', () => {
+    expect(sundayOnOrBefore('2026-11-09T02:00:00+00:00')).toBe('2026-11-08'); // Sunday evening in Ohio, Monday in UTC
+  });
+  it('handles a missing or bad time', () => {
+    expect(sundayOnOrBefore('')).toBe('');
+    expect(sundayOnOrBefore('not a date')).toBe('');
   });
 });
