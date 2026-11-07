@@ -1,31 +1,50 @@
 // Turns a YouTube video into the fields of a message. Titles on the channel usually look like
-// "Acts 10-11 :: Who Is the Gospel For? // Josh Osborn" (passage :: title // speaker). Anything that does
+// "Acts 10-11 :: Who Is the Gospel For? // Josh Osborn" (passage or series :: title // speaker, with an optional date such as 7.25.2021). Anything that does
 // not fit that shape keeps its whole title, and staff can edit every field after importing.
 
+const DATE_RE = /^(\d{1,2})[./-](\d{1,2})[./-](\d{2}|\d{4})$/;
+// "Acts 10-11", "1 John 3", "Song of Solomon 2:1-9" read as a passage. A first part without a chapter number, like "Pursuit", is a series.
+const PASSAGE_RE = /^(?:[1-3]\s)?[A-Z][A-Za-z]+(?:\s(?:of\s)?[A-Z][A-Za-z]+)*\s\d+/;
+
+function isoDate(text) {
+  const m = DATE_RE.exec(text);
+  if (!m) return '';
+  const month = Number(m[1]); const day = Number(m[2]);
+  const year = m[3].length === 2 ? 2000 + Number(m[3]) : Number(m[3]);
+  if (month < 1 || month > 12 || day < 1 || day > 31) return '';
+  return `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+}
+
 export function parseVideoTitle(raw) {
-  let title = String(raw || '').trim();
+  const parts = String(raw || '').trim().split(/\s+\/\/\s+/);
+  let date = '';
+  const rest = [];
+  for (const part of parts) {
+    const iso = isoDate(part.trim());
+    if (iso) { date = date || iso; } else rest.push(part.trim());
+  }
   let speaker = '';
+  if (rest.length > 1) speaker = rest.pop();
+  let title = rest.join(' // ');
   let scripture = '';
-  const bySpeaker = title.split(/\s+\/\/\s+/);
-  if (bySpeaker.length > 1) {
-    speaker = bySpeaker.pop().trim();
-    title = bySpeaker.join(' // ').trim();
+  let series = '';
+  const byLabel = title.split(/\s+::\s+/);
+  if (byLabel.length > 1) {
+    const head = byLabel.shift();
+    if (PASSAGE_RE.test(head)) scripture = head; else series = head;
+    title = byLabel.join(' :: ');
   }
-  const byPassage = title.split(/\s+::\s+/);
-  if (byPassage.length > 1) {
-    scripture = byPassage.shift().trim();
-    title = byPassage.join(' :: ').trim();
-  }
-  return { title, speaker, scripture };
+  return { title, speaker, scripture, series, date };
 }
 
 export function toMessage(video) {
-  const { title, speaker, scripture } = parseVideoTitle(video.title);
+  const { title, speaker, scripture, series, date } = parseVideoTitle(video.title);
   return {
     title: title || video.title,
     speaker,
     scripture,
-    date: String(video.published || '').slice(0, 10) || null,
+    series,
+    date: date || String(video.published || '').slice(0, 10) || null,
     description: String(video.description || '').trim().slice(0, 4000),
     video_url: `https://www.youtube.com/watch?v=${video.id}`,
   };

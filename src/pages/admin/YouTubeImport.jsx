@@ -13,6 +13,8 @@ export default function YouTubeImport({ existing, onClose, onImported }) {
   const [picked, setPicked] = useState({});
   const [publish, setPublish] = useState(true);
   const [progress, setProgress] = useState(null);
+  const [confirmFix, setConfirmFix] = useState(false);
+  const [fixed, setFixed] = useState(null);
 
   const have = useMemo(() => new Set(existing.map(m => ytId(m.video_url || m.yt)).filter(Boolean)), [existing]);
 
@@ -35,6 +37,8 @@ export default function YouTubeImport({ existing, onClose, onImported }) {
     return () => { live = false; };
   }, [have]);
 
+  const rowById = useMemo(() => Object.fromEntries(existing.map(m => [ytId(m.video_url || m.yt), m]).filter(([k]) => k)), [existing]);
+  const known = state.videos.filter(v => rowById[v.id]);
   const fresh = state.videos.filter(v => !have.has(v.id));
   const chosen = fresh.filter(v => picked[v.id]);
 
@@ -50,6 +54,21 @@ export default function YouTubeImport({ existing, onClose, onImported }) {
     if (done) logActivity(user, 'imported', 'Messages', `${done} from YouTube`);
     onImported();
     setProgress({ done, failed, total: chosen.length, finished: true });
+  };
+
+  const fix = async () => {
+    setConfirmFix(false);
+    setFixed({ done: 0, failed: 0, total: known.length });
+    let done = 0; let failed = 0;
+    for (const v of known) {
+      const { title, speaker, scripture, series, date } = toMessage(v);
+      const res = await dataFetch(`update/sermons/${rowById[v.id].id}`, { method: 'PUT', body: JSON.stringify({ title, speaker, scripture, series, date }) });
+      if (res.status === 'success') done += 1; else failed += 1;
+      setFixed({ done, failed, total: known.length });
+    }
+    if (done) logActivity(user, 'refreshed', 'Messages', `${done} from YouTube`);
+    onImported();
+    setFixed({ done, failed, total: known.length, finished: true });
   };
 
   const busy = progress && !progress.finished;
@@ -70,6 +89,23 @@ export default function YouTubeImport({ existing, onClose, onImported }) {
       {state.phase === 'ready' && (
         <>
           {state.source === 'feed' && <p className="text-sm text-[#1e2522]/70 mb-3">This list shows the 15 newest videos. To bring in older ones, ask Bolt to add a YouTube Data API key as VITE_YOUTUBE_API_KEY.</p>}
+          {known.length > 0 && (
+            <div className="mb-5 p-4 rounded-lg bg-[#1e2522]/5 text-sm">
+              <p><strong>{known.length}</strong> of these are already in your messages. If their titles, speakers or dates came in wrong, you can read them again from the channel.</p>
+              {confirmFix ? (
+                <div className="mt-3 flex flex-wrap items-center gap-3">
+                  <span className="font-semibold">This replaces the title, speaker, passage, series and date of {known.length} messages. Changes you made to those fields will be lost.</span>
+                  <button type="button" onClick={fix} className="bg-[#c74f2f] text-white font-bold py-2 px-4 rounded-lg">Replace them</button>
+                  <button type="button" onClick={() => setConfirmFix(false)} className="px-4 py-2 rounded-lg border border-[#1e2522]/20 font-bold">Cancel</button>
+                </div>
+              ) : (
+                <div className="mt-3 flex flex-wrap items-center gap-3">
+                  <button type="button" onClick={() => setConfirmFix(true)} disabled={fixed && !fixed.finished} className="px-4 py-2 rounded-lg border border-[#1e2522]/20 bg-white font-bold disabled:opacity-50">Read titles again</button>
+                  {fixed && <span role="status" className="font-semibold">{fixed.finished ? `${fixed.done} updated${fixed.failed ? `, ${fixed.failed} could not be saved` : ''}.` : `Updating ${fixed.done + fixed.failed} of ${fixed.total}`}</span>}
+                </div>
+              )}
+            </div>
+          )}
           {fresh.length === 0 ? (
             <p className="text-[#1e2522]/70">Every video on the channel is already in your messages.</p>
           ) : (
