@@ -184,3 +184,5 @@ In the admin, Messages has an Edit many at once panel above the list. Tick messa
 ### Automatic categories
 
 `supabase/migrations/20261107150000_ai_message_tags.sql` adds an hourly database job that looks at up to 10 messages with no category, sends the title, series and sermon summary to an Anthropic model, and saves up to three categories chosen from the approved list (admin, Message Categories). It fills in a blank category only and looks at each message once. The key is saved in Supabase Vault under the name `anthropic_api_key` and is never part of the website. With no key saved, nothing is sent. `20261107180000_ai_categories_only.sql` limits it to categories, and `20261107190000_multiple_categories.sql` lets a message have up to three.
+
+To review messages on demand, open Messages in the admin, select them (Select messages with no category helps), and use Review with AI in the Edit many at once panel. By default it only fills in messages with no category. Tick Replace categories already set to redo the ones that have one. It needs `supabase/migrations/20261107200000_ai_review_now.sql`.

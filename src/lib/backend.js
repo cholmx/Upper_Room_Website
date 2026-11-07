@@ -260,7 +260,28 @@ export function createBackend({
     }
   }
 
-  return { configured, signIn, signOut, getUser, data, getToken, upload, invoke };
+  // Calls a database function as the signed-in user and returns what it answers.
+  async function rpc(name, args = {}) {
+    if (!configured) return fail('The backend is not configured', 0);
+    if (!/^[a-z][a-z0-9_]*$/.test(name)) return fail('Invalid function name', 400);
+    try {
+      const token = await getToken();
+      if (token === anonKey) return fail('Please sign in again.', 401);
+      const res = await fetchImpl(`${base}/rest/v1/rpc/${name}`, {
+        method: 'POST',
+        headers: { apikey: anonKey, Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify(args),
+      });
+      const json = await res.json().catch(() => null);
+      if (res.status === 404) return fail('That feature is not set up yet. Ask Bolt to apply the latest database migration.', 404);
+      if (!res.ok) return fail(dataErrorText(res.status), res.status);
+      return ok(json);
+    } catch (err) {
+      return fail(err?.message || 'Network error', 0);
+    }
+  }
+
+  return { configured, signIn, signOut, getUser, data, getToken, upload, invoke, rpc };
 }
 
 export const backend = createBackend({
