@@ -180,3 +180,7 @@ In the admin, Messages has an Import from YouTube button. It lists the videos on
 ## Editing many messages at once
 
 In the admin, Messages has an Edit many at once panel above the list. Tick messages (or use Select all shown, or Select a whole series), then set their series, speaker or category, add or remove a tag, show them on the website, make them drafts, or delete them. Renaming a series is the same thing: select the whole series and set the new name. Tags need `supabase/migrations/20261107140000_message_tags.sql`. The Messages page lets visitors filter by series, speaker, scripture book, category and tag.
+
+### Automatic categories and tags
+
+`supabase/migrations/20261107150000_ai_message_tags.sql` adds an hourly database job that looks at up to 10 messages with no category or no tags, sends the title, series and sermon summary to an Anthropic model, and saves a category chosen from the approved list (admin, Message Categories) plus up to 4 tags. It fills in blank fields only and looks at each message once. The key is saved in Supabase Vault under the name `anthropic_api_key` and is never part of the website. With no key saved, nothing is sent.

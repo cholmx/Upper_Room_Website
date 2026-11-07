@@ -143,6 +143,15 @@ const TAB_CONFIGS = {
       { name: 'sort_order_num', label: 'Order on the page (lower shows first)', type: 'number' },
     ]
   },
+  categories: {
+    table: 'message_categories_church',
+    title: 'Message Categories',
+    titleField: 'name',
+    columns: ['name'],
+    fields: [
+      { name: 'name', label: 'Category name', type: 'text', required: true },
+    ]
+  },
   stories: {
     table: 'stories_church',
     title: 'Stories',
@@ -222,6 +231,7 @@ const ContentStudio = () => {
     ],
     'Content': [
       { key: 'sermons', label: 'Messages', icon: FiMic },
+      { key: 'categories', label: 'Message Categories', icon: FiLayout },
       { key: 'staff', label: 'Staff & Leaders', icon: FiUsers },
       { key: 'posts', label: 'Blog Posts', icon: FiFileText },
     ],
