@@ -23,14 +23,6 @@ const GROUPS = [
   ] },
 ];
 
-const YEARS = [
-  { year: 'Year 1', kind: 'Practices', lines: ['Fall: Sabbath', 'Winter: Prayer', 'Spring: Service'] },
-  { year: 'Year 2', kind: 'Values In The Kingdom', lines: ['Yellow class, all year'] },
-  { year: 'Year 3', kind: 'Practices', lines: ['Fall: Community', 'Winter: Scripture', 'Spring: Witness'] },
-  { year: 'Year 4', kind: 'Values In The Kingdom', lines: ['Green class, all year'] },
-  { year: 'Year 5', kind: 'Practices', lines: ['Fall: Generosity', 'Winter: Solitude', 'Spring: Fasting'] },
-];
-
 const FAQ = [
   ['Do I have to start in the fall?', 'No. Come when you are ready. The five years repeat, so anything you miss at the start comes back around.'],
   ['What does Values In The Kingdom mean?', 'Values In The Kingdom is the name of our classes on the core values of our church. There are two, a Yellow class and a Green class, and each one runs for a full year.'],
@@ -91,20 +83,12 @@ export default function Discipleship() {
         </div>
       </PhotoSplit>
 
-      <Section tone="white">
-        <SectionHeader title="How the five years work" intro="Each year on Sunday mornings is either a practices year or a Values In The Kingdom year. After year five, the plan starts over." />
-        <ol className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
-          {YEARS.map(y => (
-            <li key={y.year} className="fcard !p-6">
-              <p className="kicker text-[#c74f2f] !mb-1">{y.year}</p>
-              <h3 className="text-xl mb-3">{y.kind}</h3>
-              <ul className={`space-y-1 ${P}`}>
-                {y.lines.map(l => <li key={l}>{l}</li>)}
-              </ul>
-            </li>
-          ))}
-        </ol>
-        <p className={`mt-6 max-w-3xl ${P}`}>In a practices year, fall focuses on a Share Life practice, winter on a Know God practice, and spring on a Serve Others practice.</p>
+      <Section tone="white" narrow>
+        <SectionHeader title="How the five years work" />
+        <div className={`space-y-4 ${P}`}>
+          <p>Each year on Sunday mornings is one of two kinds. A practices year goes through three of the nine spiritual practices, one in the fall, one in the winter, and one in the spring. A Values In The Kingdom year studies the core values of our church in one class that runs all year.</p>
+          <p>The two kinds of years take turns over five years, and then the plan starts over. Wherever you join, you will come back around to everything you missed.</p>
+        </div>
       </Section>
 
       <PhotoSplit tone="gray" slot="discipleship-wednesday" side="right">
