@@ -45,68 +45,76 @@ export default function MessageDetail() {
   const audio = safeUrl(m.audio_url);
   const notesUrl = safeUrl(m.notes_url);
 
+  const cats = parseCategories(m.topic);
+
   return (
-    <>
-      <article>
-        <header className="bg-white">
-          <div className="max-w-4xl mx-auto px-5 sm:px-8 py-10 md:py-14">
-            <Link to="/messages" className="inline-flex items-center min-h-[44px] font-semibold text-[#1e2522] underline underline-offset-4">All messages</Link>
-            <h1 className="text-3xl md:text-5xl mt-2">{m.title}</h1>
-            <dl className="mt-5 grid sm:grid-cols-2 gap-x-8 gap-y-2 text-[#1e2522]/80">
-              {m.speaker && <div><dt className="inline font-semibold">Speaker: </dt><dd className="inline">{m.speaker}</dd></div>}
-              {m.date && <div><dt className="inline font-semibold">Date: </dt><dd className="inline">{formatDate(m.date)}</dd></div>}
-              {m.series && <div><dt className="inline font-semibold">Series: </dt><dd className="inline"><Link to={seriesPath(m.series)} className="underline underline-offset-4">{m.series}</Link></dd></div>}
-              {m.scripture && <div><dt className="inline font-semibold">Scripture: </dt><dd className="inline">{m.scripture}</dd></div>}
-              {parseCategories(m.topic).length > 0 && <div><dt className="inline font-semibold">{parseCategories(m.topic).length > 1 ? 'Categories' : 'Category'}: </dt><dd className="inline">{parseCategories(m.topic).join(', ')}</dd></div>}
-            </dl>
-          </div>
-        </header>
-
-        <Section tone="cream" narrow>
-          {vid && (
-            <div className="aspect-video rounded-2xl overflow-hidden bg-[#1e2522] mb-8">
-              <LiteYouTube id={vid} title={m.title} />
-            </div>
-          )}
-          {audio && (
-            <div className="mb-8">
-              <h2 className="text-xl mb-2">Listen</h2>
-              <audio controls preload="none" src={audio} className="w-full" aria-label={`Audio of ${m.title}`}>
-                <a href={audio}>Download the audio</a>
-              </audio>
-            </div>
-          )}
-          {m.description && (
-            <div className="mb-8">
-              <h2 className="text-2xl mb-3">Sermon summary</h2>
-              <RichText value={m.description} className="text-[0.95rem]" />
-            </div>
-          )}
-          {m.discussion_questions && (
-            <div className="mb-8">
-              <h2 className="text-2xl mb-3">Discussion questions</h2>
-              <RichText value={m.discussion_questions} className="text-[0.95rem]" />
-            </div>
-          )}
-          {notesUrl && <p className="mb-8"><Btn href={notesUrl} variant="ghost">Download the notes</Btn></p>}
-          {m.notes && (
-            <div className="rounded-2xl p-6 md:p-8 neu">
-              <h2 className="text-2xl mb-4">Notes and transcript</h2>
-              <RichText value={m.notes} />
-            </div>
-          )}
-        </Section>
-
-        {more.length > 0 && (
-          <Section tone="sand">
-            <h2 className="text-2xl md:text-3xl mb-6">More from this series</h2>
-            <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {more.map(x => <li key={x.id}><MessageCard message={x} /></li>)}
-            </ul>
-            <p className="mt-6"><Link to={seriesPath(m.series)} className="font-semibold underline underline-offset-4 text-[#1e2522]">See the whole series</Link></p>
-          </Section>
+    <article>
+      <Section tone="white" className="!pt-8 md:!pt-12">
+        <Link to="/messages" className="inline-flex items-center min-h-[44px] font-display font-bold text-sm underline underline-offset-4">&larr; All messages</Link>
+        <h1 className="text-3xl md:text-5xl mt-2 max-w-4xl">{m.title}</h1>
+        <p className="mt-4 text-[0.95rem] text-[#1e2522]/80">{[m.speaker, m.date && formatDate(m.date), m.scripture].filter(Boolean).join('  |  ')}</p>
+        {(m.series || cats.length > 0) && (
+          <ul className="mt-4 flex flex-wrap gap-2" aria-label="Series and categories">
+            {m.series && <li><Link to={seriesPath(m.series)} className="inline-block text-xs font-display font-bold px-3 py-1.5 rounded-full bg-[#1e2522] text-white">Series: {m.series}</Link></li>}
+            {cats.map(c => <li key={c} className="text-xs font-display font-bold px-3 py-1.5 rounded-full bg-[#e8e7e3]">{c}</li>)}
+          </ul>
         )}
-      </article>
-    </>
+
+        <div className="mt-10 grid lg:grid-cols-3 gap-10 lg:gap-14 items-start">
+          <div className="lg:col-span-2">
+            {vid && (
+              <div className="aspect-video rounded-[10px] overflow-hidden bg-[#1e2522]">
+                <LiteYouTube id={vid} title={m.title} />
+              </div>
+            )}
+            {audio && (
+              <div className="mt-8">
+                <h2 className="text-xl mb-2">Listen</h2>
+                <audio controls preload="none" src={audio} className="w-full" aria-label={`Audio of ${m.title}`}>
+                  <a href={audio}>Download the audio</a>
+                </audio>
+              </div>
+            )}
+            {m.description && (
+              <div className="mt-10">
+                <h2 className="text-2xl md:text-3xl mb-3">Sermon summary</h2>
+                <RichText value={m.description} className="text-[0.95rem]" />
+              </div>
+            )}
+            {m.notes && (
+              <div className="mt-10">
+                <h2 className="text-2xl md:text-3xl mb-3">Notes and transcript</h2>
+                <RichText value={m.notes} className="text-[0.95rem]" />
+              </div>
+            )}
+          </div>
+
+          <aside className="space-y-6" aria-label="More about this message">
+            {m.discussion_questions && (
+              <div className="rounded-[10px] bg-[#e8e7e3] p-6">
+                <h2 className="text-2xl mb-3">Discussion questions</h2>
+                <RichText value={m.discussion_questions} className="text-[0.95rem]" />
+              </div>
+            )}
+            {(notesUrl || audio) && (
+              <div className="flex flex-wrap gap-3">
+                {notesUrl && <Btn href={notesUrl} variant="primary">Download the notes</Btn>}
+                {audio && <Btn href={audio} variant="dark">Download the audio</Btn>}
+              </div>
+            )}
+          </aside>
+        </div>
+      </Section>
+
+      {more.length > 0 && (
+        <Section tone="gray">
+          <h2 className="text-2xl md:text-4xl mb-6">More from {m.series}</h2>
+          <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {more.map(x => <li key={x.id}><MessageCard message={x} /></li>)}
+          </ul>
+          <div className="mt-8"><Btn to={seriesPath(m.series)} variant="primary">See the whole series</Btn></div>
+        </Section>
+      )}
+    </article>
   );
 }
