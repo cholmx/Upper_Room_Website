@@ -1,0 +1,2 @@
+[functions.youtube-feed]
+verify_jwt = true
