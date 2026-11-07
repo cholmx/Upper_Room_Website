@@ -6,6 +6,7 @@
 
 const CHANNEL_ID = 'UCQtl2NJ6-SnnsgMXpsV1K6w';
 const MAX_VIDEOS = 300;
+const VERSION = '2026-11-07';
 
 const cors = {
   'Access-Control-Allow-Origin': '*',
@@ -74,6 +75,9 @@ async function fromApi(key: string) {
 
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') return new Response(null, { headers: cors });
+
+  // A quick check that the function is deployed. It shares nothing about the channel.
+  if (new URL(req.url).searchParams.has('ping')) return json({ ok: true, version: VERSION });
 
   // Only a signed-in user may call this.
   const token = (req.headers.get('Authorization') || '').replace(/^Bearer\s+/i, '');
