@@ -44,6 +44,7 @@ export default function Messages() {
   const latest = messages[0];
   const seriesList = useMemo(() => groupSeries(messages).map(g => ({
     ...g,
+    latest: messages.find(m => (m.series || '').trim() === g.name),
     // The newest message in the series that has a video lends its cover picture.
     thumb: ytId(messages.find(m => (m.series || '').trim() === g.name && ytId(m.video_url || m.yt))?.video_url || ''),
   })), [messages]);
@@ -115,18 +116,21 @@ export default function Messages() {
           {seriesList.length > 0 && (
             <Section tone="gray">
               <SectionHeader title="Message series" />
-              <ul className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {seriesList.map(s => (
                   <li key={s.name}>
-                    <Link to={seriesPath(s.name)} className="block rounded-[10px] overflow-hidden h-full bg-white shadow-sm">
+                    <Link to={seriesPath(s.name)} className="thumb-link flex flex-col h-full rounded-[10px] overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow">
                       <div className="aspect-video bg-[#1e2522] relative overflow-hidden">
                         {s.image
                           ? <img src={s.image} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
                           : <YtThumb id={s.thumb} className="absolute inset-0 w-full h-full object-cover" />}
+                        <span className="absolute top-3 left-3 z-10 bg-white text-[#1e2522] text-xs font-display font-bold px-3 py-1 rounded-full">{s.count} {s.count === 1 ? 'message' : 'messages'}</span>
                       </div>
-                      <div className="p-5">
-                        <h3 className="text-xl">{s.name}</h3>
-                        <p className="mt-1 text-sm text-[#1e2522]/80">{dateRangeLabel(s.first, s.last)}{dateRangeLabel(s.first, s.last) ? '  |  ' : ''}{s.count} {s.count === 1 ? 'message' : 'messages'}</p>
+                      <div className="p-6 flex flex-col flex-grow">
+                        <h3 className="text-2xl">{s.name}</h3>
+                        {dateRangeLabel(s.first, s.last) && <p className="mt-1 text-sm text-[#1e2522]/70">{dateRangeLabel(s.first, s.last)}</p>}
+                        {s.latest && <p className="mt-3 text-sm text-[#1e2522]/80 line-clamp-2"><span className="font-semibold">Latest:</span> {s.latest.title}</p>}
+                        <span className="mt-auto pt-5 font-display font-bold text-sm text-[#c74f2f]">See the series &rarr;</span>
                       </div>
                     </Link>
                   </li>
