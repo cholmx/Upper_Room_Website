@@ -10,9 +10,9 @@ export default function MessageCard({ message, as: Heading = 'h3' }) {
   const id = ytId(message.video_url || message.yt);
   return (
     <article className="rounded-2xl overflow-hidden flex flex-col neu">
-      <Link to={messagePath(message)} className="block relative aspect-video bg-[#1e2522]" aria-hidden="true" tabIndex={-1}>
+      <Link to={messagePath(message)} className="block relative aspect-video overflow-hidden bg-[#1e2522]" aria-hidden="true" tabIndex={-1}>
         {id ? (
-          <img src={ytThumb(id)} alt="" loading="lazy" className="w-full h-full object-cover text-[#1e2522]/90" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+          <img src={ytThumb(id)} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover text-[#1e2522]/90" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
         ) : null}
         <span className="absolute inset-0 flex items-center justify-center text-white/90">
           <SafeIcon icon={id ? FiPlay : FiHeadphones} className="text-4xl" />
