@@ -31,7 +31,7 @@ function Spotlight({ s }) {
   if (s.layout === 'photo' && s.image_url) {
     return (
       <section data-image-band="true" className="max-w-[1312px] mx-auto px-3 md:px-4 py-1.5 md:py-2">
-        <div className="photo-section rounded-[10px] bg-[#1e2522] text-white py-24 md:py-36 px-6 md:px-10">
+        <div className="photo-section text-shade rounded-[10px] bg-[#1e2522] text-white py-24 md:py-36 px-6 md:px-10">
           <img src={imgUrl(s.image_url, 1600)} alt="" loading="lazy" decoding="async" className="photo-bg" />
           <div className="hero-text max-w-3xl">
             {s.title && <h2 className="text-3xl md:text-5xl mb-4">{s.title}</h2>}

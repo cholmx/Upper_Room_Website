@@ -415,3 +415,16 @@ details.u-acc.neu-acc[open] { background: #ffffff; box-shadow: var(--shadow); }
   font-weight: 700;
   font-style: normal;
 }
+
+/* A dark shade on the side of a photo section where the words sit, so they stay easy to read. */
+.photo-section.text-shade::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(to right, rgba(30, 37, 34, 0.72) 0%, rgba(30, 37, 34, 0.52) 35%, rgba(30, 37, 34, 0.18) 65%, rgba(30, 37, 34, 0) 88%);
+}
+@media (max-width: 767px) {
+  .photo-section.text-shade::after { background: linear-gradient(to right, rgba(30, 37, 34, 0.66), rgba(30, 37, 34, 0.42)); }
+}

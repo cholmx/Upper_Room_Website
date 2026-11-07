@@ -141,7 +141,7 @@ export function PhotoBand({ slot, id, className = '', children }) {
   const src = loaded ? imgUrl(url || stockFor(slot), 1600) : '';
   return (
     <section id={id} data-image-band="true" className="max-w-[1312px] mx-auto px-3 md:px-4 py-1.5 md:py-2">
-      <div className={`photo-section rounded-[10px] bg-[#1e2522] text-white py-24 md:py-36 px-6 md:px-10 ${className}`}>
+      <div className={`photo-section text-shade rounded-[10px] bg-[#1e2522] text-white py-24 md:py-36 px-6 md:px-10 ${className}`}>
         {src && <img src={src} alt="" loading="lazy" decoding="async" className="photo-bg" />}
         <div className="hero-text max-w-3xl">{children}</div>
       </div>
