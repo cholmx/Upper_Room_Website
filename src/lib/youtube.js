@@ -6,6 +6,16 @@ const DATE_RE = /^(\d{1,2})[./-](\d{1,2})[./-](\d{2}|\d{4})$/;
 // "Acts 10-11", "1 John 3", "Song of Solomon 2:1-9" read as a passage. A first part without a chapter number, like "Pursuit", is a series.
 const PASSAGE_RE = /^(?:[1-3]\s)?[A-Z][A-Za-z]+(?:\s(?:of\s)?[A-Z][A-Za-z]+)*\s\d+/;
 
+// Titles sometimes use a first name and last initial. These are the speakers they stand for.
+export const SPEAKER_NAMES = {
+  'chris h': 'Chris Holm',
+  'josh o': 'Josh Osborn',
+  'weslie b': 'Weslie Broderick',
+  'jared t': 'Jared Thompson',
+  'scott m': 'Scott McPeak',
+};
+export const fullSpeakerName = (name) => SPEAKER_NAMES[String(name || '').toLowerCase().replace(/[^a-z ]/g, '').replace(/\s+/g, ' ').trim()] || String(name || '').trim();
+
 function isoDate(text) {
   const m = DATE_RE.exec(text);
   if (!m) return '';
@@ -24,7 +34,7 @@ export function parseVideoTitle(raw) {
     if (iso) { date = date || iso; } else rest.push(part.trim());
   }
   let speaker = '';
-  if (rest.length > 1) speaker = rest.pop();
+  if (rest.length > 1) speaker = fullSpeakerName(rest.pop());
   let title = rest.join(' // ');
   let scripture = '';
   let series = '';

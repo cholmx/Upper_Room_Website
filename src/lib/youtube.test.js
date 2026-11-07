@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { parseVideoTitle, toMessage, fetchChannelVideos } from './youtube';
+import { parseVideoTitle, toMessage, fetchChannelVideos, fullSpeakerName } from './youtube';
 
 describe('parseVideoTitle', () => {
   it('splits passage, title and speaker', () => {
@@ -17,6 +17,23 @@ describe('parseVideoTitle', () => {
   });
   it('treats numbered books as passages', () => {
     expect(parseVideoTitle('1 John 3 :: Love // Kate Holm').scripture).toBe('1 John 3');
+  });
+});
+
+describe('fullSpeakerName', () => {
+  it('spells out first name and last initial', () => {
+    expect(fullSpeakerName('Chris H.')).toBe('Chris Holm');
+    expect(fullSpeakerName('Josh O.')).toBe('Josh Osborn');
+    expect(fullSpeakerName('Weslie B.')).toBe('Weslie Broderick');
+    expect(fullSpeakerName('Jared T.')).toBe('Jared Thompson');
+    expect(fullSpeakerName('Scott M')).toBe('Scott McPeak');
+  });
+  it('leaves other names alone', () => {
+    expect(fullSpeakerName('Beth S.')).toBe('Beth S.');
+    expect(fullSpeakerName('Bob Bertelsen')).toBe('Bob Bertelsen');
+  });
+  it('is applied when reading a title', () => {
+    expect(parseVideoTitle('Joy // Chris H. // 8.8.2021').speaker).toBe('Chris Holm');
   });
 });
 
