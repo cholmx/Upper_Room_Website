@@ -11,7 +11,7 @@ import { useAuth } from '../../auth';
 import { LAYOUTS, TONES } from '../../lib/spotlights';
 import { newestFirst } from '../../utils';
 
-const { FiLayout, FiMic, FiCalendar, FiFileText, FiCamera, FiLogOut, FiMenu, FiX, FiMail, FiSettings, FiActivity, FiUsers, FiCheckSquare, FiHeart, FiMessageSquare } = FiIcons;
+const { FiLayout, FiMic, FiCalendar, FiFileText, FiCamera, FiLogOut, FiMenu, FiX, FiMail, FiSettings, FiActivity, FiUsers, FiCheckSquare, FiHeart, FiMessageSquare, FiExternalLink } = FiIcons;
 
 const NavItem = ({ icon, children, ...rest }) => (
   <button {...rest} className="w-full flex items-center gap-4 px-4 py-3 text-left text-white/80 hover:bg-[#eaa235] hover:text-[#1e2522] rounded-lg transition-colors">
@@ -266,7 +266,11 @@ const ContentStudio = () => {
           ))}
         </nav>
         
-        <div className="mt-auto pt-6 border-t border-white/10">
+        <div className="mt-auto pt-6 border-t border-white/10 space-y-1">
+             <a href="/" target="_blank" rel="noopener noreferrer" className="w-full flex items-center gap-4 px-4 py-3 text-left text-white/80 hover:bg-[#eaa235] hover:text-[#1e2522] rounded-lg transition-colors">
+               <SafeIcon icon={FiExternalLink} className="text-xl" />
+               <span className="font-semibold">Go to Site<span className="sr-only"> (opens in a new tab)</span></span>
+             </a>
              <NavItem icon={FiLogOut} onClick={logout}>
                 Log Out
             </NavItem>
