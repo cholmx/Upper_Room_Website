@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ytThumb } from '../utils';
+import YtThumb from './YtThumb';
 import SafeIcon from '../common/SafeIcon';
 import * as FiIcons from 'react-icons/fi';
 
@@ -29,13 +29,7 @@ export default function LiteYouTube({ id, title }) {
       aria-label={`Play ${title}`}
       className="group relative w-full h-full block bg-[#1e2522]"
     >
-      <img
-        src={ytThumb(id)}
-        alt=""
-        loading="lazy"
-        className="w-full h-full object-cover text-[#1e2522]/80 group-hover:opacity-60"
-        onError={(e) => { e.currentTarget.style.display = 'none'; }}
-      />
+      <YtThumb id={id} className="w-full h-full object-cover group-hover:opacity-60" />
       <span className="absolute inset-0 flex items-center justify-center">
         <span className="w-20 h-20 bg-[#eaa235] rounded-full flex items-center justify-center text-[#1e2522] pl-1 elev-2 transition-transform">
           <SafeIcon icon={FiPlay} className="text-3xl" />

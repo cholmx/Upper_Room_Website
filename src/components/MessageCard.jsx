@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { formatDate, messagePath, seriesPath, ytId, ytThumb } from '../utils';
+import { formatDate, messagePath, seriesPath, ytId } from '../utils';
+import YtThumb from './YtThumb';
 import SafeIcon from '../common/SafeIcon';
 import * as FiIcons from 'react-icons/fi';
 
@@ -12,7 +13,7 @@ export default function MessageCard({ message, as: Heading = 'h3' }) {
     <article className="rounded-2xl overflow-hidden flex flex-col neu">
       <Link to={messagePath(message)} className="block relative aspect-video overflow-hidden bg-[#1e2522]" aria-hidden="true" tabIndex={-1}>
         {id ? (
-          <img src={ytThumb(id)} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover text-[#1e2522]/90" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+          <YtThumb id={id} className="absolute inset-0 w-full h-full object-cover" />
         ) : null}
         <span className="absolute inset-0 flex items-center justify-center text-white/90">
           <SafeIcon icon={id ? FiPlay : FiHeadphones} className="text-4xl" />
