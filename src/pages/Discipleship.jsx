@@ -25,7 +25,7 @@ const GROUPS = [
 
 const FAQ = [
   ['Do I have to start in the fall?', 'No. Come when you are ready. The five years repeat, so anything you miss at the start comes back around.'],
-  ['What does Values In The Kingdom mean?', 'Values In The Kingdom is the name of our classes on the core values of our church. There are two, a Yellow class and a Green class, and each one runs for a full year.'],
+  ['What does Values In The Kingdom mean?', 'Values In The Kingdom is the name of our classes on the core values of our church. There are two, a Yellow class and a Green class, and each one runs for three semesters, fall, winter, and spring.'],
   ['Is Wednesday evening part of Adult Discipleship Training?', 'No. Adult Discipleship Training meets on Sunday mornings. Wednesday evenings are for enrichment classes such as Marriage, Parenting, and Finances.'],
   ['What is Spirit Class?', 'Spirit Class is a Wednesday evening enrichment class about the Holy Spirit.'],
   ['Where should I begin?', 'Start with the class that is meeting on Sunday morning. If you are not sure where to go, ask anyone on our welcome team.'],
@@ -47,6 +47,7 @@ export default function Discipleship() {
         <Panel title="When we meet">
           <p>Sunday mornings at 9:30am, one hour before worship.</p>
           <p>Kids classes meet at the same time.</p>
+          <p>Classes run in the fall, winter, and spring. We do not hold classes in the summer.</p>
         </Panel>
         <Panel title="Where to begin">
           <p>Join the class that is meeting on Sunday morning. If you would like help finding the right room, ask anyone on our welcome team or email <a className="underline underline-offset-4 font-semibold" href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
@@ -79,14 +80,14 @@ export default function Discipleship() {
         <h2 className="text-3xl md:text-5xl mb-5">Values In The Kingdom</h2>
         <div className={`space-y-4 ${P}`}>
           <p>Values In The Kingdom is our class on the core values of our church. We offer two of them, a Yellow class and a Green class.</p>
-          <p>Each class runs for a full year and goes through our six core values, from healthy relationships to living the Gospel.</p>
+          <p>Each class runs for three semesters, fall, winter, and spring, and goes through our six core values, from healthy relationships to living the Gospel.</p>
         </div>
       </PhotoSplit>
 
       <Section tone="white" narrow>
         <SectionHeader title="How the five years work" />
         <div className={`space-y-4 ${P}`}>
-          <p>Each year on Sunday mornings is one of two kinds. A practices year goes through three of the nine spiritual practices, one in the fall, one in the winter, and one in the spring. A Values In The Kingdom year studies the core values of our church in one class that runs all year.</p>
+          <p>Each year on Sunday mornings is one of two kinds. A practices year goes through three of the nine spiritual practices, one in the fall, one in the winter, and one in the spring. A Values In The Kingdom year studies the core values of our church in one class that runs through the fall, winter, and spring.</p>
           <p>The two kinds of years take turns over five years, and then the plan starts over. Wherever you join, you will come back around to everything you missed.</p>
         </div>
       </Section>
