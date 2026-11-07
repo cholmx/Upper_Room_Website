@@ -3,7 +3,7 @@ import usePageMeta from '../hooks/usePageMeta';
 import useFetch from '../hooks/useFetch';
 import { isLive } from '../utils';
 import { DEFAULT_LEADERS, HOW_WE_LEAD, LEADERS_AIM, LEADERSHIP_INTRO, LEADERSHIP_CLOSING } from '../content/leaders';
-import { Section, SectionHeader, PageHeader, PhotoBox, SlotImage } from '../components/ui';
+import { Section, SectionHeader, PageHeader, PhotoBox, PhotoBand } from '../components/ui';
 import RichText from '../components/RichText';
 
 function Person({ p }) {
@@ -42,7 +42,6 @@ export default function Leadership() {
 
       <Section tone="white">
         <SectionHeader title="How we lead" />
-        <SlotImage slot="leadership-how" ratio="aspect-[21/9]" className="mb-10" />
         <dl className="grid md:grid-cols-2 gap-6">
           {HOW_WE_LEAD.map(i => (
             <div key={i.title} className="fcard !p-6">
@@ -51,11 +50,12 @@ export default function Leadership() {
             </div>
           ))}
         </dl>
-        <div className="mt-10 max-w-3xl space-y-4 text-[0.95rem] text-[#1e2522]/80 leading-relaxed">
-          <p>{LEADERS_AIM}</p>
-          <p>{LEADERSHIP_CLOSING}</p>
-        </div>
       </Section>
+
+      <PhotoBand slot="leadership-how">
+        <p className="text-base md:text-lg leading-relaxed">{LEADERS_AIM}</p>
+        <p className="mt-4 text-base md:text-lg leading-relaxed">{LEADERSHIP_CLOSING}</p>
+      </PhotoBand>
     </>
   );
 }

@@ -117,14 +117,14 @@ export default function Home() {
         </blockquote>
       </PhotoSplit>
 
-      <PhotoSplit tone="white" slot="home-contact" side="right">
+      <PhotoBand slot="home-contact">
         <h2 className="text-3xl md:text-5xl mb-5">Contact Us</h2>
-        <p className={`${P} mb-4`}>Have a question or a prayer request? Send us a message, and someone from our church family will reply within 48 hours.</p>
-        <p className={P}>500 Sponseller Road, Columbiana, Ohio 44408</p>
-        <p className={P}><a className="underline underline-offset-4 font-semibold" href="mailto:Info@urfellowship.com">Info@urfellowship.com</a></p>
-        <p className={P}><a className="underline underline-offset-4 font-semibold" href={SITE.phoneHref}>330.482.9058</a></p>
+        <p className="text-base leading-relaxed mb-4">Have a question or a prayer request? Send us a message, and someone from our church family will reply within 48 hours.</p>
+        <p className="text-base leading-relaxed">500 Sponseller Road, Columbiana, Ohio 44408</p>
+        <p className="text-base leading-relaxed"><a className="underline underline-offset-4 font-semibold" href="mailto:Info@urfellowship.com">Info@urfellowship.com</a></p>
+        <p className="text-base leading-relaxed"><a className="underline underline-offset-4 font-semibold" href={SITE.phoneHref}>330.482.9058</a></p>
         <div className="mt-6"><Btn to="/contact" variant="primary">Send a Message</Btn></div>
-      </PhotoSplit>
+      </PhotoBand>
     </>
   );
 }

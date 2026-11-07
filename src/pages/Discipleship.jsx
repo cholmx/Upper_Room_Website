@@ -97,14 +97,14 @@ export default function Discipleship() {
         </div>
       </Section>
 
-      <PhotoSplit tone="gray" slot="discipleship-wednesday" side="right">
+      <PhotoBand slot="discipleship-wednesday">
         <h2 className="text-3xl md:text-5xl mb-5">Wednesday evenings</h2>
-        <div className={`space-y-4 ${P}`}>
+        <div className="space-y-4 text-base leading-relaxed">
           <p>Wednesday evenings from 6:30 to 8:00pm are for enrichment classes. These are separate from Adult Discipleship Training.</p>
           <p>The classes cover everyday life, with topics such as Marriage, Parenting, and Finances, and Spirit Class, a class about the Holy Spirit.</p>
           <p>Junior high (6th through 8th grade) and high school (9th through 12th grade) youth groups meet at the same time, and childcare is offered during Wednesday classes.</p>
         </div>
-      </PhotoSplit>
+      </PhotoBand>
 
       <Section tone="white" narrow>
         <SectionHeader title="Questions" />

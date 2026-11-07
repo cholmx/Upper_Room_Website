@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import usePageMeta from '../hooks/usePageMeta';
 import { usePhoto } from '../photos';
 import { CORE_VALUES, CORE_VALUES_INTRO, INSIDE_OUT, GROWING } from '../content/values';
-import { Btn, Section, SectionHeader, PageHeader, PhotoSplit } from '../components/ui';
+import { Btn, Section, SectionHeader, PageHeader, PhotoSplit, PhotoBand } from '../components/ui';
 
 // The icon comes from Site Photos in the admin, then from /images/core-values/core-value-N.png,
 // and shows the value's number if neither exists yet.
@@ -50,11 +50,11 @@ export default function CoreValues() {
         })}
       </ol>
 
-      <PhotoSplit tone="white" slot="values-growing" side="left">
-        <SectionHeader title="Growing in our values" className="!mb-6" />
-        <p className="text-[0.95rem] leading-relaxed text-[#1e2522]/80">{GROWING}</p>
+      <PhotoBand slot="values-growing">
+        <h2 className="text-3xl md:text-5xl mb-5">Growing in our values</h2>
+        <p className="text-base leading-relaxed">{GROWING}</p>
         <div className="mt-6"><Btn to="/discipleship" variant="primary">Explore Adult Discipleship Training</Btn></div>
-      </PhotoSplit>
+      </PhotoBand>
     </>
   );
 }

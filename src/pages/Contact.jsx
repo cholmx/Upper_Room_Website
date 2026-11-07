@@ -1,7 +1,7 @@
 import React from 'react';
 import usePageMeta from '../hooks/usePageMeta';
 import { useSite } from '../settings';
-import { Section, SectionHeader, PageHeader, SlotImage } from '../components/ui';
+import { Section, SectionHeader, PageHeader, SlotImage, PhotoBand } from '../components/ui';
 import FormBlock from '../components/FormBlock';
 
 const P = 'text-[0.95rem] leading-relaxed text-[#1e2522]/80';
@@ -33,13 +33,14 @@ export default function Contact() {
                 <p>Sundays at 10:30am</p>
               </address>
             </div>
-            <div>
-              <h2 className="text-2xl mb-3">We value healthy relationships</h2>
-              <p className={P}>At Upper Room Fellowship, we show up honestly, with kindness and honor. We look forward to connecting with you and journeying together in faith.</p>
-            </div>
           </div>
         </div>
       </Section>
+
+      <PhotoBand slot="contact-values">
+        <h2 className="text-3xl md:text-5xl mb-5">We value healthy relationships</h2>
+        <p className="text-base leading-relaxed">At Upper Room Fellowship, we show up honestly, with kindness and honor. We look forward to connecting with you and journeying together in faith.</p>
+      </PhotoBand>
     </>
   );
 }

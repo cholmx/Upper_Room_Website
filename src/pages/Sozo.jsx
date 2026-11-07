@@ -109,11 +109,14 @@ export default function Sozo() {
         <ul className="list-disc pl-6 space-y-2 text-[0.95rem] text-[#1e2522]/80">
           {READING.map(r => <li key={r}>{r}</li>)}
         </ul>
-        <blockquote className="mt-10 font-serif italic text-xl leading-snug">
-          “The Spirit of the Lord GOD is upon me, because the LORD has anointed me to bring good news to the afflicted; He has sent me to bind up the brokenhearted, to proclaim liberty to captives and freedom to prisoners.”
-          <footer className="mt-2 text-base font-serif not-italic text-[#1e2522]/70">Isaiah 61:1</footer>
-        </blockquote>
       </Section>
+
+      <PhotoBand slot="sozo-verse">
+        <blockquote className="font-serif italic text-2xl md:text-3xl leading-snug">
+          “The Spirit of the Lord GOD is upon me, because the LORD has anointed me to bring good news to the afflicted; He has sent me to bind up the brokenhearted, to proclaim liberty to captives and freedom to prisoners.”
+          <footer className="mt-4 text-base font-serif not-italic">Isaiah 61:1</footer>
+        </blockquote>
+      </PhotoBand>
     </>
   );
 }

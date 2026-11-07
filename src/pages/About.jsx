@@ -1,6 +1,6 @@
 import React from 'react';
 import usePageMeta from '../hooks/usePageMeta';
-import { Section, SectionHeader, PageHeader, Accordion, PhotoSplit, SlotImage } from '../components/ui';
+import { Section, SectionHeader, PageHeader, Accordion, PhotoSplit, PhotoBand } from '../components/ui';
 import RichText from '../components/RichText';
 import { BELIEFS } from '../content/beliefs';
 
@@ -29,15 +29,13 @@ export default function About() {
         </div>
       </PhotoSplit>
 
-      <Section tone="white" id="beliefs">
-        <div className="grid md:grid-cols-5 gap-10 md:gap-14 items-start">
-          <div className="md:col-span-3">
-            <SectionHeader title="What We Believe" />
-            <p className="lead mb-8">These truths are the foundation we share. On the essentials, we stand together. On everything else, we give each other room to keep growing, and love holds the family together.</p>
-            <Accordion items={items} />
-          </div>
-          <div className="md:col-span-2 md:sticky md:top-28"><SlotImage slot="about-beliefs" ratio="aspect-[4/5]" /></div>
-        </div>
+      <PhotoBand slot="about-beliefs">
+        <h2 className="text-3xl md:text-5xl mb-5">What We Believe</h2>
+        <p className="text-base leading-relaxed">These truths are the foundation we share. On the essentials, we stand together. On everything else, we give each other room to keep growing, and love holds the family together.</p>
+      </PhotoBand>
+
+      <Section tone="white" id="beliefs" narrow>
+        <Accordion items={items} />
       </Section>
     </>
   );
