@@ -9,6 +9,7 @@ import { parseTags } from '../lib/tags';
 import { Btn, Section, SectionHeader, PageHeader, PhotoBand } from '../components/ui';
 import LiteYouTube from '../components/LiteYouTube';
 import MessageCard from '../components/MessageCard';
+import YtThumb from '../components/YtThumb';
 import { Spinner, ErrorState } from '../components/StateViews';
 
 const select = 'w-full min-h-[48px] px-3 py-2 bg-white rounded-xl border border-[#1e2522]/25 focus:outline-none focus:ring-2 focus:ring-[#1e2522]';
@@ -39,7 +40,11 @@ export default function Messages() {
   const [tag, setTag] = useState('');
 
   const latest = messages[0];
-  const seriesList = useMemo(() => groupSeries(messages), [messages]);
+  const seriesList = useMemo(() => groupSeries(messages).map(g => ({
+    ...g,
+    // The newest message in the series that has a video lends its cover picture.
+    thumb: ytId(messages.find(m => (m.series || '').trim() === g.name && ytId(m.video_url || m.yt))?.video_url || ''),
+  })), [messages]);
   const tagOptions = useMemo(() => [...new Set(messages.flatMap(m => parseTags(m.tags)))].sort((a, b) => a.localeCompare(b)), [messages]);
   const uniq = (fn) => [...new Set(messages.map(fn).filter(Boolean))].sort();
   const filtered = useMemo(() => {
@@ -100,14 +105,16 @@ export default function Messages() {
           </PhotoBand>
 
           {seriesList.length > 0 && (
-            <Section tone="sand">
+            <Section tone="gray">
               <SectionHeader title="Message series" />
               <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {seriesList.map(s => (
                   <li key={s.name}>
-                    <Link to={seriesPath(s.name)} className="block rounded-2xl overflow-hidden elev-hover h-full neu">
-                      <div className="aspect-[16/9] bg-[#1e2522] flex items-center justify-center">
-                        {s.image ? <img src={s.image} alt="" loading="lazy" className="w-full h-full object-cover" /> : <span className="text-2xl text-[#eaa235] px-4 text-center">{s.name}</span>}
+                    <Link to={seriesPath(s.name)} className="block rounded-[10px] overflow-hidden h-full bg-white shadow-sm">
+                      <div className="aspect-video bg-[#1e2522] relative overflow-hidden">
+                        {s.image
+                          ? <img src={s.image} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
+                          : <YtThumb id={s.thumb} className="absolute inset-0 w-full h-full object-cover" />}
                       </div>
                       <div className="p-5">
                         <h3 className="text-xl">{s.name}</h3>

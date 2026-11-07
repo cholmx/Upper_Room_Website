@@ -14,7 +14,7 @@ import * as FiIcons from 'react-icons/fi';
 
 const { FiEdit2, FiTrash2, FiPlus, FiArrowLeft, FiSave, FiLoader, FiSearch, FiChevronUp, FiChevronDown, FiMenu } = FiIcons;
 
-const PAGE_SIZE = 10;
+const DEFAULT_PAGE_SIZE = 10;
 
 function statusOf(item) {
   if (!('published' in item) && !('publish_date' in item)) return null;
@@ -42,6 +42,7 @@ export default function GenericManager({ config }) {
   const toggleSelected = (id) => setSelected(prev => { const next = new Set(prev); if (next.has(id)) next.delete(id); else next.add(id); return next; });
   const dragId = useRef(null);
 
+  const PAGE_SIZE = config.pageSize || DEFAULT_PAGE_SIZE;
   const sortable = Boolean(config.sortField);
   const canCreate = config.canCreate !== false;
   const titleField = config.titleField || config.fields[0].name;

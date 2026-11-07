@@ -33,6 +33,7 @@ const TAB_CONFIGS = {
     table: 'sermons',
     youtubeImport: true,
     bulk: true,
+    pageSize: 100,
     sortItems: newestFirst,
     title: 'Messages',
     titleField: 'title',
