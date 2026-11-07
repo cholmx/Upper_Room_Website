@@ -355,7 +355,6 @@ details.u-acc.neu-acc[open] { background: #ffffff; box-shadow: var(--shadow); }
 .public-site { font-family: Merriweather, Georgia, serif; font-size: 0.9375rem; line-height: 1.7; }
 .public-site .font-display, .public-site .btn { font-family: Arial, Helvetica, sans-serif; }
 
-.hero-text h1, .hero-text h2, .hero-text p, .hero-text span { text-shadow: 0 1px 8px rgba(30, 37, 34, 0.35); }
 .spotlight-dark .rich-text a { color: inherit; }
 
 /* A very light shade at the top of photos that sit behind the menu, so the menu stays readable. */
