@@ -48,7 +48,7 @@ const TONES = {
   sage: 'bg-[#eaa235] text-[#1e2522]',
   terra: 'bg-[#c74f2f] text-white',
   gold: 'bg-[#eaa235] text-[#1e2522]',
-  tan: 'bg-[#e5dac5] text-[#1e2522]',
+  tan: 'bg-[#e8e7e3] text-[#1e2522]',
   bronze: 'bg-[#eaa235] text-[#1e2522]',
 };
 
