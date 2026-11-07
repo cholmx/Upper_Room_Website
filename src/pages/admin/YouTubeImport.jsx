@@ -18,7 +18,7 @@ export default function YouTubeImport({ existing, onClose, onImported }) {
 
   useEffect(() => {
     let live = true;
-    backend.invoke('youtube-feed').then(res => {
+    backend.invoke('youtube-videos').then(res => {
       if (!live) return;
       if (res.status !== 'success') { setState({ phase: 'error', error: res.error, videos: [], source: '' }); return; }
       const videos = res.data?.videos ?? [];
