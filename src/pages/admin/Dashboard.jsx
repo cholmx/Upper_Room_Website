@@ -10,6 +10,7 @@ import FormSubmissionsManager from './FormSubmissionsManager';
 import { useAuth } from '../../auth';
 import { LAYOUTS, TONES } from '../../lib/spotlights';
 import { newestFirst } from '../../utils';
+import { STANDARD_CATEGORIES } from '../../content/categories';
 
 const { FiLayout, FiMic, FiCalendar, FiFileText, FiCamera, FiLogOut, FiMenu, FiX, FiMail, FiSettings, FiActivity, FiUsers, FiCheckSquare, FiHeart, FiMessageSquare, FiExternalLink } = FiIcons;
 
@@ -145,6 +146,8 @@ const TAB_CONFIGS = {
   },
   categories: {
     table: 'message_categories_church',
+    seedNames: STANDARD_CATEGORIES,
+    pageSize: 100,
     title: 'Message Categories',
     titleField: 'name',
     columns: ['name'],

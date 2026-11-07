@@ -40,6 +40,7 @@ export default function GenericManager({ config }) {
   const [confirmDiscard, setConfirmDiscard] = useState(false);
   const [importing, setImporting] = useState(false);
   const [categories, setCategories] = useState([]);
+  const [seeding, setSeeding] = useState(null);
   const [selected, setSelected] = useState(() => new Set());
   const toggleSelected = (id) => setSelected(prev => { const next = new Set(prev); if (next.has(id)) next.delete(id); else next.add(id); return next; });
   const dragId = useRef(null);
@@ -88,6 +89,21 @@ export default function GenericManager({ config }) {
     setInitialJson(JSON.stringify(data));
     setErrors({});
     setView('form');
+  };
+
+  // Adds the standard names that are not in the list yet, so the list never depends on a database migration.
+  const missingSeeds = (config.seedNames || []).filter(n => !items.some(i => String(i[titleField] || '').toLowerCase() === n.toLowerCase()));
+  const addSeeds = async () => {
+    setSeeding({ done: 0, failed: 0, total: missingSeeds.length });
+    let done = 0; let failed = 0;
+    for (const name of missingSeeds) {
+      const res = await dataFetch(`create/${config.table}`, { method: 'POST', body: JSON.stringify({ [titleField]: name }) });
+      if (res.status === 'success') done += 1; else failed += 1;
+      setSeeding({ done, failed, total: missingSeeds.length });
+    }
+    if (done) logActivity(user, 'added', config.title, `${done} standard names`);
+    await fetchItems();
+    setSeeding({ done, failed, total: missingSeeds.length, finished: true });
   };
 
   const handleAddNew = () => {
@@ -289,7 +305,12 @@ export default function GenericManager({ config }) {
       <div className="flex flex-wrap justify-between items-center gap-4 mb-6">
         <h2 className="text-2xl font-bold text-[#1e2522]">Manage {config.title}</h2>
         <div className="flex flex-wrap items-center gap-3">
-          {config.youtubeImport && (
+          {missingSeeds.length > 0 && !loading && (
+          <button onClick={addSeeds} disabled={seeding && !seeding.finished} className="border border-[#1e2522]/20 bg-white text-[#1e2522] font-bold py-2.5 px-5 rounded-lg transition disabled:opacity-50">
+            {seeding && !seeding.finished ? `Adding ${seeding.done + seeding.failed} of ${seeding.total}` : `Add the ${missingSeeds.length} standard categories that are missing`}
+          </button>
+        )}
+        {config.youtubeImport && (
             <button onClick={() => setImporting(true)} className="border border-[#1e2522]/20 bg-white text-[#1e2522] font-bold py-2.5 px-5 rounded-lg transition">
               Import from YouTube
             </button>
