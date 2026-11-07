@@ -7,6 +7,7 @@ import StickyMobileBar from './components/StickyMobileBar';
 import { AuthProvider, useAuth } from './auth';
 import { SettingsProvider } from './settings';
 import { PhotosProvider } from './photos';
+import Amen from './components/Amen';
 import ErrorBoundary from './components/ErrorBoundary';
 
 const Home = lazy(() => import('./pages/Home'));
@@ -72,6 +73,7 @@ function PublicLayout({ children }) {
       <main id="main" tabIndex={-1} className="flex-grow outline-none">{children}</main>
       <Footer />
       <StickyMobileBar />
+      <Amen />
     </div>
   );
 }

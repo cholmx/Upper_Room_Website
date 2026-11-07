@@ -130,7 +130,7 @@ describe('mergeSectionOrder', () => {
   });
 });
 
-import { messagePath, parseMessageId, seriesPath, scriptureBook, groupSeries, dateRangeLabel, newestFirst } from './utils';
+import { messagePath, parseMessageId, seriesPath, scriptureBook, groupSeries, dateRangeLabel, newestFirst, isRecent } from './utils';
 
 describe('message urls', () => {
   it('builds and parses readable message paths', () => {
@@ -190,5 +190,17 @@ describe('newestFirst', () => {
   });
   it('handles no data', () => {
     expect(newestFirst(null)).toEqual([]);
+  });
+});
+
+describe('isRecent', () => {
+  const now = new Date('2026-11-08T15:00:00');
+  it('marks the last week as recent', () => {
+    expect(isRecent('2026-11-08', 7, now)).toBe(true);
+    expect(isRecent('2026-11-02', 7, now)).toBe(true);
+  });
+  it('does not mark older or missing dates', () => {
+    expect(isRecent('2026-10-20', 7, now)).toBe(false);
+    expect(isRecent('', 7, now)).toBe(false);
   });
 });

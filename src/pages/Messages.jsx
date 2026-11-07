@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import usePageMeta from '../hooks/usePageMeta';
 import useFetch from '../hooks/useFetch';
@@ -10,6 +10,7 @@ import { Btn, Section, SectionHeader, PageHeader, PhotoBand } from '../component
 import LiteYouTube from '../components/LiteYouTube';
 import MessageCard from '../components/MessageCard';
 import YtThumb from '../components/YtThumb';
+import NewBadge from '../components/NewBadge';
 import { Spinner, ErrorState } from '../components/StateViews';
 
 const select = 'w-full min-h-[48px] px-3 py-2 bg-white rounded-xl border border-[#1e2522]/25 focus:outline-none focus:ring-2 focus:ring-[#1e2522]';
@@ -38,6 +39,7 @@ export default function Messages() {
   const [book, setBook] = useState('');
   const [topic, setTopic] = useState('');
   const [tag, setTag] = useState('');
+  const [shown, setShown] = useState(12);
 
   const latest = messages[0];
   const seriesList = useMemo(() => groupSeries(messages).map(g => ({
@@ -59,6 +61,7 @@ export default function Messages() {
     ));
   }, [messages, q, series, speaker, book, topic, tag]);
   const anyFilter = q || series || speaker || book || topic || tag;
+  useEffect(() => { setShown(12); }, [q, series, speaker, book, topic, tag]);
   const clear = () => { setQ(''); setSeries(''); setSpeaker(''); setBook(''); setTopic(''); setTag(''); };
   const latestVideo = ytId(latest?.video_url || latest?.yt);
 
@@ -80,10 +83,11 @@ export default function Messages() {
             <SectionHeader title="Latest message" />
             {latest ? (
               <div className="grid md:grid-cols-5 gap-8 items-center">
-                <div className="md:col-span-3 aspect-video rounded-2xl overflow-hidden bg-[#1e2522]">
+                <div className="md:col-span-3 aspect-video rounded-[10px] overflow-hidden bg-[#1e2522]">
                   {latestVideo ? <LiteYouTube id={latestVideo} title={latest.title} /> : <div className="w-full h-full flex items-center justify-center text-white/80">Video coming soon</div>}
                 </div>
                 <div className="md:col-span-2">
+                  <NewBadge date={latest.date} className="mb-2" />
                   <h3 className="text-2xl md:text-3xl"><Link to={messagePath(latest)} className="hover:text-[#1e2522]">{latest.title}</Link></h3>
                   <p className="mt-2 text-[#1e2522]/80">{[latest.speaker, latest.date && formatDate(latest.date), latest.scripture].filter(Boolean).join('  |  ')}</p>
                   {latest.description && <p className="mt-3 text-[#1e2522]/80 leading-relaxed line-clamp-4">{plainText(latest.description)}</p>}
@@ -129,7 +133,7 @@ export default function Messages() {
 
           <Section tone="cream" id="archive">
             <SectionHeader title="Sermon library" intro="Missed a Sunday? Want to hear a message again? Browse current and past teaching from Upper Room Fellowship below." />
-            <form role="search" aria-label="Search messages" onSubmit={(e) => e.preventDefault()} className="rounded-2xl p-5 mb-8 neu">
+            <form role="search" aria-label="Search messages" onSubmit={(e) => e.preventDefault()} className="rounded-[10px] p-5 md:p-6 mb-6 bg-[#e8e7e3]">
               <label htmlFor="msg-search" className="block text-sm font-semibold mb-1">Search by category, tag, passage, or speaker</label>
               <input id="msg-search" type="search" value={q} onChange={(e) => setQ(e.target.value)} className={select} />
               <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
@@ -141,13 +145,18 @@ export default function Messages() {
               </div>
               {anyFilter && <button type="button" onClick={clear} className="mt-4 underline underline-offset-4 font-semibold text-[#1e2522] min-h-[44px]">Clear search and filters</button>}
             </form>
-            <p className="sr-only" aria-live="polite">{filtered.length} messages shown</p>
+            <p className="mb-6 text-sm text-[#1e2522]/70" aria-live="polite">{filtered.length === messages.length ? `${messages.length} messages` : `${filtered.length} of ${messages.length} messages`}</p>
             {filtered.length === 0 ? (
               <p className="text-[0.95rem] text-[#1e2522]/80">No messages match yet. Try a different word.</p>
             ) : (
               <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filtered.map(m => <li key={m.id}><MessageCard message={m} /></li>)}
+                {filtered.slice(0, shown).map(m => <li key={m.id}><MessageCard message={m} /></li>)}
               </ul>
+            )}
+            {filtered.length > shown && (
+              <div className="mt-10 text-center">
+                <button type="button" onClick={() => setShown(n => n + 12)} className="btn btn-outline">Show 12 more</button>
+              </div>
             )}
           </Section>
         </>

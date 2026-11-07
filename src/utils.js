@@ -196,6 +196,14 @@ export function scriptureBook(ref) {
 }
 
 // Groups messages into series with a count, a date range, and the first cover image found.
+// True when a message is from the last few days, so it can be marked New.
+export function isRecent(date, days = 7, now = new Date()) {
+  const d = String(date || '').slice(0, 10);
+  if (!d) return false;
+  const age = (now.getTime() - new Date(`${d}T12:00:00`).getTime()) / 86400000;
+  return age >= -1 && age <= days;
+}
+
 // Messages in date order, newest first. A message with no date goes last, and ties keep the newest upload first.
 export function newestFirst(messages) {
   const day = (m) => String(m.date || '').slice(0, 10);

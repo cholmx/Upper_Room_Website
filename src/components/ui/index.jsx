@@ -164,7 +164,7 @@ export function PageHeader({ kicker, title, intro, children, page, image: imageO
   const image = banner && imageOverride ? imageOverride : banner;
   return (
     <header className="max-w-[1312px] mx-auto px-3 md:px-4 pt-3 md:pt-4 pb-1.5 md:pb-2">
-      <div className="photo-section rounded-[10px] text-[#ffffff] py-24 md:py-36 px-6 md:px-10 text-left flex items-end" style={image ? { backgroundImage: `url('${imgUrl(image, 1600)}')` } : undefined}>
+      <div className="photo-section nav-fade rounded-[10px] text-[#ffffff] py-24 md:py-36 px-6 md:px-10 text-left flex items-end" style={image ? { backgroundImage: `url('${imgUrl(image, 1600)}')` } : undefined}>
         <div className="hero-text max-w-[800px] relative z-10">
           {kicker && !same(kicker, title) && <span className="kicker text-[#eaa235]">{kicker}</span>}
           <h1 className="text-4xl md:text-6xl mb-6">{title}</h1>

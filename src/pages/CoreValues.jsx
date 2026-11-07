@@ -13,7 +13,7 @@ function ValueIcon({ n }) {
   if (failed && !url) {
     return <span aria-hidden="true" className="w-[132px] h-[132px] md:w-[200px] md:h-[200px] rounded-full bg-[#c74f2f] text-white text-5xl font-semibold flex items-center justify-center">{n}</span>;
   }
-  return <img src={src} alt="" width="200" height="200" loading="lazy" className="w-[132px] h-[132px] md:w-[200px] md:h-[200px] object-contain" onError={() => setFailed(true)} />;
+  return <img src={src} alt="" width="200" height="200" loading="lazy" className="value-icon w-[132px] h-[132px] md:w-[200px] md:h-[200px] object-contain" onError={() => setFailed(true)} />;
 }
 
 export default function CoreValues() {
