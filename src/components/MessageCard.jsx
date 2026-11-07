@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { formatDate, messagePath, seriesPath, ytId } from '../utils';
 import YtThumb from './YtThumb';
 import NewBadge from './NewBadge';
+import { parseCategories } from '../lib/categories';
 import SafeIcon from '../common/SafeIcon';
 import * as FiIcons from 'react-icons/fi';
 
@@ -24,6 +25,11 @@ export default function MessageCard({ message, as: Heading = 'h3' }) {
         <p className="text-sm text-[#1e2522]/80">{[message.date && formatDate(message.date), message.speaker].filter(Boolean).join('  |  ')} <NewBadge date={message.date} className="ml-2" /></p>
         <Heading className="text-xl mt-1 mb-2"><Link to={messagePath(message)} className="hover:text-[#1e2522]">{message.title}</Link></Heading>
         {message.scripture && <p className="text-sm font-semibold text-[#1e2522]">{message.scripture}</p>}
+        {parseCategories(message.topic).length > 0 && (
+          <ul className="mt-3 flex flex-wrap gap-2" aria-label="Categories">
+            {parseCategories(message.topic).slice(0, 3).map(c => <li key={c} className="text-xs font-display font-bold px-3 py-1 rounded-full bg-[#e8e7e3] text-[#1e2522]">{c}</li>)}
+          </ul>
+        )}
         {message.series && (
           <p className="mt-auto pt-3 text-sm"><Link to={seriesPath(message.series)} className="underline underline-offset-4">Series: {message.series}</Link></p>
         )}

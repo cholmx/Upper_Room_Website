@@ -39,6 +39,7 @@ export default function Messages() {
   const [book, setBook] = useState('');
   const [topic, setTopic] = useState('');
   const [shown, setShown] = useState(12);
+  const [allChips, setAllChips] = useState(false);
 
   const latest = messages[0];
   const seriesList = useMemo(() => groupSeries(messages).map(g => ({
@@ -86,6 +87,11 @@ export default function Messages() {
                 </div>
                 <div className="md:col-span-2">
                   <NewBadge date={latest.date} className="mb-2" />
+                  {parseCategories(latest.topic).length > 0 && (
+                    <ul className="mb-3 flex flex-wrap gap-2" aria-label="Categories">
+                      {parseCategories(latest.topic).map(c => <li key={c} className="text-xs font-display font-bold px-3 py-1 rounded-full bg-[#e8e7e3]">{c}</li>)}
+                    </ul>
+                  )}
                   <h3 className="text-2xl md:text-3xl"><Link to={messagePath(latest)} className="hover:text-[#1e2522]">{latest.title}</Link></h3>
                   <p className="mt-2 text-[#1e2522]/80">{[latest.speaker, latest.date && formatDate(latest.date), latest.scripture].filter(Boolean).join('  |  ')}</p>
                   {latest.description && <p className="mt-3 text-[#1e2522]/80 leading-relaxed line-clamp-4">{plainText(latest.description)}</p>}
@@ -109,7 +115,7 @@ export default function Messages() {
           {seriesList.length > 0 && (
             <Section tone="gray">
               <SectionHeader title="Message series" />
-              <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <ul className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {seriesList.map(s => (
                   <li key={s.name}>
                     <Link to={seriesPath(s.name)} className="block rounded-[10px] overflow-hidden h-full bg-white shadow-sm">
@@ -131,14 +137,26 @@ export default function Messages() {
 
           <Section tone="cream" id="archive">
             <SectionHeader title="Sermon library" intro="Missed a Sunday? Want to hear a message again? Browse current and past teaching from Upper Room Fellowship below." />
+            {categoryOptions.length > 0 && (
+              <div className="mb-6" role="group" aria-label="Browse by category">
+                <div className="flex flex-wrap gap-2">
+                  <button type="button" aria-pressed={!topic} onClick={() => setTopic('')} className={`px-4 py-2 rounded-full text-sm font-display font-bold ${!topic ? 'bg-[#1e2522] text-white' : 'bg-[#e8e7e3] text-[#1e2522] hover:bg-[#1e2522]/15'}`}>All</button>
+                  {(allChips ? categoryOptions : categoryOptions.slice(0, 10)).map(c => (
+                    <button key={c} type="button" aria-pressed={topic === c} onClick={() => setTopic(topic === c ? '' : c)} className={`px-4 py-2 rounded-full text-sm font-display font-bold ${topic === c ? 'bg-[#1e2522] text-white' : 'bg-[#e8e7e3] text-[#1e2522] hover:bg-[#1e2522]/15'}`}>{c}</button>
+                  ))}
+                  {categoryOptions.length > 10 && (
+                    <button type="button" onClick={() => setAllChips(v => !v)} className="px-4 py-2 rounded-full text-sm font-display font-bold underline underline-offset-4">{allChips ? 'Show fewer' : `Show ${categoryOptions.length - 10} more`}</button>
+                  )}
+                </div>
+              </div>
+            )}
             <form role="search" aria-label="Search messages" onSubmit={(e) => e.preventDefault()} className="rounded-[10px] p-5 md:p-6 mb-6 bg-[#e8e7e3]">
               <label htmlFor="msg-search" className="block text-sm font-semibold mb-1">Search by category, passage, or speaker</label>
               <input id="msg-search" type="search" value={q} onChange={(e) => setQ(e.target.value)} className={select} />
-              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
+              <div className="grid sm:grid-cols-3 gap-4 mt-4">
                 <Filter label="Series" value={series} onChange={setSeries} options={uniq(m => m.series)} />
                 <Filter label="Speaker" value={speaker} onChange={setSpeaker} options={uniq(m => m.speaker)} />
                 <Filter label="Scripture book" value={book} onChange={setBook} options={uniq(m => scriptureBook(m.scripture))} />
-                <Filter label="Category" value={topic} onChange={setTopic} options={categoryOptions} />
               </div>
               {anyFilter && <button type="button" onClick={clear} className="mt-4 underline underline-offset-4 font-semibold text-[#1e2522] min-h-[44px]">Clear search and filters</button>}
             </form>
