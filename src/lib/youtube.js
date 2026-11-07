@@ -1,10 +1,8 @@
 // Turns a YouTube video into the fields of a message. Titles on the channel usually look like
-// "Acts 10-11 :: Who Is the Gospel For? // Josh Osborn" (passage or series :: title // speaker, with an optional date such as 7.25.2021). Anything that does
+// "Acts :: Who Is the Gospel For? // Josh Osborn" (series :: title // speaker, with an optional date such as 7.25.2021). Anything that does
 // not fit that shape keeps its whole title, and staff can edit every field after importing.
 
 const DATE_RE = /^(\d{1,2})[./-](\d{1,2})[./-](\d{2}|\d{4})$/;
-// "Acts 10-11", "1 John 3", "Song of Solomon 2:1-9" read as a passage. A first part without a chapter number, like "Pursuit", is a series.
-const PASSAGE_RE = /^(?:[1-3]\s)?[A-Z][A-Za-z]+(?:\s(?:of\s)?[A-Z][A-Za-z]+)*\s\d+/;
 
 // Titles sometimes use a first name and last initial. These are the speakers they stand for.
 export const SPEAKER_NAMES = {
@@ -36,23 +34,20 @@ export function parseVideoTitle(raw) {
   let speaker = '';
   if (rest.length > 1) speaker = fullSpeakerName(rest.pop());
   let title = rest.join(' // ');
-  let scripture = '';
   let series = '';
   const byLabel = title.split(/\s+::\s+/);
   if (byLabel.length > 1) {
-    const head = byLabel.shift();
-    if (PASSAGE_RE.test(head)) scripture = head; else series = head;
+    series = byLabel.shift();
     title = byLabel.join(' :: ');
   }
-  return { title, speaker, scripture, series, date };
+  return { title, speaker, series, date };
 }
 
 export function toMessage(video) {
-  const { title, speaker, scripture, series, date } = parseVideoTitle(video.title);
+  const { title, speaker, series, date } = parseVideoTitle(video.title);
   return {
     title: title || video.title,
     speaker,
-    scripture,
     series,
     date: date || String(video.published || '').slice(0, 10) || null,
     description: String(video.description || '').trim().slice(0, 4000),

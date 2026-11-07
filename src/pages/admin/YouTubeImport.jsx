@@ -61,8 +61,8 @@ export default function YouTubeImport({ existing, onClose, onImported }) {
     setFixed({ done: 0, failed: 0, total: known.length });
     let done = 0; let failed = 0;
     for (const v of known) {
-      const { title, speaker, scripture, series, date } = toMessage(v);
-      const res = await dataFetch(`update/sermons/${rowById[v.id].id}`, { method: 'PUT', body: JSON.stringify({ title, speaker, scripture, series, date }) });
+      const { title, speaker, series, date } = toMessage(v);
+      const res = await dataFetch(`update/sermons/${rowById[v.id].id}`, { method: 'PUT', body: JSON.stringify({ title, speaker, series, date }) });
       if (res.status === 'success') done += 1; else failed += 1;
       setFixed({ done, failed, total: known.length });
     }
@@ -78,7 +78,7 @@ export default function YouTubeImport({ existing, onClose, onImported }) {
       <div className="flex items-start justify-between gap-4 mb-4">
         <div>
           <h3 className="text-xl font-bold">Import from YouTube</h3>
-          <p className="text-sm text-[#1e2522]/70 mt-1">Videos from the Upper Room Fellowship channel. Each one you pick becomes a message with its title, speaker, passage, date and summary filled in. You can edit any of it afterward.</p>
+          <p className="text-sm text-[#1e2522]/70 mt-1">Videos from the Upper Room Fellowship channel. Each one you pick becomes a message with its title, series, speaker, date and summary filled in. You can edit any of it afterward.</p>
         </div>
         <button type="button" onClick={onClose} className="px-4 py-2 rounded-lg border border-[#1e2522]/20 font-bold text-sm">Close</button>
       </div>
@@ -94,7 +94,7 @@ export default function YouTubeImport({ existing, onClose, onImported }) {
               <p><strong>{known.length}</strong> of these are already in your messages. If their titles, speakers or dates came in wrong, you can read them again from the channel.</p>
               {confirmFix ? (
                 <div className="mt-3 flex flex-wrap items-center gap-3">
-                  <span className="font-semibold">This replaces the title, speaker, passage, series and date of {known.length} messages. Changes you made to those fields will be lost.</span>
+                  <span className="font-semibold">This replaces the title, speaker, series and date of {known.length} messages. Changes you made to those fields will be lost.</span>
                   <button type="button" onClick={fix} className="bg-[#c74f2f] text-white font-bold py-2 px-4 rounded-lg">Replace them</button>
                   <button type="button" onClick={() => setConfirmFix(false)} className="px-4 py-2 rounded-lg border border-[#1e2522]/20 font-bold">Cancel</button>
                 </div>
@@ -125,7 +125,7 @@ export default function YouTubeImport({ existing, onClose, onImported }) {
                         <img src={v.thumbnail} alt="" loading="lazy" className="w-28 aspect-video object-cover rounded bg-[#1e2522]/10" />
                         <span className="text-sm">
                           <span className="block font-bold">{m.title}</span>
-                          <span className="block text-[#1e2522]/70">{[m.speaker, m.scripture, m.date && formatDate(m.date)].filter(Boolean).join('  |  ')}</span>
+                          <span className="block text-[#1e2522]/70">{[m.series, m.speaker, m.date && formatDate(m.date)].filter(Boolean).join('  |  ')}</span>
                         </span>
                       </label>
                     </li>
