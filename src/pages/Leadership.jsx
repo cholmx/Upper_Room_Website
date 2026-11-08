@@ -10,7 +10,7 @@ function Person({ p }) {
   const first = p.name.split(' ')[0];
   return (
     <li className="rounded-2xl overflow-hidden flex flex-col neu">
-      <PhotoBox src={p.photo_url} alt={`Portrait of ${p.name}, ${p.role}`} label={`${p.name} headshot`} ratio="aspect-[4/5]" rounded={false} />
+      <PhotoBox src={p.photo_url} alt={`Portrait of ${p.name}, ${p.role}`} label={`${p.name} headshot`} ratio="aspect-square" rounded={false} bg="bg-white" fit="object-contain" />
       <div className="p-6 flex flex-col flex-grow">
         <h2 className="text-2xl">{p.name}</h2>
         {p.role && <p className="mt-1 font-semibold text-[#1e2522]">{p.role}</p>}

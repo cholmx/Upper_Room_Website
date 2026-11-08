@@ -85,12 +85,12 @@ export function Photo({ slot, className = '', ratio = 'aspect-[4/3]', priority =
 }
 
 // An image from a database row (leader, story, event). Leaders fall back to their initials.
-export function PhotoBox({ src, alt = '', initials, className = '', ratio = 'aspect-[4/3]', rounded = true }) {
+export function PhotoBox({ src, alt = '', initials, className = '', ratio = 'aspect-[4/3]', rounded = true, bg = 'bg-[#e8e7e3]', fit = 'object-cover' }) {
   const url = safeUrl(src);
   if (url) {
     return (
-      <div className={`${ratio} ${rounded ? 'rounded-3xl' : ''} overflow-hidden bg-[#e8e7e3] ${className}`}>
-        <img src={url} alt={alt} loading="lazy" decoding="async" className="w-full h-full object-cover" />
+      <div className={`${ratio} ${rounded ? 'rounded-3xl' : ''} overflow-hidden ${bg} ${className}`}>
+        <img src={url} alt={alt} loading="lazy" decoding="async" className={`w-full h-full ${fit}`} />
       </div>
     );
   }
