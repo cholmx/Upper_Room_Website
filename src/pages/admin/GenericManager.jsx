@@ -92,12 +92,13 @@ export default function GenericManager({ config }) {
   };
 
   // Adds the standard names that are not in the list yet, so the list never depends on a database migration.
-  const missingSeeds = (config.seedNames || []).filter(n => !items.some(i => String(i[titleField] || '').toLowerCase() === n.toLowerCase()));
+  const seedList = config.seedItems || (config.seedNames || []).map(n => ({ [titleField]: n }));
+  const missingSeeds = seedList.filter(seed => !items.some(i => String(i[titleField] || '').toLowerCase() === String(seed[titleField]).toLowerCase()));
   const addSeeds = async () => {
     setSeeding({ done: 0, failed: 0, total: missingSeeds.length });
     let done = 0; let failed = 0;
-    for (const name of missingSeeds) {
-      const res = await dataFetch(`create/${config.table}`, { method: 'POST', body: JSON.stringify({ [titleField]: name }) });
+    for (const seed of missingSeeds) {
+      const res = await dataFetch(`create/${config.table}`, { method: 'POST', body: JSON.stringify(seed) });
       if (res.status === 'success') done += 1; else failed += 1;
       setSeeding({ done, failed, total: missingSeeds.length });
     }
@@ -307,7 +308,7 @@ export default function GenericManager({ config }) {
         <div className="flex flex-wrap items-center gap-3">
           {missingSeeds.length > 0 && !loading && (
           <button onClick={addSeeds} disabled={seeding && !seeding.finished} className="border border-[#1e2522]/20 bg-white text-[#1e2522] font-bold py-2.5 px-5 rounded-lg transition disabled:opacity-50">
-            {seeding && !seeding.finished ? `Adding ${seeding.done + seeding.failed} of ${seeding.total}` : `Add the ${missingSeeds.length} standard categories that are missing`}
+            {seeding && !seeding.finished ? `Adding ${seeding.done + seeding.failed} of ${seeding.total}` : config.seedLabel ? config.seedLabel(missingSeeds.length) : `Add the ${missingSeeds.length} standard categories that are missing`}
           </button>
         )}
         {config.youtubeImport && (

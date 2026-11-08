@@ -12,6 +12,7 @@ import useNoIndex from '../../hooks/useNoIndex';
 import { LAYOUTS, TONES } from '../../lib/spotlights';
 import { newestFirst } from '../../utils';
 import { STANDARD_CATEGORIES } from '../../content/categories';
+import { DEFAULT_LEADERS } from '../../content/leaders';
 
 const { FiLayout, FiMic, FiCalendar, FiFileText, FiCamera, FiLogOut, FiMenu, FiX, FiMail, FiSettings, FiActivity, FiUsers, FiCheckSquare, FiHeart, FiMessageSquare, FiExternalLink } = FiIcons;
 
@@ -87,6 +88,8 @@ const TAB_CONFIGS = {
   },
   staff: {
     table: 'staff_church',
+    seedItems: DEFAULT_LEADERS.map((p, i) => ({ name: p.name, role: p.role, email: p.email, sort_order_num: i + 1, published: 1 })),
+    seedLabel: (n) => `Add the ${n} leaders shown on the site, then add their photos`,
     title: 'Staff and Leaders',
     titleField: 'name',
     thumbField: 'photo_url',
