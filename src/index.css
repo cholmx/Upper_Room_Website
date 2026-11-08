@@ -302,7 +302,6 @@ details.u-acc.neu-acc[open] { background: linear-gradient(145deg, #ffffff, #ffff
 .elev-hover:hover { box-shadow: var(--neu-raised); }
 
 /* A calmer, more refined surface: softer ink instead of pure black, a lighter photo wash, more room around sections */
-.text-[#1e2522] { color: #1e2522; }
 /* The banner overlay matches the sign-in page: a deep, even wash with two soft golden glows. */
 
 /* One standard surface: white, no outline, a very subtle drop shadow. Form controls keep a thin
