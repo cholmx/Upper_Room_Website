@@ -23,7 +23,6 @@ export default function Contact() {
             <FormBlock formKey="contact" />
           </div>
           <div className="md:col-span-2 space-y-8">
-            <SlotImage slot="contact-visit" />
             <div>
               <h2 className="text-2xl mb-3">Visit or call</h2>
               <address className={`not-italic space-y-1 ${P}`}>

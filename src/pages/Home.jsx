@@ -67,7 +67,6 @@ export default function Home() {
             ['Serve Others', 'Use your gifts to love your neighbors and your city.', 'home-serve'],
           ].map(([t, d, slot]) => (
             <div key={t}>
-              <SlotImage slot={slot} className="mb-5" />
               <h2 className="text-3xl md:text-4xl mb-3">{t}</h2>
               <p className="text-[0.95rem] leading-relaxed text-[#1e2522]/80">{d}</p>
             </div>
@@ -77,10 +76,10 @@ export default function Home() {
 
       <Section tone="white">
         <Cards cols={4}>
-          <Card title="Plan Your Visit" as="h3" icon={<SlotImage slot="home-plan" />} to="/plan-your-visit" linkLabel="Plan your visit"><p>See what a Sunday looks like and tell us you are coming so we can greet you.</p></Card>
-          <Card title="Hear the Latest Message" as="h3" icon={<SlotImage slot="home-messages" />} to="/messages" linkLabel="Hear the latest message"><p>Catch up on recent teaching or browse the full library.</p></Card>
-          <Card title="Grow With Us" as="h3" icon={<SlotImage slot="home-grow" />} to="/discipleship" linkLabel="Grow with us"><p>Join a Sunday morning adult class. Our welcome team can help you find a place.</p></Card>
-          <Card title="Give Online" as="h3" icon={<SlotImage slot="home-give" />} to={SITE.giveUrl} linkLabel="Give online"><p>Support the ministries and outreach of our church family.</p></Card>
+          <Card title="Plan Your Visit" as="h3" to="/plan-your-visit" linkLabel="Plan your visit"><p>See what a Sunday looks like and tell us you are coming so we can greet you.</p></Card>
+          <Card title="Hear the Latest Message" as="h3" to="/messages" linkLabel="Hear the latest message"><p>Catch up on recent teaching or browse the full library.</p></Card>
+          <Card title="Grow With Us" as="h3" to="/discipleship" linkLabel="Grow with us"><p>Join a Sunday morning adult class. Our welcome team can help you find a place.</p></Card>
+          <Card title="Give Online" as="h3" to={SITE.giveUrl} linkLabel="Give online"><p>Support the ministries and outreach of our church family.</p></Card>
         </Cards>
       </Section>
 
@@ -120,7 +119,8 @@ export default function Home() {
         <div className="mt-6"><Btn href={SITE.googleMapsUrl} variant="primary">Get Directions</Btn></div>
       </PhotoBand>
 
-      <PhotoSplit tone="gray" slot="home-vision" side="left">
+      <Section tone="gray">
+        <div className="max-w-3xl">
         <h2 className="text-3xl md:text-5xl mb-6">Our Vision</h2>
         <p className="text-xl md:text-2xl leading-snug mb-5 font-serif">We exist to help people know God deeply, share life authentically, and serve others selflessly.</p>
         <p className="text-[0.95rem] leading-relaxed text-[#1e2522]/80">Lasting change starts on the inside, as our hearts line up with God’s heart. That conviction shapes how we build relationships, how we pray, and how we serve.</p>
@@ -129,7 +129,8 @@ export default function Home() {
           “By this everyone will know that you are my disciples, if you love one another.”
           <footer className="mt-2 text-base font-serif not-italic">John 13:35</footer>
         </blockquote>
-      </PhotoSplit>
+      </div>
+      </Section>
 
       <PhotoBand slot="home-contact">
         <h2 className="text-3xl md:text-5xl mb-5">Contact Us</h2>

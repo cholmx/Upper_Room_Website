@@ -27,15 +27,16 @@ export default function Sozo() {
     <>
       <PageHeader kicker="Sozo" title="What is Sozo?" intro="Sozo is a Greek word that appears more than 100 times in the New Testament. It means to save, deliver, make whole, restore, and heal." />
 
-      <PhotoSplit tone="white" slot="sozo-intro" side="right">
+      <Section tone="white">
+        <div className="max-w-3xl">
         <div className={`space-y-4 ${P}`}>
           <p className="lead">“Sozo” is a Greek word that appears more than 100 times in the New Testament. It means to save, deliver, make whole, restore, and heal. In Matthew 9:22, Jesus uses it when He tells a woman her faith has made her well.</p>
           <p>Do you feel stuck in some area of your life? Do you sense there is more to your relationship with God than you are experiencing? Sozo is gentle, Spirit-led prayer ministry that helps you find and remove the barriers between you and God, and step into the identity and purpose He has given you.</p>
         </div>
-      </PhotoSplit>
+      </div>
+      </Section>
 
       <Section tone="white">
-        <SlotImage slot="sozo-session" ratio="aspect-[21/9]" className="mb-10" />
         <div className="grid md:grid-cols-2 gap-10 md:gap-16">
           <div>
             <SectionHeader title="What happens in a session" className="!mb-4" />
@@ -79,7 +80,8 @@ export default function Sozo() {
         </Panel>
       </Band>
 
-      <PhotoSplit tone="white" slot="sozo-begin" side="left" id="begin">
+      <Section tone="white" id="begin">
+        <div className="max-w-3xl">
         <SectionHeader title="How to begin" className="!mb-6" />
         <Steps items={[
           { title: 'Prepare your heart', body: <p>Pray about receiving Sozo, think about the areas where you want more freedom, and come ready to meet with God.</p> },
@@ -87,7 +89,8 @@ export default function Sozo() {
           { title: 'Schedule', body: <p>Our Sozo coordinator will contact you within 3 to 5 business days, answer your questions, match you with a ministry team, and find a time that works.</p> },
           { title: 'Partner with us', body: <p>We suggest a $40 donation to support the ministry, and financial help is available. Healing should be within reach of everyone. You can pay at your appointment by cash, check, or card.</p> },
         ]} />
-      </PhotoSplit>
+      </div>
+      </Section>
 
       <Section tone="white" narrow>
         <SectionHeader title="Frequently asked questions" />

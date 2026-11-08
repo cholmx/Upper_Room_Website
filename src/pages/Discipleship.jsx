@@ -31,10 +31,12 @@ export default function Discipleship() {
     <>
       <PageHeader kicker="Discipleship" title="Adult Discipleship Training" intro="Sunday morning classes where adults learn to know God, share life, and serve others." />
 
-      <PhotoSplit tone="white" slot="discipleship-intro" side="right">
+      <Section tone="white">
+        <div className="max-w-3xl">
         <p className="lead">Every Sunday at 9:30am, one hour before worship, adults meet to learn and practice what it means to follow Jesus together.</p>
         <p className={`mt-4 ${P}`}>The classes follow a five-year plan. It covers nine spiritual practices and the core values of our church. The plan repeats, so you can join at any point and still cover everything.</p>
-      </PhotoSplit>
+      </div>
+      </Section>
 
       <Band>
         <Panel title="When we meet">
@@ -74,13 +76,15 @@ export default function Discipleship() {
         </div>
       </Section>
 
-      <PhotoSplit tone="gray" slot="discipleship-values" side="left">
+      <Section tone="gray">
+        <div className="max-w-3xl">
         <h2 className="text-3xl md:text-5xl mb-5">Values In The Kingdom</h2>
         <div className={`space-y-4 ${P}`}>
           <p>Values In The Kingdom is our class on the core values of our church. We offer two of them, a Yellow class and a Green class.</p>
           <p>Each class runs for three semesters, fall, winter, and spring, and goes through our six core values, from healthy relationships to living the Gospel.</p>
         </div>
-      </PhotoSplit>
+      </div>
+      </Section>
 
       <Section tone="white" narrow>
         <SectionHeader title="How the five years work" />

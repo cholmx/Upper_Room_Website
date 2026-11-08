@@ -22,10 +22,12 @@ export default function CoreValues() {
     <>
       <PageHeader kicker="Core Values" title="Our Core Values" intro={CORE_VALUES_INTRO} />
 
-      <PhotoSplit tone="white" slot="values-intro" side="right">
+      <Section tone="white">
+        <div className="max-w-3xl">
         <SectionHeader title="Living from the inside out" className="!mb-6" />
         <p className="lead">{INSIDE_OUT}</p>
-      </PhotoSplit>
+      </div>
+      </Section>
 
       <ol className="contents">
         {CORE_VALUES.map(v => {

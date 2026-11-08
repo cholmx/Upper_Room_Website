@@ -44,11 +44,11 @@ export default function PlanYourVisit() {
       <Section tone="white">
         <Beats heading="h3" beats={[
           { title: 'Worship', photo: 'plan-worship', body: <p>Adults and children begin the service together. The music is contemporary, and lyrics and Scripture appear on screens, so you can follow along without a Bible. Sit, stand, or raise your hands, whichever feels right to you.</p> },
-          { title: 'Coffee and conversation', photo: 'plan-coffee', body: <p>After worship, we pause for coffee and a chance to greet one another. It is an easy time to meet someone new. We never single out visitors or ask anyone to stand and introduce themselves.</p> },
           { title: 'For your kids', photo: 'plan-kids', body: <p>Kids classes begin at 9:30am. During worship, children sit with their families and then go to age-appropriate programs just before the message. Check-in is secure, every volunteer is background checked and trained, and only authorized adults can pick up a child. The nursery stays open for the whole service, and a parent viewing room lets you follow along while you care for little ones.</p> },
         ]} />
         <div className="mt-14 md:mt-20">
           <Cards cols={2}>
+            <Card title="Coffee and conversation" as="h3"><p>After worship, we pause for coffee and a chance to greet one another. It is an easy time to meet someone new. We never single out visitors or ask anyone to stand and introduce themselves.</p></Card>
             <Card title="The message" as="h3"><p>Our teaching is practical and rooted in the Bible, and it helps you live out your faith in everyday life. Adults and teens stay in the sanctuary for the message while children head to their programs.</p></Card>
             <Card title="What to wear" as="h3"><p>Wear whatever is comfortable. You will see everything from jeans to business casual, and we care much more about meeting you than about what you have on.</p></Card>
             <Card title="Wednesday nights" as="h3"><p>Adult enrichment classes such as marriage and parenting, junior high youth group (6th through 8th grade), and high school youth group (9th through 12th grade) meet Wednesdays from 6:30 to 8:00pm. Childcare is offered during Wednesday classes.</p></Card>
