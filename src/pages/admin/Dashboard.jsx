@@ -8,6 +8,7 @@ import SitePhotosManager from './SitePhotosManager';
 import ChecklistManager from './ChecklistManager';
 import FormSubmissionsManager from './FormSubmissionsManager';
 import { useAuth } from '../../auth';
+import useNoIndex from '../../hooks/useNoIndex';
 import { LAYOUTS, TONES } from '../../lib/spotlights';
 import { newestFirst } from '../../utils';
 import { STANDARD_CATEGORIES } from '../../content/categories';
@@ -200,6 +201,7 @@ const TAB_CONFIGS = {
 };
 
 const ContentStudio = () => {
+  useNoIndex();
   const { user, logout } = useAuth();
   const [activeTab, setActiveTab] = useState('forms');
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);

@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import usePageMeta from '../hooks/usePageMeta';
 import useFetch from '../hooks/useFetch';
@@ -15,6 +15,9 @@ const P = 'text-[0.95rem] leading-relaxed';
 
 export default function Home() {
   usePageMeta('home');
+  // Worked out in the browser, so the static copy of the page never shows a stale day.
+  const [worship, setWorship] = useState('');
+  useEffect(() => { setWorship(worshipLine()); }, []);
   const SITE = useSite();
   const heroPhoto = usePhoto('home-hero').url;
   const bannerSlot = usePhoto('banner-home');
@@ -33,7 +36,7 @@ export default function Home() {
             <h1 id="home-h1" className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-4 leading-[1.1]">{SITE.hero.title}</h1>
             {SITE.hero.subtitle && <p className="font-serif text-lg md:text-2xl mb-6 leading-snug">{SITE.hero.subtitle}</p>}
             <div className="mt-4">{SITE.hero.buttonLabel && SITE.hero.buttonUrl && <Btn to={SITE.hero.buttonUrl} variant="primary">{SITE.hero.buttonLabel}</Btn>}</div>
-            <p className="mt-5 text-sm md:text-base">{worshipLine()}</p>
+            {worship && <p className="mt-5 text-sm md:text-base">{worship}</p>}
           </div>
         </div>
       </section>

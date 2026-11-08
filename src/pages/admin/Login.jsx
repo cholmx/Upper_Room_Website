@@ -1,8 +1,10 @@
+import useNoIndex from '../../hooks/useNoIndex';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../auth';
 
 export default function Login() {
+  useNoIndex();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');

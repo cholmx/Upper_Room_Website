@@ -186,3 +186,12 @@ In the admin, Messages has an Edit many at once panel above the list. Tick messa
 `supabase/migrations/20261107150000_ai_message_tags.sql` adds an hourly database job that looks at up to 10 messages with no category, sends the title, series and sermon summary to an Anthropic model, and saves up to three categories chosen from the approved list (admin, Message Categories). It fills in a blank category only and looks at each message once. The key is saved in Supabase Vault under the name `anthropic_api_key` and is never part of the website. With no key saved, nothing is sent. `20261107180000_ai_categories_only.sql` limits it to categories, and `20261107190000_multiple_categories.sql` lets a message have up to three.
 
 To review messages on demand, open Messages in the admin, select them (Select messages with no category helps), and use Review with AI in the Edit many at once panel. By default it only fills in messages with no category. Tick Replace categories already set to redo the ones that have one. It needs `supabase/migrations/20261107200000_ai_review_now.sql`.
+
+## Search and AI visibility
+
+- **Static copies of every page.** `npm run build` also runs `scripts/prerender-static.mjs`. It draws each public page with the site's own code and saves real HTML at the page's address, with its own title, description, canonical link, share picture and structured data. Messages, message series and each message are written from the database. Search engines, AI assistants and link previews that do not run JavaScript see the real words, and the site loads normally on top. If this step ever fails, the build still succeeds and the site works as before. Unknown addresses use `app.html`.
+- **Structured data** (`src/content/schema.js`): the church and website (in `index.html`), a breadcrumb trail on every page, the weekly Sunday service as an event, question and answer data on Discipleship and Sozo, the pastors as people, and a video record for each message.
+- **`/robots.txt`** welcomes search engines and the main AI crawlers (GPTBot, ClaudeBot, PerplexityBot, Google-Extended and others) and keeps only the admin and sign-in out.
+- **`/llms.txt`** is a short plain-language summary of the church, the page list and the latest messages, written for AI assistants.
+- **`/sitemap.xml`** lists every page, message and series.
+- Set `VITE_SITE_URL` to the real web address before the final build, so the canonical links, sitemap and llms.txt use it.

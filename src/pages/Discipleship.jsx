@@ -1,6 +1,7 @@
 import React from 'react';
 import usePageMeta from '../hooks/usePageMeta';
 import { useSite } from '../settings';
+import { DISCIPLESHIP_FAQ as FAQ } from '../content/faqs';
 import { Section, SectionHeader, PageHeader, Accordion, Band, Panel, PhotoSplit, PhotoBand } from '../components/ui';
 
 const P = 'text-[0.95rem] leading-relaxed text-[#1e2522]/80';
@@ -21,14 +22,6 @@ const GROUPS = [
     ['Witness', 'Sharing the good news of Jesus through your words and your life.'],
     ['Fasting', 'Setting aside food or other comforts to turn your hunger toward God.'],
   ] },
-];
-
-const FAQ = [
-  ['Do I have to start in the fall?', 'No. Come when you are ready. The five years repeat, so anything you miss at the start comes back around.'],
-  ['What does Values In The Kingdom mean?', 'Values In The Kingdom is the name of our classes on the core values of our church. There are two, a Yellow class and a Green class, and each one runs for three semesters, fall, winter, and spring.'],
-  ['Is Wednesday evening part of Adult Discipleship Training?', 'No. Adult Discipleship Training meets on Sunday mornings. Wednesday evenings are for enrichment classes such as Marriage, Parenting, and Finances.'],
-  ['What is Spirit Class?', 'Spirit Class is a Wednesday evening enrichment class about the Holy Spirit.'],
-  ['Where should I begin?', 'Start with the class that is meeting on Sunday morning. If you are not sure where to go, ask anyone on our welcome team.'],
 ];
 
 export default function Discipleship() {

@@ -28,6 +28,15 @@ const live = (row) => {
   return !row.publish_date || String(row.publish_date).slice(0, 10) <= new Date().toISOString().slice(0, 10);
 };
 
+// The live messages (newest first), posts and custom pages, read once for the sitemap, llms.txt and the static copies.
+export async function readLiveContent() {
+  const [sermons, pages, posts] = await Promise.all([readTable('sermons'), readTable('custom_pages_church'), readTable('posts')]);
+  const day = (r) => String(r.date || '').slice(0, 10);
+  const messages = sermons.filter(live).sort((a, b) =>
+    day(b).localeCompare(day(a)) || String(b.created_at || '').localeCompare(String(a.created_at || '')) || (Number(b.id) || 0) - (Number(a.id) || 0));
+  return { messages, posts: posts.filter(live), pages };
+}
+
 // Every public URL, with a last-modified date when the row has one.
 export async function collectRoutes() {
   const [sermons, pages, posts] = await Promise.all([

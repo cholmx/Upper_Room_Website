@@ -12,7 +12,7 @@
   <!-- SEO Meta Tags -->
   <meta name="description" content="Join us Sundays at 10:30am at 500 Sponseller Road in Columbiana, Ohio. A welcoming church family for all ages." />
     <meta name="author" content="Upper Room Fellowship" />
-  <meta name="robots" content="index, follow" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
@@ -47,7 +47,12 @@
       "url": "__SITE_URL__/",
       "image": "__SITE_URL__/og-default.png",
       "description": "Transforming lives that transform communities. A church family in Columbiana, Ohio, founded in 1971.",
+      "@id": "__SITE_URL__/#church",
+      "slogan": "Transforming lives that transform communities",
       "foundingDate": "1971",
+      "hasMap": "https://maps.google.com/?q=500+Sponseller+Road+Columbiana+OH+44408",
+      "areaServed": { "@type": "City", "name": "Columbiana, Ohio" },
+      "contactPoint": { "@type": "ContactPoint", "telephone": "+1-330-482-9058", "email": "info@urfellowship.com", "contactType": "customer service", "areaServed": "US", "availableLanguage": "English" },
       "telephone": "+1-330-482-9058",
       "email": "info@urfellowship.com",
       "address": {
@@ -70,9 +75,12 @@
       "sameAs": [
         "https://www.facebook.com/urfellowship/",
         "https://www.instagram.com/urfellowship/",
-        "https://www.youtube.com/c/TheUpperRoomFellowship"
+        "https://www.youtube.com/@TheUpperRoomFellowship"
       ]
     }
+  </script>
+  <script type="application/ld+json">
+    { "@context": "https://schema.org", "@type": "WebSite", "name": "Upper Room Fellowship", "url": "__SITE_URL__/", "publisher": { "@id": "__SITE_URL__/#church" } }
   </script>
 </head>
 <body>

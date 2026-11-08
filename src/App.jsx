@@ -80,10 +80,9 @@ function PublicLayout({ children }) {
   );
 }
 
-export default function App() {
+// Everything inside the router, so the same pages can be drawn on a server for the static copies (see scripts/prerender-static.mjs).
+export function AppBody() {
   return (
-    <ErrorBoundary>
-    <Router>
       <SettingsProvider>
       <PhotosProvider>
       <AuthProvider>
@@ -136,7 +135,15 @@ export default function App() {
       </AuthProvider>
       </PhotosProvider>
       </SettingsProvider>
-    </Router>
+  );
+}
+
+export default function App() {
+  return (
+    <ErrorBoundary>
+      <Router>
+        <AppBody />
+      </Router>
     </ErrorBoundary>
   );
 }

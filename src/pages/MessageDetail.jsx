@@ -26,7 +26,8 @@ export default function MessageDetail() {
   const video = m?.video_url || m?.yt;
   const vid = ytId(video);
   const summary = plainText(m?.description).slice(0, 155);
-  usePageMeta(m ? `${m.title} | Messages` : 'Message', summary || 'A message from Upper Room Fellowship in Columbiana, Ohio.');
+  const about = m ? `${m.title}, a message${m.speaker ? ` by ${m.speaker}` : ''}${m.series ? ` in the ${m.series} series` : ''} at Upper Room Fellowship.${summary ? ` ${summary}` : ''}`.slice(0, 300) : '';
+  usePageMeta(m ? m.title : 'Message', about || 'A message from Upper Room Fellowship in Columbiana, Ohio.', { image: vid ? ytThumb(vid) : undefined, type: 'video.other' });
   useJsonLd(m && vid ? {
     '@context': 'https://schema.org',
     '@type': 'VideoObject',
