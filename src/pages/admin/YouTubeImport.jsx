@@ -14,6 +14,7 @@ export default function YouTubeImport({ existing, onClose, onImported }) {
   const [publish, setPublish] = useState(true);
   const [progress, setProgress] = useState(null);
   const [confirmFix, setConfirmFix] = useState(false);
+  const [fields, setFields] = useState({ date: true, title: false, speaker: false, series: false });
   const [fixed, setFixed] = useState(null);
 
   const have = useMemo(() => new Set(existing.map(m => ytId(m.video_url || m.yt)).filter(Boolean)), [existing]);
@@ -67,7 +68,10 @@ export default function YouTubeImport({ existing, onClose, onImported }) {
       const extra = {};
       if (!String(row.description || '').trim() && description) extra.description = description;
       if (!String(row.discussion_questions || '').trim() && questions) extra.discussion_questions = questions;
-      const res = await dataFetch(`update/sermons/${row.id}`, { method: 'PUT', body: JSON.stringify({ title, speaker, series, date, ...extra }) });
+      const chosenFields = { title, speaker, series, date };
+      const payload = { ...extra };
+      for (const key of Object.keys(fields)) if (fields[key]) payload[key] = chosenFields[key];
+      const res = await dataFetch(`update/sermons/${row.id}`, { method: 'PUT', body: JSON.stringify(payload) });
       if (res.status === 'success') done += 1; else failed += 1;
       setFixed({ done, failed, total: known.length });
     }
@@ -96,16 +100,26 @@ export default function YouTubeImport({ existing, onClose, onImported }) {
           {state.source === 'feed' && <p className="text-sm text-[#1e2522]/70 mb-3">This list shows the 15 newest videos. To bring in older ones, ask Bolt to add a YouTube Data API key as VITE_YOUTUBE_API_KEY.</p>}
           {known.length > 0 && (
             <div className="mb-5 p-4 rounded-lg bg-[#1e2522]/5 text-sm">
-              <p><strong>{known.length}</strong> of these are already in your messages. If their titles, speakers or dates came in wrong, you can read them again from the channel.</p>
+              <p><strong>{known.length}</strong> of these are already in your messages. You can read them again from the channel and update only the parts you choose. A summary or discussion questions are filled in only where a message has none, so your edits to those are kept.</p>
+              <div className="mt-3 flex flex-wrap gap-x-6 gap-y-2" role="group" aria-label="What to update">
+                {[['date', 'Date (the Sunday before it was posted)'], ['title', 'Title'], ['speaker', 'Speaker'], ['series', 'Series']].map(([key, label]) => (
+                  <label key={key} className="flex items-center gap-2 cursor-pointer">
+                    <input type="checkbox" checked={fields[key]} onChange={(e) => setFields(f => ({ ...f, [key]: e.target.checked }))} className="w-5 h-5 accent-[#c74f2f]" />
+                    {label}
+                  </label>
+                ))}
+              </div>
               {confirmFix ? (
                 <div className="mt-3 flex flex-wrap items-center gap-3">
-                  <span className="font-semibold">This replaces the title, speaker, series and date of {known.length} messages, and fills in any empty summary or discussion questions. Changes you made to the title, speaker, series or date will be lost.</span>
-                  <button type="button" onClick={fix} className="bg-[#c74f2f] text-white font-bold py-2 px-4 rounded-lg">Replace them</button>
+                  <span className="font-semibold">{Object.values(fields).some(Boolean)
+                    ? `This replaces the ${Object.entries(fields).filter(([, v]) => v).map(([k]) => k).join(', ')} of ${known.length} messages with what the channel says. Changes you made to those will be lost.`
+                    : `Nothing is ticked, so only empty summaries and discussion questions will be filled in.`}</span>
+                  <button type="button" onClick={fix} className="bg-[#c74f2f] text-white font-bold py-2 px-4 rounded-lg">Update them</button>
                   <button type="button" onClick={() => setConfirmFix(false)} className="px-4 py-2 rounded-lg border border-[#1e2522]/20 font-bold">Cancel</button>
                 </div>
               ) : (
                 <div className="mt-3 flex flex-wrap items-center gap-3">
-                  <button type="button" onClick={() => setConfirmFix(true)} disabled={fixed && !fixed.finished} className="px-4 py-2 rounded-lg border border-[#1e2522]/20 bg-white font-bold disabled:opacity-50">Read titles again</button>
+                  <button type="button" onClick={() => setConfirmFix(true)} disabled={fixed && !fixed.finished} className="px-4 py-2 rounded-lg border border-[#1e2522]/20 bg-white font-bold disabled:opacity-50">Update messages already imported</button>
                   {fixed && <span role="status" className="font-semibold">{fixed.finished ? `${fixed.done} updated${fixed.failed ? `, ${fixed.failed} could not be saved` : ''}.` : `Updating ${fixed.done + fixed.failed} of ${fixed.total}`}</span>}
                 </div>
               )}
