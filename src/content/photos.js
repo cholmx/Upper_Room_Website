@@ -28,6 +28,7 @@ export const PHOTO_SLOTS = [
   { key: 'home-messages', label: 'Home page, Hear the Latest Message photo', alt: 'A message being taught on Sunday.' },
   { key: 'home-grow', label: 'Home page, Grow With Us photo', alt: 'Adults learning together in a class.' },
   { key: 'home-give', label: 'Home page, Give Online photo', alt: 'Generosity at Upper Room Fellowship.' },
+  { key: 'home-columbiana', label: 'Home page, We love Columbiana photo, a photo from around Columbiana', alt: 'A view of Columbiana, Ohio.' },
   { key: 'home-where', label: 'Home page, Where and When background photo, such as the building (full width, words go on top)', alt: 'The Upper Room Fellowship building in Columbiana.' },
   { key: 'home-vision', label: 'Home page, Our Vision photo', alt: 'People praying together.' },
   { key: 'home-contact', label: 'Home page, Contact Us background photo (full width, words go on top)', alt: 'A friendly conversation after church.' },

@@ -105,6 +105,14 @@ export default function Home() {
         </div>
       </Section>
 
+      <PhotoSplit tone="gray" slot="home-columbiana" side="left">
+        <h2 className="text-3xl md:text-5xl mb-5">We love Columbiana</h2>
+        <div className={`space-y-4 ${P}`}>
+          <p>Columbiana has been our home since 1971, and we love this city and the people in it.</p>
+          <p>As you look around this site, you will see photos from Columbiana, the places and the people of the community we are proud to call home.</p>
+        </div>
+      </PhotoSplit>
+
       <PhotoBand slot="home-where">
         <h2 className="text-3xl md:text-5xl mb-5">Where and When</h2>
         <p className="text-base leading-relaxed">500 Sponseller Road, Columbiana, Ohio 44408</p>
