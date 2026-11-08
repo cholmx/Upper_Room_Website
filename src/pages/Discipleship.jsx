@@ -34,7 +34,7 @@ export default function Discipleship() {
       <Section tone="white">
         <div className="max-w-3xl">
         <p className="lead">Every Sunday at 9:30am, one hour before worship, adults meet to learn and practice what it means to follow Jesus together.</p>
-        <p className={`mt-4 ${P}`}>The classes follow a five-year plan. It covers nine spiritual practices and the core values of our church. The plan repeats, so you can join at any point and still cover everything.</p>
+        <p className={`mt-4 ${P}`}>The classes follow a five-year plan. It focuses on nine spiritual practices and the core values of our church. There are more spiritual practices than these, and these nine are the ones we use for this training track. The plan repeats, so you can join at any point and still cover everything.</p>
       </div>
       </Section>
 
@@ -50,12 +50,12 @@ export default function Discipleship() {
       </Band>
 
       <Section tone="white" narrow>
-        <SectionHeader title="What you will learn" intro="There are two kinds of classes. Some teach the nine spiritual practices. Others teach the core values of our church." className="!mb-0" />
+        <SectionHeader title="What you will learn" intro="There are two kinds of classes. Some teach nine of the spiritual practices. Others teach the core values of our church." className="!mb-0" />
       </Section>
 
       <PhotoBand slot="discipleship-practices">
-        <h2 className="text-3xl md:text-5xl mb-5">The nine spiritual practices</h2>
-        <p className="text-base leading-relaxed">A spiritual practice is a regular habit that helps you grow closer to God. We group the nine practices under our three words: Know God, Share Life, and Serve Others.</p>
+        <h2 className="text-3xl md:text-5xl mb-5">Nine practices we focus on</h2>
+        <p className="text-base leading-relaxed">A spiritual practice is a regular habit that helps you grow closer to God. There are many of them, and these nine are the ones we focus on in this training track. We group them under our three words: Know God, Share Life, and Serve Others.</p>
       </PhotoBand>
 
       <Section tone="white">
@@ -89,7 +89,7 @@ export default function Discipleship() {
       <Section tone="white" narrow>
         <SectionHeader title="How the five years work" />
         <div className={`space-y-4 ${P}`}>
-          <p>Each year on Sunday mornings is one of two kinds. A practices year goes through three of the nine spiritual practices, one in the fall, one in the winter, and one in the spring. A Values In The Kingdom year studies the core values of our church in one class that runs through the fall, winter, and spring.</p>
+          <p>Each year on Sunday mornings is one of two kinds. A practices year goes through three of these nine practices, one in the fall, one in the winter, and one in the spring. A Values In The Kingdom year studies the core values of our church in one class that runs through the fall, winter, and spring.</p>
           <p>The two kinds of years take turns over five years, and then the plan starts over. Wherever you join, you will come back around to everything you missed.</p>
         </div>
       </Section>

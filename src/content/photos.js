@@ -42,7 +42,7 @@ export const PHOTO_SLOTS = [
   { key: 'values-intro', label: 'Core Values page, inside out photo', alt: 'People connecting in community.' },
   { key: 'values-growing', label: 'Core Values page, Growing in our values background photo (full width, words go on top)', alt: 'A class studying together.' },
   { key: 'discipleship-intro', label: 'Discipleship page, introduction photo', alt: 'An adult class meeting on Sunday.' },
-  { key: 'discipleship-practices', label: 'Discipleship page, nine practices background photo (full width, words go on top)', alt: 'Adults praying together.' },
+  { key: 'discipleship-practices', label: 'Discipleship page, practices background photo (full width, words go on top)', alt: 'Adults praying together.' },
   { key: 'discipleship-values', label: 'Discipleship page, Values In The Kingdom photo', alt: 'A class studying together.' },
   { key: 'discipleship-wednesday', label: 'Discipleship page, Wednesday evenings photo', alt: 'A Wednesday evening class.' },
   { key: 'sozo-intro', label: 'Sozo page, introduction photo', alt: 'A quiet place for prayer.' },
