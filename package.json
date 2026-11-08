@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && node scripts/generate-seo.mjs && node scripts/prerender-static.mjs",
+    "build": "vite build",
+    "seo": "node scripts/generate-seo.mjs && node scripts/prerender-static.mjs",
     "preview": "vite preview",
     "lint": "eslint src",
     "test": "vitest run",
