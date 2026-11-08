@@ -35,11 +35,11 @@ export const SITE = {
     apple: 'https://apps.apple.com/us/app/listenwifi/id1391914337',
     google: 'https://play.google.com/store/apps/details?id=com.listentech.ListenEverywhere',
   },
-  youtubeChannel: 'https://www.youtube.com/c/TheUpperRoomFellowship',
+  youtubeChannel: 'https://www.youtube.com/@TheUpperRoomFellowship',
   social: [
     { label: 'Facebook', url: import.meta.env.VITE_FACEBOOK_URL || 'https://www.facebook.com/urfellowship/' },
     { label: 'Instagram', url: import.meta.env.VITE_INSTAGRAM_URL || 'https://www.instagram.com/urfellowship/' },
-    { label: 'YouTube', url: import.meta.env.VITE_YOUTUBE_URL || 'https://www.youtube.com/c/TheUpperRoomFellowship' },
+    { label: 'YouTube', url: import.meta.env.VITE_YOUTUBE_URL || 'https://www.youtube.com/@TheUpperRoomFellowship' },
   ],
   hero: { title: 'You are welcome here', subtitle: '', buttonLabel: 'Plan Your Visit', buttonUrl: '/plan-your-visit' },
   announcementText: '',

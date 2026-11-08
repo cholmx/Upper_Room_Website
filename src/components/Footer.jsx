@@ -15,7 +15,7 @@ function FooterLink({ to, external, children }) {
   const className = 'block opacity-80 hover:opacity-100 hover:text-[#eaa235] mb-3 text-[0.9rem]';
   const content = children;
   return external ? (
-    <a href={to} target="_blank" rel="noopener noreferrer" className={className}>{content}</a>
+    <a href={to} {...(/^https?:/i.test(to) ? { target: '_blank', rel: 'noopener noreferrer' } : {})} className={className}>{content}</a>
   ) : (
     <Link to={to} className={className}>{content}</Link>
   );
@@ -70,7 +70,7 @@ export default function Footer() {
       <div className="text-center text-[0.8rem] py-6 border-t border-white/10 flex flex-col items-center gap-2 relative z-10 bg-[#1e2522]/20">
         <p className="opacity-80">{SITE.serviceTime}. {SITE.addressLine}.</p>
         <p className="opacity-70">&copy; {new Date().getFullYear()} {SITE.name}. Columbiana, Ohio.</p>
-        <Link to="/admin" className="hover:text-[#eaa235] transition-colors tracking-wide font-bold mt-1 opacity-80">Content Studio Login</Link>
+        <Link to="/admin" rel="nofollow" className="hover:text-[#eaa235] transition-colors tracking-wide font-bold mt-1 opacity-80">Content Studio Login</Link>
       </div>
     </div>
     </footer>
