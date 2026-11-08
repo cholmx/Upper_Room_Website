@@ -74,6 +74,13 @@ export default function Home() {
         </div>
       </Section>
 
+      <PhotoBand slot="home-where">
+        <h2 className="text-3xl md:text-5xl mb-5">Where and When</h2>
+        <p className="text-base leading-relaxed">500 Sponseller Road, Columbiana, Ohio 44408</p>
+        <p className="text-base leading-relaxed">Sunday classes at 9:30am. Worship at 10:30am.</p>
+        <div className="mt-6"><Btn href={SITE.googleMapsUrl} variant="primary">Get Directions</Btn></div>
+      </PhotoBand>
+
       <Section tone="white">
         <Cards cols={4}>
           <Card title="Plan Your Visit" as="h3" to="/plan-your-visit" linkLabel="Plan your visit"><p>See what a Sunday looks like and tell us you are coming so we can greet you.</p></Card>
@@ -112,14 +119,7 @@ export default function Home() {
         </div>
       </PhotoSplit>
 
-      <PhotoBand slot="home-where">
-        <h2 className="text-3xl md:text-5xl mb-5">Where and When</h2>
-        <p className="text-base leading-relaxed">500 Sponseller Road, Columbiana, Ohio 44408</p>
-        <p className="text-base leading-relaxed">Sunday classes at 9:30am. Worship at 10:30am.</p>
-        <div className="mt-6"><Btn href={SITE.googleMapsUrl} variant="primary">Get Directions</Btn></div>
-      </PhotoBand>
-
-      <Section tone="gray">
+      <Section tone="white">
         <div className="max-w-3xl">
         <h2 className="text-3xl md:text-5xl mb-6">Our Vision</h2>
         <p className="text-xl md:text-2xl leading-snug mb-5 font-serif">We exist to help people know God deeply, share life authentically, and serve others selflessly.</p>
