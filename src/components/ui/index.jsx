@@ -89,7 +89,7 @@ export function PhotoBox({ src, alt = '', initials, className = '', ratio = 'asp
   const url = safeUrl(src);
   if (url) {
     return (
-      <div className={`${ratio} ${rounded ? 'rounded-3xl' : ''} overflow-hidden bg-[#1e2522] ${className}`}>
+      <div className={`${ratio} ${rounded ? 'rounded-3xl' : ''} overflow-hidden bg-[#e8e7e3] ${className}`}>
         <img src={url} alt={alt} loading="lazy" decoding="async" className="w-full h-full object-cover" />
       </div>
     );

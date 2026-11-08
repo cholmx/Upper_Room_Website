@@ -26,6 +26,7 @@ export default function About() {
         <div className={`space-y-4 ${P}`}>
           <p>Upper Room Fellowship began in 1971, when a group of believers gathered in an upper room above a veterinarian’s office in Columbiana, Ohio. The setting recalled the upper room where Jesus’ first disciples prayed and waited for the Holy Spirit. The group shared a hunger for God’s presence and a desire for authentic Christianity, and they built a community where people could meet God and form real friendships.</p>
           <p>That hunger has shaped us for more than fifty years. A small gathering grew into a church family committed to healthy relationships, wholeness, spiritual gifts, the Holy Spirit’s presence, and living out the Gospel. Today we help people in Columbiana and beyond find the purpose, freedom, and fullness Jesus offers.</p>
+          <p>Columbiana is our home, and we love it. As you look around this site, you will see photos from Columbiana.</p>
         </div>
       </PhotoSplit>
 
