@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import usePageMeta from '../hooks/usePageMeta';
 import { useSite } from '../settings';
-import { Btn, Section, SectionHeader, PageHeader, Steps, PhotoSplit, PhotoBand, Beats } from '../components/ui';
+import { Btn, Section, SectionHeader, PageHeader, Steps, PhotoBand, Beats, Cards, Card } from '../components/ui';
 import FormBlock from '../components/FormBlock';
 
 const P = 'text-[0.95rem] leading-relaxed text-[#1e2522]/80';
@@ -45,12 +45,16 @@ export default function PlanYourVisit() {
         <Beats heading="h3" beats={[
           { title: 'Worship', photo: 'plan-worship', body: <p>Adults and children begin the service together. The music is contemporary, and lyrics and Scripture appear on screens, so you can follow along without a Bible. Sit, stand, or raise your hands, whichever feels right to you.</p> },
           { title: 'Coffee and conversation', photo: 'plan-coffee', body: <p>After worship, we pause for coffee and a chance to greet one another. It is an easy time to meet someone new. We never single out visitors or ask anyone to stand and introduce themselves.</p> },
-          { title: 'The message', photo: 'plan-message', body: <p>Our teaching is practical and rooted in the Bible, and it helps you live out your faith in everyday life. Adults and teens stay in the sanctuary for the message while children head to their programs.</p> },
-          { title: 'What to wear', photo: 'plan-wear', body: <p>Wear whatever is comfortable. You will see everything from jeans to business casual, and we care much more about meeting you than about what you have on.</p> },
           { title: 'For your kids', photo: 'plan-kids', body: <p>Kids classes begin at 9:30am. During worship, children sit with their families and then go to age-appropriate programs just before the message. Check-in is secure, every volunteer is background checked and trained, and only authorized adults can pick up a child. The nursery stays open for the whole service, and a parent viewing room lets you follow along while you care for little ones.</p> },
-          { title: 'Wednesday nights', photo: 'plan-wednesday', body: <p>Adult enrichment classes such as marriage and parenting, junior high youth group (6th through 8th grade), and high school youth group (9th through 12th grade) meet Wednesdays from 6:30 to 8:00pm. Childcare is offered during Wednesday classes.</p> },
-          { title: 'Accessibility', photo: 'plan-access', body: <><p>Our building is fully wheelchair accessible, with designated seating areas. For hearing needs, the free Listen Everywhere app streams our audio straight to your phone or tablet on iOS and Android. Bring your own headphones. If you have other needs, tell us ahead of time and we will plan for them.</p><div className="flex flex-wrap gap-3 pt-1"><Btn href={SITE.listenApps.apple} variant="ghost">App Store</Btn><Btn href={SITE.listenApps.google} variant="ghost">Google Play</Btn></div></> },
         ]} />
+        <div className="mt-14 md:mt-20">
+          <Cards cols={2}>
+            <Card title="The message" as="h3"><p>Our teaching is practical and rooted in the Bible, and it helps you live out your faith in everyday life. Adults and teens stay in the sanctuary for the message while children head to their programs.</p></Card>
+            <Card title="What to wear" as="h3"><p>Wear whatever is comfortable. You will see everything from jeans to business casual, and we care much more about meeting you than about what you have on.</p></Card>
+            <Card title="Wednesday nights" as="h3"><p>Adult enrichment classes such as marriage and parenting, junior high youth group (6th through 8th grade), and high school youth group (9th through 12th grade) meet Wednesdays from 6:30 to 8:00pm. Childcare is offered during Wednesday classes.</p></Card>
+            <Card title="Accessibility" as="h3"><p>Our building is fully wheelchair accessible, with designated seating areas. For hearing needs, the free Listen Everywhere app streams our audio straight to your phone or tablet on iOS and Android. Bring your own headphones. If you have other needs, tell us ahead of time and we will plan for them.</p><div className="flex flex-wrap gap-3 pt-1"><Btn href={SITE.listenApps.apple} variant="ghost">App Store</Btn><Btn href={SITE.listenApps.google} variant="ghost">Google Play</Btn></div></Card>
+          </Cards>
+        </div>
       </Section>
 
       <PhotoBand slot="plan-connect" id="connect-card">
@@ -59,10 +63,10 @@ export default function PlanYourVisit() {
         <div className="mt-6"><Btn to="/connect" variant="primary">Fill Out the Connect Card</Btn></div>
       </PhotoBand>
 
-      <PhotoSplit tone="gray" slot="plan-after" side="right">
+      <Section tone="gray" narrow>
         <h2 className="text-3xl md:text-5xl mb-5">After the service</h2>
         <p className={P}>Stop by the Connection Center to pick up a welcome gift and learn more about our church. Our team members are glad to answer questions or pray with you.</p>
-      </PhotoSplit>
+      </Section>
 
       <Section tone="white">
         <SectionHeader title="Your next steps" />
