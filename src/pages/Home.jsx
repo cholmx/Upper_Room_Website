@@ -74,22 +74,6 @@ export default function Home() {
         </div>
       </Section>
 
-      <PhotoBand slot="home-where">
-        <h2 className="text-3xl md:text-5xl mb-5">Where and When</h2>
-        <p className="text-base leading-relaxed">500 Sponseller Road, Columbiana, Ohio 44408</p>
-        <p className="text-base leading-relaxed">Sunday classes at 9:30am. Worship at 10:30am.</p>
-        <div className="mt-6"><Btn href={SITE.googleMapsUrl} variant="primary">Get Directions</Btn></div>
-      </PhotoBand>
-
-      <Section tone="white">
-        <Cards cols={4}>
-          <Card title="Plan Your Visit" as="h3" to="/plan-your-visit" linkLabel="Plan your visit"><p>See what a Sunday looks like and tell us you are coming so we can greet you.</p></Card>
-          <Card title="Hear the Latest Message" as="h3" to="/messages" linkLabel="Hear the latest message"><p>Catch up on recent teaching or browse the full library.</p></Card>
-          <Card title="Grow With Us" as="h3" to="/discipleship" linkLabel="Grow with us"><p>Join a Sunday morning adult class. Our welcome team can help you find a place.</p></Card>
-          <Card title="Give Online" as="h3" to={SITE.giveUrl} linkLabel="Give online"><p>Support the ministries and outreach of our church family.</p></Card>
-        </Cards>
-      </Section>
-
       <Section tone="white">
         <div className="text-center mb-8">
           <p className="kicker text-[#1e2522]">This Week’s Sermon</p>
@@ -109,6 +93,22 @@ export default function Home() {
           )}
           <p className="mt-6 text-center"><Link to="/messages" className="font-display font-bold text-[0.95rem] border-b-2 border-[#1e2522] pb-1">All messages</Link></p>
         </div>
+      </Section>
+
+      <PhotoBand slot="home-where">
+        <h2 className="text-3xl md:text-5xl mb-5">Where and When</h2>
+        <p className="text-base leading-relaxed">500 Sponseller Road, Columbiana, Ohio 44408</p>
+        <p className="text-base leading-relaxed">Sunday classes at 9:30am. Worship at 10:30am.</p>
+        <div className="mt-6"><Btn href={SITE.googleMapsUrl} variant="primary">Get Directions</Btn></div>
+      </PhotoBand>
+
+      <Section tone="white">
+        <Cards cols={4}>
+          <Card title="Plan Your Visit" as="h3" to="/plan-your-visit" linkLabel="Plan your visit"><p>See what a Sunday looks like and tell us you are coming so we can greet you.</p></Card>
+          <Card title="Hear the Latest Message" as="h3" to="/messages" linkLabel="Hear the latest message"><p>Catch up on recent teaching or browse the full library.</p></Card>
+          <Card title="Grow With Us" as="h3" to="/discipleship" linkLabel="Grow with us"><p>Join a Sunday morning adult class. Our welcome team can help you find a place.</p></Card>
+          <Card title="Give Online" as="h3" to={SITE.giveUrl} linkLabel="Give online"><p>Support the ministries and outreach of our church family.</p></Card>
+        </Cards>
       </Section>
 
       <PhotoSplit tone="gray" slot="home-columbiana" side="left">
