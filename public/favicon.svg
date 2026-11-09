@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Upper Room Fellowship">
+  <rect width="512" height="512" rx="96" fill="#1e2522"/>
+  <text x="256" y="318" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="196" fill="#eaa235">URF</text>
+  <rect x="136" y="360" width="240" height="14" rx="7" fill="#c74f2f"/>
+</svg>

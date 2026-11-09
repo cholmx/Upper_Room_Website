@@ -9,7 +9,8 @@ import { readFile, writeFile, mkdir, rm, copyFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { readLiveContent, SITE_URL } from './lib.mjs';
+import { readLiveContent, readPhotos, SITE_URL } from './lib.mjs';
+import { redirectRules } from '../src/content/redirects.js';
 
 const DIST = path.resolve('dist');
 const TMP = path.join(os.tmpdir(), `urf-ssr-${process.pid}`);
@@ -68,24 +69,31 @@ try {
   // The original shell stays for pages that are filled in only in the browser, such as unknown addresses.
   await copyFile(path.join(DIST, 'index.html'), path.join(DIST, 'app.html'));
 
+  const photos = await readPhotos();
+  const shareImage = (key) => photos[`banner-${key}`] || photos[`og-image`] || undefined;
+  const { messages } = await readLiveContent();
+
   let saved = 0;
   for (const route of Object.values(SEO_ROUTES)) {
     if (route === '/messages') continue;
     const key = Object.keys(SEO_ROUTES).find(k => SEO_ROUTES[k] === route);
-    const body = await mod.render(route);
+    let body = await mod.render(route);
+    if (route === '/' && messages[0]) {
+      const m = messages[0];
+      body = body.replace('Loading the latest message.', () => `<a href="${esc(messagePath(m))}">${esc(m.title)}</a>${meta(m) ? ` ${esc(meta(m))}` : ''}`);
+    }
     if (body.length < 500) { console.warn(`[static] skipped ${route} (nothing drawn)`); continue; }
-    await write(route, page({ title: SEO[key][0], description: SEO[key][1], route, schema: schemaFor(route), body }));
+    await write(route, page({ title: SEO[key][0], description: SEO[key][1], route, image: shareImage(key), schema: schemaFor(route), body }));
     saved += 1;
   }
 
-  const { messages } = await readLiveContent();
   const series = groupSeries(messages);
   const list = (items) => `<ul>${items.map(m => `<li><a href="${esc(messagePath(m))}">${esc(m.title)}</a>${meta(m) ? ` <span>${esc(meta(m))}</span>` : ''}${m.series ? ` <span>Series: ${esc(m.series)}</span>` : ''}</li>`).join('')}</ul>`;
   const crumbs = (list2) => ({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: list2.map(([name, p], i) => ({ '@type': 'ListItem', position: i + 1, name, item: `${SITE_URL}${p}` })) });
 
   // Messages page
   await write('/messages', page({
-    title: SEO.messages[0], description: SEO.messages[1], route: '/messages', schema: [crumbs([[SITE.name, '/'], ['Messages', '/messages']])],
+    title: SEO.messages[0], description: SEO.messages[1], route: '/messages', image: shareImage('messages'), schema: schemaFor('/messages'),
     body: chrome(`<h1>Messages</h1><p>${esc(SEO.messages[1])}</p>${series.length ? `<h2>Message series</h2><ul>${series.map(s => `<li><a href="${esc(seriesPath(s.name))}">${esc(s.name)}</a> (${s.count} ${s.count === 1 ? 'message' : 'messages'})</li>`).join('')}</ul>` : ''}<h2>Sermon library</h2>${list(messages)}`),
   }));
   saved += 1;
@@ -117,7 +125,7 @@ try {
   }
 
   // Unknown addresses use the plain shell, not the Home page copy.
-  await writeFile(path.join(DIST, '_redirects'), '/*    /app.html   200\n');
+  await writeFile(path.join(DIST, '_redirects'), redirectRules('/app.html'));
   console.log(`[static] wrote ${saved} static pages`);
 } catch (err) {
   console.warn(`[static] skipped, the normal site is unchanged: ${err?.message || err}`);

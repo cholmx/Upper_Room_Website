@@ -59,6 +59,18 @@ export function sundayService() {
   };
 }
 
+export function podcast() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'PodcastSeries',
+    name: `${SITE.name} Messages`,
+    description: SEO.messages[1],
+    url: abs('/messages'),
+    publisher: { '@type': 'Church', name: SITE.name, url: abs('/') },
+    sameAs: [SITE.podcasts.apple, SITE.podcasts.spotify],
+  };
+}
+
 export function leaders() {
   return DEFAULT_LEADERS.map(p => ({
     '@context': 'https://schema.org',
@@ -82,5 +94,6 @@ export function schemaFor(path) {
   if (key === 'discipleship') out.push(faqPage(DISCIPLESHIP_FAQ));
   if (key === 'sozo') out.push(faqPage(SOZO_FAQ));
   if (key === 'leadership') out.push(...leaders());
+  if (key === 'messages') out.push(podcast());
   return out;
 }

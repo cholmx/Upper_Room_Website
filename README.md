@@ -195,3 +195,12 @@ To review messages on demand, open Messages in the admin, select them (Select me
 - **`/llms.txt`** is a short plain-language summary of the church, the page list and the latest messages, written for AI assistants.
 - **`/sitemap.xml`** lists every page, message and series.
 - Set `VITE_SITE_URL` to the real web address before the final build, so the canonical links, sitemap and llms.txt use it.
+
+### More search and speed work
+
+- **301 redirects for the old website's addresses** (`src/content/redirects.js`, written into `_redirects` on every build) so the old pages' standing in search carries over to the new ones.
+- **Self-hosted Merriweather** (`@fontsource/merriweather`), so no page waits on Google Fonts.
+- **A real favicon and app icons** (`public/favicon.svg`, PNG sizes, `manifest.webmanifest`) and a logo in the church's structured data.
+- **Each page's share picture** is its banner photo from Site Photos, or the "social sharing image" slot, or the default picture.
+- **Home** includes the newest message as plain text in the static copy, and **Messages** carries podcast structured data.
+- Static pages, messages and the sitemap are written when the site is built. Publish again after a batch of new messages so the static copies and sitemap include them.

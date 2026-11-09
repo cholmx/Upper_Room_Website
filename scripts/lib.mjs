@@ -28,6 +28,12 @@ const live = (row) => {
   return !row.publish_date || String(row.publish_date).slice(0, 10) <= new Date().toISOString().slice(0, 10);
 };
 
+// The photos saved in Site Photos, as { slot_key: address }. Used for each page's share picture.
+export async function readPhotos() {
+  const rows = await readTable('site_photos_church');
+  return Object.fromEntries(rows.filter(r => r.slot_key && /^https?:\/\//i.test(String(r.image_url || ''))).map(r => [r.slot_key, r.image_url]));
+}
+
 // The live messages (newest first), posts and custom pages, read once for the sitemap, llms.txt and the static copies.
 export async function readLiveContent() {
   const [sermons, pages, posts] = await Promise.all([readTable('sermons'), readTable('custom_pages_church'), readTable('posts')]);
@@ -46,7 +52,7 @@ export async function collectRoutes() {
   const liveSermons = sermons.filter(live);
   const seriesNames = [...new Set(liveSermons.map(r => (r.series || '').trim()).filter(Boolean))];
   return [
-    ...STATIC_ROUTES.map(path => ({ path })),
+    ...STATIC_ROUTES.map(path => ({ path, lastmod: new Date().toISOString().slice(0, 10) })),
     ...liveSermons.map(r => ({ path: messagePath(r), lastmod: lm(r) })),
     ...seriesNames.map(name => ({ path: seriesPath(name) })),
     ...posts.filter(live).map(r => ({ path: `/blog/${r.id}`, lastmod: lm(r) })),
