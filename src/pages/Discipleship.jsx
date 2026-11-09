@@ -62,7 +62,7 @@ export default function Discipleship() {
         <div className="grid md:grid-cols-3 gap-6">
           {GROUPS.map(g => (
             <div key={g.name} className="fcard !p-8">
-              <h4 className="text-2xl mb-4">{g.name}</h4>
+              <h3 className="text-2xl mb-4">{g.name}</h3>
               <dl className="space-y-4">
                 {g.practices.map(([t, d]) => (
                   <div key={t}>

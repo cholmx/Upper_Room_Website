@@ -326,7 +326,7 @@ details.u-acc.neu-acc[open] { background: #ffffff; box-shadow: var(--shadow); }
 .neu-badge { box-shadow: var(--shadow); }
 
 /* Merriweather for lead paragraphs, in a larger size than body text */
-.lead { font-family: Arial, Helvetica, sans-serif; font-weight: 700; font-size: 1.1rem; line-height: 1.45; color: #000000; }
+.lead { font-family: Arial, Helvetica, sans-serif; font-weight: 700; font-size: 1.1rem; line-height: 1.35; color: #000000; }
 @media (min-width: 768px) { .lead { font-size: 1.2rem; } }
 
 /* Tighter line height for serif display text. */
@@ -440,8 +440,8 @@ details.u-acc.neu-acc[open] { background: #ffffff; box-shadow: var(--shadow); }
 }
 
 /* A little larger than reading size, so the words stay clear over a picture. */
-.photo-copy p, .photo-copy li, .photo-copy address { font-size: 1.25rem; line-height: 1.55; }
-@media (min-width: 768px) { .photo-copy p, .photo-copy li, .photo-copy address { font-size: 1.55rem; line-height: 1.5; } }
+.photo-copy p, .photo-copy li, .photo-copy address { font-size: 1.25rem; line-height: 1.35; }
+@media (min-width: 768px) { .photo-copy p, .photo-copy li, .photo-copy address { font-size: 1.55rem; line-height: 1.3; } }
 
 /* Cards use the same Arial Bold look as the words on photos. */
 .fcard :is(p, li, dd, dt, address, a:not(.btn)) {
@@ -449,3 +449,6 @@ details.u-acc.neu-acc[open] { background: #ffffff; box-shadow: var(--shadow); }
   font-weight: 700;
   font-style: normal;
 }
+
+/* Tighter line spacing for the Arial Bold text across the public site. */
+:where(.public-site) .leading-relaxed { line-height: 1.4; }

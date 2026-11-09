@@ -89,7 +89,13 @@ export default function Home() {
               <p className="mt-1 text-center text-black">{[latest.speaker, latest.date && formatDate(latest.date)].filter(Boolean).join(', ')}</p>
             </>
           ) : (
-            <p className="text-center text-black">{data ? 'This week’s message will be posted soon.' : 'Loading the latest message.'}</p>
+            data ? <p className="text-center text-black">This week’s message will be posted soon.</p> : (
+              <div role="status" aria-label="Loading the latest message">
+                <div className="aspect-video rounded-[10px] bg-[#e8e7e3] animate-pulse" />
+                <div className="h-5 w-2/3 mx-auto rounded bg-[#e8e7e3] animate-pulse mt-5" />
+                <div className="h-3 w-1/3 mx-auto rounded bg-[#e8e7e3] animate-pulse mt-3" />
+              </div>
+            )
           )}
           <p className="mt-6 text-center"><Link to="/messages" className="font-display font-bold text-[0.95rem] border-b-2 border-[#1e2522] pb-1">All messages</Link></p>
         </div>
