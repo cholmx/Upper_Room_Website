@@ -442,3 +442,10 @@ details.u-acc.neu-acc[open] { background: #ffffff; box-shadow: var(--shadow); }
 /* A little larger than reading size, so the words stay clear over a picture. */
 .photo-copy p, .photo-copy li, .photo-copy address { font-size: 1.25rem; line-height: 1.55; }
 @media (min-width: 768px) { .photo-copy p, .photo-copy li, .photo-copy address { font-size: 1.55rem; line-height: 1.5; } }
+
+/* Cards use the same Arial Bold look as the words on photos. */
+.fcard :is(p, li, dd, dt, address, a:not(.btn)) {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
