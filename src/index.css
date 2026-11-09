@@ -431,3 +431,10 @@ details.u-acc.neu-acc[open] { background: #ffffff; box-shadow: var(--shadow); }
 @media (max-width: 767px) {
   .photo-section.text-shade::after { background: linear-gradient(to right, rgba(30, 37, 34, 0.62), rgba(30, 37, 34, 0.45)); }
 }
+
+/* The words on photos are Arial Bold, so they stay easy to read over a picture. */
+.photo-section :is(p, li, address, blockquote, a:not(.btn)) {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
