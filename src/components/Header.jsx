@@ -6,9 +6,8 @@ import { useSite } from '../settings';
 import Logo from './Logo';
 import { Btn } from './ui';
 import SafeIcon from '../common/SafeIcon';
-import * as FiIcons from 'react-icons/fi';
+import { FiMenu, FiX, FiChevronDown } from 'react-icons/fi';
 
-const { FiMenu, FiX, FiChevronDown } = FiIcons;
 
 const linkBase = 'whitespace-nowrap font-display font-bold text-[0.95rem] tracking-wide py-1 inline-flex items-center gap-1';
 const linkOn = 'text-[#c74f2f]';

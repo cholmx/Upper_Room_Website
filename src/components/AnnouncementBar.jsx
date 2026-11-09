@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useSite } from '../settings';
 import SafeIcon from '../common/SafeIcon';
-import * as FiIcons from 'react-icons/fi';
+import { FiX } from 'react-icons/fi';
 
-const { FiX } = FiIcons;
 const KEY = 'urf_announcement_dismissed';
 
 // Optional, dismissible. It shows only when an announcement is set in the admin Settings tab.

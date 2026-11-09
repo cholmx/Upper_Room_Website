@@ -9,9 +9,8 @@ import { plainText } from '../lib/markdown';
 import RichText from '../components/RichText';
 import { Spinner, ErrorState, NotFound } from '../components/StateViews';
 import SafeIcon from '../common/SafeIcon';
-import * as FiIcons from 'react-icons/fi';
+import { FiArrowLeft } from 'react-icons/fi';
 
-const { FiArrowLeft } = FiIcons;
 
 export default function BlogPost() {
   const { id } = useParams();

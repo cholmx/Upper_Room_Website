@@ -2,9 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSite } from '../settings';
 import SafeIcon from '../common/SafeIcon';
-import * as FiIcons from 'react-icons/fi';
+import { FiPhone, FiMapPin, FiCalendar } from 'react-icons/fi';
 
-const { FiPhone, FiMapPin, FiCalendar } = FiIcons;
 
 const item = 'flex-1 flex flex-col items-center justify-center gap-0.5 min-h-[56px] text-[0.95rem] font-display tracking-wide font-bold whitespace-nowrap';
 

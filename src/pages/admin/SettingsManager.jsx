@@ -6,9 +6,8 @@ import { SETTINGS_TABLE } from '../../settings';
 import FieldInput from './FieldInput';
 import { validate } from './validate';
 import SafeIcon from '../../common/SafeIcon';
-import * as FiIcons from 'react-icons/fi';
+import { FiSave, FiLoader } from 'react-icons/fi';
 
-const { FiSave, FiLoader } = FiIcons;
 
 const FIELDS = [
   { name: 'hero_title', label: 'Home hero heading (blank uses “You are welcome here”)', type: 'text' },

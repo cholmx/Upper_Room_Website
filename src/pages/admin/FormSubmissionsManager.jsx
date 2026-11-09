@@ -5,9 +5,8 @@ import { logActivity } from '../../lib/activity';
 import { FORMS } from '../../content/forms';
 import ConfirmDialog from '../../components/ConfirmDialog';
 import SafeIcon from '../../common/SafeIcon';
-import * as FiIcons from 'react-icons/fi';
+import { FiLoader, FiDownload } from 'react-icons/fi';
 
-const { FiLoader, FiDownload } = FiIcons;
 const TABLE = 'form_submissions_church';
 
 const label = (key) => FORMS[key]?.label || key;

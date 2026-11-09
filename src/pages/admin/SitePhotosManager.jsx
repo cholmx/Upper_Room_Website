@@ -7,9 +7,8 @@ import { PHOTO_SLOTS } from '../../content/photos';
 import { safeUrl } from '../../utils';
 import FieldInput from './FieldInput';
 import SafeIcon from '../../common/SafeIcon';
-import * as FiIcons from 'react-icons/fi';
+import { FiSave, FiLoader } from 'react-icons/fi';
 
-const { FiSave, FiLoader } = FiIcons;
 
 const GROUPS = [
   { kind: undefined, title: 'Photos', help: 'Each photo shows beside the text its label names. Until one is added, the site shows a stand-in picture.' },

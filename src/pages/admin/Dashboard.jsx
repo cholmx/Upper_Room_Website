@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import SafeIcon from '../../common/SafeIcon';
-import * as FiIcons from 'react-icons/fi';
+import { FiLayout, FiMic, FiCalendar, FiFileText, FiCamera, FiLogOut, FiMenu, FiX, FiMail, FiSettings, FiActivity, FiUsers, FiCheckSquare, FiHeart, FiMessageSquare, FiExternalLink } from 'react-icons/fi';
 import GenericManager from './GenericManager';
 import SettingsManager from './SettingsManager';
 import ActivityLog from './ActivityLog';
@@ -14,7 +14,6 @@ import { newestFirst } from '../../utils';
 import { STANDARD_CATEGORIES } from '../../content/categories';
 import { DEFAULT_LEADERS } from '../../content/leaders';
 
-const { FiLayout, FiMic, FiCalendar, FiFileText, FiCamera, FiLogOut, FiMenu, FiX, FiMail, FiSettings, FiActivity, FiUsers, FiCheckSquare, FiHeart, FiMessageSquare, FiExternalLink } = FiIcons;
 
 const NavItem = ({ icon, children, ...rest }) => (
   <button {...rest} className="w-full flex items-center gap-4 px-4 py-3 text-left text-white/80 hover:bg-[#eaa235] hover:text-[#1e2522] rounded-lg transition-colors">

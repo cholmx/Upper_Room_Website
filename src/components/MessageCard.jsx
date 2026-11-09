@@ -5,9 +5,8 @@ import YtThumb from './YtThumb';
 import NewBadge from './NewBadge';
 import { parseCategories } from '../lib/categories';
 import SafeIcon from '../common/SafeIcon';
-import * as FiIcons from 'react-icons/fi';
+import { FiPlay, FiHeadphones } from 'react-icons/fi';
 
-const { FiPlay, FiHeadphones } = FiIcons;
 
 export default function MessageCard({ message, as: Heading = 'h3' }) {
   const id = ytId(message.video_url || message.yt);

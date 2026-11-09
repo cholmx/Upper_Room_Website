@@ -2,9 +2,8 @@ import React from 'react';
 import useFetch from '../../hooks/useFetch';
 import { ACTIVITY_TABLE } from '../../lib/activity';
 import SafeIcon from '../../common/SafeIcon';
-import * as FiIcons from 'react-icons/fi';
+import { FiLoader } from 'react-icons/fi';
 
-const { FiLoader } = FiIcons;
 
 export default function ActivityLog() {
   const { data, loading, error, reload } = useFetch(`read/${ACTIVITY_TABLE}?sort=id:desc&limit=100`, { admin: true });

@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import YtThumb from './YtThumb';
 import SafeIcon from '../common/SafeIcon';
-import * as FiIcons from 'react-icons/fi';
+import { FiPlay } from 'react-icons/fi';
 
-const { FiPlay } = FiIcons;
 
 // Shows a thumbnail and only loads the YouTube player after a click, so nothing plays
 // by itself and the page does not download the player until someone wants it.

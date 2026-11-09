@@ -11,9 +11,8 @@ import { parseCategories } from '../../lib/categories';
 import FieldInput from './FieldInput';
 import { validate, autoSlug } from './validate';
 import SafeIcon from '../../common/SafeIcon';
-import * as FiIcons from 'react-icons/fi';
+import { FiEdit2, FiTrash2, FiPlus, FiArrowLeft, FiSave, FiLoader, FiSearch, FiChevronUp, FiChevronDown, FiMenu } from 'react-icons/fi';
 
-const { FiEdit2, FiTrash2, FiPlus, FiArrowLeft, FiSave, FiLoader, FiSearch, FiChevronUp, FiChevronDown, FiMenu } = FiIcons;
 
 const DEFAULT_PAGE_SIZE = 10;
 

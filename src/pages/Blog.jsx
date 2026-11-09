@@ -7,9 +7,8 @@ import useFetch from '../hooks/useFetch';
 import { ErrorState } from '../components/StateViews';
 import { PageHeader } from '../components/ui';
 import SafeIcon from '../common/SafeIcon';
-import * as FiIcons from 'react-icons/fi';
+import { FiSearch, FiArrowRight, FiUser, FiCalendar, FiClock, FiTag } from 'react-icons/fi';
 
-const { FiSearch, FiArrowRight, FiUser, FiCalendar, FiClock, FiTag } = FiIcons;
 
 export default function Blog() {
   usePageMeta('Blog', 'Articles, devotions and updates from Upper Room Fellowship family.');
