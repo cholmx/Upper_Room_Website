@@ -1,13 +1,13 @@
 // Title tags stay near 60 characters and descriptions near 160 (see seo.test.js).
 export const SEO = {
-  home: ['Upper Room Fellowship | A Spirit-Led Church in Columbiana, Ohio', 'Join Upper Room Fellowship in Columbiana, Ohio, Sundays at 10:30am. Spirit-led worship, practical teaching, kids programs, and a church family that welcomes you.'],
+  home: ['Upper Room Fellowship | A Spirit-Led Church in Columbiana, Ohio', 'Join Upper Room Fellowship in Columbiana, Ohio, Sundays at 10:30am. Spirit-led worship, practical teaching, kids programs, and a welcoming church family.'],
   plan: ['New Here? What to Expect on a Sunday | Upper Room Fellowship', 'First time at Upper Room Fellowship? See what a Sunday looks like, how kids check-in works, and how to let us know you are coming.'],
   about: ['About Upper Room Fellowship | Our Story and Beliefs', 'Learn how Upper Room Fellowship began above a Columbiana veterinarian’s office in 1971 and what we believe.'],
   values: ['Our Core Values | Upper Room Fellowship', 'Six values shape Upper Room Fellowship, from healthy relationships to living the Gospel.'],
   discipleship: ['Adult Discipleship Training | Upper Room Fellowship', 'Sunday morning classes for adults on spiritual practices like prayer, Scripture, and Sabbath, and on our core values. Find where to begin.'],
   sozo: ['Sozo Inner Healing Prayer Ministry | Upper Room Fellowship', 'Learn what Sozo inner healing prayer ministry is, what happens in a session, and how to request one in Columbiana.'],
-  messages: ['Sermons and Podcast | Upper Room Fellowship, Columbiana, Ohio', 'Watch, listen to, or subscribe to sermons from Upper Room Fellowship.'],
-  leadership: ['Our Pastors and Leaders | Upper Room Fellowship', 'Meet the pastors and elders of Upper Room Fellowship.'],
+  messages: ['Sermons and Podcast | Upper Room Fellowship, Columbiana, Ohio', 'Watch, listen to, or subscribe to sermons and Bible teaching from Upper Room Fellowship in Columbiana, Ohio.'],
+  leadership: ['Our Pastors and Leaders | Upper Room Fellowship', 'Meet the pastors, elders and leaders of Upper Room Fellowship in Columbiana, Ohio, and learn how our team serves.'],
   contact: ['Contact Upper Room Fellowship | Columbiana, Ohio', 'Send a question or prayer request to Upper Room Fellowship in Columbiana, Ohio.'],
   connect: ['Connect Card | Upper Room Fellowship', 'Let Upper Room Fellowship in Columbiana, Ohio know you are coming. Fill out the Connect Card and our welcome team will be ready for you.'],
   give: ['Give | Upper Room Fellowship', 'Give online, by text, in person, or by mail to support Upper Room Fellowship.'],

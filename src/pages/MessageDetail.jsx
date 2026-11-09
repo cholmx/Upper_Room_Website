@@ -28,6 +28,15 @@ export default function MessageDetail() {
   const everything = useFetch('read/sermons?sort=date:desc');
   const live = newestFirst(everything.data).filter(isLive);
   const sameSeries = m?.series ? live.filter(x => (x.series || '').trim() === m.series.trim()) : [];
+  const myCats = m ? parseCategories(m.topic) : [];
+  const similar = m && myCats.length
+    ? live.filter(x => x.id !== m.id && (x.series || '').trim() !== (m.series || '').trim())
+        .map(x => ({ x, n: parseCategories(x.topic).filter(c => myCats.includes(c)).length }))
+        .filter(r => r.n > 0)
+        .sort((a, b) => b.n - a.n)
+        .slice(0, 3)
+        .map(r => r.x)
+    : [];
   const order = sameSeries.length > 1 ? sameSeries : live;
   const at = order.findIndex(x => x.id === m?.id);
   const newer = at > 0 ? order[at - 1] : null;
@@ -153,6 +162,14 @@ export default function MessageDetail() {
             {more.map(x => <li key={x.id}><MessageCard message={x} /></li>)}
           </ul>
           <div className="mt-8"><Btn to={seriesPath(m.series)} variant="primary">See the whole series</Btn></div>
+        </Section>
+      )}
+      {similar.length > 0 && (
+        <Section tone="white">
+          <h2 className="text-3xl md:text-5xl mb-8">More on {myCats.slice(0, 2).join(' and ')}</h2>
+          <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {similar.map(x => <li key={x.id}><MessageCard message={x} /></li>)}
+          </ul>
         </Section>
       )}
     </article>
