@@ -99,8 +99,8 @@ export default function Home() {
         <div className="grid md:grid-cols-2 gap-10 md:gap-14 items-center">
           <div>
             <h2 className="text-3xl md:text-5xl mb-5">Where and When</h2>
-            <p>500 Sponseller Road, Columbiana, Ohio 44408</p>
-            <p>Sunday classes at 9:30am. Worship at 10:30am.</p>
+            <p>500 Sponseller Road,<br />Columbiana, Ohio 44408</p>
+            <p>Sunday classes at 9:30am.<br />Worship at 10:30am.</p>
           </div>
           <MapEmbed />
         </div>
