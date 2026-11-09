@@ -6,6 +6,7 @@ import { GLOSSARY } from '../../content/glossary';
 import { HERO_IMAGES } from '../../content/photos';
 import { SEO_ROUTES } from '../../content/seo';
 import { useAuth } from '../../auth';
+import { useSite } from '../../settings';
 
 const isExternal = (to) => /^(https?:|mailto:|tel:|sms:)/i.test(to);
 
@@ -134,16 +135,35 @@ export function PhotoSplit({ slot, side = 'right', tone = 'white', id, ratio, cl
   );
 }
 
+// An embedded map of the church, loaded only when it nears the screen, with a Directions button underneath.
+export function MapEmbed({ className = '' }) {
+  const SITE = useSite();
+  return (
+    <div className={className}>
+      <div className="aspect-[4/3] rounded-[10px] overflow-hidden bg-[#e8e7e3]">
+        <iframe
+          title={`Map to ${SITE.name}, ${SITE.addressLine}`}
+          src={SITE.mapEmbedUrl}
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          className="w-full h-full block"
+        />
+      </div>
+      <div className="mt-4"><Btn href={SITE.googleMapsUrl} variant="primary">Get Directions</Btn></div>
+    </div>
+  );
+}
+
 // A section whose whole background is a photo, with white text on it. Photos are never darkened,
 // so choose a photo with a calm area for the words.
-export function PhotoBand({ slot, id, className = '', children }) {
+export function PhotoBand({ slot, id, className = '', wide = false, children }) {
   const { url, loaded } = usePhoto(slot);
   const src = loaded ? imgUrl(url || stockFor(slot), 1600) : '';
   return (
     <section id={id} data-image-band="true" className="max-w-[1312px] mx-auto px-3 md:px-4 py-1.5 md:py-2">
       <div className={`photo-section text-shade rounded-[10px] bg-[#1e2522] text-white py-24 md:py-36 px-6 md:px-10 ${className}`}>
         {src && <img src={src} alt="" loading="lazy" decoding="async" className="photo-bg" />}
-        <div className="hero-text photo-copy max-w-4xl">{children}</div>
+        <div className={`hero-text photo-copy ${wide ? '' : 'max-w-4xl'}`}>{children}</div>
       </div>
     </section>
   );

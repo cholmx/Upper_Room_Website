@@ -41,10 +41,12 @@ function DesktopDropdown({ item, light }) {
       onMouseLeave={() => setOpen(false)}
       onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget)) setOpen(false); }}
     >
-      <button ref={btn} type="button" aria-expanded={open} aria-haspopup="true" onClick={() => setOpen(o => !o)} className={`${linkBase} ${active ? (light ? linkOnLight : linkOn) : (light ? linkOffLight : linkOff)}`}>
-        {item.label}
-        <SafeIcon icon={FiChevronDown} className={`transition-transform ${open ? 'rotate-180' : ''}`} />
-      </button>
+      <div className="inline-flex items-center">
+        <Link to={item.children[0].to} className={`${linkBase} ${active ? (light ? linkOnLight : linkOn) : (light ? linkOffLight : linkOff)}`}>{item.label}</Link>
+        <button ref={btn} type="button" aria-expanded={open} aria-haspopup="true" aria-label={`${item.label} menu`} onClick={() => setOpen(o => !o)} className={`${linkBase} !px-1 ${active ? (light ? linkOnLight : linkOn) : (light ? linkOffLight : linkOff)}`}>
+          <SafeIcon icon={FiChevronDown} className={`transition-transform ${open ? 'rotate-180' : ''}`} />
+        </button>
+      </div>
       {open && (
         <div className="absolute left-1/2 -translate-x-1/2 top-full pt-3 z-50 min-w-[16rem]">
           <ul className="bg-white rounded-2xl py-3 elev-2">
@@ -94,10 +96,12 @@ function MobileMenu({ onClose }) {
             <li key={item.label}>
               {item.children ? (
                 <>
-                  <button type="button" aria-expanded={openGroup === item.label} onClick={() => setOpenGroup(g => (g === item.label ? null : item.label))} className="w-full flex items-center justify-between min-h-[60px] text-2xl text-left" style={big}>
-                    {item.label}
-                    <SafeIcon icon={FiChevronDown} className={`transition-transform ${openGroup === item.label ? 'rotate-180' : ''}`} />
-                  </button>
+<div className="flex items-center justify-between min-h-[60px]">
+                    <Link to={item.children[0].to} onClick={onClose} className="flex-1 flex items-center min-h-[60px] text-2xl hover:text-[#eaa235] transition-colors" style={big}>{item.label}</Link>
+                    <button type="button" aria-expanded={openGroup === item.label} aria-label={`${item.label} menu`} onClick={() => setOpenGroup(g => (g === item.label ? null : item.label))} className="p-4">
+                      <SafeIcon icon={FiChevronDown} className={`text-2xl transition-transform ${openGroup === item.label ? 'rotate-180' : ''}`} />
+                    </button>
+                  </div>
                   {openGroup === item.label && (
                     <ul className="pb-4 pl-2">
                       {item.children.map(c => (

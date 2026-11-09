@@ -11,7 +11,7 @@ import LiteYouTube from '../components/LiteYouTube';
 import MessageCard from '../components/MessageCard';
 import YtThumb from '../components/YtThumb';
 import NewBadge from '../components/NewBadge';
-import { Spinner, ErrorState } from '../components/StateViews';
+import { CardSkeletons, ErrorState } from '../components/StateViews';
 
 const select = 'w-full min-h-[48px] px-3 py-2 bg-white rounded-xl border border-[#1e2522]/25 focus:outline-none focus:ring-2 focus:ring-[#1e2522]';
 
@@ -76,7 +76,7 @@ export default function Messages() {
       {error ? (
         <Section tone="cream"><ErrorState message={error} onRetry={reload} /></Section>
       ) : loading ? (
-        <Section tone="cream"><Spinner /></Section>
+        <Section tone="white"><CardSkeletons /></Section>
       ) : (
         <>
           <Section tone="cream">

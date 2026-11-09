@@ -1,7 +1,7 @@
 import React from 'react';
 import usePageMeta from '../hooks/usePageMeta';
 import { useSite } from '../settings';
-import { Section, SectionHeader, PageHeader, SlotImage, PhotoBand } from '../components/ui';
+import { Section, SectionHeader, PageHeader, PhotoBand, MapEmbed } from '../components/ui';
 import FormBlock from '../components/FormBlock';
 
 const P = 'text-[0.95rem] leading-relaxed text-black';
@@ -32,6 +32,7 @@ export default function Contact() {
                 <p>Sundays at 10:30am</p>
               </address>
             </div>
+            <MapEmbed />
           </div>
         </div>
       </Section>

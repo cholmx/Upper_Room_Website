@@ -1,16 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import usePageMeta from '../hooks/usePageMeta';
 import useFetch from '../hooks/useFetch';
 import useJsonLd from '../hooks/useJsonLd';
 import { useSite } from '../settings';
-import { formatDate, isLive, messagePath, newestFirst, parseMessageId, safeUrl, seriesPath, ytEmbed, ytId, ytThumb } from '../utils';
+import { formatDate, isLive, messagePath, newestFirst, parseMessageId, safeUrl, seriesPath, slugify, ytEmbed, ytId, ytThumb } from '../utils';
 import { plainText } from '../lib/markdown';
 import RichText from '../components/RichText';
 import { parseCategories } from '../lib/categories';
 import LiteYouTube from '../components/LiteYouTube';
 import MessageCard from '../components/MessageCard';
 import { Btn, Section } from '../components/ui';
+import ShareButtons from '../components/ShareButtons';
 import { Spinner, ErrorState, NotFound } from '../components/StateViews';
 
 export default function MessageDetail() {
@@ -22,6 +23,21 @@ export default function MessageDetail() {
   const m = found && isLive(found) ? found : null;
   const related = useFetch(m?.series ? `read/sermons?series=${encodeURIComponent(m.series)}&sort=date:desc` : null);
   const more = newestFirst(related.data).filter(isLive).filter(x => x.id !== m?.id).slice(0, 3);
+
+  // The messages in order, so each one can point to the one before and after it.
+  const everything = useFetch('read/sermons?sort=date:desc');
+  const live = newestFirst(everything.data).filter(isLive);
+  const sameSeries = m?.series ? live.filter(x => (x.series || '').trim() === m.series.trim()) : [];
+  const order = sameSeries.length > 1 ? sameSeries : live;
+  const at = order.findIndex(x => x.id === m?.id);
+  const newer = at > 0 ? order[at - 1] : null;
+  const older = at >= 0 && at < order.length - 1 ? order[at + 1] : null;
+
+  // Remember where a visitor is in a series, so the series page can offer the next message.
+  useEffect(() => {
+    if (!m?.series) return;
+    try { localStorage.setItem(`urf-series-${slugify(m.series)}`, String(m.id)); } catch { /* storage is off */ }
+  }, [m?.id, m?.series]);
 
   const video = m?.video_url || m?.yt;
   const vid = ytId(video);
@@ -93,10 +109,14 @@ export default function MessageDetail() {
           <aside className="space-y-6" aria-label="More about this message">
             {m.discussion_questions && (
               <div className="rounded-[10px] bg-[#e8e7e3] p-6">
-                <h2 className="text-2xl mb-3">Discussion questions</h2>
+                <h2 className="text-2xl md:text-3xl mb-3">Discussion questions</h2>
                 <RichText value={m.discussion_questions} className="text-[0.95rem]" />
               </div>
             )}
+            <div>
+              <h2 className="text-xl mb-3">Share this message</h2>
+              <ShareButtons title={m.title} />
+            </div>
             {(notesUrl || audio) && (
               <div className="flex flex-wrap gap-3">
                 {notesUrl && <Btn href={notesUrl} variant="primary">Download the notes</Btn>}
@@ -107,9 +127,28 @@ export default function MessageDetail() {
         </div>
       </Section>
 
+      {(newer || older) && (
+        <Section tone="white" className="!py-10 md:!py-12">
+          <nav aria-label="More messages" className="grid sm:grid-cols-2 gap-4">
+            {older ? (
+              <Link to={messagePath(older)} className="fcard !p-6 block">
+                <span className="text-sm text-black">&larr; Older message{sameSeries.length > 1 ? ' in this series' : ''}</span>
+                <span className="block text-xl mt-1">{older.title}</span>
+              </Link>
+            ) : <span />}
+            {newer ? (
+              <Link to={messagePath(newer)} className="fcard !p-6 block sm:text-right">
+                <span className="text-sm text-black">Newer message{sameSeries.length > 1 ? ' in this series' : ''} &rarr;</span>
+                <span className="block text-xl mt-1">{newer.title}</span>
+              </Link>
+            ) : <span />}
+          </nav>
+        </Section>
+      )}
+
       {more.length > 0 && (
         <Section tone="gray">
-          <h2 className="text-2xl md:text-4xl mb-6">More from {m.series}</h2>
+          <h2 className="text-3xl md:text-5xl mb-8">More from {m.series}</h2>
           <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {more.map(x => <li key={x.id}><MessageCard message={x} /></li>)}
           </ul>

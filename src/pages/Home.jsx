@@ -6,7 +6,7 @@ import { useSite } from '../settings';
 import { usePhoto } from '../photos';
 import { HERO_IMAGES } from '../content/photos';
 import { formatDate, imgUrl, isLive, messagePath, newestFirst, ytId } from '../utils';
-import { Btn, Section, Cards, Card, SlotImage, PhotoSplit, PhotoBand } from '../components/ui';
+import { Btn, Section, Cards, Card, SlotImage, PhotoSplit, PhotoBand, MapEmbed } from '../components/ui';
 import LiteYouTube from '../components/LiteYouTube';
 import Spotlights from '../components/Spotlights';
 import { worshipLine } from '../lib/worship';
@@ -95,11 +95,15 @@ export default function Home() {
         </div>
       </Section>
 
-      <PhotoBand slot="home-where">
-        <h2 className="text-3xl md:text-5xl mb-5">Where and When</h2>
-        <p className="text-base leading-relaxed">500 Sponseller Road, Columbiana, Ohio 44408</p>
-        <p className="text-base leading-relaxed">Sunday classes at 9:30am. Worship at 10:30am.</p>
-        <div className="mt-6"><Btn href={SITE.googleMapsUrl} variant="primary">Get Directions</Btn></div>
+      <PhotoBand slot="home-where" wide>
+        <div className="grid md:grid-cols-2 gap-10 md:gap-14 items-center">
+          <div>
+            <h2 className="text-3xl md:text-5xl mb-5">Where and When</h2>
+            <p>500 Sponseller Road, Columbiana, Ohio 44408</p>
+            <p>Sunday classes at 9:30am. Worship at 10:30am.</p>
+          </div>
+          <MapEmbed />
+        </div>
       </PhotoBand>
 
       <Section tone="white">

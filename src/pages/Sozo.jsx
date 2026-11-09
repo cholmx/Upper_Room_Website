@@ -39,11 +39,11 @@ export default function Sozo() {
       <Section tone="white">
         <div className="grid md:grid-cols-2 gap-10 md:gap-16">
           <div>
-            <SectionHeader title="What happens in a session" className="!mb-4" />
+            <SectionHeader title="What happens in a session" className="!mb-6" />
             <p className={P}>Two trained team members sit down with you and, with the help of the Holy Spirit, guide you through a series of questions and tools. The session opens with prayer, moves through the tools as the Spirit leads, and closes with prayer and a short conversation about next steps. A session lasts about two hours, and you decide what you share.</p>
           </div>
           <div>
-            <SectionHeader title="Our approach" className="!mb-4" />
+            <SectionHeader title="Our approach" className="!mb-6" />
             <p className={P}>We aim to love people and offer a safe place where old wounds can heal, lies give way to truth, and doors opened to the enemy are closed. Through prayer, we help you find freedom from emotional pain, break unhealthy ties and thought patterns, uncover barriers between you and God, discover your identity in Christ, and walk in the destiny He has for you.</p>
           </div>
         </div>
