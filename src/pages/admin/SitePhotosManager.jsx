@@ -46,7 +46,7 @@ function Slot({ slot, row, onSaved }) {
     <div className="bg-white rounded-xl border border-[#1e2522]/10 p-5 space-y-4">
       <div>
         <h3 className="font-bold text-[#1e2522]">{slot.label.charAt(0).toUpperCase() + slot.label.slice(1)}</h3>
-        <p className="text-xs text-[#1e2522]/70">Slot: {slot.key}</p>
+        <p className="text-xs text-black">Slot: {slot.key}</p>
       </div>
       {slot.kind === 'model' ? (
         <div>
@@ -93,7 +93,7 @@ export default function SitePhotosManager() {
       {GROUPS.map(g => (
         <section key={g.title} aria-labelledby={`grp-${g.title}`}>
           <h2 id={`grp-${g.title}`} className="text-xl font-bold mb-1">{g.title}</h2>
-          <p className="text-[#1e2522]/70 mb-4">{g.help}</p>
+          <p className="text-black mb-4">{g.help}</p>
           <div className="grid xl:grid-cols-2 gap-5">
             {PHOTO_SLOTS.filter(s => s.kind === g.kind).map(s => <Slot key={s.key + (byKey[s.key]?.id || '')} slot={s} row={byKey[s.key]} onSaved={load} />)}
           </div>

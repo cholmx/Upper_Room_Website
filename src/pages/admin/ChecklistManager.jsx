@@ -48,7 +48,7 @@ export default function ChecklistManager() {
 
   return (
     <div>
-      <p className="text-[#1e2522]/70 mb-4">Everything still shown in brackets on the site is listed here. Check an item once the real answer is on the site, and it stops being a reminder.</p>
+      <p className="text-black mb-4">Everything still shown in brackets on the site is listed here. Check an item once the real answer is on the site, and it stops being a reminder.</p>
       <div className="bg-white rounded-2xl border border-[#1e2522]/10 p-5 mb-6">
         <div className="flex flex-wrap items-center justify-between gap-3 mb-3">
           <p className="font-bold" aria-live="polite">{doneCount} of {CHECKLIST.length} confirmed</p>
@@ -66,8 +66,8 @@ export default function ChecklistManager() {
             <li key={i.id} className="p-4 flex items-start gap-4">
               <input id={`chk-${i.id}`} type="checkbox" checked={done} onChange={() => toggle(i)} className="w-5 h-5 mt-1 accent-[#8A6309]" />
               <label htmlFor={`chk-${i.id}`} className="flex-grow cursor-pointer">
-                <span className={`block font-medium ${done ? 'line-through text-[#1e2522]/50' : 'text-[#1e2522]'}`}>{i.label}</span>
-                <span className="block text-sm text-[#1e2522]/70">{i.where}</span>
+                <span className={`block font-medium ${done ? 'line-through text-black' : 'text-[#1e2522]'}`}>{i.label}</span>
+                <span className="block text-sm text-black">{i.where}</span>
               </label>
               {i.route && <Link to={i.route} target="_blank" className="text-sm font-bold text-[#8A6309] underline">View page</Link>}
             </li>

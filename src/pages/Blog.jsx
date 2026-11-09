@@ -64,7 +64,7 @@ export default function Blog() {
             <div className="mb-16 max-w-3xl mx-auto">
               <div className="relative mb-8 group">
                 <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none group-focus-within:text-[#1e2522] transition-colors">
-                  <SafeIcon icon={FiSearch} className="text-[#1e2522]/70 text-xl" />
+                  <SafeIcon icon={FiSearch} className="text-black text-xl" />
                 </div>
                 <input
                   type="text"
@@ -95,7 +95,7 @@ export default function Blog() {
               <div className="text-center py-24 rounded-3xl neu">
                 <div className="text-6xl mb-6">🔍</div>
                 <h3 className="text-3xl font-bold mb-3">No articles found</h3>
-                <p className="opacity-60 text-[0.95rem] mb-8">We couldn't find any posts matching your criteria.</p>
+                <p className="text-[0.95rem] mb-8">We couldn't find any posts matching your criteria.</p>
                 <button 
                   onClick={() => { setSearchQuery(''); setSelectedCategory('All'); }}
                   className="btn btn-solid"
@@ -130,20 +130,20 @@ export default function Blog() {
                           {featuredPost.category && (
                             <span className="bg-[#eaa235]/10 text-[#1e2522] px-4 py-1.5 rounded-full">{featuredPost.category}</span>
                           )}
-                          <span className="flex items-center gap-1.5 text-[#1e2522]/70"><SafeIcon icon={FiCalendar} /> {featuredPost.date ? formatDate(featuredPost.date) : formatDate(featuredPost.created_at)}</span>
-                          <span className="flex items-center gap-1.5 text-[#1e2522]/70"><SafeIcon icon={FiClock} /> {getReadTime(featuredPost.body)}</span>
+                          <span className="flex items-center gap-1.5 text-black"><SafeIcon icon={FiCalendar} /> {featuredPost.date ? formatDate(featuredPost.date) : formatDate(featuredPost.created_at)}</span>
+                          <span className="flex items-center gap-1.5 text-black"><SafeIcon icon={FiClock} /> {getReadTime(featuredPost.body)}</span>
                         </div>
                         
                         <h2 className="text-4xl lg:text-5xl font-bold mb-6 group-hover:text-[#1e2522] transition-colors leading-tight">{featuredPost.title}</h2>
                         
-                        <p className="opacity-70 mb-10 line-clamp-4 text-[0.95rem] leading-relaxed">
+                        <p className="mb-10 line-clamp-4 text-[0.95rem] leading-relaxed">
                           {plainText(featuredPost.body) || 'Read this article to learn more...'}
                         </p>
                         
                         <div className="mt-auto flex items-center justify-between border-t border-[#1e2522]/5 pt-8">
                           {featuredPost.author ? (
-                            <div className="flex items-center gap-3 text-sm font-bold text-[#1e2522]/70">
-                              <div className="w-8 h-8 rounded-full bg-[#1e2522]/5 flex items-center justify-center text-[#1e2522]/70">
+                            <div className="flex items-center gap-3 text-sm font-bold text-black">
+                              <div className="w-8 h-8 rounded-full bg-[#1e2522]/5 flex items-center justify-center text-black">
                                 <SafeIcon icon={FiUser} />
                               </div>
                               {featuredPost.author}
@@ -192,7 +192,7 @@ export default function Blog() {
                             
                             <div className="p-8 flex flex-col flex-grow">
                               <div className="flex flex-wrap gap-3 text-[0.75rem] font-bold text-[#1e2522] tracking-wide mb-4">
-                                <span className="flex items-center gap-1 bg-[#eaa235]/10 px-2.5 py-1 rounded text-[#1e2522]/70"><SafeIcon icon={FiClock} /> {getReadTime(post.body)}</span>
+                                <span className="flex items-center gap-1 bg-[#eaa235]/10 px-2.5 py-1 rounded text-black"><SafeIcon icon={FiClock} /> {getReadTime(post.body)}</span>
                                 <span className="flex items-center gap-1"><SafeIcon icon={FiCalendar} /> {post.date ? formatDate(post.date) : formatDate(post.created_at)}</span>
                               </div>
                               
@@ -200,13 +200,13 @@ export default function Blog() {
                                 {post.title}
                               </h3>
                               
-                              <p className="opacity-70 mb-8 line-clamp-3 text-sm leading-relaxed flex-grow">
+                              <p className="mb-8 line-clamp-3 text-sm leading-relaxed flex-grow">
                                 {plainText(post.body) || 'Read this article to learn more...'}
                               </p>
                               
                               <div className="mt-auto pt-5 border-t border-[#1e2522]/5 flex items-center justify-between">
                                 {post.author ? (
-                                  <div className="text-xs font-bold text-[#1e2522]/70 truncate max-w-[120px] flex items-center gap-1.5">
+                                  <div className="text-xs font-bold text-black truncate max-w-[120px] flex items-center gap-1.5">
                                     <SafeIcon icon={FiUser} /> {post.author}
                                   </div>
                                 ) : <div />}

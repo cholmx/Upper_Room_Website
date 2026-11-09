@@ -38,7 +38,7 @@ export default function CustomPage() {
         <div className="max-w-xl mx-auto p-12 rounded-3xl neu">
           <div className="text-6xl mb-6">📄</div>
           <h2 className="text-3xl font-bold mb-4">Page Not Found</h2>
-          <p className="opacity-60 text-lg">The page you are looking for does not exist or has been moved.</p>
+          <p className="text-lg">The page you are looking for does not exist or has been moved.</p>
         </div>
       </div>
     );

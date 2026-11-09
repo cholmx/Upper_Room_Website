@@ -100,17 +100,17 @@ export default function FormSubmissionsManager() {
       </div>
 
       {shown.length === 0 ? (
-        <div className="bg-white rounded-2xl border border-[#1e2522]/10 p-12 text-center text-[#1e2522]/70">Nothing here.</div>
+        <div className="bg-white rounded-2xl border border-[#1e2522]/10 p-12 text-center text-black">Nothing here.</div>
       ) : (
         <ul className="space-y-3">
           {shown.map(r => (
             <li key={r.id} className="bg-white rounded-xl border border-[#1e2522]/10">
               <div className="p-4 flex flex-wrap items-center gap-3">
-                <span className={`text-[10px] font-bold px-2 py-1 rounded ${r.handled === 1 ? 'bg-[#1e2522]/5 text-[#1e2522]/70' : 'bg-[#eaa235]/20 text-[#1e2522]'}`}>{r.handled === 1 ? 'Handled' : 'New'}</span>
+                <span className={`text-[10px] font-bold px-2 py-1 rounded ${r.handled === 1 ? 'bg-[#1e2522]/5 text-black' : 'bg-[#eaa235]/20 text-[#1e2522]'}`}>{r.handled === 1 ? 'Handled' : 'New'}</span>
                 <span className="font-bold">{label(r.form_type)}</span>
                 <span className="text-[#1e2522]">{r.name || 'No name'}</span>
-                <span className="text-[#1e2522]/70 text-sm">{[r.email, r.phone].filter(Boolean).join('  |  ')}</span>
-                <span className="ml-auto text-sm text-[#1e2522]/50">{r.created_at ? new Date(r.created_at).toLocaleString() : ''}</span>
+                <span className="text-black text-sm">{[r.email, r.phone].filter(Boolean).join('  |  ')}</span>
+                <span className="ml-auto text-sm text-black">{r.created_at ? new Date(r.created_at).toLocaleString() : ''}</span>
               </div>
               <div className="px-4 pb-4 flex flex-wrap gap-2">
                 <button type="button" aria-expanded={open === r.id} onClick={() => setOpen(open === r.id ? null : r.id)} className="px-3 py-1.5 rounded-lg border border-[#1e2522]/20 text-sm font-bold">{open === r.id ? 'Hide details' : 'Show details'}</button>
@@ -120,9 +120,9 @@ export default function FormSubmissionsManager() {
               </div>
               {open === r.id && (
                 <dl className="px-4 pb-4 grid sm:grid-cols-[12rem_1fr] gap-x-4 gap-y-2 text-sm">
-                  {Object.entries(r.data || {}).length === 0 && <p className="text-[#1e2522]/70 sm:col-span-2">No other details.</p>}
+                  {Object.entries(r.data || {}).length === 0 && <p className="text-black sm:col-span-2">No other details.</p>}
                   {Object.entries(r.data || {}).map(([k, v]) => (
-                    <React.Fragment key={k}><dt className="font-bold text-[#1e2522]/70">{pretty(k)}</dt><dd className="whitespace-pre-wrap break-words">{show(v)}</dd></React.Fragment>
+                    <React.Fragment key={k}><dt className="font-bold text-black">{pretty(k)}</dt><dd className="whitespace-pre-wrap break-words">{show(v)}</dd></React.Fragment>
                   ))}
                 </dl>
               )}

@@ -18,7 +18,7 @@ export function ErrorState({ message, onRetry }) {
     <div role="alert" className="text-center py-24 rounded-3xl px-6 neu">
       <div className="text-5xl mb-6" aria-hidden="true">⚠️</div>
       <h2 className="text-3xl font-bold mb-3">We couldn't load this</h2>
-      <p className="opacity-60 text-[0.95rem] mb-8">{message || 'Please check your connection and try again.'}</p>
+      <p className="text-[0.95rem] mb-8">{message || 'Please check your connection and try again.'}</p>
       {onRetry && <button onClick={onRetry} className="btn btn-solid">Try Again</button>}
     </div>
   );
@@ -29,7 +29,7 @@ export function NotFound({ what = 'page' }) {
     <div className="min-h-[60vh] pt-40 px-6 text-center">
       <div className="max-w-xl mx-auto p-12 rounded-3xl neu">
         <h2 className="text-3xl font-bold mb-4">Not Found</h2>
-        <p className="opacity-60 text-lg">That {what} does not exist or is no longer available.</p>
+        <p className="text-lg">That {what} does not exist or is no longer available.</p>
       </div>
     </div>
   );

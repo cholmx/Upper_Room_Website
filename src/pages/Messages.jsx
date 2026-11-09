@@ -128,7 +128,7 @@ export default function Messages() {
                       </div>
                       <div className="p-6 flex flex-col flex-grow">
                         <h3 className="text-2xl">{s.name}</h3>
-                        {dateRangeLabel(s.first, s.last) && <p className="mt-1 text-sm text-[#1e2522]/70">{dateRangeLabel(s.first, s.last)}</p>}
+                        {dateRangeLabel(s.first, s.last) && <p className="mt-1 text-sm text-black">{dateRangeLabel(s.first, s.last)}</p>}
                         {s.latest && <p className="mt-3 text-sm text-black line-clamp-2"><span className="font-semibold">Latest:</span> {s.latest.title}</p>}
                         <span className="mt-auto pt-5 font-display font-bold text-sm text-[#c74f2f]">See the series &rarr;</span>
                       </div>
@@ -164,7 +164,7 @@ export default function Messages() {
               </div>
               {anyFilter && <button type="button" onClick={clear} className="mt-4 underline underline-offset-4 font-semibold text-[#1e2522] min-h-[44px]">Clear search and filters</button>}
             </form>
-            <p className="mb-6 text-sm text-[#1e2522]/70" aria-live="polite">{filtered.length === messages.length ? `${messages.length} messages` : `${filtered.length} of ${messages.length} messages`}</p>
+            <p className="mb-6 text-sm text-black" aria-live="polite">{filtered.length === messages.length ? `${messages.length} messages` : `${filtered.length} of ${messages.length} messages`}</p>
             {filtered.length === 0 ? (
               <p className="text-[0.95rem] text-black">No messages match yet. Try a different word.</p>
             ) : (

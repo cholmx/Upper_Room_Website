@@ -18,7 +18,7 @@ export default class ErrorBoundary extends React.Component {
       <div className="min-h-screen flex items-center justify-center bg-[#ffffff] px-6 text-center">
         <div className="max-w-md">
           <h1 className="text-4xl mb-4">Something went wrong</h1>
-          <p className="opacity-70 mb-8">The page hit an unexpected problem. Reloading usually fixes it.</p>
+          <p className="mb-8">The page hit an unexpected problem. Reloading usually fixes it.</p>
           <button className="btn btn-solid" onClick={() => window.location.reload()}>Reload</button>
         </div>
       </div>

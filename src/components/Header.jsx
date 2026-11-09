@@ -12,7 +12,7 @@ const { FiMenu, FiX, FiChevronDown } = FiIcons;
 
 const linkBase = 'whitespace-nowrap font-display font-bold text-[0.95rem] tracking-wide py-1 inline-flex items-center gap-1';
 const linkOn = 'text-[#c74f2f]';
-const linkOff = 'text-[#1e2522]/70 hover:text-[#1e2522]';
+const linkOff = 'text-black hover:text-[#1e2522]';
 const linkOnLight = 'text-[#eaa235]';
 const linkOffLight = 'text-white/90 hover:text-white';
 

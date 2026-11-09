@@ -147,12 +147,12 @@ export default function BulkBar({ table, title, items, filtered, selected, setSe
           </select>
         </label>
         <button type="button" className={btn} onClick={() => setSelected(new Set(items.filter(i => !String(i.topic || '').trim()).map(i => i.id)))}>Select messages with no category</button>
-        <span className="text-[#1e2522]/70">{selected.size} selected</span>
+        <span className="text-black">{selected.size} selected</span>
       </div>
 
       {selected.size > 0 && (
         <div className="mt-5 pt-5 border-t border-[#1e2522]/10 space-y-5">
-          <p className="text-sm text-[#1e2522]/70">Changes apply to the {selected.size} selected {selected.size === 1 ? 'message' : 'messages'}. To rename a series, select the whole series and set a new series name. To merge two series, select both and set one name.</p>
+          <p className="text-sm text-black">Changes apply to the {selected.size} selected {selected.size === 1 ? 'message' : 'messages'}. To rename a series, select the whole series and set a new series name. To merge two series, select both and set one name.</p>
           <div className="grid lg:grid-cols-2 gap-5">
             {field('series', 'Series', seriesList, 'Set series', 'Series name')}
             {field('speaker', 'Speaker', speakers, 'Set speaker', 'Speaker name')}

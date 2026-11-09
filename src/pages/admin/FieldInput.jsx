@@ -46,11 +46,11 @@ function ImageField({ id, value, onChange, invalid }) {
           {value && !busy && (
             <button type="button" onClick={() => onChange('')} className="px-4 py-3 rounded-lg border border-[#1e2522]/20 font-semibold text-[#1e2522] hover:bg-[#1e2522]/5">Remove</button>
           )}
-          <span className="text-sm text-[#1e2522]/70">JPG, PNG, WebP, or GIF. Large photos are shrunk for you.</span>
+          <span className="text-sm text-black">JPG, PNG, WebP, or GIF. Large photos are shrunk for you.</span>
         </div>
       )}
       <details className="mt-3" open={!uploadsEnabled || undefined}>
-        <summary className="cursor-pointer text-sm font-semibold text-[#1e2522]/70">{uploadsEnabled ? 'Or paste a link to a photo' : 'Photo link'}</summary>
+        <summary className="cursor-pointer text-sm font-semibold text-black">{uploadsEnabled ? 'Or paste a link to a photo' : 'Photo link'}</summary>
         <input id={id} type="url" value={value || ''} onChange={(e) => onChange(e.target.value)} placeholder="https://..." className={`mt-2 ${base} ${invalid ? bad : ok}`} aria-invalid={invalid} />
       </details>
       {err && <p role="alert" className="text-sm text-[#c74f2f] mt-2">{err}</p>}
@@ -103,7 +103,7 @@ function MarkdownField({ id, value, onChange, invalid }) {
       ) : (
         <textarea ref={ref} id={id} rows={10} value={value || ''} onChange={(e) => onChange(e.target.value)} className={`${base} ${invalid ? bad : ok} text-sm`} aria-invalid={invalid} />
       )}
-      <p className="text-xs text-[#1e2522]/70 mt-2">Supports **bold**, *italic*, ## headings, - lists and [links](https://example.com). Leave a blank line between paragraphs.</p>
+      <p className="text-xs text-black mt-2">Supports **bold**, *italic*, ## headings, - lists and [links](https://example.com). Leave a blank line between paragraphs.</p>
     </div>
   );
 }
@@ -143,7 +143,7 @@ export default function FieldInput({ field, value, onChange, error }) {
               <span>{name}</span>
             </label>
           ))}
-          {field.options.length === 0 && <p className="text-sm text-[#1e2522]/70">Add categories under Message Categories first.</p>}
+          {field.options.length === 0 && <p className="text-sm text-black">Add categories under Message Categories first.</p>}
         </div>
       );
       break;
@@ -180,7 +180,7 @@ export default function FieldInput({ field, value, onChange, error }) {
         {field.label}{field.required && <span className="text-[#c74f2f]" aria-hidden="true"> *</span>}
       </label>
       {control}
-      {field.type === 'slug' && <p className="text-xs text-[#1e2522]/70 mt-2">Appears in the page address. Filled in from the title if left blank.</p>}
+      {field.type === 'slug' && <p className="text-xs text-black mt-2">Appears in the page address. Filled in from the title if left blank.</p>}
       {invalid && <p role="alert" className="text-sm text-[#c74f2f] mt-2">{error}</p>}
     </div>
   );

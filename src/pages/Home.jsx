@@ -86,10 +86,10 @@ export default function Home() {
                 {videoId ? <LiteYouTube id={videoId} title={latest.title} /> : <div className="w-full h-full flex items-center justify-center text-white/80 p-6 text-center">Video coming soon</div>}
               </div>
               <p className="mt-5 text-center text-xl"><Link to={messagePath(latest)} className="font-semibold hover:text-[#c74f2f]">{latest.title}</Link></p>
-              <p className="mt-1 text-center text-[#1e2522]/70">{[latest.speaker, latest.date && formatDate(latest.date)].filter(Boolean).join(', ')}</p>
+              <p className="mt-1 text-center text-black">{[latest.speaker, latest.date && formatDate(latest.date)].filter(Boolean).join(', ')}</p>
             </>
           ) : (
-            <p className="text-center text-[#1e2522]/70">{data ? 'This week’s message will be posted soon.' : 'Loading the latest message.'}</p>
+            <p className="text-center text-black">{data ? 'This week’s message will be posted soon.' : 'Loading the latest message.'}</p>
           )}
           <p className="mt-6 text-center"><Link to="/messages" className="font-display font-bold text-[0.95rem] border-b-2 border-[#1e2522] pb-1">All messages</Link></p>
         </div>

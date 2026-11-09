@@ -87,17 +87,17 @@ export default function YouTubeImport({ existing, onClose, onImported }) {
       <div className="flex items-start justify-between gap-4 mb-4">
         <div>
           <h3 className="text-xl font-bold">Import from YouTube</h3>
-          <p className="text-sm text-[#1e2522]/70 mt-1">Videos from the Upper Room Fellowship channel. Each one you pick becomes a message with its title, series, speaker, date and summary filled in. You can edit any of it afterward.</p>
+          <p className="text-sm text-black mt-1">Videos from the Upper Room Fellowship channel. Each one you pick becomes a message with its title, series, speaker, date and summary filled in. You can edit any of it afterward.</p>
         </div>
         <button type="button" onClick={onClose} className="px-4 py-2 rounded-lg border border-[#1e2522]/20 font-bold text-sm">Close</button>
       </div>
 
-      {state.phase === 'loading' && <p role="status" className="text-[#1e2522]/70">Reading the channel.</p>}
+      {state.phase === 'loading' && <p role="status" className="text-black">Reading the channel.</p>}
       {state.phase === 'error' && <p role="alert" className="text-[#c74f2f] font-medium">{state.error}</p>}
 
       {state.phase === 'ready' && (
         <>
-          {state.source === 'feed' && <p className="text-sm text-[#1e2522]/70 mb-3">This list shows the 15 newest videos. To bring in older ones, ask Bolt to add a YouTube Data API key as VITE_YOUTUBE_API_KEY.</p>}
+          {state.source === 'feed' && <p className="text-sm text-black mb-3">This list shows the 15 newest videos. To bring in older ones, ask Bolt to add a YouTube Data API key as VITE_YOUTUBE_API_KEY.</p>}
           {known.length > 0 && (
             <div className="mb-5 p-4 rounded-lg bg-[#1e2522]/5 text-sm">
               <p><strong>{known.length}</strong> of these are already in your messages. You can read them again from the channel and update only the parts you choose. A summary or discussion questions are filled in only where a message has none, so your edits to those are kept.</p>
@@ -126,13 +126,13 @@ export default function YouTubeImport({ existing, onClose, onImported }) {
             </div>
           )}
           {fresh.length === 0 ? (
-            <p className="text-[#1e2522]/70">Every video on the channel is already in your messages.</p>
+            <p className="text-black">Every video on the channel is already in your messages.</p>
           ) : (
             <>
               <div className="flex flex-wrap items-center gap-4 mb-3 text-sm">
                 <button type="button" onClick={() => setPicked(Object.fromEntries(fresh.map(v => [v.id, true])))} className="underline underline-offset-4 font-semibold">Select all</button>
                 <button type="button" onClick={() => setPicked({})} className="underline underline-offset-4 font-semibold">Select none</button>
-                <span className="text-[#1e2522]/70">{chosen.length} of {fresh.length} selected</span>
+                <span className="text-black">{chosen.length} of {fresh.length} selected</span>
               </div>
               <ul className="divide-y divide-[#1e2522]/10 max-h-[28rem] overflow-y-auto border border-[#1e2522]/10 rounded-lg">
                 {fresh.map(v => {
@@ -144,7 +144,7 @@ export default function YouTubeImport({ existing, onClose, onImported }) {
                         <img src={v.thumbnail} alt="" loading="lazy" className="w-28 aspect-video object-cover rounded bg-[#1e2522]/10" />
                         <span className="text-sm">
                           <span className="block font-bold">{m.title}</span>
-                          <span className="block text-[#1e2522]/70">{[m.series, m.speaker, m.date && formatDate(m.date)].filter(Boolean).join('  |  ')}</span>
+                          <span className="block text-black">{[m.series, m.speaker, m.date && formatDate(m.date)].filter(Boolean).join('  |  ')}</span>
                         </span>
                       </label>
                     </li>

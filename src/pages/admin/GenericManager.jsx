@@ -265,7 +265,7 @@ export default function GenericManager({ config }) {
     return (
       <div>
         <div className="flex items-center gap-4 mb-6">
-          <button type="button" aria-label="Back to list" onClick={requestLeaveForm} className="p-2 hover:bg-[#1e2522]/10 rounded-full transition text-[#1e2522]/70 hover:text-[#1e2522]">
+          <button type="button" aria-label="Back to list" onClick={requestLeaveForm} className="p-2 hover:bg-[#1e2522]/10 rounded-full transition text-black hover:text-[#1e2522]">
             <SafeIcon icon={FiArrowLeft} className="text-xl" />
           </button>
           <h2 className="text-2xl font-bold">{formData.id ? 'Edit' : 'Add'} {config.title}</h2>
@@ -280,7 +280,7 @@ export default function GenericManager({ config }) {
             <FieldInput key={field.name} field={field} value={formData[field.name]} onChange={handleChange} error={errors[field.name]} />
           ))}
           <div className="flex justify-end gap-4 pt-6 border-t border-[#1e2522]/10">
-            <button type="button" onClick={requestLeaveForm} className="px-6 py-3 font-bold text-[#1e2522]/70 hover:text-[#1e2522] transition">Cancel</button>
+            <button type="button" onClick={requestLeaveForm} className="px-6 py-3 font-bold text-black hover:text-[#1e2522] transition">Cancel</button>
             <button type="submit" disabled={saving} className="bg-[#1e2522] text-white font-bold py-3 px-8 rounded-lg hover:bg-[#1e2522] transition disabled:bg-[#1e2522]/40 flex items-center gap-2">
               {saving ? <SafeIcon icon={FiLoader} className="animate-spin" /> : <SafeIcon icon={FiSave} />}
               {saving ? 'Saving...' : 'Save'}
@@ -330,7 +330,7 @@ export default function GenericManager({ config }) {
 
       {items.length > 0 && !sortable && (
         <div className="relative mb-4 max-w-md">
-          <SafeIcon icon={FiSearch} className="absolute left-4 top-1/2 -translate-y-1/2 text-[#1e2522]/50" />
+          <SafeIcon icon={FiSearch} className="absolute left-4 top-1/2 -translate-y-1/2 text-black" />
           <input
             type="search"
             aria-label={`Search ${config.title}`}
@@ -343,17 +343,17 @@ export default function GenericManager({ config }) {
       )}
 
       {sortable && items.length > 1 && (
-        <p className="text-sm text-[#1e2522]/70 mb-3">Drag rows by the handle, or use the arrows, to change the order. The order is saved automatically.</p>
+        <p className="text-sm text-black mb-3">Drag rows by the handle, or use the arrows, to change the order. The order is saved automatically.</p>
       )}
 
       <div className="bg-white rounded-2xl shadow-sm border border-[#1e2522]/10 overflow-hidden">
         {items.length === 0 ? (
-          <div className="p-12 text-center text-[#1e2522]/70">
+          <div className="p-12 text-center text-black">
             <p className="mb-4">No {config.title.toLowerCase()} yet.</p>
             {canCreate && <button onClick={handleAddNew} className="text-[#c74f2f] font-bold hover:underline">Create your first one</button>}
           </div>
         ) : filtered.length === 0 ? (
-          <div className="p-12 text-center text-[#1e2522]/70">No {config.title.toLowerCase()} match "{query}".</div>
+          <div className="p-12 text-center text-black">No {config.title.toLowerCase()} match "{query}".</div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
@@ -373,10 +373,10 @@ export default function GenericManager({ config }) {
                   {sortable && <th className="w-24 px-4 py-4"><span className="sr-only">Order</span></th>}
                   {config.thumbField && <th className="w-20 px-4 py-4"><span className="sr-only">Image</span></th>}
                   {columns.map(name => (
-                    <th key={name} className="px-6 py-4 text-sm font-bold text-[#1e2522]/70 tracking-wide">{labelOf(name)}</th>
+                    <th key={name} className="px-6 py-4 text-sm font-bold text-black tracking-wide">{labelOf(name)}</th>
                   ))}
-                  {config.toggleField && <th className="px-4 py-4 text-sm font-bold text-[#1e2522]/70 tracking-wide">On</th>}
-                  <th className="px-6 py-4 text-right text-sm font-bold text-[#1e2522]/70 tracking-wide">Actions</th>
+                  {config.toggleField && <th className="px-4 py-4 text-sm font-bold text-black tracking-wide">On</th>}
+                  <th className="px-6 py-4 text-right text-sm font-bold text-black tracking-wide">Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -398,7 +398,7 @@ export default function GenericManager({ config }) {
                       )}
                       {sortable && (
                         <td className="px-4 py-3">
-                          <div className="flex items-center gap-1 text-[#1e2522]/50">
+                          <div className="flex items-center gap-1 text-black">
                             <span className="cursor-grab" aria-hidden="true"><SafeIcon icon={FiMenu} /></span>
                             <button type="button" aria-label={`Move ${item[titleField] || 'item'} up`} disabled={index === 0} onClick={() => move(index, -1)} className="p-1 hover:text-[#1e2522] disabled:opacity-30"><SafeIcon icon={FiChevronUp} /></button>
                             <button type="button" aria-label={`Move ${item[titleField] || 'item'} down`} disabled={index === items.length - 1} onClick={() => move(index, 1)} className="p-1 hover:text-[#1e2522] disabled:opacity-30"><SafeIcon icon={FiChevronDown} /></button>
@@ -433,12 +433,12 @@ export default function GenericManager({ config }) {
                       <td className="px-6 py-4 text-right">
                         <div className="flex items-center justify-end gap-2">
                           {config.duplicable && (
-                            <button onClick={() => duplicate(item)} aria-label={`Make a copy of ${item[titleField] || 'item'}`} className="px-3 py-2 text-sm font-bold text-[#1e2522]/70 hover:text-[#c74f2f] bg-white border border-[#1e2522]/10 rounded-lg transition" title="Save as a copy">Copy</button>
+                            <button onClick={() => duplicate(item)} aria-label={`Make a copy of ${item[titleField] || 'item'}`} className="px-3 py-2 text-sm font-bold text-black hover:text-[#c74f2f] bg-white border border-[#1e2522]/10 rounded-lg transition" title="Save as a copy">Copy</button>
                           )}
-                          <button onClick={() => openForm({ ...item })} aria-label={`Edit ${item[titleField] || 'item'}`} className="p-2 text-[#1e2522]/50 hover:text-[#c74f2f] bg-white hover:bg-[#eaa235]/10 border border-[#1e2522]/10 rounded-lg transition" title="Edit">
+                          <button onClick={() => openForm({ ...item })} aria-label={`Edit ${item[titleField] || 'item'}`} className="p-2 text-black hover:text-[#c74f2f] bg-white hover:bg-[#eaa235]/10 border border-[#1e2522]/10 rounded-lg transition" title="Edit">
                             <SafeIcon icon={FiEdit2} />
                           </button>
-                          <button onClick={() => setPendingDelete(item)} aria-label={`Delete ${item[titleField] || 'item'}`} className="p-2 text-[#1e2522]/50 hover:text-[#c74f2f] bg-white hover:bg-[#c74f2f]/10 border border-[#1e2522]/10 rounded-lg transition" title="Delete">
+                          <button onClick={() => setPendingDelete(item)} aria-label={`Delete ${item[titleField] || 'item'}`} className="p-2 text-black hover:text-[#c74f2f] bg-white hover:bg-[#c74f2f]/10 border border-[#1e2522]/10 rounded-lg transition" title="Delete">
                             <SafeIcon icon={FiTrash2} />
                           </button>
                         </div>
@@ -454,7 +454,7 @@ export default function GenericManager({ config }) {
 
       {!sortable && filtered.length > PAGE_SIZE && (
         <nav aria-label="Pagination" className="flex items-center justify-between mt-4 text-sm">
-          <span className="text-[#1e2522]/70">Page {safePage + 1} of {pageCount} ({filtered.length} items)</span>
+          <span className="text-black">Page {safePage + 1} of {pageCount} ({filtered.length} items)</span>
           <div className="flex gap-2">
             <button disabled={safePage === 0} onClick={() => setPage(safePage - 1)} className="px-4 py-2 rounded-lg border border-[#1e2522]/20 bg-white font-bold disabled:opacity-40">Previous</button>
             <button disabled={safePage >= pageCount - 1} onClick={() => setPage(safePage + 1)} className="px-4 py-2 rounded-lg border border-[#1e2522]/20 bg-white font-bold disabled:opacity-40">Next</button>

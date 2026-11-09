@@ -80,7 +80,7 @@ export default function SettingsManager() {
 
   return (
     <form onSubmit={save} noValidate className="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-[#1e2522]/10 space-y-6">
-      <p className="text-[#1e2522]/70">These details appear across the site. Leave a field blank to use the built-in default.</p>
+      <p className="text-black">These details appear across the site. Leave a field blank to use the built-in default.</p>
       {FIELDS.map(f => <FieldInput key={f.name} field={f} value={row[f.name]} onChange={change} error={errors[f.name]} />)}
       {message && (
         <div role={message.type === 'error' ? 'alert' : 'status'} className={`p-4 rounded-lg text-sm font-medium ${message.type === 'error' ? 'bg-[#c74f2f]/10 border border-[#c74f2f] text-[#c74f2f]' : 'bg-[#eaa235]/20 border border-[#1e2522]/20 text-[#1e2522]'}`}>{message.text}</div>
