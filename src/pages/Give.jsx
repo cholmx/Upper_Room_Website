@@ -3,7 +3,7 @@ import usePageMeta from '../hooks/usePageMeta';
 import { useSite } from '../settings';
 import { Btn, Section, SectionHeader, PageHeader, Cards, Card, PhotoSplit, PhotoBand, SlotImage } from '../components/ui';
 
-const P = 'text-[0.95rem] leading-relaxed text-[#1e2522]/80';
+const P = 'text-[0.95rem] leading-relaxed text-black';
 
 const WHY = [
   'Honor God with our finances',
@@ -40,7 +40,7 @@ export default function Give() {
           {WHY.map((w, i) => (
             <li key={w} className="fcard !p-5 flex items-start gap-4">
               <span aria-hidden="true" className="w-10 h-10 rounded-full bg-[#c74f2f] text-white font-semibold flex items-center justify-center flex-shrink-0">{i + 1}</span>
-              <span className="text-[0.95rem] text-[#1e2522]/80 leading-snug pt-1.5">{w}</span>
+              <span className="text-[0.95rem] text-black leading-snug pt-1.5">{w}</span>
             </li>
           ))}
         </ol>

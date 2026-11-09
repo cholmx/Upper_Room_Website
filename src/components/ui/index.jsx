@@ -40,10 +40,10 @@ export const Btn = forwardRef(function Btn({ to, href, onClick, variant = 'prima
 // The site palette: ink, terracotta and amber for strong bands, cream and white for light ones (forest, sage and bronze are kept as names for amber and ink).
 // and the two golds for warm bands. Neighboring sections must differ (see the colors check in the README).
 const TONES = {
-  cream: 'text-[#1e2522]',
-  white: 'bg-white text-[#1e2522]',
-  sand: 'bg-white text-[#1e2522]',
-  gray: 'bg-[#e8e7e3] text-[#1e2522]',
+  cream: 'text-black',
+  white: 'bg-white text-black',
+  sand: 'bg-white text-black',
+  gray: 'bg-[#e8e7e3] text-black',
 };
 
 export function Section({ tone = 'cream', id, className = '', narrow = false, center = false, children, ...rest }) {
@@ -67,7 +67,7 @@ export function SectionHeader({ kicker, title, intro, center = false, as: Tag = 
     <div className={`${center ? 'text-center mx-auto' : ''} max-w-3xl mb-10 md:mb-12 ${className}`}>
       {kicker && !same(kicker, title) && <span className={`kicker ${tone === 'dark' ? 'text-[#eaa235]' : 'text-[#1e2522]'}`}>{kicker}</span>}
       <Tag className="text-3xl md:text-5xl">{title}</Tag>
-      {intro && <p className={`mt-4 text-[0.95rem] leading-relaxed ${tone === 'dark' ? 'text-white/85' : 'text-[#1e2522]/80'}`}>{intro}</p>}
+      {intro && <p className={`mt-4 text-[0.95rem] leading-relaxed ${tone === 'dark' ? 'text-white/85' : 'text-black'}`}>{intro}</p>}
     </div>
   );
 }
@@ -193,7 +193,7 @@ export function Beats({ beats, heading: Heading = 'h3' }) {
           <div>
             {b.kicker && <p className="kicker text-[#1e2522] !mb-1">{b.kicker}</p>}
             <Heading className="text-2xl md:text-3xl mb-3">{b.title}</Heading>
-            <div className="text-[0.95rem] leading-relaxed text-[#1e2522]/80 space-y-3">{b.body}</div>
+            <div className="text-[0.95rem] leading-relaxed text-black space-y-3">{b.body}</div>
           </div>
         );
         if (!b.photo) return <div key={b.title}>{text}</div>;
@@ -213,7 +213,7 @@ export function Card({ title, children, to, linkLabel, icon, className = '', as:
     <article className={`fcard !p-8 flex flex-col ${className}`}>
       {icon && <div className="mb-4">{icon}</div>}
       <Tag className="text-2xl mb-3">{title}</Tag>
-      <div className="text-[#1e2522]/80 leading-relaxed flex-grow space-y-3">{children}</div>
+      <div className="text-black leading-relaxed flex-grow space-y-3">{children}</div>
       {to && (
         <div className="mt-6">
           {isExternal(to) ? (
@@ -251,7 +251,7 @@ export function Accordion({ items, className = '' }) {
             <span className="font-semibold text-lg">{it.title}</span>
             <span aria-hidden="true" className="u-acc-icon flex-shrink-0 text-2xl leading-none text-[#1e2522]">+</span>
           </summary>
-          <div className="px-6 pb-6 text-[#1e2522]/85 leading-relaxed space-y-3">{it.content}</div>
+          <div className="px-6 pb-6 text-black leading-relaxed space-y-3">{it.content}</div>
         </details>
       ))}
     </div>
@@ -269,7 +269,7 @@ export function Steps({ items }) {
           </div>
           <div className="pb-2">
             <h3 className="text-xl md:text-2xl mb-2">{it.title}</h3>
-            <div className="text-[#1e2522]/80 leading-relaxed space-y-3">{it.body}</div>
+            <div className="text-black leading-relaxed space-y-3">{it.body}</div>
           </div>
         </li>
       ))}
@@ -343,5 +343,5 @@ export function Gloss({ k, children }) {
 }
 
 export function Prose({ children, className = '' }) {
-  return <div className={`space-y-5 text-[0.95rem] leading-relaxed text-[#1e2522]/85 ${className}`}>{children}</div>;
+  return <div className={`space-y-5 text-[0.95rem] leading-relaxed text-black ${className}`}>{children}</div>;
 }

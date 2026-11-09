@@ -50,7 +50,7 @@ function DesktopDropdown({ item, light }) {
           <ul className="bg-white rounded-2xl py-3 elev-2">
             {item.children.map(c => (
               <li key={c.to}>
-                <Link to={c.to} className="block px-6 py-2.5 font-display font-semibold text-[0.95rem] tracking-wide text-[#1e2522]/80 hover:text-[#1e2522] hover:bg-[#ffffff]">{c.label}</Link>
+                <Link to={c.to} className="block px-6 py-2.5 font-display font-semibold text-[0.95rem] tracking-wide text-black hover:text-[#1e2522] hover:bg-[#ffffff]">{c.label}</Link>
               </li>
             ))}
           </ul>
@@ -101,7 +101,7 @@ function MobileMenu({ onClose }) {
                   {openGroup === item.label && (
                     <ul className="pb-4 pl-2">
                       {item.children.map(c => (
-                        <li key={c.to}><Link to={c.to} onClick={onClose} className="flex items-center min-h-[48px] font-display font-bold tracking-wide text-[1rem] text-[#1e2522]/80">{c.label}</Link></li>
+                        <li key={c.to}><Link to={c.to} onClick={onClose} className="flex items-center min-h-[48px] font-display font-bold tracking-wide text-[1rem] text-black">{c.label}</Link></li>
                       ))}
                     </ul>
                   )}

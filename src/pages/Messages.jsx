@@ -94,13 +94,13 @@ export default function Messages() {
                     </ul>
                   )}
                   <h3 className="text-2xl md:text-3xl"><Link to={messagePath(latest)} className="hover:text-[#1e2522]">{latest.title}</Link></h3>
-                  <p className="mt-2 text-[#1e2522]/80">{[latest.speaker, latest.date && formatDate(latest.date), latest.scripture].filter(Boolean).join('  |  ')}</p>
-                  {latest.description && <p className="mt-3 text-[#1e2522]/80 leading-relaxed line-clamp-4">{plainText(latest.description)}</p>}
+                  <p className="mt-2 text-black">{[latest.speaker, latest.date && formatDate(latest.date), latest.scripture].filter(Boolean).join('  |  ')}</p>
+                  {latest.description && <p className="mt-3 text-black leading-relaxed line-clamp-4">{plainText(latest.description)}</p>}
                   <div className="mt-6 flex flex-wrap gap-3"><Btn to={messagePath(latest)} variant="primary">Watch</Btn><Btn href={safeUrl(latest.audio_url) || SITE.podcasts.apple} variant="dark">Listen</Btn></div>
                 </div>
               </div>
             ) : (
-              <p className="text-[0.95rem] text-[#1e2522]/80">New messages are on the way. Check back after Sunday.</p>
+              <p className="text-[0.95rem] text-black">New messages are on the way. Check back after Sunday.</p>
             )}
           </Section>
 
@@ -129,7 +129,7 @@ export default function Messages() {
                       <div className="p-6 flex flex-col flex-grow">
                         <h3 className="text-2xl">{s.name}</h3>
                         {dateRangeLabel(s.first, s.last) && <p className="mt-1 text-sm text-[#1e2522]/70">{dateRangeLabel(s.first, s.last)}</p>}
-                        {s.latest && <p className="mt-3 text-sm text-[#1e2522]/80 line-clamp-2"><span className="font-semibold">Latest:</span> {s.latest.title}</p>}
+                        {s.latest && <p className="mt-3 text-sm text-black line-clamp-2"><span className="font-semibold">Latest:</span> {s.latest.title}</p>}
                         <span className="mt-auto pt-5 font-display font-bold text-sm text-[#c74f2f]">See the series &rarr;</span>
                       </div>
                     </Link>
@@ -166,7 +166,7 @@ export default function Messages() {
             </form>
             <p className="mb-6 text-sm text-[#1e2522]/70" aria-live="polite">{filtered.length === messages.length ? `${messages.length} messages` : `${filtered.length} of ${messages.length} messages`}</p>
             {filtered.length === 0 ? (
-              <p className="text-[0.95rem] text-[#1e2522]/80">No messages match yet. Try a different word.</p>
+              <p className="text-[0.95rem] text-black">No messages match yet. Try a different word.</p>
             ) : (
               <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filtered.slice(0, shown).map(m => <li key={m.id}><MessageCard message={m} /></li>)}

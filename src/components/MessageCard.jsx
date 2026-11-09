@@ -22,7 +22,7 @@ export default function MessageCard({ message, as: Heading = 'h3' }) {
         </span>
       </Link>
       <div className="p-5 flex flex-col flex-grow">
-        <p className="text-sm text-[#1e2522]/80">{[message.date && formatDate(message.date), message.speaker].filter(Boolean).join('  |  ')} <NewBadge date={message.date} className="ml-2" /></p>
+        <p className="text-sm text-black">{[message.date && formatDate(message.date), message.speaker].filter(Boolean).join('  |  ')} <NewBadge date={message.date} className="ml-2" /></p>
         <Heading className="text-xl mt-1 mb-2"><Link to={messagePath(message)} className="hover:text-[#1e2522]">{message.title}</Link></Heading>
         {message.scripture && <p className="text-sm font-semibold text-[#1e2522]">{message.scripture}</p>}
         {parseCategories(message.topic).length > 0 && (

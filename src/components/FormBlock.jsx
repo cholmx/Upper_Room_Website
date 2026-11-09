@@ -144,7 +144,7 @@ export default function FormBlock({ formKey, heading, intro, defaults = {}, clas
   return (
     <form ref={formRef} onSubmit={submit} noValidate aria-labelledby={heading ? headingId : undefined} className={`neu rounded-2xl p-6 md:p-8 space-y-5 ${className}`}>
       {heading && <h2 id={headingId} className="text-2xl md:text-3xl">{heading}</h2>}
-      {intro && <p className="text-[#1e2522]/80 leading-relaxed">{intro}</p>}
+      {intro && <p className="text-black leading-relaxed">{intro}</p>}
       {def.fields.filter(f => isVisible(f, values)).map(f => (
         <Field key={f.name} formKey={formKey} field={f} value={values[f.name]} onChange={change} error={errors[f.name]} />
       ))}
@@ -152,7 +152,7 @@ export default function FormBlock({ formKey, heading, intro, defaults = {}, clas
       <div aria-hidden="true" className="absolute -left-[9999px] h-0 overflow-hidden">
         <label>Website<input tabIndex={-1} autoComplete="off" name="website" value={values.website || ''} onChange={(e) => change('website', e.target.value)} /></label>
       </div>
-      {def.note && <p className="text-sm text-[#1e2522]/80">{def.note}</p>}
+      {def.note && <p className="text-sm text-black">{def.note}</p>}
       {state.phase === 'error' && <p role="alert" className="text-[#c74f2f] font-medium">{state.error}</p>}
       <button type="submit" disabled={state.phase === 'sending'} aria-busy={state.phase === 'sending'} className="btn btn-solid disabled:opacity-60">
         {state.phase === 'sending' ? 'Sending...' : def.button}

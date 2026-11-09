@@ -208,7 +208,7 @@ export default function BulkBar({ table, title, items, filtered, selected, setSe
               : `${progress.label}: ${progress.done + progress.failed} of ${progress.total}`}
           </p>
           {progress.finished && progress.reasons && Object.keys(progress.reasons).some(k => k !== '__sample') && (
-            <ul className="mt-2 list-disc pl-5 space-y-1 text-[#1e2522]/80">
+            <ul className="mt-2 list-disc pl-5 space-y-1 text-black">
               {Object.entries(progress.reasons).filter(([k]) => k !== '__sample').map(([why, n]) => <li key={why}>{n} {n === 1 ? 'message' : 'messages'}: {why}</li>)}
               {progress.reasons.__sample && <li>{progress.reasons.__sample}</li>}
             </ul>

@@ -81,7 +81,7 @@ export default function Blog() {
                     <button
                       key={cat}
                       onClick={() => setSelectedCategory(cat)}
-                      className={`px-6 py-2.5 rounded-full text-sm font-bold tracking-normal flex items-center gap-2 ${selectedCategory === cat ? 'bg-[#1e2522] text-white' : 'neu text-[#1e2522]/80'}`}
+                      className={`px-6 py-2.5 rounded-full text-sm font-bold tracking-normal flex items-center gap-2 ${selectedCategory === cat ? 'bg-[#1e2522] text-white' : 'neu text-black'}`}
                     >
                       {cat !== 'All' && <SafeIcon icon={FiTag} className={selectedCategory === cat ? 'text-white' : 'text-[#1e2522]'} />}
                       {cat}

@@ -50,7 +50,7 @@ export default function Home() {
             <p className="kicker text-[#c74f2f]">Transforming lives that transform communities</p>
             <h2 className="text-3xl md:text-5xl mb-6">Welcome to Upper Room Fellowship</h2>
             <p className={`mb-4 font-semibold ${P}`}>Join us Sundays at 10:30am at 500 Sponseller Road in Columbiana, Ohio.</p>
-            <div className={`space-y-4 text-[#1e2522]/80 ${P}`}>
+            <div className={`space-y-4 text-black ${P}`}>
               <p>We started in 1971 with a handful of believers meeting in a room above a veterinarian’s office in Columbiana. Fifty-five years later, we are still gathering here, still learning, and still looking for ways to serve the city we love.</p>
               <p>On Sundays, adult and kids classes begin at 9:30am. Worship follows at 10:30am with live music, clear Bible teaching, and time for coffee and conversation. Kids from birth through 5th grade have their own programs, and Wednesday evenings bring adult classes, youth groups, and childcare. Whether you are new to faith, returning after a long absence, or looking for a church home, we would be glad to meet you.</p>
             </div>
@@ -68,7 +68,7 @@ export default function Home() {
           ].map(([t, d, slot]) => (
             <div key={t}>
               <h2 className="text-3xl md:text-4xl mb-3">{t}</h2>
-              <p className="text-[0.95rem] leading-relaxed text-[#1e2522]/80">{d}</p>
+              <p className="text-[0.95rem] leading-relaxed text-black">{d}</p>
             </div>
           ))}
         </div>
@@ -123,7 +123,7 @@ export default function Home() {
         <div className="max-w-3xl">
         <h2 className="text-3xl md:text-5xl mb-6">Our Vision</h2>
         <p className="text-xl md:text-2xl leading-snug mb-5 font-serif">We exist to help people know God deeply, share life authentically, and serve others selflessly.</p>
-        <p className="text-[0.95rem] leading-relaxed text-[#1e2522]/80">Lasting change starts on the inside, as our hearts line up with God’s heart. That conviction shapes how we build relationships, how we pray, and how we serve.</p>
+        <p className="text-[0.95rem] leading-relaxed text-black">Lasting change starts on the inside, as our hearts line up with God’s heart. That conviction shapes how we build relationships, how we pray, and how we serve.</p>
         <div className="mt-6"><Btn to="/core-values" variant="primary">Read Our Core Values</Btn></div>
         <blockquote className="mt-8 font-serif italic text-xl leading-snug">
           “By this everyone will know that you are my disciples, if you love one another.”

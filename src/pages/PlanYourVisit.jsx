@@ -5,7 +5,7 @@ import { useSite } from '../settings';
 import { Btn, Section, SectionHeader, PageHeader, Steps, PhotoBand, Beats, Cards, Card } from '../components/ui';
 import FormBlock from '../components/FormBlock';
 
-const P = 'text-[0.95rem] leading-relaxed text-[#1e2522]/80';
+const P = 'text-[0.95rem] leading-relaxed text-black';
 
 const GLANCE = [
   ['9:30am', 'Adult and kids classes begin (optional).'],

@@ -22,7 +22,7 @@ html {
 body {
   margin: 0;
   background: var(--light);
-  color: var(--black);
+  color: #000000;
   font-family: Merriweather, Georgia, serif;
   font-size: 0.9375rem;
   font-weight: 400;
@@ -326,7 +326,7 @@ details.u-acc.neu-acc[open] { background: #ffffff; box-shadow: var(--shadow); }
 .neu-badge { box-shadow: var(--shadow); }
 
 /* Merriweather for lead paragraphs, in a larger size than body text */
-.lead { font-family: Arial, Helvetica, sans-serif; font-weight: 700; font-size: 1.1rem; line-height: 1.45; color: rgba(30, 37, 34, 0.85); }
+.lead { font-family: Arial, Helvetica, sans-serif; font-weight: 700; font-size: 1.1rem; line-height: 1.45; color: #000000; }
 @media (min-width: 768px) { .lead { font-size: 1.2rem; } }
 
 /* Tighter line height for serif display text. */

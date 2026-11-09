@@ -46,7 +46,7 @@ export default function MessageSeries() {
             <p className="text-sm text-[#1e2522]/70">{[latest.date && formatDate(latest.date), latest.speaker].filter(Boolean).join('  |  ')}</p>
             <h2 className="text-2xl md:text-3xl mt-1"><Link to={messagePath(latest)}>{latest.title}</Link></h2>
             {latest.scripture && <p className="mt-2 font-semibold text-sm">{latest.scripture}</p>}
-            {latest.description && <p className="mt-3 text-[0.95rem] leading-relaxed text-[#1e2522]/80 line-clamp-4">{plainText(latest.description)}</p>}
+            {latest.description && <p className="mt-3 text-[0.95rem] leading-relaxed text-black line-clamp-4">{plainText(latest.description)}</p>}
             <div className="mt-6"><Btn to={messagePath(latest)} variant="primary">Watch and read</Btn></div>
           </div>
         </div>
