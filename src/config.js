@@ -22,7 +22,7 @@ export const SITE = {
   serviceEnds: 'around 11:45am',
   address,
   addressLine: `${address.street}, ${address.city}, ${address.region} ${address.postalCode}`,
-  mapEmbedUrl: `https://www.google.com/maps?q=${mapQuery}&output=embed`,
+  mapEmbedUrl: `https://maps.google.com/maps?q=${mapQuery}&z=15&output=embed`,
   googleMapsUrl: `https://maps.google.com/?q=${mapQuery}`,
   appleMapsUrl: `https://maps.apple.com/?q=${mapQuery}`,
   giveUrl: 'https://onrealm.org/urfellowship/-/form/give/now',

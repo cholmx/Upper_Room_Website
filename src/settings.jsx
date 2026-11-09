@@ -32,7 +32,7 @@ export function mergeSettings(row) {
     serviceTime: row.service_time || SITE.serviceTime,
     address,
     addressLine: `${address.street}, ${address.city}, ${address.region} ${address.postalCode}`,
-    mapEmbedUrl: `https://www.google.com/maps?q=${q}&output=embed`,
+    mapEmbedUrl: `https://maps.google.com/maps?q=${q}&z=15&output=embed`,
     googleMapsUrl: `https://maps.google.com/?q=${q}`,
     appleMapsUrl: `https://maps.apple.com/?q=${q}`,
     giveUrl: safeUrl(row.give_url) || SITE.giveUrl,
