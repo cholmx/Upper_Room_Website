@@ -11,16 +11,13 @@ export default function Logo({ tone = 'dark', className = '' }) {
   const img = tone === 'light' ? light : dark;
   return (
     <Link to="/" className={`inline-flex items-center hover:opacity-70 transition-opacity ${className}`}>
-      {img.url ? (
-        <img src={img.url} alt={SITE.name} className="h-10 w-auto" />
-      ) : (
-        <span
-          className="text-lg min-[400px]:text-2xl lg:text-[1.6rem] pt-0.5 tracking-tight whitespace-nowrap"
-          style={{ fontFamily: "Arial, Helvetica, sans-serif", fontWeight: 700 }}
-        >
-          {SITE.shortName}
-        </span>
-      )}
+      {img.url && <img src={img.url} alt="" className="h-11 w-auto mt-2 mr-3" />}
+      <span
+        className={`text-lg min-[400px]:text-xl lg:text-[1.4rem] pt-1 tracking-tight whitespace-nowrap ${tone === 'light' ? 'text-white' : 'text-[#1e2522]'}`}
+        style={{ fontFamily: "Arial, Helvetica, sans-serif", fontWeight: 700 }}
+      >
+        {img.url ? SITE.name : SITE.shortName}
+      </span>
     </Link>
   );
 }
