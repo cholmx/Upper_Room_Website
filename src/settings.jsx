@@ -17,7 +17,7 @@ export function mergeSettings(row) {
     region: row.region || SITE.address.region,
     postalCode: row.postal_code || SITE.address.postalCode,
   };
-  const q = encodeURIComponent(`${address.street} ${address.city} ${address.region} ${address.postalCode}`);
+  const q = encodeURIComponent(`${SITE.name} ${address.street} ${address.city} ${address.region} ${address.postalCode}`);
   const phone = row.phone || SITE.phone;
   const social = [
     { label: 'Facebook', url: safeUrl(row.facebook_url) || SITE.social.find(s => s.label === 'Facebook')?.url },

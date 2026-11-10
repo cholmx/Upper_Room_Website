@@ -140,8 +140,8 @@ export function PhotoSplit({ slot, side = 'right', tone = 'white', id, ratio, cl
 export function MapEmbed({ className = '' }) {
   const SITE = useSite();
   return (
-    <div className={className}>
-      <div className="aspect-[4/3] rounded-[10px] overflow-hidden bg-[#e8e7e3]">
+    <figure className={`bg-white rounded-[10px] overflow-hidden text-black ${className}`}>
+      <div className="aspect-[16/10] bg-[#e8e7e3]">
         <iframe
           title={`Map to ${SITE.name}, ${SITE.addressLine}`}
           src={SITE.mapEmbedUrl}
@@ -150,8 +150,14 @@ export function MapEmbed({ className = '' }) {
           className="w-full h-full block"
         />
       </div>
-      <div className="mt-4"><Btn href={SITE.googleMapsUrl} variant="primary">Get Directions</Btn></div>
-    </div>
+      <figcaption className="p-4 md:p-5 flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <div className="font-display font-bold text-lg leading-tight">{SITE.name}</div>
+          <div className="text-sm mt-1">{SITE.addressLine}</div>
+        </div>
+        <Btn href={SITE.googleMapsUrl} variant="primary">Get Directions</Btn>
+      </figcaption>
+    </figure>
   );
 }
 

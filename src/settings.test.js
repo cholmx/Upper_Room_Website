@@ -9,9 +9,9 @@ describe('mergeSettings', () => {
   it('overrides defaults and rebuilds derived links', () => {
     const s = mergeSettings({ street: '1 Main St', city: 'Salem', region: 'OH', postal_code: '44460', phone: '(330) 555-1212', service_time: 'Sundays at 9 AM' });
     expect(s.addressLine).toBe('1 Main St, Salem, OH 44460');
-    expect(s.googleMapsUrl).toContain('1%20Main%20St');
+    expect(s.googleMapsUrl).toContain('Upper%20Room%20Fellowship%201%20Main%20St');
     expect(s.phoneHref).toBe('tel:3305551212');
-    expect(s.mapEmbedUrl).toBe('https://maps.google.com/maps?q=1%20Main%20St%20Salem%20OH%2044460&z=15&output=embed');
+    expect(s.mapEmbedUrl).toBe('https://maps.google.com/maps?q=Upper%20Room%20Fellowship%201%20Main%20St%20Salem%20OH%2044460&z=15&output=embed');
     expect(s.serviceTime).toBe('Sundays at 9 AM');
   });
   it('keeps defaults for blank fields', () => {

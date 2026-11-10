@@ -5,7 +5,7 @@ const address = {
   postalCode: '44408',
 };
 
-const mapQuery = encodeURIComponent(`${address.street} ${address.city} ${address.region} ${address.postalCode}`);
+const mapQuery = encodeURIComponent(`Upper Room Fellowship ${address.street} ${address.city} ${address.region} ${address.postalCode}`);
 
 export const SITE = {
   name: 'Upper Room Fellowship',
