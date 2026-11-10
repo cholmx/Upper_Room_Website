@@ -6,13 +6,15 @@ const CLOUD = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
 const PRESET = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
 const BUCKET = 'site-images';
 const MAX_BYTES = 10 * 1024 * 1024;
+const VIDEO_TYPES = ['video/mp4', 'video/webm'];
+const MAX_VIDEO_BYTES = 50 * 1024 * 1024;
 const MAX_EDGE = 1920;
 const KEEP_UNDER = 250 * 1024;
 
 export const uploadsEnabled = Boolean((CLOUD && PRESET) || backend.configured);
 
 const safeName = (name) => String(name || 'photo').toLowerCase().replace(/\.[a-z0-9]+$/, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 40) || 'photo';
-const extFor = (type) => ({ 'image/jpeg': 'jpg', 'image/png': 'png', 'image/webp': 'webp', 'image/gif': 'gif' }[type] || 'jpg');
+const extFor = (type) => ({ 'video/mp4': 'mp4', 'video/webm': 'webm', 'image/jpeg': 'jpg', 'image/png': 'png', 'image/webp': 'webp', 'image/gif': 'gif' }[type] || 'jpg');
 
 // Photos are resized to 1920px wide at most and saved as WebP before upload so pages stay fast. Small images, GIFs and anything the browser cannot draw go up unchanged.
 async function shrink(file) {
@@ -37,12 +39,14 @@ async function shrink(file) {
 
 export async function uploadImage(input) {
   if (!uploadsEnabled) throw new Error('Photo uploads are not set up');
-  if (!input.type.startsWith('image/')) throw new Error('Please choose an image file');
-  if (input.size > MAX_BYTES * 2) throw new Error('That photo is too large. Please choose one under 20 MB.');
-  const file = await shrink(input);
-  if (file.size > MAX_BYTES) throw new Error('Image must be 10 MB or smaller');
+  const isVideo = VIDEO_TYPES.includes(input.type);
+  if (!isVideo && !input.type.startsWith('image/')) throw new Error('Please choose a photo, or an MP4 or WebM video');
+  if (isVideo && input.size > MAX_VIDEO_BYTES) throw new Error('That video is larger than 50 MB. Shorten it or compress it (a 10 to 20 second loop works best) and try again.');
+  if (!isVideo && input.size > MAX_BYTES * 2) throw new Error('That photo is too large. Please choose one under 20 MB.');
+  const file = isVideo ? input : await shrink(input);
+  if (!isVideo && file.size > MAX_BYTES) throw new Error('Image must be 10 MB or smaller');
 
-  if (!backend.configured && CLOUD && PRESET) {
+  if (!backend.configured && CLOUD && PRESET && !isVideo) {
     const body = new FormData();
     body.append('file', file);
     body.append('upload_preset', PRESET);

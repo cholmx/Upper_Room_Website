@@ -1,6 +1,6 @@
 import { parseCategories, joinCategories } from '../../lib/categories';
 import React, { useRef, useState } from 'react';
-import { ytId, ytEmbed } from '../../utils';
+import { ytId, ytEmbed, isVideoUrl } from '../../utils';
 import { uploadImage, uploadsEnabled } from '../../lib/upload';
 import RichText from '../../components/RichText';
 
@@ -13,7 +13,7 @@ export const isChecked = (v, fallback = false) => {
   return v === true || v === 1 || v === '1' || v === 'true';
 };
 
-function ImageField({ id, value, onChange, invalid }) {
+function ImageField({ id, value, onChange, invalid, video = false }) {
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState('');
   const fileRef = useRef(null);
@@ -34,19 +34,22 @@ function ImageField({ id, value, onChange, invalid }) {
 
   return (
     <div>
-      {value && !invalid && (
+      {value && !invalid && isVideoUrl(value) && (
+        <video src={value} muted loop playsInline autoPlay className="mb-3 h-40 rounded-lg border border-[#1e2522]/20 object-cover bg-[#1e2522]/5" />
+      )}
+      {value && !invalid && !isVideoUrl(value) && (
         <img src={value} alt="Preview" className="mb-3 h-40 rounded-lg border border-[#1e2522]/20 object-cover bg-[#1e2522]/5" onError={(e) => { e.currentTarget.style.display = 'none'; }} onLoad={(e) => { e.currentTarget.style.display = ''; }} />
       )}
       {uploadsEnabled && (
         <div className="flex flex-wrap items-center gap-3">
-          <input ref={fileRef} type="file" accept="image/jpeg,image/png,image/webp,image/gif" className="sr-only" onChange={pick} aria-label="Choose a photo to upload" tabIndex={-1} />
+          <input ref={fileRef} type="file" accept={video ? 'image/jpeg,image/png,image/webp,image/gif,video/mp4,video/webm' : 'image/jpeg,image/png,image/webp,image/gif'} className="sr-only" onChange={pick} aria-label={video ? 'Choose a photo or video to upload' : 'Choose a photo to upload'} tabIndex={-1} />
           <button type="button" onClick={() => fileRef.current?.click()} disabled={busy} className="px-5 py-3 rounded-lg bg-[#1e2522] text-white font-bold whitespace-nowrap disabled:opacity-60">
-            {busy ? 'Uploading...' : value ? 'Replace photo' : 'Upload a photo'}
+            {busy ? 'Uploading...' : value ? (video ? 'Replace photo or video' : 'Replace photo') : (video ? 'Upload a photo or video' : 'Upload a photo')}
           </button>
           {value && !busy && (
             <button type="button" onClick={() => onChange('')} className="px-4 py-3 rounded-lg border border-[#1e2522]/20 font-semibold text-[#1e2522] hover:bg-[#1e2522]/5">Remove</button>
           )}
-          <span className="text-sm text-black">JPG, PNG, WebP, or GIF. Large photos are shrunk for you.</span>
+          <span className="text-sm text-black">{video ? 'Photos: JPG, PNG, WebP or GIF, shrunk for you. Videos: MP4 or WebM, up to 50 MB, played silently on a loop.' : 'JPG, PNG, WebP, or GIF. Large photos are shrunk for you.'}</span>
         </div>
       )}
       <details className="mt-3" open={!uploadsEnabled || undefined}>
@@ -122,7 +125,7 @@ export default function FieldInput({ field, value, onChange, error }) {
       control = <MarkdownField id={id} value={value} onChange={set} invalid={invalid} />;
       break;
     case 'image':
-      control = <ImageField id={id} value={value} onChange={set} invalid={invalid} />;
+      control = <ImageField id={id} value={value} onChange={set} invalid={invalid} video={Boolean(field.video)} />;
       break;
     case 'checkbox':
       control = (

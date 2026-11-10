@@ -2,6 +2,7 @@ import React, { forwardRef, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { usePhoto, usePhotoUrls } from '../../photos';
 import { imgUrl, safeUrl } from '../../utils';
+import Media from '../Media';
 import { GLOSSARY } from '../../content/glossary';
 import { HERO_IMAGES } from '../../content/photos';
 import { SEO_ROUTES } from '../../content/seo';
@@ -80,7 +81,7 @@ export function Photo({ slot, className = '', ratio = 'aspect-[4/3]', priority =
   if (!url || failed === url) return null;
   return (
     <div className={`${ratio} ${rounded ? 'rounded-3xl' : ''} overflow-hidden elev-1 bg-[#1e2522] ${className}`}>
-      <img src={url} alt={alt} loading={priority ? 'eager' : 'lazy'} decoding="async" onError={() => setFailed(url)} className="w-full h-full object-cover" />
+      <Media src={url} alt={alt} priority={priority} onError={() => setFailed(url)} className="w-full h-full object-cover" />
     </div>
   );
 }
@@ -118,7 +119,7 @@ export function SlotImage({ slot, ratio = 'aspect-[4/3]', className = '' }) {
   const { url, alt, loaded } = usePhoto(slot);
   return (
     <div className={`${ratio} overflow-hidden rounded-[10px] bg-[#1e2522] ${className}`}>
-      {loaded && <img src={imgUrl(url || stockFor(slot), 1000)} alt={url ? alt : ''} loading="lazy" decoding="async" className="w-full h-full object-cover" />}
+      {loaded && <Media src={url || stockFor(slot)} width={url ? undefined : 1000} alt={url ? alt : ''} className="w-full h-full object-cover" />}
     </div>
   );
 }
@@ -162,7 +163,7 @@ export function PhotoBand({ slot, id, className = '', wide = false, children }) 
   return (
     <section id={id} data-image-band="true" className="max-w-[1312px] mx-auto px-3 md:px-4 py-1.5 md:py-2">
       <div className={`photo-section text-shade rounded-[10px] bg-[#1e2522] text-white py-24 md:py-36 px-6 md:px-10 ${className}`}>
-        {src && <img src={src} alt="" loading="lazy" decoding="async" className="photo-bg" />}
+        {src && <Media src={src} className="photo-bg" />}
         <div className={`hero-text photo-copy ${wide ? '' : 'max-w-4xl'}`}>{children}</div>
       </div>
     </section>
@@ -186,7 +187,7 @@ export function PageHeader({ kicker, title, intro, children, page, image: imageO
   return (
     <header className="max-w-[1312px] mx-auto px-3 md:px-4 pt-3 md:pt-4 pb-1.5 md:pb-2">
       <div className="photo-section nav-fade text-shade rounded-[10px] text-[#ffffff] py-24 md:py-36 px-6 md:px-10 text-left flex items-end">
-        {image && <img src={imgUrl(image, 1600)} alt="" fetchpriority="high" decoding="async" className="photo-bg" />}
+        {image && <Media src={image} width={1600} priority className="photo-bg" />}
         <div className="hero-text max-w-[800px]">
           {kicker && !same(kicker, title) && <span className="kicker text-[#eaa235]">{kicker}</span>}
           <h1 className="text-4xl md:text-6xl mb-6">{title}</h1>

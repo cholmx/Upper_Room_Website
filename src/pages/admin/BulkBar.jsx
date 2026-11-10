@@ -50,7 +50,8 @@ export default function BulkBar({ table, title, items, filtered, selected, setSe
     '!unreadable': 'The AI answer could not be read.',
     '!no_match': 'The AI did not name an approved category.',
     '!no_categories': 'There are no approved categories yet. Add some under Message Categories.',
-    '!already_set': 'Already has a category.',
+    '!already_set': 'Already set.',
+    '!too_little': 'The message has no title to work from.',
     '!not_found': 'That message no longer exists.',
   };
   const explain = (res, out) => {
@@ -106,6 +107,35 @@ export default function BulkBar({ table, title, items, filtered, selected, setSe
     setProgress({ label: 'AI review', done, failed, total: chosen.length, finished: true, reasons: { ...reasons }, stillBlank });
   };
 
+  const summarizeWithAi = async () => {
+    const label = 'AI summaries';
+    const todo = chosen.filter(r => replaceAll || !String(r.description || '').trim());
+    setProgress({ label, done: 0, failed: 0, total: todo.length, reasons: {} });
+    let done = 0; let failed = 0;
+    const reasons = {};
+    for (let i = 0; i < todo.length; i += 1) {
+      let res; let out = '';
+      for (let attempt = 0; attempt < 3; attempt += 1) {
+        res = await backend.rpc('ai_summarize_message', { sermon_id: todo[i].id, force: replaceAll });
+        out = res.status === 'success' ? String(res.data ?? '') : '';
+        if (!transient(res, out)) break;
+        await sleep(3000 * (attempt + 1));
+      }
+      if (out === 'ok') done += 1;
+      else {
+        failed += 1;
+        const why = explain(res, out);
+        reasons[why] = (reasons[why] || 0) + 1;
+      }
+      setProgress({ label, done, failed, total: todo.length, reasons: { ...reasons } });
+      if (out === '!no_key') break;
+      if (i < todo.length - 1) await sleep(1100);
+    }
+    if (done) logActivity(user, 'AI summarized', title, `${done} messages`);
+    await onDone();
+    setProgress({ label, done, failed, total: todo.length, finished: true, reasons: { ...reasons } });
+  };
+
   const deleteAll = async () => {
     setConfirmDelete(false);
     setProgress({ label: 'Delete', done: 0, failed: 0, total: chosen.length });
@@ -147,6 +177,7 @@ export default function BulkBar({ table, title, items, filtered, selected, setSe
           </select>
         </label>
         <button type="button" className={btn} onClick={() => setSelected(new Set(items.filter(i => !String(i.topic || '').trim()).map(i => i.id)))}>Select messages with no category</button>
+        <button type="button" className={btn} onClick={() => setSelected(new Set(items.filter(i => !String(i.description || '').trim()).map(i => i.id)))}>Select messages with no summary</button>
         <span className="text-black">{selected.size} selected</span>
       </div>
 
@@ -171,9 +202,10 @@ export default function BulkBar({ table, title, items, filtered, selected, setSe
               <span className="text-sm font-semibold block w-full">Review with AI</span>
               <button type="button" disabled={busy} onClick={reviewWithAi} className={btn}>Review {selected.size} with AI</button>
               {selected.size === 1 && <button type="button" disabled={busy || testResult?.loading} onClick={testOne} className={btn}>Test this one (saves nothing)</button>}
+              <button type="button" disabled={busy} onClick={summarizeWithAi} className={btn}>Write summaries for {selected.size}</button>
               <label className="flex items-center gap-2 text-sm cursor-pointer">
                 <input type="checkbox" checked={replaceAll} onChange={(e) => setReplaceAll(e.target.checked)} className="w-5 h-5 accent-[#c74f2f]" />
-                Replace categories already set
+                Replace categories or summaries already set
               </label>
             </div>
             <div className="flex flex-wrap items-end gap-2">

@@ -362,8 +362,8 @@ details.u-acc.neu-acc[open] { background: #ffffff; box-shadow: var(--shadow); }
 .spotlight-dark .rich-text a { color: inherit; }
 
 /* A very light shade at the top of photos that sit behind the menu, so the menu stays readable. */
-.photo-section > img.photo-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
-.photo-section > :not(img.photo-bg) { position: relative; z-index: 2; }
+.photo-section > .photo-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+.photo-section > :not(.photo-bg) { position: relative; z-index: 2; }
 .nav-fade::before {
   content: '';
   z-index: 1;

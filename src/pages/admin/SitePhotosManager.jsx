@@ -11,7 +11,7 @@ import { FiSave, FiLoader } from 'react-icons/fi';
 
 
 const GROUPS = [
-  { kind: undefined, title: 'Photos', help: 'Each photo shows beside the text its label names. Until one is added, the site shows a stand-in picture.' },
+  { kind: undefined, title: 'Photos', help: 'Each photo (or video) shows beside the text its label names. Until one is added, the site shows a stand-in picture.' },
   { kind: 'banner', title: 'Page banners', help: 'The wide photo at the top of each page. The Home banner is the first photo above. Until one is added, each page shows a default photo.' },
   { kind: 'logo', title: 'Logos and sharing image', help: 'The dark logo sits on light backgrounds and the light logo on dark ones.' },
   { kind: 'model', title: '3D model', help: 'Paste a link to a .glb file from your architect or designer. Until then the site shows a simple concept model. Large files should be under 20 MB.' },
@@ -53,7 +53,7 @@ function Slot({ slot, row, onSaved }) {
           <input id={`model-${slot.key}`} type="url" value={url} onChange={(e) => setUrl(e.target.value)} placeholder="https://" className="w-full px-4 py-3 bg-[#1e2522]/5 rounded-lg border border-[#1e2522]/20 focus:outline-none focus:border-[#eaa235]" />
         </div>
       ) : (
-        <FieldInput field={{ name: `photo-${slot.key}`, label: 'Image', type: 'image' }} value={url} onChange={(_, v) => setUrl(v)} />
+        <FieldInput field={{ name: `photo-${slot.key}`, label: slot.kind === 'icon' || slot.kind === 'logo' ? 'Image' : 'Photo or video', type: 'image', video: slot.kind !== 'icon' && slot.kind !== 'logo' }} value={url} onChange={(_, v) => setUrl(v)} />
       )}
       {slot.kind !== 'icon' && slot.kind !== 'logo' && slot.kind !== 'model' && slot.kind !== 'banner' && (
         <div>

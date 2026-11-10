@@ -236,3 +236,8 @@ export function dateRangeLabel(first, last) {
   const fmt = (d) => new Date(d + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
   return first.slice(0, 7) === (last || first).slice(0, 7) ? fmt(first) : `${fmt(first)} to ${fmt(last)}`;
 }
+
+// True for a link to a video file (mp4, webm, mov, m4v), so the site can play it in place of a photo.
+export function isVideoUrl(url) {
+  return /\.(mp4|webm|mov|m4v)(\?.*)?$/i.test(String(url || ''));
+}
