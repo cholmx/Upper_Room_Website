@@ -14,7 +14,10 @@ export const FORMS = {
       { name: 'name', label: 'Name', type: 'text', required: true, autoComplete: 'name' },
       { name: 'email', label: 'Email', type: 'email', required: true, autoComplete: 'email' },
       { name: 'phone', label: 'Phone (optional)', type: 'tel', autoComplete: 'tel' },
+      { name: 'married', label: 'Are you married?', type: 'select', options: ['Yes', 'No'] },
+      { name: 'spouse_name', label: 'Your spouse’s name', type: 'text', showIf: { married: 'Yes' } },
       { name: 'has_children', label: 'Do you have children?', type: 'select', options: ['Yes', 'No'] },
+      { name: 'children_ages', label: 'Ages of the children who may be coming (for example 3, 6 and 10)', type: 'text', showIf: { has_children: 'Yes' } },
       {
         name: 'visit_status', label: 'About your visit', type: 'select',
         options: ['I am planning my first visit', 'I have visited once', 'I have visited multiple times', 'I am ready to get connected'],
