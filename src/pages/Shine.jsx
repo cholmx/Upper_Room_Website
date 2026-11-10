@@ -21,12 +21,14 @@ function length(d) {
   return p.length === 3 ? `${p[0]} hr ${p[1]} min` : `${p[0]} min`;
 }
 
-function Episode({ ep, featured = false }) {
+function Episode({ ep, cover, featured = false }) {
+  const art = safeUrl(ep.image_url) || safeUrl(cover);
   const audio = safeUrl(ep.audio_url);
   const page = safeUrl(ep.page_url);
   const meta = [ep.published_at && formatDate(ep.published_at), length(ep.duration)].filter(Boolean).join('  |  ');
   return (
     <article className="fcard !p-6 md:!p-8">
+      {art && <img src={art} alt="" loading={featured ? 'eager' : 'lazy'} decoding="async" width="600" height="600" className={`${featured ? 'w-40 md:w-56' : 'w-24 md:w-28'} aspect-square object-cover rounded-[10px] bg-[#e8e7e3] mb-4`} />}
       <p className="text-sm text-black">{meta}</p>
       {featured ? <h2 className="text-2xl md:text-3xl mt-1">{ep.title}</h2> : <h3 className="text-xl md:text-2xl mt-1">{ep.title}</h3>}
       {ep.description && <p className={`mt-3 text-[0.95rem] leading-relaxed text-black whitespace-pre-line ${featured ? '' : 'line-clamp-4'}`}>{ep.description}</p>}
@@ -69,7 +71,7 @@ export default function Shine() {
       {latest && (
         <Section tone="white">
           <SectionHeader title="Latest episode" />
-          <div className="max-w-3xl"><Episode ep={latest} featured /></div>
+          <div className="max-w-3xl"><Episode ep={latest} cover={show?.image_url} featured /></div>
         </Section>
       )}
 
@@ -77,7 +79,7 @@ export default function Shine() {
         <Section tone="gray">
           <SectionHeader title="More episodes" />
           <ul className="grid md:grid-cols-2 gap-6">
-            {rest.slice(0, shown).map(ep => <li key={ep.id}><Episode ep={ep} /></li>)}
+            {rest.slice(0, shown).map(ep => <li key={ep.id}><Episode ep={ep} cover={show?.image_url} /></li>)}
           </ul>
           {rest.length > shown && <div className="mt-8"><button type="button" className="btn btn-outline" onClick={() => setShown(n => n + PAGE)}>Show more episodes</button></div>}
         </Section>
