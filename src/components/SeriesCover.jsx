@@ -21,7 +21,7 @@ export default function SeriesCover({ name, className = '' }) {
   ].join(', ');
   return (
     <div className={`series-cover ${className}`}>
-      <span aria-hidden="true" className="series-cover-blur" style={{ background: blobs, opacity: 0.7 }} />
+      <span aria-hidden="true" className="series-cover-blur" style={{ background: blobs, opacity: 0.55 }} />
       <span aria-hidden="true" className="series-cover-grain" />
       <span className="series-cover-name font-serif italic font-normal text-xl md:text-2xl " style={{ fontFamily: 'Merriweather, Georgia, serif', fontStyle: 'italic', fontWeight: 700, lineHeight: 1.08 }}>{name}</span>
     </div>
