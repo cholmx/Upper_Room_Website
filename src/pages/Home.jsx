@@ -42,7 +42,7 @@ export default function Home() {
           {banner && <Media src={banner} width={1800} priority className="photo-bg" />}
           <div className="hero-text w-full max-w-[900px] px-6 md:px-10 pb-14 md:pb-20 pt-32 text-left text-white">
             <h1 id="home-h1" className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-4 leading-[1.1]">{SITE.hero.title}</h1>
-            {SITE.hero.subtitle && <p className="font-serif text-lg md:text-2xl mb-6 leading-snug">{SITE.hero.subtitle}</p>}
+            {SITE.hero.subtitle && <p className="font-serif text-lg md:text-2xl mb-6 leading-[1.12] md:leading-[1.12] text-white">{SITE.hero.subtitle}</p>}
             <div className="mt-4">{SITE.hero.buttonLabel && SITE.hero.buttonUrl && <Btn to={SITE.hero.buttonUrl} variant="primary">{SITE.hero.buttonLabel}</Btn>}</div>
             {worship && <p className="mt-5 text-sm md:text-base">{worship}</p>}
           </div>

@@ -197,7 +197,7 @@ export function PageHeader({ kicker, title, intro, children, page, image: imageO
         <div className="hero-text max-w-[800px]">
           {kicker && !same(kicker, title) && <span className="kicker text-[#eaa235]">{kicker}</span>}
           <h1 className="text-4xl md:text-6xl mb-6">{title}</h1>
-          {intro && <p className="font-serif text-xl md:text-2xl text-white/90 max-w-[50ch] leading-snug">{intro}</p>}
+          {intro && <p className="font-serif text-xl md:text-2xl text-white max-w-[50ch] leading-[1.12] md:leading-[1.12]">{intro}</p>}
           {children && <div className="mt-8 flex flex-wrap gap-4">{children}</div>}
         </div>
       </div>

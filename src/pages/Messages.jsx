@@ -142,7 +142,7 @@ export default function Messages() {
                             <img src={s.image} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
                             <span aria-hidden="true" className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-[#1e2522]/80 to-transparent" />
                             <span className="absolute inset-x-0 bottom-0 p-4 text-white">
-                              <span className={`block leading-[0.95] ${seriesTitleSize(s.name)}`}>{s.name}</span>
+                              <span className={`block leading-[0.95] md:leading-[0.95] ${seriesTitleSize(s.name)}`}>{s.name}</span>
                               <span className="block mt-1.5 text-xs font-display font-bold">{details(s)}</span>
                             </span>
                           </>
