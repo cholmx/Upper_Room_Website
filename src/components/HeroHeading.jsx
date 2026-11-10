@@ -7,7 +7,15 @@ export default function HeroHeading({ id, lines, className = '', interval = 5500
   const [still, setStill] = useState(false);
   // The first paint, and the static copy of the page, show only the main heading. The rest join once the page is running.
   const [ready, setReady] = useState(false);
-  const all = lines.filter(Boolean);
+  // A line that repeats another (ignoring capitals and end punctuation) is dropped, so no line shows twice in a row.
+  const seen = new Set();
+  const all = lines.filter(Boolean).filter(l => {
+    const k = String(l).toLowerCase().replace(/[\s.!?,]+$/g, '').replace(/\s+/g, ' ');
+    if (seen.has(k)) return false;
+    seen.add(k);
+    return true;
+  });
+  const sig = all.join('|');
 
   useEffect(() => { setReady(true); }, []);
 
@@ -16,13 +24,13 @@ export default function HeroHeading({ id, lines, className = '', interval = 5500
     if (all.length < 2) return undefined;
     const t = setInterval(() => setI(n => (n + 1) % all.length), interval);
     return () => clearInterval(t);
-  }, [all.length, interval]);
+  }, [sig, all.length, interval]);
 
   if (!ready || all.length < 2 || still) return <h1 id={id} className={className}>{all[0]}</h1>;
   return (
     <h1 id={id} className={`${className} grid`}>
       {all.map((line, n) => (
-        <span key={line} aria-hidden={n === i ? undefined : 'true'} className="col-start-1 row-start-1 self-end hero-line" style={{ opacity: n === i ? 1 : 0, filter: n === i ? 'blur(0px)' : 'blur(28px)', transition: 'opacity 1s ease-in-out, filter 1s ease-in-out', willChange: 'opacity, filter' }}>{line}</span>
+        <span key={n} aria-hidden={n === i ? undefined : 'true'} className="col-start-1 row-start-1 self-end hero-line" style={{ opacity: n === i ? 1 : 0, filter: n === i ? 'blur(0px)' : 'blur(28px)', transition: 'opacity 1s ease-in-out, filter 1s ease-in-out', willChange: 'opacity, filter' }}>{line}</span>
       ))}
     </h1>
   );
