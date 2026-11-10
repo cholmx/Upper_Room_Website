@@ -59,6 +59,8 @@ export default function Messages() {
   const seriesList = useMemo(() => groupSeries(messages).map(g => ({
     ...g,
     latest: messages.find(m => (m.series || '').trim() === g.name),
+    // The newest message in the series that has a video lends its picture, which is blurred into the cover.
+    thumb: ytId(messages.find(m => (m.series || '').trim() === g.name && ytId(m.video_url || m.yt))?.video_url || ''),
   })), [messages]);
   const countBy = (list) => {
     const n = new Map();
@@ -136,7 +138,7 @@ export default function Messages() {
                       <div className="aspect-video bg-[#1e2522] relative overflow-hidden">
                         {s.image
                           ? <img src={s.image} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
-                          : <SeriesCover name={s.name} />}
+                          : <SeriesCover name={s.name} thumb={s.thumb} />}
                       </div>
                       <div className="px-4 py-3">
                         <h3 className={s.image ? 'text-lg md:text-xl leading-tight' : 'sr-only'}>{s.name}</h3>
