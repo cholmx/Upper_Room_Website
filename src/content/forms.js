@@ -14,6 +14,7 @@ export const FORMS = {
       { name: 'name', label: 'Name', type: 'text', required: true, autoComplete: 'name' },
       { name: 'email', label: 'Email', type: 'email', required: true, autoComplete: 'email' },
       { name: 'phone', label: 'Phone (optional)', type: 'tel', autoComplete: 'tel' },
+      { name: 'source', type: 'hidden' },
       { name: 'married', label: 'Are you married?', type: 'select', options: ['Yes', 'No'] },
       { name: 'spouse_name', label: 'Your spouse’s name', type: 'text', showIf: { married: 'Yes' } },
       { name: 'has_children', label: 'Do you have children?', type: 'select', options: ['Yes', 'No'] },

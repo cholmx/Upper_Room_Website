@@ -154,7 +154,7 @@ export default function FormBlock({ formKey, heading, intro, defaults = {}, clas
     <form ref={formRef} onSubmit={submit} noValidate aria-labelledby={heading ? headingId : undefined} className={`neu rounded-2xl p-6 md:p-8 space-y-5 ${className}`}>
       {heading && <h2 id={headingId} className="text-2xl md:text-3xl">{heading}</h2>}
       {intro && <p className="text-black leading-relaxed">{intro}</p>}
-      {def.fields.filter(f => isVisible(f, values)).map(f => (
+      {def.fields.filter(f => f.type !== 'hidden' && isVisible(f, values)).map(f => (
         <Field key={f.name} formKey={formKey} field={f} value={values[f.name]} onChange={change} error={errors[f.name]} />
       ))}
       {/* Honeypot: hidden from people and screen readers */}
