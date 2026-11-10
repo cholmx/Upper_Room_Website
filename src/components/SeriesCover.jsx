@@ -1,26 +1,29 @@
 import React from 'react';
 
-// Neutral palettes for a series without its own cover art. Which one a series gets depends on its name, so a series keeps the same look.
-const PALETTES = [
-  ['#e4e1da', '#cfcac0', '#f3f1ec'],
-  ['#dedfdc', '#c6c9c6', '#eef0ee'],
-  ['#e6e0d6', '#d2c8b8', '#f4f0e8'],
-  ['#dfdcd8', '#c9c3bd', '#efede9'],
+// Dark green with blurred splotches of color. Which colors a series gets depends on its name, so a series keeps the same look.
+const SPLOTCHES = [
+  ['#c74f2f', '#eaa235', '#e8e7e3'],
+  ['#eaa235', '#c74f2f', '#2f5a43'],
+  ['#c74f2f', '#e8e7e3', '#eaa235'],
+  ['#eaa235', '#e8e7e3', '#c74f2f'],
 ];
 const hash = (s) => [...String(s)].reduce((n, c) => (n * 31 + c.charCodeAt(0)) >>> 0, 7);
 
-// A soft, blurred, grainy backdrop with the series name in Merriweather italic.
+// A dark green cover with the series name in bold yellow Merriweather italic.
 export default function SeriesCover({ name, className = '' }) {
   const h = hash(name);
-  const [a, b, c] = PALETTES[h % PALETTES.length];
-  const x1 = 10 + (h % 30); const y1 = 15 + ((h >> 3) % 30);
-  const x2 = 55 + ((h >> 5) % 35); const y2 = 55 + ((h >> 7) % 35);
-  const x3 = 30 + ((h >> 9) % 50);
+  const [a, b, c] = SPLOTCHES[h % SPLOTCHES.length];
+  const p = (shift, range) => 8 + ((h >> shift) % range);
+  const blobs = [
+    `radial-gradient(circle at ${p(0, 35)}% ${p(3, 30)}%, ${a} 0, transparent 38%)`,
+    `radial-gradient(circle at ${60 + p(5, 30)}% ${50 + p(7, 35)}%, ${b} 0, transparent 34%)`,
+    `radial-gradient(circle at ${p(9, 60)}% ${70 + p(11, 25)}%, ${c} 0, transparent 26%)`,
+  ].join(', ');
   return (
-    <div className={`series-cover ${className}`} style={{ background: a }}>
-      <span aria-hidden="true" className="series-cover-blur" style={{ background: `radial-gradient(circle at ${x1}% ${y1}%, ${b} 0, transparent 55%), radial-gradient(circle at ${x2}% ${y2}%, ${b} 0, transparent 50%), radial-gradient(circle at ${x3}% 8%, ${c} 0, transparent 55%)` }} />
+    <div className={`series-cover ${className}`}>
+      <span aria-hidden="true" className="series-cover-blur" style={{ background: blobs, opacity: 0.75 }} />
       <span aria-hidden="true" className="series-cover-grain" />
-      <span className="series-cover-name font-serif italic font-normal text-xl md:text-2xl leading-snug text-[#1e2522]" style={{ fontFamily: 'Merriweather, Georgia, serif', fontStyle: 'italic', fontWeight: 400 }}>{name}</span>
+      <span className="series-cover-name font-serif italic font-normal text-xl md:text-2xl leading-snug" style={{ fontFamily: 'Merriweather, Georgia, serif', fontStyle: 'italic', fontWeight: 700 }}>{name}</span>
     </div>
   );
 }
