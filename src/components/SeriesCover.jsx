@@ -9,7 +9,7 @@ const SPLOTCHES = [
 ];
 const hash = (s) => [...String(s)].reduce((n, c) => (n * 31 + c.charCodeAt(0)) >>> 0, 7);
 
-// A dark green cover with the series name in bold yellow Merriweather italic.
+// A dark green cover with the series name in bold white Merriweather italic.
 export default function SeriesCover({ name, className = '' }) {
   const h = hash(name);
   const [a, b, c] = SPLOTCHES[h % SPLOTCHES.length];
@@ -21,7 +21,7 @@ export default function SeriesCover({ name, className = '' }) {
   ].join(', ');
   return (
     <div className={`series-cover ${className}`}>
-      <span aria-hidden="true" className="series-cover-blur" style={{ background: blobs, opacity: 0.55 }} />
+      <span aria-hidden="true" className="series-cover-blur" style={{ background: blobs, opacity: 0.42 }} />
       <span aria-hidden="true" className="series-cover-grain" />
       <span className="series-cover-name font-serif italic font-normal text-xl md:text-2xl " style={{ fontFamily: 'Merriweather, Georgia, serif', fontStyle: 'italic', fontWeight: 700, lineHeight: 1.08 }}>{name}</span>
     </div>
