@@ -44,6 +44,14 @@ export default function GenericManager({ config }) {
   const [refreshing, setRefreshing] = useState('');
   const [refreshMsg, setRefreshMsg] = useState('');
   const FEED_WHY = { '-1': 'has no feed address yet', '-2': 'could not be reached', '-3': 'answered with an error', '-4': 'did not look like a podcast feed' };
+  const [feedTest, setFeedTest] = useState(null);
+  const testFeed = async () => {
+    const it = items.find(i => i.slug === 'shine') || items[0];
+    if (!it) { setFeedTest({ error: 'There is no show yet.' }); return; }
+    setFeedTest({ loading: true });
+    const res = await backend.rpc('podcast_feed_test', { show: it.slug });
+    setFeedTest(res.status === 'success' ? { data: res.data } : { error: res.error });
+  };
   const refreshFeeds = async () => {
     setRefreshing('busy'); setRefreshMsg('');
     const notes = [];
@@ -329,6 +337,9 @@ export default function GenericManager({ config }) {
           </button>
         )}
         {config.refreshFeed && (
+            <button onClick={testFeed} disabled={feedTest?.loading} className="border border-[#1e2522]/20 bg-white text-[#1e2522] font-bold py-2.5 px-5 rounded-lg transition disabled:opacity-50">Test the feed</button>
+          )}
+        {config.refreshFeed && (
             <button onClick={refreshFeeds} disabled={refreshing === 'busy'} className="border border-[#1e2522]/20 bg-white text-[#1e2522] font-bold py-2.5 px-5 rounded-lg transition disabled:opacity-50">
               {refreshing === 'busy' ? 'Reading the feeds' : 'Refresh from feed'}
             </button>
@@ -351,6 +362,17 @@ export default function GenericManager({ config }) {
         </div>
       </div>
 
+      {feedTest && (
+        <div role="status" className="mb-4 text-sm rounded-[10px] bg-[#e8e7e3] p-4">
+          {feedTest.loading && <p>Reading the feed.</p>}
+          {feedTest.error && <p className="text-[#c74f2f] font-semibold">{feedTest.error}</p>}
+          {feedTest.data && (
+            <dl className="space-y-1">
+              {Object.entries(feedTest.data).map(([k, v]) => <div key={k} className="flex flex-wrap gap-2"><dt className="font-semibold">{k.replace(/_/g, ' ')}:</dt><dd className="break-words">{String(v)}</dd></div>)}
+            </dl>
+          )}
+        </div>
+      )}
       {refreshMsg && <p role="status" className="mb-4 text-sm font-semibold">{refreshMsg}</p>}
       {transcripts && <TranscriptImport items={items} onClose={() => setTranscripts(false)} onDone={fetchItems} />}
       {importing && <YouTubeImport existing={items} onClose={() => setImporting(false)} onImported={fetchItems} />}
