@@ -27,13 +27,17 @@ function Episode({ ep, cover, featured = false }) {
   const page = safeUrl(ep.page_url);
   const meta = [ep.published_at && formatDate(ep.published_at), length(ep.duration)].filter(Boolean).join('  |  ');
   return (
-    <article className="fcard !p-6 md:!p-8">
-      {art && <img src={art} alt="" loading={featured ? 'eager' : 'lazy'} decoding="async" width="600" height="600" className={`${featured ? 'w-40 md:w-56' : 'w-24 md:w-28'} aspect-square object-cover rounded-[10px] bg-[#e8e7e3] mb-4`} />}
-      <p className="text-sm text-black">{meta}</p>
-      {featured ? <h2 className="text-2xl md:text-3xl mt-1">{ep.title}</h2> : <h3 className="text-xl md:text-2xl mt-1">{ep.title}</h3>}
-      {ep.description && <p className={`mt-3 text-[0.95rem] leading-relaxed text-black whitespace-pre-line ${featured ? '' : 'line-clamp-4'}`}>{ep.description}</p>}
-      {audio && <audio controls preload="none" src={audio} className="w-full mt-5" aria-label={`Play ${ep.title}`} />}
-      {page && <p className="mt-3"><a href={page} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 font-semibold text-sm">Episode page<span className="sr-only"> (opens in a new tab)</span></a></p>}
+    <article className="fcard !p-5 md:!p-6">
+      <div className="flex gap-4 md:gap-5 items-start">
+        {art && <img src={art} alt="" loading={featured ? 'eager' : 'lazy'} decoding="async" width="600" height="600" className={`${featured ? 'w-24 md:w-40' : 'w-20 md:w-24'} shrink-0 aspect-square object-cover rounded-[10px] bg-[#e8e7e3]`} />}
+        <div className="min-w-0 flex-1">
+          <p className="text-sm text-black">{meta}</p>
+          {featured ? <h2 className="text-2xl md:text-3xl mt-1">{ep.title}</h2> : <h3 className="text-lg md:text-xl mt-1">{ep.title}</h3>}
+          {ep.description && <p className={`mt-2 text-[0.95rem] leading-relaxed text-black whitespace-pre-line ${featured ? '' : 'line-clamp-3'}`}>{ep.description}</p>}
+        </div>
+      </div>
+      {audio && <audio controls preload="none" src={audio} className="w-full mt-4" aria-label={`Play ${ep.title}`} />}
+      {page && <p className="mt-2"><a href={page} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 font-semibold text-sm">Episode page<span className="sr-only"> (opens in a new tab)</span></a></p>}
     </article>
   );
 }
