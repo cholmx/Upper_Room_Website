@@ -39,8 +39,9 @@ function Episode({ ep, featured = false }) {
 export default function Shine() {
   usePageMeta('shine');
   const shows = useFetch('read/podcast_shows_church');
-  const eps = useFetch('read/podcast_episodes_church?sort=published_at:desc');
   const [shown, setShown] = useState(PAGE);
+  // Only the newest episodes are loaded at first; "Show more" asks for the next batch.
+  const eps = useFetch(`read/podcast_episodes_church?sort=published_at:desc&limit=${shown + 2}`);
   const show = (shows.data || []).find(s => s.slug === 'shine');
   const episodes = useMemo(() => (eps.data || []).filter(e => e.show_slug === 'shine').sort((a, b) => String(b.published_at || '').localeCompare(String(a.published_at || ''))), [eps.data]);
   const [latest, ...rest] = episodes;
@@ -56,7 +57,7 @@ export default function Shine() {
         {links.map(([label, u], i) => <Btn key={label} href={safeUrl(u)} variant={i === 0 ? 'primary' : 'light'}>{label}</Btn>)}
       </PageHeader>
 
-      {eps.loading && <Section tone="white"><CardSkeletons count={3} /></Section>}
+      {eps.loading && !eps.data && <Section tone="white"><CardSkeletons count={3} /></Section>}
       {eps.error && <Section tone="white"><ErrorState message={eps.error} onRetry={eps.reload} /></Section>}
 
       {!eps.loading && !eps.error && !latest && (
