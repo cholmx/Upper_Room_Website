@@ -22,7 +22,7 @@ export default function HeroHeading({ id, lines, className = '', interval = 6500
   return (
     <h1 id={id} className={`${className} grid`}>
       {all.map((line, n) => (
-        <span key={line} aria-hidden={n === i ? undefined : 'true'} className="col-start-1 row-start-1 hero-line" style={{ opacity: n === i ? 1 : 0, filter: n === i ? 'blur(0px)' : 'blur(14px)', transition: 'opacity 2s ease-in-out, filter 2s ease-in-out', willChange: 'opacity, filter' }}>{line}</span>
+        <span key={line} aria-hidden={n === i ? undefined : 'true'} className="col-start-1 row-start-1 self-end hero-line" style={{ opacity: n === i ? 1 : 0, filter: n === i ? 'blur(0px)' : 'blur(14px)', transition: 'opacity 2s ease-in-out, filter 2s ease-in-out', willChange: 'opacity, filter' }}>{line}</span>
       ))}
     </h1>
   );
