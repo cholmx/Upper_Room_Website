@@ -3,7 +3,7 @@ import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import usePageMeta from '../hooks/usePageMeta';
 import useFetch from '../hooks/useFetch';
 import { useSite } from '../settings';
-import { dateRangeLabel, formatDate, groupSeries, isLive, messagePath, newestFirst, safeUrl, scriptureBook, seriesPath, ytId } from '../utils';
+import { seriesTitleSize, dateRangeLabel, formatDate, groupSeries, isLive, messagePath, newestFirst, safeUrl, scriptureBook, seriesPath, ytId } from '../utils';
 import { plainText } from '../lib/markdown';
 import { parseCategories } from '../lib/categories';
 import { Btn, Section, SectionHeader, PageHeader, PhotoBand } from '../components/ui';
@@ -132,7 +132,7 @@ export default function Messages() {
           {seriesList.length > 0 && (
             <Section tone="gray">
               <SectionHeader title="Message series" />
-              <ul className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
+              <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
                 {seriesList.map(s => (
                   <li key={s.name}>
                     <Link to={seriesPath(s.name)} className="thumb-link flex flex-col h-full rounded-[10px] overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow">
@@ -142,7 +142,7 @@ export default function Messages() {
                             <img src={s.image} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
                             <span aria-hidden="true" className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-[#1e2522]/80 to-transparent" />
                             <span className="absolute inset-x-0 bottom-0 p-4 text-white">
-                              <span className="block text-2xl md:text-3xl leading-[1.1]">{s.name}</span>
+                              <span className={`block leading-[0.95] ${seriesTitleSize(s.name)}`}>{s.name}</span>
                               <span className="block mt-1.5 text-xs font-display font-bold">{details(s)}</span>
                             </span>
                           </>

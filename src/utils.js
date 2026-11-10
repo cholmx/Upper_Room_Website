@@ -241,3 +241,11 @@ export function dateRangeLabel(first, last) {
 export function isVideoUrl(url) {
   return /\.(mp4|webm|mov|m4v)(\?.*)?$/i.test(String(url || ''));
 }
+
+// A text size for a series title, smaller for long names so the whole title fits on its card.
+export function seriesTitleSize(name) {
+  const n = String(name || '').length;
+  if (n <= 14) return 'text-2xl md:text-3xl';
+  if (n <= 26) return 'text-xl md:text-2xl';
+  return 'text-lg md:text-xl';
+}
