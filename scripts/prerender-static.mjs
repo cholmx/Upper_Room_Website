@@ -9,7 +9,7 @@ import { readFile, writeFile, mkdir, rm, copyFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { readLiveContent, readPhotos, SITE_URL } from './lib.mjs';
+import { readLiveContent, readPhotos, readPodcast, SITE_URL } from './lib.mjs';
 import { redirectRules } from '../src/content/redirects.js';
 
 const DIST = path.resolve('dist');
@@ -75,7 +75,7 @@ try {
 
   let saved = 0;
   for (const route of Object.values(SEO_ROUTES)) {
-    if (route === '/messages') continue;
+    if (route === '/messages' || route === '/shine') continue;
     const key = Object.keys(SEO_ROUTES).find(k => SEO_ROUTES[k] === route);
     let body = await mod.render(route);
     if (route === '/' && messages[0]) {
@@ -86,6 +86,14 @@ try {
     await write(route, page({ title: SEO[key][0], description: SEO[key][1], route, image: shareImage(key), schema: schemaFor(route), body }));
     saved += 1;
   }
+
+  // Shine podcast page
+  const pod = await readPodcast();
+  await write('/shine', page({
+    title: SEO.shine[0], description: SEO.shine[1], route: '/shine', image: shareImage('shine'), schema: schemaFor('/shine'),
+    body: chrome(`<h1>The Shine Podcast</h1><p>${esc((pod.show && pod.show.description) || SEO.shine[1])}</p>${pod.episodes.length ? `<h2>Episodes</h2><ul>${pod.episodes.map(e => `<li><strong>${esc(e.title)}</strong>${e.published_at ? ` <span>${esc(formatDate(e.published_at))}</span>` : ''}${e.description ? `<p>${esc(String(e.description).slice(0, 400))}</p>` : ''}</li>`).join('')}</ul>` : ''}`),
+  }));
+  saved += 1;
 
   const series = groupSeries(messages);
   const list = (items) => `<ul>${items.map(m => `<li><a href="${esc(messagePath(m))}">${esc(m.title)}</a>${meta(m) ? ` <span>${esc(meta(m))}</span>` : ''}${m.series ? ` <span>Series: ${esc(m.series)}</span>` : ''}</li>`).join('')}</ul>`;

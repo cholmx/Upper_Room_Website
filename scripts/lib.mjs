@@ -43,6 +43,14 @@ export async function readLiveContent() {
   return { messages, posts: posts.filter(live), pages };
 }
 
+// The Shine podcast's show and live episodes (newest first), for the static copy of its page.
+export async function readPodcast() {
+  const [shows, eps] = await Promise.all([readTable('podcast_shows_church'), readTable('podcast_episodes_church')]);
+  const episodes = eps.filter(e => e.show_slug === 'shine' && ![false, 0, '0', 'false'].includes(e.published))
+    .sort((a, b) => String(b.published_at || '').localeCompare(String(a.published_at || '')));
+  return { show: shows.find(s => s.slug === 'shine') || null, episodes };
+}
+
 // Every public URL, with a last-modified date when the row has one.
 export async function collectRoutes() {
   const [sermons, pages, posts] = await Promise.all([

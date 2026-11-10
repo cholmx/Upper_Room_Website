@@ -20,6 +20,7 @@ const Discipleship = lazy(() => import('./pages/Discipleship'));
 const Messages = lazy(() => import('./pages/Messages'));
 const MessageSeries = lazy(() => import('./pages/MessageSeries'));
 const MessageDetail = lazy(() => import('./pages/MessageDetail'));
+const Shine = lazy(() => import('./pages/Shine'));
 const Sozo = lazy(() => import('./pages/Sozo'));
 const Give = lazy(() => import('./pages/Give'));
 const Contact = lazy(() => import('./pages/Contact'));
@@ -97,7 +98,7 @@ export function AppBody() {
         {[
           ['/', Home], ['/plan-your-visit', PlanYourVisit], ['/about', About], ['/core-values', CoreValues],
           ['/leadership', Leadership], ['/messages', Messages], ['/messages/series/:series', MessageSeries], ['/messages/:slug', MessageDetail],
-          ['/discipleship', Discipleship], ['/sozo', Sozo],
+          ['/discipleship', Discipleship], ['/sozo', Sozo], ['/shine', Shine],
           ['/give', Give], ['/contact', Contact], ['/connect', Connect],
           ['/accessibility', Accessibility], ['/privacy', Privacy], ['/blog', Blog], ['/blog/:id', BlogPost], ['/p/:slug', CustomPage],
         ].map(([path, Page]) => (
@@ -113,7 +114,7 @@ export function AppBody() {
         <Route path="/beliefs" element={<Navigate to="/about#beliefs" replace />} />
         <Route path="/stories" element={<Navigate to="/about" replace />} />
         <Route path="/sermons" element={<Navigate to="/messages" replace />} />
-        <Route path="/podcasts" element={<Navigate to="/messages" replace />} />
+        <Route path="/podcasts" element={<Navigate to="/shine" replace />} />
         <Route path="/prayer" element={<Navigate to="/contact" replace />} />
         <Route path="/events" element={<Navigate to="/" replace />} />
         <Route path="/careportal" element={<Navigate to="/" replace />} />

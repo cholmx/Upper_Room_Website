@@ -6,6 +6,7 @@ export const SEO = {
   values: ['Our Core Values | Upper Room Fellowship', 'Six values shape Upper Room Fellowship, from healthy relationships to living the Gospel.'],
   discipleship: ['Adult Discipleship Training | Upper Room Fellowship', 'Sunday morning classes for adults on spiritual practices like prayer, Scripture, and Sabbath, and on our core values. Find where to begin.'],
   sozo: ['Sozo Inner Healing Prayer Ministry | Upper Room Fellowship', 'Learn what Sozo inner healing prayer ministry is, what happens in a session, and how to request one in Columbiana.'],
+  shine: ['The Shine Podcast | Upper Room Fellowship, Columbiana, Ohio', 'Listen to the Shine podcast from Upper Room Fellowship: interviews with people in our church family and episodes on topics that matter to life and faith.'],
   messages: ['Sermons and Podcast | Upper Room Fellowship, Columbiana, Ohio', 'Watch, listen to, or subscribe to sermons and Bible teaching from Upper Room Fellowship in Columbiana, Ohio.'],
   leadership: ['Our Pastors and Leaders | Upper Room Fellowship', 'Meet the pastors, elders and leaders of Upper Room Fellowship in Columbiana, Ohio, and learn how our team serves.'],
   contact: ['Contact Upper Room Fellowship | Columbiana, Ohio', 'Send a question or prayer request to Upper Room Fellowship in Columbiana, Ohio.'],
@@ -19,6 +20,6 @@ export const SEO = {
 // Route for each key, used for the sitemap and for canonical links.
 export const SEO_ROUTES = {
   home: '/', plan: '/plan-your-visit', about: '/about', values: '/core-values', discipleship: '/discipleship', leadership: '/leadership',
-  messages: '/messages', sozo: '/sozo', give: '/give',
+  messages: '/messages', shine: '/shine', sozo: '/sozo', give: '/give',
   contact: '/contact', connect: '/connect', accessibility: '/accessibility', privacy: '/privacy',
 };

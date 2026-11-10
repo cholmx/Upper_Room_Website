@@ -16,7 +16,13 @@ export const NAV = [
       { label: 'Sozo', to: '/sozo' },
     ],
   },
-  { label: 'Messages', to: '/messages' },
+  {
+    label: 'Messages',
+    children: [
+      { label: 'Messages', to: '/messages' },
+      { label: 'Shine Podcast', to: '/shine' },
+    ],
+  },
   { label: 'Leadership', to: '/leadership' },
   {
     label: 'Contact',
@@ -36,6 +42,7 @@ export const FOOTER_LINKS = [
   { label: 'Adult Discipleship Training', to: '/discipleship' },
   { label: 'Sozo', to: '/sozo' },
   { label: 'Messages', to: '/messages' },
+  { label: 'Shine Podcast', to: '/shine' },
   { label: 'Leadership', to: '/leadership' },
   { label: 'Contact', to: '/contact' },
   { label: 'Connect Card', to: '/connect' },

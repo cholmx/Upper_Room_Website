@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
+import { backend } from '../../lib/backend';
 import { dataFetch } from '../../api';
 import { useAuth } from '../../auth';
 import { logActivity } from '../../lib/activity';
@@ -40,6 +41,21 @@ export default function GenericManager({ config }) {
   const [confirmDiscard, setConfirmDiscard] = useState(false);
   const [importing, setImporting] = useState(false);
   const [transcripts, setTranscripts] = useState(false);
+  const [refreshing, setRefreshing] = useState('');
+  const [refreshMsg, setRefreshMsg] = useState('');
+  const FEED_WHY = { '-1': 'has no feed address yet', '-2': 'could not be reached', '-3': 'answered with an error', '-4': 'did not look like a podcast feed' };
+  const refreshFeeds = async () => {
+    setRefreshing('busy'); setRefreshMsg('');
+    const notes = [];
+    for (const it of items.filter(i => String(i.feed_url || '').trim())) {
+      const res = await backend.rpc('import_podcast_feed', { show: it.slug });
+      const n = res.status === 'success' ? Number(res.data) : NaN;
+      notes.push(Number.isNaN(n) ? `${it.name}: ${res.error || 'failed'}` : n < 0 ? `${it.name}: the feed ${FEED_WHY[String(n)] || 'could not be read'}` : `${it.name}: ${n} new ${n === 1 ? 'episode' : 'episodes'}`);
+    }
+    setRefreshMsg(notes.length ? notes.join('. ') + '.' : 'Add an RSS feed address to a show first.');
+    setRefreshing('');
+    fetchItems();
+  };
   const [categories, setCategories] = useState([]);
   const [seeding, setSeeding] = useState(null);
   const [selected, setSelected] = useState(() => new Set());
@@ -312,6 +328,11 @@ export default function GenericManager({ config }) {
             {seeding && !seeding.finished ? `Adding ${seeding.done + seeding.failed} of ${seeding.total}` : config.seedLabel ? config.seedLabel(missingSeeds.length) : `Add the ${missingSeeds.length} standard categories that are missing`}
           </button>
         )}
+        {config.refreshFeed && (
+            <button onClick={refreshFeeds} disabled={refreshing === 'busy'} className="border border-[#1e2522]/20 bg-white text-[#1e2522] font-bold py-2.5 px-5 rounded-lg transition disabled:opacity-50">
+              {refreshing === 'busy' ? 'Reading the feeds' : 'Refresh from feed'}
+            </button>
+          )}
         {config.youtubeImport && (
             <button onClick={() => setImporting(true)} className="border border-[#1e2522]/20 bg-white text-[#1e2522] font-bold py-2.5 px-5 rounded-lg transition">
               Import from YouTube
@@ -330,6 +351,7 @@ export default function GenericManager({ config }) {
         </div>
       </div>
 
+      {refreshMsg && <p role="status" className="mb-4 text-sm font-semibold">{refreshMsg}</p>}
       {transcripts && <TranscriptImport items={items} onClose={() => setTranscripts(false)} onDone={fetchItems} />}
       {importing && <YouTubeImport existing={items} onClose={() => setImporting(false)} onImported={fetchItems} />}
 

@@ -147,6 +147,42 @@ const TAB_CONFIGS = {
       { name: 'sort_order_num', label: 'Order on the page (lower shows first)', type: 'number' },
     ]
   },
+  podcastShows: {
+    table: 'podcast_shows_church',
+    title: 'Podcast Shows',
+    titleField: 'name',
+    thumbField: 'image_url',
+    refreshFeed: true,
+    columns: ['name', 'slug'],
+    fields: [
+      { name: 'name', label: 'Show name', type: 'text', required: true },
+      { name: 'slug', label: 'Short name used by the site (leave as shine for the Shine podcast)', type: 'text', required: true },
+      { name: 'feed_url', label: 'RSS feed address (from your podcast host). New episodes are added every hour.', type: 'url' },
+      { name: 'description', label: 'Description', type: 'textarea' },
+      { name: 'image_url', label: 'Cover art', type: 'image' },
+      { name: 'apple_url', label: 'Apple Podcasts link', type: 'url' },
+      { name: 'spotify_url', label: 'Spotify link', type: 'url' },
+      { name: 'youtube_url', label: 'YouTube link', type: 'url' },
+    ]
+  },
+  podcastEpisodes: {
+    table: 'podcast_episodes_church',
+    title: 'Podcast Episodes',
+    titleField: 'title',
+    pageSize: 100,
+    sortItems: (items) => [...items].sort((a, b) => String(b.published_at || '').localeCompare(String(a.published_at || ''))),
+    columns: ['title', 'published_at'],
+    fields: [
+      { name: 'title', label: 'Episode title', type: 'text', required: true },
+      { name: 'show_slug', label: 'Show (shine for the Shine podcast)', type: 'text', required: true },
+      { name: 'published_at', label: 'Date', type: 'date' },
+      { name: 'description', label: 'Description', type: 'textarea' },
+      { name: 'audio_url', label: 'Audio file link (an mp3 address)', type: 'url' },
+      { name: 'duration', label: 'Length (for example 32:10)', type: 'text' },
+      { name: 'page_url', label: 'Episode page link (optional)', type: 'url' },
+      { name: 'published', label: 'Published', type: 'checkbox', defaultChecked: true, help: 'Visible on the website' },
+    ]
+  },
   categories: {
     table: 'message_categories_church',
     seedNames: STANDARD_CATEGORIES,
@@ -239,6 +275,8 @@ const ContentStudio = () => {
     'Content': [
       { key: 'sermons', label: 'Messages', icon: FiMic },
       { key: 'categories', label: 'Message Categories', icon: FiLayout },
+      { key: 'podcastShows', label: 'Podcast Shows', icon: FiMic },
+      { key: 'podcastEpisodes', label: 'Podcast Episodes', icon: FiMic },
       { key: 'staff', label: 'Staff & Leaders', icon: FiUsers },
       { key: 'posts', label: 'Blog Posts', icon: FiFileText },
     ],

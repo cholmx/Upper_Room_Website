@@ -3,7 +3,7 @@
 export const OLD_ADDRESSES = [
   ['/new-here', '/plan-your-visit'], ['/visit', '/plan-your-visit'], ['/next-steps', '/plan-your-visit'], ['/faq', '/plan-your-visit'],
   ['/about-us', '/about'], ['/beliefs', '/about'], ['/stories', '/about'],
-  ['/sermons', '/messages'], ['/podcasts', '/messages'],
+  ['/sermons', '/messages'], ['/podcasts', '/shine'],
   ['/ministries', '/discipleship'], ['/table-groups', '/discipleship'], ['/serve', '/discipleship'],
   ['/kids', '/plan-your-visit'], ['/youth', '/plan-your-visit'], ['/worship-team', '/plan-your-visit'],
   ['/prayer', '/contact'], ['/transforming-together', '/give'], ['/team', '/leadership'],

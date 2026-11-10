@@ -71,6 +71,17 @@ export function podcast() {
   };
 }
 
+export function shinePodcast() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'PodcastSeries',
+    name: 'The Shine Podcast',
+    description: SEO.shine[1],
+    url: abs('/shine'),
+    publisher: { '@type': 'Church', name: SITE.name, url: abs('/') },
+  };
+}
+
 export function leaders() {
   return DEFAULT_LEADERS.map(p => ({
     '@context': 'https://schema.org',
@@ -95,5 +106,6 @@ export function schemaFor(path) {
   if (key === 'sozo') out.push(faqPage(SOZO_FAQ));
   if (key === 'leadership') out.push(...leaders());
   if (key === 'messages') out.push(podcast());
+  if (key === 'shine') out.push(shinePodcast());
   return out;
 }
