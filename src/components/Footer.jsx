@@ -6,7 +6,7 @@ import { Btn } from './ui';
 
 
 const MORE = [
-  { label: 'Give', href: true },
+  { label: 'Give', to: '/give' },
   { label: 'Accessibility', to: '/accessibility' },
   { label: 'Privacy', to: '/privacy' },
 ];

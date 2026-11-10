@@ -162,7 +162,7 @@ export default function Home() {
         <Cards cols={3}>
           <Card title="Plan Your Visit" as="h3" to="/plan-your-visit" linkLabel="Plan your visit" icon={<SafeIcon icon={FiCalendar} size={32} aria-hidden="true" className="text-[#c74f2f]" />}><p>See what a Sunday looks like and tell us you are coming so we can greet you.</p></Card>
           <Card title="Grow With Us" as="h3" to="/discipleship" linkLabel="Grow with us" icon={<SafeIcon icon={FiUsers} size={32} aria-hidden="true" className="text-[#c74f2f]" />}><p>Join a Sunday morning adult class. Our welcome team can help you find a place.</p></Card>
-          <Card title="Give Online" as="h3" to={SITE.giveUrl} linkLabel="Give online" icon={<SafeIcon icon={FiHeart} size={32} aria-hidden="true" className="text-[#c74f2f]" />}><p>Support the ministries and outreach of our church family.</p></Card>
+          <Card title="Give" as="h3" to="/give" linkLabel="Ways to give" icon={<SafeIcon icon={FiHeart} size={32} aria-hidden="true" className="text-[#c74f2f]" />}><p>Support the ministries and outreach of our church family.</p></Card>
         </Cards>
       </Section>
 

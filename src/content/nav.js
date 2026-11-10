@@ -31,7 +31,7 @@ export const NAV = [
       { label: 'Connect Card', to: '/connect' },
     ],
   },
-  { label: 'Give', to: '/give', external: true },
+  { label: 'Give', to: '/give' },
 ];
 
 // Short site map for the footer.
