@@ -1,6 +1,6 @@
 import React from 'react';
 import usePageMeta from '../hooks/usePageMeta';
-import { Section, SectionHeader, PageHeader, Accordion, Steps, Band, Panel, PhotoSplit, PhotoBand, SlotImage } from '../components/ui';
+import { Section, SectionHeader, PageHeader, PageNav, Accordion, Steps, Band, Panel, PhotoSplit, PhotoBand, SlotImage } from '../components/ui';
 import { useSite } from '../settings';
 import { SOZO_FAQ as FAQ } from '../content/faqs';
 
@@ -27,6 +27,8 @@ export default function Sozo() {
     <>
       <PageHeader kicker="Sozo" title="What is Sozo?" intro="Sozo is a Greek word that appears more than 100 times in the New Testament. It means to save, deliver, make whole, restore, and heal." />
 
+      <PageNav items={[['session', 'What happens'], ['tools', 'The tools'], ['begin', 'How to begin'], ['faq', 'Questions'], ['reading', 'Reading']]} />
+
       <Section tone="white">
         <div className="max-w-3xl">
         <div className={`space-y-4 ${P}`}>
@@ -36,7 +38,7 @@ export default function Sozo() {
       </div>
       </Section>
 
-      <Section tone="white">
+      <Section tone="white" id="session">
         <div className="grid md:grid-cols-2 gap-10 md:gap-16">
           <div>
             <SectionHeader title="What happens in a session" className="!mb-6" />
@@ -59,7 +61,7 @@ export default function Sozo() {
         </ul>
       </PhotoBand>
 
-      <Section tone="white">
+      <Section tone="white" id="tools">
         <SectionHeader title="Our Sozo tools" />
         <div className="grid md:grid-cols-3 gap-6">
           {TOOLS.map(([t, d]) => (
@@ -92,12 +94,12 @@ export default function Sozo() {
       </div>
       </Section>
 
-      <Section tone="white" narrow>
+      <Section tone="white" narrow id="faq">
         <SectionHeader title="Frequently asked questions" />
-        <Accordion items={FAQ.map(([q, a]) => ({ id: q.toLowerCase().replace(/[^a-z]+/g, '-'), title: q, content: <p className={P}>{a}</p> }))} />
+        <Accordion group="sozo-faq" items={FAQ.map(([q, a]) => ({ id: q.toLowerCase().replace(/[^a-z]+/g, '-'), title: q, content: <p className={P}>{a}</p> }))} />
       </Section>
 
-      <Section tone="white" narrow>
+      <Section tone="white" narrow id="reading">
         <SectionHeader title="Recommended reading" />
         <ul className="list-disc pl-6 space-y-2 text-[0.95rem] text-black">
           {READING.map(r => <li key={r}>{r}</li>)}

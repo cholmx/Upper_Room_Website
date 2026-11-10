@@ -2,7 +2,7 @@ import React from 'react';
 import usePageMeta from '../hooks/usePageMeta';
 import { useSite } from '../settings';
 import { DISCIPLESHIP_FAQ as FAQ } from '../content/faqs';
-import { Section, SectionHeader, PageHeader, Accordion, Band, Panel, PhotoSplit, PhotoBand } from '../components/ui';
+import { Section, SectionHeader, PageHeader, PageNav, Accordion, Band, Panel, PhotoSplit, PhotoBand } from '../components/ui';
 
 const P = 'text-[0.95rem] leading-relaxed text-black';
 
@@ -31,7 +31,9 @@ export default function Discipleship() {
     <>
       <PageHeader kicker="Discipleship" title="Adult Discipleship Training" intro="Sunday morning classes where adults learn to know God, share life, and serve others." />
 
-      <Section tone="white">
+      <PageNav items={[['classes', 'When we meet'], ['practices', 'The nine practices'], ['values', 'Values In The Kingdom'], ['years', 'The five years'], ['wednesday', 'Wednesdays'], ['faq', 'Questions']]} />
+
+      <Section tone="white" id="classes">
         <div className="max-w-3xl">
         <p className="lead">Every Sunday at 9:30am, one hour before worship, adults meet to learn and practice what it means to follow Jesus together.</p>
         <p className={`mt-4 ${P}`}>The classes follow a five-year plan. It focuses on nine spiritual practices and the core values of our church. There are more spiritual practices than these, and these nine are the ones we use for this training track. The plan repeats, so you can join at any point and still cover everything.</p>
@@ -53,7 +55,7 @@ export default function Discipleship() {
         <SectionHeader title="What you will learn" intro="There are two kinds of classes. Some teach nine of the spiritual practices. Others teach the core values of our church." className="!mb-0" />
       </Section>
 
-      <PhotoBand slot="discipleship-practices">
+      <PhotoBand slot="discipleship-practices" id="practices">
         <h2 className="text-3xl md:text-5xl mb-5">Nine practices we focus on</h2>
         <p className="text-base leading-relaxed">A spiritual practice is a regular habit that helps you grow closer to God. There are many of them, and these nine are the ones we focus on in this training track. We group them under our three words: Know God, Share Life, and Serve Others.</p>
       </PhotoBand>
@@ -76,7 +78,7 @@ export default function Discipleship() {
         </div>
       </Section>
 
-      <Section tone="gray">
+      <Section tone="gray" id="values">
         <div className="max-w-3xl">
         <h2 className="text-3xl md:text-5xl mb-5">Values In The Kingdom</h2>
         <div className={`space-y-4 ${P}`}>
@@ -86,7 +88,7 @@ export default function Discipleship() {
       </div>
       </Section>
 
-      <Section tone="white" narrow>
+      <Section tone="white" narrow id="years">
         <SectionHeader title="How the five years work" />
         <div className={`space-y-4 ${P}`}>
           <p>Each year on Sunday mornings is one of two kinds. A practices year goes through three of these nine practices, one in the fall, one in the winter, and one in the spring. A Values In The Kingdom year studies the core values of our church in one class that runs through the fall, winter, and spring.</p>
@@ -94,7 +96,7 @@ export default function Discipleship() {
         </div>
       </Section>
 
-      <PhotoBand slot="discipleship-wednesday">
+      <PhotoBand slot="discipleship-wednesday" id="wednesday">
         <h2 className="text-3xl md:text-5xl mb-5">Wednesday evenings</h2>
         <div className="space-y-4 text-base leading-relaxed">
           <p>Wednesday evenings from 6:30 to 8:00pm are for enrichment classes. These are separate from Adult Discipleship Training.</p>
@@ -103,9 +105,9 @@ export default function Discipleship() {
         </div>
       </PhotoBand>
 
-      <Section tone="white" narrow>
+      <Section tone="white" narrow id="faq">
         <SectionHeader title="Questions" />
-        <Accordion items={FAQ.map(([q, a]) => ({ id: q.toLowerCase().replace(/[^a-z]+/g, '-'), title: q, content: <p className={P}>{a}</p> }))} />
+        <Accordion group="discipleship-faq" items={FAQ.map(([q, a]) => ({ id: q.toLowerCase().replace(/[^a-z]+/g, '-'), title: q, content: <p className={P}>{a}</p> }))} />
       </Section>
     </>
   );

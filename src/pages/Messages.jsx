@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import usePageMeta from '../hooks/usePageMeta';
 import useFetch from '../hooks/useFetch';
 import { useSite } from '../settings';
@@ -33,11 +33,25 @@ export default function Messages() {
   const SITE = useSite();
   const { data, loading, error, reload } = useFetch('read/sermons?sort=date:desc');
   const messages = useMemo(() => newestFirst(data).filter(isLive), [data]);
-  const [q, setQ] = useState('');
-  const [series, setSeries] = useState('');
-  const [speaker, setSpeaker] = useState('');
-  const [book, setBook] = useState('');
-  const [topic, setTopic] = useState('');
+  const navigate = useNavigate();
+  const [params, setParams] = useSearchParams();
+  // Filters live in the address (?q=, ?topic=, ?speaker=, ?series=, ?book=) so a filtered list can be shared or bookmarked.
+  const q = params.get('q') || '';
+  const series = params.get('series') || '';
+  const speaker = params.get('speaker') || '';
+  const book = params.get('book') || '';
+  const topic = params.get('topic') || '';
+  const oldest = params.get('sort') === 'oldest';
+  const setParam = (key, value) => setParams(prev => {
+    const next = new URLSearchParams(prev);
+    if (value) next.set(key, value); else next.delete(key);
+    return next;
+  }, { replace: true });
+  const setQ = (v) => setParam('q', v);
+  const setSeries = (v) => setParam('series', v);
+  const setSpeaker = (v) => setParam('speaker', v);
+  const setBook = (v) => setParam('book', v);
+  const setTopic = (v) => setParam('topic', v);
   const [shown, setShown] = useState(12);
   const [allChips, setAllChips] = useState(false);
 
@@ -48,7 +62,13 @@ export default function Messages() {
     // The newest message in the series that has a video lends its cover picture.
     thumb: ytId(messages.find(m => (m.series || '').trim() === g.name && ytId(m.video_url || m.yt))?.video_url || ''),
   })), [messages]);
-  const categoryOptions = useMemo(() => [...new Set(messages.flatMap(m => parseCategories(m.topic)))].sort((a, b) => a.localeCompare(b)), [messages]);
+  const countBy = (list) => {
+    const n = new Map();
+    list.forEach(v => n.set(v, (n.get(v) || 0) + 1));
+    return [...n.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+  };
+  const categoryCounts = useMemo(() => countBy(messages.flatMap(m => parseCategories(m.topic))), [messages]);
+  const speakerCounts = useMemo(() => countBy(messages.map(m => (m.speaker || '').trim()).filter(Boolean)), [messages]);
   const uniq = (fn) => [...new Set(messages.map(fn).filter(Boolean))].sort();
   const filtered = useMemo(() => {
     const needle = q.trim().toLowerCase();
@@ -60,9 +80,13 @@ export default function Messages() {
       (!needle || [m.title, m.speaker, m.scripture, m.topic, m.series, plainText(m.description)].some(v => String(v || '').toLowerCase().includes(needle)))
     ));
   }, [messages, q, series, speaker, book, topic]);
+  const ordered = useMemo(() => (oldest ? [...filtered].reverse() : filtered), [filtered, oldest]);
   const anyFilter = q || series || speaker || book || topic;
-  useEffect(() => { setShown(12); }, [q, series, speaker, book, topic]);
-  const clear = () => { setQ(''); setSeries(''); setSpeaker(''); setBook(''); setTopic(''); };
+  useEffect(() => { setShown(12); }, [q, series, speaker, book, topic, oldest]);
+  const clear = () => setParams({}, { replace: true });
+  const surprise = () => { if (filtered.length) navigate(messagePath(filtered[Math.floor(Math.random() * filtered.length)])); };
+  const chip = (on) => `px-4 py-2 rounded-full text-sm font-display font-bold ${on ? 'bg-[#1e2522] text-white' : 'bg-[#e8e7e3] text-[#1e2522] hover:bg-[#1e2522]/15'}`;
+  const active = [['Search', q, () => setQ('')], ['Series', series, () => setSeries('')], ['Speaker', speaker, () => setSpeaker('')], ['Book', book, () => setBook('')], ['Category', topic, () => setTopic('')]].filter(([, v]) => v);
   const latestVideo = ytId(latest?.video_url || latest?.yt);
 
   return (
@@ -141,38 +165,66 @@ export default function Messages() {
 
           <Section tone="cream" id="archive">
             <SectionHeader title="Sermon library" intro="Missed a Sunday? Want to hear a message again? Browse current and past teaching from Upper Room Fellowship below." />
-            {categoryOptions.length > 0 && (
+            {categoryCounts.length > 0 && (
               <div className="mb-6" role="group" aria-label="Browse by category">
+                <p className="text-sm font-semibold mb-2">Category</p>
                 <div className="flex flex-wrap gap-2">
-                  <button type="button" aria-pressed={!topic} onClick={() => setTopic('')} className={`px-4 py-2 rounded-full text-sm font-display font-bold ${!topic ? 'bg-[#1e2522] text-white' : 'bg-[#e8e7e3] text-[#1e2522] hover:bg-[#1e2522]/15'}`}>All</button>
-                  {(allChips ? categoryOptions : categoryOptions.slice(0, 10)).map(c => (
-                    <button key={c} type="button" aria-pressed={topic === c} onClick={() => setTopic(topic === c ? '' : c)} className={`px-4 py-2 rounded-full text-sm font-display font-bold ${topic === c ? 'bg-[#1e2522] text-white' : 'bg-[#e8e7e3] text-[#1e2522] hover:bg-[#1e2522]/15'}`}>{c}</button>
+                  <button type="button" aria-pressed={!topic} onClick={() => setTopic('')} className={chip(!topic)}>All</button>
+                  {(allChips ? categoryCounts : categoryCounts.slice(0, 10)).map(([c, n]) => (
+                    <button key={c} type="button" aria-pressed={topic === c} onClick={() => setTopic(topic === c ? '' : c)} className={chip(topic === c)}>{c} <span className="font-normal opacity-70">{n}</span></button>
                   ))}
-                  {categoryOptions.length > 10 && (
-                    <button type="button" onClick={() => setAllChips(v => !v)} className="px-4 py-2 rounded-full text-sm font-display font-bold underline underline-offset-4">{allChips ? 'Show fewer' : `Show ${categoryOptions.length - 10} more`}</button>
+                  {categoryCounts.length > 10 && (
+                    <button type="button" onClick={() => setAllChips(v => !v)} className="px-4 py-2 rounded-full text-sm font-display font-bold underline underline-offset-4">{allChips ? 'Show fewer' : `Show ${categoryCounts.length - 10} more`}</button>
                   )}
                 </div>
               </div>
             )}
+            {speakerCounts.length > 1 && (
+              <div className="mb-6" role="group" aria-label="Browse by speaker">
+                <p className="text-sm font-semibold mb-2">Speaker</p>
+                <div className="flex flex-wrap gap-2">
+                  <button type="button" aria-pressed={!speaker} onClick={() => setSpeaker('')} className={chip(!speaker)}>Everyone</button>
+                  {speakerCounts.slice(0, 8).map(([s, n]) => (
+                    <button key={s} type="button" aria-pressed={speaker === s} onClick={() => setSpeaker(speaker === s ? '' : s)} className={chip(speaker === s)}>{s} <span className="font-normal opacity-70">{n}</span></button>
+                  ))}
+                </div>
+              </div>
+            )}
             <form role="search" aria-label="Search messages" onSubmit={(e) => e.preventDefault()} className="rounded-[10px] p-5 md:p-6 mb-6 bg-[#e8e7e3]">
-              <label htmlFor="msg-search" className="block text-sm font-semibold mb-1">Search by category, passage, or speaker</label>
+              <label htmlFor="msg-search" className="block text-sm font-semibold mb-1">Search by title, passage, speaker or topic</label>
               <input id="msg-search" type="search" value={q} onChange={(e) => setQ(e.target.value)} className={select} />
               <div className="grid sm:grid-cols-3 gap-4 mt-4">
                 <Filter label="Series" value={series} onChange={setSeries} options={uniq(m => m.series)} />
-                <Filter label="Speaker" value={speaker} onChange={setSpeaker} options={uniq(m => m.speaker)} />
                 <Filter label="Scripture book" value={book} onChange={setBook} options={uniq(m => scriptureBook(m.scripture))} />
+                <div>
+                  <label htmlFor="msg-sort" className="block text-sm font-semibold mb-1">Order</label>
+                  <select id="msg-sort" value={oldest ? 'oldest' : 'newest'} onChange={(e) => setParam('sort', e.target.value === 'oldest' ? 'oldest' : '')} className={select}>
+                    <option value="newest">Newest first</option>
+                    <option value="oldest">Oldest first</option>
+                  </select>
+                </div>
               </div>
-              {anyFilter && <button type="button" onClick={clear} className="mt-4 underline underline-offset-4 font-semibold text-[#1e2522] min-h-[44px]">Clear search and filters</button>}
+              <div className="mt-4 flex flex-wrap items-center gap-3">
+                <button type="button" onClick={surprise} disabled={!filtered.length} className="btn btn-outline !py-2 !px-4 text-sm disabled:opacity-40">Surprise me</button>
+                {anyFilter && <button type="button" onClick={clear} className="underline underline-offset-4 font-semibold text-[#1e2522] min-h-[44px]">Clear search and filters</button>}
+              </div>
             </form>
-            <p className="mb-6 text-sm text-black" aria-live="polite">{filtered.length === messages.length ? `${messages.length} messages` : `${filtered.length} of ${messages.length} messages`}</p>
-            {filtered.length === 0 ? (
-              <p className="text-[0.95rem] text-black">No messages match yet. Try a different word.</p>
-            ) : (
-              <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filtered.slice(0, shown).map(m => <li key={m.id}><MessageCard message={m} /></li>)}
+            {active.length > 0 && (
+              <ul className="mb-4 flex flex-wrap gap-2" aria-label="Active filters">
+                {active.map(([label, value, remove]) => (
+                  <li key={label}><button type="button" onClick={remove} className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#1e2522] text-white text-sm font-display font-bold">{label}: {value}<span aria-hidden="true">&times;</span><span className="sr-only"> (remove)</span></button></li>
+                ))}
               </ul>
             )}
-            {filtered.length > shown && (
+            <p className="mb-6 text-sm text-black" aria-live="polite">{filtered.length === messages.length ? `${messages.length} messages` : `${filtered.length} of ${messages.length} messages`}</p>
+            {filtered.length === 0 ? (
+              <p className="text-[0.95rem] text-black">No messages match yet. Try a different word, or clear the filters.</p>
+            ) : (
+              <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {ordered.slice(0, shown).map(m => <li key={m.id}><MessageCard message={m} /></li>)}
+              </ul>
+            )}
+            {ordered.length > shown && (
               <div className="mt-10 text-center">
                 <button type="button" onClick={() => setShown(n => n + 12)} className="btn btn-outline">Show 12 more</button>
               </div>

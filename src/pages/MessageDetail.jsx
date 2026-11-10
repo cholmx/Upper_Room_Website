@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import usePageMeta from '../hooks/usePageMeta';
 import useFetch from '../hooks/useFetch';
@@ -47,6 +47,21 @@ export default function MessageDetail() {
     if (!m?.series) return;
     try { localStorage.setItem(`urf-series-${slugify(m.series)}`, String(m.id)); } catch { /* storage is off */ }
   }, [m?.id, m?.series]);
+
+  const [tab, setTab] = useState('');
+  const tabs = [
+    m?.description && { id: 'summary', label: 'Summary', value: m.description },
+    m?.discussion_questions && { id: 'questions', label: 'Discussion questions', value: m.discussion_questions },
+    m?.notes && { id: 'transcript', label: 'Notes and transcript', value: m.notes },
+  ].filter(Boolean);
+  const activeTab = tabs.some(t => t.id === tab) ? tab : tabs[0]?.id;
+  const onTabKey = (e, id) => {
+    if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+    const i = tabs.findIndex(t => t.id === id);
+    const next = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
+    setTab(next.id);
+    requestAnimationFrame(() => document.getElementById(`tab-${next.id}`)?.focus());
+  };
 
   const video = m?.video_url || m?.yt;
   const vid = ytId(video);
@@ -101,27 +116,23 @@ export default function MessageDetail() {
                 </audio>
               </div>
             )}
-            {m.description && (
+            {tabs.length > 0 && (
               <div className="mt-10">
-                <h2 className="text-2xl md:text-3xl mb-3">Sermon summary</h2>
-                <RichText value={m.description} className="text-[0.95rem]" />
-              </div>
-            )}
-            {m.notes && (
-              <div className="mt-10">
-                <h2 className="text-2xl md:text-3xl mb-3">Notes and transcript</h2>
-                <RichText value={m.notes} className="text-[0.95rem]" />
+                <div role="tablist" aria-label="About this message" className="flex flex-wrap gap-2 mb-6">
+                  {tabs.map(t => (
+                    <button key={t.id} id={`tab-${t.id}`} type="button" role="tab" aria-selected={activeTab === t.id} aria-controls={`panel-${t.id}`} tabIndex={activeTab === t.id ? 0 : -1} onClick={() => setTab(t.id)} onKeyDown={(e) => onTabKey(e, t.id)} className={`min-h-[44px] px-5 rounded-full font-display font-bold text-sm ${activeTab === t.id ? 'bg-[#1e2522] text-white' : 'bg-[#e8e7e3] text-[#1e2522] hover:bg-[#1e2522]/15'}`}>{t.label}</button>
+                  ))}
+                </div>
+                {tabs.map(t => (
+                  <div key={t.id} id={`panel-${t.id}`} role="tabpanel" aria-labelledby={`tab-${t.id}`} hidden={activeTab !== t.id}>
+                    <RichText value={t.value} className="text-[0.95rem]" />
+                  </div>
+                ))}
               </div>
             )}
           </div>
 
           <aside className="space-y-6" aria-label="More about this message">
-            {m.discussion_questions && (
-              <div className="rounded-[10px] bg-[#e8e7e3] p-6">
-                <h2 className="text-2xl md:text-3xl mb-3">Discussion questions</h2>
-                <RichText value={m.discussion_questions} className="text-[0.95rem]" />
-              </div>
-            )}
             <div>
               <h2 className="text-xl mb-3">Share this message</h2>
               <ShareButtons title={m.title} />

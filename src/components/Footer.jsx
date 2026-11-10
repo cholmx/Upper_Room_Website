@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FOOTER_LINKS } from '../content/nav';
 import { useSite } from '../settings';
+import { Btn } from './ui';
 
 
 const MORE = [
@@ -28,7 +29,17 @@ export default function Footer() {
   return (
     <footer className="w-full max-w-[1312px] mx-auto px-3 md:px-4 pt-1.5 md:pt-2 pb-20 md:pb-4">
     <div className="bg-[#1e2522] text-[#ffffff] relative overflow-hidden rounded-[10px]">
-      <div className="px-6 md:px-10 py-20 md:py-24 flex flex-wrap gap-12 justify-between items-start relative z-10">
+      <div className="px-6 md:px-10 pt-12 md:pt-16 pb-10 md:pb-12 flex flex-wrap gap-x-10 gap-y-6 items-center justify-between border-b border-white/10 relative z-10">
+        <div>
+          <p className="text-2xl md:text-3xl font-display font-bold text-white">Join us this Sunday</p>
+          <p className="mt-2 text-[0.95rem] text-white/85">Classes at 9:30am. Worship at 10:30am. {SITE.address.street}, {SITE.address.city}.</p>
+        </div>
+        <div className="flex flex-wrap gap-3">
+          <Btn to="/plan-your-visit" variant="primary">Plan Your Visit</Btn>
+          <Btn href={SITE.googleMapsUrl} variant="light">Get Directions</Btn>
+        </div>
+      </div>
+      <div className="px-6 md:px-10 py-14 md:py-20 flex flex-wrap gap-12 justify-between items-start relative z-10">
         <div className="max-w-[26ch]">
           <h2 className="text-[1.4rem] font-normal text-[#eaa235] mb-4">
             {SITE.name}

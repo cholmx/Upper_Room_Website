@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { FORMS } from '../content/forms';
 import { buildSubmission, isVisible, validateForm } from '../lib/forms';
 import { publicDataFetch } from '../api';
+import { Link } from 'react-router-dom';
 import { useSite } from '../settings';
 
 export const SUBMISSIONS_TABLE = 'form_submissions_church';
@@ -136,6 +137,14 @@ export default function FormBlock({ formKey, heading, intro, defaults = {}, clas
       <div role="status" className={`neu rounded-2xl p-8 text-center ${className}`}>
         <svg className="check-draw mx-auto mb-4" width="56" height="56" viewBox="0 0 56 56" fill="none" stroke="#eaa235" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="28" cy="28" r="25" /><path d="M17 29l8 8 14-16" /></svg>
         <p className="text-xl font-semibold leading-relaxed">{def.confirmation}</p>
+        {def.next && (
+          <div className="mt-6 text-left max-w-md mx-auto">
+            <p className="font-display font-bold mb-2">While you wait</p>
+            <ul className="space-y-1">
+              {def.next.map(([label, to]) => <li key={to}><Link to={to} className="inline-flex items-center min-h-[44px] underline underline-offset-4 font-semibold">{label}</Link></li>)}
+            </ul>
+          </div>
+        )}
         <button type="button" onClick={() => setState({ phase: 'idle', error: '' })} className="btn btn-outline mt-6">Send another</button>
       </div>
     );
@@ -154,9 +163,12 @@ export default function FormBlock({ formKey, heading, intro, defaults = {}, clas
       </div>
       {def.note && <p className="text-sm text-black">{def.note}</p>}
       {state.phase === 'error' && <p role="alert" className="text-[#c74f2f] font-medium">{state.error}</p>}
-      <button type="submit" disabled={state.phase === 'sending'} aria-busy={state.phase === 'sending'} className="btn btn-solid disabled:opacity-60">
-        {state.phase === 'sending' ? 'Sending...' : def.button}
-      </button>
+      <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
+        <button type="submit" disabled={state.phase === 'sending'} aria-busy={state.phase === 'sending'} className="btn btn-solid disabled:opacity-60">
+          {state.phase === 'sending' ? 'Sending...' : def.button}
+        </button>
+        {def.reply && <p className="text-sm text-black max-w-[34ch]">{def.reply}</p>}
+      </div>
     </form>
   );
 }

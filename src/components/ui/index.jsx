@@ -51,7 +51,7 @@ const TONES = {
 export function Section({ tone = 'cream', id, className = '', narrow = false, center = false, children, ...rest }) {
   const panel = tone === 'gray';
   return (
-    <section id={id} className="max-w-[1312px] mx-auto px-3 md:px-4 py-1.5 md:py-2" {...rest}>
+    <section id={id} className="max-w-[1312px] mx-auto px-3 md:px-4 py-1.5 md:py-2 scroll-mt-32" {...rest}>
       <div className={`${TONES[tone]} ${panel ? 'rounded-[10px]' : ''} py-16 md:py-24 px-6 md:px-10 ${className}`}>
         <div className={`${narrow ? `max-w-[800px] ${center ? 'mx-auto' : ''}` : ''} relative z-10`}>
           {children}
@@ -167,7 +167,7 @@ export function PhotoBand({ slot, id, className = '', wide = false, children }) 
   const { url, loaded } = usePhoto(slot);
   const src = loaded ? imgUrl(url || stockFor(slot), 1600) : '';
   return (
-    <section id={id} data-image-band="true" className="max-w-[1312px] mx-auto px-3 md:px-4 py-1.5 md:py-2">
+    <section id={id} data-image-band="true" className="max-w-[1312px] mx-auto px-3 md:px-4 py-1.5 md:py-2 scroll-mt-32">
       <div className={`photo-section text-shade rounded-[10px] bg-[#1e2522] text-white py-24 md:py-36 px-6 md:px-10 ${className}`}>
         {src && <Media src={src} className="photo-bg" />}
         <div className={`hero-text photo-copy ${wide ? '' : 'max-w-4xl'}`}>{children}</div>
@@ -259,7 +259,7 @@ export function Card({ title, children, to, linkLabel, icon, className = '', as:
 }
 
 // Native details and summary: keyboard and screen reader friendly with no script.
-export function Accordion({ items, className = '' }) {
+export function Accordion({ items, className = '', group }) {
   useEffect(() => {
     const open = () => {
       const id = window.location.hash.slice(1);
@@ -273,7 +273,7 @@ export function Accordion({ items, className = '' }) {
   return (
     <div className={`space-y-3 ${className}`}>
       {items.map((it, i) => (
-        <details key={it.id || i} id={it.id} className="u-acc neu-acc group rounded-2xl">
+        <details key={it.id || i} id={it.id} name={group} className="u-acc neu-acc group rounded-2xl">
           <summary className="cursor-pointer px-6 py-5 flex items-center justify-between gap-4 text-lg font-bold min-h-[56px]">
             <span className="font-semibold text-lg">{it.title}</span>
             <span aria-hidden="true" className="u-acc-icon flex-shrink-0 text-2xl leading-none text-[#1e2522]">+</span>
@@ -282,6 +282,36 @@ export function Accordion({ items, className = '' }) {
         </details>
       ))}
     </div>
+  );
+}
+
+// A sticky "On this page" bar that jumps to a section and marks the one in view.
+export function PageNav({ items }) {
+  const [current, setCurrent] = useState('');
+  useEffect(() => {
+    if (typeof IntersectionObserver === 'undefined') return undefined;
+    const seen = new Map();
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => seen.set(e.target.id, e.isIntersecting));
+      const first = items.find(([id]) => seen.get(id));
+      if (first) setCurrent(first[0]);
+    }, { rootMargin: '-140px 0px -55% 0px' });
+    items.forEach(([id]) => { const el = document.getElementById(id); if (el) io.observe(el); });
+    return () => io.disconnect();
+  }, [items]);
+  return (
+    <nav aria-label="On this page" className="sticky top-20 z-40 bg-white border-b border-[#1e2522]/10">
+      <div className="max-w-[1312px] mx-auto px-6 md:px-14">
+        <ul className="flex gap-2 overflow-x-auto py-3 text-sm">
+          <li className="flex items-center pr-2 font-display font-bold text-black whitespace-nowrap">On this page</li>
+          {items.map(([id, label]) => (
+            <li key={id}>
+              <a href={`#${id}`} aria-current={current === id ? 'true' : undefined} className={`inline-flex items-center min-h-[40px] px-4 rounded-full font-display font-bold whitespace-nowrap ${current === id ? 'bg-[#1e2522] text-white' : 'bg-[#e8e7e3] text-[#1e2522] hover:bg-[#1e2522]/15'}`}>{label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </nav>
   );
 }
 

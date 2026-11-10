@@ -7,6 +7,8 @@ export const FORMS = {
   connect: {
     label: 'Connect Card',
     button: 'Submit',
+    reply: 'Takes about a minute. A member of our welcome team replies within 48 hours.',
+    next: [['See what a Sunday looks like', '/plan-your-visit'], ['Watch our latest message', '/messages'], ['Meet our leaders', '/leadership']],
     confirmation: 'Thank you. We received your Connect Card, and a member of our welcome team will be in touch within 48 hours.',
     fields: [
       { name: 'name', label: 'Name', type: 'text', required: true, autoComplete: 'name' },
@@ -23,6 +25,8 @@ export const FORMS = {
   contact: {
     label: 'Contact',
     button: 'Send Message',
+    reply: 'We reply within 48 hours.',
+    next: [['Plan your visit', '/plan-your-visit'], ['Watch our latest message', '/messages'], ['Listen to the Shine podcast', '/shine']],
     confirmation: 'Thanks for reaching out. We will reply within 48 hours.',
     fields: [
       { name: 'name', label: 'Name', type: 'text', required: true, autoComplete: 'name' },
@@ -33,6 +37,8 @@ export const FORMS = {
   sozo: {
     label: 'Sozo inquiry',
     button: 'Request a Sozo session',
+    reply: 'Our Sozo coordinator contacts you within 3 to 5 business days.',
+    next: [['Read the Sozo questions and answers', '/sozo#faq'], ['See what a Sunday looks like', '/plan-your-visit']],
     confirmation: 'Thank you. Our Sozo coordinator will contact you within 3 to 5 business days.',
     note: 'Your inquiry is confidential and handled with care.',
     fields: [
