@@ -6,6 +6,7 @@ import { isLive } from '../../utils';
 import { plainText } from '../../lib/markdown';
 import ConfirmDialog from '../../components/ConfirmDialog';
 import YouTubeImport from './YouTubeImport';
+import TranscriptImport from './TranscriptImport';
 import BulkBar from './BulkBar';
 import { parseCategories } from '../../lib/categories';
 import FieldInput from './FieldInput';
@@ -38,6 +39,7 @@ export default function GenericManager({ config }) {
   const [pendingDelete, setPendingDelete] = useState(null);
   const [confirmDiscard, setConfirmDiscard] = useState(false);
   const [importing, setImporting] = useState(false);
+  const [transcripts, setTranscripts] = useState(false);
   const [categories, setCategories] = useState([]);
   const [seeding, setSeeding] = useState(null);
   const [selected, setSelected] = useState(() => new Set());
@@ -315,6 +317,11 @@ export default function GenericManager({ config }) {
               Import from YouTube
             </button>
           )}
+        {config.youtubeImport && (
+            <button onClick={() => setTranscripts(t => !t)} className="border border-[#1e2522]/20 bg-white text-[#1e2522] font-bold py-2.5 px-5 rounded-lg transition">
+              Import transcripts
+            </button>
+          )}
           {canCreate && (
             <button onClick={handleAddNew} className="bg-[#eaa235] hover:bg-[#eaa235] text-[#1e2522] font-bold py-2.5 px-5 rounded-lg flex items-center gap-2 transition shadow-sm">
               <SafeIcon icon={FiPlus} /> Add New
@@ -323,6 +330,7 @@ export default function GenericManager({ config }) {
         </div>
       </div>
 
+      {transcripts && <TranscriptImport items={items} onClose={() => setTranscripts(false)} onDone={fetchItems} />}
       {importing && <YouTubeImport existing={items} onClose={() => setImporting(false)} onImported={fetchItems} />}
 
       {config.bulk && items.length > 0 && <BulkBar table={config.table} title={config.title} items={items} filtered={filtered} selected={selected} setSelected={setSelected} onDone={fetchItems} categories={categories} />}

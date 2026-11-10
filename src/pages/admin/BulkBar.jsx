@@ -178,6 +178,7 @@ export default function BulkBar({ table, title, items, filtered, selected, setSe
         </label>
         <button type="button" className={btn} onClick={() => setSelected(new Set(items.filter(i => !String(i.topic || '').trim()).map(i => i.id)))}>Select messages with no category</button>
         <button type="button" className={btn} onClick={() => setSelected(new Set(items.filter(i => !String(i.description || '').trim()).map(i => i.id)))}>Select messages with no summary</button>
+        <button type="button" className={btn} onClick={() => setSelected(new Set(items.filter(i => i.ai_summarized_at && String(i.notes || '').trim().length > 800).map(i => i.id)))}>Select AI summaries to redo from a transcript</button>
         <span className="text-black">{selected.size} selected</span>
       </div>
 
