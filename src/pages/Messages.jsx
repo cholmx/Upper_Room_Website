@@ -62,6 +62,7 @@ export default function Messages() {
     // The newest message in the series that has a video lends its picture, which is blurred into the cover.
     thumb: ytId(messages.find(m => (m.series || '').trim() === g.name && ytId(m.video_url || m.yt))?.video_url || ''),
   })), [messages]);
+  const details = (g) => [`${g.count} ${g.count === 1 ? 'message' : 'messages'}`, dateRangeLabel(g.first, g.last)].filter(Boolean).join('  |  ');
   const countBy = (list) => {
     const n = new Map();
     list.forEach(v => n.set(v, (n.get(v) || 0) + 1));
@@ -136,13 +137,18 @@ export default function Messages() {
                   <li key={s.name}>
                     <Link to={seriesPath(s.name)} className="thumb-link flex flex-col h-full rounded-[10px] overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow">
                       <div className="aspect-video bg-[#1e2522] relative overflow-hidden">
-                        {s.image
-                          ? <img src={s.image} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
-                          : <SeriesCover name={s.name} thumb={s.thumb} />}
-                      </div>
-                      <div className="px-4 py-3">
-                        <h3 className={s.image ? 'text-lg md:text-xl leading-tight' : 'sr-only'}>{s.name}</h3>
-                        <p className="mt-1 text-sm text-black">{[`${s.count} ${s.count === 1 ? 'message' : 'messages'}`, dateRangeLabel(s.first, s.last)].filter(Boolean).join('  |  ')}</p>
+                        {s.image ? (
+                          <>
+                            <img src={s.image} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
+                            <span aria-hidden="true" className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-[#1e2522]/80 to-transparent" />
+                            <span className="absolute inset-x-0 bottom-0 p-4 text-white">
+                              <span className="block text-xl md:text-2xl leading-tight">{s.name}</span>
+                              <span className="block mt-1.5 text-sm font-display font-bold">{details(s)}</span>
+                            </span>
+                          </>
+                        ) : (
+                          <SeriesCover name={s.name} details={details(s)} thumb={s.thumb} />
+                        )}
                       </div>
                     </Link>
                   </li>
