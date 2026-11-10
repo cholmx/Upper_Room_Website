@@ -28,11 +28,8 @@ const norm = (s) => String(s || '').toLowerCase().replace(/\.[a-z0-9]{2,4}$/, ''
 // Finds the message a file belongs to: by the 11-character YouTube id in the name, then by the title.
 export function matchMessage(fileName, messages, idOf) {
   const name = String(fileName || '');
-  const ids = name.match(/[A-Za-z0-9_-]{11}/g) || [];
-  for (const id of ids) {
-    const hit = messages.find(m => idOf(m) === id);
-    if (hit) return hit;
-  }
+  const byId = messages.find(m => { const id = idOf(m); return id && name.includes(id); });
+  if (byId) return byId;
   const n = norm(name);
   if (!n) return null;
   const exact = messages.filter(m => norm(m.title) === n);
