@@ -148,16 +148,10 @@ export default function Messages() {
                         {s.image
                           ? <img src={s.image} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
                           : <YtThumb id={s.thumb} className="absolute inset-0 w-full h-full object-cover" />}
-                        <span aria-hidden="true" className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-[#1e2522]/70 to-transparent" />
-                        <div className="absolute inset-x-0 bottom-0 z-10 p-5 text-white">
-                          <h3 className="text-2xl md:text-3xl leading-tight">{s.name}</h3>
-                          <p className="mt-1 text-sm font-display font-bold">{s.count} {s.count === 1 ? 'message' : 'messages'}</p>
-                        </div>
                       </div>
-                      <div className="p-6 flex flex-col flex-grow">
-                        {dateRangeLabel(s.first, s.last) && <p className="text-sm text-black">{dateRangeLabel(s.first, s.last)}</p>}
-                        {s.latest && <p className="mt-3 text-sm text-black line-clamp-2"><span className="font-semibold">Latest:</span> {s.latest.title}</p>}
-                        <span className="mt-auto pt-5 font-display font-bold text-sm text-[#c74f2f]">See the series &rarr;</span>
+                      <div className="px-5 py-4">
+                        <h3 className="text-xl md:text-2xl leading-tight">{s.name}</h3>
+                        <p className="mt-1 text-sm text-black">{[`${s.count} ${s.count === 1 ? 'message' : 'messages'}`, dateRangeLabel(s.first, s.last)].filter(Boolean).join('  |  ')}</p>
                       </div>
                     </Link>
                   </li>
