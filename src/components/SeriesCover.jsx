@@ -3,7 +3,7 @@ import React from 'react';
 // Dark green with blurred splotches of color. Which colors a series gets depends on its name, so a series keeps the same look.
 const SPLOTCHES = [
   ['#c74f2f', '#eaa235', '#e8e7e3'],
-  ['#eaa235', '#c74f2f', '#2f5a43'],
+  ['#eaa235', '#c74f2f', '#1f5a52'],
   ['#c74f2f', '#e8e7e3', '#eaa235'],
   ['#eaa235', '#e8e7e3', '#c74f2f'],
 ];
@@ -21,9 +21,9 @@ export default function SeriesCover({ name, className = '' }) {
   ].join(', ');
   return (
     <div className={`series-cover ${className}`}>
-      <span aria-hidden="true" className="series-cover-blur" style={{ background: blobs, opacity: 0.75 }} />
+      <span aria-hidden="true" className="series-cover-blur" style={{ background: blobs, opacity: 0.5 }} />
       <span aria-hidden="true" className="series-cover-grain" />
-      <span className="series-cover-name font-serif italic font-normal text-xl md:text-2xl leading-snug" style={{ fontFamily: 'Merriweather, Georgia, serif', fontStyle: 'italic', fontWeight: 700 }}>{name}</span>
+      <span className="series-cover-name font-serif italic font-normal text-xl md:text-2xl " style={{ fontFamily: 'Merriweather, Georgia, serif', fontStyle: 'italic', fontWeight: 700, lineHeight: 1.08 }}>{name}</span>
     </div>
   );
 }
