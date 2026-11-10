@@ -128,19 +128,10 @@ export default function Messages() {
             )}
           </Section>
 
-          <PhotoBand slot="messages-podcast">
-            <h2 className="text-3xl md:text-5xl mb-5">Listen anywhere</h2>
-            <p className="text-base leading-relaxed mb-6">Subscribe to our podcast on Apple Podcasts, Spotify, or your favorite podcast app, and new messages arrive automatically. Take them along on a commute, a workout, or a quiet morning.</p>
-            <div className="flex flex-wrap gap-3">
-              <Btn href={SITE.podcasts.apple} variant="primary">Apple Podcasts</Btn>
-              <Btn href={SITE.podcasts.spotify} variant="light">Spotify</Btn>
-            </div>
-          </PhotoBand>
-
           {seriesList.length > 0 && (
             <Section tone="gray">
               <SectionHeader title="Message series" />
-              <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <ul className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
                 {seriesList.map(s => (
                   <li key={s.name}>
                     <Link to={seriesPath(s.name)} className="thumb-link flex flex-col h-full rounded-[10px] overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow">
@@ -149,8 +140,8 @@ export default function Messages() {
                           ? <img src={s.image} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
                           : <YtThumb id={s.thumb} className="absolute inset-0 w-full h-full object-cover" />}
                       </div>
-                      <div className="px-5 py-4">
-                        <h3 className="text-xl md:text-2xl leading-tight">{s.name}</h3>
+                      <div className="px-4 py-3">
+                        <h3 className="text-lg md:text-xl leading-tight">{s.name}</h3>
                         <p className="mt-1 text-sm text-black">{[`${s.count} ${s.count === 1 ? 'message' : 'messages'}`, dateRangeLabel(s.first, s.last)].filter(Boolean).join('  |  ')}</p>
                       </div>
                     </Link>
@@ -227,6 +218,15 @@ export default function Messages() {
               </div>
             )}
           </Section>
+
+          <PhotoBand slot="messages-podcast">
+            <h2 className="text-3xl md:text-5xl mb-5">Listen anywhere</h2>
+            <p className="text-base leading-relaxed mb-6">Subscribe to our podcast on Apple Podcasts, Spotify, or your favorite podcast app, and new messages arrive automatically. Take them along on a commute, a workout, or a quiet morning.</p>
+            <div className="flex flex-wrap gap-3">
+              <Btn href={SITE.podcasts.apple} variant="primary">Apple Podcasts</Btn>
+              <Btn href={SITE.podcasts.spotify} variant="light">Spotify</Btn>
+            </div>
+          </PhotoBand>
         </>
       )}
     </>
