@@ -9,7 +9,7 @@ import { parseCategories } from '../lib/categories';
 import { Btn, Section, SectionHeader, PageHeader, PhotoBand } from '../components/ui';
 import LiteYouTube from '../components/LiteYouTube';
 import MessageCard from '../components/MessageCard';
-import YtThumb from '../components/YtThumb';
+import SeriesCover from '../components/SeriesCover';
 import NewBadge from '../components/NewBadge';
 import { CardSkeletons, ErrorState } from '../components/StateViews';
 
@@ -59,8 +59,6 @@ export default function Messages() {
   const seriesList = useMemo(() => groupSeries(messages).map(g => ({
     ...g,
     latest: messages.find(m => (m.series || '').trim() === g.name),
-    // The newest message in the series that has a video lends its cover picture.
-    thumb: ytId(messages.find(m => (m.series || '').trim() === g.name && ytId(m.video_url || m.yt))?.video_url || ''),
   })), [messages]);
   const countBy = (list) => {
     const n = new Map();
@@ -138,10 +136,10 @@ export default function Messages() {
                       <div className="aspect-video bg-[#1e2522] relative overflow-hidden">
                         {s.image
                           ? <img src={s.image} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
-                          : <YtThumb id={s.thumb} className="absolute inset-0 w-full h-full object-cover" />}
+                          : <SeriesCover name={s.name} />}
                       </div>
                       <div className="px-4 py-3">
-                        <h3 className="text-lg md:text-xl leading-tight">{s.name}</h3>
+                        <h3 className={s.image ? 'text-lg md:text-xl leading-tight' : 'sr-only'}>{s.name}</h3>
                         <p className="mt-1 text-sm text-black">{[`${s.count} ${s.count === 1 ? 'message' : 'messages'}`, dateRangeLabel(s.first, s.last)].filter(Boolean).join('  |  ')}</p>
                       </div>
                     </Link>
