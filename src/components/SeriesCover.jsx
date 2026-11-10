@@ -9,8 +9,8 @@ export default function SeriesCover({ name, details, thumb, className = '' }) {
       {thumb && <YtThumb id={thumb} className="series-cover-img" />}
       <span aria-hidden="true" className="series-cover-grain" />
       <span className="series-cover-text">
-        <span className="series-cover-name text-xl md:text-2xl">{name}</span>
-        {details && <span className="series-cover-details text-sm">{details}</span>}
+        <span className="series-cover-name text-2xl md:text-3xl">{name}</span>
+        {details && <span className="series-cover-details text-xs">{details}</span>}
       </span>
     </div>
   );
