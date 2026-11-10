@@ -9,6 +9,14 @@ export const SETTINGS_TABLE = 'site_settings_church';
 
 // Builds the effective site details: code defaults from config.js, overridden by
 // whatever staff saved in the admin Settings tab.
+// The extra lines the hero heading fades through, from the admin (one per line). Blank uses the defaults, and "off" turns the fading off.
+function heroLines(raw) {
+  const text = String(raw || '').trim();
+  if (!text) return SITE.hero.lines;
+  if (/^off$/i.test(text)) return [];
+  return text.split('\n').map(l => l.trim().slice(0, 120)).filter(Boolean).slice(0, 6);
+}
+
 export function mergeSettings(row) {
   if (!row) return SITE;
   const address = {
@@ -38,6 +46,7 @@ export function mergeSettings(row) {
     giveUrl: safeUrl(row.give_url) || SITE.giveUrl,
     hero: {
       title: (row.hero_title || '').trim() || SITE.hero.title,
+      lines: heroLines(row.hero_rotating),
       subtitle: (row.hero_subtitle || '').trim(),
       buttonLabel: (row.hero_button_label || '').trim() || SITE.hero.buttonLabel,
       buttonUrl: (row.hero_button_url || '').trim() || SITE.hero.buttonUrl,
