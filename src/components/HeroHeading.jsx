@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-// The Home hero heading. With extra lines it fades from one to the next, the old line blurring out as the new one sharpens in, and repeats. All lines sit in one grid cell, so the
+// The Home hero heading. With extra lines it fades from one to the next and repeats. All lines sit in one grid cell, so the
 // heading keeps the height of the longest line and nothing below it jumps. Visitors who ask for less motion see the first line only.
 // A | inside a line starts a new line of text, so "Know God, | Share Life," shows on two lines.
 function show(line) {
@@ -36,7 +36,7 @@ export default function HeroHeading({ id, lines, className = '', interval = 5500
   return (
     <h1 id={id} className={`${className} grid`}>
       {all.map((line, n) => (
-        <span key={n} aria-hidden={n === i ? undefined : 'true'} className="col-start-1 row-start-1 self-end hero-line" style={{ opacity: n === i ? 1 : 0, filter: n === i ? 'blur(0px)' : 'blur(28px)', transition: 'opacity 1s ease-in-out, filter 1s ease-in-out', willChange: 'opacity, filter' }}>{show(line)}</span>
+        <span key={n} aria-hidden={n === i ? undefined : 'true'} className="col-start-1 row-start-1 self-end hero-line" style={{ opacity: n === i ? 1 : 0, transition: 'opacity 1s ease-in-out', willChange: 'opacity' }}>{show(line)}</span>
       ))}
     </h1>
   );
