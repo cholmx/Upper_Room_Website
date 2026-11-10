@@ -11,7 +11,7 @@ import { FiSave, FiLoader } from 'react-icons/fi';
 
 const FIELDS = [
   { name: 'hero_title', label: 'Home hero heading (blank uses “You are welcome here”)', type: 'text' },
-  { name: 'hero_rotating', label: 'More lines for the Home hero heading, one per line. The heading fades through these first and ends on the Home hero heading above, then repeats. Leave blank for the standard lines, or type off to keep the heading still.', type: 'textarea' },
+  { name: 'hero_rotating', label: 'More lines for the Home hero heading, one per line. The heading fades through these first and ends on the Home hero heading above, then repeats. Put a | where a line should break, such as Know God, | Share Life, | Serve Others. Leave blank for the standard lines, or type off to keep the heading still.', type: 'textarea' },
   { name: 'hero_subtitle', label: 'Home hero line under the heading (optional)', type: 'text' },
   { name: 'hero_button_label', label: 'Home hero button text (blank uses “Plan Your Visit”)', type: 'text' },
   { name: 'hero_button_url', label: 'Home hero button link (a page such as /plan-your-visit, or a full web address)', type: 'text' },

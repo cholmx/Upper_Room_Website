@@ -2,6 +2,12 @@ import React, { useEffect, useState } from 'react';
 
 // The Home hero heading. With extra lines it fades from one to the next, the old line blurring out as the new one sharpens in, and repeats. All lines sit in one grid cell, so the
 // heading keeps the height of the longest line and nothing below it jumps. Visitors who ask for less motion see the first line only.
+// A | inside a line starts a new line of text, so "Know God, | Share Life," shows on two lines.
+function show(line) {
+  const parts = String(line).split('|').map(p => p.trim());
+  return parts.map((p, n) => <React.Fragment key={n}>{p}{n < parts.length - 1 && <> <br /></>}</React.Fragment>);
+}
+
 export default function HeroHeading({ id, lines, className = '', interval = 5500 }) {
   const [i, setI] = useState(0);
   const [still, setStill] = useState(false);
@@ -10,7 +16,7 @@ export default function HeroHeading({ id, lines, className = '', interval = 5500
   // A line that repeats another (ignoring capitals and end punctuation) is dropped, so no line shows twice in a row.
   const seen = new Set();
   const all = lines.filter(Boolean).filter(l => {
-    const k = String(l).toLowerCase().replace(/[\s.!?,]+$/g, '').replace(/\s+/g, ' ');
+    const k = String(l).toLowerCase().replace(/\|/g, ' ').replace(/[\s.!?,]+$/g, '').replace(/\s+/g, ' ');
     if (seen.has(k)) return false;
     seen.add(k);
     return true;
@@ -26,11 +32,11 @@ export default function HeroHeading({ id, lines, className = '', interval = 5500
     return () => clearInterval(t);
   }, [sig, all.length, interval]);
 
-  if (!ready || all.length < 2 || still) return <h1 id={id} className={className}>{all[0]}</h1>;
+  if (!ready || all.length < 2 || still) return <h1 id={id} className={className}>{show(all[0])}</h1>;
   return (
     <h1 id={id} className={`${className} grid`}>
       {all.map((line, n) => (
-        <span key={n} aria-hidden={n === i ? undefined : 'true'} className="col-start-1 row-start-1 self-end hero-line" style={{ opacity: n === i ? 1 : 0, filter: n === i ? 'blur(0px)' : 'blur(28px)', transition: 'opacity 1s ease-in-out, filter 1s ease-in-out', willChange: 'opacity, filter' }}>{line}</span>
+        <span key={n} aria-hidden={n === i ? undefined : 'true'} className="col-start-1 row-start-1 self-end hero-line" style={{ opacity: n === i ? 1 : 0, filter: n === i ? 'blur(0px)' : 'blur(28px)', transition: 'opacity 1s ease-in-out, filter 1s ease-in-out', willChange: 'opacity, filter' }}>{show(line)}</span>
       ))}
     </h1>
   );
