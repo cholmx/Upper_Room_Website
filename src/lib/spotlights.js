@@ -12,6 +12,7 @@ export const LAYOUTS = [
 export const TONES = [
   { value: 'white', label: 'White' },
   { value: 'gray', label: 'Light gray' },
+  { value: 'gold', label: 'Yellow' },
 ];
 
 const off = (v) => v === false || v === 0 || v === '0' || v === 'false';

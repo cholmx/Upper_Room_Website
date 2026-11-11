@@ -46,10 +46,11 @@ const TONES = {
   white: 'bg-white text-black',
   sand: 'bg-white text-black',
   gray: 'paper-bg text-black',
+  yellow: 'bg-[#eaa235] text-[#1e2522]',
 };
 
 export function Section({ tone = 'cream', id, className = '', narrow = false, center = false, children, ...rest }) {
-  const panel = tone === 'gray';
+  const panel = tone === 'gray' || tone === 'yellow';
   return (
     <section id={id} className="max-w-[1312px] mx-auto px-3 md:px-4 py-1.5 md:py-2 scroll-mt-32" {...rest}>
       <div className={`${TONES[tone]} ${panel ? 'rounded-[10px]' : ''} py-16 md:py-24 px-6 md:px-10 ${className}`}>
