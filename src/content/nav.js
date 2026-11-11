@@ -31,7 +31,13 @@ export const NAV = [
       { label: 'Connect Card', to: '/connect' },
     ],
   },
-  { label: 'Give', to: '/give' },
+  {
+    label: 'Give',
+    children: [
+      { label: 'Give', to: '/give' },
+      { label: 'Growth Campaign', to: '/growth-campaign' },
+    ],
+  },
 ];
 
 // Short site map for the footer.
@@ -46,4 +52,5 @@ export const FOOTER_LINKS = [
   { label: 'Leadership', to: '/leadership' },
   { label: 'Contact', to: '/contact' },
   { label: 'Connect Card', to: '/connect' },
+  { label: 'Growth Campaign', to: '/growth-campaign' },
 ];

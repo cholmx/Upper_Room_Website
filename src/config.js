@@ -26,6 +26,7 @@ export const SITE = {
   googleMapsUrl: `https://maps.google.com/?q=${mapQuery}`,
   appleMapsUrl: `https://maps.apple.com/?q=${mapQuery}`,
   giveUrl: 'https://onrealm.org/urfellowship/-/form/give/now',
+  campaign: { give: 'https://onrealm.org/urfellowship/give/growthcampaign', pledge: 'https://onrealm.org/urfellowship/AddPledge/goalcard' },
   textToGive: { keyword: 'urf', number: '73256', example: 'urf $50' },
   podcasts: {
     apple: 'https://podcasts.apple.com/us/podcast/the-upper-room-fellowship/id1193235232',

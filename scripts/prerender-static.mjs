@@ -9,7 +9,7 @@ import { readFile, writeFile, mkdir, rm, copyFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { readLiveContent, readPhotos, readPodcast, SITE_URL } from './lib.mjs';
+import { readLiveContent, readPhotos, readPodcast, readCampaign, SITE_URL } from './lib.mjs';
 import { redirectRules } from '../src/content/redirects.js';
 
 const DIST = path.resolve('dist');
@@ -75,7 +75,7 @@ try {
 
   let saved = 0;
   for (const route of Object.values(SEO_ROUTES)) {
-    if (route === '/messages' || route === '/shine') continue;
+    if (route === '/messages' || route === '/shine' || route === '/growth-campaign') continue;
     const key = Object.keys(SEO_ROUTES).find(k => SEO_ROUTES[k] === route);
     let body = await mod.render(route);
     if (route === '/' && messages[0]) {
@@ -86,6 +86,19 @@ try {
     await write(route, page({ title: SEO[key][0], description: SEO[key][1], route, image: shareImage(key), schema: schemaFor(route), body }));
     saved += 1;
   }
+
+  // Growth Campaign page
+  const camp = await readCampaign();
+  const md = (t) => String(t || '').split(/\n+/).map(l => l.replace(/^#+\s*/, '').replace(/^-\s+/, '').trim()).filter(Boolean).map(l => `<p>${esc(l)}</p>`).join('');
+  const updates = camp.filter(c => c.kind === 'update').sort((a, b) => String(b.item_date || '').localeCompare(String(a.item_date || '')));
+  await write('/growth-campaign', page({
+    title: SEO.growth[0], description: SEO.growth[1], route: '/growth-campaign', image: shareImage('growth'), schema: schemaFor('/growth-campaign'),
+    body: chrome(`<h1>Growth Campaign</h1><p>Transforming Together. ${esc(SEO.growth[1])}</p>`
+      + camp.filter(c => c.kind === 'vision').map(c => `<section><h2>${esc(c.title)}</h2>${md(c.body)}</section>`).join('')
+      + (camp.some(c => c.kind === 'qa') ? `<section><h2>Questions and answers</h2>${camp.filter(c => c.kind === 'qa').map(c => `<h3>${esc(c.title)}</h3>${md(c.body)}`).join('')}</section>` : '')
+      + (updates.length ? `<section><h2>Updates</h2>${updates.map(c => `<article><h3>${esc(c.title)}</h3>${c.item_date ? `<p>${esc(formatDate(c.item_date))}</p>` : ''}${md(c.body)}</article>`).join('')}</section>` : '')),
+  }));
+  saved += 1;
 
   // Shine podcast page
   const pod = await readPodcast();

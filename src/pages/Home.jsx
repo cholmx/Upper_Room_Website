@@ -35,6 +35,8 @@ export default function Home() {
   const videoId = ytId(latest?.video_url || latest?.yt);
   const pod = useFetch('read/podcast_episodes_church?sort=published_at:desc&limit=1');
   const episode = (pod.data || [])[0];
+  const camp = useFetch('read/campaign_items_church?kind=update&sort=item_date:desc&limit=1');
+  const campUpdate = (camp.data || [])[0];
 
   return (
     <>
@@ -165,6 +167,17 @@ export default function Home() {
           <Card title="Give" as="h3" to="/give" linkLabel="Ways to give" icon={<SafeIcon icon={FiHeart} size={32} aria-hidden="true" className="text-[#c74f2f]" />}><p>Support the ministries and outreach of our church family.</p></Card>
         </Cards>
       </Section>
+
+      <PhotoBand slot="home-campaign">
+        <p className="kicker text-[#eaa235]">Transforming Together</p>
+        <h2 className="text-3xl md:text-5xl mb-5">Growth Campaign</h2>
+        <p className="text-base leading-relaxed mb-4">Our building is full, and God is bringing growth. We are choosing to make room for more people to encounter Jesus, and we are doing it together.</p>
+        {campUpdate && <p className="text-base leading-relaxed mb-4"><Link to="/growth-campaign#updates" className="underline underline-offset-4 font-semibold">Latest update: {campUpdate.title}</Link></p>}
+        <div className="mt-6 flex flex-wrap gap-3">
+          <Btn to="/growth-campaign" variant="primary">Learn About the Campaign</Btn>
+          <Btn href={SITE.campaign.give} variant="light">Give to the Growth Campaign</Btn>
+        </div>
+      </PhotoBand>
 
       <PhotoSplit tone="gray" slot="home-columbiana" side="left">
         <h2 className="text-3xl md:text-5xl mb-5">We love Columbiana</h2>

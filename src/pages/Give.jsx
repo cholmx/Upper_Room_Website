@@ -61,7 +61,8 @@ export default function Give() {
 
       <Section tone="white">
         <SectionHeader title="Other ways to give" />
-        <Cards cols={3}>
+        <Cards cols={4}>
+          <Card title="Growth Campaign" as="h3" to="/growth-campaign" linkLabel="Learn more"><p>Help us make room for more people through Transforming Together.</p></Card>
           <Card title="In person" as="h3"><p>Place your gift in the offering boxes at the Connection Center on Sundays, or stop by the church office during the week.</p></Card>
           <Card title="By mail" as="h3"><p>Send checks payable to Upper Room Fellowship to {SITE.address.street}, {SITE.address.city}, {SITE.address.region} {SITE.address.postalCode}.</p></Card>
           <Card title="Legacy giving" as="h3"><p>Consider including Upper Room Fellowship in your estate plans or giving stock. Contact our finance team to learn about these options.</p></Card>

@@ -51,6 +51,13 @@ export async function readPodcast() {
   return { show: shows.find(s => s.slug === 'shine') || null, episodes };
 }
 
+// The Growth Campaign items that are turned on, for the static copy of that page.
+export async function readCampaign() {
+  const rows = await readTable('campaign_items_church');
+  return rows.filter(r => ![false, 0, '0', 'false'].includes(r.published))
+    .sort((a, b) => (Number(a.sort_order_num) || 0) - (Number(b.sort_order_num) || 0));
+}
+
 // Every public URL, with a last-modified date when the row has one.
 export async function collectRoutes() {
   const [sermons, pages, posts] = await Promise.all([

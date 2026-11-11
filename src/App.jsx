@@ -22,6 +22,7 @@ const MessageSeries = lazy(() => import('./pages/MessageSeries'));
 const MessageDetail = lazy(() => import('./pages/MessageDetail'));
 const Shine = lazy(() => import('./pages/Shine'));
 const Sozo = lazy(() => import('./pages/Sozo'));
+const GrowthCampaign = lazy(() => import('./pages/GrowthCampaign'));
 const Give = lazy(() => import('./pages/Give'));
 const Contact = lazy(() => import('./pages/Contact'));
 const Connect = lazy(() => import('./pages/Connect'));
@@ -99,7 +100,7 @@ export function AppBody() {
           ['/', Home], ['/plan-your-visit', PlanYourVisit], ['/about', About], ['/core-values', CoreValues],
           ['/leadership', Leadership], ['/messages', Messages], ['/messages/series/:series', MessageSeries], ['/messages/:slug', MessageDetail],
           ['/discipleship', Discipleship], ['/sozo', Sozo], ['/shine', Shine],
-          ['/give', Give], ['/contact', Contact], ['/connect', Connect],
+          ['/give', Give], ['/growth-campaign', GrowthCampaign], ['/contact', Contact], ['/connect', Connect],
           ['/accessibility', Accessibility], ['/privacy', Privacy], ['/blog', Blog], ['/blog/:id', BlogPost], ['/p/:slug', CustomPage],
         ].map(([path, Page]) => (
           <Route key={path} path={path} element={<PublicLayout><Page /></PublicLayout>} />
@@ -125,7 +126,8 @@ export function AppBody() {
         <Route path="/worship-team" element={<Navigate to="/plan-your-visit" replace />} />
         <Route path="/serve" element={<Navigate to="/discipleship" replace />} />
         <Route path="/outreach" element={<Navigate to="/" replace />} />
-        <Route path="/transforming-together" element={<Navigate to="/give" replace />} />
+        <Route path="/transforming-together" element={<Navigate to="/growth-campaign" replace />} />
+        <Route path="/capital-campaign" element={<Navigate to="/growth-campaign" replace />} />
         <Route path="/team" element={<Navigate to="/leadership" replace />} />
         <Route path="/sermons/:id" element={<SermonRedirect />} />
         <Route path="/events/:id" element={<Navigate to="/" replace />} />

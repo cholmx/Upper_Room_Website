@@ -183,6 +183,29 @@ const TAB_CONFIGS = {
       { name: 'published', label: 'Published', type: 'checkbox', defaultChecked: true, help: 'Visible on the website' },
     ]
   },
+  campaign: {
+    table: 'campaign_items_church',
+    title: 'Growth Campaign',
+    titleField: 'title',
+    thumbField: 'image_url',
+    pageSize: 100,
+    sortItems: (items) => [...items].sort((a, b) => String(a.kind).localeCompare(String(b.kind)) || String(b.item_date || '').localeCompare(String(a.item_date || '')) || (a.sort_order_num - b.sort_order_num)),
+    columns: ['title', 'kind', 'item_date'],
+    fields: [
+      { name: 'kind', label: 'What is this?', type: 'select', required: true, options: [
+        { value: 'update', label: 'An update or prayer post (shows under Updates, newest first)' },
+        { value: 'vision', label: 'Vision text (shows under Vision)' },
+        { value: 'qa', label: 'A question and its answer (the title is the question)' },
+        { value: 'stone', label: 'A Living Stone (a photo, with the person’s name as the title)' },
+      ] },
+      { name: 'title', label: 'Title (for a question, the question)', type: 'text', required: true },
+      { name: 'item_date', label: 'Date (for updates)', type: 'date' },
+      { name: 'body', label: 'Text (for a Living Stone, a caption or Bible verse)', type: 'markdown' },
+      { name: 'image_url', label: 'Photo (for a Living Stone)', type: 'image' },
+      { name: 'sort_order_num', label: 'Order (lower shows first, for questions and stones)', type: 'number' },
+      { name: 'published', label: 'Published', type: 'checkbox', defaultChecked: true, help: 'Visible on the website' },
+    ]
+  },
   categories: {
     table: 'message_categories_church',
     seedNames: STANDARD_CATEGORIES,
@@ -275,6 +298,7 @@ const ContentStudio = () => {
     'Content': [
       { key: 'sermons', label: 'Messages', icon: FiMic },
       { key: 'categories', label: 'Message Categories', icon: FiLayout },
+      { key: 'campaign', label: 'Growth Campaign', icon: FiHeart },
       { key: 'podcastShows', label: 'Podcast Shows', icon: FiMic },
       { key: 'podcastEpisodes', label: 'Podcast Episodes', icon: FiMic },
       { key: 'staff', label: 'Staff & Leaders', icon: FiUsers },
