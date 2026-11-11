@@ -220,7 +220,7 @@ export default function BulkBar({ table, title, items, filtered, selected, setSe
       )}
 
       {testResult && (
-        <div role="status" className="mt-4 text-sm rounded-[10px] bg-[#e8e7e3] p-4">
+        <div role="status" className="mt-4 text-sm rounded-[10px] bg-[#EDE9DC] p-4">
           {testResult.loading && <p>Asking the AI.</p>}
           {testResult.error && <p className="text-[#c74f2f] font-semibold">{testResult.error}</p>}
           {testResult.data && (

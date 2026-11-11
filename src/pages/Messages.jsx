@@ -86,7 +86,7 @@ export default function Messages() {
   useEffect(() => { setShown(12); }, [q, series, speaker, book, topic, oldest]);
   const clear = () => setParams({}, { replace: true });
   const surprise = () => { if (filtered.length) navigate(messagePath(filtered[Math.floor(Math.random() * filtered.length)])); };
-  const chip = (on) => `px-4 py-2 rounded-full text-sm font-display font-bold ${on ? 'bg-[#1e2522] text-white' : 'bg-[#e8e7e3] text-[#1e2522] hover:bg-[#1e2522]/15'}`;
+  const chip = (on) => `px-4 py-2 rounded-full text-sm font-display font-bold ${on ? 'bg-[#1e2522] text-white' : 'bg-[#EDE9DC] text-[#1e2522] hover:bg-[#1e2522]/15'}`;
   const active = [['Search', q, () => setQ('')], ['Series', series, () => setSeries('')], ['Speaker', speaker, () => setSpeaker('')], ['Book', book, () => setBook('')], ['Category', topic, () => setTopic('')]].filter(([, v]) => v);
   const latestVideo = ytId(latest?.video_url || latest?.yt);
 
@@ -115,7 +115,7 @@ export default function Messages() {
                   <NewBadge date={latest.date} className="mb-2" />
                   {parseCategories(latest.topic).length > 0 && (
                     <ul className="mb-3 flex flex-wrap gap-2" aria-label="Categories">
-                      {parseCategories(latest.topic).map(c => <li key={c} className="text-xs font-display font-bold px-3 py-1 rounded-full bg-[#e8e7e3]">{c}</li>)}
+                      {parseCategories(latest.topic).map(c => <li key={c} className="text-xs font-display font-bold px-3 py-1 rounded-full bg-[#EDE9DC]">{c}</li>)}
                     </ul>
                   )}
                   <h3 className="text-2xl md:text-3xl"><Link to={messagePath(latest)} className="hover:text-[#1e2522]">{latest.title}</Link></h3>
@@ -184,7 +184,7 @@ export default function Messages() {
                 </div>
               </div>
             )}
-            <form role="search" aria-label="Search messages" onSubmit={(e) => e.preventDefault()} className="rounded-[10px] p-5 md:p-6 mb-6 bg-[#e8e7e3]">
+            <form role="search" aria-label="Search messages" onSubmit={(e) => e.preventDefault()} className="rounded-[10px] p-5 md:p-6 mb-6 bg-[#EDE9DC]">
               <label htmlFor="msg-search" className="block text-sm font-semibold mb-1">Search by title, passage, speaker or topic</label>
               <input id="msg-search" type="search" value={q} onChange={(e) => setQ(e.target.value)} className={select} />
               <div className="grid sm:grid-cols-3 gap-4 mt-4">

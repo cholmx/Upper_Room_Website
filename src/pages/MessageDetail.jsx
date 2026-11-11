@@ -97,7 +97,7 @@ export default function MessageDetail() {
         {(m.series || cats.length > 0) && (
           <ul className="mt-4 flex flex-wrap gap-2" aria-label="Series and categories">
             {m.series && <li><Link to={seriesPath(m.series)} className="inline-block text-xs font-display font-bold px-3 py-1.5 rounded-full bg-[#1e2522] text-white">Series: {m.series}</Link></li>}
-            {cats.map(c => <li key={c} className="text-xs font-display font-bold px-3 py-1.5 rounded-full bg-[#e8e7e3]">{c}</li>)}
+            {cats.map(c => <li key={c} className="text-xs font-display font-bold px-3 py-1.5 rounded-full bg-[#EDE9DC]">{c}</li>)}
           </ul>
         )}
 
@@ -120,7 +120,7 @@ export default function MessageDetail() {
               <div className="mt-10">
                 <div role="tablist" aria-label="About this message" className="flex flex-wrap gap-2 mb-6">
                   {tabs.map(t => (
-                    <button key={t.id} id={`tab-${t.id}`} type="button" role="tab" aria-selected={activeTab === t.id} aria-controls={`panel-${t.id}`} tabIndex={activeTab === t.id ? 0 : -1} onClick={() => setTab(t.id)} onKeyDown={(e) => onTabKey(e, t.id)} className={`min-h-[44px] px-5 rounded-full font-display font-bold text-sm ${activeTab === t.id ? 'bg-[#1e2522] text-white' : 'bg-[#e8e7e3] text-[#1e2522] hover:bg-[#1e2522]/15'}`}>{t.label}</button>
+                    <button key={t.id} id={`tab-${t.id}`} type="button" role="tab" aria-selected={activeTab === t.id} aria-controls={`panel-${t.id}`} tabIndex={activeTab === t.id ? 0 : -1} onClick={() => setTab(t.id)} onKeyDown={(e) => onTabKey(e, t.id)} className={`min-h-[44px] px-5 rounded-full font-display font-bold text-sm ${activeTab === t.id ? 'bg-[#1e2522] text-white' : 'bg-[#EDE9DC] text-[#1e2522] hover:bg-[#1e2522]/15'}`}>{t.label}</button>
                   ))}
                 </div>
                 {tabs.map(t => (

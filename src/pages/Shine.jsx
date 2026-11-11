@@ -29,7 +29,7 @@ function Episode({ ep, cover, featured = false }) {
   return (
     <article className="fcard !p-5 md:!p-6">
       <div className="flex gap-4 md:gap-5 items-start">
-        {art && <img src={art} alt="" loading={featured ? 'eager' : 'lazy'} decoding="async" width="600" height="600" className={`${featured ? 'w-24 md:w-40' : 'w-20 md:w-24'} shrink-0 aspect-square object-cover rounded-[10px] bg-[#e8e7e3]`} />}
+        {art && <img src={art} alt="" loading={featured ? 'eager' : 'lazy'} decoding="async" width="600" height="600" className={`${featured ? 'w-24 md:w-40' : 'w-20 md:w-24'} shrink-0 aspect-square object-cover rounded-[10px] bg-[#EDE9DC]`} />}
         <div className="min-w-0 flex-1">
           <p className="text-sm text-black">{meta}</p>
           {featured ? <h2 className="text-2xl md:text-3xl mt-1">{ep.title}</h2> : <h3 className="text-lg md:text-xl mt-1">{ep.title}</h3>}

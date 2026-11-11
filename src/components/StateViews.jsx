@@ -14,9 +14,9 @@ export function CardSkeletons({ count = 6 }) {
     <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" role="status" aria-label="Loading">
       {Array.from({ length: count }, (_, i) => (
         <li key={i} aria-hidden="true">
-          <div className="aspect-video rounded-[10px] bg-[#e8e7e3] animate-pulse" />
-          <div className="h-3 w-1/3 rounded bg-[#e8e7e3] animate-pulse mt-4" />
-          <div className="h-5 w-4/5 rounded bg-[#e8e7e3] animate-pulse mt-3" />
+          <div className="aspect-video rounded-[10px] bg-[#EDE9DC] animate-pulse" />
+          <div className="h-3 w-1/3 rounded bg-[#EDE9DC] animate-pulse mt-4" />
+          <div className="h-5 w-4/5 rounded bg-[#EDE9DC] animate-pulse mt-3" />
         </li>
       ))}
     </ul>

@@ -363,7 +363,7 @@ export default function GenericManager({ config }) {
       </div>
 
       {feedTest && (
-        <div role="status" className="mb-4 text-sm rounded-[10px] bg-[#e8e7e3] p-4">
+        <div role="status" className="mb-4 text-sm rounded-[10px] bg-[#EDE9DC] p-4">
           {feedTest.loading && <p>Reading the feed.</p>}
           {feedTest.error && <p className="text-[#c74f2f] font-semibold">{feedTest.error}</p>}
           {feedTest.data && (

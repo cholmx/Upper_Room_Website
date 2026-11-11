@@ -12,7 +12,7 @@ export default function Amen() {
       typed = (typed + e.key.toLowerCase()).slice(-4);
       if (typed !== 'amen') return;
       typed = '';
-      const colors = ['#eaa235', '#c74f2f', '#e8e7e3', '#1e2522'];
+      const colors = ['#eaa235', '#c74f2f', '#EDE9DC', '#1e2522'];
       const dots = Array.from({ length: 36 }, (_, i) => {
         const dot = document.createElement('span');
         dot.className = 'amen-dot';

@@ -100,7 +100,7 @@ export default function Home() {
                 <p className="mt-2 text-black">{[latest.speaker, latest.date && formatDate(latest.date), latest.scripture].filter(Boolean).join('  |  ')}</p>
                 {parseCategories(latest.topic).length > 0 && (
                   <ul className="mt-3 flex flex-wrap justify-center gap-2" aria-label="Categories">
-                    {parseCategories(latest.topic).slice(0, 3).map(c => <li key={c} className="text-xs font-display font-bold px-3 py-1 rounded-full bg-[#e8e7e3]">{c}</li>)}
+                    {parseCategories(latest.topic).slice(0, 3).map(c => <li key={c} className="text-xs font-display font-bold px-3 py-1 rounded-full bg-[#EDE9DC]">{c}</li>)}
                   </ul>
                 )}
                 {latest.description && <p className="mt-4 text-[0.95rem] leading-relaxed text-black line-clamp-3">{plainText(latest.description)}</p>}
@@ -114,10 +114,10 @@ export default function Home() {
             <p className="text-center text-black">This week’s message will be posted soon.</p>
           ) : (
             <div role="status" aria-label="Loading the latest message">
-              <div className="aspect-video rounded-[10px] bg-[#e8e7e3] animate-pulse" />
+              <div className="aspect-video rounded-[10px] bg-[#EDE9DC] animate-pulse" />
               <span className="sr-only">Loading the latest message.</span>
-              <div className="h-7 w-2/3 mx-auto rounded bg-[#e8e7e3] animate-pulse mt-7" />
-              <div className="h-3 w-1/3 mx-auto rounded bg-[#e8e7e3] animate-pulse mt-3" />
+              <div className="h-7 w-2/3 mx-auto rounded bg-[#EDE9DC] animate-pulse mt-7" />
+              <div className="h-3 w-1/3 mx-auto rounded bg-[#EDE9DC] animate-pulse mt-3" />
             </div>
           )}
         </div>
@@ -133,7 +133,7 @@ export default function Home() {
             </div>
             <div className="md:col-span-3 bg-white rounded-[10px] p-5 md:p-6">
               <div className="flex gap-4 md:gap-5 items-start">
-                {safeUrl(episode.image_url) && <img src={safeUrl(episode.image_url)} alt="" loading="lazy" decoding="async" width="600" height="600" className="w-14 md:w-20 shrink-0 aspect-square object-cover rounded-[10px] bg-[#e8e7e3]" />}
+                {safeUrl(episode.image_url) && <img src={safeUrl(episode.image_url)} alt="" loading="lazy" decoding="async" width="600" height="600" className="w-14 md:w-20 shrink-0 aspect-square object-cover rounded-[10px] bg-[#EDE9DC]" />}
                 <div className="min-w-0 flex-1">
                   <p className="text-sm text-black">{[episode.published_at && formatDate(episode.published_at), 'Newest episode'].filter(Boolean).join('  |  ')}</p>
                   <h3 className="text-xl md:text-2xl mt-1">{episode.title}</h3>

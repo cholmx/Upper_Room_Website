@@ -45,7 +45,7 @@ const TONES = {
   cream: 'text-black',
   white: 'bg-white text-black',
   sand: 'bg-white text-black',
-  gray: 'bg-[#e8e7e3] text-black',
+  gray: 'bg-[#EDE9DC] text-black',
 };
 
 export function Section({ tone = 'cream', id, className = '', narrow = false, center = false, children, ...rest }) {
@@ -87,7 +87,7 @@ export function Photo({ slot, className = '', ratio = 'aspect-[4/3]', priority =
 }
 
 // An image from a database row (leader, story, event). Leaders fall back to their initials.
-export function PhotoBox({ src, alt = '', initials, className = '', ratio = 'aspect-[4/3]', rounded = true, bg = 'bg-[#e8e7e3]', fit = 'object-cover' }) {
+export function PhotoBox({ src, alt = '', initials, className = '', ratio = 'aspect-[4/3]', rounded = true, bg = 'bg-[#EDE9DC]', fit = 'object-cover' }) {
   const url = safeUrl(src);
   if (url) {
     return (
@@ -141,7 +141,7 @@ export function MapEmbed({ className = '' }) {
   const SITE = useSite();
   return (
     <figure className={`bg-white rounded-[10px] overflow-hidden text-black ${className}`}>
-      <div className="aspect-[16/10] bg-[#e8e7e3]">
+      <div className="aspect-[16/10] bg-[#EDE9DC]">
         <iframe
           title={`Map to ${SITE.name}, ${SITE.addressLine}`}
           src={SITE.mapEmbedUrl}
@@ -306,7 +306,7 @@ export function PageNav({ items }) {
           <li className="flex items-center pr-2 font-display font-bold text-black whitespace-nowrap">On this page</li>
           {items.map(([id, label]) => (
             <li key={id}>
-              <a href={`#${id}`} aria-current={current === id ? 'true' : undefined} className={`inline-flex items-center min-h-[40px] px-4 rounded-full font-display font-bold whitespace-nowrap ${current === id ? 'bg-[#1e2522] text-white' : 'bg-[#e8e7e3] text-[#1e2522] hover:bg-[#1e2522]/15'}`}>{label}</a>
+              <a href={`#${id}`} aria-current={current === id ? 'true' : undefined} className={`inline-flex items-center min-h-[40px] px-4 rounded-full font-display font-bold whitespace-nowrap ${current === id ? 'bg-[#1e2522] text-white' : 'bg-[#EDE9DC] text-[#1e2522] hover:bg-[#1e2522]/15'}`}>{label}</a>
             </li>
           ))}
         </ul>
@@ -349,7 +349,7 @@ export function QuickFacts({ items }) {
 
 // A band of two panels side by side, edge to edge. The panels are the section: each one is a block of color
 // with its own content, and the text lines up with the rest of the page. Use sparingly, one or two per page.
-const PANEL = 'bg-[#e8e7e3] text-[#1e2522]';
+const PANEL = 'bg-[#EDE9DC] text-[#1e2522]';
 
 export function Band({ children, id, className = '' }) {
   return (
