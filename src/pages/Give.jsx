@@ -55,7 +55,7 @@ export default function Give() {
         </ul>
         <div className="mt-7 flex flex-wrap items-center gap-4">
           <Btn href={SITE.giveUrl} variant="primary">Give Now</Btn>
-          <span className={P}>Or text <strong>{t.keyword} $50</strong> to <strong>{t.number}</strong>.</span>
+          <span className={P}>Or text <strong>{t.keyword}</strong> and any amount you choose, such as <strong>{t.keyword} $25</strong>, to <strong>{t.number}</strong>.</span>
         </div>
       </PhotoSplit>
 
