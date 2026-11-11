@@ -166,13 +166,40 @@ export default function Home() {
         </Cards>
       </Section>
 
-      <PhotoBand slot="home-campaign">
-        <p className="kicker text-[#eaa235]">Transforming Together</p>
-        <h2 className="text-3xl md:text-5xl mb-5">Growth Campaign</h2>
-        <p className="text-base leading-relaxed mb-4">Our building is full, and God is bringing growth. We are choosing to make room for more people to encounter Jesus, and we are doing it together.</p>
-        <div className="mt-6 flex flex-wrap gap-3">
-          <Btn to="/growth-campaign" variant="primary">Learn About the Campaign</Btn>
-          <Btn href={SITE.campaign.give} variant="light">Give to the Growth Campaign</Btn>
+      <PhotoBand slot="home-campaign" wide>
+        <div className="grid md:grid-cols-5 gap-10 md:gap-14 items-center">
+          <div className="md:col-span-3">
+            <p className="kicker text-[#eaa235]">Transforming Together</p>
+            <h2 className="text-4xl md:text-6xl mb-5">Growth Campaign</h2>
+            <p className="text-base leading-relaxed max-w-[34rem]">Our building is full, and God is bringing growth. We are choosing to make room for more people to encounter Jesus, and we are doing it together.</p>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <Btn href={SITE.campaign.give} variant="primary">Give to the Growth Campaign</Btn>
+              <Btn to="/growth-campaign" variant="light">Learn More</Btn>
+            </div>
+          </div>
+          <nav aria-label="Growth Campaign" className="md:col-span-2 paper-bg rounded-[10px] p-3 md:p-4 text-[#1e2522]">
+            <ul className="divide-y divide-[#1e2522]/10">
+              {[
+                ['Our vision', 'Why we are making room, and what it means to transform together.', '/growth-campaign#vision', false],
+                ['Questions and answers', 'Debt, volunteers, giving and more.', '/growth-campaign#qa', false],
+                ['Submit your commitment card', 'Pray, then let us know what God leads you to give.', SITE.campaign.pledge, true],
+              ].map(([t, d, to, external]) => {
+                const inner = (
+                  <>
+                    <span className="block text-lg md:text-xl font-display font-bold text-[#1e2522] leading-tight">{t}<span aria-hidden="true" className="ml-2 text-[#c74f2f]">&rarr;</span>{external && <span className="sr-only"> (opens in a new tab)</span>}</span>
+                    <span className="block mt-1 text-[1rem] leading-snug text-black font-normal" style={{ fontFamily: 'Aleo, Georgia, serif' }}>{d}</span>
+                  </>
+                );
+                return (
+                  <li key={t}>
+                    {external
+                      ? <a href={to} target="_blank" rel="noopener noreferrer" className="block px-4 py-4 rounded-[8px] hover:bg-white/70">{inner}</a>
+                      : <Link to={to} className="block px-4 py-4 rounded-[8px] hover:bg-white/70">{inner}</Link>}
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
         </div>
       </PhotoBand>
 
