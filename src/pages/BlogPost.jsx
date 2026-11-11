@@ -49,7 +49,7 @@ export default function BlogPost() {
         {live.image_url && (
           <img src={live.image_url} alt="" className="w-full rounded-2xl mb-12 elev-1" />
         )}
-        <RichText value={live.body} className="text-[0.95rem] md:text-base" />
+        <RichText value={live.body} className="text-[1.0625rem] md:text-base" />
       </div>
     </article>
   );

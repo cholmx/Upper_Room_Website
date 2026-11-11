@@ -4,7 +4,7 @@ import { useSite } from '../settings';
 import { Section, SectionHeader, PageHeader, PhotoBand, MapEmbed } from '../components/ui';
 import FormBlock from '../components/FormBlock';
 
-const P = 'text-[0.95rem] leading-relaxed text-black';
+const P = 'text-[1.0625rem] leading-relaxed text-black';
 
 export default function Contact() {
   usePageMeta('contact');

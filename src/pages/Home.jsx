@@ -18,7 +18,7 @@ import LiteYouTube from '../components/LiteYouTube';
 import Spotlights from '../components/Spotlights';
 import { worshipLine } from '../lib/worship';
 
-const P = 'text-[0.95rem] leading-relaxed';
+const P = 'text-[1.0625rem] leading-relaxed';
 
 export default function Home() {
   usePageMeta('home');
@@ -77,7 +77,7 @@ export default function Home() {
           ].map(([t, d]) => (
             <li key={t} className="bg-white rounded-[10px] p-7 md:p-8">
               <h2 className="text-3xl md:text-4xl mb-3">{t}</h2>
-              <p className="text-[0.95rem] leading-relaxed text-black">{d}</p>
+              <p className="text-[1.0625rem] leading-relaxed text-black">{d}</p>
             </li>
           ))}
         </ul>
@@ -103,10 +103,10 @@ export default function Home() {
                     {parseCategories(latest.topic).slice(0, 3).map(c => <li key={c} className="text-xs font-display font-bold px-3 py-1 rounded-full bg-[#EDE9DC]">{c}</li>)}
                   </ul>
                 )}
-                {latest.description && <p className="mt-4 text-[0.95rem] leading-relaxed text-black line-clamp-3">{plainText(latest.description)}</p>}
+                {latest.description && <p className="mt-4 text-[1.0625rem] leading-relaxed text-black line-clamp-3">{plainText(latest.description)}</p>}
                 <div className="mt-6 flex flex-wrap justify-center items-center gap-4">
                   <Btn to={messagePath(latest)} variant="primary">Watch and read</Btn>
-                  <Link to="/messages" className="inline-flex items-center min-h-[44px] font-display font-bold text-[0.95rem] underline underline-offset-4">All messages</Link>
+                  <Link to="/messages" className="inline-flex items-center min-h-[44px] font-display font-bold text-[1.0625rem] underline underline-offset-4">All messages</Link>
                 </div>
               </div>
             </>
@@ -129,7 +129,7 @@ export default function Home() {
             <div className="md:col-span-2">
               <p className="kicker text-[#1e2522]">The Shine Podcast</p>
               <h2 className="text-3xl md:text-5xl mb-5">Hear from our church family</h2>
-              <Link to="/shine" className="inline-flex items-center min-h-[44px] font-display font-bold text-[0.95rem] underline underline-offset-4">All episodes</Link>
+              <Link to="/shine" className="inline-flex items-center min-h-[44px] font-display font-bold text-[1.0625rem] underline underline-offset-4">All episodes</Link>
             </div>
             <div className="md:col-span-3 bg-white rounded-[10px] p-5 md:p-6">
               <div className="flex gap-4 md:gap-5 items-start">
@@ -137,7 +137,7 @@ export default function Home() {
                 <div className="min-w-0 flex-1">
                   <p className="text-sm text-black">{[episode.published_at && formatDate(episode.published_at), 'Newest episode'].filter(Boolean).join('  |  ')}</p>
                   <h3 className="text-xl md:text-2xl mt-1">{episode.title}</h3>
-                  {episode.description && <p className="mt-2 text-[0.95rem] leading-relaxed text-black line-clamp-2">{episode.description}</p>}
+                  {episode.description && <p className="mt-2 text-[1.0625rem] leading-relaxed text-black line-clamp-2">{episode.description}</p>}
                 </div>
               </div>
               <audio controls preload="none" src={safeUrl(episode.audio_url)} className="w-full mt-4" aria-label={`Play ${episode.title}`} />
@@ -178,7 +178,7 @@ export default function Home() {
         <div className="max-w-3xl">
         <h2 className="text-3xl md:text-5xl mb-6">Our Vision</h2>
         <p className="text-xl md:text-2xl leading-snug mb-5 font-serif">We exist to help people know God deeply, share life authentically, and serve others selflessly.</p>
-        <p className="text-[0.95rem] leading-relaxed text-black">Lasting change starts on the inside, as our hearts line up with God’s heart. That conviction shapes how we build relationships, how we pray, and how we serve.</p>
+        <p className="text-[1.0625rem] leading-relaxed text-black">Lasting change starts on the inside, as our hearts line up with God’s heart. That conviction shapes how we build relationships, how we pray, and how we serve.</p>
         <div className="mt-6"><Btn to="/core-values" variant="primary">Read Our Core Values</Btn></div>
         <blockquote className="mt-8 font-serif italic text-xl leading-snug">
           “By this everyone will know that you are my disciples, if you love one another.”

@@ -94,7 +94,7 @@ export default function Blog() {
               <div className="text-center py-24 rounded-3xl neu">
                 <div className="text-6xl mb-6">🔍</div>
                 <h3 className="text-3xl font-bold mb-3">No articles found</h3>
-                <p className="text-[0.95rem] mb-8">We couldn't find any posts matching your criteria.</p>
+                <p className="text-[1.0625rem] mb-8">We couldn't find any posts matching your criteria.</p>
                 <button 
                   onClick={() => { setSearchQuery(''); setSelectedCategory('All'); }}
                   className="btn btn-solid"
@@ -135,7 +135,7 @@ export default function Blog() {
                         
                         <h2 className="text-4xl lg:text-5xl font-bold mb-6 group-hover:text-[#1e2522] transition-colors leading-tight">{featuredPost.title}</h2>
                         
-                        <p className="mb-10 line-clamp-4 text-[0.95rem] leading-relaxed">
+                        <p className="mb-10 line-clamp-4 text-[1.0625rem] leading-relaxed">
                           {plainText(featuredPost.body) || 'Read this article to learn more...'}
                         </p>
                         

@@ -4,7 +4,7 @@ import { useSite } from '../settings';
 import { DISCIPLESHIP_FAQ as FAQ } from '../content/faqs';
 import { Section, SectionHeader, PageHeader, PageNav, Accordion, Band, Panel, PhotoSplit, PhotoBand } from '../components/ui';
 
-const P = 'text-[0.95rem] leading-relaxed text-black';
+const P = 'text-[1.0625rem] leading-relaxed text-black';
 
 const GROUPS = [
   { name: 'Know God', practices: [

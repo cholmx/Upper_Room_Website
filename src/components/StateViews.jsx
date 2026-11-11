@@ -33,7 +33,7 @@ export function ErrorState({ message, onRetry }) {
     <div role="alert" className="text-center py-24 rounded-3xl px-6 neu">
       <div className="text-5xl mb-6" aria-hidden="true">⚠️</div>
       <h2 className="text-3xl font-bold mb-3">We couldn't load this</h2>
-      <p className="text-[0.95rem] mb-8">{message || 'Please check your connection and try again.'}</p>
+      <p className="text-[1.0625rem] mb-8">{message || 'Please check your connection and try again.'}</p>
       {onRetry && <button onClick={onRetry} className="btn btn-solid">Try Again</button>}
     </div>
   );

@@ -93,7 +93,7 @@ export default function MessageDetail() {
       <Section tone="white" className="!pt-8 md:!pt-12">
         <Link to="/messages" className="inline-flex items-center min-h-[44px] font-display font-bold text-sm underline underline-offset-4">&larr; All messages</Link>
         <h1 className="text-3xl md:text-5xl mt-2 max-w-4xl">{m.title}</h1>
-        <p className="mt-4 text-[0.95rem] text-black">{[m.speaker, m.date && formatDate(m.date), m.scripture].filter(Boolean).join('  |  ')}</p>
+        <p className="mt-4 text-[1.0625rem] text-black">{[m.speaker, m.date && formatDate(m.date), m.scripture].filter(Boolean).join('  |  ')}</p>
         {(m.series || cats.length > 0) && (
           <ul className="mt-4 flex flex-wrap gap-2" aria-label="Series and categories">
             {m.series && <li><Link to={seriesPath(m.series)} className="inline-block text-xs font-display font-bold px-3 py-1.5 rounded-full bg-[#1e2522] text-white">Series: {m.series}</Link></li>}
@@ -125,7 +125,7 @@ export default function MessageDetail() {
                 </div>
                 {tabs.map(t => (
                   <div key={t.id} id={`panel-${t.id}`} role="tabpanel" aria-labelledby={`tab-${t.id}`} hidden={activeTab !== t.id}>
-                    <RichText value={t.value} className="text-[0.95rem]" />
+                    <RichText value={t.value} className="text-[1.0625rem]" />
                   </div>
                 ))}
               </div>

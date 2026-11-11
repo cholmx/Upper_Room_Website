@@ -69,7 +69,7 @@ export function SectionHeader({ kicker, title, intro, center = false, as: Tag = 
     <div className={`${center ? 'text-center mx-auto' : ''} max-w-3xl mb-10 md:mb-12 ${className}`}>
       {kicker && !same(kicker, title) && <span className={`kicker ${tone === 'dark' ? 'text-[#eaa235]' : 'text-[#1e2522]'}`}>{kicker}</span>}
       <Tag className="text-3xl md:text-5xl">{title}</Tag>
-      {intro && <p className={`mt-4 text-[0.95rem] leading-relaxed ${tone === 'dark' ? 'text-white/85' : 'text-black'}`}>{intro}</p>}
+      {intro && <p className={`mt-4 text-[1.0625rem] leading-relaxed ${tone === 'dark' ? 'text-white/85' : 'text-black'}`}>{intro}</p>}
     </div>
   );
 }
@@ -220,7 +220,7 @@ export function Beats({ beats, heading: Heading = 'h3' }) {
           <div>
             {b.kicker && <p className="kicker text-[#1e2522] !mb-1">{b.kicker}</p>}
             <Heading className="text-2xl md:text-3xl mb-3">{b.title}</Heading>
-            <div className="text-[0.95rem] leading-relaxed text-black space-y-3">{b.body}</div>
+            <div className="text-[1.0625rem] leading-relaxed text-black space-y-3">{b.body}</div>
           </div>
         );
         if (!b.photo) return <div key={b.title}>{text}</div>;
@@ -363,7 +363,7 @@ export function Panel({ title, as: Tag = 'h2', children, id, className = '' }) {
   return (
     <div id={id} className={`${PANEL} rounded-[10px] scroll-mt-24 py-14 md:py-20 px-8 md:px-12 ${className}`}>
       {title && <Tag className="text-3xl md:text-4xl mb-6">{title}</Tag>}
-      <div className="box-body space-y-4 text-[0.95rem] leading-relaxed max-w-[34rem]">{children}</div>
+      <div className="box-body space-y-4 text-[1.0625rem] leading-relaxed max-w-[34rem]">{children}</div>
     </div>
   );
 }
@@ -400,5 +400,5 @@ export function Gloss({ k, children }) {
 }
 
 export function Prose({ children, className = '' }) {
-  return <div className={`space-y-5 text-[0.95rem] leading-relaxed text-black ${className}`}>{children}</div>;
+  return <div className={`space-y-5 text-[1.0625rem] leading-relaxed text-black ${className}`}>{children}</div>;
 }

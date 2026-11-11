@@ -125,7 +125,7 @@ export default function Messages() {
                 </div>
               </div>
             ) : (
-              <p className="text-[0.95rem] text-black">New messages are on the way. Check back after Sunday.</p>
+              <p className="text-[1.0625rem] text-black">New messages are on the way. Check back after Sunday.</p>
             )}
           </Section>
 
@@ -212,7 +212,7 @@ export default function Messages() {
             )}
             <p className="mb-6 text-sm text-black" aria-live="polite">{filtered.length === messages.length ? `${messages.length} messages` : `${filtered.length} of ${messages.length} messages`}</p>
             {filtered.length === 0 ? (
-              <p className="text-[0.95rem] text-black">No messages match yet. Try a different word, or clear the filters.</p>
+              <p className="text-[1.0625rem] text-black">No messages match yet. Try a different word, or clear the filters.</p>
             ) : (
               <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {ordered.slice(0, shown).map(m => <li key={m.id}><MessageCard message={m} /></li>)}
