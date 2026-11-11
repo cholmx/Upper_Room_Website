@@ -58,7 +58,6 @@ export default function Shine() {
       <PageHeader
         kicker="Podcast"
         title="The Shine Podcast"
-        narrowIntro
         intro={show?.description || 'Conversations with people in our church family, and episodes on topics that matter to life and faith.'}
       >
         {links.map(([label, u], i) => <Btn key={label} href={safeUrl(u)} variant={i === 0 ? 'primary' : 'light'}>{label}</Btn>)}
