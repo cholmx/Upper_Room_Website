@@ -3,8 +3,8 @@
 
 1. New table
 - campaign_items_church: everything on the Growth Campaign page. kind is one of
-  update (a news or prayer post, newest first), vision (a page of text), qa (a question and its answer, in order)
-  or stone (a Living Stone: a photo with an optional name and caption). Columns: title, body (formatted text),
+  vision (a page of text) or qa (a question and its answer, in order). The kinds update and stone are
+  allowed in the table but the page does not show them. Columns: title, body (formatted text),
   image_url, item_date, sort_order_num, published (the on/off switch).
 
 2. Security
@@ -12,7 +12,7 @@
 - The image column must be empty or start with http:// or https://.
 
 3. Starting content
-- The posts, vision and questions already on the Growth Campaign page of the church app are added once, when the
+- The vision and the questions already on the Growth Campaign page of the church app are added once, when the
   table is empty, so they can be edited here.
 
 Safe to run more than once.
@@ -56,72 +56,6 @@ CREATE POLICY auth_all_campaign_items ON campaign_items_church
 
 INSERT INTO campaign_items_church (kind, title, body, item_date, sort_order_num)
 SELECT seed.kind, seed.title, seed.body, seed.item_date::date, seed.sort_order_num FROM (VALUES
-  ('update', $b$Room for More: a Transforming Together Update$b$, $b$Upper Room Family,
-
-If you were able to join us for our Transforming Together Growth Campaign meeting this past weekend, you know the room was filled with faith, generosity, and a real sense of God moving among us. If you weren't able to make it, we want to make sure you're caught up on everything that was shared, because this involves all of us. You can listen to the full meeting here:
-
-https://open.spotify.com/episode/0y98Ddjw8kz7cIA7fpNce3
-
-We spent time looking back at our history, and it was a good reminder of how God has led us every step of the way. From a handful of teenagers meeting above a veterinarian clinic in 1971, to renting space at what's now Generation Dance Studio, to setting up and tearing down every Sunday at Dixon School, to finally landing at our current location and eventually adding the sanctuary we worship in today. Every single chapter began with people saying yes to God, trusting Him with what they had, and watching Him do more than anyone expected.
-
-And now we find ourselves in another one of those chapters.
-
-As many of you have experienced firsthand, our building is full. Dozens of visitors are walking through our doors every week, and they keep telling us the same thing: they feel loved, they feel welcomed, they feel like they've found a home. That's because of you. The way you greet people, introduce yourselves, and make room in your lives for others is a direct reflection of the heart of Jesus, and it's beautiful.
-
-So where are we headed? We have a vision to build a new 650-seat sanctuary that will extend from our existing space through the Destiny Room. Once funds are available, the current sanctuary will be repurposed for classrooms and a flexible gym/multipurpose space. The estimated cost for the new sanctuary is $2.5 million, furnished, including things like seating and a sound system.
-
-We also got to hear from Brad and Kaylin, who shared honestly about what it looked like for them to pray through their commitment as a couple. They talked about their different personalities, their different numbers, and the way God ultimately challenged them to commit to something bigger than either of them had initially considered. Their story was a real encouragement, and it reminded us that this process is Christ-forming work in itself.
-
-Tom Melzoni, who has spent 30 years helping churches walk through seasons like this, also shared some wisdom and challenged us with three simple ideas as we consider our giving: Do away with something for a season. Delay a purchase or a plan. Or do more, whether that's extra hours or a creative way to contribute. The point is that God works differently in every household, and the gift that counts is the one that comes from a cheerful heart.
-
-So where do things stand right now? We currently have $150,000 in cash on hand toward our first milestone of $400,000, which is what we need to pursue permits. And the Growth Campaign executive team, representing five households, has already committed $151,200 toward our second milestone of $1,000,000 in three-year commitments before we break ground.
-
-We're on our way. And every commitment, every gift, every prayer moves us forward together.
-
-On Palm Sunday, March 29, we'll be collecting commitment cards. So between now and then, we're asking every person and every household in our Upper Room family to take time to pray and ask God a simple question: "Lord, what do you want to do through me?" The amount you land on is between you and God. What we care about is the heart behind it. And if God leads you to give cheerfully, then give. That's all we're asking.
-
-Give to the Growth Campaign:https://onrealm.org/urfellowship/give/growthcampaign
-
-Submit your commitment card:https://onrealm.org/urfellowship/AddPledge/goalcard
-
-We love you, Upper Room. God has been faithful through every season of this church's life, and He's not stopping now. We get to be part of what He's doing, and we get to do it together.
-
-Transforming Together,
-
-Chris and the URF Leadership Team$b$, '2026-03-12', 0),
-  ('update', $b$March Prayer Focus$b$, $b$As we move forward in faith toward the expansion of our church family and making room for more to encounter God and His transformation, we are committing to pray together each month around our Kingdom Values. While a new building is in our future, that is not our focus. These weekly prayer points are designed to keep our hearts aligned with God's presence, purposes, and people as we discern and step into His will for all that He wants to do in and through our lives here in the Upper Room Fellowship.
-
-- March 01 – Pray that we would allow God to heal our souls, so that we could become emotionally and spiritually healthy.
-- March 08 – Pray that we would consistently express a culture of honor, calling out the "gold" in each other.
-- March 15 – Pray that we would so demonstrate genuine unity even in the midst of diversity that the world takes note that surely Jesus is here (John 17:22-23).
-- March 22 – Ask God, what is it that You want to do through me?
-- March 29 – Pray that we are always known for love, being a living model that the Kingdom of God is healthy family and supportive connections.$b$, '2026-02-28', 1),
-  ('update', $b$February Prayer Focus$b$, $b$As we move forward in faith toward the expansion of our church family and making room for more to encounter God and His transformation, we are committing to pray together each month around our Kingdom Values. While a new building is in our future, that is not our focus. These weekly prayer points are designed to keep our hearts aligned with God’s presence, purposes, and people as we discern and step into His will for all that He wants to do in and through our lives here in the Upper Room Fellowship.
-
-- FEBRUARY – Treasuring His Presence Living the Kingdom Value of deep communion with God
-- February 01 – Pray that everyone here would “know the love of Christ which surpasses knowledge” (Ephesians 3:19).
-- February 08 – Pray that people would personally encounter God and experience “the fullness of joy” (Psalm 16:11) that comes with His presence.
-- February 15 – Pray that each would invest time to be with Jesus, making space for Him with the practice of habits like solitude, silence, Scripture, and prayer.
-- February 22 – Pray that God would show you more and more all His incomparable attributes so that you may become like Him.$b$, '2026-02-04', 2),
-  ('update', $b$Prayer Update: We're Just Getting Started$b$, $b$We're at the beginning of something significant. The Transforming Together campaign is underway, and we need you praying.
-
-Here's what's happening. Leadership is meeting with architects and contractors. Numbers are being finalized. Plans are being refined. Survey results are being reviewed. And all of it requires wisdom we don't have on our own.
-
-Pray for wisdom. Leadership is making decisions that will affect our church family for decades. They need clarity on timing, scope, and how to move forward in a way that honors both faith and stewardship.
-
-Pray for unity. Not everyone sees this expansion the same way, and that's okay. Pray that we'd have grace for different perspectives. Pray that conversations would be honest and kind. Pray that we'd stay committed to each other even when we disagree.
-
-Pray for generosity. This campaign invites every person to participate through sacrificial giving. Pray that God would stir hearts. Pray that people would have clarity about what sacrifice looks like for them. Pray that we'd all step into faith together.
-
-Pray for the people who aren't here yet. We're making room for people we haven't met. Families searching for a church home. Teenagers who need to encounter Jesus before the world tells them who to be. Adults looking for community where they can be known. Pray for them. By name if God brings specific people to mind.
-
-Pray for protection. Building campaigns can create division. Finances can become a source of stress. The enemy would love to use this season to fracture what God has built. Pray for protection over our community, our leadership, and our mission.
-
-Pray for faith. We're stepping into something that requires more than we have. Pray that we'd trust God's faithfulness. Pray that we'd remember the five times He's already provided. Pray that this would be a season where our faith grows, not just our building.
-
-More updates are coming. We'll keep you informed every step of the way. For now, we're asking you to pray.
-
-God has been faithful for 50 years. He'll be faithful through this too.$b$, '2026-01-22', 3),
   ('vision', $b$The Vision: Transforming Together$b$, $b$## Our Story: From a Seed to a Movement
 
 In 1971, a handful of teenagers had a God-given dream. They wanted to create a space where their peers could encounter the transforming power of the Gospel. They met in a small upper room, praying and worshiping and inviting friends who needed Jesus. They had no idea what God would do next.

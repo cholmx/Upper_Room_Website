@@ -1,17 +1,14 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import usePageMeta from '../hooks/usePageMeta';
 import useFetch from '../hooks/useFetch';
 import { useSite } from '../settings';
 import { Btn, Section, SectionHeader, PageHeader, Accordion } from '../components/ui';
 import RichText from '../components/RichText';
 import { CardSkeletons, ErrorState } from '../components/StateViews';
-import { formatDate, safeUrl } from '../utils';
 
 const TABS = [
-  ['updates', 'Updates'],
   ['vision', 'Vision'],
   ['qa', 'Q&A'],
-  ['stones', 'Living Stones'],
 ];
 
 const slug = (s) => String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
@@ -20,7 +17,7 @@ export default function GrowthCampaign() {
   usePageMeta('growth');
   const SITE = useSite();
   const { data, loading, error, reload } = useFetch('read/campaign_items_church?sort=sort_order_num:asc');
-  const [tab, setTab] = useState('updates');
+  const [tab, setTab] = useState('vision');
 
   // The tab can be opened from an address such as /growth-campaign#qa.
   useEffect(() => {
@@ -32,10 +29,8 @@ export default function GrowthCampaign() {
   const choose = (k) => { setTab(k); try { window.history.replaceState(null, '', `#${k}`); } catch { /* the address is left as it is */ } };
 
   const items = data || [];
-  const updates = useMemo(() => items.filter(i => i.kind === 'update').sort((a, b) => String(b.item_date || '').localeCompare(String(a.item_date || '')) || (b.sort_order_num - a.sort_order_num)), [items]);
   const visions = items.filter(i => i.kind === 'vision');
   const qas = items.filter(i => i.kind === 'qa');
-  const stones = items.filter(i => i.kind === 'stone');
   const C = SITE.campaign;
 
   const onKey = (e, k) => {
@@ -48,7 +43,7 @@ export default function GrowthCampaign() {
 
   return (
     <>
-      <PageHeader kicker="Transforming Together" title="Growth Campaign" intro="We are making room for more people to encounter Jesus. Here is where things stand, and how you can be part of it.">
+      <PageHeader kicker="Transforming Together" title="Growth Campaign" intro="We are making room for more people to encounter Jesus. Here is our vision, and answers to the questions we hear most.">
         <Btn href={C.give} variant="primary">Give to the Growth Campaign</Btn>
         <Btn href={C.pledge} variant="light">Submit Your Commitment Card</Btn>
       </PageHeader>
@@ -64,20 +59,6 @@ export default function GrowthCampaign() {
       <Section tone="gray">
         {loading && !data ? <CardSkeletons count={2} /> : error ? <ErrorState message={error} onRetry={reload} /> : (
           <>
-            <div id="cpanel-updates" role="tabpanel" aria-labelledby="ctab-updates" hidden={tab !== 'updates'}>
-              {updates.length === 0 ? <p className="text-black">Updates will be posted here.</p> : (
-                <div className="max-w-3xl space-y-8">
-                  {updates.map(u => (
-                    <article key={u.id} className="bg-white rounded-[10px] elev-1 p-6 md:p-10">
-                      <h2 className="text-2xl md:text-3xl">{u.title}</h2>
-                      {u.item_date && <p className="mt-1 text-sm text-black">{formatDate(u.item_date)}</p>}
-                      <RichText value={u.body} className="mt-4" />
-                    </article>
-                  ))}
-                </div>
-              )}
-            </div>
-
             <div id="cpanel-vision" role="tabpanel" aria-labelledby="ctab-vision" hidden={tab !== 'vision'}>
               {visions.length === 0 ? <p className="text-black">The vision will be posted here.</p> : (
                 <div className="max-w-3xl">
@@ -101,23 +82,6 @@ export default function GrowthCampaign() {
               )}
             </div>
 
-            <div id="cpanel-stones" role="tabpanel" aria-labelledby="ctab-stones" hidden={tab !== 'stones'}>
-              <SectionHeader title="Living Stones" intro="As part of the Growth Campaign, members of our congregation are painting stones as a symbol of our living faith." />
-              {stones.length === 0 ? <p className="text-black">Painted stones will appear here.</p> : (
-                <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {stones.map(s => (
-                    <li key={s.id} className="bg-white rounded-[10px] elev-1 overflow-hidden">
-                      {safeUrl(s.image_url) && <img src={safeUrl(s.image_url)} alt={s.title ? `A painted stone from ${s.title}` : 'A painted stone'} loading="lazy" decoding="async" className="w-full aspect-square object-cover bg-[#EDE9DC]" />}
-                      <div className="p-5">
-                        {s.title && <h3 className="text-xl">{s.title}</h3>}
-                        {s.body && <p className="mt-2 text-black leading-snug">{s.body}</p>}
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              )}
-              <p className="mt-8 max-w-2xl text-black">Did you paint a stone? We would love to see it. Email a photo to <a className="underline underline-offset-4 font-semibold" href={`mailto:${SITE.email}?subject=My%20living%20stone`}>{SITE.email}</a>.</p>
-            </div>
           </>
         )}
       </Section>
