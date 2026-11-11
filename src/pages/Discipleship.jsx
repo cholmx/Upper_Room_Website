@@ -7,17 +7,17 @@ import { Section, SectionHeader, PageHeader, PageNav, Accordion, Band, Panel, Ph
 const P = 'text-[1rem] leading-relaxed text-black';
 
 const GROUPS = [
-  { name: 'Know God', practices: [
+  { name: 'Know God', tagline: 'Draw close to Him through worship, prayer, and Scripture.', practices: [
     ['Prayer', 'Ongoing conversation with God, on your own and with others.'],
     ['Scripture', 'Reading, studying, and living by the Word.'],
     ['Solitude', 'Quiet time alone with God, away from noise and demands.'],
   ] },
-  { name: 'Share Life', practices: [
+  { name: 'Share Life', tagline: 'Build honest friendships and find a church family.', practices: [
     ['Sabbath', 'Weekly rest that trusts God with your time and your worth.'],
     ['Community', 'Honest, committed relationships where you are known and cared for.'],
     ['Generosity', 'Open-handed living with your money, time, and attention.'],
   ] },
-  { name: 'Serve Others', practices: [
+  { name: 'Serve Others', tagline: 'Use your gifts to love your neighbors and your city.', practices: [
     ['Service', 'Using your gifts to meet real needs at church and in the community.'],
     ['Witness', 'Sharing the good news of Jesus through your words and your life.'],
     ['Fasting', 'Setting aside food or other comforts to turn your hunger toward God.'],
@@ -63,13 +63,14 @@ export default function Discipleship() {
       <Section tone="white">
         <div className="grid md:grid-cols-3 gap-6">
           {GROUPS.map(g => (
-            <div key={g.name} className="fcard !p-8">
-              <h3 className="text-2xl mb-4">{g.name}</h3>
-              <dl className="space-y-4">
+            <div key={g.name} className="fcard !p-8 md:!p-10">
+              <h3 className="text-3xl md:text-4xl">{g.name}</h3>
+              <span className="block mt-3 font-serif italic font-normal text-[1rem] leading-snug text-black">{g.tagline}</span>
+              <dl className="mt-8 space-y-7">
                 {g.practices.map(([t, d]) => (
                   <div key={t}>
-                    <dt className="font-display font-bold">{t}</dt>
-                    <dd className={P}>{d}</dd>
+                    <dt className="font-display font-bold text-xl text-[#c74f2f] leading-tight">{t}</dt>
+                    <dd className="mt-1.5 text-[1rem] leading-snug text-black">{d}</dd>
                   </div>
                 ))}
               </dl>
