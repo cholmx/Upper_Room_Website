@@ -26,7 +26,7 @@ body {
   background: var(--light);
   color: #000000;
   font-family: Aleo, Georgia, serif;
-  font-size: 1.0625rem;
+  font-size: 1rem;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -358,7 +358,7 @@ details.u-acc.neu-acc[open] { background: #ffffff; box-shadow: var(--shadow); }
 }
 
 /* The whole site is set in two fonts: Inter Tight Bold for headings and labels, Aleo for everything else. */
-.public-site { font-family: Aleo, Georgia, serif; font-size: 1.0625rem; line-height: 1.7; }
+.public-site { font-family: Aleo, Georgia, serif; font-size: 1rem; line-height: 1.7; }
 .public-site .font-display, .public-site .btn { font-family: 'Inter Tight', Arial, Helvetica, sans-serif; }
 
 .spotlight-dark .rich-text a { color: inherit; }

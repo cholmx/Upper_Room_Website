@@ -42,8 +42,8 @@ export default function CoreValues() {
                   </div>
                   <div>
                     <h2 className="text-3xl md:text-4xl mb-4">{v.title}</h2>
-                    <p className={`text-[1.0625rem] leading-relaxed text-black`}>{v.body}</p>
-                    <p className={`mt-5 rounded-[10px] p-5 text-[1.0625rem] leading-relaxed ${dark ? 'bg-white/60' : 'bg-[#1e2522]/5'} text-black`}>{v.practice}</p>
+                    <p className={`text-[1rem] leading-relaxed text-black`}>{v.body}</p>
+                    <p className={`mt-5 rounded-[10px] p-5 text-[1rem] leading-relaxed ${dark ? 'bg-white/60' : 'bg-[#1e2522]/5'} text-black`}>{v.practice}</p>
                   </div>
                 </div>
               </Section>

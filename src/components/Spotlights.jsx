@@ -20,7 +20,7 @@ function Copy({ s, center }) {
     <div className={center ? 'text-center' : ''}>
       {s.kicker && <p className="kicker text-[#c74f2f]">{s.kicker}</p>}
       {s.title && <h2 className="text-3xl md:text-5xl mb-4">{s.title}</h2>}
-      {s.body && <RichText value={s.body} className="text-[1.0625rem]" />}
+      {s.body && <RichText value={s.body} className="text-[1rem]" />}
       <Buttons s={s} center={center} />
     </div>
   );
@@ -48,7 +48,7 @@ function Spotlight({ s }) {
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-center md:text-left">
           <div>
             {s.title && <h2 className="text-2xl md:text-3xl">{s.title}</h2>}
-            {s.body && <RichText value={s.body} className="mt-1 text-[1.0625rem]" />}
+            {s.body && <RichText value={s.body} className="mt-1 text-[1rem]" />}
           </div>
           {s.button_label && s.button_url && <div className="shrink-0"><Btn to={s.button_url} variant="primary">{s.button_label}</Btn></div>}
         </div>

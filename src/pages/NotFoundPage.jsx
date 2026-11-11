@@ -19,7 +19,7 @@ export default function NotFoundPage() {
         <div className="py-6">
           <p className="kicker text-[#c74f2f]">Page not found</p>
           <h1 className="text-4xl md:text-6xl">We could not find that page.</h1>
-          <p className="mt-5 text-[1.0625rem] md:text-base text-black leading-relaxed max-w-[55ch]">
+          <p className="mt-5 text-[1rem] md:text-base text-black leading-relaxed max-w-[55ch]">
             It may have moved. Search our messages, pick one of the places below, or call us at <a className="underline underline-offset-4 font-semibold" href={SITE.phoneHref}>{SITE.phone}</a> and we will help you find what you need.
           </p>
           <form role="search" aria-label="Search messages" onSubmit={search} className="mt-8 flex flex-wrap gap-3 max-w-xl">

@@ -4,14 +4,14 @@ import { Section, SectionHeader, PageHeader, Accordion, PhotoSplit, PhotoBand } 
 import RichText from '../components/RichText';
 import { BELIEFS } from '../content/beliefs';
 
-const P = 'text-[1.0625rem] leading-relaxed text-black';
+const P = 'text-[1rem] leading-relaxed text-black';
 
 export default function About() {
   usePageMeta('about');
   const items = BELIEFS.map(b => ({
     id: b.id,
     title: b.title,
-    content: <RichText value={b.full} className="!font-serif text-[1.0625rem] text-black" />,
+    content: <RichText value={b.full} className="!font-serif text-[1rem] text-black" />,
   }));
   return (
     <>

@@ -60,7 +60,7 @@ export default function CustomPage() {
       {/* Content Body */}
       <div className="py-24 px-6">
         <div className="max-w-[800px] mx-auto p-8 md:p-16 rounded-3xl neu">
-          <div className="space-y-8 text-[1.0625rem] md:text-base text-black leading-snug font-serif italic text-[#1e2522]">
+          <div className="space-y-8 text-[1rem] md:text-base text-black leading-snug font-serif italic text-[#1e2522]">
             {stripHtml(page.body_content_text).split('\n').filter(Boolean).map((para, i) => (
               <p key={i}>{para}</p>
             ))}

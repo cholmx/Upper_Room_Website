@@ -4,7 +4,7 @@ import { Section, SectionHeader, PageHeader, PageNav, Accordion, Steps, Band, Pa
 import { useSite } from '../settings';
 import { SOZO_FAQ as FAQ } from '../content/faqs';
 
-const P = 'text-[1.0625rem] leading-relaxed text-black';
+const P = 'text-[1rem] leading-relaxed text-black';
 
 const TOOLS = [
   ['The Father Ladder', 'Our earliest relationships shape how we see God. This tool explores those connections and heals the places where past experiences have distorted your view of the Father, Jesus, or the Holy Spirit. Many people discover a Heavenly Father who is nothing like the human authorities who let them down.'],
@@ -101,7 +101,7 @@ export default function Sozo() {
 
       <Section tone="white" narrow id="reading">
         <SectionHeader title="Recommended reading" />
-        <ul className="list-disc pl-6 space-y-2 text-[1.0625rem] text-black">
+        <ul className="list-disc pl-6 space-y-2 text-[1rem] text-black">
           {READING.map(r => <li key={r}>{r}</li>)}
         </ul>
       </Section>

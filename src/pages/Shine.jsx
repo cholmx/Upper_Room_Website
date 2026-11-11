@@ -33,7 +33,7 @@ function Episode({ ep, cover, featured = false }) {
         <div className="min-w-0 flex-1">
           <p className="text-sm text-black">{meta}</p>
           {featured ? <h2 className="text-2xl md:text-3xl mt-1">{ep.title}</h2> : <h3 className="text-lg md:text-xl mt-1">{ep.title}</h3>}
-          {ep.description && <p className={`mt-2 text-[1.0625rem] leading-relaxed text-black whitespace-pre-line ${featured ? '' : 'line-clamp-3'}`}>{ep.description}</p>}
+          {ep.description && <p className={`mt-2 text-[1rem] leading-relaxed text-black whitespace-pre-line ${featured ? '' : 'line-clamp-3'}`}>{ep.description}</p>}
         </div>
       </div>
       {audio && <audio controls preload="none" src={audio} className="w-full mt-4" aria-label={`Play ${ep.title}`} />}
