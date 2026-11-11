@@ -470,3 +470,11 @@ details.u-acc.neu-acc[open] { background: #ffffff; box-shadow: var(--shadow); }
 .series-cover-text { position: relative; z-index: 1; display: block; max-width: 100%; }
 .series-cover .series-cover-name { display: block; overflow-wrap: anywhere; color: #ffffff; line-height: 0.95; }
 .series-cover-details { display: block; margin-top: 0.45rem; color: #ffffff; font-family: 'Inter Tight', Arial, Helvetica, sans-serif; font-weight: 700; }
+
+/* Paper texture for the light gray backgrounds. The tint keeps the overall color at the site's light gray (#EDE9DC). */
+.paper-bg {
+  background-color: #f5f3ec;
+  background-image: url('/images/paper-texture.jpg');
+  background-size: 310px 302px;
+  background-blend-mode: multiply;
+}

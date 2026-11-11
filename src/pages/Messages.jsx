@@ -184,7 +184,7 @@ export default function Messages() {
                 </div>
               </div>
             )}
-            <form role="search" aria-label="Search messages" onSubmit={(e) => e.preventDefault()} className="rounded-[10px] p-5 md:p-6 mb-6 bg-[#EDE9DC]">
+            <form role="search" aria-label="Search messages" onSubmit={(e) => e.preventDefault()} className="rounded-[10px] p-5 md:p-6 mb-6 paper-bg">
               <label htmlFor="msg-search" className="block text-sm font-semibold mb-1">Search by title, passage, speaker or topic</label>
               <input id="msg-search" type="search" value={q} onChange={(e) => setQ(e.target.value)} className={select} />
               <div className="grid sm:grid-cols-3 gap-4 mt-4">

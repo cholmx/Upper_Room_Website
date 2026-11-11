@@ -45,7 +45,7 @@ const TONES = {
   cream: 'text-black',
   white: 'bg-white text-black',
   sand: 'bg-white text-black',
-  gray: 'bg-[#EDE9DC] text-black',
+  gray: 'paper-bg text-black',
 };
 
 export function Section({ tone = 'cream', id, className = '', narrow = false, center = false, children, ...rest }) {
@@ -349,7 +349,7 @@ export function QuickFacts({ items }) {
 
 // A band of two panels side by side, edge to edge. The panels are the section: each one is a block of color
 // with its own content, and the text lines up with the rest of the page. Use sparingly, one or two per page.
-const PANEL = 'bg-[#EDE9DC] text-[#1e2522]';
+const PANEL = 'paper-bg text-[#1e2522]';
 
 export function Band({ children, id, className = '' }) {
   return (
