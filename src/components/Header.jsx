@@ -75,12 +75,12 @@ function MobileMenu({ onClose }) {
     return () => { document.removeEventListener('keydown', onKey); document.body.style.overflow = prev; };
   }, [onClose]);
 
-  const big = { fontFamily: "Arial, Helvetica, sans-serif", fontWeight: 700 };
+  const big = { fontFamily: "Geist, Arial, Helvetica, sans-serif", fontWeight: 700 };
 
   return createPortal(
     <div id="mobile-menu" className="xl:hidden fixed inset-0 z-[60] bg-[#ffffff] overflow-y-auto" role="dialog" aria-modal="true" aria-label="Site menu">
       <div className="flex items-center justify-between px-6 h-16">
-        <span className="text-2xl tracking-tight" style={{ fontFamily: "Arial, Helvetica, sans-serif", fontWeight: 700 }}>{SITE.shortName}</span>
+        <span className="text-2xl tracking-tight" style={{ fontFamily: "Geist, Arial, Helvetica, sans-serif", fontWeight: 700 }}>{SITE.shortName}</span>
         <button type="button" aria-label="Close menu" onClick={onClose} className="p-3 bg-white rounded-full elev-1 transition-transform">
           <SafeIcon icon={FiX} size={22} />
         </button>

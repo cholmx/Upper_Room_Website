@@ -1,4 +1,5 @@
 /* Merriweather is served from this site (public/fonts), so no page waits on Google Fonts. */
+@font-face { font-family: 'Geist'; font-style: normal; font-weight: 700; font-display: swap; src: url('/fonts/geist-latin-700-normal.woff2') format('woff2'); }
 @font-face { font-family: 'Merriweather'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/merriweather-latin-400-normal.woff2') format('woff2'); }
 @font-face { font-family: 'Merriweather'; font-style: italic; font-weight: 400; font-display: swap; src: url('/fonts/merriweather-latin-400-italic.woff2') format('woff2'); }
 @font-face { font-family: 'Merriweather'; font-style: italic; font-weight: 700; font-display: swap; src: url('/fonts/merriweather-latin-700-italic.woff2') format('woff2'); }
@@ -32,7 +33,7 @@ body {
 }
 
 h1, h2, h3, h4 {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Geist, Arial, Helvetica, sans-serif;
   text-transform: none;
   font-weight: 700;
   letter-spacing: -0.01em;
@@ -41,7 +42,7 @@ h1, h2, h3, h4 {
 
 .kicker {
   display: inline-block;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Geist, Arial, Helvetica, sans-serif;
   font-style: normal;
   text-transform: none;
   font-weight: 700;
@@ -65,7 +66,7 @@ h1, h2, h3, h4 {
   justify-content: center;
   gap: 0.5rem;
   padding: 0.95rem 1.9rem;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Geist, Arial, Helvetica, sans-serif;
   text-transform: none;
   font-size: 0.95rem;
   font-weight: 700;
@@ -239,7 +240,7 @@ h1, h2, h3, h4 {
 .rich-text h1,
 .rich-text h2,
 .rich-text h3 {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Geist, Arial, Helvetica, sans-serif;
   text-transform: none;
   letter-spacing: -0.01em;
   margin-top: 1.75em;
@@ -327,22 +328,22 @@ details.u-acc.neu-acc[open] { background: #ffffff; box-shadow: var(--shadow); }
 .neu-badge { box-shadow: var(--shadow); }
 
 /* Merriweather for lead paragraphs, in a larger size than body text */
-.lead { font-family: Arial, Helvetica, sans-serif; font-weight: 700; font-size: 1.1rem; line-height: 1.35; color: #000000; }
+.lead { font-family: Geist, Arial, Helvetica, sans-serif; font-weight: 700; font-size: 1.1rem; line-height: 1.35; color: #000000; }
 @media (min-width: 768px) { .lead { font-size: 1.2rem; } }
 
 /* Tighter line height for serif display text. */
 :where(.font-serif) { line-height: 1.25; }
 .rich-text { line-height: 1.5; }
 
-/* Titles and headings on the public site are set in Arial Bold, in normal case. The sign-in page and the admin keep their own type. */
+/* Titles and headings on the public site are set in Geist Bold, in normal case. The sign-in page and the admin keep their own type. */
 :where(.public-site) :is(h1, h2, h3, h4) {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Geist, Arial, Helvetica, sans-serif;
   text-transform: none;
   font-weight: 700;
   letter-spacing: -0.01em;
   line-height: 1.1;
 }
-.rich-text h1, .rich-text h2, .rich-text h3 { font-family: Arial, Helvetica, sans-serif; font-weight: 700; }
+.rich-text h1, .rich-text h2, .rich-text h3 { font-family: Geist, Arial, Helvetica, sans-serif; font-weight: 700; }
 
 /* Content inside the colored boxes keeps the box's text color, with plain list markers and links */
 .box-body a:not(.btn) { color: inherit; text-decoration: underline; text-underline-offset: 4px; font-weight: 600; }
@@ -356,9 +357,9 @@ details.u-acc.neu-acc[open] { background: #ffffff; box-shadow: var(--shadow); }
   border-radius: 8px;
 }
 
-/* The whole site is set in two fonts: Arial Bold for headings and labels, Merriweather for everything else. */
+/* The whole site is set in two fonts: Geist Bold for headings and labels, Merriweather for everything else. */
 .public-site { font-family: Merriweather, Georgia, serif; font-size: 0.9375rem; line-height: 1.7; }
-.public-site .font-display, .public-site .btn { font-family: Arial, Helvetica, sans-serif; }
+.public-site .font-display, .public-site .btn { font-family: Geist, Arial, Helvetica, sans-serif; }
 
 .spotlight-dark .rich-text a { color: inherit; }
 
@@ -408,14 +409,14 @@ details.u-acc.neu-acc[open] { background: #ffffff; box-shadow: var(--shadow); }
   .img-fade, .img-fade.img-in { opacity: 1; transition: none; }
 }
 
-/* Merriweather is only for the small reading size. Anything set larger than that is Arial Bold.
+/* Merriweather is only for the small reading size. Anything set larger than that is Geist Bold.
    An element marked font-normal keeps its own weight. */
 :is(
   [class*="text-lg"], [class*="text-xl"], [class*="text-2xl"], [class*="text-3xl"], [class*="text-4xl"],
   [class*="text-5xl"], [class*="text-6xl"], [class*="text-7xl"], [class*="text-8xl"], [class*="text-9xl"],
   [class*="text-[1.05rem]"], [class*="text-[1.4rem]"], [class*="text-[1.6rem]"]
 ):not(.font-normal) {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Geist, Arial, Helvetica, sans-serif;
   font-weight: 700;
   font-style: normal;
 }
@@ -433,9 +434,9 @@ details.u-acc.neu-acc[open] { background: #ffffff; box-shadow: var(--shadow); }
   .photo-section.text-shade::after { background: linear-gradient(to right, rgba(30, 37, 34, 0.62), rgba(30, 37, 34, 0.45)); }
 }
 
-/* The words on photos are Arial Bold, so they stay easy to read over a picture. */
+/* The words on photos are Geist Bold, so they stay easy to read over a picture. */
 .photo-section :is(p, li, address, blockquote, a:not(.btn)) {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Geist, Arial, Helvetica, sans-serif;
   font-weight: 700;
   font-style: normal;
 }
@@ -444,14 +445,14 @@ details.u-acc.neu-acc[open] { background: #ffffff; box-shadow: var(--shadow); }
 .photo-copy p, .photo-copy li, .photo-copy address { font-size: 1.25rem; line-height: 1.35; }
 @media (min-width: 768px) { .photo-copy p, .photo-copy li, .photo-copy address { font-size: 1.55rem; line-height: 1.3; } }
 
-/* Cards use the same Arial Bold look as the words on photos. */
+/* Cards use the same Geist Bold look as the words on photos. */
 .fcard :is(p, li, dd, dt, address, a:not(.btn)) {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Geist, Arial, Helvetica, sans-serif;
   font-weight: 700;
   font-style: normal;
 }
 
-/* Tighter line spacing for the Arial Bold text across the public site. */
+/* Tighter line spacing for the Geist Bold text across the public site. */
 :where(.public-site) .leading-relaxed { line-height: 1.4; }
 
 /* Cover for a series that has no cover art: a blurred, darkened, grainy video picture with the series name on top. */
@@ -468,4 +469,4 @@ details.u-acc.neu-acc[open] { background: #ffffff; box-shadow: var(--shadow); }
 }
 .series-cover-text { position: relative; z-index: 1; display: block; max-width: 100%; }
 .series-cover .series-cover-name { display: block; overflow-wrap: anywhere; color: #ffffff; line-height: 0.95; }
-.series-cover-details { display: block; margin-top: 0.45rem; color: #ffffff; font-family: Arial, Helvetica, sans-serif; font-weight: 700; }
+.series-cover-details { display: block; margin-top: 0.45rem; color: #ffffff; font-family: Geist, Arial, Helvetica, sans-serif; font-weight: 700; }
