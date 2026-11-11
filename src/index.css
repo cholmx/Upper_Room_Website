@@ -1,9 +1,9 @@
-/* Merriweather is served from this site (public/fonts), so no page waits on Google Fonts. */
+/* Aleo is served from this site (public/fonts), so no page waits on Google Fonts. */
 @font-face { font-family: 'Inter Tight'; font-style: normal; font-weight: 700; font-display: swap; src: url('/fonts/inter-tight-latin-700-normal.woff2') format('woff2'); }
-@font-face { font-family: 'Merriweather'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/merriweather-latin-400-normal.woff2') format('woff2'); }
-@font-face { font-family: 'Merriweather'; font-style: italic; font-weight: 400; font-display: swap; src: url('/fonts/merriweather-latin-400-italic.woff2') format('woff2'); }
-@font-face { font-family: 'Merriweather'; font-style: italic; font-weight: 700; font-display: swap; src: url('/fonts/merriweather-latin-700-italic.woff2') format('woff2'); }
-@font-face { font-family: 'Merriweather'; font-style: normal; font-weight: 700; font-display: swap; src: url('/fonts/merriweather-latin-700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Aleo'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/aleo-latin-400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Aleo'; font-style: italic; font-weight: 400; font-display: swap; src: url('/fonts/aleo-latin-400-italic.woff2') format('woff2'); }
+@font-face { font-family: 'Aleo'; font-style: italic; font-weight: 700; font-display: swap; src: url('/fonts/aleo-latin-700-italic.woff2') format('woff2'); }
+@font-face { font-family: 'Aleo'; font-style: normal; font-weight: 700; font-display: swap; src: url('/fonts/aleo-latin-700-normal.woff2') format('woff2'); }
 
 @tailwind base;
 @tailwind components;
@@ -25,7 +25,7 @@ body {
   margin: 0;
   background: var(--light);
   color: #000000;
-  font-family: Merriweather, Georgia, serif;
+  font-family: Aleo, Georgia, serif;
   font-size: 0.9375rem;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
@@ -53,7 +53,7 @@ h1, h2, h3, h4 {
 }
 
 .serif-accent {
-  font-family: Merriweather, Georgia, serif;
+  font-family: Aleo, Georgia, serif;
   font-style: italic;
   font-weight: 400;
   text-transform: none;
@@ -228,7 +228,7 @@ h1, h2, h3, h4 {
 
 /* Admin- and user-authored markdown */
 .rich-text {
-  font-family: Merriweather, Georgia, serif;
+  font-family: Aleo, Georgia, serif;
   line-height: 1.5;
   overflow-wrap: anywhere;
 }
@@ -327,7 +327,7 @@ details.u-acc.neu-acc[open] { background: #ffffff; box-shadow: var(--shadow); }
 .btn-solid:active { box-shadow: none; }
 .neu-badge { box-shadow: var(--shadow); }
 
-/* Merriweather for lead paragraphs, in a larger size than body text */
+/* Aleo for lead paragraphs, in a larger size than body text */
 .lead { font-family: 'Inter Tight', Arial, Helvetica, sans-serif; font-weight: 700; font-size: 1.1rem; line-height: 1.35; color: #000000; }
 @media (min-width: 768px) { .lead { font-size: 1.2rem; } }
 
@@ -357,8 +357,8 @@ details.u-acc.neu-acc[open] { background: #ffffff; box-shadow: var(--shadow); }
   border-radius: 8px;
 }
 
-/* The whole site is set in two fonts: Inter Tight Bold for headings and labels, Merriweather for everything else. */
-.public-site { font-family: Merriweather, Georgia, serif; font-size: 0.9375rem; line-height: 1.7; }
+/* The whole site is set in two fonts: Inter Tight Bold for headings and labels, Aleo for everything else. */
+.public-site { font-family: Aleo, Georgia, serif; font-size: 0.9375rem; line-height: 1.7; }
 .public-site .font-display, .public-site .btn { font-family: 'Inter Tight', Arial, Helvetica, sans-serif; }
 
 .spotlight-dark .rich-text a { color: inherit; }
@@ -409,7 +409,7 @@ details.u-acc.neu-acc[open] { background: #ffffff; box-shadow: var(--shadow); }
   .img-fade, .img-fade.img-in { opacity: 1; transition: none; }
 }
 
-/* Merriweather is only for the small reading size. Anything set larger than that is Inter Tight Bold.
+/* Aleo is only for the small reading size. Anything set larger than that is Inter Tight Bold.
    An element marked font-normal keeps its own weight. */
 :is(
   [class*="text-lg"], [class*="text-xl"], [class*="text-2xl"], [class*="text-3xl"], [class*="text-4xl"],

@@ -163,7 +163,7 @@ Photo fields in the admin have an **Upload a photo** button. Photos go to a publ
 
 ## Keeping it fast
 
-The site avoids heavy effects on purpose: no animation library, no WebGL, no scroll-linked motion, no parallax or tilt. Pages are lazy-loaded, photos load lazily, and the only external font is Merriweather (regular, bold, and italic). Keep it that way unless there is a clear reason.
+The site avoids heavy effects on purpose: no animation library, no WebGL, no scroll-linked motion, no parallax or tilt. Pages are lazy-loaded, photos load lazily, and the only external font is Aleo (regular, bold, and italic). Keep it that way unless there is a clear reason.
 
 ## Front page area
 
@@ -199,7 +199,7 @@ To review messages on demand, open Messages in the admin, select them (Select me
 ### More search and speed work
 
 - **301 redirects for the old website's addresses** (`src/content/redirects.js`, written into `_redirects` on every build) so the old pages' standing in search carries over to the new ones.
-- **Self-hosted Merriweather** (`@fontsource/merriweather`), so no page waits on Google Fonts.
+- **Self-hosted Aleo** (`Aleo font files`), so no page waits on Google Fonts.
 - **A real favicon and app icons** (`public/favicon.svg`, PNG sizes, `manifest.webmanifest`) and a logo in the church's structured data.
 - **Each page's share picture** is its banner photo from Site Photos, or the "social sharing image" slot, or the default picture.
 - **Home** includes the newest message as plain text in the static copy, and **Messages** carries podcast structured data.

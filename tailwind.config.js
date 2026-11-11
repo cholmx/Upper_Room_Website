@@ -7,8 +7,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        serif: ['Merriweather', 'Georgia', 'serif'],
-        sans: ['Merriweather', 'Georgia', 'serif'],
+        serif: ['Aleo', 'Georgia', 'serif'],
+        sans: ['Aleo', 'Georgia', 'serif'],
         display: ['Inter Tight', 'Arial', 'Helvetica', 'sans-serif'],
       },
       colors: {
