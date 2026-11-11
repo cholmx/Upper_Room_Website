@@ -1,4 +1,5 @@
 /* Aleo is served from this site (public/fonts), so no page waits on Google Fonts. */
+@font-face { font-family: 'Inter Tight'; font-style: normal; font-weight: 900; font-display: swap; src: url('/fonts/inter-tight-latin-900-normal.woff2') format('woff2'); }
 @font-face { font-family: 'Inter Tight'; font-style: normal; font-weight: 700; font-display: swap; src: url('/fonts/inter-tight-latin-700-normal.woff2') format('woff2'); }
 @font-face { font-family: 'Aleo'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/aleo-latin-400-normal.woff2') format('woff2'); }
 @font-face { font-family: 'Aleo'; font-style: italic; font-weight: 400; font-display: swap; src: url('/fonts/aleo-latin-400-italic.woff2') format('woff2'); }
@@ -473,8 +474,13 @@ details.u-acc.neu-acc[open] { background: #ffffff; box-shadow: var(--shadow); }
 
 /* Paper texture for the light gray backgrounds. The tint keeps the overall color at the site's light gray (#EDE9DC). */
 .paper-bg {
-  background-color: #f5f3ec;
+  background-color: #f4f3eb;
   background-image: url('/images/paper-texture.jpg');
   background-size: 310px 302px;
   background-blend-mode: multiply;
 }
+
+/* Page headings are Inter Tight Black. Labels, buttons and the menu stay Bold. */
+.public-site :is(h1, h2, h3, h4):not(.font-normal) { font-weight: 900; }
+.public-site footer h2:not(.font-normal) { font-weight: 700; }
+.public-site .rich-text :is(h1, h2, h3, h4) { font-weight: 900; }

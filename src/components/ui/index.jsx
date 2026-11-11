@@ -187,7 +187,7 @@ function usePageBanner(pageKey) {
 }
 
 // The page banner: a photo with a dark wash, a gold kicker, a big heading, and an intro.
-export function PageHeader({ kicker, title, intro, children, page, image: imageOverride, compact = false }) {
+export function PageHeader({ kicker, title, intro, children, page, image: imageOverride, compact = false, narrowIntro = false }) {
   const banner = usePageBanner(page);
   const image = banner && imageOverride ? imageOverride : banner;
   return (
@@ -197,7 +197,7 @@ export function PageHeader({ kicker, title, intro, children, page, image: imageO
         <div className="hero-text max-w-[800px]">
           {kicker && !same(kicker, title) && <span className="kicker text-[#eaa235]">{kicker}</span>}
           <h1 className={`text-4xl md:text-6xl ${compact ? 'mb-0 md:mb-6' : 'mb-6'}`}>{title}</h1>
-          {intro && <p className={`${compact ? 'hidden md:block ' : ''}font-serif text-xl md:text-2xl text-white max-w-[50ch] leading-[1.12] md:leading-[1.12]`}>{intro}</p>}
+          {intro && <p className={`${compact ? 'hidden md:block ' : ''}font-serif text-xl md:text-2xl text-white ${narrowIntro ? 'max-w-[30ch]' : 'max-w-[50ch]'} leading-[1.12] md:leading-[1.12]`}>{intro}</p>}
           {children && <div className="mt-8 flex flex-wrap gap-4">{children}</div>}
         </div>
       </div>
