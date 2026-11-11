@@ -9,7 +9,7 @@ export default {
       fontFamily: {
         serif: ['Merriweather', 'Georgia', 'serif'],
         sans: ['Merriweather', 'Georgia', 'serif'],
-        display: ['Geist', 'Arial', 'Helvetica', 'sans-serif'],
+        display: ['Inter Tight', 'Arial', 'Helvetica', 'sans-serif'],
       },
       colors: {
         ink: {
