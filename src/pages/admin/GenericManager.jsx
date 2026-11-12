@@ -38,6 +38,37 @@ export default function GenericManager({ config }) {
   const [transcriptLoading, setTranscriptLoading] = useState(false);
   const [aiAfterSave, setAiAfterSave] = useState(true);
   const [saveNote, setSaveNote] = useState('');
+  const [aiNow, setAiNow] = useState(null);
+
+  // Saves the transcript in the box, then makes the AI read it and write a new description and categories now,
+  // replacing the ones the message has. The form then shows what the AI wrote.
+  const readNow = async () => {
+    const id = Number(formData.id);
+    const captions = /-->|^\s*\d{1,2}:\d{2}/m.test(transcript);
+    const body = captions ? cleanTranscript(transcript) : transcript.trim();
+    if (!id) { setAiNow({ error: 'Save the message first, then come back and use this button.' }); return; }
+    if (!body) { setAiNow({ error: 'Paste a transcript first.' }); return; }
+    setAiNow({ busy: true, text: 'Saving the transcript.' });
+    const saved = await backend.rpc('save_sermon_transcript', { p_sermon_id: id, p_body: body });
+    if (saved.status !== 'success') { setAiNow({ error: 'The transcript could not be saved. Please try again.' }); return; }
+    setTranscript(body); setTranscriptOriginal(body);
+    const why = (out) => (out === '!no_key' ? 'The Anthropic key is not saved in the database yet.' : out === '!no_categories' ? 'There are no approved categories yet.' : /^!status_429/.test(out) ? 'The AI service asked us to slow down. Try again in a minute.' : /^!status_/.test(out) ? 'The AI service answered with an error.' : out === '!request_failed' ? 'The request to the AI service failed.' : 'The AI did not give an answer that could be used.');
+    setAiNow({ busy: true, text: 'The AI is reading the transcript. This takes a few seconds.' });
+    const a = await backend.rpc('ai_summarize_message', { sermon_id: id, force: true });
+    const aOut = a.status === 'success' ? String(a.data ?? '') : '!request_failed';
+    const c = await backend.rpc('ai_review_message', { sermon_id: id, replace: true });
+    const cOut = c.status === 'success' ? String(c.data ?? '') : '!request_failed';
+    const fresh = await dataFetch(`read/${config.table}?id=${id}`);
+    const row = fresh.status === 'success' ? (fresh.data || [])[0] : null;
+    if (row) {
+      // The new description and categories are already saved, so only they are treated as unchanged. Other edits stay marked as unsaved.
+      setFormData(prev => ({ ...prev, description: row.description ?? prev.description, topic: row.topic ?? prev.topic }));
+      setInitialJson(j => { try { const o = JSON.parse(j); o.description = row.description ?? o.description; o.topic = row.topic ?? o.topic; return JSON.stringify(o); } catch { return j; } });
+      fetchItems();
+    }
+    const problems = [aOut !== 'ok' ? `Description: ${why(aOut)}` : '', cOut[0] === '!' ? `Categories: ${why(cOut)}` : ''].filter(Boolean);
+    setAiNow(problems.length ? { error: `${problems.join(' ')}` } : { done: 'Done. The description and categories above now come from the transcript.' });
+  };
   const [initialJson, setInitialJson] = useState('');
   const [errors, setErrors] = useState({});
   const [saving, setSaving] = useState(false);
@@ -127,7 +158,7 @@ export default function GenericManager({ config }) {
   };
 
   const openForm = (data) => {
-    setTranscript(''); setTranscriptOriginal(''); setSaveNote('');
+    setTranscript(''); setTranscriptOriginal(''); setSaveNote(''); setAiNow(null);
     if (config.transcript && data.id) {
       setTranscriptLoading(true);
       backend.rpc('get_sermon_transcript', { p_sermon_id: Number(data.id) }).then(res => {
@@ -358,6 +389,13 @@ export default function GenericManager({ config }) {
                 <input type="checkbox" checked={aiAfterSave} onChange={(e) => setAiAfterSave(e.target.checked)} className="w-5 h-5 accent-[#c74f2f]" />
                 When I save a new or changed transcript, have the AI write the description and choose categories if they are blank
               </label>
+              <div className="mt-4 flex flex-wrap items-center gap-3">
+                <button type="button" onClick={readNow} disabled={aiNow?.busy || transcriptLoading} className="px-5 py-3 rounded-lg bg-[#1e2522] text-white font-bold disabled:opacity-50">
+                  {aiNow?.busy ? 'Working' : 'Have the AI read it now'}
+                </button>
+                <span className="text-sm text-black">Saves the transcript and writes a new description and categories now, replacing the ones above.</span>
+              </div>
+              {aiNow && <p role={aiNow.error ? 'alert' : 'status'} className={`mt-3 text-sm font-semibold ${aiNow.error ? 'text-[#c74f2f]' : ''}`}>{aiNow.busy ? aiNow.text : aiNow.error || aiNow.done}</p>}
             </div>
           )}
           {saveNote && <p role="status" className="text-sm font-semibold">{saveNote}</p>}
