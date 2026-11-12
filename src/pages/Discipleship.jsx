@@ -1,5 +1,6 @@
 import React from 'react';
 import usePageMeta from '../hooks/usePageMeta';
+import useIsDesktop from '../hooks/useIsDesktop';
 import { useSite } from '../settings';
 import { DISCIPLESHIP_FAQ as FAQ } from '../content/faqs';
 import { Section, SectionHeader, PageHeader, PageNav, Accordion, Band, Panel, PhotoSplit, PhotoBand } from '../components/ui';
@@ -27,6 +28,7 @@ const GROUPS = [
 export default function Discipleship() {
   usePageMeta('discipleship');
   const SITE = useSite();
+  const desktop = useIsDesktop();
   return (
     <>
       <PageHeader kicker="Discipleship" title="Adult Discipleship Training" intro="Sunday morning classes where adults learn to know God, share life, and serve others." />
@@ -62,22 +64,42 @@ export default function Discipleship() {
       </PhotoBand>
 
       <Section tone="white">
-        <div className="grid md:grid-cols-3 gap-6">
-          {GROUPS.map(g => (
-            <div key={g.name} className="fcard !p-8 md:!p-10">
-              <h3 className="text-3xl md:text-4xl">{g.name}</h3>
-              <span className="block mt-3 font-serif italic font-normal text-[1rem] leading-snug text-black">{g.tagline}</span>
-              <dl className="mt-8 space-y-7">
-                {g.practices.map(([t, d]) => (
-                  <div key={t}>
-                    <dt className="font-display font-bold text-xl text-[#c74f2f] leading-tight">{t}</dt>
-                    <dd className="mt-1.5 text-[1rem] leading-snug text-black">{d}</dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
-          ))}
-        </div>
+        {desktop ? (
+          <div className="grid md:grid-cols-3 gap-6">
+            {GROUPS.map(g => (
+              <div key={g.name} className="fcard !p-8 md:!p-10">
+                <h3 className="text-3xl md:text-4xl">{g.name}</h3>
+                <span className="block mt-3 font-serif italic font-normal text-[1rem] leading-snug text-black">{g.tagline}</span>
+                <dl className="mt-8 space-y-7">
+                  {g.practices.map(([t, d]) => (
+                    <div key={t}>
+                      <dt className="font-display font-bold text-xl text-[#c74f2f] leading-tight">{t}</dt>
+                      <dd className="mt-1.5 text-[1rem] leading-snug text-black">{d}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <Accordion group="practices" items={GROUPS.map(g => ({
+            id: `practices-${g.name.toLowerCase().replace(/[^a-z]+/g, '-')}`,
+            title: g.name,
+            content: (
+              <>
+                <p className="font-serif italic text-[1rem] leading-snug text-black">{g.tagline}</p>
+                <dl className="mt-4 space-y-5">
+                  {g.practices.map(([pt, pd]) => (
+                    <div key={pt}>
+                      <dt className="font-display font-bold text-xl text-[#c74f2f] leading-tight">{pt}</dt>
+                      <dd className="mt-1 text-[1rem] leading-snug text-black">{pd}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </>
+            ),
+          }))} />
+        )}
       </Section>
 
       <Section tone="gray" id="values">

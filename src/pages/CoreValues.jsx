@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import usePageMeta from '../hooks/usePageMeta';
+import useIsDesktop from '../hooks/useIsDesktop';
 import { usePhoto } from '../photos';
 import { CORE_VALUES, CORE_VALUES_INTRO, INSIDE_OUT, GROWING } from '../content/values';
 import { Btn, Section, SectionHeader, PageHeader, PhotoBand } from '../components/ui';
@@ -95,20 +96,6 @@ function ValueList() {
       })}
     </ul>
   );
-}
-
-function useIsDesktop() {
-  const q = '(min-width: 1024px)';
-  const [yes, setYes] = useState(() => typeof window !== 'undefined' && window.matchMedia ? window.matchMedia(q).matches : false);
-  useEffect(() => {
-    if (!window.matchMedia) return undefined;
-    const m = window.matchMedia(q);
-    const on = () => setYes(m.matches);
-    on();
-    m.addEventListener('change', on);
-    return () => m.removeEventListener('change', on);
-  }, []);
-  return yes;
 }
 
 function ValueExplorer() {
