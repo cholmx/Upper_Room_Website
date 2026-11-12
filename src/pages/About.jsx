@@ -36,10 +36,10 @@ export default function About() {
 
       <Section tone="gray">
         <div className="max-w-3xl">
-          <p className="kicker text-[#c74f2f]">Who we are</p>
-          <h2 className="text-3xl md:text-5xl mb-5">An ancient-future church</h2>
+          <h2 className="text-3xl md:text-5xl mb-5">Who we are</h2>
           <div className={`space-y-4 ${P}`}>
-            <p>We are evangelical Christians recovering historic practices from the early church and the monastic traditions. Our roots are Pentecostal and charismatic, and we keep full belief in the Spirit’s present work. Over the years we have added theological depth, historic grounding, and attention to creation and culture.</p>
+            <p>We are evangelical Christians with Pentecostal and charismatic roots. We still believe the Holy Spirit is at work today, and we pray for healing, listen for God’s voice, and expect Him to move.</p>
+            <p>Along the way we have gone back to what Christians have practiced since the early church: Scripture, prayer, Sabbath, fasting, and unhurried time with God. We think the church’s long history has a lot to teach us, and we care about creation, culture, and the city we live in.</p>
           </div>
         </div>
         <ul className="grid md:grid-cols-2 gap-5 md:gap-6 mt-10">
