@@ -6,6 +6,7 @@ import SettingsManager from './SettingsManager';
 import ActivityLog from './ActivityLog';
 import SitePhotosManager from './SitePhotosManager';
 import WelcomeList from './WelcomeList';
+import WeeklyEmail from './WeeklyEmail';
 import FormSubmissionsManager from './FormSubmissionsManager';
 import { useAuth } from '../../auth';
 import useNoIndex from '../../hooks/useNoIndex';
@@ -305,6 +306,8 @@ const ContentStudio = () => {
         return <ActivityLog />;
       case 'welcomeList':
         return <WelcomeList />;
+      case 'weeklyEmail':
+        return <WeeklyEmail />;
       default:
         return TAB_CONFIGS[activeTab] ? <GenericManager key={activeTab} config={TAB_CONFIGS[activeTab]} /> : null;
     }
@@ -315,6 +318,7 @@ const ContentStudio = () => {
     'Inbox': [
       { key: 'forms', label: 'Form Submissions', icon: FiMail },
       { key: 'welcomeList', label: 'Welcome List', icon: FiUsers },
+      { key: 'weeklyEmail', label: 'Weekly Email', icon: FiMail },
       { key: 'welcomeSteps', label: 'Welcome Emails', icon: FiMail },
     ],
     'Site': [

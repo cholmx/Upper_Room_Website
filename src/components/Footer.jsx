@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { FOOTER_LINKS } from '../content/nav';
 import { useSite } from '../settings';
 import { Btn } from './ui';
+import WeeklySignup from './WeeklySignup';
 
 
 const MORE = [
@@ -39,6 +40,7 @@ export default function Footer() {
           <Btn href={SITE.googleMapsUrl} variant="light">Get Directions</Btn>
         </div>
       </div>
+      <WeeklySignup variant="footer" source="Footer" />
       <div className="px-6 md:px-10 py-14 md:py-20 flex flex-wrap gap-12 justify-between items-start relative z-10">
         <div className="max-w-[26ch]">
           <h2 className="text-[1.4rem] font-normal text-[#eaa235] mb-4">

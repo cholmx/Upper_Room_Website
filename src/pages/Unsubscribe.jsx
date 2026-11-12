@@ -8,24 +8,26 @@ import { Btn, Section } from '../components/ui';
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
-// The page behind the unsubscribe link at the bottom of each welcome email.
+// The page behind the unsubscribe link at the bottom of each welcome email and each weekly email.
 export default function Unsubscribe() {
   useNoIndex();
-  usePageMeta('Unsubscribe | Upper Room Fellowship', 'Stop the welcome emails from Upper Room Fellowship.');
+  usePageMeta('Unsubscribe | Upper Room Fellowship', 'Stop the emails from Upper Room Fellowship.');
   const SITE = useSite();
   const [params] = useSearchParams();
   const token = (params.get('t') || '').trim();
+  const weekly = params.get('list') === 'weekly';
+  const what = weekly ? 'weekly emails' : 'welcome emails';
   const [state, setState] = useState(UUID.test(token) ? 'working' : 'bad');
 
   useEffect(() => {
     if (!UUID.test(token)) return;
     let live = true;
-    backend.rpc('unsubscribe_welcome', { p_token: token }).then(res => {
+    backend.rpc(weekly ? 'unsubscribe_weekly' : 'unsubscribe_welcome', { p_token: token }).then(res => {
       if (!live) return;
       setState(res.status === 'success' && res.data ? 'done' : res.status === 'success' ? 'bad' : 'error');
     });
     return () => { live = false; };
-  }, [token]);
+  }, [token, weekly]);
 
   return (
     <Section tone="white" narrow>
@@ -34,7 +36,7 @@ export default function Unsubscribe() {
         {state === 'done' && (
           <>
             <h1 className="text-3xl md:text-5xl mb-4">You are unsubscribed</h1>
-            <p className="text-black max-w-[55ch]">You will not get any more welcome emails from Upper Room Fellowship. If you ever have a question or would like to visit, we would love to hear from you.</p>
+            <p className="text-black max-w-[55ch]">You will not get any more {what} from Upper Room Fellowship. If you ever have a question or would like to visit, we would love to hear from you.</p>
             <div className="mt-6"><Btn to="/" variant="primary">Go to the home page</Btn></div>
           </>
         )}
