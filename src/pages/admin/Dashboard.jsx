@@ -5,6 +5,7 @@ import GenericManager from './GenericManager';
 import SettingsManager from './SettingsManager';
 import ActivityLog from './ActivityLog';
 import SitePhotosManager from './SitePhotosManager';
+import WelcomeList from './WelcomeList';
 import ChecklistManager from './ChecklistManager';
 import FormSubmissionsManager from './FormSubmissionsManager';
 import { useAuth } from '../../auth';
@@ -202,27 +203,6 @@ const TAB_CONFIGS = {
       { name: 'published', label: 'Published', type: 'checkbox', defaultChecked: true, help: 'Visible on the website' },
     ]
   },
-  welcomeList: {
-    table: 'welcome_contacts_church',
-    title: 'Welcome List',
-    titleField: 'email',
-    bulkAdd: true,
-    pageSize: 100,
-    sortItems: (items) => [...items].sort((a, b) => b.id - a.id),
-    columns: ['name', 'email', 'source', 'status', 'next_step'],
-    fields: [
-      { name: 'name', label: 'Name', type: 'text' },
-      { name: 'email', label: 'Email', type: 'email', required: true },
-      { name: 'phone', label: 'Phone (optional)', type: 'text' },
-      { name: 'source', label: 'Where they came from', type: 'select', options: ['Paper card', 'Connect Card', 'Contact form', 'Other'].map(v => ({ value: v, label: v })) },
-      { name: 'status', label: 'Welcome emails', type: 'select', options: [
-        { value: 'active', label: 'Active (they get the emails)' },
-        { value: 'paused', label: 'Paused (no emails for now)' },
-        { value: 'finished', label: 'Finished (got them all)' },
-        { value: 'unsubscribed', label: 'Unsubscribed (never email again)' },
-      ] },
-    ]
-  },
   welcomeSteps: {
     table: 'welcome_steps_church',
     title: 'Welcome Emails',
@@ -339,6 +319,8 @@ const ContentStudio = () => {
         return <SettingsManager />;
       case 'activity':
         return <ActivityLog />;
+      case 'welcomeList':
+        return <WelcomeList />;
       default:
         return TAB_CONFIGS[activeTab] ? <GenericManager key={activeTab} config={TAB_CONFIGS[activeTab]} /> : null;
     }

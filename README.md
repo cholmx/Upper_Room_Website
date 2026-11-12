@@ -228,9 +228,9 @@ Transcripts live in `sermon_transcripts_church`, which only signed-in staff can 
 
 ## Welcome email series
 
-People who fill out the Connect Card or the contact form join a short series of welcome emails, and so does anyone added by hand from a paper contact card. Four starting emails are included (day 0, 3, 7 and 14). In the admin:
+People who fill out the Connect Card or the contact form join a short series of welcome emails, and so does anyone added by hand from a paper contact card. Five casual starting emails are included (day 0, 3, 7, 14 and 21). In the admin:
 
 - **Welcome Emails** (Inbox group): edit, reorder, turn off or add emails, change when each is sent, and send yourself a test.
-- **Welcome List**: everyone in the series, with their status. Use "Add people from paper contact cards" to paste many at once (name, email, phone per line), or Add New for one. Set someone to Paused or Unsubscribed to stop their emails.
+- **Welcome List**: add a new person with the form at the top (their first email goes out right away), or paste a stack of paper cards. A summary shows how many people are waiting for each email, and every row shows how far along the person is, what is next and when, with buttons to send the next email now, pause, resume, start over, stop emails or remove.
 
-Each email ends with the church address and an unsubscribe link (`/unsubscribe?t=...`), and anyone who unsubscribes is never added again. The sending uses the Resend setup above. Apply `20261114120000_welcome_sequence.sql`.
+Each email ends with the church address and an unsubscribe link (`/unsubscribe?t=...`), and anyone who unsubscribes is never added again. The sending uses the Resend setup above. Apply `20261114120000_welcome_sequence.sql` and then `20261115120000_welcome_casual_and_progress.sql`.
