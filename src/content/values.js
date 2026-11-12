@@ -1,46 +1,53 @@
 // The core values. Keep the wording free of em dashes.
-export const CORE_VALUES_INTRO = 'When what matters to God becomes precious to us, transformation follows. Our six values are practical ways to follow Jesus together and live the abundant life He promised, in His presence.';
+export const CORE_VALUES_INTRO = 'When what matters to God becomes precious to us, transformation follows. Our six values are practical ways to live the abundant life Jesus promised, together, in His presence.';
 
 export const INSIDE_OUT = 'Lasting change begins in the heart. As our hearts line up with God’s heart, we stop chasing perfection and let Him do the work. His priorities become ours, and we show more of Jesus at home, at work, and across our community.';
 
 export const GROWING = 'These values take practice, and our Values In The Kingdom classes in Adult Discipleship Training walk through them together. Discipleship to Jesus is learned over time and at an unhurried pace. Whether you are exploring faith or have followed Jesus for decades, there is a next step for you. Psalm 58:11 promises a reward for those who live for God, and we have seen that play out in our own lives.';
 
-// Each value has a short definition (body), things we do (practices), and a question to sit with.
+// Each value has a "We thrive" statement (thrive), a short explanation (body, one string per paragraph),
+// the things we do (practices), and a question to sit with. The first three parts are the church's own wording.
 export const CORE_VALUES = [
   {
-    id: 'relationships', n: 1, title: 'Pursuing Healthy Relationships', short: 'Honest, honoring community',
-    body: 'God is relational at His core, and He made us for honest, honoring community. We show up as ourselves, with kindness and honor, and we take the risk of being known. When conflict comes, we pursue reconciliation. Everyone can belong here before they believe.',
-    practices: ['Point out the gold in each other.', 'Listen before we respond.', 'Set boundaries that protect us without walling people out.', 'Give the grace we have received.'],
+    id: 'relationships', n: 1, title: 'Pursuing Healthy Relationships',
+    thrive: 'We thrive through relationships with others as we show up authentically, with kindness and with honor. Living this way creates invitational and nurturing communities that love genuinely, risk vulnerability, and communicate effectively.',
+    body: ['When conflicts arise, we choose reconciliation over division. We celebrate diversity and create spaces where everyone can belong before they believe. By pursuing healthy relationships, we reflect the heart of God who is relational at His core.'],
+    practices: ['Creating a culture of honor where we call out the gold in each other', 'Developing listening skills that seek understanding before resolution', 'Establishing clear boundaries that protect our hearts without building walls', 'Risking vulnerability that leads to genuine connection', 'Extending grace that reflects how God has been gracious to us'],
     question: 'Who in your life could use your honest, unhurried attention this week?',
   },
   {
-    id: 'wholeness', n: 2, title: 'Accessing Abundant Wholeness', short: 'Healing for the whole person',
-    body: 'Jesus paid for everything we need, and that opens the way to complete salvation, healing, and deliverance. God wants His people whole in every area of life, spiritually, emotionally, physically, and relationally. Faith is embodied, so wholeness includes our bodies, our minds, and our rhythms of rest.',
-    practices: ['Live from abundance with an inheritance mindset.', 'Receive God’s healing for old wounds and current struggles.', 'Care for our bodies and minds alongside prayer.', 'Pass on the wholeness we have received.'],
+    id: 'wholeness', n: 2, title: 'Accessing Abundant Wholeness',
+    thrive: 'We thrive in complete joy and are able to live from abundance because Jesus loves us and paid for everything we need by His work on the cross, opening the way for our complete salvation, complete healing, and complete deliverance.',
+    body: ['We believe God’s desire is for His people to experience wholeness in every area of life: spiritually, emotionally, physically, and relationally. This fullness isn’t just for a select few but is available to everyone who follows Jesus.'],
+    practices: ['Approaching life from a position of having what we need, not lack', 'Receiving God’s healing for past wounds and present struggles', 'Embracing both divine intervention and wise stewardship of our bodies and minds', 'Living with an inheritance mindset rather than an orphan mentality', 'Extending the wholeness we’ve received to others around us'],
     question: 'Where do you need God’s healing right now, and who could pray with you?',
   },
   {
-    id: 'greatness', n: 3, title: 'Knowing Our Greatness', short: 'Gifts, worth, and purpose',
-    body: 'Every person is made in God’s image and carries great value and a God-given destiny. We help people find their spiritual gifts and natural talents, and then we give them real opportunities to use them. Nobody watches from the sidelines here.',
-    practices: ['Develop the gifts God has given each of us.', 'Serve from a secure identity with no need to earn approval.', 'Pursue excellence without perfectionism.', 'Open doors for everyone to contribute.'],
+    id: 'greatness', n: 3, title: 'Knowing Our Greatness',
+    thrive: 'We thrive as we serve with God by ministering in our unique and personal way to the world around us with excellence, believing there is no spectator Christianity and that inherent in every person is great value and destiny.',
+    body: ['We help people discover their spiritual gifts and natural talents, then provide opportunities for them to use these gifts to serve others. Each person has a God-given purpose that, when fulfilled, brings deep satisfaction and impacts the kingdom.'],
+    practices: ['Discovering and developing the unique gifts God has given each of us', 'Serving from a place of identity rather than to earn approval', 'Pursuing excellence without succumbing to perfectionism', 'Creating pathways for everyone to contribute meaningfully', 'Celebrating the diverse ways God’s image is reflected through each person'],
     question: 'What gift has God given you that you have been holding back?',
   },
   {
-    id: 'supernatural', n: 4, title: 'Owning a Supernatural Lifestyle', short: 'Partnering with the Holy Spirit',
-    body: 'We partner with the Holy Spirit, who is active and available today. We expect faith, miracles, signs, and wonders, because the power that raised Jesus from the dead is at work now. We make room for healing prayer, prophetic ministry, and Spirit-led worship, and we keep it grounded in Scripture and good character.',
-    practices: ['Expect God to work through us beyond what we could explain.', 'Learn to recognize His voice and respond.', 'Pray boldly for healing and breakthrough.', 'Take faith-filled risks when He prompts us.', 'Keep our expectations grounded in Scripture and good character.'],
+    id: 'supernatural', n: 4, title: 'Owning a Supernatural Lifestyle',
+    thrive: 'We thrive in risk, faith, miracles, signs, and wonders as we partner with the Holy Spirit, being freed to live a supernatural life instead of living in the brokenness of sin and religious bondage.',
+    body: ['The same power that raised Jesus from the dead is available to believers today. We create space for God to move supernaturally through prayer for healing, prophetic ministry, and Spirit-led worship. The supernatural should be normal for Christians.'],
+    practices: ['Expecting God to work in and through us in ways that exceed natural explanation', 'Developing spiritual sensitivity to hear God’s voice and respond to His leading', 'Praying boldly for healing, miracles, and breakthrough', 'Taking faith-filled risks when God prompts us to step out', 'Balancing supernatural expectation with biblical wisdom and character'],
     question: 'What might God be prompting you to do or say that you have been putting off?',
   },
   {
-    id: 'presence', n: 5, title: 'Treasuring His Presence', short: 'Daily time with God',
-    body: 'We grow close to God through worship, prayer, and time in His Word. Spiritual practices such as Sabbath, solitude, and fasting are the ordinary ways we are formed, and hurry works against them. That closeness shapes a kingdom mindset, so we can live loved and fully alive.',
-    practices: ['Build daily rhythms that make room for God, including slowing down on purpose.', 'Treat worship as relationship.', 'Put His presence ahead of programs and polish.', 'Create places where anyone can meet Him.'],
+    id: 'presence', n: 5, title: 'Treasuring His Presence',
+    thrive: 'We thrive in a growing relationship with God through daily interaction with Him in worship, prayer, and reading the Word. This relationship brings about a kingdom mindset that allows us to live loved and causes us to be fully alive.',
+    body: ['When we experience God’s presence, transformation happens naturally. We prioritize creating environments where people can encounter God personally, whether in corporate worship or private devotion.'],
+    practices: ['Cultivating daily rhythms that create space to connect with God', 'Approaching worship as relationship, not religious duty', 'Prioritizing God’s presence over programs and performance', 'Creating environments where encountering God is accessible to all', 'Allowing His presence to transform us from the inside out'],
     question: 'What is one thing you could slow down or set aside this week to make room for God?',
   },
   {
-    id: 'gospel', n: 6, title: 'Living the Gospel', short: 'Good news in every day',
-    body: 'We share the life of Christ through servanthood and generosity, so our friends, families, and neighbors come to know His love and salvation. The kingdom is present and still coming, and the good news belongs to every day of the week.',
-    practices: ['Serve without strings attached.', 'Give generously of our time, talent, and money.', 'Share our faith through words and actions.', 'Stand with the marginalized.', 'Work to be good news in our neighborhoods, workplaces, and city.'],
+    id: 'gospel', n: 6, title: 'Living the Gospel',
+    thrive: 'We thrive as we model and share the life of Christ through a life of servanthood and overwhelming generosity, with a desire that our friends, families, and communities know the amazing love and salvation of Jesus.',
+    body: ['The good news isn’t just for Sundays. It’s for everyday life. We demonstrate God’s love through practical acts of service, generous giving, and sharing our faith with others in a natural, relational way.'],
+    practices: ['Serving others with no strings attached', 'Giving generously of our time, talent, and treasure', 'Sharing our faith through both words and actions', 'Advocating for justice and standing with the marginalized', 'Being good news to our neighborhoods, workplaces, and city'],
     question: 'Who in your neighborhood or workplace could you serve this week with no strings attached?',
   },
 ];

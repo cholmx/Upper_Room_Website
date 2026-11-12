@@ -75,7 +75,6 @@ function ValueExplorer() {
               <span className={`font-display font-bold text-2xl w-9 shrink-0 ${on ? 'text-[#eaa235]' : 'text-[#c74f2f]'}`}>{String(val.n).padStart(2, '0')}</span>
               <span className="block">
                 <span className="block font-display font-bold text-base md:text-lg leading-tight">{val.title}</span>
-                <span className={`hidden lg:block mt-1 font-sans font-normal text-sm leading-snug ${on ? 'text-white/80' : 'text-black/70'}`}>{val.short}</span>
               </span>
             </button>
           );
@@ -91,9 +90,12 @@ function ValueExplorer() {
           </div>
         </div>
 
-        <p className="mt-6 text-[1rem] leading-relaxed text-black">{v.body}</p>
+        <p className="mt-6 lead">{v.thrive}</p>
+        <div className="mt-4 space-y-4 text-[1rem] leading-relaxed text-black">
+          {v.body.map(t => <p key={t}>{t}</p>)}
+        </div>
 
-        <h3 className="mt-8 mb-3 text-xl">In practice, we</h3>
+        <h3 className="mt-8 mb-3 text-xl">In practice, this means:</h3>
         <ul className="space-y-2">
           {v.practices.map(p => (
             <li key={p} className="flex gap-3 text-[1rem] leading-snug text-black">
