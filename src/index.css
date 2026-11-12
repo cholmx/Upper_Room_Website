@@ -478,3 +478,8 @@ details.u-acc.neu-acc[open] { background: #ffffff; box-shadow: var(--shadow); }
   background-size: 310px 302px;
   background-blend-mode: multiply;
 }
+
+/* Core values explorer: the panel eases in when a value is chosen. */
+.value-panel { animation: valueIn 0.3s ease; }
+@keyframes valueIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .value-panel { animation: none; } }
