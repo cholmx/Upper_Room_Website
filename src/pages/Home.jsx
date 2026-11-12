@@ -64,7 +64,7 @@ export default function Home() {
             <p className={`mb-4 font-semibold ${P}`}>Join us Sundays at 10:30am at 500 Sponseller Road in Columbiana, Ohio.</p>
             <div className={`space-y-4 text-black ${P}`}>
               <p>We started in 1971 with a handful of believers meeting in a room above a veterinarian’s office in Columbiana. Fifty-five years later, we are still gathering here, still learning, and still looking for ways to serve the city we love.</p>
-              <p>We are a Spirit-filled church that also loves the old ways of following Jesus: prayer, Scripture, Sabbath, and the other practices Christians have kept for centuries. We take our time with it, because knowing Jesus can’t be rushed.</p>
+              <p>We are a Spirit-filled church that also loves the old practices of following Jesus, like prayer, Scripture, and Sabbath. Christians have kept them for centuries, and we are still learning from them.</p>
               <p>On Sundays, adult and kids classes begin at 9:30am. Worship follows at 10:30am with live music, clear Bible teaching, and time for coffee and conversation. Kids from birth through 5th grade have their own programs, and Wednesday evenings bring adult classes, youth groups, and childcare. Whether you are new to faith, returning after a long absence, or looking for a church home, we would be glad to meet you.</p>
             </div>
             <div className="mt-8"><Btn to="/plan-your-visit" variant="primary">Plan Your Visit</Btn></div>

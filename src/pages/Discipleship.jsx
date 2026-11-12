@@ -38,7 +38,7 @@ export default function Discipleship() {
       <Section tone="white" id="classes">
         <div className="max-w-3xl">
         <p className="lead">Every Sunday at 9:30am, one hour before worship, adults meet to learn and practice what it means to follow Jesus together.</p>
-        <p className={`mt-4 ${P}`}>Discipleship to Jesus means learning from Him how to live. Spiritual practices are the ordinary way that happens, and they push back against the hurry and distraction that crowd Him out.</p>
+        <p className={`mt-4 ${P}`}>Discipleship to Jesus means learning from Him how to live. Spiritual practices are how that happens day to day, and they give us a way to slow down when life is hurried.</p>
         <p className={`mt-4 ${P}`}>The classes follow a five-year plan. It focuses on nine spiritual practices and the core values of our church. There are more spiritual practices than these, and these nine are the ones we use for this training track. The plan repeats, so you can join at any point and still cover everything.</p>
       </div>
       </Section>
@@ -60,7 +60,7 @@ export default function Discipleship() {
 
       <PhotoBand slot="discipleship-practices" id="practices">
         <h2 className="text-3xl md:text-5xl mb-5">Nine practices we focus on</h2>
-        <p className="text-base leading-relaxed">A spiritual practice is a regular habit that helps you grow closer to God. People have used these habits since the early church, and they slow us down enough to be with Jesus. There are many of them, and these nine are the ones we focus on in this training track. We group them under our three words: Know God, Share Life, and Serve Others.</p>
+        <p className="text-base leading-relaxed">A spiritual practice is a regular habit that helps you grow closer to God. Christians have used these habits since the early church. There are many of them, and these nine are the ones we focus on in this training track. We group them under our three words: Know God, Share Life, and Serve Others.</p>
       </PhotoBand>
 
       <Section tone="white">
