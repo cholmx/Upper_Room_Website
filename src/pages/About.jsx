@@ -38,7 +38,7 @@ export default function About() {
         <div className="max-w-3xl">
           <h2 className="text-3xl md:text-5xl mb-5">Who we are</h2>
           <div className={`space-y-4 ${P}`}>
-            <p>Upper Room Fellowship is an ancient-future church. That means we draw on the ancient ways of the church, like Scripture, prayer, Sabbath, and fasting, and bring them into life today.</p>
+            <p>Upper Room Fellowship draws on the ancient ways of the church, like Scripture, prayer, Sabbath, and fasting, and brings them into life today.</p>
             <p>We are evangelical Christians who believe the Holy Spirit is at work today. We pray for healing, listen for God’s voice, and expect Him to move. We also care about creation, culture, and the city we live in.</p>
           </div>
         </div>

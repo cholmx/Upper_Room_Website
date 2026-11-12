@@ -1,8 +1,8 @@
 // Title tags stay near 60 characters and descriptions near 160 (see seo.test.js).
 export const SEO = {
-  home: ['Upper Room Fellowship | A Spirit-Led Church in Columbiana, Ohio', 'An ancient-future church in Columbiana, Ohio. Sundays at 10:30am: Spirit-led worship, historic practices, discipleship to Jesus, and kids programs.'],
+  home: ['Upper Room Fellowship | A Spirit-Led Church in Columbiana, Ohio', 'Sundays at 10:30am in Columbiana, Ohio. Spirit-led worship, the ancient practices of the church, discipleship to Jesus, and kids programs.'],
   plan: ['New Here? What to Expect on a Sunday | Upper Room Fellowship', 'First time at Upper Room Fellowship? See what a Sunday looks like, how kids check-in works, and how to let us know you are coming.'],
-  about: ['About Upper Room Fellowship | Our Story and Beliefs', 'How Upper Room Fellowship began above a Columbiana veterinarian’s office in 1971, why we are an ancient-future church, and what we believe.'],
+  about: ['About Upper Room Fellowship | Our Story and Beliefs', 'How Upper Room Fellowship began above a Columbiana veterinarian’s office in 1971, how we draw on the ancient ways of the church, and what we believe.'],
   values: ['Our Core Values | Upper Room Fellowship', 'Six values shape Upper Room Fellowship, from healthy relationships to living the Gospel.'],
   discipleship: ['Adult Discipleship Training | Upper Room Fellowship', 'Sunday morning classes for adults on spiritual practices like prayer, Scripture, and Sabbath, and on our core values. Find where to begin.'],
   sozo: ['Sozo Inner Healing Prayer Ministry | Upper Room Fellowship', 'Learn what Sozo inner healing prayer ministry is, what happens in a session, and how to request one in Columbiana.'],
