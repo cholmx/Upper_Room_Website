@@ -74,7 +74,7 @@ export default function Events() {
 
   return (
     <>
-      <PageHeader kicker="What is coming up" title="Events" intro="Gatherings, classes and ways to get connected at Upper Room Fellowship. Everyone is welcome, and first-time guests are especially welcome." />
+      <PageHeader kicker="What is coming up" title="Events" intro="Gatherings, classes and ways to get connected at Upper Room Fellowship." />
       <Section tone="white">
         {error ? <ErrorState message={error} onRetry={reload} /> : loading && !data ? <CardSkeletons count={3} /> : (
           <>
