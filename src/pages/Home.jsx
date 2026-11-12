@@ -37,7 +37,7 @@ export default function Home() {
   const pod = useFetch('read/podcast_episodes_church?sort=published_at:desc&limit=1');
   const episode = (pod.data || [])[0];
   const eventsFetch = useFetch('read/urf_events_church?sort=event_date:asc');
-  const comingUp = useMemo(() => upcoming(eventsFetch.data).slice(0, 3), [eventsFetch.data]);
+  const comingUp = useMemo(() => upcoming(eventsFetch.data).slice(0, 4), [eventsFetch.data]);
 
   return (
     <>
@@ -166,7 +166,7 @@ export default function Home() {
             <h2 className="text-3xl md:text-5xl">Coming up</h2>
             <Link to="/events" className="inline-flex items-center min-h-[44px] font-display font-bold text-[0.95rem] underline underline-offset-4">See all events</Link>
           </div>
-          <ul className="grid md:grid-cols-3 gap-4 md:gap-6">
+          <ul className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             {comingUp.map(({ ev, date }) => (
               <li key={ev.id} className="bg-white rounded-[10px] elev-1 p-5 md:p-6">
                 <Link to="/events" className="flex gap-4 items-start hover:text-[#c74f2f]">
