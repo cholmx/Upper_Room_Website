@@ -66,9 +66,7 @@ interest, stories) post to `form_submissions_church` and appear in the admin und
 staff can mark them handled, reply by email, export a CSV, or delete them. Each form has a honeypot field and a
 short timing check against bots.
 
-**Submissions are stored, but not emailed.** Sending a copy to info@urfellowship.com needs a server-side step
-(a Supabase database webhook or edge function with an email service). Until that is added, someone has to check the
-Form Submissions tab.
+**Submissions are stored and emailed.** Each one is saved in Form Submissions and a notice is emailed through Resend (see Email (Resend) below). Until Resend is set up, someone has to check the Form Submissions tab.
 
 ## Database and permissions
 
