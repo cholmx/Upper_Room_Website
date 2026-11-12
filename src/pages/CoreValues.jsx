@@ -40,8 +40,11 @@ function ValueExplorer() {
     try { window.history.replaceState(null, '', `#${CORE_VALUES[next].id}`); } catch { /* ignore */ }
     if (focus && tabs.current[next]) tabs.current[next].focus();
     else if (!focus && typeof window !== 'undefined' && window.innerWidth < 1024) {
-      const el = document.getElementById('value-panel');
-      if (el) setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 0);
+      // Look the panel up after React has swapped it in.
+      setTimeout(() => {
+        const el = document.getElementById('value-panel');
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 50);
     }
   };
 
@@ -53,8 +56,8 @@ function ValueExplorer() {
   };
 
   return (
-    <div className="grid lg:grid-cols-[340px_1fr] gap-6 lg:gap-10 items-start">
-      <div role="tablist" aria-label="Core values" className="grid grid-cols-2 lg:grid-cols-1 gap-3">
+    <div className="grid grid-cols-[minmax(0,1fr)] lg:grid-cols-[340px_minmax(0,1fr)] gap-6 lg:gap-10 items-start">
+      <div role="tablist" aria-label="Core values" className="grid grid-cols-1 min-[360px]:grid-cols-[repeat(2,minmax(0,1fr))] lg:grid-cols-1 gap-2.5 md:gap-3">
         {CORE_VALUES.map((val, i) => {
           const on = i === active;
           return (
@@ -68,23 +71,23 @@ function ValueExplorer() {
               tabIndex={on ? 0 : -1}
               onClick={() => select(i)}
               onKeyDown={e => onKey(e, i)}
-              className={`text-left rounded-[10px] p-4 flex items-center gap-4 min-h-[72px] transition-colors ${on ? 'bg-[#1e2522] text-white shadow-lg' : 'bg-white text-[#1e2522] hover:bg-white/70'}`}
+              className={`text-left rounded-[10px] p-3 md:p-4 flex flex-row items-center gap-3 min-[360px]:flex-col min-[360px]:items-start min-[360px]:gap-1 lg:flex-row lg:items-center lg:gap-4 min-h-[72px] transition-colors ${on ? 'bg-[#1e2522] text-white shadow-lg' : 'bg-white text-[#1e2522] hover:bg-white/70'}`}
             >
-              <span className={`font-display font-bold text-2xl w-9 shrink-0 ${on ? 'text-[#eaa235]' : 'text-[#c74f2f]'}`}>{String(val.n).padStart(2, '0')}</span>
+              <span className={`font-display font-bold text-xl md:text-2xl lg:w-9 shrink-0 ${on ? 'text-[#eaa235]' : 'text-[#c74f2f]'}`}>{String(val.n).padStart(2, '0')}</span>
               <span className="block">
-                <span className="block font-display font-bold text-base md:text-lg leading-tight">{val.title}</span>
+                <span className="block font-display font-bold text-[0.95rem] md:text-lg leading-tight">{val.title}</span>
               </span>
             </button>
           );
         })}
       </div>
 
-      <div id="value-panel" role="tabpanel" aria-labelledby={`value-tab-${v.id}`} tabIndex={0} className="bg-white rounded-[10px] p-6 md:p-10 value-panel" key={v.id}>
-        <div className="flex items-center gap-5 md:gap-7">
-          <ValueIcon n={v.n} size={96} />
-          <div>
+      <div id="value-panel" role="tabpanel" style={{ scrollMarginTop: 96 }} aria-labelledby={`value-tab-${v.id}`} tabIndex={0} className="bg-white rounded-[10px] p-5 min-[400px]:p-6 md:p-10 value-panel min-w-0" key={v.id}>
+        <div className="flex flex-col items-start gap-3 min-[400px]:flex-row min-[400px]:items-center min-[400px]:gap-5 md:gap-7">
+          <ValueIcon n={v.n} size={80} />
+          <div className="min-w-0">
             <p className="kicker text-[#c74f2f] !mb-1">Value {v.n} of {CORE_VALUES.length}</p>
-            <h2 className="text-3xl md:text-4xl leading-[1.05] md:leading-[1.05]">{v.title}</h2>
+            <h2 className="text-2xl min-[400px]:text-3xl md:text-4xl leading-[1.05] md:leading-[1.05] break-words">{v.title}</h2>
           </div>
         </div>
 
