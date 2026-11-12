@@ -60,3 +60,11 @@ describe('plain', () => {
     expect(plain('up—in the best way')).toBe('up, in the best way');
   });
 });
+
+describe('blurb', () => {
+  it('drops the event name repeated at the start of the description', async () => {
+    const { blurb } = await import('./events');
+    expect(blurb({ title: 'Young Adults Gathering', summary: 'Young Adults Gathering – The young adults will meet Friday.' })).toBe('The young adults will meet Friday.');
+    expect(blurb({ title: 'First Steps', summary: 'A short get-together for new people.' })).toBe('A short get-together for new people.');
+  });
+});

@@ -79,6 +79,18 @@ export const groupOf = (ev) => ev.ministry || (ev.scope === 'whole_church' ? 'Wh
 // Text from urf.life with dashes written as commas, to match the rest of this site.
 export const plain = (s) => String(s || '').replace(/\s*[\u2013\u2014]\s*/g, ', ');
 
+// The short description, without the event's own name repeated at the start (for example "Young Adults Gathering: The young adults...").
+export function blurb(ev) {
+  let s = String(ev.summary || ev.details || '').trim();
+  const t = String(ev.title || '').trim();
+  const norm = (x) => x.replace(/[\u2018\u2019]/g, "'").toLowerCase();
+  if (t && norm(s).startsWith(norm(t))) {
+    const rest = s.slice(t.length).replace(/^\s*[\u2013\u2014:,-]\s*/, '');
+    if (rest) s = rest.charAt(0).toUpperCase() + rest.slice(1);
+  }
+  return plain(s);
+}
+
 // Upcoming events with their next date, soonest first.
 export function upcoming(events, today = startOfToday()) {
   return (events || [])

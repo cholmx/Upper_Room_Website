@@ -5,7 +5,7 @@ import useJsonLd from '../hooks/useJsonLd';
 import { useSite } from '../settings';
 import { Btn, Section, PageHeader } from '../components/ui';
 import { CardSkeletons, ErrorState } from '../components/StateViews';
-import { upcoming, timeRange, frequencyLabel, groupOf, plain } from '../lib/events';
+import { upcoming, timeRange, frequencyLabel, groupOf, plain, blurb } from '../lib/events';
 import { safeUrl } from '../utils';
 
 const MONTH = (d) => d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
@@ -14,7 +14,7 @@ function Card({ ev, date }) {
   const time = timeRange(ev);
   const freq = frequencyLabel(ev);
   const link = safeUrl(ev.link);
-  const more = ev.details && ev.details !== ev.summary ? ev.details : '';
+  const more = ev.summary && ev.details && ev.details !== ev.summary ? ev.details : '';
   return (
     <li className="bg-white rounded-[10px] elev-1 p-5 md:p-6 flex gap-5">
       <div className="shrink-0 w-16 md:w-20 text-center" aria-hidden="true">
@@ -23,7 +23,7 @@ function Card({ ev, date }) {
         <div className="mt-1 text-xs text-black">{date.toLocaleDateString('en-US', { weekday: 'short' })}</div>
       </div>
       <div className="min-w-0 flex-1">
-        <h3 className="text-xl md:text-2xl leading-tight">{plain(ev.title)}</h3>
+        <h3 className="text-xl md:text-2xl leading-[1.05] md:leading-[1.05]">{plain(ev.title)}</h3>
         <p className="mt-1 text-sm text-black">
           {[date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }), time, ev.location].filter(Boolean).join('  |  ')}
         </p>
@@ -31,7 +31,7 @@ function Card({ ev, date }) {
           {freq && <span className="text-xs font-display font-bold px-3 py-1 rounded-full bg-[#EDE9DC]">{freq}</span>}
           {ev.ministry && <span className="text-xs font-display font-bold px-3 py-1 rounded-full bg-[#EDE9DC]">{ev.ministry}</span>}
         </div>
-        {ev.summary && <p className="mt-3 text-[1rem] leading-snug text-black">{plain(ev.summary)}</p>}
+        {(ev.summary || ev.details) && <p className="mt-3 text-[1rem] leading-snug text-black">{blurb(ev)}</p>}
         {more && (
           <details className="mt-3">
             <summary className="cursor-pointer text-sm font-semibold underline underline-offset-4">More details</summary>
