@@ -17,7 +17,6 @@ import { FiCalendar, FiUsers, FiHeart } from 'react-icons/fi';
 import { Btn, Section, Cards, Card, SlotImage, PhotoSplit, PhotoBand, MapEmbed } from '../components/ui';
 import LiteYouTube from '../components/LiteYouTube';
 import Spotlights from '../components/Spotlights';
-import WeeklySignup from '../components/WeeklySignup';
 import { worshipLine } from '../lib/worship';
 
 const P = 'text-[1rem] leading-relaxed';
@@ -253,10 +252,6 @@ export default function Home() {
           <footer className="mt-2 text-base font-serif not-italic">John 13:35</footer>
         </blockquote>
       </div>
-      </Section>
-
-      <Section tone="gray">
-        <WeeklySignup source="Home page" />
       </Section>
 
       <PhotoBand slot="home-contact">

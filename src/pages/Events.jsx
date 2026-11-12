@@ -7,7 +7,6 @@ import { Btn, Section, PageHeader } from '../components/ui';
 import { CardSkeletons, ErrorState } from '../components/StateViews';
 import { upcoming, timeRange, frequencyLabel, groupOf, plain, blurb } from '../lib/events';
 import { safeUrl } from '../utils';
-import WeeklySignup from '../components/WeeklySignup';
 
 const MONTH = (d) => d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
 
@@ -96,10 +95,6 @@ export default function Events() {
             ))}
           </>
         )}
-      </Section>
-
-      <Section tone="gray">
-        <WeeklySignup source="Events page" />
       </Section>
     </>
   );
