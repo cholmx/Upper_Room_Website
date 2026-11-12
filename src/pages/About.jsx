@@ -13,7 +13,6 @@ const CONVICTIONS = [
   ['Now and not yet', 'God’s kingdom is already present and is still coming in full.'],
   ['The Spirit is here', 'The Holy Spirit is active and available to us today.'],
   ['An embodied faith', 'Faith involves our bodies, our time, our work, and the places where we live.'],
-  ['The church’s past', 'We read the history of the church alongside Scripture and treat it as a resource.'],
   ['Formed on purpose', 'Phones, consumerism, and the pace of modern life shape people in ways that compete with the way of Jesus. We choose habits that shape us toward Him.'],
   ['Grace and truth', 'We avoid legalism and we avoid prosperity teaching.'],
 ];
