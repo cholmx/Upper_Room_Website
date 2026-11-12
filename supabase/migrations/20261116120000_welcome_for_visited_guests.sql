@@ -2,7 +2,7 @@
 # Welcome emails for people who have already visited
 
 Most people join the welcome emails at the church, after they have already been to a service, so the series no longer
-explains what a Sunday is like or links to Plan Your Visit. It is now four short, casual emails: glad to meet you
+explains what a Sunday is like or links to Plan Your Visit. It is now four short, casual emails. None of them promises that someone will be in touch by a certain time: glad to meet you
 (day 0), finding your people (day 3), hearing a message again (day 10) and a check-in (day 17).
 
 A starting email is only replaced if it still has the original text, so any email you edited yourself is left alone.
@@ -15,7 +15,7 @@ UPDATE public.welcome_steps_church SET delay_days = 0, subject = $b$Glad to meet
 
 Thanks for sharing your info with us. Whether you were with us this past Sunday or you're just getting to know us, we're really glad you're here.
 
-Someone from our welcome team will reach out within 48 hours. In the meantime, if you have a question about anything, like the kids' programs, classes, or how to get connected, just hit reply. It comes straight to us.
+If you have a question about anything, like the kids' programs, classes, or how to get connected, just hit reply. It comes straight to us.
 
 And next Sunday, stop by the Connection Center. We'd love to give you a little welcome gift and say hi.
 
