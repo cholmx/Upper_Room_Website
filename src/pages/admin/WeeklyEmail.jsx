@@ -187,11 +187,11 @@ export default function WeeklyEmail() {
             </div>
             <div>
               <label className="block text-sm font-semibold" htmlFor="weekly-blurb">Short summary of the message</label>
-              <p className="text-xs text-black mt-1">AI shortens the message summary to a sentence or two. It is written again only if the summary changes. Change it any way you like.</p>
+              <p className="text-xs text-black mt-1">AI writes a two or three sentence summary from the message transcript (or shortens the summary if there is no transcript). It is written again only if the summary or transcript changes. Change it any way you like.</p>
               <textarea id="weekly-blurb" rows={4} maxLength={600} value={blurb} onChange={(e) => setBlurb(e.target.value)} className={`${input} mt-2`} disabled={!preview.sermon_id} />
               <div className="mt-2 flex flex-wrap gap-2">
                 <button type="button" onClick={saveBlurb} disabled={busy !== '' || !preview.sermon_id} className={btn}>{busy === 'saveblurb' ? 'Saving' : 'Save summary'}</button>
-                <button type="button" onClick={writeBlurb} disabled={busy !== '' || !preview.sermon_id} className={btn}>{busy === 'aiblurb' ? 'Writing' : 'Shorten with AI'}</button>
+                <button type="button" onClick={writeBlurb} disabled={busy !== '' || !preview.sermon_id} className={btn}>{busy === 'aiblurb' ? 'Writing' : 'Write with AI'}</button>
               </div>
               {blurbNote && <p role="status" className="mt-2 text-sm font-semibold">{blurbNote}</p>}
 
