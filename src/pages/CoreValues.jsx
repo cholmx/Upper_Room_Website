@@ -25,7 +25,6 @@ function indexFromHash() {
 
 function ValueExplorer() {
   const [active, setActive] = useState(indexFromHash);
-  const [showQuestion, setShowQuestion] = useState(false);
   const tabs = useRef([]);
   const v = CORE_VALUES[active];
 
@@ -38,7 +37,6 @@ function ValueExplorer() {
   const select = (i, focus) => {
     const next = (i + CORE_VALUES.length) % CORE_VALUES.length;
     setActive(next);
-    setShowQuestion(false);
     try { window.history.replaceState(null, '', `#${CORE_VALUES[next].id}`); } catch { /* ignore */ }
     if (focus && tabs.current[next]) tabs.current[next].focus();
     else if (!focus && typeof window !== 'undefined' && window.innerWidth < 1024) {
@@ -105,20 +103,6 @@ function ValueExplorer() {
           ))}
         </ul>
 
-        <div className="mt-8">
-          <button
-            type="button"
-            aria-expanded={showQuestion}
-            onClick={() => setShowQuestion(s => !s)}
-            className="inline-flex items-center min-h-[44px] px-5 rounded-full bg-[#EDE9DC] hover:bg-[#1e2522]/15 font-display font-bold text-[#1e2522]"
-          >
-            {showQuestion ? 'Hide the question' : 'Sit with a question'}
-          </button>
-          {showQuestion && (
-            <p className="mt-4 rounded-[10px] bg-[#EDE9DC] p-5 font-serif italic text-[1.125rem] leading-relaxed text-black">{v.question}</p>
-          )}
-        </div>
-
         <div className="mt-8 pt-6 border-t border-[#1e2522]/10 flex items-center justify-between gap-3">
           <button type="button" onClick={() => select(active - 1)} className="inline-flex items-center min-h-[44px] px-4 rounded-full hover:bg-[#1e2522]/10 font-display font-bold text-[#1e2522]">
             <span aria-hidden="true" className="mr-2">&larr;</span>Previous
@@ -146,7 +130,7 @@ export default function CoreValues() {
       </Section>
 
       <Section tone="gray" id="values-explorer">
-        <SectionHeader title="Explore the six values" intro="Choose a value to see what it means, how we practice it, and a question to sit with." className="!mb-8" />
+        <SectionHeader title="Explore the six values" intro="Choose a value to see how we thrive in it and what it looks like in practice." className="!mb-8" />
         <ValueExplorer />
       </Section>
 
