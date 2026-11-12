@@ -51,6 +51,7 @@ export function mergeSettings(row) {
       buttonLabel: (row.hero_button_label || '').trim() || SITE.hero.buttonLabel,
       buttonUrl: (row.hero_button_url || '').trim() || SITE.hero.buttonUrl,
     },
+    campaignHome: row.campaign_home_on !== 0 && row.campaign_home_on !== false,
     announcementText: (row.announcement_text || '').trim(),
     announcementUrl: safeUrl(row.announcement_url),
     social,

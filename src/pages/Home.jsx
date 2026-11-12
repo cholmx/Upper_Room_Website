@@ -196,6 +196,7 @@ export default function Home() {
         </Cards>
       </Section>
 
+      {SITE.campaignHome !== false && (
       <PhotoBand slot="home-campaign" wide>
         <div className="grid md:grid-cols-5 gap-10 md:gap-14 items-center">
           <div className="md:col-span-3">
@@ -232,6 +233,7 @@ export default function Home() {
           </nav>
         </div>
       </PhotoBand>
+      )}
 
       <PhotoSplit tone="gray" slot="home-columbiana" side="left">
         <h2 className="text-3xl md:text-5xl mb-5">We love Columbiana</h2>

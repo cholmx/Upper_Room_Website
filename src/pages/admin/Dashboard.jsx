@@ -174,6 +174,7 @@ const TAB_CONFIGS = {
   },
   campaign: {
     table: 'campaign_items_church',
+    homeSwitch: true,
     title: 'Growth Campaign',
     titleField: 'title',
     pageSize: 100,
@@ -288,6 +289,13 @@ const TAB_CONFIGS = {
   },
 };
 
+// Screens that share one place in the menu. The first screen of each group is the main one, and the rest show as tabs above the content.
+const TAB_GROUPS = {
+  sermons: { label: 'Messages', tabs: [['sermons', 'Messages'], ['categories', 'Categories']] },
+  welcomeList: { label: 'Welcome', tabs: [['welcomeList', 'Welcome List'], ['welcomeSteps', 'Welcome Emails']] },
+};
+const groupFor = (key) => Object.keys(TAB_GROUPS).find(g => TAB_GROUPS[g].tabs.some(([k]) => k === key));
+
 const ContentStudio = () => {
   useNoIndex();
   const { user, logout } = useAuth();
@@ -317,9 +325,8 @@ const ContentStudio = () => {
   const TABS = {
     'Inbox': [
       { key: 'forms', label: 'Form Submissions', icon: FiMail },
-      { key: 'welcomeList', label: 'Welcome List', icon: FiUsers },
+      { key: 'welcomeList', label: 'Welcome', icon: FiUsers },
       { key: 'weeklyEmail', label: 'Weekly Email', icon: FiMail },
-      { key: 'welcomeSteps', label: 'Welcome Emails', icon: FiMail },
     ],
     'Site': [
       { key: 'spotlights', label: 'Front Page Area', icon: FiLayout },
@@ -328,7 +335,6 @@ const ContentStudio = () => {
     ],
     'Content': [
       { key: 'sermons', label: 'Messages', icon: FiMic },
-      { key: 'categories', label: 'Message Categories', icon: FiLayout },
       { key: 'events', label: 'Events', icon: FiCalendar },
       { key: 'campaign', label: 'Growth Campaign', icon: FiHeart },
       { key: 'podcastShows', label: 'Podcast Shows', icon: FiMic },
@@ -346,7 +352,9 @@ const ContentStudio = () => {
     } : {})
   };
 
+  const group = groupFor(activeTab);
   const getTabLabel = () => {
+      if (group) return TAB_GROUPS[group].label;
       for (const category in TABS) {
           const tab = TABS[category].find(t => t.key === activeTab);
           if (tab) return tab.label;
@@ -371,7 +379,7 @@ const ContentStudio = () => {
             <div key={category}>
               <h2 className="px-4 text-sm font-bold text-white/60 tracking-wide mb-2">{category}</h2>
               {items.map(tab => (
-                 <NavItem key={tab.key} icon={tab.icon} aria-current={activeTab === tab.key ? 'page' : undefined} onClick={() => { setActiveTab(tab.key); if (window.innerWidth < 1024) setIsSidebarOpen(false); }}>
+                 <NavItem key={tab.key} icon={tab.icon} aria-current={(group || activeTab) === tab.key ? 'page' : undefined} onClick={() => { setActiveTab(tab.key); if (window.innerWidth < 1024) setIsSidebarOpen(false); }}>
                     {tab.label}
                 </NavItem>
               ))}
@@ -399,6 +407,21 @@ const ContentStudio = () => {
           <h1 className="text-3xl font-bold">{getTabLabel()}</h1>
         </header>
         
+        {group && (
+          <div role="tablist" aria-label={TAB_GROUPS[group].label} className="flex flex-wrap gap-2 mb-6">
+            {TAB_GROUPS[group].tabs.map(([key, label]) => (
+              <button
+                key={key}
+                type="button"
+                role="tab"
+                aria-selected={activeTab === key}
+                onClick={() => setActiveTab(key)}
+                className={`px-5 py-2.5 rounded-full text-sm font-bold ${activeTab === key ? 'bg-[#1e2522] text-white' : 'bg-white border border-[#1e2522]/20 text-[#1e2522] hover:bg-[#1e2522]/10'}`}
+              >{label}</button>
+            ))}
+          </div>
+        )}
+
         <div className="flex-1 overflow-y-auto">
               <div key={activeTab}>
                 {renderContent()}

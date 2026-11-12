@@ -1,3 +1,4 @@
+import CampaignHomeSwitch from './CampaignHomeSwitch';
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { backend } from '../../lib/backend';
 import { cleanTranscript } from '../../lib/transcript';
@@ -490,6 +491,7 @@ export default function GenericManager({ config }) {
           )}
         </div>
       )}
+      {config.homeSwitch && <CampaignHomeSwitch />}
       {config.testWelcome && items.length > 0 && (
         <form onSubmit={sendWelcomeTest} className="mb-6 bg-white rounded-2xl border border-[#1e2522]/10 p-5 flex flex-wrap items-end gap-3">
           <label className="text-sm font-semibold">
