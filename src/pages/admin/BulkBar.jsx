@@ -151,76 +151,31 @@ export default function BulkBar({ table, title, items, filtered, selected, setSe
     setProgress({ label: 'Delete', done, failed, total: chosen.length, finished: true });
   };
 
-  const field = (key, label, list, setLabel, ph) => (
-    <div className="flex flex-wrap items-end gap-2">
-      <label className="text-sm font-semibold">
-        <span className="block mb-1">{label}</span>
-        <input list={`bulk-${key}`} value={values[key]} onChange={(e) => set(key, e.target.value)} placeholder={ph} className={input} />
+  const [open, setOpen] = useState('');
+  const n = selected.size;
+  const noCategory = items.filter(i => !String(i.topic || '').trim());
+  const noSummary = items.filter(i => !String(i.description || '').trim());
+  const redo = items.filter(i => i.ai_summarized_at && String(i.notes || '').trim().length > 800);
+  const pick = (list) => setSelected(new Set(list.map(i => i.id)));
+  const toggle = (k) => setOpen(o => (o === k ? '' : k));
+  const label = (k) => `${n} ${n === 1 ? 'message' : 'messages'}`;
+
+  const field = (key, name, list, setLabel, ph) => (
+    <div>
+      <label className="block text-sm font-semibold mb-1" htmlFor={`bulk-in-${key}`}>{name}</label>
+      <div className="flex flex-wrap items-center gap-2">
+        <input id={`bulk-in-${key}`} list={`bulk-${key}`} value={values[key]} onChange={(e) => set(key, e.target.value)} placeholder={ph} className={input} />
         <datalist id={`bulk-${key}`}>{list.map(v => <option key={v} value={v} />)}</datalist>
-      </label>
-      <button type="button" disabled={busy || !values[key].trim()} onClick={() => setField(key, setLabel)} className={btn}>Set</button>
-      <button type="button" disabled={busy} onClick={() => clearField(key, `Clear ${label.toLowerCase()}`)} className={btn}>Clear</button>
+        <button type="button" disabled={busy || !values[key].trim()} onClick={() => setField(key, setLabel)} className={btn}>Change to this</button>
+        <button type="button" disabled={busy} onClick={() => clearField(key, `Clear ${name.toLowerCase()}`)} className={btn}>Remove it</button>
+      </div>
     </div>
   );
 
-  return (
-    <div className="bg-white rounded-2xl border border-[#1e2522]/10 shadow-sm p-5 mb-6" role="region" aria-label="Edit many at once">
-      <div className="flex flex-wrap items-center gap-3 text-sm">
-        <strong>Edit many at once</strong>
-        <button type="button" className={btn} onClick={() => setSelected(new Set(filtered.map(i => i.id)))}>Select all {filtered.length} shown</button>
-        <button type="button" className={btn} onClick={() => setSelected(new Set())} disabled={selected.size === 0}>Deselect all</button>
-        <label className="flex items-center gap-2">
-          <span className="font-semibold">Select a whole series</span>
-          <select value="" onChange={(e) => { const name = e.target.value; if (name) setSelected(new Set(items.filter(i => String(i.series || '').trim() === name).map(i => i.id))); }} className={input}>
-            <option value="">Choose a series</option>
-            {seriesList.map(s => <option key={s} value={s}>{s}</option>)}
-          </select>
-        </label>
-        <button type="button" className={btn} onClick={() => setSelected(new Set(items.filter(i => !String(i.topic || '').trim()).map(i => i.id)))}>Select messages with no category</button>
-        <button type="button" className={btn} onClick={() => setSelected(new Set(items.filter(i => !String(i.description || '').trim()).map(i => i.id)))}>Select messages with no summary</button>
-        <button type="button" className={btn} onClick={() => setSelected(new Set(items.filter(i => i.ai_summarized_at && String(i.notes || '').trim().length > 800).map(i => i.id)))}>Select AI summaries to redo from a transcript</button>
-        <span className="text-black">{selected.size} selected</span>
-      </div>
-
-      {selected.size > 0 && (
-        <div className="mt-5 pt-5 border-t border-[#1e2522]/10 space-y-5">
-          <p className="text-sm text-black">Changes apply to the {selected.size} selected {selected.size === 1 ? 'message' : 'messages'}. To rename a series, select the whole series and set a new series name. To merge two series, select both and set one name.</p>
-          <div className="grid lg:grid-cols-2 gap-5">
-            {field('series', 'Series', seriesList, 'Set series', 'Series name')}
-            {field('speaker', 'Speaker', speakers, 'Set speaker', 'Speaker name')}
-            <div className="flex flex-wrap items-end gap-2">
-              <label className="text-sm font-semibold">
-                <span className="block mb-1">Categories</span>
-                <input list="bulk-topic" value={values.topic} onChange={(e) => set('topic', e.target.value)} placeholder="Category" className={input} />
-                <datalist id="bulk-topic">{topics.map(v => <option key={v} value={v} />)}</datalist>
-              </label>
-              <button type="button" disabled={busy || !values.topic.trim()} onClick={() => run(`Add category ${values.topic.trim()}`, r => { const next = addCategory(r.topic, values.topic); return next === (r.topic || '') ? null : { topic: next }; })} className={btn}>Add</button>
-              <button type="button" disabled={busy || !values.topic.trim()} onClick={() => run(`Remove category ${values.topic.trim()}`, r => { const next = removeCategory(r.topic, values.topic); return next === (r.topic || '') ? null : { topic: next }; })} className={btn}>Remove</button>
-              <button type="button" disabled={busy || !values.topic.trim()} onClick={() => run(`Set category ${values.topic.trim()}`, () => ({ topic: values.topic.trim() }))} className={btn}>Set only this</button>
-              <button type="button" disabled={busy} onClick={() => clearField('topic', 'Clear categories')} className={btn}>Clear</button>
-            </div>
-            <div className="flex flex-wrap items-end gap-3">
-              <span className="text-sm font-semibold block w-full">Review with AI</span>
-              <button type="button" disabled={busy} onClick={reviewWithAi} className={btn}>Review {selected.size} with AI</button>
-              {selected.size === 1 && <button type="button" disabled={busy || testResult?.loading} onClick={testOne} className={btn}>Test this one (saves nothing)</button>}
-              <button type="button" disabled={busy} onClick={summarizeWithAi} className={btn}>Write summaries for {selected.size}</button>
-              <label className="flex items-center gap-2 text-sm cursor-pointer">
-                <input type="checkbox" checked={replaceAll} onChange={(e) => setReplaceAll(e.target.checked)} className="w-5 h-5 accent-[#c74f2f]" />
-                Replace categories or summaries already set
-              </label>
-            </div>
-            <div className="flex flex-wrap items-end gap-2">
-              <span className="text-sm font-semibold block w-full">On the website</span>
-              <button type="button" disabled={busy} onClick={() => run('Show on website', () => ({ published: 1 }))} className={btn}>Show</button>
-              <button type="button" disabled={busy} onClick={() => run('Make drafts', () => ({ published: 0 }))} className={btn}>Make drafts</button>
-              <button type="button" disabled={busy} onClick={() => setConfirmDelete(true)} className={`${btn} !text-[#c74f2f]`}>Delete selected</button>
-            </div>
-          </div>
-        </div>
-      )}
-
+  const status = (testResult || progress) && (
+    <div className="px-5 pt-4 text-sm text-black space-y-3">
       {testResult && (
-        <div role="status" className="mt-4 text-sm rounded-[10px] bg-[#EDE9DC] p-4">
+        <div role="status" className="rounded-[10px] bg-[#EDE9DC] p-4">
           {testResult.loading && <p>Asking the AI.</p>}
           {testResult.error && <p className="text-[#c74f2f] font-semibold">{testResult.error}</p>}
           {testResult.data && (
@@ -232,20 +187,133 @@ export default function BulkBar({ table, title, items, filtered, selected, setSe
           )}
         </div>
       )}
-
       {progress && (
-        <div role="status" className="mt-4 text-sm">
+        <div role="status">
           <p className="font-semibold">
             {progress.finished
               ? `${progress.label}: ${progress.done} updated${progress.failed ? `, ${progress.failed} not changed` : ''}.${typeof progress.stillBlank === 'number' ? ` ${progress.stillBlank} of the ${progress.total} still have no category in the database.` : ''}`
               : `${progress.label}: ${progress.done + progress.failed} of ${progress.total}`}
           </p>
           {progress.finished && progress.reasons && Object.keys(progress.reasons).some(k => k !== '__sample') && (
-            <ul className="mt-2 list-disc pl-5 space-y-1 text-black">
-              {Object.entries(progress.reasons).filter(([k]) => k !== '__sample').map(([why, n]) => <li key={why}>{n} {n === 1 ? 'message' : 'messages'}: {why}</li>)}
+            <ul className="mt-2 list-disc pl-5 space-y-1">
+              {Object.entries(progress.reasons).filter(([k]) => k !== '__sample').map(([why, count]) => <li key={why}>{count} {count === 1 ? 'message' : 'messages'}: {why}</li>)}
               {progress.reasons.__sample && <li>{progress.reasons.__sample}</li>}
             </ul>
           )}
+        </div>
+      )}
+    </div>
+  );
+
+  const panels = {
+    series: (
+      <div className="space-y-5">
+        <p className="text-sm text-black">Changes the series or speaker on the {label()} you ticked. To rename a series, tick all of its messages and change the series name. To merge two series, tick both and change them to one name.</p>
+        {field('series', 'Series', seriesList, 'Set series', 'Series name')}
+        {field('speaker', 'Speaker', speakers, 'Set speaker', 'Speaker name')}
+      </div>
+    ),
+    categories: (
+      <div className="space-y-4">
+        <p className="text-sm text-black">A message can have up to three categories. Choose a category, then choose what to do with it on the {label()} you ticked.</p>
+        <div>
+          <label className="block text-sm font-semibold mb-1" htmlFor="bulk-in-topic">Category</label>
+          <input id="bulk-in-topic" list="bulk-topic" value={values.topic} onChange={(e) => set('topic', e.target.value)} placeholder="Choose or type a category" className={`${input} w-full sm:w-auto`} />
+          <datalist id="bulk-topic">{topics.map(v => <option key={v} value={v} />)}</datalist>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <button type="button" disabled={busy || !values.topic.trim()} onClick={() => run(`Add category ${values.topic.trim()}`, r => { const next = addCategory(r.topic, values.topic); return next === (r.topic || '') ? null : { topic: next }; })} className={btn}>Add it</button>
+          <button type="button" disabled={busy || !values.topic.trim()} onClick={() => run(`Remove category ${values.topic.trim()}`, r => { const next = removeCategory(r.topic, values.topic); return next === (r.topic || '') ? null : { topic: next }; })} className={btn}>Take it off</button>
+          <button type="button" disabled={busy || !values.topic.trim()} onClick={() => run(`Set category ${values.topic.trim()}`, () => ({ topic: values.topic.trim() }))} className={btn}>Make it the only category</button>
+          <button type="button" disabled={busy} onClick={() => clearField('topic', 'Clear categories')} className={btn}>Remove all categories</button>
+        </div>
+      </div>
+    ),
+    ai: (
+      <div className="space-y-4">
+        <p className="text-sm text-black">The AI helper reads each message’s title, description and transcript. It works through the {label()} you ticked one at a time, so a long list takes a few minutes.</p>
+        <div className="grid sm:grid-cols-2 gap-4">
+          <div className="rounded-[10px] bg-[#EDE9DC] p-4">
+            <p className="font-semibold">Choose categories</p>
+            <p className="text-sm text-black mt-1">Picks one to three categories from your approved list.</p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <button type="button" disabled={busy} onClick={reviewWithAi} className={btn}>Choose categories for {n}</button>
+              {n === 1 && <button type="button" disabled={busy || testResult?.loading} onClick={testOne} className={btn}>Try it (saves nothing)</button>}
+            </div>
+          </div>
+          <div className="rounded-[10px] bg-[#EDE9DC] p-4">
+            <p className="font-semibold">Write summaries</p>
+            <p className="text-sm text-black mt-1">Writes a short summary for messages that have none, from the transcript when there is one.</p>
+            <div className="mt-3"><button type="button" disabled={busy} onClick={summarizeWithAi} className={btn}>Write summaries for {n}</button></div>
+          </div>
+        </div>
+        <label className="flex items-center gap-2 text-sm cursor-pointer">
+          <input type="checkbox" checked={replaceAll} onChange={(e) => setReplaceAll(e.target.checked)} className="w-5 h-5 accent-[#c74f2f]" />
+          Also redo messages that already have categories or a summary
+        </label>
+      </div>
+    ),
+    site: (
+      <div className="space-y-4">
+        <p className="text-sm text-black">Choose whether the {label()} you ticked show on the website.</p>
+        <div className="flex flex-wrap gap-2">
+          <button type="button" disabled={busy} onClick={() => run('Show on website', () => ({ published: 1 }))} className={btn}>Show on the website</button>
+          <button type="button" disabled={busy} onClick={() => run('Make drafts', () => ({ published: 0 }))} className={btn}>Hide as drafts</button>
+          <button type="button" disabled={busy} onClick={() => setConfirmDelete(true)} className={`${btn} !text-[#c74f2f]`}>Delete them</button>
+        </div>
+      </div>
+    ),
+  };
+  const TOOLS = [['series', 'Series and speaker'], ['categories', 'Categories'], ['ai', 'AI helper'], ['site', 'Show or hide']];
+
+  return (
+    <>
+      <section className="bg-white rounded-2xl border border-[#1e2522]/10 shadow-sm p-5 md:p-6 mb-6" aria-label="Choose messages to edit">
+        <h3 className="text-xl font-bold">Edit many messages at once</h3>
+        <p className="text-sm text-black mt-1 max-w-3xl">Step 1: tick the messages in the list, or choose a group below. Step 2: a toolbar appears at the bottom of the screen with what you can do to them.</p>
+        <div className="mt-4 flex flex-wrap items-end gap-x-6 gap-y-4">
+          <div className="flex flex-wrap items-center gap-2">
+            <button type="button" className={btn} onClick={() => setSelected(new Set(filtered.map(i => i.id)))}>Tick all {filtered.length} shown</button>
+            <button type="button" className={btn} onClick={() => setSelected(new Set())} disabled={n === 0}>Untick all</button>
+            <span className="text-sm font-semibold">{n} ticked</span>
+          </div>
+          <label className="text-sm font-semibold">
+            <span className="block mb-1">Tick a whole series</span>
+            <select value="" onChange={(e) => { const name = e.target.value; if (name) pick(items.filter(i => String(i.series || '').trim() === name)); }} className={input}>
+              <option value="">Choose a series</option>
+              {seriesList.map(x => <option key={x} value={x}>{x}</option>)}
+            </select>
+          </label>
+          <label className="text-sm font-semibold">
+            <span className="block mb-1">Tick messages that need work</span>
+            <select value="" onChange={(e) => { const v = e.target.value; if (v === 'cat') pick(noCategory); if (v === 'sum') pick(noSummary); if (v === 'redo') pick(redo); }} className={input}>
+              <option value="">Choose a group</option>
+              <option value="cat">With no category ({noCategory.length})</option>
+              <option value="sum">With no summary ({noSummary.length})</option>
+              <option value="redo">With an AI summary and a transcript ({redo.length})</option>
+            </select>
+          </label>
+        </div>
+        {n === 0 && status}
+      </section>
+
+      {n > 0 && (
+        <div className="fixed bottom-0 inset-x-0 lg:left-72 z-40 p-3 md:p-4 pointer-events-none" role="region" aria-label="What to do with the ticked messages">
+          <div className="pointer-events-auto max-w-5xl mx-auto rounded-2xl shadow-2xl border border-[#1e2522]/15 bg-white overflow-hidden">
+            {(open || status) && (
+              <div className="max-h-[60vh] overflow-y-auto pb-5 border-b border-[#1e2522]/10">
+                {status}
+                {open && <div className="px-5 pt-4" id={`bulk-panel-${open}`}>{panels[open]}</div>}
+              </div>
+            )}
+            <div className="bg-[#1e2522] text-white px-4 py-3 flex flex-wrap items-center gap-2">
+              <span className="font-bold mr-2">{label()} ticked</span>
+              {TOOLS.map(([k, name]) => (
+                <button key={k} type="button" aria-expanded={open === k} aria-controls={`bulk-panel-${k}`} onClick={() => toggle(k)} className={`px-4 py-2 rounded-lg text-sm font-bold ${open === k ? 'bg-[#eaa235] text-[#1e2522]' : 'bg-white/10 hover:bg-white/20'}`}>{name}</button>
+              ))}
+              <button type="button" onClick={() => { setSelected(new Set()); setOpen(''); }} className="ml-auto px-4 py-2 rounded-lg text-sm font-bold underline underline-offset-4">Untick all</button>
+            </div>
+          </div>
         </div>
       )}
 
@@ -258,6 +326,6 @@ export default function BulkBar({ table, title, items, filtered, selected, setSe
           onConfirm={deleteAll}
         />
       )}
-    </div>
+    </>
   );
 }

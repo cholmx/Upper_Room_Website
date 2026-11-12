@@ -326,7 +326,7 @@ export default function GenericManager({ config }) {
   }
 
   return (
-    <div>
+    <div style={selected.size > 0 && config.bulk ? { paddingBottom: '9rem' } : undefined}>
       {errorBanner}
       <div className="flex flex-wrap justify-between items-center gap-4 mb-6">
         <h2 className="text-2xl font-bold text-[#1e2522]">Manage {config.title}</h2>
