@@ -39,7 +39,7 @@ export default function About() {
           <h2 className="text-3xl md:text-5xl mb-5">Who we are</h2>
           <div className={`space-y-4 ${P}`}>
             <p>We are evangelical Christians with Pentecostal and charismatic roots. We still believe the Holy Spirit is at work today, and we pray for healing, listen for God’s voice, and expect Him to move.</p>
-            <p>Along the way we have gone back to what Christians have practiced since the early church: Scripture, prayer, Sabbath, fasting, and unhurried time with God. We think the church’s long history has a lot to teach us, and we care about creation, culture, and the city we live in.</p>
+            <p>We also practice what Christians have practiced since the early church: Scripture, prayer, Sabbath, fasting, and unhurried time with God. We think the church’s long history has a lot to teach us, and we care about creation, culture, and the city we live in.</p>
           </div>
         </div>
         <ul className="grid md:grid-cols-2 gap-5 md:gap-6 mt-10">
