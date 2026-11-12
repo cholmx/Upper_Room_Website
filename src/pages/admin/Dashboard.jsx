@@ -390,13 +390,13 @@ const ContentStudio = () => {
       {/* Sidebar */}
       <aside className={`w-72 bg-[#1e2522] text-white p-6 flex-col fixed lg:relative h-full z-50 lg:z-auto ${isSidebarOpen ? 'flex' : 'hidden'}`}>
         <div className="flex items-center justify-between mb-10">
-            <h1 className="text-2xl font-bold text-white tracking-wider">Content <span className="text-[#eaa235]">Studio</span></h1>
+            <h1 className="text-2xl font-bold text-white tracking-wider"><span className="text-[#eaa235]">Admin</span></h1>
             <button aria-label="Close menu" onClick={() => setIsSidebarOpen(false)} className="lg:hidden text-2xl text-white/70 hover:text-white">
                 <SafeIcon icon={FiX} />
             </button>
         </div>
 
-        <nav aria-label="Content Studio" className="flex-grow space-y-4">
+        <nav aria-label="Admin" className="flex-grow space-y-4">
           {Object.entries(TABS).map(([category, items]) => (
             <div key={category}>
               <h2 className="px-4 text-sm font-bold text-white/60 tracking-wide mb-2">{category}</h2>

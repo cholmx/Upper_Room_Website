@@ -32,7 +32,7 @@ export default function Login() {
       <div className="bg-[#11201B] p-10 rounded-3xl shadow-2xl max-w-md w-full border border-white/10 relative z-10">
         <div className="text-center mb-10">
           <h1 className="text-3xl font-black text-white mb-2 tracking-tight">
-            Content Studio
+            Admin
           </h1>
           <p className="font-serif italic text-[#eaa235] text-sm">Upper Room Fellowship</p>
         </div>
@@ -60,7 +60,7 @@ export default function Login() {
           </div>
           <div>
             <label htmlFor="login-password" className="block text-[0.9rem] font-bold tracking-wide mb-3 text-white/70">
-              Studio Password
+              Password
             </label>
             <input
               id="login-password"
@@ -77,7 +77,7 @@ export default function Login() {
             disabled={submitting}
             className="w-full disabled:opacity-60 bg-[#eaa235] text-[#1e2522] font-bold text-sm tracking-wide py-4 rounded-xl hover:bg-white transition-colors shadow-[0_0_20px_rgba(255,196,79,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)]"
           >
-            {submitting ? 'Signing in...' : 'Enter Studio'}
+            {submitting ? 'Signing in...' : 'Sign In'}
           </button>
         </form>
       </div>
