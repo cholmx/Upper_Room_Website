@@ -38,6 +38,8 @@ export default function WeeklyEmail() {
   const [previewError, setPreviewError] = useState('');
   const [loadingPreview, setLoadingPreview] = useState(true);
   const [thought, setThought] = useState('');
+  const [blurb, setBlurb] = useState('');
+  const [blurbNote, setBlurbNote] = useState('');
   const [thoughtNote, setThoughtNote] = useState('');
   const [busy, setBusy] = useState('');
   const [testTo, setTestTo] = useState('');
@@ -58,7 +60,8 @@ export default function WeeklyEmail() {
         const s = await dataFetch(`read/sermons?id=${res.data.sermon_id}`);
         const row = s.status === 'success' ? (Array.isArray(s.data) ? s.data[0] : s.data) : null;
         setThought((row && row.weekly_thought) || '');
-      } else setThought('');
+        setBlurb((row && row.weekly_blurb) || '');
+      } else { setThought(''); setBlurb(''); }
     } else setPreviewError(res.error || 'The preview could not be built.');
     setLoadingPreview(false);
   }, []);
@@ -79,6 +82,23 @@ export default function WeeklyEmail() {
     const res = await backend.rpc('set_weekly_thought', { p_sermon_id: preview.sermon_id, p_text: thought });
     setBusy('');
     if (res.status === 'success') { setThoughtNote('Saved.'); logActivity(user, 'edited the weekly thought', 'Weekly Email', ''); loadPreview(); } else setThoughtNote(res.error || 'That did not save.');
+  };
+
+  const saveBlurb = async () => {
+    if (!preview?.sermon_id) return;
+    setBusy('saveblurb'); setBlurbNote('');
+    const res = await backend.rpc('set_weekly_blurb', { p_sermon_id: preview.sermon_id, p_text: blurb });
+    setBusy('');
+    if (res.status === 'success') { setBlurbNote('Saved.'); loadPreview(); } else setBlurbNote(res.error || 'That did not save.');
+  };
+
+  const writeBlurb = async () => {
+    if (!preview?.sermon_id) return;
+    setBusy('aiblurb'); setBlurbNote('');
+    const res = await backend.rpc('ai_weekly_blurb', { p_sermon_id: preview.sermon_id });
+    setBusy('');
+    if (res.status === 'success' && res.data === 'ok') { setBlurbNote('A new short summary is ready.'); loadPreview(); }
+    else setBlurbNote(AI_ERRORS[res.data] || (typeof res.data === 'string' && res.data.startsWith('!status_') ? 'The AI service answered with an error. Please try again.' : res.error || 'That did not work.'));
   };
 
   const writeThought = async () => {
@@ -166,7 +186,16 @@ export default function WeeklyEmail() {
               <iframe title="Preview of the weekly email" sandbox="" srcDoc={preview.html} className="w-full h-[640px] rounded-lg border border-[#1e2522]/15 bg-white" />
             </div>
             <div>
-              <label className="block text-sm font-semibold" htmlFor="weekly-thought">A thought for the week</label>
+              <label className="block text-sm font-semibold" htmlFor="weekly-blurb">Short summary of the message</label>
+              <p className="text-xs text-black mt-1">AI shortens the message summary to a sentence or two. It is written again only if the summary changes. Change it any way you like.</p>
+              <textarea id="weekly-blurb" rows={4} maxLength={600} value={blurb} onChange={(e) => setBlurb(e.target.value)} className={`${input} mt-2`} disabled={!preview.sermon_id} />
+              <div className="mt-2 flex flex-wrap gap-2">
+                <button type="button" onClick={saveBlurb} disabled={busy !== '' || !preview.sermon_id} className={btn}>{busy === 'saveblurb' ? 'Saving' : 'Save summary'}</button>
+                <button type="button" onClick={writeBlurb} disabled={busy !== '' || !preview.sermon_id} className={btn}>{busy === 'aiblurb' ? 'Writing' : 'Shorten with AI'}</button>
+              </div>
+              {blurbNote && <p role="status" className="mt-2 text-sm font-semibold">{blurbNote}</p>}
+
+              <label className="block text-sm font-semibold mt-6" htmlFor="weekly-thought">A thought for the week</label>
               <p className="text-xs text-black mt-1">Written by AI from the message the first time. Change it any way you like.</p>
               <textarea id="weekly-thought" rows={7} maxLength={1500} value={thought} onChange={(e) => setThought(e.target.value)} className={`${input} mt-2`} disabled={!preview.sermon_id} />
               <div className="mt-2 flex flex-wrap gap-2">
