@@ -204,3 +204,15 @@ To review messages on demand, open Messages in the admin, select them (Select me
 - **Each page's share picture** is its banner photo from Site Photos, or the "social sharing image" slot, or the default picture.
 - **Home** includes the newest message as plain text in the static copy, and **Messages** carries podcast structured data.
 - Static pages, messages and the sitemap are written when the site is built. Publish again after a batch of new messages so the static copies and sitemap include them.
+
+## Email (Resend)
+
+Forms save to the database as before. A database trigger also queues a notice to the staff address (and, for the Connect Card, a welcome email to the visitor), and a job that runs every minute sends the queue through Resend.
+
+Setup, once:
+1. Create a Resend account and add the domain (urfellowship.com). Add the DNS records Resend shows (SPF, DKIM) where the domain is managed, and wait for it to show as verified.
+2. Create a Resend API key and store it in the Supabase Vault under the name `resend_api_key`, the same way the Anthropic key is stored. It is never put in the site or in a table.
+3. Apply the migration `20261112130000_resend_email.sql`.
+4. In the admin, open Email Settings to check the notice address and the sender, then Email Log to send a test email.
+
+Emails that cannot be sent are tried up to three times, and the reason is shown in Email Log.

@@ -201,6 +201,34 @@ const TAB_CONFIGS = {
       { name: 'published', label: 'Published', type: 'checkbox', defaultChecked: true, help: 'Visible on the website' },
     ]
   },
+  emailSettings: {
+    table: 'email_settings_church',
+    title: 'Email Settings',
+    titleField: 'notify_email',
+    canCreate: false,
+    columns: ['notify_email', 'from_address'],
+    fields: [
+      { name: 'notify_email', label: 'Send a notice to this address whenever someone fills out a form on the website', type: 'text', required: true },
+      { name: 'from_address', label: 'Send from (a sender on a domain you verified in Resend, for example Upper Room Fellowship <info@urfellowship.com>)', type: 'text', required: true },
+      { name: 'welcome_enabled', label: 'Send a welcome email to people who fill out the Connect Card', type: 'checkbox', defaultChecked: true },
+    ]
+  },
+  emailLog: {
+    table: 'email_outbox_church',
+    title: 'Email Log',
+    titleField: 'subject',
+    canCreate: false,
+    testEmail: true,
+    pageSize: 100,
+    sortItems: (items) => [...items].sort((a, b) => b.id - a.id),
+    columns: ['created_at', 'to_email', 'subject', 'status'],
+    fields: [
+      { name: 'to_email', label: 'To', type: 'text' },
+      { name: 'subject', label: 'Subject', type: 'text' },
+      { name: 'status', label: 'Status (pending, sent or failed)', type: 'text' },
+      { name: 'error', label: 'Problem, if any', type: 'textarea' },
+    ]
+  },
   categories: {
     table: 'message_categories_church',
     seedNames: STANDARD_CATEGORIES,
@@ -302,6 +330,8 @@ const ContentStudio = () => {
     ...(isAdmin ? {
       'Admin': [
         { key: 'settings', label: 'Settings', icon: FiSettings },
+        { key: 'emailSettings', label: 'Email Settings', icon: FiMail },
+        { key: 'emailLog', label: 'Email Log', icon: FiMail },
         { key: 'activity', label: 'Activity Log', icon: FiActivity },
       ]
     } : {})

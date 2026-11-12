@@ -44,6 +44,16 @@ export default function GenericManager({ config }) {
   const [refreshing, setRefreshing] = useState('');
   const [refreshMsg, setRefreshMsg] = useState('');
   const FEED_WHY = { '-1': 'has no feed address yet', '-2': 'could not be reached', '-3': 'answered with an error', '-4': 'did not look like a podcast feed' };
+  const [testTo, setTestTo] = useState('');
+  const [testState, setTestState] = useState(null);
+  const sendTest = async (e) => {
+    e.preventDefault();
+    setTestState({ busy: true });
+    const res = await backend.rpc('send_test_email', { to_address: testTo.trim() });
+    const d = res.status === 'success' ? res.data : null;
+    setTestState(d ? { status: d.status, error: d.error } : { status: 'failed', error: res.error });
+    fetchItems();
+  };
   const [feedTest, setFeedTest] = useState(null);
   const testFeed = async () => {
     const it = items.find(i => i.slug === 'shine') || items[0];
@@ -372,6 +382,20 @@ export default function GenericManager({ config }) {
             </dl>
           )}
         </div>
+      )}
+      {config.testEmail && (
+        <form onSubmit={sendTest} className="mb-6 bg-white rounded-2xl border border-[#1e2522]/10 p-5 flex flex-wrap items-end gap-3">
+          <label className="text-sm font-semibold">
+            <span className="block mb-1">Send a test email to</span>
+            <input type="email" required value={testTo} onChange={(e) => setTestTo(e.target.value)} placeholder="you@example.com" className="px-3 py-2 rounded-lg border border-[#1e2522]/20 bg-white min-w-[16rem]" />
+          </label>
+          <button type="submit" disabled={testState?.busy} className="px-4 py-2 rounded-lg border border-[#1e2522]/20 bg-white font-bold text-sm disabled:opacity-40">{testState?.busy ? 'Sending' : 'Send test'}</button>
+          {testState && !testState.busy && (
+            <p role="status" className={`text-sm font-semibold ${testState.status === 'sent' ? '' : 'text-[#c74f2f]'}`}>
+              {testState.status === 'sent' ? 'Sent. Check that inbox, and the spam folder.' : `Not sent. ${testState.error || ''}`}
+            </p>
+          )}
+        </form>
       )}
       {refreshMsg && <p role="status" className="mb-4 text-sm font-semibold">{refreshMsg}</p>}
       {transcripts && <TranscriptImport items={items} onClose={() => setTranscripts(false)} onDone={fetchItems} />}
