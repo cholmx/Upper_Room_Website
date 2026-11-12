@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { dataFetch } from '../../api';
 import { backend } from '../../lib/backend';
 import { useAuth } from '../../auth';
@@ -152,10 +152,14 @@ export default function BulkBar({ table, title, items, filtered, selected, setSe
   };
 
   const [open, setOpen] = useState('');
+  const [hasTranscript, setHasTranscript] = useState(new Set());
+  useEffect(() => {
+    backend.rpc('sermon_transcript_status', {}).then(res => { if (res.status === 'success') setHasTranscript(new Set((res.data || []).map(r => String(r.sermon_id)))); });
+  }, [items.length]);
   const n = selected.size;
   const noCategory = items.filter(i => !String(i.topic || '').trim());
   const noSummary = items.filter(i => !String(i.description || '').trim());
-  const redo = items.filter(i => i.ai_summarized_at && String(i.notes || '').trim().length > 800);
+  const redo = items.filter(i => i.ai_summarized_at && hasTranscript.has(String(i.id)));
   const pick = (list) => setSelected(new Set(list.map(i => i.id)));
   const toggle = (k) => setOpen(o => (o === k ? '' : k));
   const label = (k) => `${n} ${n === 1 ? 'message' : 'messages'}`;
@@ -290,7 +294,7 @@ export default function BulkBar({ table, title, items, filtered, selected, setSe
               <option value="">Choose a group</option>
               <option value="cat">With no category ({noCategory.length})</option>
               <option value="sum">With no summary ({noSummary.length})</option>
-              <option value="redo">With an AI summary and a transcript ({redo.length})</option>
+              <option value="redo">With an AI description and a private transcript ({redo.length})</option>
             </select>
           </label>
         </div>

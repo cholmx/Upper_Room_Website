@@ -221,3 +221,7 @@ Two settings live outside this code and have to be checked in the Supabase and G
 
 - **New-user signup must stay off.** Every signed-in account is treated as staff: the database rules give any signed-in user full edit access to the site's content, photos and form submissions. If self-service signup is ever enabled for this project, a stranger could register and edit the website. Staff accounts should only be created by an administrator.
 - **The YouTube Data API key is a server secret.** It belongs only in the Supabase edge function secret `YOUTUBE_API_KEY`. It must never be set as `VITE_YOUTUBE_API_KEY`, because variables named `VITE_` are compiled into the public page code. A key that was once set that way should be regenerated in Google Cloud.
+
+## Transcripts are private
+
+Transcripts live in `sermon_transcripts_church`, which only signed-in staff can read, so they are never on the website or in a page's source. Add them with Messages, Import transcripts. After saving, the admin can have the AI read each new transcript and write the description and choose categories for any that are blank. The hourly AI tagging job and the AI helper also read the private transcript. The message's public Notes field is separate and is shown on the page.

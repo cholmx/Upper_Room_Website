@@ -52,7 +52,7 @@ export default function MessageDetail() {
   const tabs = [
     m?.description && { id: 'summary', label: 'Summary', value: m.description },
     m?.discussion_questions && { id: 'questions', label: 'Discussion questions', value: m.discussion_questions },
-    m?.notes && { id: 'transcript', label: 'Notes and transcript', value: m.notes },
+    m?.notes && { id: 'transcript', label: 'Notes', value: m.notes },
   ].filter(Boolean);
   const activeTab = tabs.some(t => t.id === tab) ? tab : tabs[0]?.id;
   const onTabKey = (e, id) => {

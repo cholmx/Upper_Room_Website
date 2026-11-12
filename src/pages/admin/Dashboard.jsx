@@ -51,7 +51,7 @@ const TAB_CONFIGS = {
       { name: 'topic', label: 'Categories (choose all that fit)', type: 'text' },
       { name: 'description', label: 'Sermon summary', type: 'markdown' },
       { name: 'discussion_questions', label: 'Discussion questions', type: 'markdown' },
-      { name: 'notes', label: 'Notes, transcript, or written summary', type: 'markdown' },
+      { name: 'notes', label: 'Notes shown on the message page (transcripts do not go here. Use Import transcripts, which keeps them private)', type: 'markdown' },
       { name: 'notes_url', label: 'Downloadable notes link (optional)', type: 'url' },
       { name: 'video_url', label: 'YouTube URL', type: 'youtube' },
       { name: 'audio_url', label: 'Audio URL (optional)', type: 'url' },
