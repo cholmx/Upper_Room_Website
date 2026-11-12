@@ -27,6 +27,7 @@ const Give = lazy(() => import('./pages/Give'));
 const Contact = lazy(() => import('./pages/Contact'));
 const Connect = lazy(() => import('./pages/Connect'));
 const Accessibility = lazy(() => import('./pages/Accessibility'));
+const Unsubscribe = lazy(() => import('./pages/Unsubscribe'));
 const Privacy = lazy(() => import('./pages/Privacy'));
 const Blog = lazy(() => import('./pages/Blog'));
 const BlogPost = lazy(() => import('./pages/BlogPost'));
@@ -101,7 +102,7 @@ export function AppBody() {
           ['/leadership', Leadership], ['/messages', Messages], ['/messages/series/:series', MessageSeries], ['/messages/:slug', MessageDetail],
           ['/discipleship', Discipleship], ['/sozo', Sozo], ['/shine', Shine],
           ['/give', Give], ['/growth-campaign', GrowthCampaign], ['/contact', Contact], ['/connect', Connect],
-          ['/accessibility', Accessibility], ['/privacy', Privacy], ['/blog', Blog], ['/blog/:id', BlogPost], ['/p/:slug', CustomPage],
+          ['/accessibility', Accessibility], ['/privacy', Privacy], ['/unsubscribe', Unsubscribe], ['/blog', Blog], ['/blog/:id', BlogPost], ['/p/:slug', CustomPage],
         ].map(([path, Page]) => (
           <Route key={path} path={path} element={<PublicLayout><Page /></PublicLayout>} />
         ))}

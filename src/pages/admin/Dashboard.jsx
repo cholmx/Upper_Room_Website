@@ -202,6 +202,42 @@ const TAB_CONFIGS = {
       { name: 'published', label: 'Published', type: 'checkbox', defaultChecked: true, help: 'Visible on the website' },
     ]
   },
+  welcomeList: {
+    table: 'welcome_contacts_church',
+    title: 'Welcome List',
+    titleField: 'email',
+    bulkAdd: true,
+    pageSize: 100,
+    sortItems: (items) => [...items].sort((a, b) => b.id - a.id),
+    columns: ['name', 'email', 'source', 'status', 'next_step'],
+    fields: [
+      { name: 'name', label: 'Name', type: 'text' },
+      { name: 'email', label: 'Email', type: 'email', required: true },
+      { name: 'phone', label: 'Phone (optional)', type: 'text' },
+      { name: 'source', label: 'Where they came from', type: 'select', options: ['Paper card', 'Connect Card', 'Contact form', 'Other'].map(v => ({ value: v, label: v })) },
+      { name: 'status', label: 'Welcome emails', type: 'select', options: [
+        { value: 'active', label: 'Active (they get the emails)' },
+        { value: 'paused', label: 'Paused (no emails for now)' },
+        { value: 'finished', label: 'Finished (got them all)' },
+        { value: 'unsubscribed', label: 'Unsubscribed (never email again)' },
+      ] },
+    ]
+  },
+  welcomeSteps: {
+    table: 'welcome_steps_church',
+    title: 'Welcome Emails',
+    titleField: 'subject',
+    testWelcome: true,
+    sortItems: (items) => [...items].sort((a, b) => a.step_number - b.step_number),
+    columns: ['step_number', 'delay_days', 'subject'],
+    fields: [
+      { name: 'step_number', label: 'Order (1 is first)', type: 'number', required: true },
+      { name: 'delay_days', label: 'Send this many days after the person is added (0 is right away)', type: 'number' },
+      { name: 'subject', label: 'Subject', type: 'text', required: true },
+      { name: 'body', label: 'Email text. Leave a blank line between paragraphs. Web addresses become links. {{first_name}} becomes their first name. An unsubscribe link is added at the bottom for you.', type: 'textarea', required: true },
+      { name: 'published', label: 'Send this email', type: 'checkbox', defaultChecked: true },
+    ]
+  },
   emailSettings: {
     table: 'email_settings_church',
     title: 'Email Settings',
@@ -211,7 +247,7 @@ const TAB_CONFIGS = {
     fields: [
       { name: 'notify_email', label: 'Send a notice to this address whenever someone fills out a form on the website', type: 'text', required: true },
       { name: 'from_address', label: 'Send from (a sender on a domain you verified in Resend, for example Upper Room Fellowship <info@urfellowship.com>)', type: 'text', required: true },
-      { name: 'welcome_enabled', label: 'Send a welcome email to people who fill out the Connect Card', type: 'checkbox', defaultChecked: true },
+      { name: 'welcome_enabled', label: 'Add people who fill out the Connect Card or the contact form to the welcome emails', type: 'checkbox', defaultChecked: true },
     ]
   },
   emailLog: {
@@ -312,6 +348,8 @@ const ContentStudio = () => {
   const TABS = {
     'Inbox': [
       { key: 'forms', label: 'Form Submissions', icon: FiMail },
+      { key: 'welcomeList', label: 'Welcome List', icon: FiUsers },
+      { key: 'welcomeSteps', label: 'Welcome Emails', icon: FiMail },
     ],
     'Site': [
       { key: 'checklist', label: 'Content to Confirm', icon: FiCheckSquare },

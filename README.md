@@ -225,3 +225,12 @@ Two settings live outside this code and have to be checked in the Supabase and G
 ## Transcripts are private
 
 Transcripts live in `sermon_transcripts_church`, which only signed-in staff can read, so they are never on the website or in a page's source. Paste one into the message form under Transcript (private), or add many files at once with Messages, Import transcripts. After saving, the admin can have the AI read each new transcript and write the description and choose categories for any that are blank. The hourly AI tagging job and the AI helper also read the private transcript. The message's public Notes field is separate and is shown on the page.
+
+## Welcome email series
+
+People who fill out the Connect Card or the contact form join a short series of welcome emails, and so does anyone added by hand from a paper contact card. Four starting emails are included (day 0, 3, 7 and 14). In the admin:
+
+- **Welcome Emails** (Inbox group): edit, reorder, turn off or add emails, change when each is sent, and send yourself a test.
+- **Welcome List**: everyone in the series, with their status. Use "Add people from paper contact cards" to paste many at once (name, email, phone per line), or Add New for one. Set someone to Paused or Unsubscribed to stop their emails.
+
+Each email ends with the church address and an unsubscribe link (`/unsubscribe?t=...`), and anyone who unsubscribes is never added again. The sending uses the Resend setup above. Apply `20261114120000_welcome_sequence.sql`.

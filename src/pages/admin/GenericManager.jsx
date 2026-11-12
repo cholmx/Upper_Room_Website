@@ -82,6 +82,30 @@ export default function GenericManager({ config }) {
   const [refreshing, setRefreshing] = useState('');
   const [refreshMsg, setRefreshMsg] = useState('');
   const FEED_WHY = { '-1': 'has no feed address yet', '-2': 'could not be reached', '-3': 'answered with an error', '-4': 'did not look like a podcast feed' };
+  const [bulkText, setBulkText] = useState('');
+  const [bulkState, setBulkState] = useState(null);
+  const addMany = async (e) => {
+    e.preventDefault();
+    setBulkState({ busy: true });
+    const res = await backend.rpc('add_welcome_contacts', { p_lines: bulkText, p_source: 'Paper card' });
+    if (res.status === 'success') {
+      const d = res.data || {};
+      setBulkState({ done: `Added ${d.added || 0}. ${d.skipped ? `${d.skipped} skipped because they are already on the list. ` : ''}${d.invalid ? `${d.invalid} lines had no email address and were left out.` : ''}`.trim() });
+      if (d.added) setBulkText('');
+      fetchItems();
+    } else setBulkState({ error: res.error });
+  };
+  const [welcomeStep, setWelcomeStep] = useState('');
+  const [welcomeTo, setWelcomeTo] = useState('');
+  const [welcomeState, setWelcomeState] = useState(null);
+  const sendWelcomeTest = async (e) => {
+    e.preventDefault();
+    const id = Number(welcomeStep || items[0]?.id);
+    setWelcomeState({ busy: true });
+    const res = await backend.rpc('send_welcome_step_test', { p_step_id: id, p_to: welcomeTo.trim() });
+    const d = res.status === 'success' ? res.data : null;
+    setWelcomeState(d ? { status: d.status, error: d.error } : { status: 'failed', error: res.error });
+  };
   const [testTo, setTestTo] = useState('');
   const [testState, setTestState] = useState(null);
   const sendTest = async (e) => {
@@ -467,6 +491,34 @@ export default function GenericManager({ config }) {
             </dl>
           )}
         </div>
+      )}
+      {config.bulkAdd && (
+        <form onSubmit={addMany} className="mb-6 bg-white rounded-2xl border border-[#1e2522]/10 p-5">
+          <h3 className="text-lg font-bold">Add people from paper contact cards</h3>
+          <p className="text-sm text-black mt-1 max-w-3xl">Type or paste one person per line: name, email, and phone if you have it. They start the welcome emails right away. Anyone already on the list, or who unsubscribed, is skipped. To add just one person, use Add New.</p>
+          <label htmlFor="bulk-add" className="sr-only">People to add</label>
+          <textarea id="bulk-add" rows={5} value={bulkText} onChange={(e) => setBulkText(e.target.value)} placeholder={'Jane Smith, jane@example.com, 330 555 1212\nTom Lee, tom@example.com'} className="mt-3 w-full px-4 py-3 bg-[#1e2522]/5 rounded-lg border border-[#1e2522]/20 focus:outline-none focus:border-[#eaa235]" />
+          <div className="mt-3 flex flex-wrap items-center gap-3">
+            <button type="submit" disabled={bulkState?.busy || !bulkText.trim()} className="px-4 py-2 rounded-lg border border-[#1e2522]/20 bg-white font-bold text-sm disabled:opacity-40">{bulkState?.busy ? 'Adding' : 'Add to the welcome emails'}</button>
+            {bulkState && !bulkState.busy && <p role={bulkState.error ? 'alert' : 'status'} className={`text-sm font-semibold ${bulkState.error ? 'text-[#c74f2f]' : ''}`}>{bulkState.error || bulkState.done}</p>}
+          </div>
+        </form>
+      )}
+      {config.testWelcome && items.length > 0 && (
+        <form onSubmit={sendWelcomeTest} className="mb-6 bg-white rounded-2xl border border-[#1e2522]/10 p-5 flex flex-wrap items-end gap-3">
+          <label className="text-sm font-semibold">
+            <span className="block mb-1">Send me this email</span>
+            <select value={welcomeStep || items[0]?.id} onChange={(e) => setWelcomeStep(e.target.value)} className="px-3 py-2 rounded-lg border border-[#1e2522]/20 bg-white">
+              {items.map(i => <option key={i.id} value={i.id}>{i.step_number}. {i.subject}</option>)}
+            </select>
+          </label>
+          <label className="text-sm font-semibold">
+            <span className="block mb-1">at this address</span>
+            <input type="email" required value={welcomeTo} onChange={(e) => setWelcomeTo(e.target.value)} placeholder="you@example.com" className="px-3 py-2 rounded-lg border border-[#1e2522]/20 bg-white min-w-[16rem]" />
+          </label>
+          <button type="submit" disabled={welcomeState?.busy} className="px-4 py-2 rounded-lg border border-[#1e2522]/20 bg-white font-bold text-sm disabled:opacity-40">{welcomeState?.busy ? 'Sending' : 'Send test'}</button>
+          {welcomeState && !welcomeState.busy && <p role="status" className={`text-sm font-semibold ${welcomeState.status === 'sent' ? '' : 'text-[#c74f2f]'}`}>{welcomeState.status === 'sent' ? 'Sent. Check that inbox, and the spam folder.' : `Not sent. ${welcomeState.error || ''}`}</p>}
+        </form>
       )}
       {config.testEmail && (
         <form onSubmit={sendTest} className="mb-6 bg-white rounded-2xl border border-[#1e2522]/10 p-5 flex flex-wrap items-end gap-3">

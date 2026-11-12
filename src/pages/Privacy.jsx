@@ -14,7 +14,7 @@ export default function Privacy() {
         <p className="mb-6"><Todo id="legal-review">[LEGAL REVIEW: have someone qualified review this page before launch]</Todo></p>
         <div className="space-y-4 text-[1rem] leading-relaxed text-black">
           <h2 className={h}>Forms</h2>
-          <p>When you send the Connect Card, a contact message, or any other form, we receive the information you type. We use it only to reply to you, to prepare for your visit, or to follow up on what you asked about. Forms are stored in our staff dashboard and sent to {SITE.email}. Only our staff and volunteers who need the information can see it. If you give an email address on the Connect Card, we send you one welcome email. Our email is sent through Resend, which has its own privacy policy.</p>
+          <p>When you send the Connect Card, a contact message, or any other form, we receive the information you type. We use it only to reply to you, to prepare for your visit, or to follow up on what you asked about. Forms are stored in our staff dashboard and sent to {SITE.email}. Only our staff and volunteers who need the information can see it. If you give an email address on the Connect Card or the contact form, or on a paper card, we send you a short series of welcome emails over about two weeks. Each one has a link to unsubscribe. Our email is sent through Resend, which has its own privacy policy.</p>
           <h2 className={h}>Giving</h2>
           <p>Online giving is handled by Realm, a church management service. When you give, you leave this site and use Realm’s secure form. We do not see or store your card or bank details.</p>
           <h2 className={h}>Videos, maps, and other services</h2>
