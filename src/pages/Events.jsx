@@ -39,7 +39,7 @@ function Card({ ev, date }) {
             <p className="mt-2 text-[1rem] leading-snug text-black">{plain(more)}</p>
           </details>
         )}
-        {link && <div className="mt-4"><Btn href={link} variant="primary">{ev.needs_signup ? 'Sign up' : 'Learn more'}</Btn></div>}
+        {link && <div className="mt-4"><Btn href={link} variant="green">{ev.needs_signup ? 'Sign up' : 'Learn more'}</Btn></div>}
       </div>
     </li>
   );

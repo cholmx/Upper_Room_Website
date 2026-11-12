@@ -36,7 +36,7 @@ function ValueBody({ v, first }) {
       <ul className="space-y-2">
         {v.practices.map(p => (
           <li key={p} className="flex gap-3 text-[1rem] leading-snug text-black">
-            <span aria-hidden="true" className="mt-[0.45em] w-2 h-2 rounded-full bg-[#c74f2f] shrink-0" />
+            <span aria-hidden="true" className="mt-[0.45em] w-2 h-2 rounded-full bg-[#608563] shrink-0" />
             <span>{p}</span>
           </li>
         ))}

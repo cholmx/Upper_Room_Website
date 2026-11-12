@@ -68,7 +68,7 @@ export default function Home() {
               <p>We draw on the ancient ways of the church, like prayer, Scripture, and Sabbath, and we believe the Holy Spirit is at work today.</p>
               <p>On Sundays, adult and kids classes begin at 9:30am. Worship follows at 10:30am with live music, clear Bible teaching, and time for coffee and conversation. Kids from birth through 5th grade have their own programs, and Wednesday evenings bring adult classes, youth groups, and childcare. Whether you are new to faith, returning after a long absence, or looking for a church home, we would be glad to meet you.</p>
             </div>
-            <div className="mt-8"><Btn to="/plan-your-visit" variant="primary">Plan Your Visit</Btn></div>
+            <div className="mt-8"><Btn to="/plan-your-visit" variant="green">Plan Your Visit</Btn></div>
           </div>
         </div>
       </Section>
@@ -247,7 +247,7 @@ export default function Home() {
         <h2 className="text-3xl md:text-5xl mb-6">Our Vision</h2>
         <p className="text-xl md:text-2xl leading-snug mb-5 font-serif">We exist to help people know God deeply, share life authentically, and serve others selflessly.</p>
         <p className="text-[1rem] leading-relaxed text-black">Lasting change starts on the inside, as our hearts line up with God’s heart. That conviction shapes how we build relationships, how we pray, and how we serve.</p>
-        <div className="mt-6"><Btn to="/core-values" variant="primary">Read Our Core Values</Btn></div>
+        <div className="mt-6"><Btn to="/core-values" variant="green">Read Our Core Values</Btn></div>
         <blockquote className="mt-8 font-serif italic text-xl leading-snug">
           “By this everyone will know that you are my disciples, if you love one another.”
           <footer className="mt-2 text-base font-serif not-italic">John 13:35</footer>

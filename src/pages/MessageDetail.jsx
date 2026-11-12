@@ -172,7 +172,7 @@ export default function MessageDetail() {
           <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {more.map(x => <li key={x.id}><MessageCard message={x} /></li>)}
           </ul>
-          <div className="mt-8"><Btn to={seriesPath(m.series)} variant="primary">See the whole series</Btn></div>
+          <div className="mt-8"><Btn to={seriesPath(m.series)} variant="green">See the whole series</Btn></div>
         </Section>
       )}
       {similar.length > 0 && (
