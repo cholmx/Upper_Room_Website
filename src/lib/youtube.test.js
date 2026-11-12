@@ -95,3 +95,14 @@ describe('sundayOnOrBefore', () => {
     expect(sundayOnOrBefore('not a date')).toBe('');
   });
 });
+
+describe('splitDescription footer', () => {
+  const footer = '\n\nURF WEBSITE: \n➤ http://www.urfellowship.com\n\nSOCIALS: \n➤ Instagram: https://www.instagram.com/urfellowship/\n➤ Facebook: https://www.facebook.com/urfellowship';
+  it('drops the website and social links after the discussion questions', () => {
+    const text = 'Sermon Summary\nPeter visits Cornelius.\n\nDiscussion Questions\n1. Who is the Gospel for?\n2. What stretches you?' + footer;
+    expect(splitDescription(text)).toEqual({ summary: 'Peter visits Cornelius.', questions: '1. Who is the Gospel for?\n2. What stretches you?' });
+  });
+  it('drops them from a description with no headings too', () => {
+    expect(splitDescription('A short note.' + footer)).toEqual({ summary: 'A short note.', questions: '' });
+  });
+});

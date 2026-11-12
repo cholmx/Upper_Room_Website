@@ -48,7 +48,18 @@ export function parseVideoTitle(raw) {
 const SUMMARY_HEAD = /^\s*(?:sermon\s+)?summary\s*:?\s*$/i;
 const QUESTIONS_HEAD = /^\s*(?:discussion\s+questions?|questions?\s+for\s+discussion)\s*:?\s*$/i;
 
-export function splitDescription(text) {
+// The links at the bottom of every description ("URF WEBSITE:", "SOCIALS:", lines starting with an arrow) are not part
+// of the summary or the questions, so everything from the first such line on is dropped.
+const FOOTER_HEAD = /^\s*(?:urf\s+website|website|socials?)\s*:?\s*$/i;
+const FOOTER_ARROW = /^\s*➤/;
+export function stripDescriptionFooter(text) {
+  const lines = String(text || '').replace(/\r/g, '').split('\n');
+  const at = lines.findIndex(l => FOOTER_HEAD.test(l) || FOOTER_ARROW.test(l));
+  return (at === -1 ? lines : lines.slice(0, at)).join('\n').trim();
+}
+
+export function splitDescription(raw) {
+  const text = stripDescriptionFooter(raw);
   const lines = String(text || '').replace(/\r/g, '').split('\n');
   const out = { summary: [], questions: [] };
   let mode = null;
