@@ -41,7 +41,7 @@ const llms = [
   '- Facebook: https://www.facebook.com/urfellowship/',
   '',
   '## Pages',
-  ...['plan', 'about', 'values', 'discipleship', 'sozo', 'messages', 'shine', 'growth', 'leadership', 'contact', 'connect', 'give'].map(pageLine),
+  ...['plan', 'about', 'values', 'discipleship', 'sozo', 'messages', 'shine', 'events', 'growth', 'leadership', 'contact', 'connect', 'give'].map(pageLine),
   '',
   '## Recent messages',
   ...(messages.length

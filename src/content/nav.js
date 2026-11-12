@@ -7,6 +7,7 @@ export const NAV = [
     children: [
       { label: 'About Us', to: '/about' },
       { label: 'Core Values', to: '/core-values' },
+      { label: 'Events', to: '/events' },
     ],
   },
   {
@@ -45,6 +46,7 @@ export const FOOTER_LINKS = [
   { label: 'New Here?', to: '/plan-your-visit' },
   { label: 'About Us', to: '/about' },
   { label: 'Core Values', to: '/core-values' },
+  { label: 'Events', to: '/events' },
   { label: 'Adult Discipleship Training', to: '/discipleship' },
   { label: 'Sozo', to: '/sozo' },
   { label: 'Messages', to: '/messages' },

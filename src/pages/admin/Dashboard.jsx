@@ -60,33 +60,6 @@ const TAB_CONFIGS = {
       ...PUBLISH_FIELDS
     ]
   },
-  events: {
-    table: 'events_church',
-    title: 'Events',
-    titleField: 'title',
-    columns: ['title', 'date', 'ministry'],
-    fields: [
-      { name: 'title', label: 'Title', type: 'text', required: true },
-      { name: 'date', label: 'Date (first occurrence)', type: 'date', required: true },
-      {
-        name: 'recurrence', label: 'Repeats', type: 'select',
-        options: [
-          { value: 'none', label: 'Does not repeat' },
-          { value: 'weekly', label: 'Every week' },
-          { value: 'biweekly', label: 'Every 2 weeks' },
-          { value: 'monthly', label: 'Every month' },
-        ]
-      },
-      { name: 'ministry', label: 'Ministry (for the calendar filter)', type: 'select', options: [{ value: '', label: 'None' }, ...opts(['Sunday', 'Kids', 'Youth', 'Table Groups', 'Outreach', 'Campaign'])] },
-      { name: 'time', label: 'Time', type: 'text' },
-      { name: 'location', label: 'Location', type: 'text' },
-      { name: 'desc_text', label: 'Description', type: 'markdown' },
-      { name: 'image_url', label: 'Image (optional)', type: 'image' },
-      { name: 'registration_url', label: 'Sign-up link (optional)', type: 'url' },
-      { name: 'featured', label: 'Featured', type: 'checkbox', help: 'Show at the top of the Events page' },
-      ...PUBLISH_FIELDS
-    ]
-  },
   staff: {
     table: 'staff_church',
     seedItems: DEFAULT_LEADERS.map((p, i) => ({ name: p.name, role: p.role, email: p.email, sort_order_num: i + 1, published: 1 })),
@@ -183,6 +156,20 @@ const TAB_CONFIGS = {
       { name: 'duration', label: 'Length (for example 32:10)', type: 'text' },
       { name: 'page_url', label: 'Episode page link (optional)', type: 'url' },
       { name: 'published', label: 'Published', type: 'checkbox', defaultChecked: true, help: 'Visible on the website' },
+    ]
+  },
+  events: {
+    table: 'urf_events_church',
+    title: 'Events',
+    titleField: 'title',
+    canCreate: false,
+    syncNow: { rpc: 'sync_events_now', label: 'Update from urf.life', note: 'Events come from urf.life and are copied here every hour. To change an event, change it on urf.life. Use Hide to keep one off this website.' },
+    pageSize: 100,
+    sortItems: (items) => [...items].sort((a, b) => String(a.event_date || '').localeCompare(String(b.event_date || ''))),
+    columns: ['title', 'event_date', 'ministry', 'recurrence_label', 'hidden'],
+    fields: [
+      { name: 'title', label: 'Event (changed on urf.life, not here)', type: 'text', required: true },
+      { name: 'hidden', label: 'Hide this event on this website', type: 'checkbox', defaultChecked: false },
     ]
   },
   campaign: {
@@ -342,6 +329,7 @@ const ContentStudio = () => {
     'Content': [
       { key: 'sermons', label: 'Messages', icon: FiMic },
       { key: 'categories', label: 'Message Categories', icon: FiLayout },
+      { key: 'events', label: 'Events', icon: FiCalendar },
       { key: 'campaign', label: 'Growth Campaign', icon: FiHeart },
       { key: 'podcastShows', label: 'Podcast Shows', icon: FiMic },
       { key: 'podcastEpisodes', label: 'Podcast Episodes', icon: FiMic },

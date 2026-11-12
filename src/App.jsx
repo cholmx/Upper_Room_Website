@@ -23,6 +23,7 @@ const MessageDetail = lazy(() => import('./pages/MessageDetail'));
 const Shine = lazy(() => import('./pages/Shine'));
 const Sozo = lazy(() => import('./pages/Sozo'));
 const GrowthCampaign = lazy(() => import('./pages/GrowthCampaign'));
+const Events = lazy(() => import('./pages/Events'));
 const Give = lazy(() => import('./pages/Give'));
 const Contact = lazy(() => import('./pages/Contact'));
 const Connect = lazy(() => import('./pages/Connect'));
@@ -101,7 +102,7 @@ export function AppBody() {
           ['/', Home], ['/plan-your-visit', PlanYourVisit], ['/about', About], ['/core-values', CoreValues],
           ['/leadership', Leadership], ['/messages', Messages], ['/messages/series/:series', MessageSeries], ['/messages/:slug', MessageDetail],
           ['/discipleship', Discipleship], ['/sozo', Sozo], ['/shine', Shine],
-          ['/give', Give], ['/growth-campaign', GrowthCampaign], ['/contact', Contact], ['/connect', Connect],
+          ['/give', Give], ['/events', Events], ['/growth-campaign', GrowthCampaign], ['/contact', Contact], ['/connect', Connect],
           ['/accessibility', Accessibility], ['/privacy', Privacy], ['/unsubscribe', Unsubscribe], ['/blog', Blog], ['/blog/:id', BlogPost], ['/p/:slug', CustomPage],
         ].map(([path, Page]) => (
           <Route key={path} path={path} element={<PublicLayout><Page /></PublicLayout>} />
@@ -118,7 +119,6 @@ export function AppBody() {
         <Route path="/sermons" element={<Navigate to="/messages" replace />} />
         <Route path="/podcasts" element={<Navigate to="/shine" replace />} />
         <Route path="/prayer" element={<Navigate to="/contact" replace />} />
-        <Route path="/events" element={<Navigate to="/" replace />} />
         <Route path="/careportal" element={<Navigate to="/" replace />} />
         <Route path="/ministries" element={<Navigate to="/discipleship" replace />} />
         <Route path="/kids" element={<Navigate to="/plan-your-visit" replace />} />
@@ -131,7 +131,7 @@ export function AppBody() {
         <Route path="/capital-campaign" element={<Navigate to="/growth-campaign" replace />} />
         <Route path="/team" element={<Navigate to="/leadership" replace />} />
         <Route path="/sermons/:id" element={<SermonRedirect />} />
-        <Route path="/events/:id" element={<Navigate to="/" replace />} />
+        <Route path="/events/:id" element={<Navigate to="/events" replace />} />
 
         <Route path="*" element={<PublicLayout><NotFoundPage /></PublicLayout>} />
       </Routes>

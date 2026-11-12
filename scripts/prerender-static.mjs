@@ -9,7 +9,7 @@ import { readFile, writeFile, mkdir, rm, copyFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { readLiveContent, readPhotos, readPodcast, readCampaign, SITE_URL } from './lib.mjs';
+import { readLiveContent, readPhotos, readPodcast, readCampaign, readEvents, SITE_URL } from './lib.mjs';
 import { redirectRules } from '../src/content/redirects.js';
 
 const DIST = path.resolve('dist');
@@ -75,7 +75,7 @@ try {
 
   let saved = 0;
   for (const route of Object.values(SEO_ROUTES)) {
-    if (route === '/messages' || route === '/shine' || route === '/growth-campaign') continue;
+    if (route === '/messages' || route === '/shine' || route === '/growth-campaign' || route === '/events') continue;
     const key = Object.keys(SEO_ROUTES).find(k => SEO_ROUTES[k] === route);
     let body = await mod.render(route);
     if (route === '/' && messages[0]) {
@@ -86,6 +86,16 @@ try {
     await write(route, page({ title: SEO[key][0], description: SEO[key][1], route, image: shareImage(key), schema: schemaFor(route), body }));
     saved += 1;
   }
+
+  // Events page
+  const { upcoming, timeRange, frequencyLabel, plain } = await import('../src/lib/events.js');
+  const evs = upcoming(await readEvents());
+  const dayText = (d) => d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+  await write('/events', page({
+    title: SEO.events[0], description: SEO.events[1], route: '/events', image: shareImage('events'), schema: schemaFor('/events'),
+    body: chrome(`<h1>Events</h1><p>${esc(SEO.events[1])}</p>` + (evs.length ? `<ul>${evs.map(({ ev, date }) => `<li><h2>${esc(plain(ev.title))}</h2><p>${esc([dayText(date), timeRange(ev), ev.location, frequencyLabel(ev)].filter(Boolean).join(' | '))}</p>${ev.summary ? `<p>${esc(plain(ev.summary))}</p>` : ''}</li>`).join('')}</ul>` : '')),
+  }));
+  saved += 1;
 
   // Growth Campaign page
   const camp = await readCampaign();

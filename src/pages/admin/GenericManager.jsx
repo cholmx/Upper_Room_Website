@@ -82,6 +82,14 @@ export default function GenericManager({ config }) {
   const [refreshing, setRefreshing] = useState('');
   const [refreshMsg, setRefreshMsg] = useState('');
   const FEED_WHY = { '-1': 'has no feed address yet', '-2': 'could not be reached', '-3': 'answered with an error', '-4': 'did not look like a podcast feed' };
+  const [syncMsg, setSyncMsg] = useState('');
+  const [syncing, setSyncing] = useState(false);
+  const syncNow = async () => {
+    setSyncing(true); setSyncMsg('');
+    const res = await backend.rpc(config.syncNow.rpc, {});
+    setSyncing(false);
+    if (res.status === 'success') { setSyncMsg(res.data?.count >= 0 ? `Done. ${res.data.count} ${res.data.count === 1 ? 'event' : 'events'} updated.` : `Not updated. ${res.data?.result || ''}`); fetchItems(); } else setSyncMsg(res.error || 'That did not work.');
+  };
   const [welcomeStep, setWelcomeStep] = useState('');
   const [welcomeTo, setWelcomeTo] = useState('');
   const [welcomeState, setWelcomeState] = useState(null);
@@ -442,6 +450,9 @@ export default function GenericManager({ config }) {
             {seeding && !seeding.finished ? `Adding ${seeding.done + seeding.failed} of ${seeding.total}` : config.seedLabel ? config.seedLabel(missingSeeds.length) : `Add the ${missingSeeds.length} standard categories that are missing`}
           </button>
         )}
+        {config.syncNow && (
+            <button onClick={syncNow} disabled={syncing} className="border border-[#1e2522]/20 bg-white text-[#1e2522] font-bold py-2.5 px-5 rounded-lg transition disabled:opacity-50">{syncing ? 'Updating' : config.syncNow.label}</button>
+          )}
         {config.refreshFeed && (
             <button onClick={testFeed} disabled={feedTest?.loading} className="border border-[#1e2522]/20 bg-white text-[#1e2522] font-bold py-2.5 px-5 rounded-lg transition disabled:opacity-50">Test the feed</button>
           )}
@@ -509,6 +520,8 @@ export default function GenericManager({ config }) {
           )}
         </form>
       )}
+      {config.syncNow && <p className="mb-4 text-sm text-black max-w-3xl">{config.syncNow.note}</p>}
+      {syncMsg && <p role="status" className="mb-4 text-sm font-semibold">{syncMsg}</p>}
       {refreshMsg && <p role="status" className="mb-4 text-sm font-semibold">{refreshMsg}</p>}
       {transcripts && <TranscriptImport items={items} onClose={() => setTranscripts(false)} onDone={fetchItems} />}
       {importing && <YouTubeImport existing={items} onClose={() => setImporting(false)} onImported={fetchItems} />}

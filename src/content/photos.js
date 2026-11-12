@@ -10,7 +10,7 @@ export const HERO_IMAGES = {
   plan: VISIT, contact: VISIT, connect: VISIT,
   about: ABOUT, values: ABOUT,
   leadership: PX(3184393),
-  messages: PX(34328505), shine: PX(34328505), growth: GENERAL,
+  messages: PX(34328505), shine: PX(34328505), growth: GENERAL, events: VISIT,
   discipleship: MINISTRY,
   sozo: GENERAL, give: GENERAL, accessibility: GENERAL, privacy: GENERAL,
   blog: PX(6779632),

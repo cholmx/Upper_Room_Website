@@ -58,6 +58,12 @@ export async function readCampaign() {
     .sort((a, b) => (Number(a.sort_order_num) || 0) - (Number(b.sort_order_num) || 0));
 }
 
+// The events shown on the Events page (not hidden), for its static copy.
+export async function readEvents() {
+  const rows = await readTable('urf_events_church');
+  return rows.filter(r => !Number(r.hidden));
+}
+
 // Every public URL, with a last-modified date when the row has one.
 export async function collectRoutes() {
   const [sermons, pages, posts] = await Promise.all([
