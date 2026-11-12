@@ -1,0 +1,1 @@
+ALTER TABLE public.site_settings_church ADD COLUMN IF NOT EXISTS campaign_home_on integer NOT NULL DEFAULT 1;
