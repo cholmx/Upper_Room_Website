@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { backend } from '../../lib/backend';
+import { cleanTranscript } from '../../lib/transcript';
 import { dataFetch } from '../../api';
 import { useAuth } from '../../auth';
 import { logActivity } from '../../lib/activity';
@@ -31,6 +32,12 @@ export default function GenericManager({ config }) {
   const [loading, setLoading] = useState(true);
   const [view, setView] = useState('list'); // 'list' | 'form'
   const [formData, setFormData] = useState({});
+  // A message's private transcript is kept apart from the message row, so it has its own state.
+  const [transcript, setTranscript] = useState('');
+  const [transcriptOriginal, setTranscriptOriginal] = useState('');
+  const [transcriptLoading, setTranscriptLoading] = useState(false);
+  const [aiAfterSave, setAiAfterSave] = useState(true);
+  const [saveNote, setSaveNote] = useState('');
   const [initialJson, setInitialJson] = useState('');
   const [errors, setErrors] = useState({});
   const [saving, setSaving] = useState(false);
@@ -84,7 +91,7 @@ export default function GenericManager({ config }) {
   const sortable = Boolean(config.sortField);
   const canCreate = config.canCreate !== false;
   const titleField = config.titleField || config.fields[0].name;
-  const dirty = view === 'form' && JSON.stringify(formData) !== initialJson;
+  const dirty = view === 'form' && (JSON.stringify(formData) !== initialJson || (Boolean(config.transcript) && transcript !== transcriptOriginal));
 
   useEffect(() => {
     fetchItems();
@@ -120,6 +127,14 @@ export default function GenericManager({ config }) {
   };
 
   const openForm = (data) => {
+    setTranscript(''); setTranscriptOriginal(''); setSaveNote('');
+    if (config.transcript && data.id) {
+      setTranscriptLoading(true);
+      backend.rpc('get_sermon_transcript', { p_sermon_id: Number(data.id) }).then(res => {
+        const t = res.status === 'success' ? String(res.data || '') : '';
+        setTranscript(t); setTranscriptOriginal(t); setTranscriptLoading(false);
+      });
+    }
     setFormData(data);
     setInitialJson(JSON.stringify(data));
     setErrors({});
@@ -228,6 +243,26 @@ export default function GenericManager({ config }) {
       return;
     }
     logActivity(user, payload.id ? 'updated' : 'created', config.title, payload[titleField]);
+    if (config.transcript && transcript !== transcriptOriginal) {
+      const id = Number(payload.id || res.data?.id);
+      const captions = /-->|^\s*\d{1,2}:\d{2}/m.test(transcript);
+      const body = captions ? cleanTranscript(transcript) : transcript.trim();
+      setSaving(true);
+      const saved = await backend.rpc('save_sermon_transcript', { p_sermon_id: id, p_body: body });
+      if (saved.status !== 'success') {
+        setSaving(false);
+        setError('The message was saved, but its transcript could not be saved. Please try again.');
+        return;
+      }
+      // Then the AI reads the new transcript and fills in a description and categories that are still blank.
+      if (aiAfterSave && body) {
+        setSaveNote('Saved. The AI is reading the transcript to fill in the description and categories. This takes a few seconds.');
+        await backend.rpc('ai_summarize_message', { sermon_id: id, force: false });
+        await backend.rpc('ai_review_message', { sermon_id: id, replace: false });
+      }
+      setSaving(false);
+      setSaveNote('');
+    }
     setInitialJson(JSON.stringify(prepared));
     setView('list');
     fetchItems();
@@ -314,6 +349,18 @@ export default function GenericManager({ config }) {
           )).map(field => (
             <FieldInput key={field.name} field={field} value={formData[field.name]} onChange={handleChange} error={errors[field.name]} />
           ))}
+          {config.transcript && (
+            <div>
+              <label htmlFor="f-transcript" className="block text-sm font-bold text-[#1e2522] mb-2">Transcript (private)</label>
+              <p className="text-sm text-black mb-2">Paste the full transcript here, with or without times. It is never shown on the website. The AI uses it to write the description and choose categories.</p>
+              <textarea id="f-transcript" rows={10} value={transcriptLoading ? 'Loading the transcript.' : transcript} disabled={transcriptLoading} onChange={(e) => setTranscript(e.target.value)} className="w-full px-4 py-3 bg-[#1e2522]/5 rounded-lg border border-[#1e2522]/20 focus:outline-none focus:border-[#eaa235] focus:ring-1 focus:ring-[#eaa235]" />
+              <label className="mt-3 flex items-center gap-2 text-sm cursor-pointer">
+                <input type="checkbox" checked={aiAfterSave} onChange={(e) => setAiAfterSave(e.target.checked)} className="w-5 h-5 accent-[#c74f2f]" />
+                When I save a new or changed transcript, have the AI write the description and choose categories if they are blank
+              </label>
+            </div>
+          )}
+          {saveNote && <p role="status" className="text-sm font-semibold">{saveNote}</p>}
           <div className="flex justify-end gap-4 pt-6 border-t border-[#1e2522]/10">
             <button type="button" onClick={requestLeaveForm} className="px-6 py-3 font-bold text-black hover:text-[#1e2522] transition">Cancel</button>
             <button type="submit" disabled={saving} className="bg-[#1e2522] text-white font-bold py-3 px-8 rounded-lg hover:bg-[#1e2522] transition disabled:bg-[#1e2522]/40 flex items-center gap-2">

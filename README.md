@@ -224,4 +224,4 @@ Two settings live outside this code and have to be checked in the Supabase and G
 
 ## Transcripts are private
 
-Transcripts live in `sermon_transcripts_church`, which only signed-in staff can read, so they are never on the website or in a page's source. Add them with Messages, Import transcripts. After saving, the admin can have the AI read each new transcript and write the description and choose categories for any that are blank. The hourly AI tagging job and the AI helper also read the private transcript. The message's public Notes field is separate and is shown on the page.
+Transcripts live in `sermon_transcripts_church`, which only signed-in staff can read, so they are never on the website or in a page's source. Paste one into the message form under Transcript (private), or add many files at once with Messages, Import transcripts. After saving, the admin can have the AI read each new transcript and write the description and choose categories for any that are blank. The hourly AI tagging job and the AI helper also read the private transcript. The message's public Notes field is separate and is shown on the page.
