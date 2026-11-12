@@ -36,7 +36,7 @@ export default function Footer() {
           <p className="mt-2 text-[0.95rem] text-white/85">Classes at 9:30am. Worship at 10:30am. {SITE.address.street}, {SITE.address.city}.</p>
         </div>
         <div className="flex flex-wrap gap-3">
-          <Btn to="/plan-your-visit" variant="primary">Plan Your Visit</Btn>
+          <Btn to="/plan-your-visit" variant="gold">Plan Your Visit</Btn>
           <Btn href={SITE.googleMapsUrl} variant="light">Get Directions</Btn>
         </div>
       </div>

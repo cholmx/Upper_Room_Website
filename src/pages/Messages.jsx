@@ -229,7 +229,7 @@ export default function Messages() {
             <h2 className="text-3xl md:text-5xl mb-5">Listen anywhere</h2>
             <p className="text-base leading-relaxed mb-6">Subscribe to our podcast on Apple Podcasts, Spotify, or your favorite podcast app, and new messages arrive automatically. Take them along on a commute, a workout, or a quiet morning.</p>
             <div className="flex flex-wrap gap-3">
-              <Btn href={SITE.podcasts.apple} variant="primary">Apple Podcasts</Btn>
+              <Btn href={SITE.podcasts.apple} variant="gold">Apple Podcasts</Btn>
               <Btn href={SITE.podcasts.spotify} variant="light">Spotify</Btn>
             </div>
           </PhotoBand>

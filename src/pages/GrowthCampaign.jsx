@@ -44,7 +44,7 @@ export default function GrowthCampaign() {
   return (
     <>
       <PageHeader kicker="Transforming Together" title="Growth Campaign" intro="We are making room for more people to encounter Jesus. Here is our vision, and answers to the questions we hear most.">
-        <Btn href={C.give} variant="primary">Give to the Growth Campaign</Btn>
+        <Btn href={C.give} variant="gold">Give to the Growth Campaign</Btn>
         <Btn href={C.pledge} variant="light">Submit Your Commitment Card</Btn>
       </PageHeader>
 

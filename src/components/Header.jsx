@@ -87,7 +87,7 @@ function MobileMenu({ onClose }) {
       </div>
       <div className="px-6 pt-2 grid grid-cols-2 gap-3">
         <Btn ref={first} to="/plan-your-visit" variant="primary" onClick={onClose} className="!px-4 text-center">Plan Your Visit</Btn>
-        <Btn to="/give" variant="accent" onClick={onClose} className="!px-4 text-center">Give</Btn>
+        <Btn to="/give" variant="gold" onClick={onClose} className="!px-4 text-center">Give</Btn>
       </div>
       <nav aria-label="Main" className="px-6 py-6 pb-28">
         <ul>

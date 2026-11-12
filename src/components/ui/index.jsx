@@ -14,6 +14,7 @@ const isExternal = (to) => /^(https?:|mailto:|tel:|sms:)/i.test(to);
 const BTN = {
   primary: 'btn btn-solid',
   accent: 'btn bg-[#c74f2f] text-white border-[#c74f2f] hover:bg-[#1e2522] hover:border-[#1e2522]',
+  gold: 'btn bg-[#eaa235] text-[#1e2522] border-[#eaa235] hover:bg-[#c74f2f] hover:text-white hover:border-[#c74f2f]',
   dark: 'btn bg-[#1e2522] text-white border-[#1e2522] hover:bg-[#eaa235] hover:text-[#1e2522] hover:border-[#eaa235]',
   ghost: 'btn btn-outline',
   light: 'btn btn-outline-dark',

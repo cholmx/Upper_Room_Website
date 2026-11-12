@@ -60,7 +60,7 @@ export default function PlanYourVisit() {
       <PhotoBand slot="plan-connect" id="connect-card">
         <h2 className="text-3xl md:text-5xl mb-5">Let us know you are coming</h2>
         <p className="text-base leading-relaxed">Fill out our short online Connect Card, and our welcome team will be ready to greet you. We keep your information confidential and use it only to serve you well.</p>
-        <div className="mt-6"><Btn to="/connect" variant="primary">Fill Out the Connect Card</Btn></div>
+        <div className="mt-6"><Btn to="/connect" variant="gold">Fill Out the Connect Card</Btn></div>
       </PhotoBand>
 
       <Section tone="white">

@@ -24,7 +24,7 @@ export default function Give() {
         title="Give"
         intro="Your generosity fuels our mission to transform lives and communities. When you give, you help create places where people meet God, build healthy relationships, and find purpose through serving others."
       >
-        <Btn href={SITE.giveUrl} variant="primary">Give Now</Btn>
+        <Btn href={SITE.giveUrl} variant="gold">Give Now</Btn>
       </PageHeader>
 
       <Section tone="white">
@@ -54,7 +54,7 @@ export default function Give() {
           <li className="flex gap-3"><span aria-hidden="true" className="text-[#c74f2f] font-bold">3.</span><span>Finish on our secure giving page. It opens in a new tab.</span></li>
         </ul>
         <div className="mt-7 flex flex-wrap items-center gap-4">
-          <Btn href={SITE.giveUrl} variant="primary">Give Now</Btn>
+          <Btn href={SITE.giveUrl} variant="gold">Give Now</Btn>
           <span className={P}>Or text <strong>{t.keyword}</strong> and any amount you choose, such as <strong>{t.keyword} $25</strong>, to <strong>{t.number}</strong>.</span>
         </div>
       </PhotoSplit>

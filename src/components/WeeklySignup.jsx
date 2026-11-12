@@ -45,7 +45,7 @@ export default function WeeklySignup({ variant = 'band', source = 'Website' }) {
         <div aria-hidden="true" style={{ position: 'absolute', left: '-10000px', width: 1, height: 1, overflow: 'hidden' }}>
           <label>Website<input tabIndex={-1} autoComplete="off" value={trap} onChange={(e) => setTrap(e.target.value)} /></label>
         </div>
-        <button type="submit" disabled={state.status === 'busy'} className="min-h-[48px] px-6 rounded-full bg-[#c74f2f] text-white font-display font-bold hover:bg-[#a83f23] disabled:opacity-60">
+        <button type="submit" disabled={state.status === 'busy'} className={`min-h-[48px] px-6 rounded-full font-display font-bold disabled:opacity-60 ${dark ? 'bg-[#eaa235] text-[#1e2522] hover:bg-white' : 'bg-[#c74f2f] text-white hover:bg-[#a83f23]'}`}>
           {state.status === 'busy' ? 'Signing up' : 'Sign me up'}
         </button>
         {state.status === 'error' && <p id={`${id}-err`} role="alert" className={`md:col-span-3 text-sm font-semibold ${dark ? 'text-[#eaa235]' : 'text-[#c74f2f]'}`}>{state.message}</p>}

@@ -14,7 +14,7 @@ function Buttons({ s, center, onPhoto }) {
   const yellow = s.tone === 'yellow';
   return (
     <div className={`flex flex-wrap gap-3 mt-6 ${center ? 'justify-center' : ''}`}>
-      {s.button_label && s.button_url && <Btn to={s.button_url} variant="primary" className={yellow ? YELLOW_DARK : ''}>{s.button_label}</Btn>}
+      {s.button_label && s.button_url && <Btn to={s.button_url} variant={onPhoto ? 'gold' : 'primary'} className={yellow ? YELLOW_DARK : ''}>{s.button_label}</Btn>}
       {s.button2_label && s.button2_url && <Btn to={s.button2_url} variant={onPhoto ? 'light' : yellow ? 'ghost' : 'dark'} className={yellow ? YELLOW_LINE : ''}>{s.button2_label}</Btn>}
     </div>
   );

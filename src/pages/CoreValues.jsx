@@ -207,7 +207,7 @@ export default function CoreValues() {
       <PhotoBand slot="values-growing">
         <h2 className="text-3xl md:text-5xl mb-5">Growing in our values</h2>
         <p className="text-base leading-relaxed">{GROWING}</p>
-        <div className="mt-6"><Btn to="/discipleship" variant="primary">Explore Adult Discipleship Training</Btn></div>
+        <div className="mt-6"><Btn to="/discipleship" variant="gold">Explore Adult Discipleship Training</Btn></div>
       </PhotoBand>
     </>
   );

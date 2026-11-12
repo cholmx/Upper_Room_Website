@@ -48,7 +48,7 @@ export default function Home() {
           <div className="hero-text w-full max-w-[900px] px-6 md:px-10 pb-14 md:pb-20 pt-32 text-left text-white">
             <HeroHeading id="home-h1" lines={SITE.hero.lines && SITE.hero.lines.length ? SITE.hero.lines : [SITE.hero.title]} className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-4 leading-[1.1]" />
             {SITE.hero.subtitle && <p className="font-serif text-lg md:text-2xl mb-6 leading-[1.12] md:leading-[1.12] text-white">{SITE.hero.subtitle}</p>}
-            <div className="mt-4">{SITE.hero.buttonLabel && SITE.hero.buttonUrl && <Btn to={SITE.hero.buttonUrl} variant="primary">{SITE.hero.buttonLabel}</Btn>}</div>
+            <div className="mt-4">{SITE.hero.buttonLabel && SITE.hero.buttonUrl && <Btn to={SITE.hero.buttonUrl} variant="gold">{SITE.hero.buttonLabel}</Btn>}</div>
             {worship && <p className="mt-5 text-sm md:text-base">{worship}</p>}
           </div>
         </div>
@@ -204,7 +204,7 @@ export default function Home() {
             <h2 className="text-4xl md:text-6xl mb-5">Growth Campaign</h2>
             <p className="text-base leading-relaxed max-w-[34rem]">Our building is full, and God is bringing growth. We are choosing to make room for more people to encounter Jesus, and we are doing it together.</p>
             <div className="mt-7 flex flex-wrap gap-3">
-              <Btn href={SITE.campaign.give} variant="primary">Give to the Growth Campaign</Btn>
+              <Btn href={SITE.campaign.give} variant="gold">Give to the Growth Campaign</Btn>
               <Btn to="/growth-campaign" variant="light">Learn More</Btn>
             </div>
           </div>
@@ -265,7 +265,7 @@ export default function Home() {
         <p className="text-base leading-relaxed">500 Sponseller Road, Columbiana, Ohio 44408</p>
         <p className="text-base leading-relaxed"><a className="underline underline-offset-4 font-semibold" href="mailto:Info@urfellowship.com">Info@urfellowship.com</a></p>
         <p className="text-base leading-relaxed"><a className="underline underline-offset-4 font-semibold" href={SITE.phoneHref}>330.482.9058</a></p>
-        <div className="mt-6"><Btn to="/contact" variant="primary">Send a Message</Btn></div>
+        <div className="mt-6"><Btn to="/contact" variant="gold">Send a Message</Btn></div>
       </PhotoBand>
     </>
   );
