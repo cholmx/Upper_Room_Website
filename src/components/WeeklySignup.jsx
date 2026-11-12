@@ -68,7 +68,7 @@ export default function WeeklySignup({ variant = 'band', source = 'Website' }) {
   return (
     <div className="relative max-w-3xl">
       <h2 className="text-3xl md:text-5xl mb-4">The weekly URF email</h2>
-      <p className="text-[1rem] leading-relaxed text-black mb-6">Every Wednesday morning we send one short email with last Sunday’s message, the questions to talk about, a thought for the week, and the events coming up in the next seven days. You can leave at any time.</p>
+      <p className="text-[1rem] leading-relaxed text-black mb-6">Every Wednesday morning we send one short email with last Sunday’s message, a thought for the week, and the events coming up in the next seven days. You can leave at any time.</p>
       {form}
     </div>
   );

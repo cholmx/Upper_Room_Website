@@ -157,7 +157,7 @@ export default function WeeklyEmail() {
           <h3 className="text-lg font-bold">What would go out right now</h3>
           <button type="button" onClick={loadPreview} disabled={loadingPreview} className={btn}>{loadingPreview ? 'Loading' : 'Refresh preview'}</button>
         </div>
-        <p className="text-sm text-black mt-1 max-w-3xl">It is built from your newest published message, its summary and discussion questions, and the events in the next seven days. Edit those in Messages and Events, then refresh.</p>
+        <p className="text-sm text-black mt-1 max-w-3xl">It is built from your newest published message, a short version of its summary, and the events in the next seven days. Edit those in Messages and Events, then refresh.</p>
         {previewError && <p role="alert" className="mt-3 text-sm font-semibold text-[#c74f2f]">{previewError}</p>}
         {preview && (
           <div className="mt-4 grid lg:grid-cols-[1fr_340px] gap-6 items-start">
