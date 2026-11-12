@@ -3,7 +3,7 @@
 
 Rewrites the five welcome emails (day 0, 3, 7, 14 and 21) to add:
 - First Steps, the monthly get-together for new people, in the first email.
-- Table Groups and a sign-up link in the second.
+- Table Groups and a sign-up link in the second. Sozo is not mentioned, since it may not be right for brand new people.
 - A new third email that explains urf.life, the church family's website, and explains Realm with a link to join.
 - Table Groups and Join Realm again in the last check-in.
 The URFamily Lunch is not mentioned.
@@ -68,8 +68,6 @@ Wednesday evenings, 6:30 to 8:00pm: Classes on things like marriage and parentin
 
 Take a look: https://www.urfellowship.com/discipleship
 
-If you could use some prayer, Sozo is a gentle, one-on-one prayer ministry: https://www.urfellowship.com/sozo
-
 Not sure where you'd fit? Just reply and tell us a little about yourself. We'll point you the right way.
 
 The Upper Room welcome team$b$, published = 1 WHERE step_number = 2;
@@ -85,8 +83,6 @@ Sunday mornings at 9:30am: Adult classes meet an hour before worship. Our welcom
 Wednesday evenings, 6:30 to 8:00pm: Classes on things like marriage and parenting, plus youth groups for junior high and high school, and childcare while you're in class.
 
 Take a look: https://www.urfellowship.com/discipleship
-
-If you could use some prayer, Sozo is a gentle, one-on-one prayer ministry: https://www.urfellowship.com/sozo
 
 Not sure where you'd fit? Just reply and tell us a little about yourself. We'll point you the right way.
 
