@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import SafeIcon from '../../common/SafeIcon';
-import { FiLayout, FiMic, FiCalendar, FiFileText, FiCamera, FiLogOut, FiMenu, FiX, FiMail, FiSettings, FiActivity, FiUsers, FiCheckSquare, FiHeart, FiMessageSquare, FiExternalLink } from 'react-icons/fi';
+import { FiLayout, FiMic, FiCalendar, FiFileText, FiCamera, FiLogOut, FiMenu, FiX, FiMail, FiSettings, FiActivity, FiUsers, FiHeart, FiMessageSquare, FiExternalLink } from 'react-icons/fi';
 import GenericManager from './GenericManager';
 import SettingsManager from './SettingsManager';
 import ActivityLog from './ActivityLog';
 import SitePhotosManager from './SitePhotosManager';
 import WelcomeList from './WelcomeList';
-import ChecklistManager from './ChecklistManager';
 import FormSubmissionsManager from './FormSubmissionsManager';
 import { useAuth } from '../../auth';
 import useNoIndex from '../../hooks/useNoIndex';
@@ -298,8 +297,6 @@ const ContentStudio = () => {
     switch (activeTab) {
       case 'forms':
         return <FormSubmissionsManager />;
-      case 'checklist':
-        return <ChecklistManager />;
       case 'photos':
         return <SitePhotosManager />;
       case 'settings':
@@ -321,7 +318,6 @@ const ContentStudio = () => {
       { key: 'welcomeSteps', label: 'Welcome Emails', icon: FiMail },
     ],
     'Site': [
-      { key: 'checklist', label: 'Content to Confirm', icon: FiCheckSquare },
       { key: 'spotlights', label: 'Front Page Area', icon: FiLayout },
       { key: 'photos', label: 'Site Photos', icon: FiCamera },
       { key: 'pages', label: 'Custom Pages', icon: FiLayout },

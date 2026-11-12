@@ -1,4 +1,4 @@
-// The "Content to confirm" list in the admin. Every visible [BRACKETED] placeholder on the site
+// The list of bracketed placeholders on the site. Every visible [BRACKETED] placeholder
 // has an entry here (checklist.test.js keeps the two in step).
 export const CHECKLIST = [
   { id: 'logo', label: 'Upload the dark and light logo files', where: 'Admin, Site Photos', route: '/' },

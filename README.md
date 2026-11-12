@@ -42,8 +42,7 @@ Old addresses (`/visit`, `/sermons`, `/team`, `/podcasts`) redirect to the new o
 ## Content to confirm
 
 Anything the church still has to supply shows on the live page as a yellow bracketed note, for example
-`[PARKING DETAILS: ...]`, and in a photo slot as `[PHOTO: ...]`. All of them are listed in the admin under
-**Content to Confirm**, where each one can be checked off. `src/content/checklist.js` holds the list, and
+`[PARKING DETAILS: ...]`, and in a photo slot as `[PHOTO: ...]`. `src/content/checklist.js` holds the list, and
 `npm test` fails if a bracketed note is added to a page without a matching checklist entry.
 
 Long pages are set up to take existing text: paste each topic into `src/content/beliefs.js` (`full`), and
