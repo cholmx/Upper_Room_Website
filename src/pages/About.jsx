@@ -4,6 +4,20 @@ import { Section, SectionHeader, PageHeader, Accordion, PhotoSplit, PhotoBand } 
 import RichText from '../components/RichText';
 import { BELIEFS } from '../content/beliefs';
 
+const CONVICTIONS = [
+  ['One story', 'Scripture is the authoritative story of God. We read it as one narrative, from creation to new creation.'],
+  ['Jesus at the center', 'Our theology is orthodox and Trinitarian, and everything points to Jesus.'],
+  ['Discipleship to Jesus', 'Following Jesus means being His disciple and learning from Him how to live.'],
+  ['Ordinary means of growth', 'Spiritual disciplines such as prayer, Scripture, Sabbath, and fasting are how we are formed over time.'],
+  ['Unhurried', 'Hurry is an enemy of the spiritual life, so we make room to slow down and be with God.'],
+  ['Now and not yet', 'God’s kingdom is already present and is still coming in full.'],
+  ['The Spirit is here', 'The Holy Spirit is active and available to us today.'],
+  ['An embodied faith', 'Faith involves our bodies, our time, our work, and the places where we live.'],
+  ['The church’s past', 'We read the history of the church alongside Scripture and treat it as a resource.'],
+  ['Formed on purpose', 'Phones, consumerism, and the pace of modern life shape people in ways that compete with the way of Jesus. We choose habits that shape us toward Him.'],
+  ['Grace and truth', 'We avoid legalism and we avoid prosperity teaching.'],
+];
+
 const P = 'text-[1rem] leading-relaxed text-black';
 
 export default function About() {
@@ -20,6 +34,24 @@ export default function About() {
         title="About Us"
         intro="Founded in faith, rooted in relationship, and focused on transformation."
       />
+
+      <Section tone="gray">
+        <div className="max-w-3xl">
+          <p className="kicker text-[#c74f2f]">Who we are</p>
+          <h2 className="text-3xl md:text-5xl mb-5">An ancient-future church</h2>
+          <div className={`space-y-4 ${P}`}>
+            <p>We are evangelical Christians recovering historic practices from the early church and the monastic traditions. Our roots are Pentecostal and charismatic, and we keep full belief in the Spirit’s present work. Over the years we have added theological depth, historic grounding, and attention to creation and culture.</p>
+          </div>
+        </div>
+        <ul className="grid md:grid-cols-2 gap-5 md:gap-6 mt-10">
+          {CONVICTIONS.map(([t, d]) => (
+            <li key={t} className="bg-white rounded-[10px] p-6 md:p-7">
+              <h3 className="text-xl md:text-2xl mb-2">{t}</h3>
+              <p className={P}>{d}</p>
+            </li>
+          ))}
+        </ul>
+      </Section>
 
       <PhotoSplit tone="white" slot="about-story" side="right">
         <SectionHeader title="Our Story" className="!mb-6" />

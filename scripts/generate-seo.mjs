@@ -28,7 +28,7 @@ const pageLine = (key) => `- [${SEO[key][0].split('|')[0].trim()}](${SITE_URL}${
 const llms = [
   '# Upper Room Fellowship',
   '',
-  '> Upper Room Fellowship is a Spirit-led church in Columbiana, Ohio, founded in 1971. Our mission: Transforming lives that transform communities. Know God. Share Life. Serve Others.',
+  '> Upper Room Fellowship is an ancient-future, Spirit-led church in Columbiana, Ohio, founded in 1971. We recover historic practices from the early church while keeping full belief in the Spirit’s present work. Our mission: Transforming lives that transform communities. Know God. Share Life. Serve Others.',
   '',
   '## Visit us',
   '- Address: 500 Sponseller Road, Columbiana, Ohio 44408',
