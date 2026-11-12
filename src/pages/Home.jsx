@@ -11,6 +11,7 @@ import { formatDate, isLive, messagePath, newestFirst, safeUrl, ytId } from '../
 import { plainText } from '../lib/markdown';
 import { parseCategories } from '../lib/categories';
 import NewBadge from '../components/NewBadge';
+import { upcoming, timeRange, plain } from '../lib/events';
 import SafeIcon from '../common/SafeIcon';
 import { FiCalendar, FiUsers, FiHeart } from 'react-icons/fi';
 import { Btn, Section, Cards, Card, SlotImage, PhotoSplit, PhotoBand, MapEmbed } from '../components/ui';
@@ -35,6 +36,8 @@ export default function Home() {
   const videoId = ytId(latest?.video_url || latest?.yt);
   const pod = useFetch('read/podcast_episodes_church?sort=published_at:desc&limit=1');
   const episode = (pod.data || [])[0];
+  const eventsFetch = useFetch('read/urf_events_church?sort=event_date:asc');
+  const comingUp = useMemo(() => upcoming(eventsFetch.data).slice(0, 3), [eventsFetch.data]);
 
   return (
     <>
@@ -156,6 +159,32 @@ export default function Home() {
           <MapEmbed />
         </div>
       </PhotoBand>
+
+      {comingUp.length > 0 && (
+        <Section tone="gray">
+          <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
+            <h2 className="text-3xl md:text-5xl">Coming up</h2>
+            <Link to="/events" className="inline-flex items-center min-h-[44px] font-display font-bold text-[0.95rem] underline underline-offset-4">See all events</Link>
+          </div>
+          <ul className="grid md:grid-cols-3 gap-4 md:gap-6">
+            {comingUp.map(({ ev, date }) => (
+              <li key={ev.id} className="bg-white rounded-[10px] elev-1 p-5 md:p-6">
+                <Link to="/events" className="flex gap-4 items-start hover:text-[#c74f2f]">
+                  <span className="shrink-0 w-14 text-center" aria-hidden="true">
+                    <span className="block font-display font-bold text-xs uppercase tracking-wide text-[#c74f2f]">{date.toLocaleDateString('en-US', { month: 'short' })}</span>
+                    <span className="block font-display font-bold text-4xl leading-none">{date.getDate()}</span>
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block font-display font-bold text-lg md:text-xl leading-tight">{plain(ev.title)}</span>
+                    <span className="block mt-1 text-sm text-black">{[date.toLocaleDateString('en-US', { weekday: 'long' }), timeRange(ev)].filter(Boolean).join(', ')}</span>
+                    {ev.location && <span className="block text-sm text-black">{ev.location}</span>}
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </Section>
+      )}
 
       <Section tone="white">
         <h2 className="text-3xl md:text-5xl mb-8">Start here</h2>
