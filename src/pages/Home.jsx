@@ -11,7 +11,7 @@ import { formatDate, isLive, messagePath, newestFirst, safeUrl, ytId } from '../
 import { plainText } from '../lib/markdown';
 import { parseCategories } from '../lib/categories';
 import NewBadge from '../components/NewBadge';
-import { upcoming, timeRange, plain, blurb } from '../lib/events';
+import { upcoming, timeRange, plain } from '../lib/events';
 import SafeIcon from '../common/SafeIcon';
 import { FiCalendar, FiUsers, FiHeart } from 'react-icons/fi';
 import { Btn, Section, Cards, Card, SlotImage, PhotoSplit, PhotoBand, MapEmbed } from '../components/ui';
@@ -178,7 +178,6 @@ export default function Home() {
                     <span className="block font-display font-bold text-lg md:text-xl leading-[1.05] md:leading-[1.05]">{plain(ev.title)}</span>
                     <span className="block mt-1 text-sm text-black">{[date.toLocaleDateString('en-US', { weekday: 'long' }), timeRange(ev)].filter(Boolean).join(', ')}</span>
                     {ev.location && <span className="block text-sm text-black">{ev.location}</span>}
-                    {(ev.summary || ev.details) && <span className="mt-2 text-[1rem] leading-snug text-black line-clamp-3">{blurb(ev)}</span>}
                   </span>
                 </Link>
               </li>
