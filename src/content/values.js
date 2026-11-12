@@ -5,7 +5,7 @@ export const INSIDE_OUT = 'Lasting change begins in the heart. As our hearts lin
 
 export const GROWING = 'These values take practice, and our Values In The Kingdom classes in Adult Discipleship Training walk through them together. Discipleship to Jesus is learned over time and at an unhurried pace. Whether you are exploring faith or have followed Jesus for decades, there is a next step for you. Psalm 58:11 promises a reward for those who live for God, and we have seen that play out in our own lives.';
 
-// Each value has a "We thrive" statement (thrive), a short explanation (body, one string per paragraph),
+// the things we do (practices). All of it is the church's own wording.
 // the things we do (practices), and a question to sit with. The first three parts are the church's own wording.
 export const CORE_VALUES = [
   {
