@@ -45,6 +45,8 @@ export default function WeeklyEmail() {
   const [testTo, setTestTo] = useState('');
   const [testNote, setTestNote] = useState('');
   const [confirmSend, setConfirmSend] = useState(false);
+  const [confirmRebuild, setConfirmRebuild] = useState(false);
+  const [rebuildNote, setRebuildNote] = useState('');
   const [sendNote, setSendNote] = useState('');
   const [many, setMany] = useState('');
   const [manyNote, setManyNote] = useState('');
@@ -108,6 +110,20 @@ export default function WeeklyEmail() {
     setBusy('');
     if (res.status === 'success' && res.data === 'ok') { setThoughtNote('A new thought is ready.'); loadPreview(); }
     else setThoughtNote(AI_ERRORS[res.data] || (typeof res.data === 'string' && res.data.startsWith('!status_') ? 'The AI service answered with an error. Please try again.' : res.error || 'That did not work.'));
+  };
+
+  // Writes the short summary and the thought again with AI, then builds the preview again.
+  const rebuild = async () => {
+    setConfirmRebuild(false); setRebuildNote('');
+    if (!preview?.sermon_id) { loadPreview(); return; }
+    setBusy('rebuild');
+    const a = await backend.rpc('ai_weekly_blurb', { p_sermon_id: preview.sermon_id });
+    const b = await backend.rpc('ai_weekly_thought', { p_sermon_id: preview.sermon_id, p_force: true });
+    setBusy('');
+    const okA = a.status === 'success' && a.data === 'ok';
+    const okB = b.status === 'success' && b.data === 'ok';
+    setRebuildNote(okA && okB ? 'Rebuilt. The summary and the thought were written again.' : `Rebuilt, but ${!okA && !okB ? 'the summary and the thought' : !okA ? 'the summary' : 'the thought'} could not be written again, so the saved version is used. ${AI_ERRORS[(!okA ? a.data : b.data)] || ''}`.trim());
+    loadPreview();
   };
 
   const sendTest = async (e) => {
@@ -175,8 +191,12 @@ export default function WeeklyEmail() {
       <section className={card} aria-label="This week's email">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <h3 className="text-lg font-bold">What would go out right now</h3>
-          <button type="button" onClick={loadPreview} disabled={loadingPreview} className={btn}>{loadingPreview ? 'Loading' : 'Refresh preview'}</button>
+          <div className="flex flex-wrap gap-2">
+            <button type="button" onClick={loadPreview} disabled={loadingPreview || busy !== ''} className={btn}>{loadingPreview ? 'Loading' : 'Refresh preview'}</button>
+            <button type="button" onClick={() => setConfirmRebuild(true)} disabled={loadingPreview || busy !== ''} className={btn}>{busy === 'rebuild' ? 'Rebuilding' : 'Rebuild from scratch'}</button>
+          </div>
         </div>
+        {rebuildNote && <p role="status" className="mt-2 text-sm font-semibold">{rebuildNote}</p>}
         <p className="text-sm text-black mt-1 max-w-3xl">It is built from your newest published message, a short version of its summary, and the events in the next seven days. Edit those in Messages and Events, then refresh.</p>
         {previewError && <p role="alert" className="mt-3 text-sm font-semibold text-[#c74f2f]">{previewError}</p>}
         {preview && (
@@ -258,6 +278,7 @@ export default function WeeklyEmail() {
         </section>
       )}
 
+      {confirmRebuild && <ConfirmDialog title="Rebuild the email from scratch?" message="The short summary and the thought for the week are written again with AI, and anything you typed in those two boxes is replaced. The message, the events and the podcast are always read fresh." confirmLabel="Rebuild" onCancel={() => setConfirmRebuild(false)} onConfirm={rebuild} />}
       {confirmSend && <ConfirmDialog title="Send the weekly email now?" message={`The email shown above goes to ${active} ${active === 1 ? 'person' : 'people'} right away. This cannot be undone.`} confirmLabel="Send" onCancel={() => setConfirmSend(false)} onConfirm={sendNow} />}
       {pendingRemove && <ConfirmDialog title="Remove this person?" message={`${pendingRemove.name || pendingRemove.email} will be taken off the list. They can sign up again later.`} confirmLabel="Remove" onCancel={() => setPendingRemove(null)} onConfirm={remove} />}
     </div>
