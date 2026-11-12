@@ -23,6 +23,94 @@ function indexFromHash() {
   return i >= 0 ? i : 0;
 }
 
+function ValueBody({ v, first }) {
+  return (
+    <>
+      <p className={`${first ? '' : 'mt-6 '}lead`}>{v.thrive}</p>
+      <div className="mt-4 space-y-4 text-[1rem] leading-relaxed text-black">
+        {v.body.map(t => <p key={t}>{t}</p>)}
+      </div>
+
+      <h3 className="mt-8 mb-3 text-xl">In practice, this means:</h3>
+      <ul className="space-y-2">
+        {v.practices.map(p => (
+          <li key={p} className="flex gap-3 text-[1rem] leading-snug text-black">
+            <span aria-hidden="true" className="mt-[0.45em] w-2 h-2 rounded-full bg-[#c74f2f] shrink-0" />
+            <span>{p}</span>
+          </li>
+        ))}
+      </ul>
+    </>
+  );
+}
+
+// On phones the six values are a list. Tap one to open it right where it is, so there is no scrolling back and forth.
+function ValueList() {
+  const [open, setOpen] = useState(() => (typeof window !== 'undefined' && window.location.hash ? indexFromHash() : -1));
+  const rows = useRef([]);
+
+  useEffect(() => {
+    const onHash = () => { if (window.location.hash) setOpen(indexFromHash()); };
+    window.addEventListener('hashchange', onHash);
+    return () => window.removeEventListener('hashchange', onHash);
+  }, []);
+
+  const toggle = i => {
+    const next = open === i ? -1 : i;
+    setOpen(next);
+    if (next >= 0) {
+      try { window.history.replaceState(null, '', `#${CORE_VALUES[next].id}`); } catch { /* ignore */ }
+      setTimeout(() => { if (rows.current[next]) rows.current[next].scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 50);
+    }
+  };
+
+  return (
+    <ul className="space-y-3">
+      {CORE_VALUES.map((v, i) => {
+        const on = i === open;
+        return (
+          <li key={v.id} ref={el => { rows.current[i] = el; }} style={{ scrollMarginTop: 92 }} className="bg-white rounded-[10px] overflow-hidden">
+            <h3 className="!text-base">
+              <button
+                type="button"
+                id={`value-head-${v.id}`}
+                aria-expanded={on}
+                aria-controls={`value-body-${v.id}`}
+                onClick={() => toggle(i)}
+                className="w-full flex items-center gap-4 text-left p-4 min-h-[64px]"
+              >
+                <span className="font-display font-bold text-2xl text-[#c74f2f] w-9 shrink-0">{String(v.n).padStart(2, '0')}</span>
+                <span className="flex-1 font-display font-bold text-lg leading-tight text-[#1e2522]">{v.title}</span>
+                <span aria-hidden="true" className={`shrink-0 text-2xl text-[#1e2522] transition-transform ${on ? 'rotate-45' : ''}`}>+</span>
+              </button>
+            </h3>
+            {on && (
+              <div id={`value-body-${v.id}`} role="region" aria-labelledby={`value-head-${v.id}`} className="px-5 pb-6 value-panel">
+                <div className="mb-4"><ValueIcon n={v.n} size={72} /></div>
+                <ValueBody v={v} first />
+              </div>
+            )}
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+
+function useIsDesktop() {
+  const q = '(min-width: 1024px)';
+  const [yes, setYes] = useState(() => typeof window !== 'undefined' && window.matchMedia ? window.matchMedia(q).matches : false);
+  useEffect(() => {
+    if (!window.matchMedia) return undefined;
+    const m = window.matchMedia(q);
+    const on = () => setYes(m.matches);
+    on();
+    m.addEventListener('change', on);
+    return () => m.removeEventListener('change', on);
+  }, []);
+  return yes;
+}
+
 function ValueExplorer() {
   const [active, setActive] = useState(indexFromHash);
   const tabs = useRef([]);
@@ -91,20 +179,7 @@ function ValueExplorer() {
           </div>
         </div>
 
-        <p className="mt-6 lead">{v.thrive}</p>
-        <div className="mt-4 space-y-4 text-[1rem] leading-relaxed text-black">
-          {v.body.map(t => <p key={t}>{t}</p>)}
-        </div>
-
-        <h3 className="mt-8 mb-3 text-xl">In practice, this means:</h3>
-        <ul className="space-y-2">
-          {v.practices.map(p => (
-            <li key={p} className="flex gap-3 text-[1rem] leading-snug text-black">
-              <span aria-hidden="true" className="mt-[0.45em] w-2 h-2 rounded-full bg-[#c74f2f] shrink-0" />
-              <span>{p}</span>
-            </li>
-          ))}
-        </ul>
+        <ValueBody v={v} />
 
         <div className="mt-8 pt-6 border-t border-[#1e2522]/10 flex items-center justify-between gap-3">
           <button type="button" onClick={() => select(active - 1)} className="inline-flex items-center min-h-[44px] px-4 rounded-full hover:bg-[#1e2522]/10 font-display font-bold text-[#1e2522]">
@@ -117,6 +192,11 @@ function ValueExplorer() {
       </div>
     </div>
   );
+}
+
+function ValueChooser() {
+  const desktop = useIsDesktop();
+  return desktop ? <ValueExplorer /> : <ValueList />;
 }
 
 export default function CoreValues() {
@@ -133,8 +213,8 @@ export default function CoreValues() {
       </Section>
 
       <Section tone="gray" id="values-explorer">
-        <SectionHeader title="Explore the six values" intro="Choose a value to see how we thrive in it and what it looks like in practice." className="!mb-8" />
-        <ValueExplorer />
+        <SectionHeader title="Explore the six values" intro="Open a value to see how we thrive in it and what it looks like in practice." className="!mb-8" />
+        <ValueChooser />
       </Section>
 
       <PhotoBand slot="values-growing">
