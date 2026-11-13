@@ -35,6 +35,7 @@ const opts = (list) => list.map(v => ({ value: v, label: v }));
 const TAB_CONFIGS = {
   sermons: {
     table: 'sermons',
+    syncNow: { rpc: 'sync_sermon_podcast_now', label: 'Refresh podcast episodes', unit: 'episode', units: 'episodes', note: 'The Listen button on each message goes to the matching episode on the sermon podcast (matched by title). The episodes are copied from Apple Podcasts every hour. Press Refresh podcast episodes right after a new episode is published.' },
     youtubeImport: true,
     transcript: true,
     bulk: true,
