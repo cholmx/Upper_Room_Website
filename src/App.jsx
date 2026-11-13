@@ -17,6 +17,7 @@ const About = lazy(() => import('./pages/About'));
 const CoreValues = lazy(() => import('./pages/CoreValues'));
 const Leadership = lazy(() => import('./pages/Leadership'));
 const Discipleship = lazy(() => import('./pages/Discipleship'));
+const AudioArchive = lazy(() => import('./pages/AudioArchive'));
 const Messages = lazy(() => import('./pages/Messages'));
 const MessageSeries = lazy(() => import('./pages/MessageSeries'));
 const MessageDetail = lazy(() => import('./pages/MessageDetail'));
@@ -102,7 +103,7 @@ export function AppBody() {
         {/* Public Routes */}
         {[
           ['/', Home], ['/plan-your-visit', PlanYourVisit], ['/about', About], ['/core-values', CoreValues],
-          ['/leadership', Leadership], ['/messages', Messages], ['/messages/series/:series', MessageSeries], ['/messages/:slug', MessageDetail],
+          ['/leadership', Leadership], ['/messages', Messages], ['/messages/audio-archive', AudioArchive], ['/messages/series/:series', MessageSeries], ['/messages/:slug', MessageDetail],
           ['/discipleship', Discipleship], ['/sozo', Sozo], ['/shine', Shine],
           ['/give', Give], ['/events', Events], ['/growth-campaign', GrowthCampaign], ['/contact', Contact], ['/connect', Connect],
           ['/accessibility', Accessibility], ['/privacy', Privacy], ['/unsubscribe', Unsubscribe], ['/blog', Blog], ['/blog/:id', BlogPost], ['/p/:slug', CustomPage],

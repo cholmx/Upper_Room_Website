@@ -10,7 +10,6 @@ import { parseCategories } from '../lib/categories';
 import { Btn, Section, SectionHeader, PageHeader, PhotoBand } from '../components/ui';
 import LiteYouTube from '../components/LiteYouTube';
 import MessageCard from '../components/MessageCard';
-import AudioArchive from '../components/AudioArchive';
 import SeriesCover from '../components/SeriesCover';
 import NewBadge from '../components/NewBadge';
 import { CardSkeletons, ErrorState } from '../components/StateViews';
@@ -228,8 +227,6 @@ export default function Messages() {
             )}
           </Section>
 
-          <AudioArchive messages={messages} />
-
           <PhotoBand slot="messages-podcast">
             <h2 className="text-3xl md:text-5xl mb-5">Listen anywhere</h2>
             <p className="text-base leading-relaxed mb-6">Subscribe to our podcast on Apple Podcasts, Spotify, or your favorite podcast app, and new messages arrive automatically. Take them along on a commute, a workout, or a quiet morning.</p>
@@ -237,6 +234,7 @@ export default function Messages() {
               <Btn href={SITE.podcasts.apple} variant="gold">Apple Podcasts</Btn>
               <Btn href={SITE.podcasts.spotify} variant="light">Spotify</Btn>
             </div>
+            <p className="mt-6 text-base leading-relaxed">Looking for older messages that never had a video? They are in the <Link to="/messages/audio-archive" className="underline underline-offset-4 font-semibold">audio archive</Link>.</p>
           </PhotoBand>
         </>
       )}
