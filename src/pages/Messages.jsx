@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import usePageMeta from '../hooks/usePageMeta';
 import useFetch from '../hooks/useFetch';
+import useSermonPodcast from '../hooks/useSermonPodcast';
 import { useSite } from '../settings';
 import { seriesTitleSize, dateRangeLabel, formatDate, groupSeries, isLive, messagePath, newestFirst, safeUrl, scriptureBook, seriesPath, ytId } from '../utils';
 import { plainText } from '../lib/markdown';
@@ -56,6 +57,7 @@ export default function Messages() {
   const [allChips, setAllChips] = useState(false);
 
   const latest = messages[0];
+  const latestPodcast = useSermonPodcast(latest);
   const seriesList = useMemo(() => groupSeries(messages).map(g => ({
     ...g,
     latest: messages.find(m => (m.series || '').trim() === g.name),
@@ -121,7 +123,7 @@ export default function Messages() {
                   <h3 className="text-2xl md:text-3xl"><Link to={messagePath(latest)} className="hover:text-[#1e2522]">{latest.title}</Link></h3>
                   <p className="mt-2 text-black">{[latest.speaker, latest.date && formatDate(latest.date), latest.scripture].filter(Boolean).join('  |  ')}</p>
                   {latest.description && <p className="mt-3 text-black leading-relaxed line-clamp-4">{plainText(latest.description)}</p>}
-                  <div className="mt-6 flex flex-wrap gap-3"><Btn to={messagePath(latest)} variant="primary">Watch</Btn><Btn href={safeUrl(latest.audio_url) || SITE.podcasts.apple} variant="dark">Listen</Btn></div>
+                  <div className="mt-6 flex flex-wrap gap-3"><Btn to={messagePath(latest)} variant="primary">Watch</Btn><Btn href={latestPodcast.appleUrl || safeUrl(latest.audio_url) || SITE.podcasts.apple} variant="dark">Listen</Btn></div>
                 </div>
               </div>
             ) : (

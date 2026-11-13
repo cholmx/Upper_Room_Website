@@ -1,3 +1,4 @@
+import useSermonPodcast from '../hooks/useSermonPodcast';
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import usePageMeta from '../hooks/usePageMeta';
@@ -63,6 +64,7 @@ export default function MessageDetail() {
     requestAnimationFrame(() => document.getElementById(`tab-${next.id}`)?.focus());
   };
 
+  const podcast = useSermonPodcast(m);
   const video = m?.video_url || m?.yt;
   const vid = ytId(video);
   const summary = plainText(m?.description).slice(0, 155);
@@ -83,7 +85,7 @@ export default function MessageDetail() {
   if (error) return <Section><ErrorState message={error} onRetry={reload} /></Section>;
   if (!m) return <NotFound what="message" />;
 
-  const audio = safeUrl(m.audio_url);
+  const audio = safeUrl(m.audio_url) || podcast.audioUrl;
   const notesUrl = safeUrl(m.notes_url);
 
   const cats = parseCategories(m.topic);
@@ -114,6 +116,7 @@ export default function MessageDetail() {
                 <audio controls preload="none" src={audio} className="w-full" aria-label={`Audio of ${m.title}`}>
                   <a href={audio}>Download the audio</a>
                 </audio>
+                {podcast.appleUrl && <p className="mt-3"><a href={podcast.appleUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 font-semibold">Listen on Apple Podcasts<span className="sr-only"> (opens in a new tab)</span></a></p>}
               </div>
             )}
             {tabs.length > 0 && (
