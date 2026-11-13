@@ -6,8 +6,9 @@
 //   always the same so the form cannot be used to find out who is on the team.
 // Emails are put in the email outbox and sent through Resend like every other email from this site.
 
-const VERSION = '2026-11-13.1';
-const SITE = Deno.env.get('SITE_URL') || 'https://www.urfellowship.com';
+const VERSION = '2026-11-13.2';
+// The address the invitation and reset links point at. It is fixed here, so no secret needs to be set.
+const SITE = 'https://www.urfellowship.com';
 const URL_ = Deno.env.get('SUPABASE_URL') ?? '';
 const SERVICE = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '';
 const ANON = Deno.env.get('SUPABASE_ANON_KEY') ?? '';
