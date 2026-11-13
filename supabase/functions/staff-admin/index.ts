@@ -1,4 +1,4 @@
-// Team logins for the admin: invite people, change who is an admin or an editor, remove people, and send a password reset.
+// Team logins for the admin: invite people, change who is an admin or an editor, set a password for someone, remove people, and send a password reset.
 //
 // The browser cannot create or delete logins, so this runs on the server with the project's service key.
 // - Invite, change role, remove and resend: only signed-in admins (checked against staff_roles_church).
@@ -6,7 +6,7 @@
 //   always the same so the form cannot be used to find out who is on the team.
 // Emails are put in the email outbox and sent through Resend like every other email from this site.
 
-const VERSION = '2026-11-13.2';
+const VERSION = '2026-11-13.3';
 // The address the invitation and reset links point at. It is fixed here, so no secret needs to be set.
 const SITE = 'https://www.urfellowship.com';
 const URL_ = Deno.env.get('SUPABASE_URL') ?? '';
@@ -128,6 +128,17 @@ Deno.serve(async (req) => {
     if (id === me.id && role !== 'admin') return json({ error: 'You cannot take admin away from yourself. Ask another admin.' }, 400);
     const res = await service(`/rest/v1/staff_roles_church?user_id=eq.${id}`, { method: 'PATCH', body: JSON.stringify({ role }), headers: { Prefer: 'return=minimal' } });
     return res.ok ? json({ ok: true }) : json({ error: 'That did not save.' }, 500);
+  }
+
+  if (action === 'set_password') {
+    const id = String(body.user_id || '');
+    const password = String(body.password || '');
+    if (!/^[0-9a-f-]{36}$/i.test(id)) return json({ error: 'That person was not found.' }, 400);
+    if (password.length < 10 || password.length > 72) return json({ error: 'The password must be 10 to 72 characters.' }, 400);
+    const member = await service(`/rest/v1/staff_roles_church?user_id=eq.${id}&select=user_id`);
+    if (!member.ok || (await member.json()).length === 0) return json({ error: 'That person is not on the team.' }, 404);
+    const res = await service(`/auth/v1/admin/users/${id}`, { method: 'PUT', body: JSON.stringify({ password }) });
+    return res.ok ? json({ ok: true }) : json({ error: 'The password could not be changed.' }, 502);
   }
 
   if (action === 'remove') {

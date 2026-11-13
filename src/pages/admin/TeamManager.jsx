@@ -26,6 +26,9 @@ export default function TeamManager() {
   const [note, setNote] = useState('');
   const [pendingRemove, setPendingRemove] = useState(null);
   const [copied, setCopied] = useState(false);
+  const [pwFor, setPwFor] = useState(null);
+  const [pw, setPw] = useState('');
+  const [pwState, setPwState] = useState(null);
 
   const call = async (body) => backend.post('staff-admin', body);
 
@@ -62,6 +65,24 @@ export default function TeamManager() {
     const res = await call({ action: 'remove', user_id: r.user_id });
     setBusy('');
     if (res.status === 'success') { logActivity(user, 'removed from the team', 'Team', r.email); setNote(`${r.email} was removed and can no longer sign in.`); team.reload(); } else setNote(res.error);
+  };
+
+  const makePassword = () => {
+    const chars = 'abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    const bytes = new Uint32Array(16);
+    window.crypto.getRandomValues(bytes);
+    setPw(Array.from(bytes, b => chars[b % chars.length]).join(''));
+  };
+
+  const savePassword = async (e) => {
+    e.preventDefault();
+    if (pw.length < 10) { setPwState({ error: 'Please use at least 10 characters.' }); return; }
+    setPwState({ busy: true });
+    const res = await call({ action: 'set_password', user_id: pwFor.user_id, password: pw });
+    if (res.status === 'success') {
+      logActivity(user, 'set a new password for', 'Team', pwFor.email);
+      setPwState({ done: `The password for ${pwFor.email} was changed. Give it to them privately. They can change it any time with "Forgot your password?" on the sign-in page.` });
+    } else setPwState({ error: res.error });
   };
 
   const copy = async () => {
@@ -104,6 +125,23 @@ export default function TeamManager() {
         </section>
       )}
 
+      {pwFor && (
+        <section className={card} aria-label="Change a password">
+          <h3 className="text-lg font-bold">Change the password for {pwFor.name || pwFor.email}</h3>
+          <p className="text-sm text-black mt-1 max-w-3xl">Type a new password, or press "Make one" for a random one. It is shown here so you can pass it on. It is not saved anywhere on this page.</p>
+          <form onSubmit={savePassword} className="mt-4 flex flex-wrap items-end gap-3">
+            <label className="text-sm font-semibold flex-1 min-w-[16rem]">New password (at least 10 characters)
+              <input type="text" autoComplete="off" value={pw} onChange={(e) => setPw(e.target.value)} className={`${input} mt-1 font-mono`} required />
+            </label>
+            <button type="button" onClick={makePassword} className={btn}>Make one</button>
+            <button type="submit" disabled={pwState?.busy || !!pwState?.done} className={`${btn} !bg-[#1e2522] !text-white`}>{pwState?.busy ? 'Saving' : 'Save password'}</button>
+            <button type="button" onClick={() => { setPwFor(null); setPw(''); setPwState(null); }} className={btn}>{pwState?.done ? 'Close' : 'Cancel'}</button>
+          </form>
+          {pwState?.done && <p role="status" className="mt-3 text-sm font-semibold">{pwState.done}</p>}
+          {pwState?.error && <p role="alert" className="mt-3 text-sm font-semibold text-[#c74f2f]">{pwState.error}</p>}
+        </section>
+      )}
+
       <section className={card} aria-label="People on the team">
         <h3 className="text-lg font-bold">People on the team</h3>
         {note && <p role="status" className="mt-2 text-sm font-semibold">{note}</p>}
@@ -125,6 +163,7 @@ export default function TeamManager() {
                     </td>
                     <td className="py-2 pr-3">{day(r.created_at)}</td>
                     <td className="py-2 whitespace-nowrap">
+                      <button type="button" onClick={() => { setPwFor(r); setPw(''); setPwState(null); }} className="font-bold underline underline-offset-2 mr-4">Change password</button>
                       <button type="button" onClick={() => resend(r)} disabled={busy === r.user_id} className="font-bold underline underline-offset-2 mr-4">Send a new link</button>
                       {!me && <button type="button" onClick={() => setPendingRemove(r)} disabled={busy === r.user_id} className="text-[#c74f2f] font-bold underline underline-offset-2">Remove</button>}
                     </td>
