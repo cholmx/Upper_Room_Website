@@ -6,7 +6,7 @@
 
 const CHANNEL_ID = 'UCQtl2NJ6-SnnsgMXpsV1K6w';
 const MAX_VIDEOS = 300;
-const VERSION = '2026-11-07b';
+const VERSION = '2026-11-13';
 
 const cors = {
   'Access-Control-Allow-Origin': '*',

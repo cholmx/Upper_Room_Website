@@ -3,11 +3,11 @@
   "functions": {
     "staff-admin": {
       "hasChanged": false,
-      "hash": "ad06c130500dd680f09f396680e2ead0829fffe58a6302443152b9d334a54c53"
+      "hash": "d36b2260931dd16d6d377782e575a2f32e3c62bba513ca8d82d897c4b987e9b4"
     },
     "youtube-videos": {
       "hasChanged": false,
-      "hash": "095648b946b588f60917e7ea8792e2d42f1e808119cd48673434b780a987dde4"
+      "hash": "3f2ab97957a535824f340d3f65c2759e93aefafe058c3e344c65572266c7bb88"
     }
   }
 }
