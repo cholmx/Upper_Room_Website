@@ -1,5 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Upper Room Fellowship">
-  <rect width="512" height="512" rx="96" fill="#1e2522"/>
-  <text x="256" y="318" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="196" fill="#eaa235">URF</text>
-  <rect x="136" y="360" width="240" height="14" rx="7" fill="#c74f2f"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="21 18 1773 1773" role="img" aria-label="Upper Room Fellowship">
+  <circle cx="907" cy="904" r="886.5" fill="#000"/>
+  <g fill="#fff">
+    <polygon points="614,367 912,556 1217,364 1217,579 914,771 614,578"/>
+    <polygon points="387,576 913,917 1442,577 1440,796 913,1132 381,788"/>
+    <polygon points="153,795 913,1278 1673,797 1670,1010 914,1496 162,1016"/>
+  </g>
 </svg>
