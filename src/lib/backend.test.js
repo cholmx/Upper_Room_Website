@@ -168,3 +168,49 @@ describe('auth', () => {
     expect(await backend.getUser()).toBeNull();
   });
 });
+
+describe('team logins', () => {
+  const tokens = () => ({ access_token: 'JWT1', refresh_token: 'R1', expires_in: 3600, user: { email: 'a@b.c' } });
+
+  it('trades an invitation code for a session', async () => {
+    const { backend, calls, storage } = setup(() => reply(tokens()));
+    const res = await backend.verifyLink('invite', 'abcdefghij1234567890');
+    expect(res.status).toBe('success');
+    expect(calls[0].url).toContain('/auth/v1/verify');
+    expect(JSON.parse(calls[0].init.body)).toEqual({ type: 'invite', token_hash: 'abcdefghij1234567890' });
+    expect(storage.getItem('urf_session')).not.toBeNull();
+  });
+
+  it('refuses a link that looks wrong without calling the server', async () => {
+    const { backend, calls } = setup(() => reply(tokens()));
+    expect((await backend.verifyLink('magiclink', 'abcdefghij1234567890')).status).toBe('error');
+    expect((await backend.verifyLink('invite', 'short')).status).toBe('error');
+    expect(calls.length).toBe(0);
+  });
+
+  it('says a used or expired link needs a new one', async () => {
+    const { backend } = setup(() => reply({ error: 'bad' }, 403));
+    expect((await backend.verifyLink('recovery', 'abcdefghij1234567890')).error).toMatch(/expired|already used/);
+  });
+
+  it('sets a password for the signed-in person', async () => {
+    const { backend, calls } = setup((url) => (url.includes('/verify') ? reply(tokens()) : reply({ id: 'u1' })));
+    await backend.verifyLink('invite', 'abcdefghij1234567890');
+    const res = await backend.updatePassword('a-long-password');
+    expect(res.status).toBe('success');
+    const put = calls.at(-1);
+    expect(put.init.method).toBe('PUT');
+    expect(put.url).toContain('/auth/v1/user');
+    expect(put.init.headers.Authorization).toBe('Bearer JWT1');
+    expect(JSON.parse(put.init.body)).toEqual({ password: 'a-long-password' });
+  });
+
+  it('posts to a function, signed in or not', async () => {
+    const { backend, calls } = setup(() => reply({ ok: true }));
+    const open = await backend.post('staff-admin', { action: 'forgot', email: 'a@b.c' }, { signedIn: false });
+    expect(open.status).toBe('success');
+    expect(calls[0].url).toContain('/functions/v1/staff-admin');
+    expect(calls[0].init.method).toBe('POST');
+    expect((await backend.post('staff-admin', { action: 'invite' })).status).toBe('error'); // not signed in
+  });
+});

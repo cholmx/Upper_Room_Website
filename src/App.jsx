@@ -36,6 +36,7 @@ const CustomPage = lazy(() => import('./pages/CustomPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 const Login = lazy(() => import('./pages/admin/Login'));
 const Dashboard = lazy(() => import('./pages/admin/Dashboard'));
+const SetPassword = lazy(() => import('./pages/admin/SetPassword'));
 
 // New pages open at the top, unless the link points at a section (for example /next-steps#baptism).
 function ScrollToTop() {
@@ -95,6 +96,7 @@ export function AppBody() {
       <Routes>
         {/* Admin Routes */}
         <Route path="/login" element={<Login />} />
+        <Route path="/admin/set-password" element={<SetPassword />} />
         <Route path="/admin" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
 
         {/* Public Routes */}

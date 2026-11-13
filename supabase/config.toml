@@ -1,2 +1,6 @@
 [functions.youtube-videos]
 verify_jwt = true
+
+# Team logins. The function checks the caller itself, because "forgot password" has to work before anyone is signed in.
+[functions.staff-admin]
+verify_jwt = false

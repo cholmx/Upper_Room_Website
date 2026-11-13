@@ -7,6 +7,7 @@ import ActivityLog from './ActivityLog';
 import SitePhotosManager from './SitePhotosManager';
 import WelcomeList from './WelcomeList';
 import WeeklyEmail from './WeeklyEmail';
+import TeamManager from './TeamManager';
 import FormSubmissionsManager from './FormSubmissionsManager';
 import { useAuth } from '../../auth';
 import useNoIndex from '../../hooks/useNoIndex';
@@ -296,6 +297,9 @@ const TAB_GROUPS = {
 };
 const groupFor = (key) => Object.keys(TAB_GROUPS).find(g => TAB_GROUPS[g].tabs.some(([k]) => k === key));
 
+// What an editor can open. Admins can open everything. The database enforces the same limits.
+const EDITOR_TABS = ['forms', 'welcomeList', 'welcomeSteps', 'weeklyEmail', 'posts'];
+
 const ContentStudio = () => {
   useNoIndex();
   const { user, logout } = useAuth();
@@ -303,7 +307,10 @@ const ContentStudio = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   const renderContent = () => {
+    if (user?.role !== 'admin' && !EDITOR_TABS.includes(activeTab)) return null;
     switch (activeTab) {
+      case 'team':
+        return <TeamManager />;
       case 'forms':
         return <FormSubmissionsManager />;
       case 'photos':
@@ -321,8 +328,8 @@ const ContentStudio = () => {
     }
   };
 
-  const isAdmin = user?.role !== 'editor';
-  const TABS = {
+  const isAdmin = user?.role === 'admin';
+  const ALL_TABS = {
     'Inbox': [
       { key: 'forms', label: 'Form Submissions', icon: FiMail },
       { key: 'welcomeList', label: 'Welcome', icon: FiUsers },
@@ -347,10 +354,16 @@ const ContentStudio = () => {
         { key: 'settings', label: 'Settings', icon: FiSettings },
         { key: 'emailSettings', label: 'Email Settings', icon: FiMail },
         { key: 'emailLog', label: 'Email Log', icon: FiMail },
+        { key: 'team', label: 'Team', icon: FiUsers },
         { key: 'activity', label: 'Activity Log', icon: FiActivity },
       ]
     } : {})
   };
+
+  // Editors see only the Inbox and Blog Posts.
+  const TABS = isAdmin ? ALL_TABS : Object.fromEntries(
+    Object.entries(ALL_TABS).map(([cat, items]) => [cat, items.filter(t => EDITOR_TABS.includes(t.key))]).filter(([, items]) => items.length)
+  );
 
   const group = groupFor(activeTab);
   const getTabLabel = () => {
@@ -362,6 +375,18 @@ const ContentStudio = () => {
       return 'Dashboard';
   }
 
+
+  if (user && !user.role) {
+    return (
+      <div className="min-h-screen bg-[#f5f3ee] flex items-center justify-center p-4">
+        <div className="bg-white max-w-sm p-6 rounded-xl border border-black/10 shadow-sm text-[#1e2522]">
+          <h1 className="text-lg font-bold">No access yet</h1>
+          <p className="mt-2 text-sm">This login is not on the team. Ask an admin to invite you from the Team screen.</p>
+          <button type="button" onClick={logout} className="mt-4 px-4 py-2 rounded-lg bg-[#1e2522] text-white text-sm font-semibold">Sign out</button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#1e2522]/5 text-[#1e2522] flex">

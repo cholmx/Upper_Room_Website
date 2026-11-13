@@ -281,7 +281,57 @@ export function createBackend({
     }
   }
 
-  return { configured, signIn, signOut, getUser, data, getToken, upload, invoke, rpc };
+  // Trades the one-time code from an invitation or password reset link for a signed-in session.
+  async function verifyLink(type, tokenHash) {
+    if (!configured) return fail('The backend is not configured', 0);
+    if (!['invite', 'recovery'].includes(type) || !/^[A-Za-z0-9_-]{10,200}$/.test(tokenHash || '')) return fail('That link is not valid.', 400);
+    try {
+      const { res, json } = await authCall('verify', { body: { type, token_hash: tokenHash } });
+      if (!res.ok || !json.access_token) return fail('That link has expired or was already used. Ask an admin to send a new one.', res.status);
+      const session = tokenToSession(json);
+      writeSession(session);
+      return ok(session.user);
+    } catch (err) {
+      return fail(err?.message || 'Network error', 0);
+    }
+  }
+
+  // Sets a new password for the signed-in user.
+  async function updatePassword(password) {
+    if (!configured) return fail('The backend is not configured', 0);
+    try {
+      const token = await getToken();
+      if (token === anonKey) return fail('Please open the link in your email again.', 401);
+      const { res, json } = await authCall('user', { method: 'PUT', token, body: { password } });
+      if (!res.ok) return fail(errorText(json, res.status), res.status);
+      return ok(json);
+    } catch (err) {
+      return fail(err?.message || 'Network error', 0);
+    }
+  }
+
+  // Calls an edge function with a JSON body. Signed in by default; pass { signedIn: false } for a public call.
+  async function post(name, body = {}, { signedIn = true } = {}) {
+    if (!configured) return fail('The backend is not configured', 0);
+    if (!/^[a-z][a-z0-9-]*$/.test(name)) return fail('Invalid function name', 400);
+    try {
+      const token = signedIn ? await getToken() : anonKey;
+      if (signedIn && token === anonKey) return fail('Please sign in again.', 401);
+      const res = await fetchImpl(`${base}/functions/v1/${name}`, {
+        method: 'POST',
+        headers: { apikey: anonKey, Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      const json = await res.json().catch(() => null);
+      if (res.status === 404) return fail('That is not set up yet. Ask Bolt to deploy the staff-admin function.', 404);
+      if (!res.ok) return fail(json?.error || 'That did not work. Please try again.', res.status);
+      return ok(json);
+    } catch {
+      return fail('Could not reach the server. The staff-admin function may not be deployed yet.', 0);
+    }
+  }
+
+  return { configured, signIn, signOut, getUser, data, getToken, upload, invoke, rpc, verifyLink, updatePassword, post };
 }
 
 export const backend = createBackend({
