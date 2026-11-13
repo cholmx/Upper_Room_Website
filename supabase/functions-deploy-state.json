@@ -1,0 +1,13 @@
+{
+  "projectId": "72441526",
+  "functions": {
+    "staff-admin": {
+      "hasChanged": false,
+      "hash": "ad06c130500dd680f09f396680e2ead0829fffe58a6302443152b9d334a54c53"
+    },
+    "youtube-videos": {
+      "hasChanged": false,
+      "hash": "095648b946b588f60917e7ea8792e2d42f1e808119cd48673434b780a987dde4"
+    }
+  }
+}

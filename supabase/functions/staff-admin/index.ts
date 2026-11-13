@@ -6,7 +6,7 @@
 //   always the same so the form cannot be used to find out who is on the team.
 // Emails are put in the email outbox and sent through Resend like every other email from this site.
 
-const VERSION = '2026-11-13';
+const VERSION = '2026-11-13.1';
 const SITE = Deno.env.get('SITE_URL') || 'https://www.urfellowship.com';
 const URL_ = Deno.env.get('SUPABASE_URL') ?? '';
 const SERVICE = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '';
