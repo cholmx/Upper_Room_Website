@@ -10,6 +10,7 @@ import { parseCategories } from '../lib/categories';
 import { Btn, Section, SectionHeader, PageHeader, PhotoBand } from '../components/ui';
 import LiteYouTube from '../components/LiteYouTube';
 import MessageCard from '../components/MessageCard';
+import AudioArchive from '../components/AudioArchive';
 import SeriesCover from '../components/SeriesCover';
 import NewBadge from '../components/NewBadge';
 import { CardSkeletons, ErrorState } from '../components/StateViews';
@@ -226,6 +227,8 @@ export default function Messages() {
               </div>
             )}
           </Section>
+
+          <AudioArchive messages={messages} />
 
           <PhotoBand slot="messages-podcast">
             <h2 className="text-3xl md:text-5xl mb-5">Listen anywhere</h2>

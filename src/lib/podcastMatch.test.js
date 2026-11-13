@@ -42,3 +42,12 @@ describe('matching messages to podcast episodes', () => {
     expect(findEpisode({ title: 'Who Is the Gospel For?' }, null)).toBeNull();
   });
 });
+
+describe('episode titles', () => {
+  it('splits series, title and speaker', async () => {
+    const { parseEpisodeTitle } = await import('./podcastMatch');
+    expect(parseEpisodeTitle('Acts 10-11 :: Who Is the Gospel For? // Josh Osborn')).toEqual({ series: 'Acts 10-11', title: 'Who Is the Gospel For?', speaker: 'Josh Osborn' });
+    expect(parseEpisodeTitle('Title // Speaker')).toEqual({ series: '', title: 'Title', speaker: 'Speaker' });
+    expect(parseEpisodeTitle('Do It Again')).toEqual({ series: '', title: 'Do It Again', speaker: '' });
+  });
+});

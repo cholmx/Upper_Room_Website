@@ -27,6 +27,17 @@ function load() {
 
 export function resetSermonPodcastCache() { cache = null; }
 
+// Both lists, for pages that show the whole podcast (null until they load).
+export function useSermonPodcastLists() {
+  const [lists, setLists] = useState(null);
+  useEffect(() => {
+    let live = true;
+    load().then(l => { if (live) setLists(l); });
+    return () => { live = false; };
+  }, []);
+  return lists;
+}
+
 // The Listen links for a message: its podcast episode on Apple Podcasts, the episode page (Spotify and more), and the audio file.
 export default function useSermonPodcast(message) {
   const [lists, setLists] = useState(null);

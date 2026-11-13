@@ -40,3 +40,13 @@ export function findEpisode(message, episodes) {
   }
   return best ? best.ep : null;
 }
+
+// Splits "Acts 10-11 :: Who Is the Gospel For? // Josh Osborn" into its parts. Plain titles come back as just a title.
+export function parseEpisodeTitle(raw) {
+  const t = String(raw || '').trim();
+  const m = /^(.*?)\s*::\s*(.+?)\s*(?:\/\/\s*(.+))?$/.exec(t);
+  if (m) return { series: m[1].trim(), title: m[2].trim(), speaker: (m[3] || '').trim() };
+  const s = /^(.+?)\s*\/\/\s*(.+)$/.exec(t);
+  if (s) return { series: '', title: s[1].trim(), speaker: s[2].trim() };
+  return { series: '', title: t, speaker: '' };
+}
