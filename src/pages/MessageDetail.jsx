@@ -110,13 +110,20 @@ export default function MessageDetail() {
                 <LiteYouTube id={vid} title={m.title} />
               </div>
             )}
-            {audio && (
+            {(audio || podcast.appleUrl || podcast.pageUrl) && (
               <div className="mt-8">
                 <h2 className="text-xl mb-2">Listen</h2>
-                <audio controls preload="none" src={audio} className="w-full" aria-label={`Audio of ${m.title}`}>
-                  <a href={audio}>Download the audio</a>
-                </audio>
-                {podcast.appleUrl && <p className="mt-3"><a href={podcast.appleUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 font-semibold">Listen on Apple Podcasts<span className="sr-only"> (opens in a new tab)</span></a></p>}
+                {audio && (
+                  <audio controls preload="none" src={audio} className="w-full" aria-label={`Audio of ${m.title}`}>
+                    <a href={audio}>Download the audio</a>
+                  </audio>
+                )}
+                {(podcast.appleUrl || podcast.pageUrl) && (
+                  <p className="mt-3 flex flex-wrap gap-x-6 gap-y-1">
+                    {podcast.appleUrl && <a href={podcast.appleUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 font-semibold">Listen on Apple Podcasts<span className="sr-only"> (opens in a new tab)</span></a>}
+                    {podcast.pageUrl && <a href={podcast.pageUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 font-semibold">Listen on Spotify and other apps<span className="sr-only"> (opens in a new tab)</span></a>}
+                  </p>
+                )}
               </div>
             )}
             {tabs.length > 0 && (

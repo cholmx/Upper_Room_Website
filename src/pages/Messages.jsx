@@ -123,7 +123,7 @@ export default function Messages() {
                   <h3 className="text-2xl md:text-3xl"><Link to={messagePath(latest)} className="hover:text-[#1e2522]">{latest.title}</Link></h3>
                   <p className="mt-2 text-black">{[latest.speaker, latest.date && formatDate(latest.date), latest.scripture].filter(Boolean).join('  |  ')}</p>
                   {latest.description && <p className="mt-3 text-black leading-relaxed line-clamp-4">{plainText(latest.description)}</p>}
-                  <div className="mt-6 flex flex-wrap gap-3"><Btn to={messagePath(latest)} variant="primary">Watch</Btn><Btn href={latestPodcast.appleUrl || safeUrl(latest.audio_url) || SITE.podcasts.apple} variant="dark">Listen</Btn></div>
+                  <div className="mt-6 flex flex-wrap gap-3"><Btn to={messagePath(latest)} variant="primary">Watch</Btn><Btn href={latestPodcast.listenUrl || safeUrl(latest.audio_url) || SITE.podcasts.apple} variant="dark">Listen</Btn></div>
                 </div>
               </div>
             ) : (

@@ -34,7 +34,7 @@ export default function Home() {
   const { data } = useFetch('read/sermons?sort=date:desc');
   const latest = useMemo(() => newestFirst(data).filter(isLive)[0], [data]);
   const videoId = ytId(latest?.video_url || latest?.yt);
-  const pod = useFetch('read/podcast_episodes_church?sort=published_at:desc&limit=1');
+  const pod = useFetch('read/podcast_episodes_church?show_slug=shine&sort=published_at:desc&limit=1');
   const episode = (pod.data || [])[0];
   const eventsFetch = useFetch('read/urf_events_church?sort=event_date:asc');
   const comingUp = useMemo(() => upcoming(eventsFetch.data).slice(0, 4), [eventsFetch.data]);

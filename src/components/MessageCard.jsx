@@ -6,10 +6,12 @@ import NewBadge from './NewBadge';
 import { parseCategories } from '../lib/categories';
 import SafeIcon from '../common/SafeIcon';
 import { FiPlay, FiHeadphones } from 'react-icons/fi';
+import useSermonPodcast from '../hooks/useSermonPodcast';
 
 
 export default function MessageCard({ message, as: Heading = 'h3' }) {
   const id = ytId(message.video_url || message.yt);
+  const podcast = useSermonPodcast(message);
   return (
     <article className="rounded-2xl overflow-hidden flex flex-col neu">
       <Link to={messagePath(message)} className="thumb-link block relative aspect-video overflow-hidden bg-[#1e2522]" aria-hidden="true" tabIndex={-1}>
@@ -28,6 +30,13 @@ export default function MessageCard({ message, as: Heading = 'h3' }) {
           <ul className="mt-3 flex flex-wrap gap-2" aria-label="Categories">
             {parseCategories(message.topic).slice(0, 3).map(c => <li key={c} className="text-xs font-display font-bold px-3 py-1 rounded-full bg-[#EDE9DC] text-[#1e2522]">{c}</li>)}
           </ul>
+        )}
+        {podcast.listenUrl && (
+          <p className="mt-3 text-sm">
+            <a href={podcast.listenUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 min-h-[44px] font-display font-bold underline underline-offset-4">
+              <SafeIcon icon={FiHeadphones} aria-hidden="true" />Listen<span className="sr-only"> to {message.title} on the podcast (opens in a new tab)</span>
+            </a>
+          </p>
         )}
         {message.series && (
           <p className="mt-auto pt-3 text-sm"><Link to={seriesPath(message.series)} className="underline underline-offset-4">Series: {message.series}</Link></p>

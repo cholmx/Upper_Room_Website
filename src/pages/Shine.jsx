@@ -47,7 +47,7 @@ export default function Shine() {
   const shows = useFetch('read/podcast_shows_church');
   const [shown, setShown] = useState(PAGE);
   // Only the newest episodes are loaded at first; "Show more" asks for the next batch.
-  const eps = useFetch(`read/podcast_episodes_church?sort=published_at:desc&limit=${shown + 2}`);
+  const eps = useFetch(`read/podcast_episodes_church?show_slug=shine&sort=published_at:desc&limit=${shown + 2}`);
   const show = (shows.data || []).find(s => s.slug === 'shine');
   const episodes = useMemo(() => (eps.data || []).filter(e => e.show_slug === 'shine').sort((a, b) => String(b.published_at || '').localeCompare(String(a.published_at || ''))), [eps.data]);
   const [latest, ...rest] = episodes;

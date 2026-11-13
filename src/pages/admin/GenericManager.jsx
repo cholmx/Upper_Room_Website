@@ -89,7 +89,7 @@ export default function GenericManager({ config }) {
     setSyncing(true); setSyncMsg('');
     const res = await backend.rpc(config.syncNow.rpc, {});
     setSyncing(false);
-    if (res.status === 'success') { setSyncMsg(res.data?.count >= 0 ? `Done. ${res.data.count} ${res.data.count === 1 ? (config.syncNow.unit || 'event') : (config.syncNow.units || 'events')} updated.` : `Not updated. ${res.data?.result || ''}`); fetchItems(); } else setSyncMsg(res.error || 'That did not work.');
+    if (res.status === 'success') { setSyncMsg(res.data?.count >= 0 ? `Done. ${res.data.count} ${res.data.count === 1 ? (config.syncNow.unit || 'event') : (config.syncNow.units || 'events')} updated.${config.syncNow.showResult && res.data.result ? ` ${res.data.result}` : ''}` : `Not updated. ${res.data?.result || ''}`); fetchItems(); } else setSyncMsg(res.error || 'That did not work.');
   };
   const [welcomeStep, setWelcomeStep] = useState('');
   const [welcomeTo, setWelcomeTo] = useState('');
