@@ -4,7 +4,7 @@ import useNoIndex from '../../hooks/useNoIndex';
 import { backend } from '../../lib/backend';
 import { useAuth } from '../../auth';
 
-const input = 'w-full px-3 py-2 text-sm bg-white border border-black/15 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#eaa235] text-[#1e2522]';
+const input = 'w-full px-3 py-2 text-sm bg-white border border-black/15 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F9AB55] text-[#1C2A2B]';
 
 // The page behind the link in an invitation or a password reset email: choose a password, then go to the admin.
 export default function SetPassword() {
@@ -47,24 +47,24 @@ export default function SetPassword() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f5f3ee] flex items-center justify-center p-4">
+    <div className="min-h-screen bg-[#F4ECDD] flex items-center justify-center p-4">
       <div className="bg-white w-full max-w-sm p-6 rounded-xl border border-black/10 shadow-sm">
-        <h1 className="text-lg font-bold text-[#1e2522]">{invited ? 'Welcome to the team' : 'Choose a new password'}</h1>
+        <h1 className="text-lg font-bold text-[#1C2A2B]">{invited ? 'Welcome to the team' : 'Choose a new password'}</h1>
         <p className="text-xs text-black/60 mb-4">Upper Room Fellowship admin</p>
-        {state === 'checking' && <p role="status" className="text-sm text-[#1e2522]">One moment.</p>}
-        {state === 'bad' && <p role="alert" className="text-sm text-[#9a3a1f]">{error}</p>}
+        {state === 'checking' && <p role="status" className="text-sm text-[#1C2A2B]">One moment.</p>}
+        {state === 'bad' && <p role="alert" className="text-sm text-[#1C2A2B]">{error}</p>}
         {state === 'ready' && (
           <form onSubmit={save} className="space-y-3" noValidate>
-            {error && <div role="alert" className="bg-red-50 border border-red-200 text-[#9a3a1f] p-2 rounded-lg text-xs font-medium">{error}</div>}
+            {error && <div role="alert" className="bg-[#C65D3B]/10 border border-[#C65D3B] text-[#1C2A2B] p-2 rounded-lg text-xs font-medium">{error}</div>}
             <div>
-              <label htmlFor="new-pw" className="block text-xs font-semibold text-[#1e2522] mb-1">New password (at least 10 characters)</label>
+              <label htmlFor="new-pw" className="block text-xs font-semibold text-[#1C2A2B] mb-1">New password (at least 10 characters)</label>
               <input id="new-pw" type="password" autoComplete="new-password" value={pw} onChange={(e) => setPw(e.target.value)} className={input} required />
             </div>
             <div>
-              <label htmlFor="new-pw2" className="block text-xs font-semibold text-[#1e2522] mb-1">Type it again</label>
+              <label htmlFor="new-pw2" className="block text-xs font-semibold text-[#1C2A2B] mb-1">Type it again</label>
               <input id="new-pw2" type="password" autoComplete="new-password" value={again} onChange={(e) => setAgain(e.target.value)} className={input} required />
             </div>
-            <button type="submit" disabled={busy} className="w-full mt-1 py-2 text-sm font-semibold rounded-lg bg-[#1e2522] text-white hover:bg-[#eaa235] hover:text-[#1e2522] disabled:opacity-60 transition-colors">{busy ? 'Saving...' : 'Save password and continue'}</button>
+            <button type="submit" disabled={busy} className="w-full mt-1 py-2 text-sm font-semibold rounded-lg bg-[#1C2A2B] text-white hover:bg-[#F9AB55] hover:text-[#1C2A2B] disabled:opacity-60 transition-colors">{busy ? 'Saving...' : 'Save password and continue'}</button>
           </form>
         )}
       </div>

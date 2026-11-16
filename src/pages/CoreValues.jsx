@@ -12,7 +12,7 @@ function ValueIcon({ n, size }) {
   const [failed, setFailed] = useState(false);
   const src = url || `/images/core-values/core-value-${n}.png`;
   if (failed && !url) {
-    return <span aria-hidden="true" style={{ width: size, height: size }} className="rounded-full bg-[#c74f2f] text-white font-semibold flex items-center justify-center shrink-0">{n}</span>;
+    return <span aria-hidden="true" style={{ width: size, height: size }} className="rounded-full bg-[#C65D3B] text-white font-semibold flex items-center justify-center shrink-0">{n}</span>;
   }
   return <img src={src} alt="" width={size} height={size} loading="lazy" style={{ width: size, height: size }} className="value-icon object-contain shrink-0" onError={() => setFailed(true)} />;
 }
@@ -36,7 +36,7 @@ function ValueBody({ v, first }) {
       <ul className="space-y-2">
         {v.practices.map(p => (
           <li key={p} className="flex gap-3 text-[1rem] leading-snug text-black">
-            <span aria-hidden="true" className="mt-[0.45em] w-2 h-2 rounded-full bg-[#2a3834] shrink-0" />
+            <span aria-hidden="true" className="mt-[0.45em] w-2 h-2 rounded-full bg-[#5D947B] shrink-0" />
             <span>{p}</span>
           </li>
         ))}
@@ -80,9 +80,9 @@ function ValueList() {
                 onClick={() => toggle(i)}
                 className="w-full flex items-center gap-4 text-left p-4 min-h-[64px]"
               >
-                <span className="font-display font-bold text-2xl text-[#c74f2f] w-9 shrink-0">{String(v.n).padStart(2, '0')}</span>
-                <span className="flex-1 font-display font-bold text-lg leading-tight text-[#1e2522]">{v.title}</span>
-                <span aria-hidden="true" className={`shrink-0 text-2xl text-[#1e2522] transition-transform ${on ? 'rotate-45' : ''}`}>+</span>
+                <span className="font-display font-bold text-2xl text-[#C65D3B] w-9 shrink-0">{String(v.n).padStart(2, '0')}</span>
+                <span className="flex-1 font-display font-bold text-lg leading-tight text-[#1C2A2B]">{v.title}</span>
+                <span aria-hidden="true" className={`shrink-0 text-2xl text-[#1C2A2B] transition-transform ${on ? 'rotate-45' : ''}`}>+</span>
               </button>
             </h3>
             {on && (
@@ -146,9 +146,9 @@ function ValueExplorer() {
               tabIndex={on ? 0 : -1}
               onClick={() => select(i)}
               onKeyDown={e => onKey(e, i)}
-              className={`text-left rounded-[10px] p-3 md:p-4 flex flex-row items-center gap-3 min-[360px]:flex-col min-[360px]:items-start min-[360px]:gap-1 lg:flex-row lg:items-center lg:gap-4 min-h-[72px] transition-colors ${on ? 'bg-[#1e2522] text-white shadow-lg' : 'bg-white text-[#1e2522] hover:bg-white/70'}`}
+              className={`text-left rounded-[10px] p-3 md:p-4 flex flex-row items-center gap-3 min-[360px]:flex-col min-[360px]:items-start min-[360px]:gap-1 lg:flex-row lg:items-center lg:gap-4 min-h-[72px] transition-colors ${on ? 'bg-[#1C2A2B] text-white shadow-lg' : 'bg-white text-[#1C2A2B] hover:bg-white/70'}`}
             >
-              <span className={`font-display font-bold text-xl md:text-2xl lg:w-9 shrink-0 ${on ? 'text-[#eaa235]' : 'text-[#c74f2f]'}`}>{String(val.n).padStart(2, '0')}</span>
+              <span className={`font-display font-bold text-xl md:text-2xl lg:w-9 shrink-0 ${on ? 'text-[#F9AB55]' : 'text-[#C65D3B]'}`}>{String(val.n).padStart(2, '0')}</span>
               <span className="block">
                 <span className="block font-display font-bold text-[0.95rem] md:text-lg leading-tight">{val.title}</span>
               </span>
@@ -161,18 +161,18 @@ function ValueExplorer() {
         <div className="flex flex-col items-start gap-3 min-[400px]:flex-row min-[400px]:items-center min-[400px]:gap-5 md:gap-7">
           <ValueIcon n={v.n} size={80} />
           <div className="min-w-0">
-            <p className="kicker text-[#c74f2f] !mb-1">Value {v.n} of {CORE_VALUES.length}</p>
+            <p className="kicker text-[#C65D3B] !mb-1">Value {v.n} of {CORE_VALUES.length}</p>
             <h2 className="text-2xl min-[400px]:text-3xl md:text-4xl leading-[1.05] md:leading-[1.05] break-words">{v.title}</h2>
           </div>
         </div>
 
         <ValueBody v={v} />
 
-        <div className="mt-8 pt-6 border-t border-[#1e2522]/10 flex items-center justify-between gap-3">
-          <button type="button" onClick={() => select(active - 1)} className="inline-flex items-center min-h-[44px] px-4 rounded-full hover:bg-[#1e2522]/10 font-display font-bold text-[#1e2522]">
+        <div className="mt-8 pt-6 border-t border-[#1C2A2B]/10 flex items-center justify-between gap-3">
+          <button type="button" onClick={() => select(active - 1)} className="inline-flex items-center min-h-[44px] px-4 rounded-full hover:bg-[#1C2A2B]/10 font-display font-bold text-[#1C2A2B]">
             <span aria-hidden="true" className="mr-2">&larr;</span>Previous
           </button>
-          <button type="button" onClick={() => select(active + 1)} className="inline-flex items-center min-h-[44px] px-4 rounded-full hover:bg-[#1e2522]/10 font-display font-bold text-[#1e2522]">
+          <button type="button" onClick={() => select(active + 1)} className="inline-flex items-center min-h-[44px] px-4 rounded-full hover:bg-[#1C2A2B]/10 font-display font-bold text-[#1C2A2B]">
             Next<span aria-hidden="true" className="ml-2">&rarr;</span>
           </button>
         </div>

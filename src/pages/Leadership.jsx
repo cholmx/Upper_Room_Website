@@ -13,11 +13,11 @@ function Person({ p }) {
       <PhotoBox src={p.photo_url} alt={`Portrait of ${p.name}, ${p.role}`} label={`${p.name} headshot`} ratio="aspect-square" rounded={false} bg="bg-white" fit="object-contain" />
       <div className="p-6 flex flex-col flex-grow">
         <h2 className="text-2xl">{p.name}</h2>
-        {p.role && <p className="mt-1 font-semibold text-[#1e2522]">{p.role}</p>}
+        {p.role && <p className="mt-1 font-semibold text-[#1C2A2B]">{p.role}</p>}
         {p.bio && (p.markdown ? <RichText value={p.bio} className="mt-3" /> : <p className="mt-3 text-black leading-relaxed">{p.bio}</p>)}
         {p.email && (
           <p className="mt-auto pt-4">
-            <a href={`mailto:${p.email}`} className="inline-flex items-center min-h-[44px] font-semibold underline underline-offset-4 text-[#1e2522]">Email {first}</a>
+            <a href={`mailto:${p.email}`} className="inline-flex items-center min-h-[44px] font-semibold underline underline-offset-4 text-[#1C2A2B]">Email {first}</a>
           </p>
         )}
       </div>

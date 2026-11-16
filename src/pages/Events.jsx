@@ -18,7 +18,7 @@ function Card({ ev, date }) {
   return (
     <li className="bg-white rounded-[10px] elev-1 p-5 md:p-6 flex gap-5">
       <div className="shrink-0 w-16 md:w-20 text-center" aria-hidden="true">
-        <div className="font-display font-bold text-sm uppercase tracking-wide text-[#c74f2f]">{date.toLocaleDateString('en-US', { month: 'short' })}</div>
+        <div className="font-display font-bold text-sm uppercase tracking-wide text-[#C65D3B]">{date.toLocaleDateString('en-US', { month: 'short' })}</div>
         <div className="font-display font-bold text-4xl md:text-5xl leading-none">{date.getDate()}</div>
         <div className="mt-1 text-xs text-black">{date.toLocaleDateString('en-US', { weekday: 'short' })}</div>
       </div>
@@ -28,8 +28,8 @@ function Card({ ev, date }) {
           {[date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }), time, ev.location].filter(Boolean).join('  |  ')}
         </p>
         <div className="mt-2 flex flex-wrap gap-2">
-          {freq && <span className="text-xs font-display font-bold px-3 py-1 rounded-full bg-[#EDE9DC]">{freq}</span>}
-          {ev.ministry && <span className="text-xs font-display font-bold px-3 py-1 rounded-full bg-[#EDE9DC]">{ev.ministry}</span>}
+          {freq && <span className="text-xs font-display font-bold px-3 py-1 rounded-full bg-[#F4ECDD]">{freq}</span>}
+          {ev.ministry && <span className="text-xs font-display font-bold px-3 py-1 rounded-full bg-[#F4ECDD]">{ev.ministry}</span>}
         </div>
         {(ev.summary || ev.details) && <p className="mt-3 text-[1rem] leading-snug text-black">{blurb(ev)}</p>}
         {more && (
@@ -81,7 +81,7 @@ export default function Events() {
             {groups.length > 1 && (
               <div className="mb-8 flex flex-wrap gap-2" role="group" aria-label="Show events for">
                 {['', ...groups].map(g => (
-                  <button key={g || 'all'} type="button" aria-pressed={group === g} onClick={() => setGroup(g)} className={`px-4 py-2 rounded-full text-sm font-display font-bold ${group === g ? 'bg-[#1e2522] text-white' : 'bg-[#EDE9DC] text-[#1e2522] hover:bg-[#1e2522]/15'}`}>{g || 'All events'}</button>
+                  <button key={g || 'all'} type="button" aria-pressed={group === g} onClick={() => setGroup(g)} className={`px-4 py-2 rounded-full text-sm font-display font-bold ${group === g ? 'bg-[#1C2A2B] text-white' : 'bg-[#F4ECDD] text-[#1C2A2B] hover:bg-[#1C2A2B]/15'}`}>{g || 'All events'}</button>
                 ))}
               </div>
             )}

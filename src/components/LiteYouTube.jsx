@@ -26,11 +26,11 @@ export default function LiteYouTube({ id, title }) {
       type="button"
       onClick={() => setPlaying(true)}
       aria-label={`Play ${title}`}
-      className="group relative w-full h-full block bg-[#1e2522]"
+      className="group relative w-full h-full block bg-[#1C2A2B]"
     >
       <YtThumb id={id} className="w-full h-full object-cover group-hover:opacity-60" />
       <span className="absolute inset-0 flex items-center justify-center">
-        <span className="w-20 h-20 bg-[#eaa235] rounded-full flex items-center justify-center text-[#1e2522] pl-1 elev-2 transition-transform">
+        <span className="w-20 h-20 bg-[#F9AB55] rounded-full flex items-center justify-center text-[#1C2A2B] pl-1 elev-2 transition-transform">
           <SafeIcon icon={FiPlay} className="text-3xl" />
         </span>
       </span>

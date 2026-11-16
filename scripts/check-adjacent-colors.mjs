@@ -6,7 +6,7 @@ import { chromium } from 'playwright';
 import { STATIC_ROUTES } from './lib.mjs';
 
 const base = process.argv[2] || 'http://localhost:4173';
-const INK = 'rgb(30, 37, 34)';
+const INK = 'rgb(28, 42, 43)';
 const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
 const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
 let bad = 0;

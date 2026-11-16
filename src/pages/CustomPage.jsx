@@ -26,7 +26,7 @@ export default function CustomPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-[#ffffff] pt-32 flex flex-col items-center justify-center opacity-60">
-        <div className="w-12 h-12 border-4 border-[#eaa235] border-t-transparent rounded-full animate-spin mb-4"></div>
+        <div className="w-12 h-12 border-4 border-[#F9AB55] border-t-transparent rounded-full animate-spin mb-4"></div>
         <p className="font-bold tracking-wide text-sm">Loading Page...</p>
       </div>
     );
@@ -45,14 +45,14 @@ export default function CustomPage() {
   }
 
   return (
-    <div className="bg-[#ffffff] min-h-screen text-[#1e2522] pt-20 pb-32">
+    <div className="bg-[#ffffff] min-h-screen text-[#1C2A2B] pt-20 pb-32">
       {/* Hero Banner */}
-      <div className="bg-[#1e2522] text-[#ffffff] py-24 px-6 text-center relative overflow-hidden">
+      <div className="bg-[#1C2A2B] text-[#ffffff] py-24 px-6 text-center relative overflow-hidden">
          {/* Subtle abstract background */}
          <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/9562304/pexels-photo-9562304.jpeg?auto=compress&cs=tinysrgb&h=1200')] bg-cover bg-center opacity-[0.08] mix-blend-overlay"></div>
          
          <div className="max-w-[800px] mx-auto relative z-10">
-           <span className="kicker text-[#eaa235] mb-4 inline-block">Information</span>
+           <span className="kicker text-[#F9AB55] mb-4 inline-block">Information</span>
            <h1 className="text-4xl md:text-6xl mb-8 leading-tight">{page.title_text}</h1>
          </div>
       </div>
@@ -60,7 +60,7 @@ export default function CustomPage() {
       {/* Content Body */}
       <div className="py-24 px-6">
         <div className="max-w-[800px] mx-auto p-8 md:p-16 rounded-3xl neu">
-          <div className="space-y-8 text-[1rem] md:text-base text-black leading-snug font-serif italic text-[#1e2522]">
+          <div className="space-y-8 text-[1rem] md:text-base text-black leading-snug font-serif italic text-[#1C2A2B]">
             {stripHtml(page.body_content_text).split('\n').filter(Boolean).map((para, i) => (
               <p key={i}>{para}</p>
             ))}

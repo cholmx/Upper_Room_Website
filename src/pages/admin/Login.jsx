@@ -39,22 +39,22 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f5f3ee] flex items-center justify-center p-4">
+    <div className="min-h-screen bg-[#F4ECDD] flex items-center justify-center p-4">
       <div className="bg-white w-full max-w-xs p-6 rounded-xl border border-black/10 shadow-sm">
         <div className="mb-5">
-          <h1 className="text-lg font-bold text-[#1e2522]">Admin</h1>
+          <h1 className="text-lg font-bold text-[#1C2A2B]">Admin</h1>
           <p className="text-xs text-black/60">Upper Room Fellowship</p>
         </div>
 
         {error && (
-          <div role="alert" className="bg-red-50 border border-red-200 text-[#9a3a1f] p-2 rounded-lg mb-4 text-xs font-medium">
+          <div role="alert" className="bg-[#C65D3B]/10 border border-[#C65D3B] text-[#1C2A2B] p-2 rounded-lg mb-4 text-xs font-medium">
             {error}
           </div>
         )}
 
         {mode === 'forgot' ? (
           sent ? (
-            <div role="status" className="space-y-3 text-sm text-[#1e2522]">
+            <div role="status" className="space-y-3 text-sm text-[#1C2A2B]">
               <p>If that email belongs to the team, a link to choose a new password is on its way. It can take a few minutes.</p>
               <button type="button" onClick={() => { setMode('signin'); setSent(false); }} className="font-semibold underline underline-offset-2">Back to sign in</button>
             </div>
@@ -62,17 +62,17 @@ export default function Login() {
             <form onSubmit={handleForgot} className="space-y-3">
               <p className="text-xs text-black/70">Enter your email and we will send you a link to choose a new password.</p>
               <div>
-                <label htmlFor="forgot-email" className="block text-xs font-semibold text-[#1e2522] mb-1">Email</label>
-                <input id="forgot-email" type="email" autoComplete="username" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full px-3 py-2 text-sm bg-white border border-black/15 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#eaa235] text-[#1e2522]" required />
+                <label htmlFor="forgot-email" className="block text-xs font-semibold text-[#1C2A2B] mb-1">Email</label>
+                <input id="forgot-email" type="email" autoComplete="username" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full px-3 py-2 text-sm bg-white border border-black/15 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F9AB55] text-[#1C2A2B]" required />
               </div>
-              <button type="submit" disabled={submitting} className="w-full mt-1 py-2 text-sm font-semibold rounded-lg bg-[#1e2522] text-white hover:bg-[#eaa235] hover:text-[#1e2522] disabled:opacity-60 transition-colors">{submitting ? 'Sending...' : 'Send me a link'}</button>
-              <button type="button" onClick={() => { setMode('signin'); setError(''); }} className="w-full text-xs font-semibold underline underline-offset-2 text-[#1e2522]">Back to sign in</button>
+              <button type="submit" disabled={submitting} className="w-full mt-1 py-2 text-sm font-semibold rounded-lg bg-[#1C2A2B] text-white hover:bg-[#F9AB55] hover:text-[#1C2A2B] disabled:opacity-60 transition-colors">{submitting ? 'Sending...' : 'Send me a link'}</button>
+              <button type="button" onClick={() => { setMode('signin'); setError(''); }} className="w-full text-xs font-semibold underline underline-offset-2 text-[#1C2A2B]">Back to sign in</button>
             </form>
           )
         ) : (
         <form onSubmit={handleLogin} className="space-y-3">
           <div>
-            <label htmlFor="login-email" className="block text-xs font-semibold text-[#1e2522] mb-1">
+            <label htmlFor="login-email" className="block text-xs font-semibold text-[#1C2A2B] mb-1">
               Email
             </label>
             <input
@@ -81,12 +81,12 @@ export default function Login() {
               autoComplete="username"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-3 py-2 text-sm bg-white border border-black/15 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#eaa235] text-[#1e2522]"
+              className="w-full px-3 py-2 text-sm bg-white border border-black/15 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F9AB55] text-[#1C2A2B]"
               required
             />
           </div>
           <div>
-            <label htmlFor="login-password" className="block text-xs font-semibold text-[#1e2522] mb-1">
+            <label htmlFor="login-password" className="block text-xs font-semibold text-[#1C2A2B] mb-1">
               Password
             </label>
             <input
@@ -95,18 +95,18 @@ export default function Login() {
               autoComplete="current-password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-3 py-2 text-sm bg-white border border-black/15 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#eaa235] text-[#1e2522]"
+              className="w-full px-3 py-2 text-sm bg-white border border-black/15 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F9AB55] text-[#1C2A2B]"
               required
             />
           </div>
           <button
             type="submit"
             disabled={submitting}
-            className="w-full mt-1 py-2 text-sm font-semibold rounded-lg bg-[#1e2522] text-white hover:bg-[#eaa235] hover:text-[#1e2522] disabled:opacity-60 transition-colors"
+            className="w-full mt-1 py-2 text-sm font-semibold rounded-lg bg-[#1C2A2B] text-white hover:bg-[#F9AB55] hover:text-[#1C2A2B] disabled:opacity-60 transition-colors"
           >
             {submitting ? 'Signing in...' : 'Sign In'}
           </button>
-          <button type="button" onClick={() => { setMode('forgot'); setError(''); }} className="w-full text-xs font-semibold underline underline-offset-2 text-[#1e2522]">Forgot your password?</button>
+          <button type="button" onClick={() => { setMode('forgot'); setError(''); }} className="w-full text-xs font-semibold underline underline-offset-2 text-[#1C2A2B]">Forgot your password?</button>
         </form>
         )}
       </div>

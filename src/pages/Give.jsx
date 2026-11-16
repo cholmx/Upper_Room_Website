@@ -39,7 +39,7 @@ export default function Give() {
         <ol className="mt-6 grid md:grid-cols-2 gap-4 max-w-4xl">
           {WHY.map((w, i) => (
             <li key={w} className="fcard !p-5 flex items-start gap-4">
-              <span aria-hidden="true" className="w-10 h-10 rounded-full bg-[#c74f2f] text-white font-semibold flex items-center justify-center flex-shrink-0">{i + 1}</span>
+              <span aria-hidden="true" className="w-10 h-10 rounded-full bg-[#C65D3B] text-white font-semibold flex items-center justify-center flex-shrink-0">{i + 1}</span>
               <span className="text-[1rem] text-black leading-snug pt-1.5">{w}</span>
             </li>
           ))}
@@ -49,9 +49,9 @@ export default function Give() {
       <PhotoSplit tone="gray" slot="give-ways" side="left" id="online">
         <h2 className="text-3xl md:text-5xl mb-5">Give online</h2>
         <ul className={`space-y-3 ${P}`}>
-          <li className="flex gap-3"><span aria-hidden="true" className="text-[#c74f2f] font-bold">1.</span><span>Choose a one-time gift or set up recurring giving.</span></li>
-          <li className="flex gap-3"><span aria-hidden="true" className="text-[#c74f2f] font-bold">2.</span><span>Direct it to the general fund or a specific ministry.</span></li>
-          <li className="flex gap-3"><span aria-hidden="true" className="text-[#c74f2f] font-bold">3.</span><span>Finish on our secure giving page. It opens in a new tab.</span></li>
+          <li className="flex gap-3"><span aria-hidden="true" className="text-[#C65D3B] font-bold">1.</span><span>Choose a one-time gift or set up recurring giving.</span></li>
+          <li className="flex gap-3"><span aria-hidden="true" className="text-[#C65D3B] font-bold">2.</span><span>Direct it to the general fund or a specific ministry.</span></li>
+          <li className="flex gap-3"><span aria-hidden="true" className="text-[#C65D3B] font-bold">3.</span><span>Finish on our secure giving page. It opens in a new tab.</span></li>
         </ul>
         <div className="mt-7 flex flex-wrap items-center gap-4">
           <Btn href={SITE.giveUrl} variant="gold">Give Now</Btn>
@@ -79,7 +79,7 @@ export default function Give() {
             'We meet all accounting standards and legal requirements.',
           ].map(t2 => (
             <li key={t2} className="bg-white rounded-[10px] p-5 flex items-start gap-3">
-              <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c74f2f" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0 mt-0.5"><path d="M5 13l4 4L19 7" /></svg>
+              <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C65D3B" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0 mt-0.5"><path d="M5 13l4 4L19 7" /></svg>
               <span className={P}>{t2}</span>
             </li>
           ))}

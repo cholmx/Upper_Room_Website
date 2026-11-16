@@ -27,8 +27,8 @@ export default function Contact() {
               <h2 className="text-2xl mb-3">Visit or call</h2>
               <address className={`not-italic space-y-1 ${P}`}>
                 <p>{SITE.address.street}<br />{SITE.address.city}, {SITE.address.region} {SITE.address.postalCode}</p>
-                <p><a className="underline underline-offset-4 font-semibold text-[#1e2522]" href={SITE.phoneHref}>{SITE.phone}</a></p>
-                <p><a className="underline underline-offset-4 font-semibold text-[#1e2522]" href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
+                <p><a className="underline underline-offset-4 font-semibold text-[#1C2A2B]" href={SITE.phoneHref}>{SITE.phone}</a></p>
+                <p><a className="underline underline-offset-4 font-semibold text-[#1C2A2B]" href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
                 <p>Sundays at 10:30am</p>
               </address>
             </div>

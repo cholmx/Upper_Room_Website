@@ -5,9 +5,9 @@ import { useAuth } from '../../auth';
 import { logActivity } from '../../lib/activity';
 import ConfirmDialog from '../../components/ConfirmDialog';
 
-const btn = 'px-3 py-1.5 rounded-lg border border-[#1e2522]/20 bg-white font-bold text-sm disabled:opacity-40';
-const input = 'w-full px-3 py-2 rounded-lg border border-[#1e2522]/20 bg-white';
-const card = 'bg-white rounded-2xl border border-[#1e2522]/10 p-5 md:p-6';
+const btn = 'px-3 py-1.5 rounded-lg border border-[#1C2A2B]/20 bg-white font-bold text-sm disabled:opacity-40';
+const input = 'w-full px-3 py-2 rounded-lg border border-[#1C2A2B]/20 bg-white';
+const card = 'bg-white rounded-2xl border border-[#1C2A2B]/10 p-5 md:p-6';
 
 const day = (iso) => {
   const d = iso ? new Date(iso) : null;
@@ -91,7 +91,7 @@ export default function TeamManager() {
 
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-bold text-[#1e2522]">Team</h2>
+      <h2 className="text-2xl font-bold text-[#1C2A2B]">Team</h2>
 
       <section className={card} aria-label="What each role can do">
         <p className="text-sm text-black max-w-3xl"><strong>Admins</strong> can do everything. <strong>Editors</strong> can use the Inbox (form submissions, the welcome emails and the weekly email) and write Blog Posts. Everything else is hidden from them, and the database blocks it too.</p>
@@ -109,10 +109,10 @@ export default function TeamManager() {
               <option value="admin">Admin</option>
             </select>
           </label>
-          <button type="submit" disabled={state?.busy} className={`${btn} !bg-[#1e2522] !text-white`}>{state?.busy ? 'Sending' : 'Send invite'}</button>
+          <button type="submit" disabled={state?.busy} className={`${btn} !bg-[#1C2A2B] !text-white`}>{state?.busy ? 'Sending' : 'Send invite'}</button>
         </form>
         {state?.done && <p role="status" className="mt-3 text-sm font-semibold">{state.done}</p>}
-        {state?.error && <p role="alert" className="mt-3 text-sm font-semibold text-[#c74f2f]">{state.error}</p>}
+        {state?.error && <p role="alert" className="mt-3 text-sm font-semibold text-[#C65D3B]">{state.error}</p>}
       </section>
 
       {link && (
@@ -134,11 +134,11 @@ export default function TeamManager() {
               <input type="text" autoComplete="off" value={pw} onChange={(e) => setPw(e.target.value)} className={`${input} mt-1 font-mono`} required />
             </label>
             <button type="button" onClick={makePassword} className={btn}>Make one</button>
-            <button type="submit" disabled={pwState?.busy || !!pwState?.done} className={`${btn} !bg-[#1e2522] !text-white`}>{pwState?.busy ? 'Saving' : 'Save password'}</button>
+            <button type="submit" disabled={pwState?.busy || !!pwState?.done} className={`${btn} !bg-[#1C2A2B] !text-white`}>{pwState?.busy ? 'Saving' : 'Save password'}</button>
             <button type="button" onClick={() => { setPwFor(null); setPw(''); setPwState(null); }} className={btn}>{pwState?.done ? 'Close' : 'Cancel'}</button>
           </form>
           {pwState?.done && <p role="status" className="mt-3 text-sm font-semibold">{pwState.done}</p>}
-          {pwState?.error && <p role="alert" className="mt-3 text-sm font-semibold text-[#c74f2f]">{pwState.error}</p>}
+          {pwState?.error && <p role="alert" className="mt-3 text-sm font-semibold text-[#C65D3B]">{pwState.error}</p>}
         </section>
       )}
 
@@ -147,16 +147,16 @@ export default function TeamManager() {
         {note && <p role="status" className="mt-2 text-sm font-semibold">{note}</p>}
         <div className="mt-3 overflow-x-auto">
           <table className="w-full text-sm">
-            <thead><tr className="text-left border-b border-[#1e2522]/15"><th className="py-2 pr-3">Name</th><th className="py-2 pr-3">Email</th><th className="py-2 pr-3">Role</th><th className="py-2 pr-3">Added</th><th className="py-2"><span className="sr-only">Actions</span></th></tr></thead>
+            <thead><tr className="text-left border-b border-[#1C2A2B]/15"><th className="py-2 pr-3">Name</th><th className="py-2 pr-3">Email</th><th className="py-2 pr-3">Role</th><th className="py-2 pr-3">Added</th><th className="py-2"><span className="sr-only">Actions</span></th></tr></thead>
             <tbody>
               {rows.map(r => {
                 const me = r.user_id === user?.id;
                 return (
-                  <tr key={r.user_id} className="border-b border-[#1e2522]/10">
+                  <tr key={r.user_id} className="border-b border-[#1C2A2B]/10">
                     <td className="py-2 pr-3">{r.name || ''}{me ? <span className="ml-2 text-xs text-black/60">(you)</span> : null}</td>
                     <td className="py-2 pr-3">{r.email}</td>
                     <td className="py-2 pr-3">
-                      <select aria-label={`Role for ${r.email}`} value={r.role} disabled={me || busy === r.user_id} onChange={(e) => changeRole(r, e.target.value)} className="px-2 py-1 rounded-lg border border-[#1e2522]/20 bg-white">
+                      <select aria-label={`Role for ${r.email}`} value={r.role} disabled={me || busy === r.user_id} onChange={(e) => changeRole(r, e.target.value)} className="px-2 py-1 rounded-lg border border-[#1C2A2B]/20 bg-white">
                         <option value="editor">Editor</option>
                         <option value="admin">Admin</option>
                       </select>
@@ -165,7 +165,7 @@ export default function TeamManager() {
                     <td className="py-2 whitespace-nowrap">
                       <button type="button" onClick={() => { setPwFor(r); setPw(''); setPwState(null); }} className="font-bold underline underline-offset-2 mr-4">Change password</button>
                       <button type="button" onClick={() => resend(r)} disabled={busy === r.user_id} className="font-bold underline underline-offset-2 mr-4">Send a new link</button>
-                      {!me && <button type="button" onClick={() => setPendingRemove(r)} disabled={busy === r.user_id} className="text-[#c74f2f] font-bold underline underline-offset-2">Remove</button>}
+                      {!me && <button type="button" onClick={() => setPendingRemove(r)} disabled={busy === r.user_id} className="text-[#C65D3B] font-bold underline underline-offset-2">Remove</button>}
                     </td>
                   </tr>
                 );

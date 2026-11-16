@@ -14,7 +14,7 @@ const MORE = [
 
 
 function FooterLink({ to, external, children }) {
-  const className = 'block opacity-80 hover:opacity-100 hover:text-[#eaa235] mb-3 text-[0.9rem]';
+  const className = 'block opacity-80 hover:opacity-100 hover:text-[#F9AB55] mb-3 text-[0.9rem]';
   const content = children;
   return external ? (
     <a href={to} {...(/^https?:/i.test(to) ? { target: '_blank', rel: 'noopener noreferrer' } : {})} className={className}>{content}</a>
@@ -29,7 +29,7 @@ export default function Footer() {
   const SITE = useSite();
   return (
     <footer className="w-full max-w-[1312px] mx-auto px-3 md:px-4 pt-1.5 md:pt-2 pb-20 md:pb-4">
-    <div className="bg-[#1e2522] text-[#ffffff] relative overflow-hidden rounded-[10px]">
+    <div className="bg-[#003235] text-[#ffffff] relative overflow-hidden rounded-[10px]">
       <div className="px-6 md:px-10 pt-12 md:pt-16 pb-10 md:pb-12 flex flex-wrap gap-x-10 gap-y-6 items-center justify-between border-b border-white/10 relative z-10">
         <div>
           <p className="text-2xl md:text-3xl font-display font-bold text-white">Join us this Sunday</p>
@@ -43,14 +43,14 @@ export default function Footer() {
       <WeeklySignup variant="footer" source="Footer" />
       <div className="px-6 md:px-10 py-14 md:py-20 flex flex-wrap gap-12 justify-between items-start relative z-10">
         <div className="max-w-[26ch]">
-          <h2 className="text-[1.4rem] font-normal text-[#eaa235] mb-4">
+          <h2 className="text-[1.4rem] font-normal text-[#F9AB55] mb-4">
             {SITE.name}
           </h2>
           <p className="opacity-80 text-[0.95rem] leading-relaxed mb-6">Transforming lives that transform communities.</p>
           <ul className="flex flex-wrap gap-x-5" aria-label="Social media">
             {SITE.social.map(s => (
               <li key={s.label}>
-                <a href={s.url} target="_blank" rel="noopener noreferrer" aria-label={`${s.label} (opens in a new tab)`} className="inline-flex items-center min-h-[44px] text-[0.9rem] opacity-80 hover:opacity-100 hover:text-[#eaa235] underline-offset-4 hover:underline">{s.label}</a>
+                <a href={s.url} target="_blank" rel="noopener noreferrer" aria-label={`${s.label} (opens in a new tab)`} className="inline-flex items-center min-h-[44px] text-[0.9rem] opacity-80 hover:opacity-100 hover:text-[#F9AB55] underline-offset-4 hover:underline">{s.label}</a>
               </li>
             ))}
           </ul>
@@ -80,10 +80,10 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="text-center text-[0.8rem] py-6 border-t border-white/10 flex flex-col items-center gap-2 relative z-10 bg-[#1e2522]/20">
+      <div className="text-center text-[0.8rem] py-6 border-t border-white/10 flex flex-col items-center gap-2 relative z-10 bg-[#1C2A2B]/20">
         <p className="opacity-80">{SITE.serviceTime}. {SITE.addressLine}.</p>
         <p className="opacity-70">&copy; {new Date().getFullYear()} {SITE.name}. Columbiana, Ohio.</p>
-        <Link to="/admin" rel="nofollow" className="hover:text-[#eaa235] transition-colors text-[0.7rem] font-normal opacity-70 hover:opacity-100 mt-1">Admin Login</Link>
+        <Link to="/admin" rel="nofollow" className="hover:text-[#F9AB55] transition-colors text-[0.7rem] font-normal opacity-70 hover:opacity-100 mt-1">Admin Login</Link>
       </div>
     </div>
     </footer>

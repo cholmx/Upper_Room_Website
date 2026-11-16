@@ -75,18 +75,18 @@ export default function SettingsManager() {
   };
 
   if (loading) {
-    return <div className="flex justify-center p-12" role="status" aria-label="Loading"><SafeIcon icon={FiLoader} className="animate-spin text-3xl text-[#c74f2f]" /></div>;
+    return <div className="flex justify-center p-12" role="status" aria-label="Loading"><SafeIcon icon={FiLoader} className="animate-spin text-3xl text-[#C65D3B]" /></div>;
   }
 
   return (
-    <form onSubmit={save} noValidate className="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-[#1e2522]/10 space-y-6">
+    <form onSubmit={save} noValidate className="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-[#1C2A2B]/10 space-y-6">
       <p className="text-black">These details appear across the site. Leave a field blank to use the built-in default.</p>
       {FIELDS.map(f => <FieldInput key={f.name} field={f} value={row[f.name]} onChange={change} error={errors[f.name]} />)}
       {message && (
-        <div role={message.type === 'error' ? 'alert' : 'status'} className={`p-4 rounded-lg text-sm font-medium ${message.type === 'error' ? 'bg-[#c74f2f]/10 border border-[#c74f2f] text-[#c74f2f]' : 'bg-[#eaa235]/20 border border-[#1e2522]/20 text-[#1e2522]'}`}>{message.text}</div>
+        <div role={message.type === 'error' ? 'alert' : 'status'} className={`p-4 rounded-lg text-sm font-medium ${message.type === 'error' ? 'bg-[#C65D3B]/10 border border-[#C65D3B] text-[#C65D3B]' : 'bg-[#F9AB55]/20 border border-[#1C2A2B]/20 text-[#1C2A2B]'}`}>{message.text}</div>
       )}
       <div className="flex justify-end">
-        <button type="submit" disabled={saving} className="bg-[#1e2522] text-white font-bold py-3 px-8 rounded-lg hover:bg-[#1e2522] transition disabled:bg-[#1e2522]/40 flex items-center gap-2">
+        <button type="submit" disabled={saving} className="bg-[#1C2A2B] text-white font-bold py-3 px-8 rounded-lg hover:bg-[#1C2A2B] transition disabled:bg-[#1C2A2B]/40 flex items-center gap-2">
           {saving ? <SafeIcon icon={FiLoader} className="animate-spin" /> : <SafeIcon icon={FiSave} />}
           {saving ? 'Saving...' : 'Save Settings'}
         </button>

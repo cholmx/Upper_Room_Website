@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { backend } from '../lib/backend';
 
-const field = 'neu-field w-full min-h-[48px] px-4 py-3 rounded-xl border border-[#1e2522]/25 focus:outline-none focus:ring-2 focus:ring-[#1e2522] focus:border-[#1e2522] text-base text-black bg-white';
+const field = 'neu-field w-full min-h-[48px] px-4 py-3 rounded-xl border border-[#1C2A2B]/25 focus:outline-none focus:ring-2 focus:ring-[#1C2A2B] focus:border-[#1C2A2B] text-base text-black bg-white';
 
 // Sign up for the weekly email. The "website" box is hidden and is a trap for bots, so it must stay empty.
 export default function WeeklySignup({ variant = 'band', source = 'Website' }) {
@@ -45,10 +45,10 @@ export default function WeeklySignup({ variant = 'band', source = 'Website' }) {
         <div aria-hidden="true" style={{ position: 'absolute', left: '-10000px', width: 1, height: 1, overflow: 'hidden' }}>
           <label>Website<input tabIndex={-1} autoComplete="off" value={trap} onChange={(e) => setTrap(e.target.value)} /></label>
         </div>
-        <button type="submit" disabled={state.status === 'busy'} className={`min-h-[48px] px-6 rounded-full font-display font-bold disabled:opacity-60 ${dark ? 'bg-[#eaa235] text-[#1e2522] hover:bg-white' : 'bg-[#c74f2f] text-white hover:bg-[#a83f23]'}`}>
+        <button type="submit" disabled={state.status === 'busy'} className={`min-h-[48px] px-6 rounded-full font-display font-bold disabled:opacity-60 ${dark ? 'bg-[#F9AB55] text-[#1C2A2B] hover:bg-white' : 'bg-[#C65D3B] text-white hover:bg-[#003235]'}`}>
           {state.status === 'busy' ? 'Signing up' : 'Sign me up'}
         </button>
-        {state.status === 'error' && <p id={`${id}-err`} role="alert" className={`md:col-span-3 text-sm font-semibold ${dark ? 'text-[#eaa235]' : 'text-[#c74f2f]'}`}>{state.message}</p>}
+        {state.status === 'error' && <p id={`${id}-err`} role="alert" className={`md:col-span-3 text-sm font-semibold ${dark ? 'text-[#F9AB55]' : 'text-[#C65D3B]'}`}>{state.message}</p>}
       </form>
     )
   );

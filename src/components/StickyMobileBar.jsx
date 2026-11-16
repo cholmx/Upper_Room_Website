@@ -11,14 +11,14 @@ const item = 'flex-1 flex flex-col items-center justify-center gap-0.5 min-h-[56
 export default function StickyMobileBar() {
   const SITE = useSite();
   return (
-    <nav aria-label="Quick actions" className="md:hidden fixed bottom-0 inset-x-0 z-40 bg-[#1e2522] border-t border-white/10 flex pb-[env(safe-area-inset-bottom)]">
+    <nav aria-label="Quick actions" className="md:hidden fixed bottom-0 inset-x-0 z-40 bg-[#1C2A2B] border-t border-white/10 flex pb-[env(safe-area-inset-bottom)]">
       <a href={SITE.phoneHref} className={`${item} text-[#ffffff]`}>
-        <SafeIcon icon={FiPhone} className="text-xl text-[#eaa235]" /> Call
+        <SafeIcon icon={FiPhone} className="text-xl text-[#F9AB55]" /> Call
       </a>
       <a href={SITE.googleMapsUrl} target="_blank" rel="noopener noreferrer" className={`${item} text-[#ffffff] border-x border-white/10`}>
-        <SafeIcon icon={FiMapPin} className="text-xl text-[#eaa235]" /> Directions<span className="sr-only"> (opens in a new tab)</span>
+        <SafeIcon icon={FiMapPin} className="text-xl text-[#F9AB55]" /> Directions<span className="sr-only"> (opens in a new tab)</span>
       </a>
-      <Link to="/plan-your-visit" className={`${item} bg-[#c74f2f] text-white`}>
+      <Link to="/plan-your-visit" className={`${item} bg-[#C65D3B] text-white`}>
         <SafeIcon icon={FiCalendar} className="text-xl" /> Plan Your Visit
       </Link>
     </nav>

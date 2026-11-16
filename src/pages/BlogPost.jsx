@@ -37,11 +37,11 @@ export default function BlogPost() {
   return (
     <article className="bg-[#ffffff] min-h-screen pt-32 pb-24 px-6">
       <div className="max-w-[800px] mx-auto">
-        <Link to="/blog" className="inline-flex items-center gap-2 text-sm font-bold tracking-wide text-[#1e2522] hover:text-[#1e2522] mb-8">
+        <Link to="/blog" className="inline-flex items-center gap-2 text-sm font-bold tracking-wide text-[#1C2A2B] hover:text-[#1C2A2B] mb-8">
           <SafeIcon icon={FiArrowLeft} /> All Articles
         </Link>
         <div className="flex flex-wrap items-center gap-3 text-sm font-bold tracking-wide text-black mb-6">
-          {live.category && <span className="bg-[#eaa235]/10 text-[#1e2522] px-4 py-1.5 rounded-full">{live.category}</span>}
+          {live.category && <span className="bg-[#F9AB55]/10 text-[#1C2A2B] px-4 py-1.5 rounded-full">{live.category}</span>}
           <span>{formatDate(live.date || live.created_at?.slice(0, 10))}</span>
           {live.author && <><span>•</span><span>{live.author}</span></>}
         </div>

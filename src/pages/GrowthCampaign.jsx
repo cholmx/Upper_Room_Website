@@ -48,10 +48,10 @@ export default function GrowthCampaign() {
         <Btn href={C.pledge} variant="light">Submit Your Commitment Card</Btn>
       </PageHeader>
 
-      <nav aria-label="Growth Campaign sections" className="sticky top-20 z-40 bg-white border-b border-[#1e2522]/10">
+      <nav aria-label="Growth Campaign sections" className="sticky top-20 z-40 bg-white border-b border-[#1C2A2B]/10">
         <div role="tablist" className="max-w-[1312px] mx-auto px-6 md:px-14 flex gap-2 overflow-x-auto py-3">
           {TABS.map(([k, label]) => (
-            <button key={k} id={`ctab-${k}`} type="button" role="tab" aria-selected={tab === k} aria-controls={`cpanel-${k}`} tabIndex={tab === k ? 0 : -1} onClick={() => choose(k)} onKeyDown={(e) => onKey(e, k)} className={`min-h-[44px] px-5 rounded-full font-display font-bold text-sm whitespace-nowrap ${tab === k ? 'bg-[#1e2522] text-white' : 'bg-[#EDE9DC] text-[#1e2522] hover:bg-[#1e2522]/15'}`}>{label}</button>
+            <button key={k} id={`ctab-${k}`} type="button" role="tab" aria-selected={tab === k} aria-controls={`cpanel-${k}`} tabIndex={tab === k ? 0 : -1} onClick={() => choose(k)} onKeyDown={(e) => onKey(e, k)} className={`min-h-[44px] px-5 rounded-full font-display font-bold text-sm whitespace-nowrap ${tab === k ? 'bg-[#1C2A2B] text-white' : 'bg-[#F4ECDD] text-[#1C2A2B] hover:bg-[#1C2A2B]/15'}`}>{label}</button>
           ))}
         </div>
       </nav>

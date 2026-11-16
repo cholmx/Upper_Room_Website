@@ -148,7 +148,7 @@ Old addresses `/worship-team`, `/outreach`, `/prayer`, `/stories` and `/connect`
 
 ## Colors
 
-The palette is five colors: `#1E2522` ink, `#EAA235` amber, `#C74F2F` terracotta, `#EDE9DC` sand and `#FFFFFF` white. Text on white uses ink, because amber and terracotta do not have enough contrast for small text on light backgrounds. Sections are white, light gray (`#EDE9DC`) or a full photo. Neighboring gray sections or neighboring photos should differ, and neighboring white sections read as one white page. The footer is ink. Check it with `node scripts/check-adjacent-colors.mjs` while a preview is running.
+The palette is five colors: `#1C2A2B` ink, `#F9AB55` amber, `#C65D3B` terracotta, `#F4ECDD` sand and `#FFFFFF` white. Text on white uses ink, because amber and terracotta do not have enough contrast for small text on light backgrounds. Sections are white, light gray (`#F4ECDD`) or a full photo. Neighboring gray sections or neighboring photos should differ, and neighboring white sections read as one white page. The footer is ink. Check it with `node scripts/check-adjacent-colors.mjs` while a preview is running.
 
 ## Photo uploads
 

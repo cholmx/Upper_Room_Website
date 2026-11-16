@@ -5,7 +5,7 @@ import { isRecent } from '../utils';
 export default function NewBadge({ date, className = '' }) {
   if (!isRecent(date)) return null;
   return (
-    <span className={`inline-flex items-center gap-1.5 text-xs font-bold font-display text-[#c74f2f] ${className}`}>
+    <span className={`inline-flex items-center gap-1.5 text-xs font-bold font-display text-[#C65D3B] ${className}`}>
       <span className="new-dot" aria-hidden="true"></span>New
     </span>
   );

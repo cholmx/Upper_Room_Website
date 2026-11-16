@@ -6,8 +6,8 @@ import RichText from './RichText';
 import { activeSpotlights } from '../lib/spotlights';
 
 // On the yellow background the red button would not stand out, so the main button is dark there.
-const YELLOW_DARK = '!bg-[#1e2522] !text-white !border-[#1e2522] hover:!bg-white hover:!text-[#1e2522] hover:!border-white';
-const YELLOW_LINE = '!text-[#1e2522] !border-[#1e2522] hover:!bg-[#1e2522] hover:!text-white';
+const YELLOW_DARK = '!bg-[#1C2A2B] !text-white !border-[#1C2A2B] hover:!bg-white hover:!text-[#1C2A2B] hover:!border-white';
+const YELLOW_LINE = '!text-[#1C2A2B] !border-[#1C2A2B] hover:!bg-[#1C2A2B] hover:!text-white';
 
 function Buttons({ s, center, onPhoto }) {
   if (!(s.button_label && s.button_url) && !(s.button2_label && s.button2_url)) return null;
@@ -23,7 +23,7 @@ function Buttons({ s, center, onPhoto }) {
 function Copy({ s, center }) {
   return (
     <div className={center ? 'text-center' : ''}>
-      {s.kicker && <p className={`kicker ${s.tone === 'yellow' ? 'text-[#1e2522]' : 'text-[#c74f2f]'}`}>{s.kicker}</p>}
+      {s.kicker && <p className={`kicker ${s.tone === 'yellow' ? 'text-[#1C2A2B]' : 'text-[#C65D3B]'}`}>{s.kicker}</p>}
       {s.title && <h2 className="text-3xl md:text-5xl mb-4">{s.title}</h2>}
       {s.body && <RichText value={s.body} className="text-[1rem]" />}
       <Buttons s={s} center={center} />
@@ -36,7 +36,7 @@ function Spotlight({ s }) {
   if (s.layout === 'photo' && s.image_url) {
     return (
       <section data-image-band="true" className="max-w-[1312px] mx-auto px-3 md:px-4 py-1.5 md:py-2">
-        <div className="photo-section text-shade rounded-[10px] bg-[#1e2522] text-white py-24 md:py-36 px-6 md:px-10">
+        <div className="photo-section text-shade rounded-[10px] bg-[#1C2A2B] text-white py-24 md:py-36 px-6 md:px-10">
           <img src={imgUrl(s.image_url, 1600)} alt="" loading="lazy" decoding="async" className="photo-bg" />
           <div className="hero-text photo-copy max-w-4xl">
             {s.title && <h2 className="text-3xl md:text-5xl mb-4">{s.title}</h2>}

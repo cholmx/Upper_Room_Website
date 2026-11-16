@@ -77,28 +77,28 @@ export default function YouTubeImport({ existing, onClose, onImported }) {
   const busy = progress && !progress.finished;
 
   return (
-    <div className="bg-white rounded-2xl border border-[#1e2522]/10 shadow-sm p-6 mb-8" role="region" aria-label="Import from YouTube">
+    <div className="bg-white rounded-2xl border border-[#1C2A2B]/10 shadow-sm p-6 mb-8" role="region" aria-label="Import from YouTube">
       <div className="flex items-start justify-between gap-4 mb-4">
         <div>
           <h3 className="text-xl font-bold">Import from YouTube</h3>
           <p className="text-sm text-black mt-1">Videos from the Upper Room Fellowship channel. Each one you pick becomes a message with its title, series, speaker, date and summary filled in. You can edit any of it afterward.</p>
         </div>
-        <button type="button" onClick={onClose} className="px-4 py-2 rounded-lg border border-[#1e2522]/20 font-bold text-sm">Close</button>
+        <button type="button" onClick={onClose} className="px-4 py-2 rounded-lg border border-[#1C2A2B]/20 font-bold text-sm">Close</button>
       </div>
 
       {state.phase === 'loading' && <p role="status" className="text-black">Reading the channel.</p>}
-      {state.phase === 'error' && <p role="alert" className="text-[#c74f2f] font-medium">{state.error}</p>}
+      {state.phase === 'error' && <p role="alert" className="text-[#C65D3B] font-medium">{state.error}</p>}
 
       {state.phase === 'ready' && (
         <>
           {state.source === 'feed' && <p className="text-sm text-black mb-3">This list shows the 15 newest videos. To bring in older ones, ask Bolt to add a YouTube Data API key as the server secret YOUTUBE_API_KEY.</p>}
           {known.length > 0 && (
-            <div className="mb-5 p-4 rounded-lg bg-[#1e2522]/5 text-sm">
+            <div className="mb-5 p-4 rounded-lg bg-[#1C2A2B]/5 text-sm">
               <p><strong>{known.length}</strong> of these are already in your messages. You can read them again from the channel and update only the parts you choose. A summary or discussion questions are filled in only where a message has none, so your edits to those are kept.</p>
               <div className="mt-3 flex flex-wrap gap-x-6 gap-y-2" role="group" aria-label="What to update">
                 {[['date', 'Date (the Sunday before it was posted)'], ['title', 'Title'], ['speaker', 'Speaker'], ['series', 'Series']].map(([key, label]) => (
                   <label key={key} className="flex items-center gap-2 cursor-pointer">
-                    <input type="checkbox" checked={fields[key]} onChange={(e) => setFields(f => ({ ...f, [key]: e.target.checked }))} className="w-5 h-5 accent-[#c74f2f]" />
+                    <input type="checkbox" checked={fields[key]} onChange={(e) => setFields(f => ({ ...f, [key]: e.target.checked }))} className="w-5 h-5 accent-[#C65D3B]" />
                     {label}
                   </label>
                 ))}
@@ -108,12 +108,12 @@ export default function YouTubeImport({ existing, onClose, onImported }) {
                   <span className="font-semibold">{Object.values(fields).some(Boolean)
                     ? `This replaces the ${Object.entries(fields).filter(([, v]) => v).map(([k]) => k).join(', ')} of ${known.length} messages with what the channel says. Changes you made to those will be lost.`
                     : `Nothing is ticked, so only empty summaries and discussion questions will be filled in.`}</span>
-                  <button type="button" onClick={fix} className="bg-[#c74f2f] text-white font-bold py-2 px-4 rounded-lg">Update them</button>
-                  <button type="button" onClick={() => setConfirmFix(false)} className="px-4 py-2 rounded-lg border border-[#1e2522]/20 font-bold">Cancel</button>
+                  <button type="button" onClick={fix} className="bg-[#C65D3B] text-white font-bold py-2 px-4 rounded-lg">Update them</button>
+                  <button type="button" onClick={() => setConfirmFix(false)} className="px-4 py-2 rounded-lg border border-[#1C2A2B]/20 font-bold">Cancel</button>
                 </div>
               ) : (
                 <div className="mt-3 flex flex-wrap items-center gap-3">
-                  <button type="button" onClick={() => setConfirmFix(true)} disabled={fixed && !fixed.finished} className="px-4 py-2 rounded-lg border border-[#1e2522]/20 bg-white font-bold disabled:opacity-50">Update messages already imported</button>
+                  <button type="button" onClick={() => setConfirmFix(true)} disabled={fixed && !fixed.finished} className="px-4 py-2 rounded-lg border border-[#1C2A2B]/20 bg-white font-bold disabled:opacity-50">Update messages already imported</button>
                   {fixed && <span role="status" className="font-semibold">{fixed.finished ? `${fixed.done} updated${fixed.failed ? `, ${fixed.failed} could not be saved` : ''}.` : `Updating ${fixed.done + fixed.failed} of ${fixed.total}`}</span>}
                 </div>
               )}
@@ -128,14 +128,14 @@ export default function YouTubeImport({ existing, onClose, onImported }) {
                 <button type="button" onClick={() => setPicked({})} className="underline underline-offset-4 font-semibold">Select none</button>
                 <span className="text-black">{chosen.length} of {fresh.length} selected</span>
               </div>
-              <ul className="divide-y divide-[#1e2522]/10 max-h-[28rem] overflow-y-auto border border-[#1e2522]/10 rounded-lg">
+              <ul className="divide-y divide-[#1C2A2B]/10 max-h-[28rem] overflow-y-auto border border-[#1C2A2B]/10 rounded-lg">
                 {fresh.map(v => {
                   const m = toMessage(v);
                   return (
                     <li key={v.id}>
-                      <label className="flex items-start gap-4 p-3 cursor-pointer hover:bg-[#1e2522]/5">
-                        <input type="checkbox" checked={Boolean(picked[v.id])} onChange={(e) => setPicked(p => ({ ...p, [v.id]: e.target.checked }))} className="mt-1 w-5 h-5 accent-[#c74f2f]" />
-                        <img src={v.thumbnail} alt="" loading="lazy" className="w-28 aspect-video object-cover rounded bg-[#1e2522]/10" />
+                      <label className="flex items-start gap-4 p-3 cursor-pointer hover:bg-[#1C2A2B]/5">
+                        <input type="checkbox" checked={Boolean(picked[v.id])} onChange={(e) => setPicked(p => ({ ...p, [v.id]: e.target.checked }))} className="mt-1 w-5 h-5 accent-[#C65D3B]" />
+                        <img src={v.thumbnail} alt="" loading="lazy" className="w-28 aspect-video object-cover rounded bg-[#1C2A2B]/10" />
                         <span className="text-sm">
                           <span className="block font-bold">{m.title}</span>
                           <span className="block text-black">{[m.series, m.speaker, m.date && formatDate(m.date)].filter(Boolean).join('  |  ')}</span>
@@ -146,11 +146,11 @@ export default function YouTubeImport({ existing, onClose, onImported }) {
                 })}
               </ul>
               <label className="flex items-center gap-3 mt-4 text-sm cursor-pointer">
-                <input type="checkbox" checked={publish} onChange={(e) => setPublish(e.target.checked)} className="w-5 h-5 accent-[#c74f2f]" />
+                <input type="checkbox" checked={publish} onChange={(e) => setPublish(e.target.checked)} className="w-5 h-5 accent-[#C65D3B]" />
                 Show them on the website right away (leave unchecked to save them as drafts)
               </label>
               <div className="mt-4 flex items-center gap-4">
-                <button type="button" onClick={run} disabled={busy || chosen.length === 0} className="bg-[#eaa235] text-[#1e2522] font-bold py-2.5 px-5 rounded-lg disabled:opacity-50">
+                <button type="button" onClick={run} disabled={busy || chosen.length === 0} className="bg-[#F9AB55] text-[#1C2A2B] font-bold py-2.5 px-5 rounded-lg disabled:opacity-50">
                   {busy ? `Importing ${progress.done + progress.failed} of ${progress.total}` : `Import ${chosen.length} ${chosen.length === 1 ? 'video' : 'videos'}`}
                 </button>
                 {progress?.finished && (

@@ -10,9 +10,9 @@ import { FiMenu, FiX, FiChevronDown } from 'react-icons/fi';
 
 
 const linkBase = 'whitespace-nowrap font-display font-bold text-[0.95rem] tracking-wide py-1 inline-flex items-center gap-1';
-const linkOn = 'text-[#c74f2f]';
-const linkOff = 'text-black hover:text-[#1e2522]';
-const linkOnLight = 'text-[#eaa235]';
+const linkOn = 'text-[#C65D3B]';
+const linkOff = 'text-black hover:text-[#1C2A2B]';
+const linkOnLight = 'text-[#F9AB55]';
 const linkOffLight = 'text-white/90 hover:text-white';
 
 function DesktopDropdown({ item, light }) {
@@ -51,7 +51,7 @@ function DesktopDropdown({ item, light }) {
           <ul className="bg-white rounded-2xl py-3 elev-2">
             {item.children.map(c => (
               <li key={c.to}>
-                <Link to={c.to} className="block px-6 py-2.5 font-display font-semibold text-[0.95rem] tracking-wide text-black hover:text-[#1e2522] hover:bg-[#ffffff]">{c.label}</Link>
+                <Link to={c.to} className="block px-6 py-2.5 font-display font-semibold text-[0.95rem] tracking-wide text-black hover:text-[#1C2A2B] hover:bg-[#ffffff]">{c.label}</Link>
               </li>
             ))}
           </ul>
@@ -96,7 +96,7 @@ function MobileMenu({ onClose }) {
               {item.children ? (
                 <>
 <div className="flex items-center justify-between min-h-[60px]">
-                    <Link to={item.children[0].to} onClick={onClose} className="flex-1 flex items-center min-h-[60px] text-2xl hover:text-[#eaa235] transition-colors" style={big}>{item.label}</Link>
+                    <Link to={item.children[0].to} onClick={onClose} className="flex-1 flex items-center min-h-[60px] text-2xl hover:text-[#F9AB55] transition-colors" style={big}>{item.label}</Link>
                     <button type="button" aria-expanded={openGroup === item.label} aria-label={`${item.label} menu`} onClick={() => setOpenGroup(g => (g === item.label ? null : item.label))} className="p-4">
                       <SafeIcon icon={FiChevronDown} className={`text-2xl transition-transform ${openGroup === item.label ? 'rotate-180' : ''}`} />
                     </button>
@@ -111,8 +111,8 @@ function MobileMenu({ onClose }) {
                 </>
               ) : (
                 item.external
-                  ? <a href={SITE.giveUrl} target="_blank" rel="noopener noreferrer" onClick={onClose} className="flex items-center min-h-[60px] text-2xl hover:text-[#eaa235] transition-colors" style={big}>{item.label}<span className="sr-only"> (opens in a new tab)</span></a>
-                  : <Link to={item.to} onClick={onClose} className="flex items-center min-h-[60px] text-2xl hover:text-[#eaa235] transition-colors" style={big}>{item.label}</Link>
+                  ? <a href={SITE.giveUrl} target="_blank" rel="noopener noreferrer" onClick={onClose} className="flex items-center min-h-[60px] text-2xl hover:text-[#F9AB55] transition-colors" style={big}>{item.label}<span className="sr-only"> (opens in a new tab)</span></a>
+                  : <Link to={item.to} onClick={onClose} className="flex items-center min-h-[60px] text-2xl hover:text-[#F9AB55] transition-colors" style={big}>{item.label}</Link>
               )}
             </li>
           ))}
@@ -149,7 +149,7 @@ export default function Header() {
   const light = hasHero && !scrolled;
 
   return (
-    <header className={`sticky top-0 z-50 flex items-center h-20 transition-colors ${hasHero ? '-mb-20' : ''} ${light ? 'bg-transparent text-white' : 'bg-white text-[#1e2522] shadow-[0_1px_2px_rgba(30,37,34,0.05),0_6px_18px_-6px_rgba(30,37,34,0.10)]'}`}>
+    <header className={`sticky top-0 z-50 flex items-center h-20 transition-colors ${hasHero ? '-mb-20' : ''} ${light ? 'bg-transparent text-white' : 'bg-white text-[#1C2A2B] shadow-[0_1px_2px_rgba(28,42,43,0.05),0_6px_18px_-6px_rgba(28,42,43,0.10)]'}`}>
       <div className="max-w-[1312px] w-full mx-auto px-9 md:px-14 flex items-center justify-between gap-6">
         <Logo tone={light ? 'light' : 'dark'} />
         <nav aria-label="Main" className="hidden xl:flex items-center gap-5 pt-1">
@@ -160,7 +160,7 @@ export default function Header() {
               : <NavLink key={item.to} to={item.to} end={item.to === '/'} className={({ isActive }) => `${linkBase} ${isActive ? (light ? linkOnLight : linkOn) : (light ? linkOffLight : linkOff)}`}>{item.label}</NavLink>))}
         </nav>
         <div className="flex items-center gap-2 xl:hidden">
-          <button type="button" className={`p-2 rounded-full transition-colors ${light ? 'hover:bg-white/10' : 'hover:bg-[#1e2522]/5'}`} aria-expanded={open} aria-controls="mobile-menu" aria-label="Open menu" onClick={() => setOpen(true)}>
+          <button type="button" className={`p-2 rounded-full transition-colors ${light ? 'hover:bg-white/10' : 'hover:bg-[#1C2A2B]/5'}`} aria-expanded={open} aria-controls="mobile-menu" aria-label="Open menu" onClick={() => setOpen(true)}>
             <SafeIcon icon={FiMenu} size={24} />
           </button>
         </div>

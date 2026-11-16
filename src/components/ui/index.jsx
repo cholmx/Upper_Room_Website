@@ -13,10 +13,10 @@ const isExternal = (to) => /^(https?:|mailto:|tel:|sms:)/i.test(to);
 
 const BTN = {
   primary: 'btn btn-solid',
-  accent: 'btn bg-[#c74f2f] text-white border-[#c74f2f] hover:bg-[#1e2522] hover:border-[#1e2522]',
-  gold: 'btn bg-[#eaa235] text-[#1e2522] border-[#eaa235] hover:bg-[#c74f2f] hover:text-white hover:border-[#c74f2f]',
-  green: 'btn bg-[#2a3834] text-white border-[#2a3834] hover:bg-[#4a6d65] hover:border-[#4a6d65]',
-  dark: 'btn bg-[#1e2522] text-white border-[#1e2522] hover:bg-[#eaa235] hover:text-[#1e2522] hover:border-[#eaa235]',
+  accent: 'btn bg-[#C65D3B] text-white border-[#C65D3B] hover:bg-[#1C2A2B] hover:border-[#1C2A2B]',
+  gold: 'btn bg-[#F9AB55] text-[#1C2A2B] border-[#F9AB55] hover:bg-[#C65D3B] hover:text-white hover:border-[#C65D3B]',
+  green: 'btn bg-[#003235] text-white border-[#003235] hover:bg-[#F9AB55] hover:text-[#1C2A2B] hover:border-[#F9AB55]',
+  dark: 'btn bg-[#1C2A2B] text-white border-[#1C2A2B] hover:bg-[#F9AB55] hover:text-[#1C2A2B] hover:border-[#F9AB55]',
   ghost: 'btn btn-outline',
   light: 'btn btn-outline-dark',
 };
@@ -41,14 +41,14 @@ export const Btn = forwardRef(function Btn({ to, href, onClick, variant = 'prima
   return <button ref={ref} type={type} onClick={onClick} className={cls} {...rest}>{children}</button>;
 });
 
-// The site palette: ink, terracotta and amber for strong bands, cream and white for light ones (forest, sage and bronze are kept as names for amber and ink).
+// The site palette: jet black, dark teal, jungle teal, sandy brown and rosy copper, with cream and white for light bands.
 // and the two golds for warm bands. Neighboring sections must differ (see the colors check in the README).
 const TONES = {
   cream: 'text-black',
   white: 'bg-white text-black',
   sand: 'bg-white text-black',
   gray: 'paper-bg text-black',
-  yellow: 'bg-[#eaa235] text-[#1e2522]',
+  yellow: 'bg-[#F9AB55] text-[#1C2A2B]',
 };
 
 export function Section({ tone = 'cream', id, className = '', narrow = false, center = false, children, ...rest }) {
@@ -70,7 +70,7 @@ const same = (a, b) => String(a || '').toLowerCase().replace(/&|\band\b/g, '').r
 export function SectionHeader({ kicker, title, intro, center = false, as: Tag = 'h2', tone = 'light', className = '' }) {
   return (
     <div className={`${center ? 'text-center mx-auto' : ''} max-w-3xl mb-10 md:mb-12 ${className}`}>
-      {kicker && !same(kicker, title) && <span className={`kicker ${tone === 'dark' ? 'text-[#eaa235]' : 'text-[#1e2522]'}`}>{kicker}</span>}
+      {kicker && !same(kicker, title) && <span className={`kicker ${tone === 'dark' ? 'text-[#F9AB55]' : 'text-[#1C2A2B]'}`}>{kicker}</span>}
       <Tag className="text-3xl md:text-5xl">{title}</Tag>
       {intro && <p className={`mt-4 text-[1rem] leading-relaxed ${tone === 'dark' ? 'text-white/85' : 'text-black'}`}>{intro}</p>}
     </div>
@@ -83,14 +83,14 @@ export function Photo({ slot, className = '', ratio = 'aspect-[4/3]', priority =
   const [failed, setFailed] = useState(null);
   if (!url || failed === url) return null;
   return (
-    <div className={`${ratio} ${rounded ? 'rounded-3xl' : ''} overflow-hidden elev-1 bg-[#1e2522] ${className}`}>
+    <div className={`${ratio} ${rounded ? 'rounded-3xl' : ''} overflow-hidden elev-1 bg-[#1C2A2B] ${className}`}>
       <Media src={url} alt={alt} priority={priority} onError={() => setFailed(url)} className="w-full h-full object-cover" />
     </div>
   );
 }
 
 // An image from a database row (leader, story, event). Leaders fall back to their initials.
-export function PhotoBox({ src, alt = '', initials, className = '', ratio = 'aspect-[4/3]', rounded = true, bg = 'bg-[#EDE9DC]', fit = 'object-cover' }) {
+export function PhotoBox({ src, alt = '', initials, className = '', ratio = 'aspect-[4/3]', rounded = true, bg = 'bg-[#F4ECDD]', fit = 'object-cover' }) {
   const url = safeUrl(src);
   if (url) {
     return (
@@ -101,7 +101,7 @@ export function PhotoBox({ src, alt = '', initials, className = '', ratio = 'asp
   }
   if (!initials) return null;
   return (
-    <div aria-hidden="true" className={`${ratio} ${rounded ? 'rounded-3xl' : ''} bg-gradient-to-br from-[#1e2522] to-[#1e2522] flex items-center justify-center text-6xl font-black text-[#eaa235]/60 ${className}`}>
+    <div aria-hidden="true" className={`${ratio} ${rounded ? 'rounded-3xl' : ''} bg-gradient-to-br from-[#1C2A2B] to-[#1C2A2B] flex items-center justify-center text-6xl font-black text-[#F9AB55]/60 ${className}`}>
       {initials}
     </div>
   );
@@ -121,7 +121,7 @@ const stockFor = (slot) => STOCK[[...slot].reduce((n, c) => n + c.charCodeAt(0),
 export function SlotImage({ slot, ratio = 'aspect-[4/3]', className = '' }) {
   const { url, alt, loaded } = usePhoto(slot);
   return (
-    <div className={`${ratio} overflow-hidden rounded-[10px] bg-[#1e2522] ${className}`}>
+    <div className={`${ratio} overflow-hidden rounded-[10px] bg-[#1C2A2B] ${className}`}>
       {loaded && <Media src={url || stockFor(slot)} width={url ? undefined : 1000} alt={url ? alt : ''} className="w-full h-full object-cover" />}
     </div>
   );
@@ -144,7 +144,7 @@ export function MapEmbed({ className = '' }) {
   const SITE = useSite();
   return (
     <figure className={`bg-white rounded-[10px] overflow-hidden text-black ${className}`}>
-      <div className="aspect-[16/10] bg-[#EDE9DC]">
+      <div className="aspect-[16/10] bg-[#F4ECDD]">
         <iframe
           title={`Map to ${SITE.name}, ${SITE.addressLine}`}
           src={SITE.mapEmbedUrl}
@@ -171,7 +171,7 @@ export function PhotoBand({ slot, id, className = '', wide = false, children }) 
   const src = loaded ? imgUrl(url || stockFor(slot), 1600) : '';
   return (
     <section id={id} data-image-band="true" className="max-w-[1312px] mx-auto px-3 md:px-4 py-1.5 md:py-2 scroll-mt-32">
-      <div className={`photo-section text-shade rounded-[10px] bg-[#1e2522] text-white py-24 md:py-36 px-6 md:px-10 ${className}`}>
+      <div className={`photo-section text-shade rounded-[10px] bg-[#003235] text-white py-24 md:py-36 px-6 md:px-10 ${className}`}>
         {src && <Media src={src} className="photo-bg" />}
         <div className={`hero-text photo-copy ${wide ? '' : 'max-w-4xl'}`}>{children}</div>
       </div>
@@ -198,7 +198,7 @@ export function PageHeader({ kicker, title, intro, children, page, image: imageO
       <div className={`photo-section nav-fade text-shade rounded-[10px] text-[#ffffff] ${compact ? 'py-16' : 'py-24'} md:py-36 px-6 md:px-10 text-left flex items-end`}>
         {image && <Media src={image} width={1600} priority className="photo-bg" />}
         <div className="hero-text max-w-[800px]">
-          {kicker && !same(kicker, title) && <span className="kicker text-[#eaa235]">{kicker}</span>}
+          {kicker && !same(kicker, title) && <span className="kicker text-[#F9AB55]">{kicker}</span>}
           <h1 className={`text-4xl md:text-6xl ${compact ? 'mb-0 md:mb-6' : 'mb-6'}`}>{title}</h1>
           {intro && <p className={`${compact ? 'hidden md:block ' : ''}font-serif text-xl md:text-2xl text-white max-w-[50ch] leading-[1.12] md:leading-[1.12]`}>{intro}</p>}
           {children && <div className="mt-8 flex flex-wrap gap-4">{children}</div>}
@@ -221,7 +221,7 @@ export function Beats({ beats, heading: Heading = 'h3' }) {
       {beats.map((b, i) => {
         const text = (
           <div>
-            {b.kicker && <p className="kicker text-[#1e2522] !mb-1">{b.kicker}</p>}
+            {b.kicker && <p className="kicker text-[#1C2A2B] !mb-1">{b.kicker}</p>}
             <Heading className="text-2xl md:text-3xl mb-3">{b.title}</Heading>
             <div className="text-[1rem] leading-relaxed text-black space-y-3">{b.body}</div>
           </div>
@@ -247,11 +247,11 @@ export function Card({ title, children, to, linkLabel, icon, className = '', as:
       {to && (
         <div className="mt-6">
           {isExternal(to) ? (
-            <a href={to} target="_blank" rel="noopener noreferrer" className="inline-flex items-center font-display font-bold tracking-wide text-[0.9rem] text-[#1e2522] hover:text-[#1e2522] transition-colors">
+            <a href={to} target="_blank" rel="noopener noreferrer" className="inline-flex items-center font-display font-bold tracking-wide text-[0.9rem] text-[#1C2A2B] hover:text-[#1C2A2B] transition-colors">
               {linkLabel || 'Learn more'} <span aria-hidden="true" className="ml-2">&rarr;</span><span className="sr-only"> (opens in a new tab)</span>
             </a>
           ) : (
-            <Link to={to} className="inline-flex items-center font-display font-bold tracking-wide text-[0.9rem] text-[#1e2522] hover:text-[#1e2522] transition-colors">
+            <Link to={to} className="inline-flex items-center font-display font-bold tracking-wide text-[0.9rem] text-[#1C2A2B] hover:text-[#1C2A2B] transition-colors">
               {linkLabel || 'Learn more'} <span aria-hidden="true" className="ml-2">&rarr;</span>
             </Link>
           )}
@@ -279,7 +279,7 @@ export function Accordion({ items, className = '', group }) {
         <details key={it.id || i} id={it.id} name={group} className="u-acc neu-acc group rounded-2xl">
           <summary className="cursor-pointer px-6 py-5 flex items-center justify-between gap-4 text-lg font-bold min-h-[56px]">
             <span className="font-semibold text-lg">{it.title}</span>
-            <span aria-hidden="true" className="u-acc-icon flex-shrink-0 text-2xl leading-none text-[#1e2522]">+</span>
+            <span aria-hidden="true" className="u-acc-icon flex-shrink-0 text-2xl leading-none text-[#1C2A2B]">+</span>
           </summary>
           <div className="px-6 pb-6 text-black leading-relaxed space-y-3">{it.content}</div>
         </details>
@@ -303,13 +303,13 @@ export function PageNav({ items }) {
     return () => io.disconnect();
   }, [items]);
   return (
-    <nav aria-label="On this page" className="sticky top-20 z-40 bg-white border-b border-[#1e2522]/10">
+    <nav aria-label="On this page" className="sticky top-20 z-40 bg-white border-b border-[#1C2A2B]/10">
       <div className="max-w-[1312px] mx-auto px-6 md:px-14">
         <ul className="flex gap-2 overflow-x-auto py-3 text-sm">
           <li className="flex items-center pr-2 font-display font-bold text-black whitespace-nowrap">On this page</li>
           {items.map(([id, label]) => (
             <li key={id}>
-              <a href={`#${id}`} aria-current={current === id ? 'true' : undefined} className={`inline-flex items-center min-h-[40px] px-4 rounded-full font-display font-bold whitespace-nowrap ${current === id ? 'bg-[#1e2522] text-white' : 'bg-[#EDE9DC] text-[#1e2522] hover:bg-[#1e2522]/15'}`}>{label}</a>
+              <a href={`#${id}`} aria-current={current === id ? 'true' : undefined} className={`inline-flex items-center min-h-[40px] px-4 rounded-full font-display font-bold whitespace-nowrap ${current === id ? 'bg-[#1C2A2B] text-white' : 'bg-[#F4ECDD] text-[#1C2A2B] hover:bg-[#1C2A2B]/15'}`}>{label}</a>
             </li>
           ))}
         </ul>
@@ -324,8 +324,8 @@ export function Steps({ items }) {
       {items.map((it, i) => (
         <li key={it.title} className="flex gap-5">
           <div className="flex flex-col items-center">
-            <span className="w-12 h-12 rounded-full bg-[#c74f2f] text-white font-black flex items-center justify-center flex-shrink-0">{i + 1}</span>
-            {i < items.length - 1 && <span className="w-px flex-grow bg-[#eaa235]/60 mt-2" aria-hidden="true"></span>}
+            <span className="w-12 h-12 rounded-full bg-[#C65D3B] text-white font-black flex items-center justify-center flex-shrink-0">{i + 1}</span>
+            {i < items.length - 1 && <span className="w-px flex-grow bg-[#F9AB55]/60 mt-2" aria-hidden="true"></span>}
           </div>
           <div className="pb-2">
             <h3 className="text-xl md:text-2xl mb-2">{it.title}</h3>
@@ -342,7 +342,7 @@ export function QuickFacts({ items }) {
     <dl className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
       {items.map(f => (
         <div key={f.label} className="neu-inset rounded-3xl p-6">
-          <dt className="kicker text-[#1e2522] !mb-1">{f.label}</dt>
+          <dt className="kicker text-[#1C2A2B] !mb-1">{f.label}</dt>
           <dd className="text-lg font-bold leading-snug">{f.value}</dd>
         </div>
       ))}
@@ -352,7 +352,7 @@ export function QuickFacts({ items }) {
 
 // A band of two panels side by side, edge to edge. The panels are the section: each one is a block of color
 // with its own content, and the text lines up with the rest of the page. Use sparingly, one or two per page.
-const PANEL = 'paper-bg text-[#1e2522]';
+const PANEL = 'paper-bg text-[#1C2A2B]';
 
 export function Band({ children, id, className = '' }) {
   return (
@@ -381,7 +381,7 @@ export function Todo({ id, children }) {
   const user = useAuth()?.user;
   if (!user) return null;
   return (
-    <span data-todo={id} className="inline bg-[#eaa235] text-[#1e2522] border border-dashed border-[#1e2522] rounded px-1.5 py-0.5 text-[0.95em] font-semibold normal-case tracking-normal not-italic">
+    <span data-todo={id} className="inline bg-[#F9AB55] text-[#1C2A2B] border border-dashed border-[#1C2A2B] rounded px-1.5 py-0.5 text-[0.95em] font-semibold normal-case tracking-normal not-italic">
       {children}
     </span>
   );

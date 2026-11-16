@@ -373,27 +373,27 @@ export default function GenericManager({ config }) {
   if (loading && view === 'list') {
     return (
       <div className="flex justify-center items-center p-12 h-64" role="status" aria-label="Loading">
-        <SafeIcon icon={FiLoader} className="animate-spin text-3xl text-[#c74f2f]" />
+        <SafeIcon icon={FiLoader} className="animate-spin text-3xl text-[#C65D3B]" />
       </div>
     );
   }
 
   const errorBanner = error && (
-    <div role="alert" className="mb-6 p-4 rounded-lg bg-[#c74f2f]/10 border border-[#c74f2f] text-[#c74f2f] text-sm font-medium">{error}</div>
+    <div role="alert" className="mb-6 p-4 rounded-lg bg-[#C65D3B]/10 border border-[#C65D3B] text-[#C65D3B] text-sm font-medium">{error}</div>
   );
 
   if (view === 'form') {
     return (
       <div>
         <div className="flex items-center gap-4 mb-6">
-          <button type="button" aria-label="Back to list" onClick={requestLeaveForm} className="p-2 hover:bg-[#1e2522]/10 rounded-full transition text-black hover:text-[#1e2522]">
+          <button type="button" aria-label="Back to list" onClick={requestLeaveForm} className="p-2 hover:bg-[#1C2A2B]/10 rounded-full transition text-black hover:text-[#1C2A2B]">
             <SafeIcon icon={FiArrowLeft} className="text-xl" />
           </button>
           <h2 className="text-2xl font-bold">{formData.id ? 'Edit' : 'Add'} {config.title}</h2>
-          {dirty && <span className="text-xs font-bold text-[#1e2522] bg-[#eaa235]/20 px-2 py-1 rounded">Unsaved changes</span>}
+          {dirty && <span className="text-xs font-bold text-[#1C2A2B] bg-[#F9AB55]/20 px-2 py-1 rounded">Unsaved changes</span>}
         </div>
         {errorBanner}
-        <form onSubmit={handleSave} noValidate className="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-[#1e2522]/10 space-y-6">
+        <form onSubmit={handleSave} noValidate className="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-[#1C2A2B]/10 space-y-6">
           {config.fields.map(field => (field.name === 'topic' && config.categorySelect && categories.length > 0
             ? { ...field, type: 'categories', options: [...new Set([...categories, ...parseCategories(formData.topic)])] }
             : field
@@ -402,26 +402,26 @@ export default function GenericManager({ config }) {
           ))}
           {config.transcript && (
             <div>
-              <label htmlFor="f-transcript" className="block text-sm font-bold text-[#1e2522] mb-2">Transcript (private)</label>
+              <label htmlFor="f-transcript" className="block text-sm font-bold text-[#1C2A2B] mb-2">Transcript (private)</label>
               <p className="text-sm text-black mb-2">Paste the full transcript here, with or without times. It is never shown on the website. The AI uses it to write the description and choose categories.</p>
-              <textarea id="f-transcript" rows={10} value={transcriptLoading ? 'Loading the transcript.' : transcript} disabled={transcriptLoading} onChange={(e) => setTranscript(e.target.value)} className="w-full px-4 py-3 bg-[#1e2522]/5 rounded-lg border border-[#1e2522]/20 focus:outline-none focus:border-[#eaa235] focus:ring-1 focus:ring-[#eaa235]" />
+              <textarea id="f-transcript" rows={10} value={transcriptLoading ? 'Loading the transcript.' : transcript} disabled={transcriptLoading} onChange={(e) => setTranscript(e.target.value)} className="w-full px-4 py-3 bg-[#1C2A2B]/5 rounded-lg border border-[#1C2A2B]/20 focus:outline-none focus:border-[#F9AB55] focus:ring-1 focus:ring-[#F9AB55]" />
               <label className="mt-3 flex items-center gap-2 text-sm cursor-pointer">
-                <input type="checkbox" checked={aiAfterSave} onChange={(e) => setAiAfterSave(e.target.checked)} className="w-5 h-5 accent-[#c74f2f]" />
+                <input type="checkbox" checked={aiAfterSave} onChange={(e) => setAiAfterSave(e.target.checked)} className="w-5 h-5 accent-[#C65D3B]" />
                 When I save a new or changed transcript, have the AI write the description and choose categories if they are blank
               </label>
               <div className="mt-4 flex flex-wrap items-center gap-3">
-                <button type="button" onClick={readNow} disabled={aiNow?.busy || transcriptLoading} className="px-5 py-3 rounded-lg bg-[#1e2522] text-white font-bold disabled:opacity-50">
+                <button type="button" onClick={readNow} disabled={aiNow?.busy || transcriptLoading} className="px-5 py-3 rounded-lg bg-[#1C2A2B] text-white font-bold disabled:opacity-50">
                   {aiNow?.busy ? 'Working' : 'Have the AI read it now'}
                 </button>
                 <span className="text-sm text-black">Saves the transcript and writes a new description and categories now, replacing the ones above.</span>
               </div>
-              {aiNow && <p role={aiNow.error ? 'alert' : 'status'} className={`mt-3 text-sm font-semibold ${aiNow.error ? 'text-[#c74f2f]' : ''}`}>{aiNow.busy ? aiNow.text : aiNow.error || aiNow.done}</p>}
+              {aiNow && <p role={aiNow.error ? 'alert' : 'status'} className={`mt-3 text-sm font-semibold ${aiNow.error ? 'text-[#C65D3B]' : ''}`}>{aiNow.busy ? aiNow.text : aiNow.error || aiNow.done}</p>}
             </div>
           )}
           {saveNote && <p role="status" className="text-sm font-semibold">{saveNote}</p>}
-          <div className="flex justify-end gap-4 pt-6 border-t border-[#1e2522]/10">
-            <button type="button" onClick={requestLeaveForm} className="px-6 py-3 font-bold text-black hover:text-[#1e2522] transition">Cancel</button>
-            <button type="submit" disabled={saving} className="bg-[#1e2522] text-white font-bold py-3 px-8 rounded-lg hover:bg-[#1e2522] transition disabled:bg-[#1e2522]/40 flex items-center gap-2">
+          <div className="flex justify-end gap-4 pt-6 border-t border-[#1C2A2B]/10">
+            <button type="button" onClick={requestLeaveForm} className="px-6 py-3 font-bold text-black hover:text-[#1C2A2B] transition">Cancel</button>
+            <button type="submit" disabled={saving} className="bg-[#1C2A2B] text-white font-bold py-3 px-8 rounded-lg hover:bg-[#1C2A2B] transition disabled:bg-[#1C2A2B]/40 flex items-center gap-2">
               {saving ? <SafeIcon icon={FiLoader} className="animate-spin" /> : <SafeIcon icon={FiSave} />}
               {saving ? 'Saving...' : 'Save'}
             </button>
@@ -444,36 +444,36 @@ export default function GenericManager({ config }) {
     <div style={selected.size > 0 && config.bulk ? { paddingBottom: '9rem' } : undefined}>
       {errorBanner}
       <div className="flex flex-wrap justify-between items-center gap-4 mb-6">
-        <h2 className="text-2xl font-bold text-[#1e2522]">Manage {config.title}</h2>
+        <h2 className="text-2xl font-bold text-[#1C2A2B]">Manage {config.title}</h2>
         <div className="flex flex-wrap items-center gap-3">
           {missingSeeds.length > 0 && !loading && (
-          <button onClick={addSeeds} disabled={seeding && !seeding.finished} className="border border-[#1e2522]/20 bg-white text-[#1e2522] font-bold py-2.5 px-5 rounded-lg transition disabled:opacity-50">
+          <button onClick={addSeeds} disabled={seeding && !seeding.finished} className="border border-[#1C2A2B]/20 bg-white text-[#1C2A2B] font-bold py-2.5 px-5 rounded-lg transition disabled:opacity-50">
             {seeding && !seeding.finished ? `Adding ${seeding.done + seeding.failed} of ${seeding.total}` : config.seedLabel ? config.seedLabel(missingSeeds.length) : `Add the ${missingSeeds.length} standard categories that are missing`}
           </button>
         )}
         {config.syncNow && (
-            <button onClick={syncNow} disabled={syncing} className="border border-[#1e2522]/20 bg-white text-[#1e2522] font-bold py-2.5 px-5 rounded-lg transition disabled:opacity-50">{syncing ? 'Updating' : config.syncNow.label}</button>
+            <button onClick={syncNow} disabled={syncing} className="border border-[#1C2A2B]/20 bg-white text-[#1C2A2B] font-bold py-2.5 px-5 rounded-lg transition disabled:opacity-50">{syncing ? 'Updating' : config.syncNow.label}</button>
           )}
         {config.refreshFeed && (
-            <button onClick={testFeed} disabled={feedTest?.loading} className="border border-[#1e2522]/20 bg-white text-[#1e2522] font-bold py-2.5 px-5 rounded-lg transition disabled:opacity-50">Test the feed</button>
+            <button onClick={testFeed} disabled={feedTest?.loading} className="border border-[#1C2A2B]/20 bg-white text-[#1C2A2B] font-bold py-2.5 px-5 rounded-lg transition disabled:opacity-50">Test the feed</button>
           )}
         {config.refreshFeed && (
-            <button onClick={refreshFeeds} disabled={refreshing === 'busy'} className="border border-[#1e2522]/20 bg-white text-[#1e2522] font-bold py-2.5 px-5 rounded-lg transition disabled:opacity-50">
+            <button onClick={refreshFeeds} disabled={refreshing === 'busy'} className="border border-[#1C2A2B]/20 bg-white text-[#1C2A2B] font-bold py-2.5 px-5 rounded-lg transition disabled:opacity-50">
               {refreshing === 'busy' ? 'Reading the feeds' : 'Refresh from feed'}
             </button>
           )}
         {config.youtubeImport && (
-            <button onClick={() => setImporting(true)} className="border border-[#1e2522]/20 bg-white text-[#1e2522] font-bold py-2.5 px-5 rounded-lg transition">
+            <button onClick={() => setImporting(true)} className="border border-[#1C2A2B]/20 bg-white text-[#1C2A2B] font-bold py-2.5 px-5 rounded-lg transition">
               Import from YouTube
             </button>
           )}
         {config.youtubeImport && (
-            <button onClick={() => setTranscripts(t => !t)} className="border border-[#1e2522]/20 bg-white text-[#1e2522] font-bold py-2.5 px-5 rounded-lg transition">
+            <button onClick={() => setTranscripts(t => !t)} className="border border-[#1C2A2B]/20 bg-white text-[#1C2A2B] font-bold py-2.5 px-5 rounded-lg transition">
               Import transcripts
             </button>
           )}
           {canCreate && (
-            <button onClick={handleAddNew} className="bg-[#eaa235] hover:bg-[#eaa235] text-[#1e2522] font-bold py-2.5 px-5 rounded-lg flex items-center gap-2 transition shadow-sm">
+            <button onClick={handleAddNew} className="bg-[#F9AB55] hover:bg-[#F9AB55] text-[#1C2A2B] font-bold py-2.5 px-5 rounded-lg flex items-center gap-2 transition shadow-sm">
               <SafeIcon icon={FiPlus} /> Add New
             </button>
           )}
@@ -481,9 +481,9 @@ export default function GenericManager({ config }) {
       </div>
 
       {feedTest && (
-        <div role="status" className="mb-4 text-sm rounded-[10px] bg-[#EDE9DC] p-4">
+        <div role="status" className="mb-4 text-sm rounded-[10px] bg-[#F4ECDD] p-4">
           {feedTest.loading && <p>Reading the feed.</p>}
-          {feedTest.error && <p className="text-[#c74f2f] font-semibold">{feedTest.error}</p>}
+          {feedTest.error && <p className="text-[#C65D3B] font-semibold">{feedTest.error}</p>}
           {feedTest.data && (
             <dl className="space-y-1">
               {Object.entries(feedTest.data).map(([k, v]) => <div key={k} className="flex flex-wrap gap-2"><dt className="font-semibold">{k.replace(/_/g, ' ')}:</dt><dd className="break-words">{String(v)}</dd></div>)}
@@ -493,30 +493,30 @@ export default function GenericManager({ config }) {
       )}
       {config.homeSwitch && <CampaignHomeSwitch />}
       {config.testWelcome && items.length > 0 && (
-        <form onSubmit={sendWelcomeTest} className="mb-6 bg-white rounded-2xl border border-[#1e2522]/10 p-5 flex flex-wrap items-end gap-3">
+        <form onSubmit={sendWelcomeTest} className="mb-6 bg-white rounded-2xl border border-[#1C2A2B]/10 p-5 flex flex-wrap items-end gap-3">
           <label className="text-sm font-semibold">
             <span className="block mb-1">Send me this email</span>
-            <select value={welcomeStep || items[0]?.id} onChange={(e) => setWelcomeStep(e.target.value)} className="px-3 py-2 rounded-lg border border-[#1e2522]/20 bg-white">
+            <select value={welcomeStep || items[0]?.id} onChange={(e) => setWelcomeStep(e.target.value)} className="px-3 py-2 rounded-lg border border-[#1C2A2B]/20 bg-white">
               {items.map(i => <option key={i.id} value={i.id}>{i.step_number}. {i.subject}</option>)}
             </select>
           </label>
           <label className="text-sm font-semibold">
             <span className="block mb-1">at this address</span>
-            <input type="email" required value={welcomeTo} onChange={(e) => setWelcomeTo(e.target.value)} placeholder="you@example.com" className="px-3 py-2 rounded-lg border border-[#1e2522]/20 bg-white min-w-[16rem]" />
+            <input type="email" required value={welcomeTo} onChange={(e) => setWelcomeTo(e.target.value)} placeholder="you@example.com" className="px-3 py-2 rounded-lg border border-[#1C2A2B]/20 bg-white min-w-[16rem]" />
           </label>
-          <button type="submit" disabled={welcomeState?.busy} className="px-4 py-2 rounded-lg border border-[#1e2522]/20 bg-white font-bold text-sm disabled:opacity-40">{welcomeState?.busy ? 'Sending' : 'Send test'}</button>
-          {welcomeState && !welcomeState.busy && <p role="status" className={`text-sm font-semibold ${welcomeState.status === 'sent' ? '' : 'text-[#c74f2f]'}`}>{welcomeState.status === 'sent' ? 'Sent. Check that inbox, and the spam folder.' : `Not sent. ${welcomeState.error || ''}`}</p>}
+          <button type="submit" disabled={welcomeState?.busy} className="px-4 py-2 rounded-lg border border-[#1C2A2B]/20 bg-white font-bold text-sm disabled:opacity-40">{welcomeState?.busy ? 'Sending' : 'Send test'}</button>
+          {welcomeState && !welcomeState.busy && <p role="status" className={`text-sm font-semibold ${welcomeState.status === 'sent' ? '' : 'text-[#C65D3B]'}`}>{welcomeState.status === 'sent' ? 'Sent. Check that inbox, and the spam folder.' : `Not sent. ${welcomeState.error || ''}`}</p>}
         </form>
       )}
       {config.testEmail && (
-        <form onSubmit={sendTest} className="mb-6 bg-white rounded-2xl border border-[#1e2522]/10 p-5 flex flex-wrap items-end gap-3">
+        <form onSubmit={sendTest} className="mb-6 bg-white rounded-2xl border border-[#1C2A2B]/10 p-5 flex flex-wrap items-end gap-3">
           <label className="text-sm font-semibold">
             <span className="block mb-1">Send a test email to</span>
-            <input type="email" required value={testTo} onChange={(e) => setTestTo(e.target.value)} placeholder="you@example.com" className="px-3 py-2 rounded-lg border border-[#1e2522]/20 bg-white min-w-[16rem]" />
+            <input type="email" required value={testTo} onChange={(e) => setTestTo(e.target.value)} placeholder="you@example.com" className="px-3 py-2 rounded-lg border border-[#1C2A2B]/20 bg-white min-w-[16rem]" />
           </label>
-          <button type="submit" disabled={testState?.busy} className="px-4 py-2 rounded-lg border border-[#1e2522]/20 bg-white font-bold text-sm disabled:opacity-40">{testState?.busy ? 'Sending' : 'Send test'}</button>
+          <button type="submit" disabled={testState?.busy} className="px-4 py-2 rounded-lg border border-[#1C2A2B]/20 bg-white font-bold text-sm disabled:opacity-40">{testState?.busy ? 'Sending' : 'Send test'}</button>
           {testState && !testState.busy && (
-            <p role="status" className={`text-sm font-semibold ${testState.status === 'sent' ? '' : 'text-[#c74f2f]'}`}>
+            <p role="status" className={`text-sm font-semibold ${testState.status === 'sent' ? '' : 'text-[#C65D3B]'}`}>
               {testState.status === 'sent' ? 'Sent. Check that inbox, and the spam folder.' : `Not sent. ${testState.error || ''}`}
             </p>
           )}
@@ -539,7 +539,7 @@ export default function GenericManager({ config }) {
             placeholder={`Search ${config.title.toLowerCase()}...`}
             value={query}
             onChange={(e) => { setQuery(e.target.value); setPage(0); }}
-            className="w-full pl-11 pr-4 py-2.5 rounded-lg border border-[#1e2522]/20 bg-white focus:outline-none focus:border-[#eaa235] focus:ring-1 focus:ring-[#eaa235]"
+            className="w-full pl-11 pr-4 py-2.5 rounded-lg border border-[#1C2A2B]/20 bg-white focus:outline-none focus:border-[#F9AB55] focus:ring-1 focus:ring-[#F9AB55]"
           />
         </div>
       )}
@@ -548,11 +548,11 @@ export default function GenericManager({ config }) {
         <p className="text-sm text-black mb-3">Drag rows by the handle, or use the arrows, to change the order. The order is saved automatically.</p>
       )}
 
-      <div className="bg-white rounded-2xl shadow-sm border border-[#1e2522]/10 overflow-hidden">
+      <div className="bg-white rounded-2xl shadow-sm border border-[#1C2A2B]/10 overflow-hidden">
         {items.length === 0 ? (
           <div className="p-12 text-center text-black">
             <p className="mb-4">No {config.title.toLowerCase()} yet.</p>
-            {canCreate && <button onClick={handleAddNew} className="text-[#c74f2f] font-bold hover:underline">Create your first one</button>}
+            {canCreate && <button onClick={handleAddNew} className="text-[#C65D3B] font-bold hover:underline">Create your first one</button>}
           </div>
         ) : filtered.length === 0 ? (
           <div className="p-12 text-center text-black">No {config.title.toLowerCase()} match "{query}".</div>
@@ -560,7 +560,7 @@ export default function GenericManager({ config }) {
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-[#1e2522]/5 border-b border-[#1e2522]/10">
+                <tr className="bg-[#1C2A2B]/5 border-b border-[#1C2A2B]/10">
                   {config.bulk && (
                     <th className="w-10 px-4 py-4">
                       <input
@@ -568,7 +568,7 @@ export default function GenericManager({ config }) {
                         aria-label={visible.length > 0 && visible.every(i => selected.has(i.id)) ? 'Deselect everything on this page' : 'Select everything on this page'}
                         checked={visible.length > 0 && visible.every(i => selected.has(i.id))}
                         onChange={(e) => setSelected(prev => { const next = new Set(prev); visible.forEach(i => (e.target.checked ? next.add(i.id) : next.delete(i.id))); return next; })}
-                        className="w-5 h-5 accent-[#c74f2f]"
+                        className="w-5 h-5 accent-[#C65D3B]"
                       />
                     </th>
                   )}
@@ -591,43 +591,43 @@ export default function GenericManager({ config }) {
                       onDragStart={() => { dragId.current = item.id; }}
                       onDragOver={(e) => sortable && e.preventDefault()}
                       onDrop={() => sortable && onDrop(item.id)}
-                      className="border-b border-[#1e2522]/10 hover:bg-[#1e2522]/5 transition"
+                      className="border-b border-[#1C2A2B]/10 hover:bg-[#1C2A2B]/5 transition"
                     >
                       {config.bulk && (
                         <td className="px-4 py-4">
-                          <input type="checkbox" checked={selected.has(item.id)} onChange={() => toggleSelected(item.id)} aria-label={`Select ${item[titleField] || 'item'}`} className="w-5 h-5 accent-[#c74f2f]" />
+                          <input type="checkbox" checked={selected.has(item.id)} onChange={() => toggleSelected(item.id)} aria-label={`Select ${item[titleField] || 'item'}`} className="w-5 h-5 accent-[#C65D3B]" />
                         </td>
                       )}
                       {sortable && (
                         <td className="px-4 py-3">
                           <div className="flex items-center gap-1 text-black">
                             <span className="cursor-grab" aria-hidden="true"><SafeIcon icon={FiMenu} /></span>
-                            <button type="button" aria-label={`Move ${item[titleField] || 'item'} up`} disabled={index === 0} onClick={() => move(index, -1)} className="p-1 hover:text-[#1e2522] disabled:opacity-30"><SafeIcon icon={FiChevronUp} /></button>
-                            <button type="button" aria-label={`Move ${item[titleField] || 'item'} down`} disabled={index === items.length - 1} onClick={() => move(index, 1)} className="p-1 hover:text-[#1e2522] disabled:opacity-30"><SafeIcon icon={FiChevronDown} /></button>
+                            <button type="button" aria-label={`Move ${item[titleField] || 'item'} up`} disabled={index === 0} onClick={() => move(index, -1)} className="p-1 hover:text-[#1C2A2B] disabled:opacity-30"><SafeIcon icon={FiChevronUp} /></button>
+                            <button type="button" aria-label={`Move ${item[titleField] || 'item'} down`} disabled={index === items.length - 1} onClick={() => move(index, 1)} className="p-1 hover:text-[#1C2A2B] disabled:opacity-30"><SafeIcon icon={FiChevronDown} /></button>
                           </div>
                         </td>
                       )}
                       {config.thumbField && (
                         <td className="px-4 py-3">
                           {item[config.thumbField]
-                            ? <img src={item[config.thumbField]} alt="" loading="lazy" className="w-14 h-14 object-cover rounded-lg bg-[#1e2522]/5" />
-                            : <div className="w-14 h-14 rounded-lg bg-[#1e2522]/5" />}
+                            ? <img src={item[config.thumbField]} alt="" loading="lazy" className="w-14 h-14 object-cover rounded-lg bg-[#1C2A2B]/5" />
+                            : <div className="w-14 h-14 rounded-lg bg-[#1C2A2B]/5" />}
                         </td>
                       )}
                       {columns.map((name, i) => {
                         const text = plainText(String(item[name] ?? ''));
                         return (
-                          <td key={name} className="px-6 py-4 text-[#1e2522] text-sm">
+                          <td key={name} className="px-6 py-4 text-[#1C2A2B] text-sm">
                             {text ? (text.length > 50 ? `${text.slice(0, 50)}...` : text) : '-'}
                             {i === 0 && status && (
-                              <span className={`ml-2 text-[10px] font-bold px-2 py-0.5 rounded ${status === 'Draft' ? 'bg-[#1e2522]/10 text-[#1e2522]' : 'bg-[#eaa235]/20 text-[#1e2522]'}`}>{status}</span>
+                              <span className={`ml-2 text-[10px] font-bold px-2 py-0.5 rounded ${status === 'Draft' ? 'bg-[#1C2A2B]/10 text-[#1C2A2B]' : 'bg-[#F9AB55]/20 text-[#1C2A2B]'}`}>{status}</span>
                             )}
                           </td>
                         );
                       })}
                       {config.toggleField && (
                         <td className="px-4 py-4">
-                          <button type="button" role="switch" aria-checked={Boolean(Number(item[config.toggleField]))} aria-label={`${item[titleField] || 'Item'} is ${Number(item[config.toggleField]) ? 'on' : 'off'}`} onClick={() => toggle(item)} className={`relative w-11 h-6 rounded-full transition-colors ${Number(item[config.toggleField]) ? 'bg-[#1e2522]' : 'bg-[#1e2522]/20'}`}>
+                          <button type="button" role="switch" aria-checked={Boolean(Number(item[config.toggleField]))} aria-label={`${item[titleField] || 'Item'} is ${Number(item[config.toggleField]) ? 'on' : 'off'}`} onClick={() => toggle(item)} className={`relative w-11 h-6 rounded-full transition-colors ${Number(item[config.toggleField]) ? 'bg-[#1C2A2B]' : 'bg-[#1C2A2B]/20'}`}>
                             <span className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform ${Number(item[config.toggleField]) ? 'translate-x-5' : ''}`} />
                           </button>
                         </td>
@@ -635,12 +635,12 @@ export default function GenericManager({ config }) {
                       <td className="px-6 py-4 text-right">
                         <div className="flex items-center justify-end gap-2">
                           {config.duplicable && (
-                            <button onClick={() => duplicate(item)} aria-label={`Make a copy of ${item[titleField] || 'item'}`} className="px-3 py-2 text-sm font-bold text-black hover:text-[#c74f2f] bg-white border border-[#1e2522]/10 rounded-lg transition" title="Save as a copy">Copy</button>
+                            <button onClick={() => duplicate(item)} aria-label={`Make a copy of ${item[titleField] || 'item'}`} className="px-3 py-2 text-sm font-bold text-black hover:text-[#C65D3B] bg-white border border-[#1C2A2B]/10 rounded-lg transition" title="Save as a copy">Copy</button>
                           )}
-                          <button onClick={() => openForm({ ...item })} aria-label={`Edit ${item[titleField] || 'item'}`} className="p-2 text-black hover:text-[#c74f2f] bg-white hover:bg-[#eaa235]/10 border border-[#1e2522]/10 rounded-lg transition" title="Edit">
+                          <button onClick={() => openForm({ ...item })} aria-label={`Edit ${item[titleField] || 'item'}`} className="p-2 text-black hover:text-[#C65D3B] bg-white hover:bg-[#F9AB55]/10 border border-[#1C2A2B]/10 rounded-lg transition" title="Edit">
                             <SafeIcon icon={FiEdit2} />
                           </button>
-                          <button onClick={() => setPendingDelete(item)} aria-label={`Delete ${item[titleField] || 'item'}`} className="p-2 text-black hover:text-[#c74f2f] bg-white hover:bg-[#c74f2f]/10 border border-[#1e2522]/10 rounded-lg transition" title="Delete">
+                          <button onClick={() => setPendingDelete(item)} aria-label={`Delete ${item[titleField] || 'item'}`} className="p-2 text-black hover:text-[#C65D3B] bg-white hover:bg-[#C65D3B]/10 border border-[#1C2A2B]/10 rounded-lg transition" title="Delete">
                             <SafeIcon icon={FiTrash2} />
                           </button>
                         </div>
@@ -658,8 +658,8 @@ export default function GenericManager({ config }) {
         <nav aria-label="Pagination" className="flex items-center justify-between mt-4 text-sm">
           <span className="text-black">Page {safePage + 1} of {pageCount} ({filtered.length} items)</span>
           <div className="flex gap-2">
-            <button disabled={safePage === 0} onClick={() => setPage(safePage - 1)} className="px-4 py-2 rounded-lg border border-[#1e2522]/20 bg-white font-bold disabled:opacity-40">Previous</button>
-            <button disabled={safePage >= pageCount - 1} onClick={() => setPage(safePage + 1)} className="px-4 py-2 rounded-lg border border-[#1e2522]/20 bg-white font-bold disabled:opacity-40">Next</button>
+            <button disabled={safePage === 0} onClick={() => setPage(safePage - 1)} className="px-4 py-2 rounded-lg border border-[#1C2A2B]/20 bg-white font-bold disabled:opacity-40">Previous</button>
+            <button disabled={safePage >= pageCount - 1} onClick={() => setPage(safePage + 1)} className="px-4 py-2 rounded-lg border border-[#1C2A2B]/20 bg-white font-bold disabled:opacity-40">Next</button>
           </div>
         </nav>
       )}

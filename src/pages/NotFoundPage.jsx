@@ -17,14 +17,14 @@ export default function NotFoundPage() {
     <>
       <Section tone="white" narrow>
         <div className="py-6">
-          <p className="kicker text-[#c74f2f]">Page not found</p>
+          <p className="kicker text-[#C65D3B]">Page not found</p>
           <h1 className="text-4xl md:text-6xl">We could not find that page.</h1>
           <p className="mt-5 text-[1rem] md:text-base text-black leading-relaxed max-w-[55ch]">
             It may have moved. Search our messages, pick one of the places below, or call us at <a className="underline underline-offset-4 font-semibold" href={SITE.phoneHref}>{SITE.phone}</a> and we will help you find what you need.
           </p>
           <form role="search" aria-label="Search messages" onSubmit={search} className="mt-8 flex flex-wrap gap-3 max-w-xl">
             <label htmlFor="nf-search" className="sr-only">Search messages</label>
-            <input id="nf-search" type="search" value={term} onChange={(e) => setTerm(e.target.value)} placeholder="Search messages, such as prayer or Romans" className="flex-1 min-w-[14rem] min-h-[48px] px-4 py-3 bg-white rounded-xl border border-[#1e2522]/25 focus:outline-none focus:ring-2 focus:ring-[#1e2522]" />
+            <input id="nf-search" type="search" value={term} onChange={(e) => setTerm(e.target.value)} placeholder="Search messages, such as prayer or Romans" className="flex-1 min-w-[14rem] min-h-[48px] px-4 py-3 bg-white rounded-xl border border-[#1C2A2B]/25 focus:outline-none focus:ring-2 focus:ring-[#1C2A2B]" />
             <button type="submit" className="btn btn-solid">Search</button>
           </form>
         </div>

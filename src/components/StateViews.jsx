@@ -3,7 +3,7 @@ import React from 'react';
 export function Spinner({ label = 'Loading' }) {
   return (
     <div className="flex justify-center items-center py-32" role="status" aria-label={label}>
-      <div className="w-10 h-10 border-4 border-[#eaa235] border-t-transparent rounded-full animate-spin"></div>
+      <div className="w-10 h-10 border-4 border-[#F9AB55] border-t-transparent rounded-full animate-spin"></div>
     </div>
   );
 }
@@ -14,9 +14,9 @@ export function CardSkeletons({ count = 6 }) {
     <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" role="status" aria-label="Loading">
       {Array.from({ length: count }, (_, i) => (
         <li key={i} aria-hidden="true">
-          <div className="aspect-video rounded-[10px] bg-[#EDE9DC] animate-pulse" />
-          <div className="h-3 w-1/3 rounded bg-[#EDE9DC] animate-pulse mt-4" />
-          <div className="h-5 w-4/5 rounded bg-[#EDE9DC] animate-pulse mt-3" />
+          <div className="aspect-video rounded-[10px] bg-[#F4ECDD] animate-pulse" />
+          <div className="h-3 w-1/3 rounded bg-[#F4ECDD] animate-pulse mt-4" />
+          <div className="h-5 w-4/5 rounded bg-[#F4ECDD] animate-pulse mt-3" />
         </li>
       ))}
     </ul>

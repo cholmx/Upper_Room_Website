@@ -14,7 +14,7 @@ import SeriesCover from '../components/SeriesCover';
 import NewBadge from '../components/NewBadge';
 import { CardSkeletons, ErrorState } from '../components/StateViews';
 
-const select = 'w-full min-h-[48px] px-3 py-2 bg-white rounded-xl border border-[#1e2522]/25 focus:outline-none focus:ring-2 focus:ring-[#1e2522]';
+const select = 'w-full min-h-[48px] px-3 py-2 bg-white rounded-xl border border-[#1C2A2B]/25 focus:outline-none focus:ring-2 focus:ring-[#1C2A2B]';
 
 function Filter({ label, value, onChange, options }) {
   const id = `f-${label.replace(/\W+/g, '-').toLowerCase()}`;
@@ -88,7 +88,7 @@ export default function Messages() {
   useEffect(() => { setShown(12); }, [q, series, speaker, book, topic, oldest]);
   const clear = () => setParams({}, { replace: true });
   const surprise = () => { if (filtered.length) navigate(messagePath(filtered[Math.floor(Math.random() * filtered.length)])); };
-  const chip = (on) => `px-4 py-2 rounded-full text-sm font-display font-bold ${on ? 'bg-[#1e2522] text-white' : 'bg-[#EDE9DC] text-[#1e2522] hover:bg-[#1e2522]/15'}`;
+  const chip = (on) => `px-4 py-2 rounded-full text-sm font-display font-bold ${on ? 'bg-[#1C2A2B] text-white' : 'bg-[#F4ECDD] text-[#1C2A2B] hover:bg-[#1C2A2B]/15'}`;
   const active = [['Search', q, () => setQ('')], ['Series', series, () => setSeries('')], ['Speaker', speaker, () => setSpeaker('')], ['Book', book, () => setBook('')], ['Category', topic, () => setTopic('')]].filter(([, v]) => v);
   const latestVideo = ytId(latest?.video_url || latest?.yt);
 
@@ -110,17 +110,17 @@ export default function Messages() {
             <SectionHeader title="Latest message" />
             {latest ? (
               <div className="grid md:grid-cols-5 gap-8 items-center">
-                <div className="md:col-span-3 aspect-video rounded-[10px] overflow-hidden bg-[#1e2522]">
+                <div className="md:col-span-3 aspect-video rounded-[10px] overflow-hidden bg-[#1C2A2B]">
                   {latestVideo ? <LiteYouTube id={latestVideo} title={latest.title} /> : <div className="w-full h-full flex items-center justify-center text-white/80">Video coming soon</div>}
                 </div>
                 <div className="md:col-span-2">
                   <NewBadge date={latest.date} className="mb-2" />
                   {parseCategories(latest.topic).length > 0 && (
                     <ul className="mb-3 flex flex-wrap gap-2" aria-label="Categories">
-                      {parseCategories(latest.topic).map(c => <li key={c} className="text-xs font-display font-bold px-3 py-1 rounded-full bg-[#EDE9DC]">{c}</li>)}
+                      {parseCategories(latest.topic).map(c => <li key={c} className="text-xs font-display font-bold px-3 py-1 rounded-full bg-[#F4ECDD]">{c}</li>)}
                     </ul>
                   )}
-                  <h3 className="text-2xl md:text-3xl"><Link to={messagePath(latest)} className="hover:text-[#1e2522]">{latest.title}</Link></h3>
+                  <h3 className="text-2xl md:text-3xl"><Link to={messagePath(latest)} className="hover:text-[#1C2A2B]">{latest.title}</Link></h3>
                   <p className="mt-2 text-black">{[latest.speaker, latest.date && formatDate(latest.date), latest.scripture].filter(Boolean).join('  |  ')}</p>
                   {latest.description && <p className="mt-3 text-black leading-relaxed line-clamp-4">{plainText(latest.description)}</p>}
                   <div className="mt-6 flex flex-wrap gap-3"><Btn to={messagePath(latest)} variant="primary">Watch</Btn><Btn href={latestPodcast.listenUrl || safeUrl(latest.audio_url) || SITE.podcasts.apple} variant="dark">Listen</Btn></div>
@@ -138,11 +138,11 @@ export default function Messages() {
                 {seriesList.map(s => (
                   <li key={s.name}>
                     <Link to={seriesPath(s.name)} className="thumb-link flex flex-col h-full rounded-[10px] overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow">
-                      <div className="aspect-video bg-[#1e2522] relative overflow-hidden">
+                      <div className="aspect-video bg-[#1C2A2B] relative overflow-hidden">
                         {s.image ? (
                           <>
                             <img src={s.image} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
-                            <span aria-hidden="true" className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-[#1e2522]/80 to-transparent" />
+                            <span aria-hidden="true" className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-[#1C2A2B]/80 to-transparent" />
                             <span className="absolute inset-x-0 bottom-0 p-4 text-white">
                               <span className={`block leading-[0.95] md:leading-[0.95] ${seriesTitleSize(s.name)}`}>{s.name}</span>
                               <span className="block mt-1.5 text-xs font-display font-bold">{details(s)}</span>
@@ -202,13 +202,13 @@ export default function Messages() {
               </div>
               <div className="mt-4 flex flex-wrap items-center gap-3">
                 <button type="button" onClick={surprise} disabled={!filtered.length} className="btn btn-outline !py-2 !px-4 text-sm disabled:opacity-40">Surprise me</button>
-                {anyFilter && <button type="button" onClick={clear} className="underline underline-offset-4 font-semibold text-[#1e2522] min-h-[44px]">Clear search and filters</button>}
+                {anyFilter && <button type="button" onClick={clear} className="underline underline-offset-4 font-semibold text-[#1C2A2B] min-h-[44px]">Clear search and filters</button>}
               </div>
             </form>
             {active.length > 0 && (
               <ul className="mb-4 flex flex-wrap gap-2" aria-label="Active filters">
                 {active.map(([label, value, remove]) => (
-                  <li key={label}><button type="button" onClick={remove} className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#1e2522] text-white text-sm font-display font-bold">{label}: {value}<span aria-hidden="true">&times;</span><span className="sr-only"> (remove)</span></button></li>
+                  <li key={label}><button type="button" onClick={remove} className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#1C2A2B] text-white text-sm font-display font-bold">{label}: {value}<span aria-hidden="true">&times;</span><span className="sr-only"> (remove)</span></button></li>
                 ))}
               </ul>
             )}

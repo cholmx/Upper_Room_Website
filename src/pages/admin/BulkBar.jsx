@@ -6,8 +6,8 @@ import { addCategory, removeCategory, parseCategories } from '../../lib/categori
 import { logActivity } from '../../lib/activity';
 import ConfirmDialog from '../../components/ConfirmDialog';
 
-const btn = 'px-4 py-2 rounded-lg border border-[#1e2522]/20 bg-white font-bold text-sm disabled:opacity-40';
-const input = 'px-3 py-2 rounded-lg border border-[#1e2522]/20 bg-white text-sm min-w-[12rem]';
+const btn = 'px-4 py-2 rounded-lg border border-[#1C2A2B]/20 bg-white font-bold text-sm disabled:opacity-40';
+const input = 'px-3 py-2 rounded-lg border border-[#1C2A2B]/20 bg-white text-sm min-w-[12rem]';
 
 // Edits many messages at once: choose messages, then change their series, speaker, category or visibility.
 export default function BulkBar({ table, title, items, filtered, selected, setSelected, onDone, categories = [] }) {
@@ -179,9 +179,9 @@ export default function BulkBar({ table, title, items, filtered, selected, setSe
   const status = (testResult || progress) && (
     <div className="px-5 pt-4 text-sm text-black space-y-3">
       {testResult && (
-        <div role="status" className="rounded-[10px] bg-[#EDE9DC] p-4">
+        <div role="status" className="rounded-[10px] bg-[#F4ECDD] p-4">
           {testResult.loading && <p>Asking the AI.</p>}
-          {testResult.error && <p className="text-[#c74f2f] font-semibold">{testResult.error}</p>}
+          {testResult.error && <p className="text-[#C65D3B] font-semibold">{testResult.error}</p>}
           {testResult.data && (
             <dl className="space-y-1">
               {Object.entries(testResult.data).map(([k, v]) => (
@@ -237,7 +237,7 @@ export default function BulkBar({ table, title, items, filtered, selected, setSe
       <div className="space-y-4">
         <p className="text-sm text-black">The AI helper reads each message’s title, description and transcript. It works through the {label()} you ticked one at a time, so a long list takes a few minutes.</p>
         <div className="grid sm:grid-cols-2 gap-4">
-          <div className="rounded-[10px] bg-[#EDE9DC] p-4">
+          <div className="rounded-[10px] bg-[#F4ECDD] p-4">
             <p className="font-semibold">Choose categories</p>
             <p className="text-sm text-black mt-1">Picks one to three categories from your approved list.</p>
             <div className="mt-3 flex flex-wrap gap-2">
@@ -245,14 +245,14 @@ export default function BulkBar({ table, title, items, filtered, selected, setSe
               {n === 1 && <button type="button" disabled={busy || testResult?.loading} onClick={testOne} className={btn}>Try it (saves nothing)</button>}
             </div>
           </div>
-          <div className="rounded-[10px] bg-[#EDE9DC] p-4">
+          <div className="rounded-[10px] bg-[#F4ECDD] p-4">
             <p className="font-semibold">Write summaries</p>
             <p className="text-sm text-black mt-1">Writes a short summary for messages that have none, from the transcript when there is one.</p>
             <div className="mt-3"><button type="button" disabled={busy} onClick={summarizeWithAi} className={btn}>Write summaries for {n}</button></div>
           </div>
         </div>
         <label className="flex items-center gap-2 text-sm cursor-pointer">
-          <input type="checkbox" checked={replaceAll} onChange={(e) => setReplaceAll(e.target.checked)} className="w-5 h-5 accent-[#c74f2f]" />
+          <input type="checkbox" checked={replaceAll} onChange={(e) => setReplaceAll(e.target.checked)} className="w-5 h-5 accent-[#C65D3B]" />
           Also redo messages that already have categories or a summary
         </label>
       </div>
@@ -263,7 +263,7 @@ export default function BulkBar({ table, title, items, filtered, selected, setSe
         <div className="flex flex-wrap gap-2">
           <button type="button" disabled={busy} onClick={() => run('Show on website', () => ({ published: 1 }))} className={btn}>Show on the website</button>
           <button type="button" disabled={busy} onClick={() => run('Make drafts', () => ({ published: 0 }))} className={btn}>Hide as drafts</button>
-          <button type="button" disabled={busy} onClick={() => setConfirmDelete(true)} className={`${btn} !text-[#c74f2f]`}>Delete them</button>
+          <button type="button" disabled={busy} onClick={() => setConfirmDelete(true)} className={`${btn} !text-[#C65D3B]`}>Delete them</button>
         </div>
       </div>
     ),
@@ -272,7 +272,7 @@ export default function BulkBar({ table, title, items, filtered, selected, setSe
 
   return (
     <>
-      <section className="bg-white rounded-2xl border border-[#1e2522]/10 shadow-sm p-5 md:p-6 mb-6" aria-label="Choose messages to edit">
+      <section className="bg-white rounded-2xl border border-[#1C2A2B]/10 shadow-sm p-5 md:p-6 mb-6" aria-label="Choose messages to edit">
         <h3 className="text-xl font-bold">Edit many messages at once</h3>
         <p className="text-sm text-black mt-1 max-w-3xl">Step 1: tick the messages in the list, or choose a group below. Step 2: a toolbar appears at the bottom of the screen with what you can do to them.</p>
         <div className="mt-4 flex flex-wrap items-end gap-x-6 gap-y-4">
@@ -303,17 +303,17 @@ export default function BulkBar({ table, title, items, filtered, selected, setSe
 
       {n > 0 && (
         <div className="fixed bottom-0 inset-x-0 lg:left-72 z-40 p-3 md:p-4 pointer-events-none" role="region" aria-label="What to do with the ticked messages">
-          <div className="pointer-events-auto max-w-5xl mx-auto rounded-2xl shadow-2xl border border-[#1e2522]/15 bg-white overflow-hidden">
+          <div className="pointer-events-auto max-w-5xl mx-auto rounded-2xl shadow-2xl border border-[#1C2A2B]/15 bg-white overflow-hidden">
             {(open || status) && (
-              <div className="max-h-[60vh] overflow-y-auto pb-5 border-b border-[#1e2522]/10">
+              <div className="max-h-[60vh] overflow-y-auto pb-5 border-b border-[#1C2A2B]/10">
                 {status}
                 {open && <div className="px-5 pt-4" id={`bulk-panel-${open}`}>{panels[open]}</div>}
               </div>
             )}
-            <div className="bg-[#1e2522] text-white px-4 py-3 flex flex-wrap items-center gap-2">
+            <div className="bg-[#1C2A2B] text-white px-4 py-3 flex flex-wrap items-center gap-2">
               <span className="font-bold mr-2">{label()} ticked</span>
               {TOOLS.map(([k, name]) => (
-                <button key={k} type="button" aria-expanded={open === k} aria-controls={`bulk-panel-${k}`} onClick={() => toggle(k)} className={`px-4 py-2 rounded-lg text-sm font-bold ${open === k ? 'bg-[#eaa235] text-[#1e2522]' : 'bg-white/10 hover:bg-white/20'}`}>{name}</button>
+                <button key={k} type="button" aria-expanded={open === k} aria-controls={`bulk-panel-${k}`} onClick={() => toggle(k)} className={`px-4 py-2 rounded-lg text-sm font-bold ${open === k ? 'bg-[#F9AB55] text-[#1C2A2B]' : 'bg-white/10 hover:bg-white/20'}`}>{name}</button>
               ))}
               <button type="button" onClick={() => { setSelected(new Set()); setOpen(''); }} className="ml-auto px-4 py-2 rounded-lg text-sm font-bold underline underline-offset-4">Untick all</button>
             </div>

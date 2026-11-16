@@ -73,7 +73,7 @@ export default function Discipleship() {
                 <dl className="mt-8 space-y-7">
                   {g.practices.map(([t, d]) => (
                     <div key={t}>
-                      <dt className="font-display font-bold text-xl text-[#c74f2f] leading-tight">{t}</dt>
+                      <dt className="font-display font-bold text-xl text-[#C65D3B] leading-tight">{t}</dt>
                       <dd className="mt-1.5 text-[1rem] leading-snug text-black">{d}</dd>
                     </div>
                   ))}
@@ -91,7 +91,7 @@ export default function Discipleship() {
                 <dl className="mt-4 space-y-5">
                   {g.practices.map(([pt, pd]) => (
                     <div key={pt}>
-                      <dt className="font-display font-bold text-xl text-[#c74f2f] leading-tight">{pt}</dt>
+                      <dt className="font-display font-bold text-xl text-[#C65D3B] leading-tight">{pt}</dt>
                       <dd className="mt-1 text-[1rem] leading-snug text-black">{pd}</dd>
                     </div>
                   ))}

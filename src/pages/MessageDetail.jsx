@@ -98,15 +98,15 @@ export default function MessageDetail() {
         <p className="mt-4 text-[1rem] text-black">{[m.speaker, m.date && formatDate(m.date), m.scripture].filter(Boolean).join('  |  ')}</p>
         {(m.series || cats.length > 0) && (
           <ul className="mt-4 flex flex-wrap gap-2" aria-label="Series and categories">
-            {m.series && <li><Link to={seriesPath(m.series)} className="inline-block text-xs font-display font-bold px-3 py-1.5 rounded-full bg-[#1e2522] text-white">Series: {m.series}</Link></li>}
-            {cats.map(c => <li key={c} className="text-xs font-display font-bold px-3 py-1.5 rounded-full bg-[#EDE9DC]">{c}</li>)}
+            {m.series && <li><Link to={seriesPath(m.series)} className="inline-block text-xs font-display font-bold px-3 py-1.5 rounded-full bg-[#1C2A2B] text-white">Series: {m.series}</Link></li>}
+            {cats.map(c => <li key={c} className="text-xs font-display font-bold px-3 py-1.5 rounded-full bg-[#F4ECDD]">{c}</li>)}
           </ul>
         )}
 
         <div className="mt-10 grid lg:grid-cols-3 gap-10 lg:gap-14 items-start">
           <div className="lg:col-span-2">
             {vid && (
-              <div className="aspect-video rounded-[10px] overflow-hidden bg-[#1e2522]">
+              <div className="aspect-video rounded-[10px] overflow-hidden bg-[#1C2A2B]">
                 <LiteYouTube id={vid} title={m.title} />
               </div>
             )}
@@ -130,7 +130,7 @@ export default function MessageDetail() {
               <div className="mt-10">
                 <div role="tablist" aria-label="About this message" className="flex flex-wrap gap-2 mb-6">
                   {tabs.map(t => (
-                    <button key={t.id} id={`tab-${t.id}`} type="button" role="tab" aria-selected={activeTab === t.id} aria-controls={`panel-${t.id}`} tabIndex={activeTab === t.id ? 0 : -1} onClick={() => setTab(t.id)} onKeyDown={(e) => onTabKey(e, t.id)} className={`min-h-[44px] px-5 rounded-full font-display font-bold text-sm ${activeTab === t.id ? 'bg-[#1e2522] text-white' : 'bg-[#EDE9DC] text-[#1e2522] hover:bg-[#1e2522]/15'}`}>{t.label}</button>
+                    <button key={t.id} id={`tab-${t.id}`} type="button" role="tab" aria-selected={activeTab === t.id} aria-controls={`panel-${t.id}`} tabIndex={activeTab === t.id ? 0 : -1} onClick={() => setTab(t.id)} onKeyDown={(e) => onTabKey(e, t.id)} className={`min-h-[44px] px-5 rounded-full font-display font-bold text-sm ${activeTab === t.id ? 'bg-[#1C2A2B] text-white' : 'bg-[#F4ECDD] text-[#1C2A2B] hover:bg-[#1C2A2B]/15'}`}>{t.label}</button>
                   ))}
                 </div>
                 {tabs.map(t => (

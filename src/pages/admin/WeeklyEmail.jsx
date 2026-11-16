@@ -6,9 +6,9 @@ import { useAuth } from '../../auth';
 import { logActivity } from '../../lib/activity';
 import ConfirmDialog from '../../components/ConfirmDialog';
 
-const btn = 'px-3 py-1.5 rounded-lg border border-[#1e2522]/20 bg-white font-bold text-sm disabled:opacity-40';
-const input = 'w-full px-3 py-2 rounded-lg border border-[#1e2522]/20 bg-white';
-const card = 'bg-white rounded-2xl border border-[#1e2522]/10 p-5 md:p-6';
+const btn = 'px-3 py-1.5 rounded-lg border border-[#1C2A2B]/20 bg-white font-bold text-sm disabled:opacity-40';
+const input = 'w-full px-3 py-2 rounded-lg border border-[#1C2A2B]/20 bg-white';
+const card = 'bg-white rounded-2xl border border-[#1C2A2B]/10 p-5 md:p-6';
 
 const AI_ERRORS = {
   '!no_key': 'The Anthropic key is not stored in the database yet.',
@@ -171,7 +171,7 @@ export default function WeeklyEmail() {
 
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-bold text-[#1e2522]">Weekly Email</h2>
+      <h2 className="text-2xl font-bold text-[#1C2A2B]">Weekly Email</h2>
 
       <section className={card} aria-label="Status">
         <div className="flex flex-wrap items-center justify-between gap-4">
@@ -184,7 +184,7 @@ export default function WeeklyEmail() {
             </p>
             <p className="text-sm text-black mt-1">{active} {active === 1 ? 'person is' : 'people are'} signed up.{last ? ` The last email went out ${day(last.issue_date)} to ${last.recipients} people.` : ''}</p>
           </div>
-          <button type="button" onClick={toggle} disabled={!cfg || busy === 'toggle'} className={`${btn} ${on ? '' : '!bg-[#1e2522] !text-white'}`}>{on ? 'Turn off' : 'Turn on'}</button>
+          <button type="button" onClick={toggle} disabled={!cfg || busy === 'toggle'} className={`${btn} ${on ? '' : '!bg-[#1C2A2B] !text-white'}`}>{on ? 'Turn off' : 'Turn on'}</button>
         </div>
       </section>
 
@@ -198,12 +198,12 @@ export default function WeeklyEmail() {
         </div>
         {rebuildNote && <p role="status" className="mt-2 text-sm font-semibold">{rebuildNote}</p>}
         <p className="text-sm text-black mt-1 max-w-3xl">It is built from your newest published message, a short version of its summary, and the events in the next seven days. Edit those in Messages and Events, then refresh.</p>
-        {previewError && <p role="alert" className="mt-3 text-sm font-semibold text-[#c74f2f]">{previewError}</p>}
+        {previewError && <p role="alert" className="mt-3 text-sm font-semibold text-[#C65D3B]">{previewError}</p>}
         {preview && (
           <div className="mt-4 grid lg:grid-cols-[1fr_340px] gap-6 items-start">
             <div>
               <p className="text-sm font-semibold mb-2">Subject: <span className="font-normal">{preview.subject}</span></p>
-              <iframe title="Preview of the weekly email" sandbox="" srcDoc={preview.html} className="w-full h-[640px] rounded-lg border border-[#1e2522]/15 bg-white" />
+              <iframe title="Preview of the weekly email" sandbox="" srcDoc={preview.html} className="w-full h-[640px] rounded-lg border border-[#1C2A2B]/15 bg-white" />
             </div>
             <div>
               <label className="block text-sm font-semibold" htmlFor="weekly-blurb">Short summary of the message</label>
@@ -228,7 +228,7 @@ export default function WeeklyEmail() {
           </div>
         )}
 
-        <div className="mt-6 pt-5 border-t border-[#1e2522]/10 grid md:grid-cols-2 gap-6">
+        <div className="mt-6 pt-5 border-t border-[#1C2A2B]/10 grid md:grid-cols-2 gap-6">
           <form onSubmit={sendTest} className="flex flex-wrap items-end gap-3">
             <label className="text-sm font-semibold flex-1 min-w-[14rem]">
               <span className="block mb-1">Send a test to</span>
@@ -240,7 +240,7 @@ export default function WeeklyEmail() {
           <div>
             <p className="text-sm font-semibold mb-1">Send it to everyone now</p>
             <p className="text-xs text-black mb-2">Use this to send early or to send the first one. It will not send twice in one day.</p>
-            <button type="button" onClick={() => setConfirmSend(true)} disabled={busy === 'send' || active === 0} className={`${btn} !bg-[#1e2522] !text-white`}>{busy === 'send' ? 'Sending' : `Send to ${active} ${active === 1 ? 'person' : 'people'}`}</button>
+            <button type="button" onClick={() => setConfirmSend(true)} disabled={busy === 'send' || active === 0} className={`${btn} !bg-[#1C2A2B] !text-white`}>{busy === 'send' ? 'Sending' : `Send to ${active} ${active === 1 ? 'person' : 'people'}`}</button>
             {sendNote && <p role="status" className="mt-2 text-sm font-semibold">{sendNote}</p>}
           </div>
         </div>
@@ -256,13 +256,13 @@ export default function WeeklyEmail() {
         <div className="mt-5 flex items-center gap-3"><label className="text-sm font-semibold" htmlFor="weekly-q">Search</label><input id="weekly-q" value={q} onChange={(e) => setQ(e.target.value)} className={`${input} max-w-xs`} /></div>
         <div className="mt-3 overflow-x-auto">
           <table className="w-full text-sm">
-            <thead><tr className="text-left border-b border-[#1e2522]/15"><th className="py-2 pr-3">Name</th><th className="py-2 pr-3">Email</th><th className="py-2 pr-3">Signed up</th><th className="py-2 pr-3">From</th><th className="py-2 pr-3">Status</th><th className="py-2"><span className="sr-only">Remove</span></th></tr></thead>
+            <thead><tr className="text-left border-b border-[#1C2A2B]/15"><th className="py-2 pr-3">Name</th><th className="py-2 pr-3">Email</th><th className="py-2 pr-3">Signed up</th><th className="py-2 pr-3">From</th><th className="py-2 pr-3">Status</th><th className="py-2"><span className="sr-only">Remove</span></th></tr></thead>
             <tbody>
               {shown.slice(0, 200).map(r => (
-                <tr key={r.id} className="border-b border-[#1e2522]/10">
+                <tr key={r.id} className="border-b border-[#1C2A2B]/10">
                   <td className="py-2 pr-3">{r.name || ''}</td><td className="py-2 pr-3">{r.email}</td><td className="py-2 pr-3">{day(r.created_at)}</td><td className="py-2 pr-3">{r.source}</td>
                   <td className="py-2 pr-3">{r.status === 'active' ? 'Active' : 'Unsubscribed'}</td>
-                  <td className="py-2"><button type="button" onClick={() => setPendingRemove(r)} className="text-[#c74f2f] font-bold underline underline-offset-2">Remove</button></td>
+                  <td className="py-2"><button type="button" onClick={() => setPendingRemove(r)} className="text-[#C65D3B] font-bold underline underline-offset-2">Remove</button></td>
                 </tr>
               ))}
               {shown.length === 0 && <tr><td colSpan={6} className="py-4 text-black">{rows.length === 0 ? 'No one has signed up yet.' : 'No one matches that search.'}</td></tr>}

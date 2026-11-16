@@ -5,7 +5,7 @@ import { logActivity } from '../../lib/activity';
 import { cleanTranscript, matchMessage } from '../../lib/transcript';
 import { ytId } from '../../utils';
 
-const btn = 'px-4 py-2 rounded-lg border border-[#1e2522]/20 bg-white font-bold text-sm disabled:opacity-40';
+const btn = 'px-4 py-2 rounded-lg border border-[#1C2A2B]/20 bg-white font-bold text-sm disabled:opacity-40';
 
 // Adds transcripts to messages from files (.txt, .srt, .vtt). Each file is matched by its name, and the match can be changed before saving.
 export default function TranscriptImport({ items, onClose, onDone }) {
@@ -88,7 +88,7 @@ export default function TranscriptImport({ items, onClose, onDone }) {
   };
 
   return (
-    <div className="bg-white rounded-2xl border border-[#1e2522]/10 shadow-sm p-5 mb-6" role="region" aria-label="Import transcripts">
+    <div className="bg-white rounded-2xl border border-[#1C2A2B]/10 shadow-sm p-5 mb-6" role="region" aria-label="Import transcripts">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <strong>Import transcripts</strong>
         <button type="button" className={btn} onClick={onClose}>Close</button>
@@ -98,11 +98,11 @@ export default function TranscriptImport({ items, onClose, onDone }) {
         <input ref={fileRef} type="file" accept=".txt,.srt,.vtt,.md,text/plain" multiple className="sr-only" aria-label="Choose transcript files" tabIndex={-1} onChange={(e) => { load(e.target.files); e.target.value = ''; }} />
         <button type="button" className={btn} onClick={() => fileRef.current?.click()}>Choose files</button>
         <label className="flex items-center gap-2 text-sm cursor-pointer">
-          <input type="checkbox" checked={replace} onChange={(e) => setReplace(e.target.checked)} className="w-5 h-5 accent-[#c74f2f]" />
+          <input type="checkbox" checked={replace} onChange={(e) => setReplace(e.target.checked)} className="w-5 h-5 accent-[#C65D3B]" />
           Replace a transcript a message already has
         </label>
         <label className="flex items-center gap-2 text-sm cursor-pointer">
-          <input type="checkbox" checked={aiAfter} onChange={(e) => setAiAfter(e.target.checked)} className="w-5 h-5 accent-[#c74f2f]" />
+          <input type="checkbox" checked={aiAfter} onChange={(e) => setAiAfter(e.target.checked)} className="w-5 h-5 accent-[#C65D3B]" />
           Then have the AI write the description and choose categories for any that are blank
         </label>
       </div>
@@ -110,13 +110,13 @@ export default function TranscriptImport({ items, onClose, onDone }) {
       {rows.length > 0 && (
         <div className="mt-5 overflow-x-auto">
           <table className="w-full text-sm text-left">
-            <thead><tr className="border-b border-[#1e2522]/10"><th className="py-2 pr-4">File</th><th className="py-2 pr-4">Message</th><th className="py-2">Words</th></tr></thead>
+            <thead><tr className="border-b border-[#1C2A2B]/10"><th className="py-2 pr-4">File</th><th className="py-2 pr-4">Message</th><th className="py-2">Words</th></tr></thead>
             <tbody>
               {rows.map(r => (
-                <tr key={r.key} className="border-b border-[#1e2522]/10 align-top">
+                <tr key={r.key} className="border-b border-[#1C2A2B]/10 align-top">
                   <td className="py-2 pr-4 break-all">{r.name}</td>
                   <td className="py-2 pr-4">
-                    <select value={r.id} onChange={(e) => setRows(prev => prev.map(p => p.key === r.key ? { ...p, id: e.target.value } : p))} className="px-3 py-2 rounded-lg border border-[#1e2522]/20 bg-white max-w-[22rem]" aria-label={`Message for ${r.name}`}>
+                    <select value={r.id} onChange={(e) => setRows(prev => prev.map(p => p.key === r.key ? { ...p, id: e.target.value } : p))} className="px-3 py-2 rounded-lg border border-[#1C2A2B]/20 bg-white max-w-[22rem]" aria-label={`Message for ${r.name}`}>
                       <option value="">No match, skip this file</option>
                       {sorted.map(m => <option key={m.id} value={m.id}>{[m.date && String(m.date).slice(0, 10), m.title].filter(Boolean).join('  ')}</option>)}
                     </select>

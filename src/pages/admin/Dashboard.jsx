@@ -18,7 +18,7 @@ import { DEFAULT_LEADERS } from '../../content/leaders';
 
 
 const NavItem = ({ icon, children, ...rest }) => (
-  <button {...rest} className="w-full flex items-center gap-4 px-4 py-3 text-left text-white/80 hover:bg-[#eaa235] hover:text-[#1e2522] rounded-lg transition-colors">
+  <button {...rest} className="w-full flex items-center gap-4 px-4 py-3 text-left text-white/80 hover:bg-[#F9AB55] hover:text-[#1C2A2B] rounded-lg transition-colors">
     <SafeIcon icon={icon} className="text-xl" />
     <span className="font-semibold">{children}</span>
   </button>
@@ -379,22 +379,22 @@ const ContentStudio = () => {
 
   if (user && !user.role) {
     return (
-      <div className="min-h-screen bg-[#f5f3ee] flex items-center justify-center p-4">
-        <div className="bg-white max-w-sm p-6 rounded-xl border border-black/10 shadow-sm text-[#1e2522]">
+      <div className="min-h-screen bg-[#F4ECDD] flex items-center justify-center p-4">
+        <div className="bg-white max-w-sm p-6 rounded-xl border border-black/10 shadow-sm text-[#1C2A2B]">
           <h1 className="text-lg font-bold">No access yet</h1>
           <p className="mt-2 text-sm">This login is not on the team. Ask an admin to invite you from the Team screen.</p>
-          <button type="button" onClick={logout} className="mt-4 px-4 py-2 rounded-lg bg-[#1e2522] text-white text-sm font-semibold">Sign out</button>
+          <button type="button" onClick={logout} className="mt-4 px-4 py-2 rounded-lg bg-[#1C2A2B] text-white text-sm font-semibold">Sign out</button>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#1e2522]/5 text-[#1e2522] flex">
+    <div className="min-h-screen bg-[#1C2A2B]/5 text-[#1C2A2B] flex">
       {/* Sidebar */}
-      <aside className={`w-72 bg-[#1e2522] text-white p-6 flex-col fixed lg:relative h-full z-50 lg:z-auto ${isSidebarOpen ? 'flex' : 'hidden'}`}>
+      <aside className={`w-72 bg-[#1C2A2B] text-white p-6 flex-col fixed lg:relative h-full z-50 lg:z-auto ${isSidebarOpen ? 'flex' : 'hidden'}`}>
         <div className="flex items-center justify-between mb-10">
-            <h1 className="text-2xl font-bold text-white tracking-wider"><span className="text-[#eaa235]">Admin</span></h1>
+            <h1 className="text-2xl font-bold text-white tracking-wider"><span className="text-[#F9AB55]">Admin</span></h1>
             <button aria-label="Close menu" onClick={() => setIsSidebarOpen(false)} className="lg:hidden text-2xl text-white/70 hover:text-white">
                 <SafeIcon icon={FiX} />
             </button>
@@ -414,7 +414,7 @@ const ContentStudio = () => {
         </nav>
         
         <div className="mt-auto pt-6 border-t border-white/10 space-y-1">
-             <a href="/" target="_blank" rel="noopener noreferrer" className="w-full flex items-center gap-4 px-4 py-3 text-left text-white/80 hover:bg-[#eaa235] hover:text-[#1e2522] rounded-lg transition-colors">
+             <a href="/" target="_blank" rel="noopener noreferrer" className="w-full flex items-center gap-4 px-4 py-3 text-left text-white/80 hover:bg-[#F9AB55] hover:text-[#1C2A2B] rounded-lg transition-colors">
                <SafeIcon icon={FiExternalLink} className="text-xl" />
                <span className="font-semibold">Go to Site<span className="sr-only"> (opens in a new tab)</span></span>
              </a>
@@ -442,7 +442,7 @@ const ContentStudio = () => {
                 role="tab"
                 aria-selected={activeTab === key}
                 onClick={() => setActiveTab(key)}
-                className={`px-5 py-2.5 rounded-full text-sm font-bold ${activeTab === key ? 'bg-[#1e2522] text-white' : 'bg-white border border-[#1e2522]/20 text-[#1e2522] hover:bg-[#1e2522]/10'}`}
+                className={`px-5 py-2.5 rounded-full text-sm font-bold ${activeTab === key ? 'bg-[#1C2A2B] text-white' : 'bg-white border border-[#1C2A2B]/20 text-[#1C2A2B] hover:bg-[#1C2A2B]/10'}`}
               >{label}</button>
             ))}
           </div>

@@ -7,7 +7,7 @@ import { useSite } from '../settings';
 
 export const SUBMISSIONS_TABLE = 'form_submissions_church';
 
-const input = 'neu-field w-full min-h-[48px] px-4 py-3 rounded-xl border border-[#1e2522]/25 focus:outline-none focus:ring-2 focus:ring-[#1e2522] focus:border-[#1e2522] text-base';
+const input = 'neu-field w-full min-h-[48px] px-4 py-3 rounded-xl border border-[#1C2A2B]/25 focus:outline-none focus:ring-2 focus:ring-[#1C2A2B] focus:border-[#1C2A2B] text-base';
 
 function Field({ formKey, field, value, onChange, error }) {
   const id = `ff-${formKey}-${field.name}`;
@@ -31,12 +31,12 @@ function Field({ formKey, field, value, onChange, error }) {
         <div className="flex flex-wrap gap-x-6 gap-y-1">
           {field.options.map(o => (
             <label key={o} className="inline-flex items-center gap-2 min-h-[44px] cursor-pointer">
-              <input type="radio" name={field.name} value={o} checked={value === o} onChange={() => onChange(field.name, o)} className="w-5 h-5 accent-[#1e2522]" />
+              <input type="radio" name={field.name} value={o} checked={value === o} onChange={() => onChange(field.name, o)} className="w-5 h-5 accent-[#1C2A2B]" />
               <span>{o}</span>
             </label>
           ))}
         </div>
-        {error && <p id={describedBy} role="alert" className="text-[#c74f2f] text-sm mt-1">{error}</p>}
+        {error && <p id={describedBy} role="alert" className="text-[#C65D3B] text-sm mt-1">{error}</p>}
       </fieldset>
     );
   } else if (field.type === 'checkboxes') {
@@ -51,20 +51,20 @@ function Field({ formKey, field, value, onChange, error }) {
                 type="checkbox"
                 checked={list.includes(o)}
                 onChange={(e) => onChange(field.name, e.target.checked ? [...list, o] : list.filter(x => x !== o))}
-                className="w-5 h-5 accent-[#1e2522]"
+                className="w-5 h-5 accent-[#1C2A2B]"
               />
               <span>{o}</span>
             </label>
           ))}
         </div>
-        {error && <p id={describedBy} role="alert" className="text-[#c74f2f] text-sm mt-1">{error}</p>}
+        {error && <p id={describedBy} role="alert" className="text-[#C65D3B] text-sm mt-1">{error}</p>}
       </fieldset>
     );
   } else if (field.type === 'checkbox') {
     return (
       <div>
         <label className="inline-flex items-start gap-3 min-h-[44px] cursor-pointer">
-          <input id={id} type="checkbox" name={field.name} checked={Boolean(value)} onChange={(e) => onChange(field.name, e.target.checked)} className="w-5 h-5 mt-1 accent-[#1e2522]" />
+          <input id={id} type="checkbox" name={field.name} checked={Boolean(value)} onChange={(e) => onChange(field.name, e.target.checked)} className="w-5 h-5 mt-1 accent-[#1C2A2B]" />
           <span>{field.label}</span>
         </label>
       </div>
@@ -86,10 +86,10 @@ function Field({ formKey, field, value, onChange, error }) {
   return (
     <div>
       <label htmlFor={id} className="block font-semibold mb-2">
-        {field.label}{field.required && <span aria-hidden="true" className="text-[#c74f2f]"> *</span>}
+        {field.label}{field.required && <span aria-hidden="true" className="text-[#C65D3B]"> *</span>}
       </label>
       {control}
-      {error && <p id={describedBy} role="alert" className="text-[#c74f2f] text-sm mt-1">{error}</p>}
+      {error && <p id={describedBy} role="alert" className="text-[#C65D3B] text-sm mt-1">{error}</p>}
     </div>
   );
 }
@@ -135,7 +135,7 @@ export default function FormBlock({ formKey, heading, intro, defaults = {}, clas
   if (state.phase === 'sent') {
     return (
       <div role="status" className={`neu rounded-2xl p-8 text-center ${className}`}>
-        <svg className="check-draw mx-auto mb-4" width="56" height="56" viewBox="0 0 56 56" fill="none" stroke="#eaa235" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="28" cy="28" r="25" /><path d="M17 29l8 8 14-16" /></svg>
+        <svg className="check-draw mx-auto mb-4" width="56" height="56" viewBox="0 0 56 56" fill="none" stroke="#F9AB55" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="28" cy="28" r="25" /><path d="M17 29l8 8 14-16" /></svg>
         <p className="text-xl font-semibold leading-relaxed">{def.confirmation}</p>
         {def.next && (
           <div className="mt-6 text-left max-w-md mx-auto">
@@ -162,7 +162,7 @@ export default function FormBlock({ formKey, heading, intro, defaults = {}, clas
         <label>Website<input tabIndex={-1} autoComplete="off" name="website" value={values.website || ''} onChange={(e) => change('website', e.target.value)} /></label>
       </div>
       {def.note && <p className="text-sm text-black">{def.note}</p>}
-      {state.phase === 'error' && <p role="alert" className="text-[#c74f2f] font-medium">{state.error}</p>}
+      {state.phase === 'error' && <p role="alert" className="text-[#C65D3B] font-medium">{state.error}</p>}
       <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
         <button type="submit" disabled={state.phase === 'sending'} aria-busy={state.phase === 'sending'} className="btn btn-solid disabled:opacity-60">
           {state.phase === 'sending' ? 'Sending...' : def.button}

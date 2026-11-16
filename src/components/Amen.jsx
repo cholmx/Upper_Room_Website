@@ -12,7 +12,7 @@ export default function Amen() {
       typed = (typed + e.key.toLowerCase()).slice(-4);
       if (typed !== 'amen') return;
       typed = '';
-      const colors = ['#eaa235', '#c74f2f', '#EDE9DC', '#1e2522'];
+      const colors = ['#F9AB55', '#C65D3B', '#F4ECDD', '#1C2A2B'];
       const dots = Array.from({ length: 36 }, (_, i) => {
         const dot = document.createElement('span');
         dot.className = 'amen-dot';
@@ -22,7 +22,7 @@ export default function Amen() {
         dot.style.setProperty('--x', `${Math.round(Math.cos(angle) * dist * (Math.random() > 0.5 ? 1 : -1))}px`);
         dot.style.setProperty('--y', `${-Math.round(Math.sin(angle) * dist)}px`);
         dot.style.background = colors[i % colors.length];
-        dot.style.border = '1px solid rgba(30,37,34,0.15)';
+        dot.style.border = '1px solid rgba(28,42,43,0.15)';
         document.body.appendChild(dot);
         return dot;
       });

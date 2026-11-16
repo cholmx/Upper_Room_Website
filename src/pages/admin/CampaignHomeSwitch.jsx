@@ -41,13 +41,13 @@ export default function CampaignHomeSwitch() {
 
   if (loading) return null;
   return (
-    <section aria-label="Home page section" className="mb-6 bg-white rounded-2xl border border-[#1e2522]/10 p-5 flex flex-wrap items-center justify-between gap-4">
+    <section aria-label="Home page section" className="mb-6 bg-white rounded-2xl border border-[#1C2A2B]/10 p-5 flex flex-wrap items-center justify-between gap-4">
       <div className="max-w-2xl">
         <p className="text-lg font-bold">{on ? 'The Growth Campaign section is showing on the Home page' : 'The Growth Campaign section is hidden on the Home page'}</p>
         <p className="text-sm text-black mt-1">This is the "Transforming Together" band with the Give and Learn More buttons. The Growth Campaign page itself stays up either way.</p>
         {note && <p role="status" className="mt-2 text-sm font-semibold">{note}</p>}
       </div>
-      <button type="button" role="switch" aria-checked={on} onClick={toggle} disabled={busy} className={`px-5 py-2.5 rounded-full font-bold text-sm disabled:opacity-50 ${on ? 'bg-white border border-[#1e2522]/30' : 'bg-[#1e2522] text-white'}`}>
+      <button type="button" role="switch" aria-checked={on} onClick={toggle} disabled={busy} className={`px-5 py-2.5 rounded-full font-bold text-sm disabled:opacity-50 ${on ? 'bg-white border border-[#1C2A2B]/30' : 'bg-[#1C2A2B] text-white'}`}>
         {busy ? 'Saving' : on ? 'Hide it' : 'Show it'}
       </button>
     </section>

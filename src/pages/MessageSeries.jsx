@@ -55,7 +55,7 @@ export default function MessageSeries() {
       <Section tone={(next || (seenIdx < 0 && chrono.length > 1)) ? 'gray' : 'white'}>
         <SectionHeader title="Latest in this series" />
         <div className="grid md:grid-cols-5 gap-8 md:gap-12 items-center">
-          <div className="md:col-span-3 aspect-video rounded-[10px] overflow-hidden bg-[#1e2522]">
+          <div className="md:col-span-3 aspect-video rounded-[10px] overflow-hidden bg-[#1C2A2B]">
             {video ? <LiteYouTube id={video} title={latest.title} /> : <div className="w-full h-full flex items-center justify-center text-white/80">Video coming soon</div>}
           </div>
           <div className="md:col-span-2">
