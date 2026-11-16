@@ -234,7 +234,6 @@ export default function Messages() {
               <Btn href={SITE.podcasts.apple} variant="gold">Apple Podcasts</Btn>
               <Btn href={SITE.podcasts.spotify} variant="light">Spotify</Btn>
             </div>
-            <p className="mt-6 text-base leading-relaxed">Looking for older messages that never had a video? They are in the <Link to="/messages/audio-archive" className="underline underline-offset-4 font-semibold">audio archive</Link>.</p>
           </PhotoBand>
         </>
       )}
