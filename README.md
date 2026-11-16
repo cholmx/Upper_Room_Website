@@ -148,7 +148,7 @@ Old addresses `/worship-team`, `/outreach`, `/prayer`, `/stories` and `/connect`
 
 ## Colors
 
-The palette is jet black `#1C2A2B`, dark teal `#003235`, jungle teal `#5D947B`, sandy brown `#F9AB55`, rosy copper `#C65D3B`, cream `#F4ECDD` and white `#FFFFFF`. Text on white uses jet black, because sandy brown, jungle teal and rosy copper do not have enough contrast for small text on light backgrounds. Sections are white, cream (`#F4ECDD`) or a full photo. Neighboring cream sections or neighboring photos should differ, and neighboring white sections read as one white page. The footer is dark teal. Check it with `node scripts/check-adjacent-colors.mjs` while a preview is running.
+The palette is jet black `#1C2A2B`, dark teal `#172B2C`, jungle teal `#5B8B75`, sandy brown `#F9AB55`, rosy copper `#C65D3B`, cream `#F4ECDD` and white `#FFFFFF`. Text on white uses jet black, because sandy brown, jungle teal and rosy copper do not have enough contrast for small text on light backgrounds. Sections are white, cream (`#F4ECDD`) or a full photo. Neighboring cream sections or neighboring photos should differ, and neighboring white sections read as one white page. The footer is dark teal. Check it with `node scripts/check-adjacent-colors.mjs` while a preview is running.
 
 ## Photo uploads
 

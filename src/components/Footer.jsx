@@ -23,13 +23,13 @@ function FooterLink({ to, external, children }) {
   );
 }
 
-const heading = 'text-[1.2rem] font-bold text-[#5D947B] mb-5';
+const heading = 'text-[1.2rem] font-bold text-[#5B8B75] mb-5';
 
 export default function Footer() {
   const SITE = useSite();
   return (
     <footer className="w-full max-w-[1312px] mx-auto px-3 md:px-4 pt-1.5 md:pt-2 pb-20 md:pb-4">
-    <div className="bg-[#003235] text-[#ffffff] relative overflow-hidden rounded-[10px]">
+    <div className="bg-[#172B2C] text-[#ffffff] relative overflow-hidden rounded-[10px]">
       <div className="px-6 md:px-10 pt-12 md:pt-16 pb-10 md:pb-12 flex flex-wrap gap-x-10 gap-y-6 items-center justify-between border-b border-white/10 relative z-10">
         <div>
           <p className="text-2xl md:text-3xl font-display font-bold text-white">Join us this Sunday</p>

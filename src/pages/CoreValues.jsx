@@ -36,7 +36,7 @@ function ValueBody({ v, first }) {
       <ul className="space-y-2">
         {v.practices.map(p => (
           <li key={p} className="flex gap-3 text-[1rem] leading-snug text-black">
-            <span aria-hidden="true" className="mt-[0.45em] w-2 h-2 rounded-full bg-[#5D947B] shrink-0" />
+            <span aria-hidden="true" className="mt-[0.45em] w-2 h-2 rounded-full bg-[#5B8B75] shrink-0" />
             <span>{p}</span>
           </li>
         ))}
@@ -80,7 +80,7 @@ function ValueList() {
                 onClick={() => toggle(i)}
                 className="w-full flex items-center gap-4 text-left p-4 min-h-[64px]"
               >
-                <span className="font-display font-bold text-2xl text-[#5D947B] w-9 shrink-0">{String(v.n).padStart(2, '0')}</span>
+                <span className="font-display font-bold text-2xl text-[#5B8B75] w-9 shrink-0">{String(v.n).padStart(2, '0')}</span>
                 <span className="flex-1 font-display font-bold text-lg leading-tight text-[#1C2A2B]">{v.title}</span>
                 <span aria-hidden="true" className={`shrink-0 text-2xl text-[#1C2A2B] transition-transform ${on ? 'rotate-45' : ''}`}>+</span>
               </button>
@@ -148,7 +148,7 @@ function ValueExplorer() {
               onKeyDown={e => onKey(e, i)}
               className={`text-left rounded-[10px] p-3 md:p-4 flex flex-row items-center gap-3 min-[360px]:flex-col min-[360px]:items-start min-[360px]:gap-1 lg:flex-row lg:items-center lg:gap-4 min-h-[72px] transition-colors ${on ? 'bg-[#1C2A2B] text-white shadow-lg' : 'bg-white text-[#1C2A2B] hover:bg-white/70'}`}
             >
-              <span className={`font-display font-bold text-xl md:text-2xl lg:w-9 shrink-0 ${on ? 'text-[#F9AB55]' : 'text-[#5D947B]'}`}>{String(val.n).padStart(2, '0')}</span>
+              <span className={`font-display font-bold text-xl md:text-2xl lg:w-9 shrink-0 ${on ? 'text-[#F9AB55]' : 'text-[#5B8B75]'}`}>{String(val.n).padStart(2, '0')}</span>
               <span className="block">
                 <span className="block font-display font-bold text-[0.95rem] md:text-lg leading-tight">{val.title}</span>
               </span>

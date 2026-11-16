@@ -14,8 +14,8 @@ export default {
       colors: {
         // The site palette: jet black, dark teal, jungle teal, sandy brown, rosy copper, cream and white.
         black: '#1C2A2B',
-        teal: { DEFAULT: '#003235' },
-        jungle: { DEFAULT: '#5D947B' },
+        teal: { DEFAULT: '#172B2C' },
+        jungle: { DEFAULT: '#5B8B75' },
         sand: { DEFAULT: '#F4ECDD' },
         copper: { DEFAULT: '#C65D3B' },
         ink: {

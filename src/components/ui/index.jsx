@@ -15,7 +15,7 @@ const BTN = {
   primary: 'btn btn-solid',
   accent: 'btn bg-[#C65D3B] text-white border-[#C65D3B] hover:bg-[#1C2A2B] hover:border-[#1C2A2B]',
   gold: 'btn bg-[#F9AB55] text-[#1C2A2B] border-[#F9AB55] hover:bg-[#C65D3B] hover:text-white hover:border-[#C65D3B]',
-  green: 'btn bg-[#003235] text-white border-[#003235] hover:bg-[#F9AB55] hover:text-[#1C2A2B] hover:border-[#F9AB55]',
+  green: 'btn bg-[#172B2C] text-white border-[#172B2C] hover:bg-[#F9AB55] hover:text-[#1C2A2B] hover:border-[#F9AB55]',
   dark: 'btn bg-[#1C2A2B] text-white border-[#1C2A2B] hover:bg-[#F9AB55] hover:text-[#1C2A2B] hover:border-[#F9AB55]',
   ghost: 'btn btn-outline',
   light: 'btn btn-outline-dark',
@@ -49,12 +49,10 @@ const TONES = {
   sand: 'bg-white text-black',
   gray: 'paper-bg text-black',
   yellow: 'bg-[#F9AB55] text-[#1C2A2B]',
-  // Jungle teal: only for bands that hold white cards, so no small text sits directly on it.
-  sage: 'bg-[#5D947B] text-[#1C2A2B]',
 };
 
 export function Section({ tone = 'cream', id, className = '', narrow = false, center = false, children, ...rest }) {
-  const panel = tone === 'gray' || tone === 'yellow' || tone === 'sage';
+  const panel = tone === 'gray' || tone === 'yellow';
   return (
     <section id={id} className="max-w-[1312px] mx-auto px-3 md:px-4 py-1.5 md:py-2 scroll-mt-32" {...rest}>
       <div className={`${TONES[tone]} ${panel ? 'rounded-[10px]' : ''} py-16 md:py-24 px-6 md:px-10 ${className}`}>
@@ -173,7 +171,7 @@ export function PhotoBand({ slot, id, className = '', wide = false, children }) 
   const src = loaded ? imgUrl(url || stockFor(slot), 1600) : '';
   return (
     <section id={id} data-image-band="true" className="max-w-[1312px] mx-auto px-3 md:px-4 py-1.5 md:py-2 scroll-mt-32">
-      <div className={`photo-section text-shade rounded-[10px] bg-[#003235] text-white py-24 md:py-36 px-6 md:px-10 ${className}`}>
+      <div className={`photo-section text-shade rounded-[10px] bg-[#172B2C] text-white py-24 md:py-36 px-6 md:px-10 ${className}`}>
         {src && <Media src={src} className="photo-bg" />}
         <div className={`hero-text photo-copy ${wide ? '' : 'max-w-4xl'}`}>{children}</div>
       </div>

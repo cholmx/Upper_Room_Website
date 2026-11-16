@@ -63,7 +63,7 @@ export default function Discipleship() {
         <p className="text-base leading-relaxed">A spiritual practice is a regular habit that helps you grow closer to God. Christians have used these habits since the early church. There are many of them, and these nine are the ones we focus on in this training track. We group them under our three words: Know God, Share Life, and Serve Others.</p>
       </PhotoBand>
 
-      <Section tone="sage">
+      <Section tone="gray">
         {desktop ? (
           <div className="grid md:grid-cols-3 gap-6">
             {GROUPS.map(g => (
@@ -102,7 +102,7 @@ export default function Discipleship() {
         )}
       </Section>
 
-      <Section tone="gray" id="values">
+      <Section tone="white" id="values">
         <div className="max-w-3xl">
         <h2 className="text-3xl md:text-5xl mb-5">Values In The Kingdom</h2>
         <div className={`space-y-4 ${P}`}>
@@ -112,7 +112,7 @@ export default function Discipleship() {
       </div>
       </Section>
 
-      <Section tone="white" narrow id="years">
+      <Section tone="gray" narrow id="years">
         <SectionHeader title="How the five years work" />
         <div className={`space-y-4 ${P}`}>
           <p>Each year on Sunday mornings is one of two kinds. A practices year goes through three of these nine practices, one in the fall, one in the winter, and one in the spring. A Values In The Kingdom year studies the core values of our church in one class that runs through the fall, winter, and spring.</p>

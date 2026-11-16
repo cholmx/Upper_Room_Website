@@ -42,7 +42,7 @@ export default function Home() {
   return (
     <>
       <section aria-labelledby="home-h1" className="max-w-[1312px] mx-auto px-3 md:px-4 pt-3 md:pt-4 pb-1.5 md:pb-2">
-        <div className="photo-section nav-fade text-shade hero-photo rounded-[10px] bg-[#003235] min-h-[70vh] md:min-h-[85vh] flex items-end">
+        <div className="photo-section nav-fade text-shade hero-photo rounded-[10px] bg-[#172B2C] min-h-[70vh] md:min-h-[85vh] flex items-end">
           {banner && <Media src={banner} width={1800} priority className="photo-bg" />}
           <div className="hero-text w-full max-w-[900px] px-6 md:px-10 pb-14 md:pb-20 pt-32 text-left text-white">
             <HeroHeading id="home-h1" lines={SITE.hero.lines && SITE.hero.lines.length ? SITE.hero.lines : [SITE.hero.title]} className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-4 leading-[1.1]" />
@@ -72,7 +72,7 @@ export default function Home() {
         </div>
       </Section>
 
-      <Section tone="sage">
+      <Section tone="gray">
         <ul className="grid md:grid-cols-3 gap-6 md:gap-8">
           {[
             ['Know God', 'Draw close to Him through worship, prayer, and Scripture.'],
@@ -171,7 +171,7 @@ export default function Home() {
             {comingUp.map(({ ev, date }) => (
               <li key={ev.id} className="bg-white rounded-[10px] elev-1 p-5 md:p-6">
                 <Link to="/events" className="flex gap-4 items-start hover:text-[#C65D3B]">
-                  <span className="shrink-0 w-14 text-center bg-[#F4ECDD] border-t-4 border-[#5D947B] rounded-[6px] py-1.5" aria-hidden="true">
+                  <span className="shrink-0 w-14 text-center bg-[#F4ECDD] border-t-4 border-[#5B8B75] rounded-[6px] py-1.5" aria-hidden="true">
                     <span className="block font-display font-bold text-xs uppercase tracking-wide text-[#1C2A2B]">{date.toLocaleDateString('en-US', { month: 'short' })}</span>
                     <span className="block font-display font-bold text-4xl leading-none">{date.getDate()}</span>
                   </span>
@@ -190,9 +190,9 @@ export default function Home() {
       <Section tone="white">
         <h2 className="text-3xl md:text-5xl mb-8">Start here</h2>
         <Cards cols={3}>
-          <Card title="Plan Your Visit" as="h3" to="/plan-your-visit" linkLabel="Plan your visit" icon={<SafeIcon icon={FiCalendar} size={32} aria-hidden="true" className="text-[#5D947B]" />}><p>See what a Sunday looks like and tell us you are coming so we can greet you.</p></Card>
-          <Card title="Grow With Us" as="h3" to="/discipleship" linkLabel="Grow with us" icon={<SafeIcon icon={FiUsers} size={32} aria-hidden="true" className="text-[#5D947B]" />}><p>Join a Sunday morning adult class. Our welcome team can help you find a place.</p></Card>
-          <Card title="Give" as="h3" to="/give" linkLabel="Ways to give" icon={<SafeIcon icon={FiHeart} size={32} aria-hidden="true" className="text-[#5D947B]" />}><p>Support the ministries and outreach of our church family.</p></Card>
+          <Card title="Plan Your Visit" as="h3" to="/plan-your-visit" linkLabel="Plan your visit" icon={<SafeIcon icon={FiCalendar} size={32} aria-hidden="true" className="text-[#5B8B75]" />}><p>See what a Sunday looks like and tell us you are coming so we can greet you.</p></Card>
+          <Card title="Grow With Us" as="h3" to="/discipleship" linkLabel="Grow with us" icon={<SafeIcon icon={FiUsers} size={32} aria-hidden="true" className="text-[#5B8B75]" />}><p>Join a Sunday morning adult class. Our welcome team can help you find a place.</p></Card>
+          <Card title="Give" as="h3" to="/give" linkLabel="Ways to give" icon={<SafeIcon icon={FiHeart} size={32} aria-hidden="true" className="text-[#5B8B75]" />}><p>Support the ministries and outreach of our church family.</p></Card>
         </Cards>
       </Section>
 
