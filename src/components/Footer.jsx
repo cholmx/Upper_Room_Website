@@ -23,7 +23,7 @@ function FooterLink({ to, external, children }) {
   );
 }
 
-const heading = 'text-[1.05rem] font-bold text-white/70 mb-5';
+const heading = 'text-[1.2rem] font-bold text-[#5D947B] mb-5';
 
 export default function Footer() {
   const SITE = useSite();

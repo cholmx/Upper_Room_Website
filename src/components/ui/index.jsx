@@ -49,10 +49,12 @@ const TONES = {
   sand: 'bg-white text-black',
   gray: 'paper-bg text-black',
   yellow: 'bg-[#F9AB55] text-[#1C2A2B]',
+  // Jungle teal: only for bands that hold white cards, so no small text sits directly on it.
+  sage: 'bg-[#5D947B] text-[#1C2A2B]',
 };
 
 export function Section({ tone = 'cream', id, className = '', narrow = false, center = false, children, ...rest }) {
-  const panel = tone === 'gray' || tone === 'yellow';
+  const panel = tone === 'gray' || tone === 'yellow' || tone === 'sage';
   return (
     <section id={id} className="max-w-[1312px] mx-auto px-3 md:px-4 py-1.5 md:py-2 scroll-mt-32" {...rest}>
       <div className={`${TONES[tone]} ${panel ? 'rounded-[10px]' : ''} py-16 md:py-24 px-6 md:px-10 ${className}`}>

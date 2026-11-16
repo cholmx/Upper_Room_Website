@@ -487,3 +487,11 @@ details.u-acc.neu-acc[open] { background: #ffffff; box-shadow: var(--shadow); }
 .value-panel { animation: valueIn 0.3s ease; }
 @keyframes valueIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .value-panel { animation: none; } }
+
+/* Jungle teal (#5D947B) accents. These are lines, borders, icons and large shapes, so the text on them stays jet black. */
+::selection { background: #5D947B; color: #1C2A2B; }
+.public-site .fcard { border-top: 4px solid #5D947B; }
+details.u-acc[open] { border-left: 4px solid #5D947B; }
+.u-acc-icon { color: #5D947B; }
+.btn-outline, .btn-outline-gold { border: 2px solid #5D947B; padding: calc(0.95rem - 1px) calc(1.9rem - 1px); }
+.public-site blockquote { border-left: 4px solid #5D947B; padding-left: 1rem; }

@@ -63,7 +63,7 @@ export default function Discipleship() {
         <p className="text-base leading-relaxed">A spiritual practice is a regular habit that helps you grow closer to God. Christians have used these habits since the early church. There are many of them, and these nine are the ones we focus on in this training track. We group them under our three words: Know God, Share Life, and Serve Others.</p>
       </PhotoBand>
 
-      <Section tone="white">
+      <Section tone="sage">
         {desktop ? (
           <div className="grid md:grid-cols-3 gap-6">
             {GROUPS.map(g => (
