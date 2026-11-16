@@ -488,10 +488,6 @@ details.u-acc.neu-acc[open] { background: #ffffff; box-shadow: var(--shadow); }
 @keyframes valueIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .value-panel { animation: none; } }
 
-/* Jungle teal (#5B8B75) accents. These are lines, borders, icons and large shapes, so the text on them stays jet black. */
+/* Jungle teal (#5B8B75) accents: icons and the text selection. There are no colored edges or borders. */
 ::selection { background: #5B8B75; color: #1C2A2B; }
-.public-site .fcard { border-top: 4px solid #5B8B75; }
-details.u-acc[open] { border-left: 4px solid #5B8B75; }
 .u-acc-icon { color: #5B8B75; }
-.btn-outline, .btn-outline-gold { border: 2px solid #5B8B75; padding: calc(0.95rem - 1px) calc(1.9rem - 1px); }
-.public-site blockquote { border-left: 4px solid #5B8B75; padding-left: 1rem; }

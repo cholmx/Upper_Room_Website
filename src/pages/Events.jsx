@@ -17,7 +17,7 @@ function Card({ ev, date }) {
   const more = ev.summary && ev.details && ev.details !== ev.summary ? ev.details : '';
   return (
     <li className="bg-white rounded-[10px] elev-1 p-5 md:p-6 flex gap-5">
-      <div className="shrink-0 w-16 md:w-20 self-start text-center bg-[#F4ECDD] border-t-4 border-[#5B8B75] rounded-[6px] py-2" aria-hidden="true">
+      <div className="shrink-0 w-16 md:w-20 self-start text-center bg-[#F4ECDD] rounded-[6px] py-2" aria-hidden="true">
         <div className="font-display font-bold text-sm uppercase tracking-wide text-[#1C2A2B]">{date.toLocaleDateString('en-US', { month: 'short' })}</div>
         <div className="font-display font-bold text-4xl md:text-5xl leading-none">{date.getDate()}</div>
         <div className="mt-1 text-xs text-black">{date.toLocaleDateString('en-US', { weekday: 'short' })}</div>
@@ -28,8 +28,8 @@ function Card({ ev, date }) {
           {[date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }), time, ev.location].filter(Boolean).join('  |  ')}
         </p>
         <div className="mt-2 flex flex-wrap gap-2">
-          {freq && <span className="text-xs font-display font-bold px-3 py-1 rounded-full bg-[#F4ECDD] border border-[#5B8B75]">{freq}</span>}
-          {ev.ministry && <span className="text-xs font-display font-bold px-3 py-1 rounded-full bg-[#F4ECDD] border border-[#5B8B75]">{ev.ministry}</span>}
+          {freq && <span className="text-xs font-display font-bold px-3 py-1 rounded-full bg-[#F4ECDD]">{freq}</span>}
+          {ev.ministry && <span className="text-xs font-display font-bold px-3 py-1 rounded-full bg-[#F4ECDD]">{ev.ministry}</span>}
         </div>
         {(ev.summary || ev.details) && <p className="mt-3 text-[1rem] leading-snug text-black">{blurb(ev)}</p>}
         {more && (

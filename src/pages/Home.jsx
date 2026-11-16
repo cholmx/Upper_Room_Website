@@ -171,7 +171,7 @@ export default function Home() {
             {comingUp.map(({ ev, date }) => (
               <li key={ev.id} className="bg-white rounded-[10px] elev-1 p-5 md:p-6">
                 <Link to="/events" className="flex gap-4 items-start hover:text-[#C65D3B]">
-                  <span className="shrink-0 w-14 text-center bg-[#F4ECDD] border-t-4 border-[#5B8B75] rounded-[6px] py-1.5" aria-hidden="true">
+                  <span className="shrink-0 w-14 text-center bg-[#F4ECDD] rounded-[6px] py-1.5" aria-hidden="true">
                     <span className="block font-display font-bold text-xs uppercase tracking-wide text-[#1C2A2B]">{date.toLocaleDateString('en-US', { month: 'short' })}</span>
                     <span className="block font-display font-bold text-4xl leading-none">{date.getDate()}</span>
                   </span>

@@ -47,7 +47,7 @@ export default function Login() {
         </div>
 
         {error && (
-          <div role="alert" className="bg-[#C65D3B]/10 border border-[#C65D3B] text-[#1C2A2B] p-2 rounded-lg mb-4 text-xs font-medium">
+          <div role="alert" className="bg-[#C65D3B]/10 text-[#1C2A2B] p-2 rounded-lg mb-4 text-xs font-medium">
             {error}
           </div>
         )}

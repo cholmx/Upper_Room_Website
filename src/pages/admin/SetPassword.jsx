@@ -55,7 +55,7 @@ export default function SetPassword() {
         {state === 'bad' && <p role="alert" className="text-sm text-[#1C2A2B]">{error}</p>}
         {state === 'ready' && (
           <form onSubmit={save} className="space-y-3" noValidate>
-            {error && <div role="alert" className="bg-[#C65D3B]/10 border border-[#C65D3B] text-[#1C2A2B] p-2 rounded-lg text-xs font-medium">{error}</div>}
+            {error && <div role="alert" className="bg-[#C65D3B]/10 text-[#1C2A2B] p-2 rounded-lg text-xs font-medium">{error}</div>}
             <div>
               <label htmlFor="new-pw" className="block text-xs font-semibold text-[#1C2A2B] mb-1">New password (at least 10 characters)</label>
               <input id="new-pw" type="password" autoComplete="new-password" value={pw} onChange={(e) => setPw(e.target.value)} className={input} required />

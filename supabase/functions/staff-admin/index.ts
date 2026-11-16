@@ -6,7 +6,7 @@
 //   always the same so the form cannot be used to find out who is on the team.
 // Emails are put in the email outbox and sent through Resend like every other email from this site.
 
-const VERSION = '2026-11-16';
+const VERSION = '2026-11-16.1';
 // The address the invitation and reset links point at. It is fixed here, so no secret needs to be set.
 const SITE = 'https://www.urfellowship.com';
 const URL_ = Deno.env.get('SUPABASE_URL') ?? '';
@@ -58,7 +58,7 @@ async function queueEmail(kind: string, to: string, subject: string, intro: stri
     + `<p style="margin:0 0 16px">${intro}</p>`
     + `<p style="margin:0 0 20px"><a href="${esc(link)}" style="display:inline-block;background:#C65D3B;color:#ffffff;text-decoration:none;font-weight:bold;font-family:Inter Tight,Arial,Helvetica,sans-serif;padding:12px 20px;border-radius:8px">${esc(button)}</a></p>`
     + '<p style="margin:0 0 16px;font-size:14px;color:#172B2C">This link works once and expires after a day. If it does not work, ask an admin to send you a new one.</p>'
-    + '<hr style="border:0;border-top:1px solid #5B8B75;margin:24px 0 12px"><p style="font-size:12px;color:#172B2C;margin:0">Upper Room Fellowship, 500 Sponseller Road, Columbiana, Ohio 44408</p></div>';
+    + '<hr style="border:0;border-top:2px solid #F4ECDD;margin:24px 0 12px"><p style="font-size:12px;color:#172B2C;margin:0">Upper Room Fellowship, 500 Sponseller Road, Columbiana, Ohio 44408</p></div>';
   await service('/rest/v1/email_outbox_church', { method: 'POST', body: JSON.stringify({ kind, to_email: to, subject, html }), headers: { Prefer: 'return=minimal' } });
 }
 

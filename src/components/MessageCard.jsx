@@ -26,7 +26,7 @@ export default function MessageCard({ message, as: Heading = 'h3' }) {
         {message.scripture && <p className="text-sm font-semibold text-[#1C2A2B]">{message.scripture}</p>}
         {parseCategories(message.topic).length > 0 && (
           <ul className="mt-3 flex flex-wrap gap-2" aria-label="Categories">
-            {parseCategories(message.topic).slice(0, 3).map(c => <li key={c} className="text-xs font-display font-bold px-3 py-1 rounded-full bg-[#F4ECDD] border border-[#5B8B75] text-[#1C2A2B]">{c}</li>)}
+            {parseCategories(message.topic).slice(0, 3).map(c => <li key={c} className="text-xs font-display font-bold px-3 py-1 rounded-full bg-[#F4ECDD] text-[#1C2A2B]">{c}</li>)}
           </ul>
         )}
         {message.series && (
