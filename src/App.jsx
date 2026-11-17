@@ -122,6 +122,10 @@ export function AppBody() {
         <Route path="/podcasts" element={<Navigate to="/shine" replace />} />
         <Route path="/prayer" element={<Navigate to="/contact" replace />} />
         <Route path="/careportal" element={<Navigate to="/" replace />} />
+        <Route path="/home" element={<Navigate to="/" replace />} />
+        <Route path="/rental" element={<Navigate to="/contact" replace />} />
+        <Route path="/247prayer" element={<Navigate to="/contact" replace />} />
+        <Route path="/prophetic" element={<Navigate to="/core-values" replace />} />
         <Route path="/ministries" element={<Navigate to="/discipleship" replace />} />
         <Route path="/kids" element={<Navigate to="/plan-your-visit" replace />} />
         <Route path="/youth" element={<Navigate to="/plan-your-visit" replace />} />

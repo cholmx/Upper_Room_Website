@@ -8,6 +8,7 @@ export const OLD_ADDRESSES = [
   ['/kids', '/plan-your-visit'], ['/youth', '/plan-your-visit'], ['/worship-team', '/plan-your-visit'],
   ['/prayer', '/contact'], ['/transforming-together', '/growth-campaign'], ['/capital-campaign', '/growth-campaign'], ['/team', '/leadership'],
   ['/careportal', '/'], ['/outreach', '/'],
+  ['/home', '/'], ['/rental', '/contact'], ['/247prayer', '/contact'], ['/prophetic', '/core-values'],
 ];
 
 export const redirectRules = (fallback) => [
