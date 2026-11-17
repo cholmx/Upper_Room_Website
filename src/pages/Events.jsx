@@ -5,7 +5,7 @@ import useJsonLd from '../hooks/useJsonLd';
 import { useSite } from '../settings';
 import { Btn, Section, PageHeader } from '../components/ui';
 import { CardSkeletons, ErrorState } from '../components/StateViews';
-import { upcoming, timeRange, frequencyLabel, groupOf, plain, blurb } from '../lib/events';
+import { upcoming, timeRange, frequencyLabel, groupOf, plain, blurb, eventJsonLd } from '../lib/events';
 import { safeUrl } from '../utils';
 
 const MONTH = (d) => d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
@@ -60,17 +60,7 @@ export default function Events() {
 
   useEffect(() => { if (group && !groups.includes(group)) setGroup(''); }, [groups, group]);
 
-  useJsonLd(list.length ? list.slice(0, 20).map(({ ev, date }) => {
-    const t = /^(\d{2}):(\d{2})/.exec(String(ev.event_time || ''));
-    const day = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
-    return {
-      '@context': 'https://schema.org', '@type': 'Event', name: plain(ev.title), description: ev.summary ? plain(ev.summary) : undefined,
-      startDate: t && Number(t[1]) >= 6 ? `${day}T${t[1]}:${t[2]}:00` : day,
-      eventStatus: 'https://schema.org/EventScheduled', eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
-      location: { '@type': 'Place', name: ev.location || SITE.name, address: ev.location ? undefined : `${SITE.address.street}, ${SITE.address.city}, ${SITE.address.region} ${SITE.address.postalCode}` },
-      organizer: { '@type': 'Organization', name: SITE.name },
-    };
-  }) : null);
+  useJsonLd(list.length ? list.slice(0, 20).map(({ ev, date }) => eventJsonLd(ev, date, SITE)) : null);
 
   return (
     <>

@@ -68,3 +68,32 @@ describe('blurb', () => {
     expect(blurb({ title: 'First Steps', summary: 'A short get-together for new people.' })).toBe('A short get-together for new people.');
   });
 });
+
+describe('event structured data', () => {
+  const site = { name: 'Upper Room Fellowship', url: 'https://www.urfellowship.com', address: { street: '500 Sponseller Road', city: 'Columbiana', region: 'OH', postalCode: '44408' } };
+  const day = new Date(2026, 10, 20);
+
+  it('fills in the description, address and organizer website for an event with little information', async () => {
+    const { eventJsonLd } = await import('./events');
+    const j = eventJsonLd({ title: 'First Steps', event_time: '11:45' }, day, site);
+    expect(j.description).toMatch(/First Steps at Upper Room Fellowship in Columbiana, Ohio/);
+    expect(j.location.address.streetAddress).toBe('500 Sponseller Road');
+    expect(j.organizer.url).toBe('https://www.urfellowship.com/');
+    expect(j.startDate).toBe('2026-11-20T11:45:00');
+    expect(j.url).toBe('https://www.urfellowship.com/events');
+  });
+
+  it('uses the church address for rooms in the building and the written place for other locations', async () => {
+    const { eventJsonLd } = await import('./events');
+    expect(eventJsonLd({ title: 'A', location: 'Fellowship Hall' }, day, site).location.address.addressLocality).toBe('Columbiana');
+    expect(eventJsonLd({ title: 'A', location: 'URF' }, day, site).location.address.postalCode).toBe('44408');
+    const away = eventJsonLd({ title: 'B', location: 'Camp Frederick, Rogers, OH', link: 'https://example.com/signup' }, day, site);
+    expect(away.location).toEqual({ '@type': 'Place', name: 'Camp Frederick, Rogers, OH', address: 'Camp Frederick, Rogers, OH' });
+    expect(away.url).toBe('https://example.com/signup');
+  });
+
+  it('uses the summary as the description', async () => {
+    const { eventJsonLd } = await import('./events');
+    expect(eventJsonLd({ title: 'C', summary: 'Join us for lunch.' }, day, site).description).toBe('Join us for lunch.');
+  });
+});

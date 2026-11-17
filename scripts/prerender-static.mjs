@@ -88,11 +88,11 @@ try {
   }
 
   // Events page
-  const { upcoming, timeRange, frequencyLabel, plain } = await import('../src/lib/events.js');
+  const { upcoming, timeRange, frequencyLabel, plain, eventJsonLd } = await import('../src/lib/events.js');
   const evs = upcoming(await readEvents());
   const dayText = (d) => d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
   await write('/events', page({
-    title: SEO.events[0], description: SEO.events[1], route: '/events', image: shareImage('events'), schema: schemaFor('/events'),
+    title: SEO.events[0], description: SEO.events[1], route: '/events', image: shareImage('events'), schema: [].concat(schemaFor('/events') || [], evs.slice(0, 20).map(({ ev, date }) => eventJsonLd(ev, date, SITE))),
     body: chrome(`<h1>Events</h1><p>${esc(SEO.events[1])}</p>` + (evs.length ? `<ul>${evs.map(({ ev, date }) => `<li><h2>${esc(plain(ev.title))}</h2><p>${esc([dayText(date), timeRange(ev), ev.location, frequencyLabel(ev)].filter(Boolean).join(' | '))}</p>${ev.summary ? `<p>${esc(plain(ev.summary))}</p>` : ''}</li>`).join('')}</ul>` : '')),
   }));
   saved += 1;

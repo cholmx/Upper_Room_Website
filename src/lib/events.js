@@ -98,3 +98,38 @@ export function upcoming(events, today = startOfToday()) {
     .filter(x => x.date)
     .sort((a, b) => a.date - b.date || String(a.ev.title).localeCompare(String(b.ev.title)));
 }
+
+// Places inside the church building, which share the church's address.
+const ON_SITE = /^(?:the\s+)?(?:church|urf|upper room(?: fellowship)?|fellowship hall|coffee lounge|lobby|sanctuary|gym|gymnasium|youth room|kids?(?: \w+)? (?:room|area))\b/i;
+
+// The structured data for one event (what Google reads for event results). Every field Google asks for is filled in:
+// a description, a full address, and the organizer's website.
+export function eventJsonLd(ev, date, site) {
+  const t = /^(\d{2}):(\d{2})/.exec(String(ev.event_time || ''));
+  const day = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+  const where = String(ev.location || '').trim();
+  const church = {
+    '@type': 'PostalAddress',
+    streetAddress: site.address.street,
+    addressLocality: site.address.city,
+    addressRegion: site.address.region,
+    postalCode: site.address.postalCode,
+    addressCountry: 'US',
+  };
+  const onSite = !where || ON_SITE.test(where) || where.toLowerCase().includes(String(site.name).toLowerCase());
+  const description = (blurb(ev) || plain(ev.details)).replace(/\s+/g, ' ').trim().slice(0, 300)
+    || `${plain(ev.title)} at ${site.name} in ${site.address.city}, ${site.address.region === 'OH' ? 'Ohio' : site.address.region}.`;
+  const link = /^https?:\/\//i.test(String(ev.link || '')) ? ev.link : `${site.url}/events`;
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Event',
+    name: plain(ev.title),
+    description,
+    startDate: t && Number(t[1]) >= 6 ? `${day}T${t[1]}:${t[2]}:00` : day,
+    eventStatus: 'https://schema.org/EventScheduled',
+    eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+    location: { '@type': 'Place', name: where || site.name, address: onSite ? church : where },
+    organizer: { '@type': 'Organization', name: site.name, url: `${site.url}/` },
+    url: link,
+  };
+}
