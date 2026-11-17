@@ -31,3 +31,20 @@ describe('structured data', () => {
     expect(faqPage([['Q?', 'A.']]).mainEntity[0].name).toBe('Q?');
   });
 });
+
+describe('the Sunday service data Google requires', () => {
+  it('has a start date, an end date, an image, a performer and an offer', async () => {
+    const { sundayService, nextSunday } = await import('./schema');
+    const s = sundayService();
+    expect(s.startDate).toMatch(/^\d{4}-\d{2}-\d{2}T10:30:00$/);
+    expect(s.endDate).toMatch(/T11:45:00$/);
+    expect(s.image[0]).toMatch(/og-default\.png$/);
+    expect(s.performer.name).toBeTruthy();
+    expect(s.offers.price).toBe('0');
+    expect(new Date(`${s.startDate.slice(0, 10)}T12:00:00Z`).getUTCDay()).toBe(0);
+    // Wednesday gives the coming Sunday. On Sunday before noon it is today, and after noon it is next week.
+    expect(nextSunday(new Date('2026-11-18T15:00:00Z'))).toBe('2026-11-22');
+    expect(nextSunday(new Date('2026-11-22T14:00:00Z'))).toBe('2026-11-22');
+    expect(nextSunday(new Date('2026-11-22T19:00:00Z'))).toBe('2026-11-29');
+  });
+});

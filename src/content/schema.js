@@ -36,6 +36,15 @@ export function faqPage(pairs) {
   };
 }
 
+// The date of the next Sunday service in Columbiana (Eastern time), as YYYY-MM-DD. After the service has ended, it is the following Sunday.
+export function nextSunday(now = new Date()) {
+  const p = Object.fromEntries(new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', hourCycle: 'h23', weekday: 'short' }).formatToParts(now).map(x => [x.type, x.value]));
+  const dow = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(p.weekday);
+  const add = dow === 0 ? (Number(p.hour) >= 12 ? 7 : 0) : 7 - dow;
+  const d = new Date(Date.UTC(Number(p.year), Number(p.month) - 1, Number(p.day) + add));
+  return d.toISOString().slice(0, 10);
+}
+
 // The weekly worship service, so assistants can answer "what time is church on Sunday in Columbiana".
 export function sundayService() {
   return {
@@ -45,6 +54,8 @@ export function sundayService() {
     description: 'Worship with live music, clear Bible teaching, and time for coffee and conversation. Kids programs for birth through 5th grade.',
     eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
     eventStatus: 'https://schema.org/EventScheduled',
+    startDate: `${nextSunday()}T10:30:00`,
+    endDate: `${nextSunday()}T11:45:00`,
     eventSchedule: {
       '@type': 'Schedule',
       repeatFrequency: 'P1W',
@@ -55,6 +66,9 @@ export function sundayService() {
     },
     location: PLACE,
     organizer: { '@type': 'Church', name: SITE.name, url: abs('/') },
+    performer: { '@type': 'Organization', name: SITE.name },
+    image: [abs('/og-default.png')],
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD', availability: 'https://schema.org/InStock', url: abs('/plan-your-visit') },
     isAccessibleForFree: true,
   };
 }

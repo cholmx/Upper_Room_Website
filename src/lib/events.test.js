@@ -97,3 +97,26 @@ describe('event structured data', () => {
     expect(eventJsonLd({ title: 'C', summary: 'Join us for lunch.' }, day, site).description).toBe('Join us for lunch.');
   });
 });
+
+describe('event structured data, the recommended fields', () => {
+  const site = { name: 'Upper Room Fellowship', url: 'https://www.urfellowship.com', address: { street: '500 Sponseller Road', city: 'Columbiana', region: 'OH', postalCode: '44408' } };
+  it('adds an image, a performer, an offer and the end time', async () => {
+    const { eventJsonLd } = await import('./events');
+    const j = eventJsonLd({ title: 'Brunch', event_time: '09:00', end_time: '12:00' }, new Date(2026, 10, 20), site);
+    expect(j.endDate).toBe('2026-11-20T12:00:00');
+    expect(j.offers.price).toBe('0');
+    expect(j.image[0]).toBe('https://www.urfellowship.com/og-default.png');
+    expect(j.performer.name).toBe('Upper Room Fellowship');
+  });
+  it('leaves out the end when it is not known, and out the free offer when there is a cost', async () => {
+    const { eventJsonLd } = await import('./events');
+    const j = eventJsonLd({ title: 'Retreat', summary: 'The registration fee is $20.', event_time: '17:00' }, new Date(2026, 10, 20), site);
+    expect(j.endDate).toBeUndefined();
+    expect(j.offers).toBeUndefined();
+  });
+  it('ends a multi-day event on its last day', async () => {
+    const { eventJsonLd } = await import('./events');
+    const j = eventJsonLd({ title: 'Retreat', event_time: '17:00', end_time: '12:00', is_recurring: true, recurrence_type: 'date_range', recurrence_end: '2026-10-10' }, new Date(2026, 9, 9), site);
+    expect(j.endDate).toBe('2026-10-10T12:00:00');
+  });
+});

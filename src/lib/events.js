@@ -120,6 +120,14 @@ export function eventJsonLd(ev, date, site) {
   const description = (blurb(ev) || plain(ev.details)).replace(/\s+/g, ' ').trim().slice(0, 300)
     || `${plain(ev.title)} at ${site.name} in ${site.address.city}, ${site.address.region === 'OH' ? 'Ohio' : site.address.region}.`;
   const link = /^https?:\/\//i.test(String(ev.link || '')) ? ev.link : `${site.url}/events`;
+  // The end is only given when the event says when it ends. A long event ends on its last day.
+  const e = /^(\d{2}):(\d{2})/.exec(String(ev.end_time || ''));
+  let endDate;
+  if (ev.recurrence_type === 'date_range' && ev.recurrence_end) endDate = e && Number(e[1]) >= 6 ? `${ev.recurrence_end}T${e[1]}:${e[2]}:00` : String(ev.recurrence_end);
+  else if (t && e && Number(t[1]) >= 6 && `${e[1]}:${e[2]}` > `${t[1]}:${t[2]}`) endDate = `${day}T${e[1]}:${e[2]}:00`;
+  // Free unless the words say there is a cost.
+  const words = `${ev.summary || ''} ${ev.details || ''}`;
+  const free = !/\$|\b(?:cost|fee|price|tickets?|registration is|donation)\b/i.test(words);
   return {
     '@context': 'https://schema.org',
     '@type': 'Event',
@@ -130,6 +138,10 @@ export function eventJsonLd(ev, date, site) {
     eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
     location: { '@type': 'Place', name: where || site.name, address: onSite ? church : where },
     organizer: { '@type': 'Organization', name: site.name, url: `${site.url}/` },
+    performer: { '@type': 'Organization', name: site.name },
+    image: [`${site.url}/og-default.png`],
+    ...(endDate ? { endDate } : {}),
+    ...(free ? { isAccessibleForFree: true, offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD', availability: 'https://schema.org/InStock', url: link } } : {}),
     url: link,
   };
 }
