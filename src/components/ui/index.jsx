@@ -184,9 +184,14 @@ const PAGE_KEY_BY_ROUTE = Object.fromEntries(Object.entries(SEO_ROUTES).map(([k,
 function usePageBanner(pageKey) {
   const { pathname } = useLocation();
   const key = pageKey || PAGE_KEY_BY_ROUTE[pathname] || (pathname.startsWith('/messages') ? 'messages' : pathname.startsWith('/events') ? 'events' : pathname.startsWith('/blog') ? 'blog' : 'about');
-  const { url, loaded } = usePhoto(`banner-${key}`);
-  if (!loaded) return '';
-  return url || HERO_IMAGES[key] || HERO_IMAGES.about;
+  const own = usePhoto(`banner-${key}`);
+  const homeBanner = usePhoto('banner-home');
+  const homeHero = usePhoto('home-hero');
+  if (!own.loaded) return '';
+  if (own.url) return own.url;
+  // The FAQ page shares the Home page's banner photo, whichever photo is set for it in Site Photos.
+  if (key === 'faq') return !homeBanner.loaded ? '' : homeBanner.url || homeHero.url || HERO_IMAGES.home;
+  return HERO_IMAGES[key] || HERO_IMAGES.about;
 }
 
 // The page banner: a photo with a dark wash, a gold kicker, a big heading, and an intro.

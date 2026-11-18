@@ -8,6 +8,7 @@ const GENERAL = PX(9562304);
 export const HERO_IMAGES = {
   home: PX(38274945),
   plan: VISIT, contact: VISIT, connect: VISIT,
+  faq: PX(38274945),
   about: ABOUT, values: ABOUT,
   leadership: PX(3184393),
   messages: PX(34328505), shine: PX(34328505), growth: GENERAL, events: VISIT,
