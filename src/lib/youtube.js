@@ -24,7 +24,7 @@ function isoDate(text) {
 }
 
 // A video titled "Name // Speaker", with no "Series ::" in front, is a one-off message. It goes in this series.
-export const STAND_ALONE_SERIES = 'Stand Alone Sermons';
+export const STAND_ALONE_SERIES = 'Standalone Sermons';
 
 export function parseVideoTitle(raw) {
   const parts = String(raw || '').trim().split(/\s+\/\/\s+/);

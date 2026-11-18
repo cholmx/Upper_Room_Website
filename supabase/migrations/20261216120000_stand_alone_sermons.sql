@@ -1,8 +1,8 @@
 /*
-# Stand Alone Sermons
+# Standalone Sermons
 
 When a video is imported from YouTube with a title like "Name // Speaker", with no "Series ::" in front, it is a one-off
-message, so it is now put in the series "Stand Alone Sermons". Titles written as "Series :: Name // Speaker" are unchanged,
+message, so it is now put in the series "Standalone Sermons". Titles written as "Series :: Name // Speaker" are unchanged,
 and so are titles with no speaker. This changes the title reader used by the automatic YouTube import. Messages that are
 already imported are not changed. Safe to run more than once.
 */
@@ -51,7 +51,7 @@ BEGIN
     title := btrim(array_to_string(pieces[2:array_length(pieces, 1)], ' :: '));
   END IF;
   -- "Name // Speaker" with no series in front: a one-off message.
-  IF series = '' AND speaker <> '' THEN series := 'Stand Alone Sermons'; END IF;
+  IF series = '' AND speaker <> '' THEN series := 'Standalone Sermons'; END IF;
   RETURN;
 END
 $$;
