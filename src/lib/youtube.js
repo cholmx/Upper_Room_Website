@@ -23,6 +23,9 @@ function isoDate(text) {
   return `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
 }
 
+// A video titled "Name // Speaker", with no "Series ::" in front, is a one-off message. It goes in this series.
+export const STAND_ALONE_SERIES = 'Stand Alone Sermons';
+
 export function parseVideoTitle(raw) {
   const parts = String(raw || '').trim().split(/\s+\/\/\s+/);
   let date = '';
@@ -40,6 +43,7 @@ export function parseVideoTitle(raw) {
     series = byLabel.shift();
     title = byLabel.join(' :: ');
   }
+  if (!series && speaker) series = STAND_ALONE_SERIES;
   return { title, speaker, series, date };
 }
 

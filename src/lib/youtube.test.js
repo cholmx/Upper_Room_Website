@@ -8,11 +8,20 @@ describe('parseVideoTitle', () => {
   it('always reads the first part as the series', () => {
     expect(parseVideoTitle('Acts 10-11 :: Who Is the Gospel For? // Josh Osborn')).toEqual({ title: 'Who Is the Gospel For?', speaker: 'Josh Osborn', series: 'Acts 10-11', date: '' });
   });
+  it('puts a "Name // Speaker" title with no series in Stand Alone Sermons', () => {
+    expect(parseVideoTitle('Do It Again // Chris Holm')).toEqual({ title: 'Do It Again', speaker: 'Chris Holm', series: 'Stand Alone Sermons', date: '' });
+    expect(parseVideoTitle('Joy // Chris H. // 8.8.2021').series).toBe('Stand Alone Sermons');
+  });
+  it('does not change a title that has a series, or one with no speaker', () => {
+    expect(parseVideoTitle('Acts 7 :: Can God Use This Mess? // Chris Holm').series).toBe('Acts 7');
+    expect(parseVideoTitle('Easter Sunday').series).toBe('');
+    expect(parseVideoTitle('Hope // 9.5.21').series).toBe('');
+  });
   it('keeps a plain title whole', () => {
     expect(parseVideoTitle('Easter Sunday')).toEqual({ title: 'Easter Sunday', speaker: '', series: '', date: '' });
   });
   it('takes a date out of the speaker spot and uses it as the date', () => {
-    expect(parseVideoTitle("It's God's, Not Mine // Bob Bertelsen // 7.25.2021")).toEqual({ title: "It's God's, Not Mine", speaker: 'Bob Bertelsen', series: '', date: '2021-07-25' });
+    expect(parseVideoTitle("It's God's, Not Mine // Bob Bertelsen // 7.25.2021")).toEqual({ title: "It's God's, Not Mine", speaker: 'Bob Bertelsen', series: 'Stand Alone Sermons', date: '2021-07-25' });
     expect(parseVideoTitle('Hope // 9.5.21')).toMatchObject({ title: 'Hope', speaker: '', date: '2021-09-05' });
   });
 });
