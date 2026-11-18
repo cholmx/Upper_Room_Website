@@ -17,6 +17,7 @@ const About = lazy(() => import('./pages/About'));
 const CoreValues = lazy(() => import('./pages/CoreValues'));
 const Leadership = lazy(() => import('./pages/Leadership'));
 const Discipleship = lazy(() => import('./pages/Discipleship'));
+const Faq = lazy(() => import('./pages/Faq'));
 const Messages = lazy(() => import('./pages/Messages'));
 const MessageSeries = lazy(() => import('./pages/MessageSeries'));
 const MessageDetail = lazy(() => import('./pages/MessageDetail'));
@@ -101,7 +102,7 @@ export function AppBody() {
 
         {/* Public Routes */}
         {[
-          ['/', Home], ['/plan-your-visit', PlanYourVisit], ['/about', About], ['/core-values', CoreValues],
+          ['/', Home], ['/plan-your-visit', PlanYourVisit], ['/faq', Faq], ['/about', About], ['/core-values', CoreValues],
           ['/leadership', Leadership], ['/messages', Messages], ['/messages/series/:series', MessageSeries], ['/messages/:slug', MessageDetail],
           ['/discipleship', Discipleship], ['/sozo', Sozo], ['/shine', Shine],
           ['/give', Give], ['/events', Events], ['/growth-campaign', GrowthCampaign], ['/contact', Contact], ['/connect', Connect],
@@ -114,7 +115,6 @@ export function AppBody() {
         <Route path="/new-here" element={<Navigate to="/plan-your-visit" replace />} />
         <Route path="/visit" element={<Navigate to="/plan-your-visit" replace />} />
         <Route path="/next-steps" element={<Navigate to="/plan-your-visit" replace />} />
-        <Route path="/faq" element={<Navigate to="/plan-your-visit" replace />} />
         <Route path="/about-us" element={<Navigate to="/about" replace />} />
         <Route path="/beliefs" element={<Navigate to="/about#beliefs" replace />} />
         <Route path="/stories" element={<Navigate to="/about" replace />} />

@@ -2,7 +2,7 @@
 // Used by the page hooks in the browser and by the build step that writes the static copies of the pages.
 import { SITE } from '../config';
 import { SEO, SEO_ROUTES } from './seo';
-import { DISCIPLESHIP_FAQ, SOZO_FAQ } from './faqs';
+import { DISCIPLESHIP_FAQ, VISIT_FAQ, SOZO_FAQ } from './faqs';
 import { DEFAULT_LEADERS } from './leaders';
 
 const abs = (path) => `${SITE.url}${path}`;
@@ -116,6 +116,7 @@ export function schemaFor(path) {
   const out = [];
   out.push(path === '/' ? breadcrumbs([[SITE.name, '/']]) : breadcrumbs([[SITE.name, '/'], [title, path]]));
   if (key === 'home' || key === 'plan') out.push(sundayService());
+  if (key === 'faq') out.push(faqPage(VISIT_FAQ));
   if (key === 'discipleship') out.push(faqPage(DISCIPLESHIP_FAQ));
   if (key === 'sozo') out.push(faqPage(SOZO_FAQ));
   if (key === 'leadership') out.push(...leaders());

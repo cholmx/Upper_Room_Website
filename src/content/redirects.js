@@ -1,7 +1,7 @@
 // The addresses from the old website, and where each one now lives. The host sends visitors and search engines
 // to the new page with a permanent (301) redirect, so the old pages' standing in search carries over.
 export const OLD_ADDRESSES = [
-  ['/new-here', '/plan-your-visit'], ['/visit', '/plan-your-visit'], ['/next-steps', '/plan-your-visit'], ['/faq', '/plan-your-visit'],
+  ['/new-here', '/plan-your-visit'], ['/visit', '/plan-your-visit'], ['/next-steps', '/plan-your-visit'],
   ['/about-us', '/about'], ['/beliefs', '/about'], ['/stories', '/about'],
   ['/sermons', '/messages'], ['/podcasts', '/shine'],
   ['/ministries', '/discipleship'], ['/table-groups', '/discipleship'], ['/serve', '/discipleship'],

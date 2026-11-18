@@ -44,6 +44,7 @@ export const NAV = [
 // Short site map for the footer.
 export const FOOTER_LINKS = [
   { label: 'New Here?', to: '/plan-your-visit' },
+  { label: 'FAQ', to: '/faq' },
   { label: 'About Us', to: '/about' },
   { label: 'Core Values', to: '/core-values' },
   { label: 'Events', to: '/events' },

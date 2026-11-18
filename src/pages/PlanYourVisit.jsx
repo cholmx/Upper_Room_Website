@@ -78,7 +78,7 @@ export default function PlanYourVisit() {
         <div className="grid md:grid-cols-5 gap-10 items-start">
           <div className="md:col-span-2">
             <SectionHeader title="Questions before you visit?" className="!mb-6" />
-            <p className={P}>Email <a className="underline underline-offset-4 font-semibold text-[#1C2A2B]" href={`mailto:${SITE.email}`}>{SITE.email}</a>, call <a className="underline underline-offset-4 font-semibold text-[#1C2A2B]" href={SITE.phoneHref}>{SITE.phone}</a>, or send us a message below.</p>
+            <p className={P}>Find quick answers on our <Link className="underline underline-offset-4 font-semibold" to="/faq">frequently asked questions</Link> page, or email <a className="underline underline-offset-4 font-semibold text-[#1C2A2B]" href={`mailto:${SITE.email}`}>{SITE.email}</a>, call <a className="underline underline-offset-4 font-semibold text-[#1C2A2B]" href={SITE.phoneHref}>{SITE.phone}</a>, or send us a message below.</p>
           </div>
           <div className="md:col-span-3"><FormBlock formKey="contact" /></div>
         </div>

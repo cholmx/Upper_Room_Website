@@ -4,6 +4,7 @@ export const SEO = {
   plan: ['New Here? What to Expect on a Sunday | Upper Room Fellowship', 'First time at Upper Room Fellowship? See what a Sunday looks like, how kids check-in works, and how to let us know you are coming.'],
   about: ['About Upper Room Fellowship | Our Story and Beliefs', 'How Upper Room Fellowship began above a Columbiana veterinarian’s office in 1971, how we draw on the ancient ways of the church, and what we believe.'],
   values: ['Our Core Values | Upper Room Fellowship', 'Six values shape Upper Room Fellowship, from healthy relationships to living the Gospel.'],
+  faq: ['Visitor FAQ: What to Expect | Upper Room Fellowship', 'Answers for first-time visitors to Upper Room Fellowship in Columbiana, Ohio: service times, kids, what to wear, beliefs, and how to get connected.'],
   discipleship: ['Adult Discipleship Training | Upper Room Fellowship', 'Sunday morning classes for adults on spiritual practices like prayer, Scripture, and Sabbath, and on our core values. Find where to begin.'],
   sozo: ['Sozo Inner Healing Prayer Ministry | Upper Room Fellowship', 'Learn what Sozo inner healing prayer ministry is, what happens in a session, and how to request one in Columbiana.'],
   growth: ['Growth Campaign | Upper Room Fellowship, Columbiana, Ohio', 'Transforming Together: updates, our vision for making room for more people, questions and answers, and how to give or submit a commitment card.'],
@@ -21,7 +22,7 @@ export const SEO = {
 
 // Route for each key, used for the sitemap and for canonical links.
 export const SEO_ROUTES = {
-  home: '/', plan: '/plan-your-visit', about: '/about', values: '/core-values', discipleship: '/discipleship', leadership: '/leadership',
+  home: '/', plan: '/plan-your-visit', faq: '/faq', about: '/about', values: '/core-values', discipleship: '/discipleship', leadership: '/leadership',
   messages: '/messages', events: '/events', growth: '/growth-campaign', shine: '/shine', sozo: '/sozo', give: '/give',
   contact: '/contact', connect: '/connect', accessibility: '/accessibility', privacy: '/privacy',
 };

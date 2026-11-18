@@ -48,3 +48,17 @@ describe('the Sunday service data Google requires', () => {
     expect(nextSunday(new Date('2026-11-22T19:00:00Z'))).toBe('2026-11-29');
   });
 });
+
+describe('the visitor FAQ page', () => {
+  it('describes every question as FAQ data and has an address of its own', async () => {
+    const { VISIT_FAQ, VISIT_FAQ_GROUPS } = await import('./faqs');
+    const faq = schemaFor('/faq').find(d => d['@type'] === 'FAQPage');
+    expect(faq.mainEntity.length).toBe(VISIT_FAQ.length);
+    expect(VISIT_FAQ.length).toBeGreaterThan(20);
+    for (const g of VISIT_FAQ_GROUPS) for (const [q, a, link] of g.items) {
+      expect(q.endsWith('?')).toBe(true);
+      expect(a.length).toBeGreaterThan(20);
+      if (link) expect(link[1]).toMatch(/^\//);
+    }
+  });
+});

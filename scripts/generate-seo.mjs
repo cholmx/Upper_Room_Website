@@ -5,7 +5,7 @@ import { SEO, SEO_ROUTES } from '../src/content/seo.js';
 import { messagePath } from '../src/utils.js';
 import { BELIEFS } from '../src/content/beliefs.js';
 import { CORE_VALUES, CORE_VALUES_INTRO, INSIDE_OUT } from '../src/content/values.js';
-import { DISCIPLESHIP_FAQ, SOZO_FAQ } from '../src/content/faqs.js';
+import { DISCIPLESHIP_FAQ, SOZO_FAQ, VISIT_FAQ_GROUPS } from '../src/content/faqs.js';
 import { DEFAULT_LEADERS, LEADERSHIP_INTRO } from '../src/content/leaders.js';
 
 const routes = await collectRoutes();
@@ -48,7 +48,7 @@ const llms = [
   `- [Everything on this site in one page of plain text](${SITE_URL}/llms-full.txt): what we believe, our core values, how Sunday works, our leaders and answers to common questions.`,
   '',
   '## Pages',
-  ...['plan', 'about', 'values', 'discipleship', 'sozo', 'messages', 'shine', 'events', 'growth', 'leadership', 'contact', 'connect', 'give'].map(pageLine),
+  ...['plan', 'faq', 'about', 'values', 'discipleship', 'sozo', 'messages', 'shine', 'events', 'growth', 'leadership', 'contact', 'connect', 'give'].map(pageLine),
   '',
   '## Recent messages',
   ...(messages.length
@@ -73,6 +73,8 @@ const full = [
   '- First Steps is a short get-together after the service on the first Sunday of every month, for people who want to hear more about the church and how to get connected.',
   '- Phone 330.482.9058, email info@urfellowship.com. Plan a visit: ' + SITE_URL + '/plan-your-visit',
   '',
+  '## Frequently asked questions from visitors',
+  ...VISIT_FAQ_GROUPS.flatMap(g => [`### ${g.title}`, fq(g.items.map(([q, a]) => [q, a])), '']),
   '## What we believe',
   ...BELIEFS.flatMap(b => [`### ${b.title}`, b.full, '']),
   '## Our core values',
